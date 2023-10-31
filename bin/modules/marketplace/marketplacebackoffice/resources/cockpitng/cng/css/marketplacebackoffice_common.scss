@@ -1,0 +1,16 @@
+@import "cockpitng-globals.scss";
+div.yw-sideNavigation .yw-treeCellInner {
+    @include setSideNavigationIconGlyph("marketplacebackoffice.treenode.vendor", "vendors");
+    @include setSideNavigationIconGlyph("marketplacebackoffice.treenode.user", "vendor_users");
+    @include setSideNavigationIconGlyph("customersupport_backoffice_explorerTree_vendorReviews", "feedback");
+    @include setSideNavigationIconGlyph("marketplacebackoffice.treenode.wcms", "crm-sales");
+    @include setSideNavigationIconGlyph("marketplacebackoffice.treenode.order", "sales-order");
+}
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("marketplacebackoffice.treenode.vendor", "vendors");
+    @include setTreeIconGlyph("marketplacebackoffice.treenode.user", "vendor_users");
+    @include setTreeIconGlyph("customersupport_backoffice_explorerTree_vendorReviews", "feedback");
+    @include setTreeIconGlyph("marketplacebackoffice.treenode.wcms", "crm-sales");
+    @include setTreeIconGlyph("marketplacebackoffice.treenode.order", "sales-order");
+}

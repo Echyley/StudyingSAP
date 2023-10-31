@@ -1,0 +1,18 @@
+.se-ctx-menu-btn__msg {
+    @include se-dropdown-menu('left');
+    @include se-popover-box-shadow();
+    @include se-type('1');
+    white-space: normal;
+    padding: 20px;
+    width: 250px;
+}
+
+.se-ctx-menu-btn__msg-title {
+    @include se-weight('bold');
+    color: var(--sapTitleColor);
+    margin-bottom: se-space('xxs');
+}
+
+.se-ctx-menu-btn__msg-description {
+    color: var(--sapTextColor);
+}

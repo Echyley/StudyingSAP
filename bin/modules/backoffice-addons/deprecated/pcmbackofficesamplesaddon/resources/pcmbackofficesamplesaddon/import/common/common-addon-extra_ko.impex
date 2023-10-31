@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=ko
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;"""식별자"" 특성에는 모든 언어의 값이 있어야 합니다.";
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;"""가격"" 특성에는 최소 하나의 요소가 있어야 합니다.";
+;ProductSupercategoriesSizeConstraint;;;"""상위 범주"" 특성에는 최소 하나의 요소가 있어야 합니다.";
+;ProductGalleryImagesSizeConstraint;;;"""갤러리 이미지"" 특성에는 최소 하나의 요소가 있어야 합니다.";
+;ProductReferencesSizeConstraint;;;"""제품 참조"" 특성에는 최소 하나의 요소가 있어야 합니다.";
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;"""상품 번호"" 특성은 공백일 수 없습니다.";
+;ProductDescriptionNotEmptyConstraint;;;"""내역"" 특성은 공백일 수 없습니다.";
+;ProductEanNotEmptyConstraint;;;"""EAN"" 특성은 공백일 수 없습니다.";
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;"""승인""의 특성 값은 ""승인됨""이어야 합니다.";

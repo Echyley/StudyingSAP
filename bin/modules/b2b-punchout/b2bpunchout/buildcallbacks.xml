@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="b2bpunchout_buildcallbacks">
+
+	<macrodef name="b2bpunchout_clean_classpath_file">
+		<sequential>
+			<copy file="${ext.b2bpunchout.path}/.classpath" tofile="${ext.b2bpunchout.path}/.classpath.edit"
+				  overwrite="true"
+				  failonerror="true">
+				<filterchain>
+					<linecontainsregexp negate="true">
+						<regexp pattern="^(\t\t\t\t|)$" />  <!-- added by script -->
+					</linecontainsregexp>
+				</filterchain>
+			</copy>
+			<move file="${ext.b2bpunchout.path}/.classpath.edit" tofile="${ext.b2bpunchout.path}/.classpath"
+				  overwrite="true"
+				  failonerror="true" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="b2bpunchout_after_clean">
+		<sequential>
+			<echo level="info" message="Generating .classpath file for b2bpunchout" />
+			<create_extension_classpath_file extname="b2bpunchout" />
+			<b2bpunchout_clean_classpath_file />
+		</sequential>
+	</macrodef>
+
+	<!--
+		Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+
+		 ${ear.path}: 			path to ear
+	 -->
+	<macrodef name="b2bpunchout_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="generate-cxml-jaxb-files">
+		<sequential>
+			<mkdir dir="${ext.b2bpunchout.path}/gensrc" />
+			<echo>Generating JAXB files based on cxml dtd's</echo>
+			<xjc
+					fork="true"
+					destdir="${ext.b2bpunchout.path}/gensrc"
+					binding="${ext.b2bpunchout.path}/resources/cXML/cXMLBindings.xjb"
+					package="org.cxml">
+					<arg value="-dtd"/>
+					<jvmarg value="-DenableExternalEntityProcessing=true"/>
+				<schema dir="${ext.b2bpunchout.path}/resources/cXML/" includes="*/*.dtd"/>
+				<produces dir="${ext.b2bpunchout.path}/gensrc/org/cxml">
+					<include name="*.java"/>
+				</produces>
+				<depends dir="${ext.b2bpunchout.path}/resources/cXML/"/>
+			</xjc>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="b2bpunchout_before_build">
+		<sequential>
+			<generate-cxml-jaxb-files />
+		</sequential>
+	</macrodef>
+
+	<target name="generate-cxml-jaxb-files">
+		<sequential>
+			<generate-cxml-jaxb-files />
+		</sequential>
+	</target>
+
+</project>

@@ -1,0 +1,28 @@
+<fd-popover
+    [triggers]="[]"
+    [isOpen]="isOpen"
+    [placement]="placement || 'bottom-end'"
+    class="se-dropdown-more-menu">
+    <fd-popover-control>
+        <div #toggleMenu>
+            <div
+                *ngIf="!useProjectedAnchor; else projectedAnchor;"
+                class="sap-icon--overflow se-dropdown-more-menu__toggle"
+                title="{{ 'se.contextmenu.title.more' | translate }}"></div>
+            <ng-template #projectedAnchor>
+                <ng-content></ng-content>
+            </ng-template>
+        </div>
+    </fd-popover-control>
+    <fd-popover-body>
+        <ul fd-list class="se-dropdown-menu__list" [ngClass]="additionalClasses">
+            <se-dropdown-menu-item
+                *ngFor="let dropdownItem of clonedDropdownItems"
+                [dropdownItem]="dropdownItem"
+                [selectedItem]="selectedItem"
+                (selectedItemChange)="selectedItemChange.emit($event)"
+                class="fd-list__byline-left"></se-dropdown-menu-item>
+        </ul>
+        <div *ngIf="message" class="se-information">{{ message | translate }}</div>
+    </fd-popover-body>
+</fd-popover>

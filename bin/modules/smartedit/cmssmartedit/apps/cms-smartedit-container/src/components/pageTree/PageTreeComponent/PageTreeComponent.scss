@@ -1,0 +1,61 @@
+.se-page-tree-component {
+    &-node {
+        position: relative;
+        &--content {
+            display: flex;
+            padding-left: 8px;
+            cursor: pointer;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &--name {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            line-height: 16px;
+            color: var(--sapContent_LabelColor);
+            overflow: hidden;
+
+            &--up {
+                font-weight: 600;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &--down {
+                font-style: oblique;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    &-drop-area {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        display: none;
+        &-circle {
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--sapContent_DragAndDropActiveColor);
+            border-radius: 50%;
+            background-color: var(--sapShell_Background);
+        }
+        &-line {
+            width: 100%;
+            height: 2px;
+            background: var(--sapContent_DragAndDropActiveColor);
+            margin-top: 4px;
+        }
+    }
+
+    &-dragged {
+        opacity: 0.4;
+    }
+}

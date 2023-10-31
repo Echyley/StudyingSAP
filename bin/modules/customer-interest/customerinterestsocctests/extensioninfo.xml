@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+            	
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Customerinterestsocctests" jaloLogicFree="true" managername="CustomerinterestsocctestsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="customerinterestsocctests" usemaven="false">
+                        		
+        
+        
+        <requires-extension name="commercewebservicestests"/>
+                
+        <requires-extension name="customerinterestsocc"/>
+             		
+        
+        <!-- use sample notificationType from here    -->
+                
+        <requires-extension name="stocknotificationservices"/>
+        		
+        
+        
+        <coremodule generated="true" manager="de.hybris.platform.customerinterestsocctests.jalo.CustomerinterestsocctestsManager" packageroot="de.hybris.platform.customerinterestsocctests"/>
+                        		
+        
+        	
+    
+    
+    </extension>
+            
+
+
+</extensioninfo>

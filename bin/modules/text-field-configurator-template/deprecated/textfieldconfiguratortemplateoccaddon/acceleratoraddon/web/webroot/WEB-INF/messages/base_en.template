@@ -1,0 +1,11 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# put localizations or messages used in your web application into this file
+#
+
+##################
+#!!! ATENTION !!!!
+##################
+
+# Before adding resource keys here, please rename this files from *.template to *.properties Otherwise resources are NOT translated!

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+            	
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Notificationocctests" jaloLogicFree="true" managername="NotificationocctestsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="notificationocctests" usemaven="false">
+                        		
+        
+        
+        <requires-extension name="commercewebservicestests"/>
+                        		
+	    
+        <requires-extension name="notificationocc"/>
+        		
+        
+        
+        <coremodule generated="true" manager="de.hybris.platform.notificationocctests.jalo.NotificationocctestsManager" packageroot="de.hybris.platform.notificationocctests"/>
+                        		
+        
+        	
+    
+    
+    </extension>
+            
+
+
+</extensioninfo>

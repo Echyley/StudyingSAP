@@ -1,0 +1,10 @@
+@import "cockpitng-globals.scss";
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("hmc.cms2", "crm-sales");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("hmc.cms2", "crm-sales");
+}

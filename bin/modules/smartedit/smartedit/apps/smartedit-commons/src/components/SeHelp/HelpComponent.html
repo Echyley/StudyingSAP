@@ -1,0 +1,11 @@
+<se-tooltip
+    [triggers]="['mouseenter', 'mouseleave']"
+    placement="right"
+    [isChevronVisible]="true"
+    [title]="title"
+    class="se-help"
+>
+    <span se-tooltip-trigger class="sap-icon--sys-help se-y-help-icon"></span>
+
+    <ng-content se-tooltip-body></ng-content>
+</se-tooltip>

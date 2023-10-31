@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%"
+        width="100%">
+
+    <style src="${wr}/IntegrationObjectEditorListbox.scss"/>
+
+    <listbox id="attributesListBox" multiple="true" checkmark="true" vflex="1"
+             sclass="integrationbackoffice-generic-listbox integrationbackoffice-editor-listbox"
+             emptyMessage="${labels.integrationbackoffice.editMode.columnFormat.noData}">
+        <listhead sizable="true">
+            <listheader width="30%" id="attributeNameListheader"
+                        label="${labels.integrationbackoffice.editMode.header.attributeName}" sort="auto"
+                        sortDirection="ascending"/>
+            <listheader width="30%" id="descriptionListheader"
+                        label="${labels.integrationbackoffice.editMode.header.description}" sort="auto"
+                        sclass="integrationbackoffice-listbox-header-description">
+                <div sclass="attributeListbox-tooltip-container-class">
+                    <button id="descriptionTooltips" sclass="integrationbackofficeTooltips icon-default-class cng-action-icon cng-font-icon font-icon--sys-help" popup="integrationbackofficeListboxHeaderPopup"></button>
+                </div>
+                <popup id="integrationbackofficeListboxHeaderPopup" sclass="yw-desc-tooltip">
+                    ${labels.integrationbackoffice.editMode.headerToolTip}
+                </popup>
+            </listheader>
+
+            <listheader width="14%" id="attributeStatus"
+                        label="${labels.integrationbackoffice.editMode.header.status}"/>
+            <listheader width="9%" label="${labels.integrationbackoffice.editMode.header.unique}"/>
+            <listheader width="12%" label="${labels.integrationbackoffice.editMode.header.autocreate}"/>
+            <listheader width="5%" label=""/>
+        </listhead>
+    </listbox>
+
+</widget>

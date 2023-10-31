@@ -1,0 +1,24 @@
+.se-sites-link {
+    display: inline-block;
+    padding: 0;
+    left: auto;
+    margin-right: 10px;
+
+    &__text {
+        color: var(--sapNeutralColor);
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: none;
+            color: var(--sapNeutralColor);
+        }
+    }
+
+    &__arrow {
+        vertical-align: middle;
+        color: var(--sapNeutralColor);
+        padding: 0 10px !important;
+        @include se-type('-1');
+    }
+}

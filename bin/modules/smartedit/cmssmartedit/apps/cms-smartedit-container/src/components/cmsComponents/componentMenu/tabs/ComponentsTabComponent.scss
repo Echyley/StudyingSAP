@@ -1,0 +1,47 @@
+se-components-tab .se-component-menu {
+    &__tabs-header {
+        padding: 0 20px se-space('s');
+        border-bottom: se-border();
+        .fd-form__set {
+            margin: 0 !important;
+            border: none;
+        }
+
+        &--upper {
+            margin-bottom: se-space('xs');
+        }
+
+        &--lower {
+            @include se-flex-row();
+        }
+    }
+
+    &__tabs-search {
+        width: 78%;
+    }
+
+    &__clone-on-drop.fd-form__item {
+        @include se-flex-row();
+    }
+
+    &__clone-check-box.fd-form__control {
+        margin: 0 se-space('base') 0 se-space('s');
+    }
+
+    &__clone-label.fd-form__label {
+        white-space: nowrap;
+        color: var(--sapTextColor);
+        margin-bottom: 0;
+    }
+
+    &__infinite-scroll .se-infinite-scrolling__container {
+        max-height: 300px;
+    }
+    &__infinite-scroll--short .se-infinite-scrolling__container {
+        max-height: 250px;
+    }
+
+    &__result {
+        @include se-grid-columns(2);
+    }
+}

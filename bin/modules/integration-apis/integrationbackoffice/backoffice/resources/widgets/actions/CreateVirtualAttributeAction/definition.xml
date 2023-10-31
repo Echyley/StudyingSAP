@@ -1,0 +1,20 @@
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="integrationbackoffice.actions.createVirtualAttributeAction"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+    <name>Create Virtual Attribute</name>
+    <description>Create a virtual attribute</description>
+    <version>1.0</version>
+
+    <actionClassName>de.hybris.platform.integrationbackoffice.widgets.modeling.actions.CreateVirtualAttributeAction</actionClassName>
+
+    <iconUri>createVirtualAttributeAction</iconUri>
+
+    <sockets>
+        <output id="createVirtualAttributePerform" type="java.lang.String"/>
+    </sockets>
+
+</action-definition>

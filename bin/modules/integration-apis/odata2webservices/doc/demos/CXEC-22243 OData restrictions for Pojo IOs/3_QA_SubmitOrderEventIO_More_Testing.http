@@ -1,0 +1,37 @@
+###  QA 1: GETting users is not supported
+GET {{fullURL}}/OrderSubmission/Users
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/json
+
+###  QA 2: GETting orders is not supported
+GET {{fullURL}}/OrderSubmission/Orders
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/json
+
+### QA 3: POSTing orders not supported
+POST {{fullURL}}/OrderSubmission/Orders
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "code": "order 1",
+  "user": {
+    "id": "anonymous"
+  }
+}
+
+### QA 4: POSTing users not supported
+POST {{fullURL}}/OrderSubmission/Users
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "anonymous"
+}
+
+### QA 5: the error response respects the Accept header
+GET {{fullURL}}/OrderSubmission/Orders
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml

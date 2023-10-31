@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <style src="${wr}/MetadataViewerModal.css"/>
+
+    <vlayout sclass="integrationbackoffice-modal-body">
+        <div id="integrationbackofficeJsonTabTooltip-container" sclass="integrationbackofficeJsonTabTooltip-container">
+            <button id="integrationbackofficeJsonTabTooltip"
+                    sclass="integrationbackofficeJsonTabTooltip integrationbackofficeTooltips icon-default-class cng-action-icon cng-font-icon font-icon--sys-help"
+                    popup="integrationbackofficeJsonTextboxPopup"/>
+        </div>
+        <popup id="integrationbackofficeJsonTextboxPopup" sclass="yw-desc-tooltip">
+            ${labels.integrationbackoffice.metadata.jsonTooltip}
+        </popup>
+        <tabbox id="integrationbackofficeMetadataTabbox" sclass="integrationbackoffice-integrationbackofficeMetadataTabbox">
+            <tabs id="integrationbackofficeMetadataTabs" sclass="integrationbackoffice-metadata-tabs">
+                <tab id="integrationbackofficeImpexTab"
+                     label="${labels.integrationbackoffice.metadata.tabs.impexView}"/>
+                <tab id="integrationbackofficeEdmxTab" label="${labels.integrationbackoffice.metadata.tabs.edmxView}"/>
+                <tab id="integrationbackofficeJsonTab" label="${labels.integrationbackoffice.metadata.tabs.jsonView}"/>
+                <tab id="integrationbackofficeRelationshipGraphTab"
+                     label="${labels.integrationbackoffice.metadata.tabs.visualizer}"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel sclass="integrationbackoffice-metadata-tabpanel">
+                    <textbox id="integrationbackofficeImpexTextbox" sclass="integrationbackoffice-integrationbackofficeImpexTextbox integrationbackoffice-metadata-textbox
+                    integrationbackoffice-metadata-textbox-large yw-integrationbackoffice-metadata-textbox-impex"
+                             multiline="true" readonly="true"/>
+                </tabpanel>
+                <tabpanel sclass="integrationbackoffice-metadata-tabpanel">
+                    <vlayout spacing="15px">
+                        <textbox id="integrationbackofficeEdmxTextbox"
+                                 sclass="integrationbackoffice-metadata-textbox integrationbackoffice-metadata-textbox-large"
+                                 multiline="true" readonly="true"/>
+                        <span sclass="integrationbackoffice-modal-label">
+                            ${labels.integrationbackoffice.metadata.edmx.path}
+                        </span>
+                        <textbox id="integrationbackofficeEdmxPathTextbox" readonly="true"/>
+                    </vlayout>
+                </tabpanel>
+                <tabpanel sclass="integrationbackoffice-metadata-tabpanel">
+                    <vlayout spacing="15px">
+                        <tabbox id="intgerationbackofficeJsonTabbox" sclass="integrationbackoffice-intgerationbackofficeJsonTabbox">
+                            <tabs id="integratonbackofficeJsonTabs"
+                                  sclass="integrationbackoffice-integratonbackofficeJsonTabs integrationbackoffice-metadata-tabs integrationbackoffice-metadata-json-tabs">
+                                <tab id="integrationbackofficeJsonPersistenceTab" sclass="integrationbackoffice-integrationbackofficeJsonPersistenceTab" label="Persistence"/>
+                                <tab id="integrationbackofficeJsonOutboundTab" sclass="integrationbackoffice-integrationbackofficeJsonOutboundTab" label="Outbound"/>
+                            </tabs>
+                            <tabpanels>
+                                <tabpanel sclass="integrationbackoffice-metadata-tabpanel">
+                                    <textbox id="integrationbackofficeJsonTextBox"
+                                             sclass="integrationbackoffice-integrationbackofficeJsonTextBox integrationbackoffice-metadata-textbox integrationbackoffice-metadata-textbox-small"
+                                             multiline="true" readonly="true"/>
+                                </tabpanel>
+                                <tabpanel sclass="integrationbackoffice-metadata-tabpanel">
+                                    <textbox id="integrationbackofficeJsonOutboundTextBox"
+                                             sclass="integrationbackoffice-integrationbackofficeJsonOutboundTextBox integrationbackoffice-metadata-textbox integrationbackoffice-metadata-textbox-small"
+                                             multiline="true" readonly="true"/>
+                                </tabpanel>
+                            </tabpanels>
+                        </tabbox>
+                        <span id="integrationbackofficeJsonPathSpan" sclass="integrationbackoffice-modal-label">
+                            ${labels.integrationbackoffice.metadata.json.path}
+                        </span>
+                        <textbox id="integrationbackofficeJsonPathTextbox" readonly="true"/>
+                    </vlayout>
+                </tabpanel>
+                <tabpanel sclass="integrationbackoffice-metadata-tabpanel">
+                    <vlayout>
+                        <networkchart id="integrationbackofficeNetworkChart"
+                                      sclass="integrationbackoffice-metadata-visualizer"/>
+                        <script defer="true" type="text/javascript" src="${wr}/MetadataViewerModal.js"/>
+                    </vlayout>
+                    <textbox id="canvasAsString" visible="false" readonly="true"/>
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+    </vlayout>
+    <div sclass="metadataViewerFooter">
+        <button id="integrationbackofficeMetadataDownloadButton"
+                label="${labels.integrationbackoffice.metadata.button.download}"
+                sclass="y-btn-primary integrationbackoffice-modal-button"/>
+    </div>
+
+</widget>

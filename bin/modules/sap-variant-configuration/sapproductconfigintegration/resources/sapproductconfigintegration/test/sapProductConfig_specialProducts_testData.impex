@@ -1,0 +1,11 @@
+# fixes an wrong price - use of USD instead of EUR - defined in
+# sapProductConfig_basic_testData.impex (configurator-complex-products-module)
+# can be deleted after fixed and released in configurator-complex-products-module
+
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+#################################################################################
+# Update Product  Prices
+#################################################################################
+INSERT_UPDATE Product;code[unique=true];$prices
+;KD990MIX;1 PCE = 599 EUR N;
+;000000000000056227;1 PCE = 99 EUR N;

@@ -1,0 +1,33 @@
+/****************************************************
+				restriction-Editor
+****************************************************/
+
+#restrictions-label {
+    display: none;
+}
+
+.se-restriction__select {
+    text-transform: capitalize;
+    width: 100%;
+}
+
+.se-restrictions-list__item-content {
+    @include se-text-ellipsis();
+    cursor: default;
+    flex-grow: 1;
+}
+
+// UserGroup Restriction Tags
+#userGroups-selector {
+    .se-generic-editor-multiple-dropdown__match li[draggable='true'] {
+        @include se-flex-row(center);
+        display: inline-flex !important;
+        border: se-border();
+        margin: 4px 0 4px 8px;
+        padding: 4px 8px;
+        border-radius: se-space('base');
+        background-color: var(--fd-token-background-color);
+        color: var(--sapNeutralColor);
+        min-height: 28px;
+    }
+}

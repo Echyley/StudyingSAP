@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="cmsSiteService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.cms2.servicelayer.services.CMSSiteService" />
+	</bean>
+
+	<bean id="cmsPageService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.cms2.servicelayer.services.CMSPageService" />
+	</bean>
+
+	<bean id="storeSessionFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.storesession.StoreSessionFacade" />
+	</bean>
+
+	<bean id="customerFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.customer.CustomerFacade" />
+	</bean>
+
+	<bean id="pageTitleResolver" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorservices.storefront.util.PageTitleResolver" />
+	</bean>
+
+	<bean id="sessionService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.servicelayer.session.SessionService" />
+	</bean>
+
+
+	<bean id="hostConfigService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorservices.config.HostConfigService" />
+	</bean>
+
+	<bean id="i18nService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.servicelayer.i18n.I18NService" />
+	</bean>
+
+	<bean id="siteConfigService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorservices.config.SiteConfigService" />
+	</bean>
+
+	<bean id="simpleBreadcrumbBuilder" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder" />
+	</bean>
+
+	<bean id="userFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.user.UserFacade" />
+	</bean>
+
+	<bean id="configurationService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.servicelayer.config.ConfigurationService" />
+	</bean>
+
+	<bean id="baseSiteService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.site.BaseSiteService" />
+	</bean>
+
+	<bean id="consentFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.consent.ConsentFacade" />
+	</bean>
+
+	<bean id="cmsPreviewService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.cms2.servicelayer.services.CMSPreviewService" />
+	</bean>
+
+	<bean id="cartFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.order.CartFacade" />
+	</bean>
+
+	<bean id="acceleratorCheckoutFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorfacades.order.AcceleratorCheckoutFacade" />
+	</bean>
+
+	<bean id="saveCartFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.order.SaveCartFacade" />
+	</bean>
+
+	<bean id="punchOutService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.b2b.punchout.services.PunchOutService" />
+	</bean>
+
+	<bean id="punchOutSessionService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.b2b.punchout.services.PunchOutSessionService" />
+	</bean>
+
+	<bean id="punchOutCredentialService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.b2b.punchout.services.PunchOutCredentialService" />
+	</bean>
+
+	<bean id="cartService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.order.CartService" />
+	</bean>
+
+	<bean id="punchOutUserAuthenticationStrategy" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.b2b.punchout.security.PunchOutUserAuthenticationStrategy" />
+	</bean>
+
+	<bean id="redirectStrategy" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.security.web.RedirectStrategy" />
+	</bean>
+
+	<bean id="lazyInitOverrideBeanFactoryPostProcessor" class="de.hybris.platform.spring.LazyInitOverrideBeanFactoryPostProcessor" />
+
+	<bean id="siteBaseUrlResolutionService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorservices.urlresolver.impl.DefaultSiteBaseUrlResolutionService" />
+	</bean>
+
+	<bean id="punchOutAuthenticationAspect" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.b2b.punchout.aop.aspect.PunchOutAuthenticationAspect" />
+	</bean>
+
+	<bean id="productFacade" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.commercefacades.product.ProductFacade" />
+	</bean>
+
+	<util:list id="csrfAllowedUrlPatternsList" />
+	<util:list id="beforeViewHandlersList"  />
+	<util:map id="supportedTransactionURLPaths"  />
+	<util:map id="b2bPunchOutLevelMapping"  />
+
+</beans>

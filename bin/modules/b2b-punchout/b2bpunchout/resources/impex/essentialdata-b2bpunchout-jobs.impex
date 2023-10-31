@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+#%impex.enableCodeExecution(true);
+#%impex.enableExternalSyntaxParsing(true)
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$timeoutDurationMillseconds=$config-b2bpunchout.timeout
+
+insert_update FlexibleSearchRetentionRule;code[unique=true];searchQuery;actionReference;retentionTimeSeconds
+"#%beforeEach:
+Long timeoutDurationSeconds = Long.valueOf(String.valueOf($timeoutDurationMillseconds))/1000L;
+line.put(4, String.valueOf(timeoutDurationSeconds))";
+;expiredPunchoutSessionCleanupRetentionRule; select {PK}, {itemtype} from {StoredPunchOutSession} where {modifiedtime} < ?CALC_RETIREMENT_TIME;basicRemoveCleanupAction;
+#%beforeEach:end
+
+# JOB
+INSERT_UPDATE RetentionJob; code[unique=true]; retentionRule(code); batchSize
+; expiredPunchoutSessionCleanupRetentionJob; expiredPunchoutSessionCleanupRetentionRule; 100
+
+# CRON JOB
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isoCode)[default=en]
+; expiredPunchoutSessionCleanupCronJob; expiredPunchoutSessionCleanupRetentionJob;
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+; expiredPunchoutSessionCleanupCronJob;0 0 0 1 * ?

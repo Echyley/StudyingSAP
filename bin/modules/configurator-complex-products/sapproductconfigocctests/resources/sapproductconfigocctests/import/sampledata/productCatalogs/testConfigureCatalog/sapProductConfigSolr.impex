@@ -1,0 +1,172 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the Solr configuration for the wsTest store used for testing product configuration
+#
+$productCatalog=testConfigureCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=wsTestSolrServerConfig
+$indexConfigName=wsTestSolrIndexConfig
+$searchConfigName=wsTestPageSize
+$facetSearchConfigName=wsTestIndex
+$facetSearchConfigDescription=wsTest Solr Index
+$searchIndexNamePrefix=wsTest
+$solrIndexedType=wsTestProductType
+$indexBaseSite=wsTest
+$indexLanguages=en
+$indexCurrencies=USD
+
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+# Create the solr server configuration
+INSERT_UPDATE ServicelayerJob	;code[unique=true]	;springId[unique=true]
+										;solrIndexerJob		;solrIndexerJob
+
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);username;password;indexingUsername;indexingPassword
+;$serverConfigName;standalone;solrclient;client123;solrindexingclient;indexingclient123
+
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+;$serverConfigName;https://localhost:8983/solr;true
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);
+;$indexConfigName;100;1;TWO_PHASE;
+
+# Create the faceted search configuration
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+;$searchConfigName;20
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true]
+;sortRef1;$solrIndexedType;relevance
+;sortRef3;$solrIndexedType;name-asc
+;sortRef4;$solrIndexedType;name-desc
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+;$solrIndexedType;Product;false;sortRef1,sortRef3,sortRef4
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;$serverConfigName;$searchConfigName;$indexConfigName;$solrIndexedType;true;$productCatalog:Online
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+;$indexBaseSite;$facetSearchConfigName
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsPhraseQuery[default=false];ftsPhraseQueryBoost
+;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;;;;;;;;;;;
+;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider;code;TRUE;100;;;;;;;
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider;getName(#lang);TRUE;50;;;;;;;
+;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;;;TRUE;25;;;;;;;
+;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;;;TRUE;25;;;;;;;
+;$solrIndexedType; manufacturerAID        ;string ;            ;    ;    ;    ;    ;    ;;;;;;;;;;;
+;$solrIndexedType; ean                    ;string ;            ;    ;    ;    ;true;true;;;;;;;;;;;
+;$solrIndexedType; multidimensional       ;boolean;            ;    ;    ;    ;    ;    ;multidimentionalProductFlagValueProvider;;;;;;;;;;
+;$solrIndexedType; configurable           ;boolean;            ;    ;    ;    ;    ;    ;productConfigurableProvider;;;;;;;;;;
+;$solrIndexedType; configuratorType       ;string ;            ;    ;    ;    ;    ;    ;productConfiguratorTypeProvider;;;;;;;;;;
+;$solrIndexedType; baseProduct            ;string ;            ;    ;    ;    ;    ;    ;sapProductConfigDefaultBaseValueResolver;;;;;;;;;;
+
+
+$classificationCatalog=cpqTestClassification
+$classificationVersion=1.0
+$classificationCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='$classificationVersion'])[unique=true,default='$classificationCatalog:$classificationVersion'];
+$classificationSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='$classificationVersion'])[unique=true,default='$classificationCatalog:$classificationVersion'];
+
+# Solr index for variants
+$classAttribute=classificationAttribute(code,$classificationSystemVersion)
+$classClass=classificationClass(code,$classificationCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classificationSystemVersion)
+INSERT_UPDATE 	SolrIndexedProperty	;solrIndexedType(identifier)[unique=true]; name[unique=true] ;type(code) ;facet;currency[default=false];localized[default=false];multiValue;useForSpellchecking;useForAutocomplete;fieldValueProvider                         ;$classAttributeAssignment
+;$solrIndexedType                                                            ; CAMERA_MODE       ;string     ;true ;false                  ;true                    ;false     ;false              ;false             ;commerceClassificationPropertyValueProvider;CONF_CAMERA_SL:cpqTestClassification:1.0:CAMERA_MODE:cpqTestClassification:1.0:cpqTestClassification:1.0;
+;$solrIndexedType                                                            ; CAMERA_COLOR      ;string     ;true ;false                  ;true                    ;false     ;false              ;false             ;commerceClassificationPropertyValueProvider;CONF_CAMERA_SL:::CAMERA_COLOR::::;
+
+
+
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {PK} FROM {Product} WHERE {code} NOT IN(   {{ SELECT {code} FROM {GenericVariantProduct} }})";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
+SELECT DISTINCT tbl.pk, tbl.code FROM (
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}
+	UNION
+	{{
+		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p} WHERE {p:code} IN (
+			{{
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}
+		)
+	}}
+) tbl  WHERE tbl.code NOT IN ( {{ SELECT {code} FROM {GenericVariantProduct} }}) ORDER BY tbl.code
+";anonymous
+
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:relevance;score;false
+;$solrIndexedType:name-asc;name;true
+;$solrIndexedType:name-desc;name;false
+
+# Language
+$lang=en
+
+# Solr Indexed Property
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+ #;$solrIndexedType;allPromotions;"Promotion"
+ #;$solrIndexedType;availableInStores;"Stores"
+ ;$solrIndexedType;code;"Code"
+ ;$solrIndexedType;description;"Description"
+ ;$solrIndexedType;name;"Name"
+ ;$solrIndexedType;summary;"Summary"
+
+# Define the available sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]
+ ;$solrIndexedType;name-asc;"Name (ascending)"
+ ;$solrIndexedType;name-desc;"Name (descending)"
+ ;$solrIndexedType;relevance;"Relevance"
+ 
+
+# Search query template
+INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
+;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder
+
+# Non-facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
+;itemtype:$solrIndexedType 				  ;    ;   ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;code:$solrIndexedType                   ;    ;   ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+
+
+# Search query template
+INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
+;SUGGESTIONS;$solrIndexedType;defaultFreeTextQueryBuilder
+
+# Non-facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=SUGGESTIONS:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
+;itemtype:$solrIndexedType 				  ;    ;   ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;code:$solrIndexedType                   ;    ;   ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;

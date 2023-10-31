@@ -1,0 +1,89 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+INSERT Employee; uid                    ; groups(uid)
+               ; employee               ; employeegroup
+               ; multisite-employee     ; employeegroup, multisitegroup
+               ; multisite-employee-a   ; employeegroup, multisitegroup
+               ; multisite-employee-a+b ; employeegroup, multisitegroup
+
+INSERT BaseSite; uid         ; dataIsolationEnabled
+               ; test-site-a ; true
+               ; test-site-b ; true
+               ; test-site   ; false
+
+INSERT SiteEmployeeGroup; uid                   ; visibleSite(uid); members(uid)
+                        ; site-a-employee-group ; test-site-a     ; multisite-employee-a, multisite-employee-a+b
+                        ; site-b-employee-group ; test-site-b     ; multisite-employee-a+b
+
+INSERT BaseStore; uid            ; cmsSites(uid)
+                ; test-store     ; test-site
+                ; test-store-a   ; test-site-a
+                ; test-store-b   ; test-site-b
+                ; test-store-a+b ; test-site-a,test-site-b
+
+INSERT Customer; uid                     ; site(uid)   ; groups(uid)
+               ; foo@bar.com             ;             ; customergroup, multisitegroup
+               ; foo@bar.com|test-site-a ; test-site-a ; customergroup, multisitegroup
+               ; foo@bar.com|test-site-b ; test-site-b ; customergroup, multisitegroup
+               ; fooall@bar.com          ;             ; customergroup
+
+INSERT SitePreference; customer(uid)            ; site(uid)
+                     ; foo@bar.com|test-site-a  ; test-site-a
+                     ; foo@bar.com|test-site-b  ; test-site-b
+
+INSERT Cart; code             ; user(uid)               ; site(uid)   ; store(uid)   ; date[dateformat = yyyy-MM-dd]; currency(isocode)
+           ; test-cart-anon-a ; anonymous               ; test-site-a ; test-store-a ; 2000-01-01                   ; EUR
+           ; test-cart-foo-a  ; foo@bar.com|test-site-a ; test-site-a ; test-store-a ; 2000-01-01                   ; EUR
+           ; test-cart-anon-b ; anonymous               ; test-site-b ; test-store-b ; 2000-01-01                   ; EUR
+           ; test-cart-foo-b  ; foo@bar.com|test-site-b ; test-site-b ; test-store-b ; 2000-01-01                   ; EUR
+           ; test-cart-anon   ; anonymous               ;             ;              ; 2000-01-01                   ; EUR
+           ; test-cart-foo    ; foo@bar.com             ;             ;              ; 2000-01-01                   ; EUR
+
+INSERT_UPDATE ConsentTemplate; id[unique = true]           ; name                               ; description                                                                                                                        ; version[unique = true]; baseSite(uid)[unique = true]; &ConsentTemplateRef;
+                             ; MARKETING_NEWSLETTER_SITE   ; "I approve to this sample consent" ; "This is a sample consent description that will need to be updated or replaced, based on the valid registration consent required." ; 0                     ; test-site                   ; consent_template_record_1
+                             ; MARKETING_NEWSLETTER_SITE_A ; "I approve to this sample consent" ; "This is a sample consent description that will need to be updated or replaced, based on the valid registration consent required." ; 0                     ; test-site-a                 ; consent_template_record_2
+                             ; MARKETING_NEWSLETTER_SITE_B ; "I approve to this sample consent" ; "This is a sample consent description that will need to be updated or replaced, based on the valid registration consent required." ; 0                     ; test-site-b                 ; consent_template_record_3
+
+INSERT_UPDATE Consent; code[unique = true]; consentTemplate(&ConsentTemplateRef)[unique = true]; customer(uid)[unique = true]; consentgivendate[dateformat = dd-MM-yyyy]; consentwithdrawndate[dateformat = dd-MM-yyyy]
+                     ; 00000001           ; consent_template_record_1                          ; fooall@bar.com              ; "11-08-2022"                             ;
+                     ; 00000002           ; consent_template_record_2                          ; foo@bar.com|test-site-a     ; "11-08-2022"                             ;
+                     ; 00000003           ; consent_template_record_3                          ; foo@bar.com|test-site-b     ; "11-08-2022"                             ;
+#
+INSERT_UPDATE Address; owner(Customer.uid)[unique = true]; streetname[unique = true]; streetnumber[unique = true]; postalcode[unique = true]; duplicate[unique = true]; town      ; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname  ; email          ; gender(code)
+                     ; fooall@bar.com                    ; testStreet1              ; 1                          ; 28277                    ; false                   ; Stockholm ; AT              ; true          ; true          ; true           ; false           ; Foo      ; Demokunde ; fooall@bar.com ; MALE
+                     ; foo@bar.com|test-site-a           ; testStreet2              ; 2                          ; 28277                    ; false                   ; Stockholm ; AT              ; true          ; true          ; true           ; false           ; Foo      ; Demokunde ; foo@bar.com    ; MALE
+                     ; foo@bar.com|test-site-b           ; testStreet3              ; 3                          ; 28277                    ; false                   ; Stockholm ; AT              ; true          ; true          ; true           ; false           ; Foo      ; Demokunde ; foo@bar.com    ; MALE
+
+INSERT_UPDATE Order; code[unique = true]; user(uid)               ; date[dateformat = dd.MM.yyyy HH:mm]; currency(isocode); net   ; deliveryMode(code[default = 'courier']); Discounts(code); calculated; store(uid)   ; site(uid)
+                   ; testOrder1         ; fooall@bar.com          ; 15.08.2022 10:58                   ; EUR              ; false ;                                        ;                ; true     ; test-store   ; test-site
+                   ; testOrder2         ; foo@bar.com|test-site-a ; 15.08.2022 10:58                   ; EUR              ; false ;                                        ;                ; true     ; test-store-a ; test-site-a
+                   ; testOrder3         ; foo@bar.com|test-site-b ; 15.08.2022 10:58                   ; EUR              ; false ;                                        ;                ; true     ; test-store-b ; test-site-b
+
+INSERT_UPDATE ReturnRequest;code[unique=true];rma;order(code);
+ ;testReturnRequestA;0000001;testOrder2;
+ ;testReturnRequestB;0000002;testOrder3;
+ ;testReturnRequestC;0000003;testOrder1;
+
+INSERT_UPDATE Vendor; name[lang = en]; code[unique = true];
+                    ; Default Vendor ; defaultVendor      ;
+
+INSERT_UPDATE Warehouse; name[lang = en]   ; code[unique = true]; default; vendor(code)  ;
+                       ; Default Warehouse ; defaultWarehouse   ; true   ; defaultVendor ;
+
+INSERT_UPDATE Consignment; code[unique = true]; status(code); order(code); shippingAddress(owner(Customer.uid), streetname, streetnumber); warehouse(code[default = 'defaultWarehouse']); deliveryMode(code[default = 'courier']);
+                         ; test-consignment   ; READY       ; testOrder1 ; fooall@bar.com:testStreet1:1                                  ;                                              ;                                        ;
+                         ; test-consignment-a ; READY       ; testOrder2 ; foo@bar.com|test-site-a:testStreet2:2                         ;                                              ;                                        ;
+                         ; test-consignment-b ; READY       ; testOrder3 ; foo@bar.com|test-site-b:testStreet3:3                         ;                                              ;                                        ;
+
+INSERT_UPDATE CustomerReview; product(code, catalogVersion(catalog(id[default = 'testCatalog']), version[default = 'Online']))[unique = true]; rating[unique = true]; user(uid)[unique = true]; comment        ; headline ; creationTime[dateformat = 'yyyy-MM-dd''T''HH:mm:ss']; approvalStatus(code); alias ; language(isocode)
+                            ; testProduct0                                                                                                   ; 1                    ; anonymous               ; anon-comment   ; headline ; 2022-08-15T00:00:00                                 ; approved            ; alias ; en
+                            ; testProduct0                                                                                                   ; 2                    ; fooall@bar.com          ; fooall-comment ; headline ; 2022-08-15T00:00:00                                 ; approved            ; alias ; en
+                            ; testProduct0                                                                                                   ; 3                    ; foo@bar.com|test-site-a ; foo-a-comment  ; headline ; 2022-08-15T00:00:00                                 ; approved            ; alias ; en
+                            ; testProduct0                                                                                                   ; 4                    ; foo@bar.com|test-site-b ; foo-b-comment  ; headline ; 2022-08-15T00:00:00                                 ; approved            ; alias ; en
+
+INSERT_UPDATE AuditReportData; code[unique = true];             auditRootItem(Customer.uid);
+                             ; PDR-foo@bar.com;                 foo@bar.com;
+                             ; PDR-fooall@bar.com;              fooall@bar.com;
+                             ; PDR-foo@bar.com|test-site-a;     foo@bar.com|test-site-a;
+                             ; PDR-foo@bar.com|test-site-b;     foo@bar.com|test-site-b;

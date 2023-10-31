@@ -1,0 +1,40 @@
+<div class="se-toolbar-group">
+    <se-toolbar
+        cssClass="se-toolbar--shell"
+        imageRoot="imageRoot"
+        toolbarName="smartEditHeaderToolbar"
+    ></se-toolbar>
+    <se-toolbar
+        cssClass="se-toolbar--experience"
+        imageRoot="imageRoot"
+        toolbarName="smartEditExperienceToolbar"
+    ></se-toolbar>
+    <se-toolbar
+        [ngClass]="{'se-toolbar--perspective-hidden': !isReady}"
+        cssClass="se-toolbar--perspective"
+        imageRoot="imageRoot"
+        toolbarName="smartEditPerspectiveToolbar"
+    ></se-toolbar>
+</div>
+
+<div id="js_iFrameWrapper" class="iframeWrapper">
+    <div class="wrap">
+        <div
+            *ngIf="showPageTreeList()"
+            id="page-tree-container"
+            [ngStyle]="{'width': width}"
+            class="page-tree__list"
+        >
+            <se-page-tree-container></se-page-tree-container>
+        </div>
+        <div
+            *ngIf="showPageTreeList()"
+            class="splitter-tree-panel"
+            resizer="#page-tree-container"
+        ></div>
+        <div class="iframe-panel">
+            <iframe id="ySmartEditFrame" src=""></iframe>
+            <div id="ySmartEditFrameDragArea"></div>
+        </div>
+    </div>
+</div>

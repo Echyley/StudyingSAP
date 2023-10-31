@@ -1,0 +1,37 @@
+<div *ngIf="propertyType">
+    <!-- Product catalog selector -->
+    <div id="product-catalog">
+        <label
+            id="labelForProductCatalog"
+            class="se-control-label"
+            [ngClass]="{ 'required': field.required }"
+            *ngIf="catalogs.length === 1"
+            >{{ catalogName | seL10n | async }}</label
+        >
+        <se-generic-editor-dropdown
+            id="se-catalog-selector-dropdown"
+            *ngIf="catalogs.length > 1"
+            [field]="productCatalogField"
+            [qualifier]="'productCatalog'"
+            [model]="model"
+        ></se-generic-editor-dropdown>
+    </div>
+
+    <!-- Item selector -->
+    <div>
+        <label id="labelForItem"  class="se-control-label" [translate]="mainDropDownI18nKey"></label>
+        <se-generic-editor-dropdown
+            id="se-items-selector-dropdown"
+            [field]="field"
+            [qualifier]="qualifier"
+            [model]="model"
+            [itemComponent]="itemComponent"
+            [(reset)]="reset"
+        ></se-generic-editor-dropdown>
+    </div>
+</div>
+<div
+    class="product-catalog-item-type-missing"
+    *ngIf="!propertyType"
+    translate="se.cms.catalogawareitem.itemtype.notsupported"
+></div>

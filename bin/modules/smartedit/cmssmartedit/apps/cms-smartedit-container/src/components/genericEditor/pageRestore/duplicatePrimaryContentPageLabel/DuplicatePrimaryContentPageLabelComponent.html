@@ -1,0 +1,41 @@
+<div>
+    <div class="fd-form__item fd-form__item--check">
+        <input
+            class="fd-form__control"
+            type="radio"
+            name="duplicateResolution"
+            id="overwritePrimaryPageOption"
+            [(ngModel)]="conflictResolution"
+            (click)="selectResolution(RESOLUTION_OPTIONS.overwritePage)"
+            [value]="RESOLUTION_OPTIONS.overwritePage"
+        />
+        <label
+            for="overwritePrimaryPageOption"
+            class="fd-form__label"
+            [translate]="'se.cms.page.restore.content.duplicate.primaryforvariation.option.overwrite'"
+        ></label>
+    </div>
+    <div class="fd-form__item fd-form__item--check">
+        <input
+            class="fd-form__control"
+            type="radio"
+            name="duplicateResolution"
+            id="renamePrimaryPageOption"
+            [(ngModel)]="conflictResolution"
+            (click)="selectResolution(RESOLUTION_OPTIONS.renamePageLabel)"
+            [value]="RESOLUTION_OPTIONS.renamePageLabel"
+        />
+        <label
+            for="renamePrimaryPageOption"
+            class="fd-form__label"
+            [translate]="'se.cms.page.restore.content.duplicate.primaryforvariation.option.rename'"
+        ></label>
+    </div>
+    <div
+        class="rename-label-section"
+        *ngIf="conflictResolution === RESOLUTION_OPTIONS.renamePageLabel"
+    >
+        <label fd-form-label [translate]="'se.cms.page.restore.page.label'"></label>
+        <input type="text" fd-form-control [(ngModel)]="page['label']" />
+    </div>
+</div>

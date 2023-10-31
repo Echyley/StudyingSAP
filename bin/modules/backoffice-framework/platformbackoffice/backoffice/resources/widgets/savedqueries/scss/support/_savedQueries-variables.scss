@@ -1,0 +1,73 @@
+/*================================
+    Saved-Queries Widget variables
+================================*/
+@import "cockpitng-globals.scss";
+
+$saved-queries__default--color: var(--bo-container-color);
+$saved-queries__default--bg-color: var(--bo-container-background);
+
+$saved-queries__list--bg-color: transparent;
+$saved-queries__list--padding: false; //0 $_container-spacing-default__small;
+$safed-queries__filter-checkbox--line-height: $editor-defaults__inline-box--height;
+$safed-queries__vlist-filter-checkbox--line-height: normal;
+$safed-queries__vlist-filter-checkbox--margin-top: $container-spacing-default__half;
+
+$saved-queries__list-item--bg-color: transparent;
+$saved-queries__list-item--selected-bg-color: var(--bo-list-selected-background);
+$saved-queries__list-item--selected-hover-bg-color: var(--bo-list-selected-hover-background);
+$saved-queries__list-item--hover-bg-color: var(--bo-list-hover-background);
+$saved-queries__list-item--active-bg-color: var(--bo-list-active-background);
+$saved-queries__list-item--hover-color: false; //$blue__greyish--200;
+$saved-queries__list-item--color: var(--bo-list-text-color);
+$saved-queries__list-item--active-color: var(--bo-list-active-text-color);
+$_saved-queries__list-item--padding-x: $_container-spacing-default__small;
+$saved-queries__list-item-name-cell--padding-left: 16px;
+$saved-queries__list-item-btn-cell--padding-right: 0;
+$saved-queries__list-item-btn-cell--padding-y: 2px;
+$saved-queries__list-item-label--padding-left: 0;
+
+$_saved-queries__list-empty--text-align: left;
+$_saved-queries__list-empty--font-style: normal;
+$_saved-queries__list-empty-content--margin: 0 ($_container-spacing-default__tiny * -1);
+
+$saved-queries__list-item-delete-btn--size: $toolbar__button-default--size;
+$saved-queries__list-item-delete-btn--line-height: $font-size__base;
+$_saved-queries__list-item-btn-cell--width: $saved-queries__list-item-delete-btn--size;
+@if $_saved-queries__list-item--padding-x {
+	$_saved-queries__list-item-btn-cell--width: $_saved-queries__list-item-btn-cell--width + $_saved-queries__list-item--padding-x;
+}
+$saved-queries__list-item-btn-cell--min-height: floor($saved-queries__list-item-delete-btn--size + 2 * $saved-queries__list-item-btn-cell--padding-y);
+
+$saved-queries__filter-input--bg-color: var(--bo-input-background);
+$saved-queries__filter-input--color: var(--bo-text-color);
+$saved-queries__filter-input--border-color: var(--bo-input-border-color);
+$saved-queries__filter-input--focus-bg-color: var(--bo-input-focus-background);
+$saved-queries__filter-input--focus-color: var(--bo-text-color);
+$saved-queries__filter-input-placeholder--color: var(--bo-placeholder-text-color);
+
+$saved-queries__filter-button--hover-bg-color: transparent;
+
+$saved-queries__header-content--height: $editor-defaults__inline-box--height;
+$saved-queries__header--padding: floor(($toolbar__default--height - $saved-queries__header-content--height)/2) $_container-spacing-default__small;
+$saved-queries__header-label--line-height: 19px;
+$saved-queries__header-label--padding-left: 0;
+$saved-queries__header-label--text-transform: none;
+$saved-queries__header-label--font-weight: $font-weight-bold;
+
+$saved-queries__header-filter-toggle-icon--size: $toolbar__button-default--size;
+$saved-queries__header-filter-toggle-icon--font-family: $font-family__icon;
+$saved-queries__header-filter-toggle-icon--content: _getIconGlyphContentValue('filter');
+$saved-queries__header-filter-toggle-icon--font-size: $font-size__large;
+
+$_saved-queries__header-filter-toggle-button--color: var(--bo-button-icon-color);
+$_saved-queries__header-filter-toggle-button--bg-color: transparent;
+$_saved-queries__header-filter-toggle-button-radius: $toolbar__button-default--border-radius;
+$_saved-queries__header-filter-toggle-button-checked--color: var(--bo-button-selected-color);
+$_saved-queries__header-filter-toggle-button-checked--bg-color: var(--bo-button-selected-background);
+
+$saved-queries__header-delimiter--border-size: $_default__delimiter--border-width;
+$saved-queries__header-delimiter--border-color: var(--bo-object-header-border-color);
+$saved-queries__tree-filter--padding: 0 $_container-spacing-default__small $_container-spacing-default__small;
+
+$saved-queries__recently-added--bg-color: var(--bo-selected-color);
+$_saved-queries__recently-added--color: false;

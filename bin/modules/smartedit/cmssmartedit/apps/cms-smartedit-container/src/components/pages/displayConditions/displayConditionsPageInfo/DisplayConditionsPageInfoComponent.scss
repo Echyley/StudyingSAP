@@ -1,0 +1,8 @@
+.se-edit-page-info__display-conditions {
+    margin-bottom: se-space('s');
+}
+
+.se-edit-page-info-display-conditions__basic-info {
+    @include se-grid-columns(2);
+    margin-bottom: se-space('s');
+}

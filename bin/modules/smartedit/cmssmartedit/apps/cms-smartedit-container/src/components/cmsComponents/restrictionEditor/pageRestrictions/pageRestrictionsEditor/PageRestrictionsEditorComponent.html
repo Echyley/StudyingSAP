@@ -1,0 +1,14 @@
+<se-page-restrictions-info-message
+    *ngIf="page.restrictions?.length > 1"
+></se-page-restrictions-info-message>
+
+<se-restrictions-editor
+    [editable]="isEditable"
+    [getRestrictionTypes]="getRestrictionTypes"
+    [getSupportedRestrictionTypes]="getSupportedRestrictionTypes"
+    [item]="page"
+    [restrictionUuids]="page.restrictions"
+    [removeValidationMessages]="onRemoveValidationMessages"
+    (onRestrictionsChange)="onRestrictionsChange($event)"
+>
+</se-restrictions-editor>

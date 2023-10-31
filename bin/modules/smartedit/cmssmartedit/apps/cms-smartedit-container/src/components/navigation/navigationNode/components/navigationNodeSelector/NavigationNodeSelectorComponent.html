@@ -1,0 +1,33 @@
+<div *ngIf="isReady">
+    <div *ngIf="cmsItem[qualifier]" class="se-navigation-mode">
+        <div class="se-navigation__node">
+            <se-breadcrumb
+                class="se-navigation__node-breadcrumb"
+                [nodeUuid]="cmsItem[qualifier]"
+                [uriContext]="uriContext"
+            ></se-breadcrumb>
+            <div class="se-navigation__node-button">
+                <button
+                    class="btn btn-link btn-block se-navigation__button"
+                    (click)="remove($event)"
+                    [disabled]="!field.editable"
+                    translate="se.cms.navigationcomponent.management.node.selection.remove.action"
+                ></button>
+            </div>
+        </div>
+        <se-navigation-editor-tree
+            [uriContext]="uriContext"
+            [readOnly]="true"
+            [rootNodeUid]="nodeUid"
+        ></se-navigation-editor-tree>
+    </div>
+    <div *ngIf="!cmsItem[qualifier]">
+        <label
+            translate="se.cms.navigationcomponent.management.node.selection.invite.action"
+        ></label>
+        <se-navigation-node-picker
+            [uriContext]="uriContext"
+            [editable]="field.editable"
+        ></se-navigation-node-picker>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="se-page-info__name">
+    <se-homepage-icon
+        *ngIf="field.qualifier === 'name'"
+        [cmsPage]="cmsPage"
+        [uriContext]="uriContext"
+    ></se-homepage-icon>
+    <div
+        id="{{ field.qualifier }}-homepage"
+        class="se-page-info__name-value fd-form-control"
+        [title]="field.qualifier"
+    >
+        {{ model[qualifier] }}
+    </div>
+</div>

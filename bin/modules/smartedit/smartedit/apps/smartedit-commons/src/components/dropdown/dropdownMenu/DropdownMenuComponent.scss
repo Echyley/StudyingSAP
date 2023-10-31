@@ -1,0 +1,102 @@
+se-dropdown-menu {
+    .fd-popover__popper {
+        border: 0; // hide vertical line which appears above the top right corner
+    }
+}
+
+.se-information {
+    padding: 12px;
+}
+
+// Toggle
+.se-dropdown-more-menu__toggle {
+    color: var(--sapInformativeColor) !important;
+    cursor: pointer;
+    &.sap-icon--overflow {
+        position: relative;
+        bottom: 3px;
+        height: 20px;
+        line-height: 36px;
+    }
+}
+
+se-dropdown-menu-item li > * {
+    width: 100% !important;
+}
+
+// Dropdown Menu
+.se-dropdown-menu__list {
+    @include se-flex-column;
+    min-width: 100px;
+    border-radius: var(--sapElement_BorderCornerRadius) !important;
+    se-dropdown-menu-item {
+        &:first-child {
+            .se-dropdown-item,
+            .se-dropdown-item:hover {
+                border-top-left-radius: var(--sapElement_BorderCornerRadius);
+                border-top-right-radius: var(--sapElement_BorderCornerRadius);
+            }
+        }
+        &:last-child {
+            .se-dropdown-item,
+            .se-dropdown-item:hover {
+                border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+                border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+                border-bottom: none !important;
+            }
+        }
+
+        .fd-list__item {
+            border-bottom: none;
+            padding: unset;
+
+            .se-dropdown-item {
+                text-decoration: none !important;
+                white-space: nowrap;
+                color: var(--sapTextColor);
+                width: 100%;
+                padding: 10px 24px;
+                border-bottom: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);
+                &.fd-has-color-status-3 {
+                    color: var(--sapNegativeColor);
+                }
+            }
+
+            .se-dropdown-item__delete,
+            .se-dropdown-item__delete a {
+                order: 99;
+                &,
+                &:hover {
+                    color: var(--sapNegativeColor);
+                }
+                &.se-dropdown-item--disabled,
+                &.se-dropdown-item--disabled:hover {
+                    opacity: 0.4;
+                    padding-right: se-space('xxs') !important;
+                    background: var(--sapBaseColor) !important;
+                }
+            }
+        }
+    }
+}
+
+// TODO remove it when deletePageItemComponent is migrated
+.se-dropdown-item__delete-wrapper {
+    @include se-flex-row();
+    width: 100%;
+}
+// TODO remove it when deletePageItemComponent is migrated
+.se-dropdown-item__delete-page-popover {
+    margin-right: se-space('s');
+    .sap-icon--message-error {
+        color: var(--sapIndicationColor_5);
+    }
+}
+// TODO remove it when deletePageItemComponent is migrated
+.se-dropdown-item__delete-link-wrapper {
+    width: 100%;
+}
+// TODO remove it when deletePageItemComponent is migrated
+.se-dropdown-item__delete-link-wrapper--disabled {
+    cursor: not-allowed;
+}

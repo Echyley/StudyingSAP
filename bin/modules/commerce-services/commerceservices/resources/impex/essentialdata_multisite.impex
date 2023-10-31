@@ -1,0 +1,37 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE UserGroup; uid[unique = true]; locname[lang = en]    ; locname[lang = de]
+                       ; multisitegroup    ; Multi-site User Group ; Multi-site Benutzergruppe
+
+INSERT_UPDATE SearchRestriction; code[unique = true]; principal(uid)[unique = true]; restrictedType(code)[unique = true]; query                                 ; active[default = true]; generate[default = false]
+                               ; Site_visibility    ; multisitegroup               ; BaseSite                           ; "{item:pk} IN (?session.sites)"       ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; BaseStore                          ; "
+EXISTS (
+    {{SELECT {sfs:pk} FROM {StoresForCMSSite AS sfs} WHERE {sfs:target}={item:pk} AND {sfs:source} IN (?session.sites)}}
+)"                                    ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; Customer                           ; "{item:site} IN (?session.sites)"     ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; AbstractOrder                      ; "{item:site} IN (?session.sites)"     ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; SitePreference                     ; "{item:site} IN (?session.sites)"     ;
+                               ; Site_visibility    ; multisitegroup               ; Consent                            ; "
+EXISTS (
+    {{SELECT {c:pk} FROM {Customer AS c} WHERE {c:pk}={item:customer} AND {c:site} IN (?session.sites)}}
+)"                                    ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; ConsentTemplate                    ; "{item:baseSite} IN (?session.sites)" ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; Consignment                        ; "
+EXISTS (
+    {{SELECT {ao:pk} FROM {AbstractOrder AS ao} WHERE {ao:pk}={item:order} AND {ao:site} IN (?session.sites)}}
+)"                                    ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; CustomerReview                     ; "
+EXISTS (
+    {{SELECT {c:pk} FROM {Customer AS c} WHERE {pk}={item:user} AND {c:site} IN (?session.sites)}}
+)"                                    ;                       ;
+                               ; Site_visibility    ; multisitegroup               ; AuditReportData                    ; "
+EXISTS (
+    {{SELECT {c:pk} FROM {Customer AS c} WHERE {c:pk} = {item.auditRootItem} AND {c:site} IN (?session.sites)}}
+)"                                    ;                       ;
+                               ; Site_visibility   ; multisitegroup              ; ReturnRequest                          ; "
+EXISTS(
+    {{ SELECT {o:pk} FROM {Order AS o} WHERE {o:pk} = {item.order} AND {o:site} IN (?session.sites)}}
+) "                                    ;                      ;

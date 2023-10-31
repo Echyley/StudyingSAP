@@ -1,0 +1,25 @@
+$defaultCurrency=EUR
+$passwordEncoding=md5
+$defaultPassword=welcome
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+###################################################################################
+# CPQ Test Users
+###################################################################################
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid);locname[lang=en];
+;b2bgroup;customergroup;B2B Group;
+;b2bcustomergroup;b2bgroup;B2B Customer Group;
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;B2B_DEFAULT_PRICE_GROUP;A DEFAULT B2B USERPRICEGROUP;
+
+INSERT_UPDATE B2BUnit;name[unique=true];uid
+;TESTUNIT;TESTUNIT;
+
+###############################
+# B2B Customer
+###############################
+INSERT_UPDATE B2BCustomer;description;uid[unique=true];customerid;originalUid;email;name;groups(uid);defaultB2BUnit(uid);sessionCurrency(isocode)[default=$defaultCurrency];$setPassword;
+;CPQ Customer B2B;cpq03;cpq03;cpq03;cpq03@sap.com;cpq03;b2bcustomergroup;TESTUNIT;;;
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);
+;cpq03;Testreet;1a;123456;false;Testtown;US;

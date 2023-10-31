@@ -1,0 +1,9 @@
+{
+    "name": "smarteditmaster",
+    "extension": {
+        "type": "master"
+    },
+    "style": {
+        "urlsToRewrite": []
+    }
+}

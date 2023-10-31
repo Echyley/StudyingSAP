@@ -1,0 +1,32 @@
+<textarea
+    #textarea
+    class="fd-form__control"
+    [ngClass]="{'has-error': widget.field.hasErrors}"
+    name="{{widget.field.qualifier}}-{{widget.qualifier}}"
+    [disabled]="widget.isFieldDisabled()"
+    [(ngModel)]="widget.model[widget.qualifier]"
+    (change)="reassignUserCheck()"
+></textarea>
+<div *ngIf="requiresUserCheck()">
+    <!--    id="richTextWarningMessage" is used for e2e test to detect the element-->
+    <div id="richTextWarningMessage" [hidden]="widget.field.isUserChecked">
+        <span
+            fd-object-status
+            [status]="'critical'"
+            [glyph]="'message-warning'"
+            class="se-generic-editor__warning"
+            label="{{'se.editor.richtext.message.warning' | translate}}"
+        ></span>
+    </div>
+    <!--    id="richTextWarningCheckBox is used for e2e test  to detect the element-->
+    <input
+        id="richTextWarningCheckBox"
+        type="checkbox"
+        [(ngModel)]="widget.field.isUserChecked"
+        (click)="checkboxOnClick($event.target)"
+    />
+    <span
+        [ngClass]="{'warning-check-msg': true, 'not-checked': widget.editor.hasFrontEndValidationErrors && !widget.field.isUserChecked}"
+        >{{'se.editor.richtext.check' | translate}}</span
+    >
+</div>

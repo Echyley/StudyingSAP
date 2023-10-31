@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapproductavailability" managername="SapproductavailabilityManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapproductavailability">
+                       
+      
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                 
+       
+      
+        <requires-extension name="acceleratorservices"/>
+              	  
+      
+        <requires-extension name="sapcore"/>
+              
+        <requires-extension name="sapcorebol"/>
+              
+        <requires-extension name="sapcoreconfiguration"/>
+         
+      
+        <requires-extension name="sapcoretest"/>
+        	  
+        <requires-extension name="sapcorejco"/>
+         
+	  
+        <requires-extension name="sapcorejcorec"/>
+        	  
+        <requires-extension name="sapmodel"/>
+        	 
+      
+        <coremodule generated="true" manager="de.hybris.platform.sap.sapproductavailability.jalo.SapproductavailabilityManager" packageroot="de.hybris.platform.sap.sapproductavailability"/>
+        	  	  
+   
+    </extension>
+          
+
+</extensioninfo>

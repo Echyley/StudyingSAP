@@ -1,0 +1,13 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+;email-body;email-body
+;email-attachments;email-attachments
+;documents;documents
+;cronjob;cronjob
+;imagestest;imagestest
+;images2;images2
+;images3;images3

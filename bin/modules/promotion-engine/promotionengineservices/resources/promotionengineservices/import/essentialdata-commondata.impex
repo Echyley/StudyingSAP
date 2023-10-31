@@ -1,0 +1,9 @@
+# -----------------------------------------------------------------------
+#
+# Copyright (c) 2022 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# -----------------------------------------------------------------------
+
+# Zone Delivery Mode for 'free-standard-shipping' set to active
+INSERT_UPDATE ZoneDeliveryMode;code[unique=true];net;active
+;free-standard-shipping;true;true

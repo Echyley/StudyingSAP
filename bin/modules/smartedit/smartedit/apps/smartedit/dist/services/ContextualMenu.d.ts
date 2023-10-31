@@ -1,0 +1,1 @@
+export { ContextualMenu } from 'smarteditcommons';

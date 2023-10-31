@@ -1,0 +1,8 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$lang=de
+
+insert_update PatternConstraint;id[unique = true, allownull = true];message[lang = $lang]
+;PunchoutSecretPatternConstraint;Der gemeinsame geheime Schlüssel muss aus 8-100 Zeichen bestehen und Folgendes enthalten: Groß- und Kleinbuchstaben, Zahl(en) sowie ein oder mehrere Sonderzeichen.

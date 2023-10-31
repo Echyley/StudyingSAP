@@ -1,0 +1,38 @@
+@import "cockpitng-globals.scss";
+
+//$backoffice--media-info-container--width: 330px;
+$backoffice--media-info-header--margin-bottom: $_container-spacing-default__tiny;
+$backoffice--media-info-value--color: $_default-list__item--color;
+$backoffice--media-info-value--margin-bottom: $_container-spacing-default__small;
+
+$backoffice--media-info-container--margin-right: 24px;
+$backoffice--preview-placeholder--width: 330px;
+$backoffice--desc-tooltip--max-width: $backoffice--preview-placeholder--width;
+$backoffice--desc-tooltip--font-size: $font-size__small;
+
+$backoffice--collection-preview-container--bg-color: $body__default--bg-color;
+//$backoffice--collection-preview-list-body--bg-color: $grey__light--1200;
+
+$backoffice--cng-scripting-action--padding: 6px;
+
+$backoffice--sync-icon--size: 16px;
+$backoffice--sync-loading-icon--animation-duration: 0.8s;
+
+$backoffice--partial-sync-info--padding: 0 ($container-spacing-default__half);
+$backoffice--partial-sync-info--max-height: 99vh;
+$backoffice--partial-sync-info-entry--padding: $container-spacing-default__third 0;
+$backoffice--partial-sync-info-entry--border-top: $boxes--border__thin solid $grey__light--1100;
+$backoffice--partial-sync-info-entry-icon--margin-left: $container-spacing-default__third;
+
+$backoffice--product-type-icon--size: 24px;
+
+// deprecated and not used
+$backoffice--product-approval-state-check--color: $yellow__default;
+$backoffice--product-approval-state-approved--content: $check--content;
+$backoffice--product-approval-state-approved--color: $green_light-200;
+$backoffice--product-approval-state-unapproved--content: $close--content;
+$backoffice--product-approval-state-unapproved--color: $red__default--200;
+
+$ye-dndfileupload__drop-area-icon--content: _getIconGlyphContentValue("upload");
+$ye-dndfileupload__drop-area-icon--font-size: $font-size__large;
+$ye-dndfileupload__drop-area-icon--font-family: $font-family__icon;

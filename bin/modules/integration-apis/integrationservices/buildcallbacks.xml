@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~  Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<project name="integrationservices_buildcallbacks">
+    <property name="local.prop.file" value="${HYBRIS_CONFIG_DIR}/local.properties"/>
+
+	<macrodef name="integrationservices_clean_classpath_file">
+		<sequential>
+			<copy file="${ext.integrationservices.path}/.classpath" tofile="${ext.integrationservices.path}/.classpath.edit"
+				  overwrite="true" failonerror="true">
+				<filterchain>
+					<linecontainsregexp negate="true">
+						<regexp pattern="^(\t\t\t\t|)$" />  <!-- added by script -->
+					</linecontainsregexp>
+				</filterchain>
+			</copy>
+			<move file="${ext.integrationservices.path}/.classpath.edit" tofile="${ext.integrationservices.path}/.classpath"
+				  overwrite="true" failonerror="true" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="integrationservices_after_clean">
+		<sequential>
+			<echo level="info" message="Generating .classpath file for integrationservices" />
+			<create_extension_classpath_file extname="integrationservices" />
+			<integrationservices_clean_classpath_file />
+		</sequential>
+	</macrodef>
+
+    <macrodef name="integrationservices_before_yunit">
+        <sequential>
+            <echo level="info"
+                  message="Enabling debug output for integration-apis in ${local.prop.file}" />
+            <copy file="${local.prop.file}"
+                  tofile="${local.prop.file}.backup"
+                  overwrite="true"/>
+            <echo file="${local.prop.file}" append="true">
+integration-api.log.level=debug
+            </echo>
+        </sequential>
+    </macrodef>
+    <macrodef name="integrationservices_after_yunit">
+        <sequential>
+            <echo level="info"
+                  message="Disabling debug output for integration-apis in local.properties" />
+            <move file="${local.prop.file}.backup"
+                  tofile="${local.prop.file}"
+                  overwrite="true"/>
+        </sequential>
+    </macrodef>
+</project>

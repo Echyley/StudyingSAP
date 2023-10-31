@@ -1,0 +1,49 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+#% if: de.hybris.platform.core.Registry.getCurrentTenant().getTenantSpecificExtensionNames().contains("searchservices")
+
+$languages=en,de
+$currencies=EUR,USD
+$snIndexConfiguration=backoffice
+$snIndexType=backoffice-product
+$indexedType = indexType(id)[unique = true, default = 'backoffice-product'];
+
+###### SEARCHSERVICES PRODUCT DATA QUALITY INDEX ######
+
+INSERT_UPDATE SnIndexConfiguration ; id[unique=true]       ; name       ; user(uid) ; languages(isocode) ; currencies(isocode) ;  
+                                   ; $snIndexConfiguration ; Backoffice ; admin     ; $languages         ; $currencies         ;  
+
+INSERT_UPDATE SnIndexType ; indexConfiguration(id) ; id[unique=true] ; name               ; itemComposedType(code) ; identityProvider  
+                          ; $snIndexConfiguration  ; $snIndexType    ; Backoffice Product ; Product                ; snIdentityProvider
+
+#searchservices coverage group fields
+INSERT_UPDATE SnField ; id[unique = true]                   ; $indexedType ; fieldType(code) ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default = false] ; multiValued[default = false] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; valueProvider                              ;  
+                      ; pcmCoreAttributesCoverageGroup      ;              ; DOUBLE          ;                 ;                            ;                           ;                            ;                              ;                                 ;                                    ; coreDataQualitySnIndexerValueProvider      ;  
+                      ; pcmMarketingAttributesCoverageGroup ;              ; DOUBLE          ;                 ;                            ;                           ;                            ;                              ;                                 ;                                    ; marketingDataQualitySnIndexerValueProvider ;  
+
+#searchservices simple fields
+INSERT_UPDATE SnField ; id[unique = true]           ; $indexedType ; fieldType(code) ; retrievable[default=false] ; searchable[default=false] ; localized[default = false] ; multiValued[default = false] ; useForSuggesting[default=false] ; useForSpellchecking[default = false] ; valueProvider                        ;  
+                      ; minOrderQuantity            ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; maxOrderQuantity            ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; priceQuantity               ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; manufacturerAID             ;              ; TEXT            ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; numberContentUnits          ;              ; DOUBLE          ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; manufacturerTypeDescription ;              ; TEXT            ;                            ;                           ; true                       ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; supplierAlternativeAID      ;              ; TEXT            ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; erpGroupBuyer               ;              ; TEXT            ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; erpGroupSupplier            ;              ; TEXT            ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; order                       ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; orderQuantityInterval       ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; xmlcontent                  ;              ; TEXT            ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; startLineNumber             ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+                      ; endLineNumber               ;              ; INTEGER         ;                            ;                           ;                            ;                              ;                                 ;                                      ; modelAttributeSnIndexerValueProvider ;  
+
+
+#searchservices reference fields
+INSERT_UPDATE SnField ; id[unique = true] ; $indexedType ; fieldType(code) ; retrievable[default=false] ; searchable[default=false] ; localized[default = false] ; valueProvider                        ; valueProviderParameters                      ; multiValued[default = false] ; useForSuggesting[default=false] ; useForSpellchecking[default = false] ;  
+                      ; contentUnitPk     ;              ; STRING          ;                            ;                           ;                            ; modelAttributeSnIndexerValueProvider ; expression->contentUnit.pk.longValueAsString ;                              ;                                 ;                                      ;  
+                      ; contentUnit       ;              ; STRING          ;                            ;                           ; true                       ; itemModelLabelSnIndexerValueProvider ; expression->contentUnit                      ;                              ;                                 ;                                      ;
+
+#% endif:

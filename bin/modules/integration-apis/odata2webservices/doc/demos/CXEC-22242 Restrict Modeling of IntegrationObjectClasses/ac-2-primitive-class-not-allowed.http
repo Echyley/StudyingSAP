@@ -1,0 +1,31 @@
+###
+# Cannot create an IntegrationObjectClass with a primitive type
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "TestIO",
+    "classes": [
+      {
+        "root": false,
+        "code": "String",
+        "type": "java.lang.String",
+        "integrationObject": {
+          "code": "TestIO"
+        }
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+%}

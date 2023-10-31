@@ -1,0 +1,110 @@
+@import "../support/_processes-mixins.scss";
+
+.yw-processes-list-item {
+    &-icon {
+        width: $processes__list-item-icon--size;
+        height: $processes__list-item-icon--size;
+        margin: $processes__list-item-icon--margin;
+        position: absolute;
+        font-family: $_processes__list-item-icon--font-family;
+
+        &:before {
+            content: $_processes__list-item-icon--content;
+        }
+        &[data-title^="excel import"],
+        &[data-title^="excel-import"]{
+            &:before{
+                content: $_processes__list-item-icon-import--content;
+            }
+        }
+
+        .yw-processes-unseen & {
+            @include _addIndicatorDot ($processes__header-process-icon-unseen--bg-color, inherit, $processes__list-item-indicator--top, $processes__list-item-indicator--right, $processes__header-process-icon-unseen--size, $processes__header-process-icon-spinner-before--space);
+        }
+    }
+    &-content {
+        &-progress {
+            height: $processes__list-item-progress--height;
+            background-color: $processes__list-item-progress-default--bg-color;
+            margin: $processes__list-item-progress--margin;
+            position: relative;
+            border-radius: $_processes__list-item-progress--border-radius;
+
+            &:before {
+                height: inherit;
+                background-color: $processes__list-item-progress-before--bg-color;
+                left: $processes__list-item-progress-before--left;
+                right: $processes__list-item-progress-before--right;
+                z-index: -1;
+                position: absolute;
+                content: "";
+                display: block;
+                border-radius: inherit;
+            }
+
+        }
+        .yw-processes-list-item-status-finished + & &-progress {
+            height: $_processes__list-item-progress-finished--height;
+        }
+
+        &-progressbar-bar {
+            height: $processes__list-item-progress--height;
+            width: 100%;
+            background-color: $processes__list-item-progress-before--bg-color;
+            border-radius: $_processes__list-item-progress--border-radius;
+        }
+        &-progressbar-progress {
+            height: $processes__list-item-progress--height;
+            width: 0;
+            background-color: $processes__list-item-progress-default--bg-color;
+            border-radius: $_processes__list-item-progress--border-radius;
+        }
+        .yw-processes &-status {
+            font-weight: inherit;
+            
+            &.z-label {
+                float: right;
+                display: inline-block;
+                text-transform: uppercase;
+                text-align: right;
+                padding: 4px;
+                line-height: 12px;
+                font-size: $font-size__small;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+        }
+    }
+    .yw-processes &-status {
+        
+
+        &-info.z-label {
+            font-size: $_processes__list-item-status-info-text--font-size;
+            text-align: left;
+            display: block;
+            white-space: normal;
+            position: relative;
+        }
+        &-running {
+           @include _statusColoring ($processes__item-status-running--color, $processes__item-status-running--border-color, $processes__item-status-running--bg-color);
+        }
+        &-runningrestart {
+           @include _statusColoring ($processes__item-status-run-restart--color, $processes__item-status-run-restart--border-color, $processes__item-status-run-restart--bg-color);
+        }
+        &-aborted {
+           @include _statusColoring ($processes__item-status-aborted--color, $processes__item-status-aborted--border-color, $processes__item-status-aborted--bg-color);
+        }
+        &-finished {
+           @include _statusColoring ($processes__item-status-finished--color, $processes__item-status-finished--border-color, $processes__item-status-finished--bg-color);
+        }
+        &-failed {
+           @include _statusColoring ($processes__item-status-aborted--color, $processes__item-status-aborted--border-color, $processes__item-status-aborted--bg-color);
+        }
+        &-paused {
+           @include _statusColoring ($processes__item-status-paused--color, $processes__item-status-paused--border-color, $processes__item-status-paused--bg-color);
+        }
+        &-unknown {
+           @include _statusColoring ($processes__item-status-unknown--color, $processes__item-status-unknown--border-color, $processes__item-status-unknown--bg-color);
+        }
+    }
+}

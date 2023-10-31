@@ -1,0 +1,99 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+#% if: de.hybris.platform.core.Registry.getCurrentTenant().getTenantSpecificExtensionNames().contains("adaptivesearch")
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$snIndexType=backoffice-product
+$indexedType = indexType(id)[unique = true, default = 'backoffice-product'];
+$backofficeSearchCfgId = 42d46b84-3b85-42ad-a057-382fcbae294b;
+$backofficeSearchProfileCode = backoffice-product-default
+$backofficeSearchProfileName = Backoffice Product Default
+$indexedType = indexType(id)[unique = true, default = 'backoffice-product'];
+
+###### SEARCHSERVICES FACET ######
+INSERT_UPDATE AsSearchProfileActivationSet;     indexType[unique=true];
+                                          ;     $snIndexType;
+
+INSERT_UPDATE AsSimpleSearchProfile;    code[unique=true];                      name[lang=en];                  indexType;       activationSet(indexType);
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.adaptivesearch.model.AsSimpleSearchProfileModel;
+String asSimpleSearchProfileCode = line.get(Integer.valueOf(1));
+AsSimpleSearchProfileModel asSimpleSearchProfile;
+try
+{
+    asSimpleSearchProfile = Registry.getApplicationContext().getBean(""asSearchProfileService"").getSearchProfileForCode(null, asSimpleSearchProfileCode).get();
+}
+catch (Exception e)
+{
+    asSimpleSearchProfile = null;
+}
+if (asSimpleSearchProfile != null)
+{
+    line.clear();
+}"
+                                   ;    $backofficeSearchProfileCode;           $backofficeSearchProfileName;    $snIndexType;     $snIndexType;
+
+INSERT_UPDATE AsSimpleSearchConfiguration;  searchProfile(code)[unique=true];           uid[unique=true];
+                                         ;  $backofficeSearchProfileCode;      $backofficeSearchCfgId;
+
+#searchservices coverage group facet
+#Since common-addon-extra.impex will be imported multiple times, a script is added to prevent warnings from multiple imports
+INSERT_UPDATE AsFacet;  searchConfiguration(uid);      uid[unique=true];                       indexProperty;                          facetType(code);    priority;   ranged[default=false]
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.adaptivesearch.model.AsFacetModel;
+String asFacetUid = line.get(Integer.valueOf(2));
+AsFacetModel asFacet;
+try
+{
+    asFacet = Registry.getApplicationContext().getBean(""asConfigurationService"").getConfigurationForUid(AsFacetModel.class, null, asFacetUid).get();
+}
+catch (Exception e)
+{
+    asFacet = null;
+}
+if (asFacet != null)
+{
+    line.clear();
+}"
+                     ;  $backofficeSearchCfgId;        b80fb32b-a9f7-4095-f1b0-f9296c98bd5e;   pcmCoreAttributesCoverageGroup;         MULTISELECT;        400;        true
+                     ;  $backofficeSearchCfgId;        2cf550a1-7749-0624-d8a8-c1fd37ad37b7;   pcmMarketingAttributesCoverageGroup;    MULTISELECT;        300;        true
+
+#searchservices coverage group facet range
+#Since common-addon-extra.impex will be imported multiple times, a script is added to prevent warnings from multiple imports
+INSERT_UPDATE AsFacetRange ; facetConfiguration(uid)                        ; uid[unique=true]                     ; id           ; name[lang=en]   ; from    ; to      ;  facetConfigurationPOS
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.adaptivesearch.model.AsFacetRangeModel;
+String asFacetRangeUid = line.get(Integer.valueOf(2));
+AsFacetRangeModel asFacetRange;
+try
+{
+    asFacetRange = Registry.getApplicationContext().getBean(""asConfigurationService"").getConfigurationForUid(AsFacetRangeModel.class, null, asFacetRangeUid).get();
+}
+catch (Exception e)
+{
+    asFacetRange = null;
+}
+if (asFacetRange != null)
+{
+    line.clear();
+}"
+                           ; b80fb32b-a9f7-4095-f1b0-f9296c98bd5e           ; af3a1127-0d45-fb7f-c96d-0d456fe56555 ; 0-19        ; 0-19%           ; 0.0     ; 0.1999  ;  0
+                           ; b80fb32b-a9f7-4095-f1b0-f9296c98bd5e           ; 9cf5b4af-71c6-0a68-81d4-d0ab18991bee ; 20-39       ; 20-39%          ; 0.1999  ; 0.3999  ;  1
+                           ; b80fb32b-a9f7-4095-f1b0-f9296c98bd5e           ; 15820e99-e336-ad17-b0c3-31db32871301 ; 40-59       ; 40-59%          ; 0.3999  ; 0.5999  ;  2
+                           ; b80fb32b-a9f7-4095-f1b0-f9296c98bd5e           ; c9b97ba7-281c-0126-f2f1-d1850ef1e574 ; 60-79       ; 60-79%          ; 0.5999  ; 0.7999  ;  3
+                           ; b80fb32b-a9f7-4095-f1b0-f9296c98bd5e           ; 59327281-f327-db2b-1d65-bb7446fb5b67 ; 80-99       ; 80-99%          ; 0.7999  ; 0.9999  ;  4
+                           ; b80fb32b-a9f7-4095-f1b0-f9296c98bd5e           ; a81b223e-b27f-d47d-e96b-fd0fc19ecf47 ; 100         ; 100%            ; 0.9999  ; 1.0001  ;  5
+                           ; 2cf550a1-7749-0624-d8a8-c1fd37ad37b7           ; 398d87be-13f3-4b0e-de9a-a5d7cd968c37 ; 0-19        ; 0-19%           ; 0.0     ; 0.1999  ;  0
+                           ; 2cf550a1-7749-0624-d8a8-c1fd37ad37b7           ; b777a5d8-4bec-4a2a-08b4-168f60ab124b ; 20-39       ; 20-39%          ; 0.1999  ; 0.3999  ;  1
+                           ; 2cf550a1-7749-0624-d8a8-c1fd37ad37b7           ; faa0c2bb-cc57-e5ee-c592-213af3df257a ; 40-59       ; 40-59%          ; 0.3999  ; 0.5999  ;  2
+                           ; 2cf550a1-7749-0624-d8a8-c1fd37ad37b7           ; 1f53a3d6-fdc6-a2a0-6dc5-7d0b4a788ac4 ; 60-79       ; 60-79%          ; 0.5999  ; 0.7999  ;  3
+                           ; 2cf550a1-7749-0624-d8a8-c1fd37ad37b7           ; a76d1488-ab0f-579a-c79a-8320da7b6713 ; 80-99       ; 80-99%          ; 0.7999  ; 0.9999  ;  4
+                           ; 2cf550a1-7749-0624-d8a8-c1fd37ad37b7           ; c90b6c84-48c3-9c88-d93d-134c50fba4c2 ; 100         ; 100%            ; 0.9999  ; 1.0001  ;  5
+
+#% endif:

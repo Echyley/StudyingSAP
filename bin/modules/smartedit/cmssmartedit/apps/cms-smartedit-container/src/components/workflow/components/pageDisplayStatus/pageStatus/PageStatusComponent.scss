@@ -1,0 +1,34 @@
+.se-page-status {
+    @include se-flex-row();
+
+    &__label {
+        white-space: nowrap;
+        line-height: 2.4375rem;
+    }
+
+    &__icon {
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+
+        &--draft {
+            @include status-icon();
+            background-color: var(--sapField_PlaceholderTextColor);
+        }
+        &--in_progress {
+            @include status-icon();
+            background-color: var(--sapIndicationColor_3);
+        }
+        &--ready_to_sync {
+            @include status-icon();
+            background-color: var(--sapIndicationColor_5);
+        }
+        &--synced {
+            @include status-icon();
+            background-color: var(--sapPositiveColor);
+        }
+        &--locked {
+            color: var(--sapTextColor);
+        }
+    }
+}

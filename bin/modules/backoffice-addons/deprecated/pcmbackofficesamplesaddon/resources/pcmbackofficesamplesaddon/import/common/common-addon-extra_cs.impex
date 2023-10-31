@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=cs
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;Atribut „Identifkátor“ musí obsahovat hodnoty ve všech jazycích.;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;Atribut „Ceny“ musí obsahovat alespoň jeden prvek.;
+;ProductSupercategoriesSizeConstraint;;;Atribut „Nadřazené kategorie“ musí obsahovat alespoň jeden prvek.;
+;ProductGalleryImagesSizeConstraint;;;Atribut „Obrázky v galerii“ musí obsahovat alespoň jeden prvek.;
+;ProductReferencesSizeConstraint;;;Atribut „Reference produktu“ musí obsahovat alespoň jeden prvek.;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;Atribut „Číslo artiklu“ nesmí být prázdný.;
+;ProductDescriptionNotEmptyConstraint;;;Atribut „Popis“ nesmí být prázdný.;
+;ProductEanNotEmptyConstraint;;;Atribut „EAN“ nesmí být prázdný.;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;Hodnota atributu pro „Schválení“ musí být „schváleno“.;

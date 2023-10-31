@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="OrderChannelTypeEnum" autocreate="true" generate="true" dynamic="true">
+			<value code="WEB" />
+			<value code="POS" />
+			<value code="SD" />
+		</enumtype>
+	</enumtypes>
+	<relations>
+
+
+	</relations>
+		
+	<itemtypes>
+	
+
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+			<attribute qualifier="sapcarintegration_HTTPDestination" type="SAPHTTPDestination" autocreate="true">
+					<persistence type="property"/>
+					<description>HTTP Destination for OData</description>
+					<!-- <modifiers read="true" write="false" search="true" optional="false" removable="false" initial="true"
+								  private="false" partof="false"/> -->
+				</attribute>
+				<attribute qualifier="sapcarintegration_client" type="java.lang.String" autocreate="true">
+					<persistence type="property"/>
+					<description>Client for CAR System</description>
+				</attribute>
+				<attribute qualifier="sapcarintegration_serviceName" type="java.lang.String" autocreate="true">
+					<persistence type="property"/>
+					<description>Service Name</description>
+					
+				</attribute>
+				
+
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

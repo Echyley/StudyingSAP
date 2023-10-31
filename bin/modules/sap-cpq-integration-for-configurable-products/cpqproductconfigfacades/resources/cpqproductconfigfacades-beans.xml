@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.cpq.productconfig.facades.data.CommerceParameters">
+		<property name="currency" type="java.lang.String" />
+		<property name="locale" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.facades.data.ProductDetailData">
+		<property name="code" type="java.lang.String" />
+		<property name="name" type="java.lang.String" />
+		<property name="description" type="java.lang.String" />
+		<property name="primaryProductImageUrl" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.facades.data.ProductThumbnailData">
+		<property name="code" type="java.lang.String" />
+		<property name="thumbnailProductImageUrl" type="java.lang.String" />
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.facades.data.AccessControlData">
+		<property name="serviceEndpointUrl" type="String">
+			<description>CPQ service URL</description>
+		</property>
+		<property name="accessToken" type="String">
+			<description>Oauth2 token</description>
+		</property>
+		<property name="accessTokenExpiration" type="long">
+			<description>time stamp when this token expires</description>
+		</property>
+		<property name="ownerId" type="String">
+			<description>Owner id for token</description>
+		</property>
+	</bean>
+	
+		<bean class="de.hybris.platform.cpq.productconfig.facades.data.ProductConfigData">
+		<property name="configId" type="String">
+			<description>CPQ service URL</description>
+		</property>
+	</bean>
+
+</beans>

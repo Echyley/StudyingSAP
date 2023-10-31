@@ -1,0 +1,11 @@
+<fd-pagination
+    class="se-pagination"
+    [displayTotalItems]="displayTotalItems"
+    [totalItems]="totalItems"
+    [itemsPerPage]="totalItems === 1 ? 1 : itemsPerPage"
+    [currentPage]="currentPage"
+    (pageChangeStart)="onPageChanged($event)"
+    nextLabel="{{ 'se.btn.nextpage.title' | translate }}"
+    previousLabel="{{ 'se.btn.previouspage.title' | translate }}"
+>
+</fd-pagination>

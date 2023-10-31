@@ -1,0 +1,43 @@
+<div class="se-link-toggle">
+    <div class="se-link-toggle__row">
+        <div class="se-form-control-row se-form-control-row--action">
+            <label class="se-control-label se-link-toggle__label" for="external-link">
+                <input
+                    class="fd-form__control se-link-toggle__input"
+                    id="external-link"
+                    name="linktoggle"
+                    type="radio"
+                    [(ngModel)]="model.linkToggle.external"
+                    (ngModelChange)="clearUrlLink()"
+                    [value]="true"
+                />
+                {{ 'se.editor.linkto.external.label' | translate}}
+            </label>
+        </div>
+
+        <div class="se-form-control-row se-form-control-row--action">
+            <label class="se-control-label se-link-toggle__label" for="internal-link">
+                <input
+                    class="fd-form__control se-link-toggle__input"
+                    id="internal-link"
+                    name="linktoggle"
+                    type="radio"
+                    [(ngModel)]="model.linkToggle.external"
+                    (ngModelChange)="clearUrlLink()"
+                    [value]="false"
+                />
+                {{ 'se.editor.linkto.internal.label' | translate}}
+            </label>
+        </div>
+    </div>
+
+    <input
+        class="fd-form-control fd-input"
+        id="urlLink"
+        name="urlLink"
+        type="text"
+        [(ngModel)]="model.linkToggle.urlLink"
+        (ngModelChange)="checkUrlLink()"
+        [ngClass]="{ 'has-error': field.hasErrors }"
+    />
+</div>

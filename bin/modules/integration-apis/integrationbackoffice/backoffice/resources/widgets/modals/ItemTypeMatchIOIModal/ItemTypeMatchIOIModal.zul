@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:n="http://www.zkoss.org/2005/zk/native"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <style src="${wr}/ItemTypeMatchIOIModal.css"/>
+    <vlayout id="itemTypeMatchLayout" sclass="integrationbackoffice-itemTypeMatchLayout" height="100%">
+        <div id="itemTypeMatchBody" sclass="integrationbackoffice-itemTypeMatchIOIModal-body">
+            <listbox id="itemTypeMatcherListBox" sclass="integrationbackoffice-itemTypeMatcherListBox"
+                     emptyMessage="${labels.integrationbackoffice.itemTypeMatchIOIModal.emptyRow}" rows="6">
+                <listhead sizable="true">
+                    <listheader width="50%" id="integrationObjectItemListheader"
+                                label="${labels.integrationbackoffice.itemTypeMatchIOIModal.header.IOI}" sort="auto"
+                                sortDirection="ascending"/>
+                    <listheader width="50%" id="itemTypeRestrictionListheader" sclass="itemTypeRestrictionListheader"
+                                label="${labels.integrationbackoffice.itemTypeMatchIOIModal.header.ItemTypeMatch}">
+                        <div id="itemTypeMatchDescriptionTooltip-container" sclass="itemTypeMatchDescriptionTooltip-container">
+                            <button id="itemTypeMatchDescriptionTooltip"
+                                    sclass="itemTypeMatchDescriptionTooltip integrationbackofficeTooltips icon-default-class cng-action-icon cng-font-icon font-icon--sys-help"
+                                    popup="itemTypeMatchDescriptionPopup"/>
+                        </div>
+                    </listheader>
+                </listhead>
+            </listbox>
+        </div>
+        <div id="itemTypeMatchFooter" sclass="integrationbackoffice-itemTypeMatchIOIModal-foot">
+            <button id="saveButton" label="${labels.integrationbackoffice.itemTypeMatchIOIModal.button.save}"
+                    sclass="y-btn-primary integrationbackoffice-modal-button"/>
+        </div>
+    </vlayout>
+    <popup id="itemTypeMatchDescriptionPopup" sclass="yw-desc-tooltip">
+        <div>
+            <n:span>
+                <n:b>${labels.integrationbackoffice.itemTypeMatchIOIModal.toolTip.allSubAndSuperTypes.head}</n:b>
+                : ${labels.integrationbackoffice.itemTypeMatchIOIModal.toolTip.allSubAndSuperTypes.text}
+            </n:span>
+            <n:br/>
+            <n:span>
+                <n:b>${labels.integrationbackoffice.itemTypeMatchIOIModal.toolTip.allSubTypes.head}</n:b>
+                : ${labels.integrationbackoffice.itemTypeMatchIOIModal.toolTip.allSubTypes.text}
+            </n:span>
+            <n:br/>
+            <n:span>
+                <n:b>${labels.integrationbackoffice.itemTypeMatchIOIModal.toolTip.restrictToItemType.head}</n:b>
+                : ${labels.integrationbackoffice.itemTypeMatchIOIModal.toolTip.restrictToItemType.text}
+            </n:span>
+        </div>
+    </popup>
+</widget>
+
+
+

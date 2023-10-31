@@ -1,0 +1,16 @@
+se-infinite-scrolling {
+    &.se-infinite-scrolling--narrowed {
+        .se-infinite-scrolling__holder {
+            padding: 0 20px;
+        }
+    }
+
+    .se-infinite-scrolling {
+        &__container {
+            @include se-scrolling-container();
+        }
+        &__holder {
+            overflow-y: hidden;
+        }
+    }
+}

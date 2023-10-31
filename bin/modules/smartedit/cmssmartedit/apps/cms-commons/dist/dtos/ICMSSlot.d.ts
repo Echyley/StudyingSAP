@@ -1,0 +1,11 @@
+import { CMSItem } from 'smarteditcommons';
+/**
+ * @description
+ * Interface for cms-slot information.
+ * This interface first defined for page-tree
+ */
+export interface ICMSSlot extends CMSItem {
+    active: boolean;
+    cmsComponents: string[];
+    synchronizationBlocked: boolean;
+}

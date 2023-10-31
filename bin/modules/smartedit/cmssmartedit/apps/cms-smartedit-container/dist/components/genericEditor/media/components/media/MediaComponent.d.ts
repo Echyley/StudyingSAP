@@ -1,0 +1,30 @@
+import { ChangeDetectorRef, OnInit } from '@angular/core';
+import { ErrorContext, GenericEditorWidgetData, LogService, TypedMap, ISharedDataService, IFileValidation, IMediaService } from 'smarteditcommons';
+import { MediaUtilService } from '../../services';
+export declare class MediaComponent implements OnInit {
+    private cdr;
+    private fileValidationService;
+    private logService;
+    private mediaUtilService;
+    private mediaService;
+    private sharedDataService;
+    acceptedFileTypes: string[];
+    fileErrors: ErrorContext[];
+    image: File | string | null;
+    isFieldDisabled: boolean;
+    mediaSelectorId: string;
+    previewMessage: boolean;
+    maxUploadFileSize: number;
+    private readonly mediaIdByLang;
+    private readonly lang;
+    private field;
+    constructor(cdr: ChangeDetectorRef, fileValidationService: IFileValidation, logService: LogService, mediaUtilService: MediaUtilService, mediaService: IMediaService, sharedDataService: ISharedDataService, data: GenericEditorWidgetData<TypedMap<string>>);
+    ngOnInit(): Promise<void>;
+    onMediaIdChange(id: string): Promise<void>;
+    onFileSelect(file: FileList | string): Promise<void>;
+    onMediaUploaded(id: string): Promise<void>;
+    resetImage(): void;
+    canShowFileSelector(): boolean;
+    private canVideoPreview;
+    private checkMediaPreview;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">	
+		   
+		   <alias alias="centralOrderRCOutboundAdditionalAttributeMapper"
+		name="defaultCentralOrderRCOutboundAdditionalAttributeMapper" />
+	<bean id="defaultCentralOrderRCOutboundAdditionalAttributeMapper"
+		class="com.sap.sapcentralorderrcfacades.order.mapper.impl.DefaultCentralOrderRCOutboundAdditionalAttributeMapper">
+		<property name="commercePriceService"
+			ref="subscriptionCommercePriceService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="configurationService" ref="coConfigurationService" />
+	</bean>
+
+	<bean depends-on="centralOrderAdditionalAttributeMappers"
+		parent="listMergeDirective">
+		<property name="add"
+			ref="centralOrderRCOutboundAdditionalAttributeMapper" />
+	</bean>
+
+	<alias alias="centralOrderRCPopulator"
+		name="defaultCentralOrderRCPopulator" />
+	<bean id="defaultCentralOrderRCPopulator"
+		class="com.sap.sapcentralorderrcfacades.populator.impl.DefaultCentralOrderRCDetailsPopulator">
+		
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<bean depends-on="sapCpiOrderDetailPopulators"
+		parent="listMergeDirective">
+		<property name="add" ref="centralOrderRCPopulator" />
+	</bean>
+</beans>

@@ -1,0 +1,10 @@
+{
+    "name": "smarteditloader",
+    "extension": {
+        "type": "container"
+    },
+    "typescript": {
+        "entry": "./src/index.ts",
+        "dist": "./dist/index.js"
+    }
+}

@@ -1,0 +1,21 @@
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="integrationbackoffice.actions.integrationObjectMetadataViewerAction"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+    <name>View Metadata</name>
+    <description>Display various metadata and structural information of the Integration Object</description>
+    <version>1.0</version>
+
+    <actionClassName>de.hybris.platform.integrationbackoffice.widgets.modeling.actions.IntegrationObjectMetadataViewerAction</actionClassName>
+
+    <iconUri>generate_meta</iconUri>
+
+    <sockets>
+        <output type="de.hybris.platform.integrationservices.model.IntegrationObjectModel" id="openMetadataModal"/>
+        <input type="java.lang.Boolean" id="actionState"/>
+    </sockets>
+
+</action-definition>

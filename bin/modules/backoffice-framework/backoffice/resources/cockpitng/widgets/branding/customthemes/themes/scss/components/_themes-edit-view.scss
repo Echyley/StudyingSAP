@@ -1,0 +1,120 @@
+.yw-com_hybris_backoffice_widgets_customthemes_themes {
+	.header-back-btn {
+        font-family: $font-family__icon;
+        font-size: $font-size__large;
+        margin-right: $_container-spacing-default__core;
+		&:after {
+            content: $header-back-btn-content;
+        }
+	}
+    .theme-edit-view {
+    	max-height:  $brand-setting-container-height;
+        margin: $brand-setting-container-margin;
+        height: 100%;
+        &-section-title {
+            display: block;
+        	font-weight: $font-weight-bold;
+        	font-size: $font-size__large;
+            margin-top: $theme-edit-view-section-title--margin;
+            margin-bottom: $theme-edit-view-section-title--margin;
+            line-height: $theme-edit-view-section-title--height;
+        }
+        .yw-customizeTheme-preview {
+        	float: left;
+        	margin-left: $customize-theme-preview--margin-left;
+        	width: $customize-theme-preview--width;
+        	height: 100%;
+            &-content {
+            	max-height: $customize-theme-preview-content--height;
+                overflow-y: scroll;
+                box-shadow: var(--bo-content-shadow-small);
+                border-bottom-right-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+        }
+        .yw-customizeTheme-container {
+            	width: 25%;
+            	height: 100%;
+                float: left;
+                overflow: scroll;
+                border-radius: 4px;
+                box-shadow: var(--bo-content-shadow-small);
+                background: var(--bo-container-background);
+                padding: 0 $_container-spacing-default__small;
+                .yw-customTheme-attribute {
+                    margin-top: $_container-spacing-default__small;
+                    width: 100%;
+                    .yw-loceditor-caption .y-icon-loceditor {
+                        margin-left: auto;
+                    }
+                    .yw-loceditor {
+                        .yw-loceditor-row-editor .z-div{
+                            height: 100%;
+                            > input {
+                                height: 100%;
+                            }
+                        }
+                        .z-label {
+                            display: inline;
+                            margin-bottom: 0px;
+                            color: var(--bo-content-label-color);
+                        }
+                    }
+                    .z-label {
+                        line-height: $theme-edit-view-label--height;
+                        margin-bottom: $theme-edit-view-label--margin-bottom;
+                        display: block;
+                        color: var(--bo-content-label-color);
+                        &.yw-label-mandatory {
+                            @include _addDefaultMandatoryFlag();
+                            float: left;
+                        }
+                    }
+
+                    .z-textbox {
+                        width: 100%;
+                        height: $customize-theme-attribute--height;
+                    }
+    
+                    &-colorTextBox.z-textbox {
+                        width: 60%;
+                        height: $customize-theme-attribute--height;
+                        display: inline-block !important;
+                    }
+                    &-colorBox.z-colorbox {
+                        width: calc(40% - #{$customize-theme-attribute-colorbox--margin-right});;
+                        height: $customize-theme-attribute--height;
+                        margin-right: $customize-theme-attribute-colorbox--margin-right;
+                        border-color: var(--bo-input-border-color);
+                        background: var(--bo-container-background);
+                        .z-colorbox-current {
+                            width: 24px;
+                            height: 24px;
+                            margin: 3px 9px;
+                        }
+                        .z-colorbox-button {
+                            width: 24px;
+                            height: 24px;
+                            top: 14px;
+                            right: 2px;
+                            background-color: var(--bo-container-background);
+                        }
+                        .z-colorbox-icon {
+                            color: var(--bo-button-icon-color);
+                            font-family: $font-family__icon;
+                            &:before {
+                                content: _getIconGlyphContentValue('navigation-down-arrow');
+                            }
+                        }   
+                    }
+                    .ye-validation-error {
+                        .ye-validation-panel .ye-validation-exclamation-icon {
+                            &:before {
+                                position: inherit;
+                            }
+                        }
+                    }
+                }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.build.json",
+    "compilerOptions": {
+        "typeRoots": ["node_modules/@types", "node_modules/smartedit-build/test/@types"],
+        "paths": {
+            "smarteditcommons/*": ["src/*"],
+            "smarteditcommons": ["src"],
+            "testhelpers": ["node_modules/smartedit-build/test/unit"],
+            "testhelpers/*": ["node_modules/smartedit-build/test/unit/*"]
+        }
+    }
+}

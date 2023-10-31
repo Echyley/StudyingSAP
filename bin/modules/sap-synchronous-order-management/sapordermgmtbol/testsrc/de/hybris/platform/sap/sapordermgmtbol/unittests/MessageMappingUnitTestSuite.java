@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+package de.hybris.platform.sap.sapordermgmtbol.unittests;
+
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.BackendMessageMapperTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.BackendMessageTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRulePatternTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRuleResultTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRuleTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRulesContainerKeyTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRulesContainerTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRulesLoaderImplTest;
+import de.hybris.platform.sap.sapordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingRulesParserTest;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+
+@RunWith(Suite.class)
+@SuiteClasses(
+{ MessageMappingRulePatternTest.class, //
+		MessageMappingRuleResultTest.class, //
+		MessageMappingRuleTest.class, //
+		MessageMappingRulesParserTest.class, //
+		MessageMappingRulesContainerKeyTest.class, //
+		MessageMappingRulesContainerTest.class, //
+		MessageMappingRulesLoaderImplTest.class, //
+		BackendMessageTest.class, //
+		BackendMessageMapperTest.class, //
+})
+@SuppressWarnings("javadoc")
+public class MessageMappingUnitTestSuite
+{
+	//
+}

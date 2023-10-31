@@ -1,0 +1,29 @@
+$lang=id
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;Promo Produk yang Dapat Dikonfigurasi
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;Persentase diskon pada harga opsi dengan pesan promo;Terapkan diskon {discount_value,number,percent*1} ke opsi {cstic} / {cstic_value}
+;y_configurable_product_display_promo_message;Tampilkan pesan promo (promo berlaku);Tampilkan pesan promo
+;y_configurable_product_display_promo_opportunity_message;Tampilkan pesan peluang promo (promo belum berlaku);Tampilkan pesan peluang promo
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;Karakteristik;Karakteristik di mana diskon ini berlaku dan mengapa pesan ini muncul
+;y_configurable_product_percentage_discount_for_option;cstic_value;Nilai Karakteristik;Nilai karakteristik di mana diskon ini berlaku dan mengapa pesan ini muncul
+;y_configurable_product_percentage_discount_for_option;discount_value;Persentase Nilai Diskon;Persentase diskon yang berlaku untuk harga opsi. Masukkan nilai tanpa tanda persen.
+;y_configurable_product_percentage_discount_for_option;message;Pesan;Teks Pesan
+;y_configurable_product_percentage_discount_for_option;extended_message;Pesan yang Diperpanjang;Teks Pesan yang Diperpanjang
+;y_configurable_product_display_promo_message;cstic;Karakteristik;Karakteristik di mana pesan ini muncul
+;y_configurable_product_display_promo_message;cstic_value;Nilai Karakteristik;Nilai karakteristik di mana pesan ini muncul
+;y_configurable_product_display_promo_message;message;Pesan;Teks Pesan
+;y_configurable_product_display_promo_message;extended_message;Pesan yang Diperpanjang;Teks Pesan yang Diperpanjang
+;y_configurable_product_display_promo_opportunity_message;cstic;Karakteristik;Karakteristik di mana pesan ini muncul
+;y_configurable_product_display_promo_opportunity_message;cstic_value;Nilai Karakteristik;Nilai karakteristik di mana pesan ini muncul
+;y_configurable_product_display_promo_opportunity_message;message;Pesan;Teks Pesan
+;y_configurable_product_display_promo_opportunity_message;extended_message;Pesan yang Diperpanjang;Teks Pesan yang Diperpanjang
+
+#% endif:

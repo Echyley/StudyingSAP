@@ -1,0 +1,28 @@
+$scpiCustomerMetaUrl=https://tester.hana.ondemand.com/gw/odata/SAP/REPLICATION-OF-CUSTOMER-FROM-SAP-COMMERCE-CLOUD-TO-SAP-CLOUD-FOR-CUSTOMER
+$version=v=1
+
+INSERT_UPDATE BasicCredential ; id[unique=true] ; password ; username
+                              ; scpiCredentials ; password ; username
+
+
+INSERT_UPDATE DestinationTarget ; destinationChannel(code,itemtype(code)) ; id[unique=true]                
+                                ; KYMA:DestinationChannel                 ; scpiOutboundCustomerDestination
+
+
+INSERT_UPDATE Endpoint ; id[unique=true]                ; name                           ; specUrl               ; version[unique=true]
+                       ; SAPCpiOutboundCustomerEndpoint ; SAPCpiOutboundCustomerEndpoint ; "$scpiCustomerMetaUrl ; $version/$metadata" ; unknown
+
+
+INSERT_UPDATE ConsumedDestination ; active[allownull=true] ; credential(id)  ; destinationTarget(id)           ; endpoint(id,version)                   ; id[unique=true]                         ; url                  					 ; additionalProperties(key, value)[map-delimiter = |]
+                                  ; true                   ; scpiCredentials ; scpiOutboundCustomerDestination ; SAPCpiOutboundCustomerEndpoint:unknown ; scpiOutboundCustomerConsumedDestination ; "$scpiCustomerMetaUrl;$version/Customers"; "csrfURL->$scpiCustomerMetaUrl;$version/"            
+
+
+
+INSERT_UPDATE OutboundChannelConfiguration; code[unique = true]; integrationObject(code); destination(id)
+                                          ; SapCpiC4cCustomerOutboundChannel    ; OutboundC4cCustomer        ; scpiOutboundCustomerConsumedDestination
+
+INSERT_UPDATE OutboundSyncStreamConfiguration; streamId[unique = true]; container(id)           ; itemTypeForStream(code); outboundChannelConfiguration(code); 
+                                 ; SapCpiC4cCustomerStream          ; outboundSyncDataStreams ; Customer                ; SapCpiC4cCustomerOutboundChannel;
+                                 ; SapCpiC4cCountryStream          ; outboundSyncDataStreams ; Country                ; SapCpiC4cCustomerOutboundChannel;
+                                 ; SapCpiC4cAddressStream          ; outboundSyncDataStreams ; Address                ; SapCpiC4cCustomerOutboundChannel;
+

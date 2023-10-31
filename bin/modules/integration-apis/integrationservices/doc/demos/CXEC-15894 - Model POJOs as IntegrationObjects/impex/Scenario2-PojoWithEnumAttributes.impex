@@ -1,0 +1,15 @@
+$integrationClass = integrationObjectClass(integrationObject(code), code)
+$returnClass = returnIntegrationObjectClass(integrationObject(code), code)
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; Pojo_IO_S2
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]   ; type(code)                           ; root[default = false]
+                                    ; Pojo_IO_S2                 ; Product        ; de.hybris.platform.core.model.product.ProductModel     ; true
+                                    ; Pojo_IO_S2                 ; ApprovalStatus ; de.hybris.platform.catalog.enums.ArticleApprovalStatus ;
+
+INSERT_UPDATE IntegrationObjectClassAttribute; $integrationClass[unique = true]; attributeName[unique = true]; unique[default = false]; readMethod         ; $returnClass
+                                             ; Pojo_IO_S2:Product              ; code                        ; true                   ; getCode            ;
+                                             ; Pojo_IO_S2:Product              ; approvalStatus              ;                        ; getApprovalStatus  ; Pojo_IO_S2:ApprovalStatus
+                                             ; Pojo_IO_S2:ApprovalStatus       ; code                        ; true                   ; getCode            ;
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code)
+                                         ; Pojo_IO_S2                            ; BASIC

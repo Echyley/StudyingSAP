@@ -1,0 +1,55 @@
+<div class="fd-form__set">
+    <div class="fd-form__item fd-form__item--check">
+        <label
+            for="components-in-slot-options"
+            class="se-control-label"
+            [translate]="'se.cms.slot.shared.replace.editor.componentsinslot'"
+        >
+        </label>
+        <div id="components-in-slot-options">
+            <div class="se-form-control-row">
+                <input
+                    class="fd-form__control"
+                    type="radio"
+                    name="componentsInSlot"
+                    id="clone-all"
+                    [(ngModel)]="page.cloneAction"
+                    [value]="cloneAction.clone"
+                />
+                <label
+                    for="clone-all"
+                    [translate]="'se.cms.slot.shared.replace.editor.componentsinslot.cloneall'"
+                ></label>
+            </div>
+
+            <div class="se-form-control-row">
+                <input
+                    class="fd-form__control"
+                    type="radio"
+                    name="componentsInSlot"
+                    id="use-existing"
+                    [(ngModel)]="page.cloneAction"
+                    [value]="cloneAction.useExisting"
+                />
+                <label
+                    for="use-existing"
+                    [translate]="'se.cms.slot.shared.replace.editor.componentsinslot.useexisting'"
+                ></label>
+            </div>
+            <div class="se-form-control-row">
+                <input
+                    class="fd-form__control"
+                    type="radio"
+                    name="componentsInSlot"
+                    id="remove-all"
+                    [(ngModel)]="page.cloneAction"
+                    [value]="cloneAction.remove"
+                />
+                <label
+                    for="remove-all"
+                    [translate]="'se.cms.slot.shared.replace.editor.componentsinslot.removeall'"
+                ></label>
+            </div>
+        </div>
+    </div>
+</div>

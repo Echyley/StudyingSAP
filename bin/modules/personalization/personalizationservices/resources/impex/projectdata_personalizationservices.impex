@@ -1,0 +1,7 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE CxUpdateSegmentsCronJob; code[unique = true]     ; job(code)           ; singleExecutable; sessionLanguage(isocode); fullUpdate; allBaseSites; allProviders
+                                     ; cxUpdateSegmentsCronJob ; cxUpdateSegmentsJob ; false           ; en                      ; true      ; true        ; true
+

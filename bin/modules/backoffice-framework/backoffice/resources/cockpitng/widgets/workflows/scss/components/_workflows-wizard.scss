@@ -1,0 +1,27 @@
+@import "../support/_workflows-mixins.scss";
+
+.yw-workflowview-link-container {
+  width: 100%;
+  text-align: right;
+  padding-bottom: 20px;
+}
+
+.yw-workflowview-link {
+  text-align: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  text-transform: none;
+  white-space: normal;
+  padding: 0;
+  height: auto;
+  min-height: 0;
+  font-size: $font_size__base;
+
+  &[disabled], &[disabled]:hover, &[disabled]:active {
+    color: inherit;
+    background-color: transparent !important;
+    border: none;
+    opacity: .4;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="customerticketingocctests_buildcallbacks">
+
+    <macrodef name="customerticketingocctests_importwstestdata">
+        <sequential>
+          <yrun>
+                de.hybris.platform.customerticketingocctests.setup.CustomerTicketingOccTestSetupUtils.loadExtensionDataInJunit();
+                de.hybris.platform.util.RedeployUtilities.shutdown();
+            </yrun>
+        </sequential>
+    </macrodef>
+
+</project>

@@ -1,0 +1,17 @@
+@import '../node_modules/smarteditcommons/dist/styles.css'; // This import will not be bundled by smartedit app. It will be reflected in dist/styles.css.
+
+@import 'node_modules/smarteditcommons/styling/less/variables';
+
+#smarteditoverlay {
+    z-index: @z-index-level-4;
+
+    @import 'node_modules/smarteditcommons/styling/less/helpers';
+    @import 'node_modules/smarteditcommons/styling/less/components';
+
+    @import 'components';
+    label {
+        font-weight: normal;
+    }
+}
+
+@import 'body-components';

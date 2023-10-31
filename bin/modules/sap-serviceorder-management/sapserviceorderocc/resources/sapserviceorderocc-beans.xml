@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="beans.xsd">
+
+
+	<!--
+		Example Data POJO
+	
+	<bean class="yemptypackage.data.MyPojo">
+		<property name="id" type="String"/>
+		<property name="flag" type="boolean"/>
+	</bean>
+	-->
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.AbstractOrderWsDTO">
+		<property name="servicedAt" type="java.util.Date">
+			<description>Requested Seervice Date for all service products in cart/Order</description>
+            <hints>
+                <hint name="example">2020-11-31T09:00:00+0000</hint>
+            </hints>
+         </property>
+	</bean>
+	
+
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO">
+		<property name="serviceCancellable" type="java.lang.Boolean" >
+			<description>If Service product Exist,based on condition Service Order is cancellable or not.If Service Product Doesnt Exits the valuue will be set as False.The flags are used to show/hide the 'Service Order Cancel' button in UI.</description>		
+			<hints>
+				<hint name="example">TRUE</hint>
+			</hints>
+         </property>
+         <property name="serviceReschedulable" type="java.lang.Boolean" >
+			<description>If Service product Exist,Service Order is Reschedubale or not.If Service Product Doesnt Exits the valuue will be set as False. The flags are used to show/hide the 'Service Order Reschedule' button in UI.</description>		
+			<hints>
+				<hint name="example">TRUE</hint>
+			</hints>
+         </property>
+	</bean>
+	
+	
+	
+
+	<bean class="com.sap.hybris.sapserviceorderocc.dto.order.CancelServiceEntryInputWsDTO">
+        <description>Representation of a cancellation request entry input for an service order</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">CancelServiceEntryInput</hint>
+        </hints>
+        <property name="orderEntryNumber" type="Integer">
+            <description>Order entry number of the cancelled product</description>
+            <hints>
+                <hint name="example">1</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="quantity" type="Long">
+            <description>Quantity of the product which belongs to the order entry and is requested to be cancelled</description>
+            <hints>
+                <hint name="example">5</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.order.CancellationRequestEntryInputListWsDTO">
+        <property name="cancelReason" type="java.lang.String">
+            <description>Cancellation reason </description>
+            <hints>
+                <hint name="example">Plans changed and not at home anymore</hint>
+            </hints>
+        </property>
+    </bean> 
+    
+    <bean class="com.sap.hybris.sapserviceorderocc.dto.ServiceScheduleSlotWsDTO">
+    	<hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">ServiceScheduleSlot</hint>
+        </hints>
+         <property name="scheduledAt" type="java.util.Date">
+            <description>Requested Service Date for all service products in cart/Orde</description>
+            <hints>
+				<hint name="example">2020-11-31T09:00:00+0000</hint>
+            </hints>
+        </property>
+	</bean>
+        
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.basestore.BaseStoreWsDTO">
+		<property name="serviceOrderConfiguration" type="com.sap.hybris.sapserviceorderocc.dto.ServiceOrderConfigWsDTO" >
+			<description>Service Order Configuration.</description>		
+	    </property>
+	</bean>
+	
+	
+	<bean class="com.sap.hybris.sapserviceorderocc.dto.ServiceOrderConfigWsDTO">
+		<description>Configured Service Order.</description>	
+		<hints>
+            <hint name="wsRelated"/>
+        <hint name="alias">ServiceOrderConfiguration</hint>
+       </hints>	
+		<property name="leadDays" type="java.lang.Integer">
+			<description>Number of lead days from today required to create service order (ex. 25/09/2020(Today) + 4 - > After considering Lead Days the Date will be 28/09/2020).</description>		
+	         <hints>
+	           <hint name="example">4</hint>
+	         </hints>
+	    </property>
+        <property name="serviceScheduleTimes" type="java.util.List&lt;java.lang.String>">
+			<description>List of Configured Schedule Time.</description>
+			<hints>
+	           <hint name="example">[]</hint>
+	         </hints>
+        </property>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO">
+        <property name="productTypes" type="java.lang.String" >
+			<description>Product Type tells what type of product it is eg. SERVICE or PHYSICAL or SUBSCRIPTION or any Custom defined types can be added.It can be multiple type of produuct which will be seperated by commas.</description>		
+			<hints>
+				<hint name="example">SERVICE</hint>
+			</hints>
+        </property>
+	</bean>
+</beans>

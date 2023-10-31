@@ -1,0 +1,6 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; TestIO
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]; type(code)                                ; root
+                                    ; TestIO                                ; Class              ; java.lang.Class                           ; true
+                                    ; TestIO                                ; ItemPropertyValue  ; de.hybris.platform.util.ItemPropertyValue ; true
+                                    ; TestIO                                ; StandardDateRange  ; de.hybris.platform.util.StandardDateRange ; true

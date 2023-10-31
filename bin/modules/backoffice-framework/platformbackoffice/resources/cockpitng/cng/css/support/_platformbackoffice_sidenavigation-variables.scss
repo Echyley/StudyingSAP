@@ -1,0 +1,11 @@
+/**
+* Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+*/
+$sidenav__toolbar-button--height: 48px;
+$sidenav__toolbar-button--width: 48px;
+$sidenav__toolbar-button--after-font-size: $font-size__h4;
+$sidenav__toolbar-button--color:var(--bo-content-icon-color);
+$sidenav__toolbar-button_hover--background-image: linear-gradient(to right, var(--bo-neutral-color) 0.25rem, var(--bo-list-hover-background) 0.25rem);
+$sidenav__toolbar-separate--border: var(--bo-container-border-width) solid var(--bo-toolbar-separator-color);
+$sidenav__toolbar-separate--margin: $_container-spacing-default__tiny auto $_container-spacing-default__tiny auto;
+$sidenav__toolbar-action-div--background-color: var(--bo-sideNavigation__treerow_hover--bg-color);

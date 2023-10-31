@@ -1,0 +1,74 @@
+[
+	{
+		"testId": 1,
+		"description": "query with localized expression with invalid language",
+		"languages": [
+			"notExisting"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_group",
+			"value": "enGroup1"
+		},
+		"expectedData": {
+			"error": {
+				"code": "Validation",
+				"message": "Invalid Accept-Language header: [notExisting]",
+				"target": "/v1/indexes/${indexId}/search"
+			}
+		}
+	},
+	{
+		"testId": 2,
+		"description": "query with qualified expression with invalid qualifier",
+		"qualifiers": {
+			"currency": "notExisting"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_group",
+			"value": "eurGroup1"
+		},
+		"expectedData": {
+			"error": {
+				"code": "Validation",
+				"message": "Found invalid qualifiers for configured type 'testIndexType': ['currency=notExisting']",
+				"target": "/v1/indexes/${indexId}/search"
+			}
+		}
+	},
+	{
+		"testId": 3,
+		"description": "query with localized expression with invalid languageId",
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_group",
+			"value": "enGroup1",
+			"languageId": "notExisting"
+		},
+		"expectedData": {
+			"error": {
+				"code": "Validation",
+				"message": "Querying not supported for expression 'language_discount_group', no language configured with id 'notExisting'",
+				"target": "/v1/indexes/${indexId}/search"
+			}
+		}
+	},
+	{
+		"testId": 4,
+		"description": "query with qualified expression with invalid qualifierId",
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_group",
+			"value": "eurGroup1",
+			"qualifierId": "notExisting"
+		},
+		"expectedData": {
+			"error": {
+				"code": "Validation",
+				"message": "Querying not supported for expression 'currency_discount_group', no qualifier configured with id 'notExisting'",
+				"target": "/v1/indexes/${indexId}/search"
+			}
+		}
+	}
+]

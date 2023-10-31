@@ -1,0 +1,34 @@
+.se-navigation__node {
+    display: flex;
+    background-color: var(--sapLegend_WorkingBackground);
+    padding: 0 20px;
+    margin: 0 -20px 20px -20px;
+    border-top: 1px solid var(--sapBaseColor);
+    border-bottom: 1px solid var(--sapBaseColor);
+
+    &-breadcrumb {
+        flex: 10;
+
+        .se-breadcrumb {
+            margin-bottom: 0;
+            border: none;
+        }
+    }
+
+    &-button {
+        flex: 2;
+        display: flex;
+    }
+}
+
+.se-navigation__button {
+    font-size: 15px;
+    font-family: $font-sap;
+    @include se-weight('bold');
+    align-self: flex-end;
+    text-transform: capitalize;
+}
+
+se-navigation-node-selector .se-navigation-editor-tree {
+    margin: 0;
+}

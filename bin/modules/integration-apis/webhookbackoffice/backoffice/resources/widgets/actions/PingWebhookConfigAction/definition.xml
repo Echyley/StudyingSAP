@@ -1,0 +1,22 @@
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="webhookbackoffice.actions.PingWebhookConfigAction"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+    <name>Validate Webhook Configuration</name>
+    <description>Action to generate and send webhook payload to destination</description>
+    <version>1.0</version>
+
+    <actionClassName>de.hybris.platform.webhookbackoffice.widgets.actions.PingWebhookConfigurationAction</actionClassName>
+
+    <iconUri>journey-depart</iconUri>
+
+    <outputType>de.hybris.platform.webhookservices.model.WebhookConfigurationModel</outputType>
+
+    <sockets>
+        <output id="templateTestWebhookConfig" type="de.hybris.platform.webhookservices.model.WebhookConfigurationModel" />
+    </sockets>
+
+</action-definition>

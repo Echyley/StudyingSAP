@@ -1,0 +1,25 @@
+@import "cockpitng-globals.scss";
+
+$adaptiveSearchBackoffice__yas-info-icon--background-image: url("images/icon_func_star_sprite.png");
+
+$adaptiveSearchBackoffice__actions-popup--border: $boxes--border__thin solid $grey__default--900;
+$adaptiveSearchBackoffice__actions-popup-img--top: -4px;
+
+$adaptiveSearchBackoffice__actions-button--color: $blue__default;
+$adaptiveSearchBackoffice__actions-button--font-size: $font-size__h3;
+
+$adaptiveSearchBackoffice__facet-list-content--padding-left: $container-spacing-default__third;
+
+$adaptiveSearchBackoffice__facet-list-updated-item--bg-color: rgba($grey__light--1200,.8);
+$adaptiveSearchBackoffice__facet-list-updated-item--border-color: $grey__light--200; 
+$adaptiveSearchBackoffice__facet-list-updated-item--color: $grey__dark--500;
+$adaptiveSearchBackoffice__facet-list-value-name--margin-right: 0.25em;
+
+$adaptiveSearchBackoffice__search-configuration-description--color: $black;
+$adaptiveSearchBackoffice__search-configuration-description--border: $adaptiveSearchBackoffice__actions-popup--border;
+$adaptiveSearchBackoffice__search-configuration-description--padding: 7px 7px;
+
+$adaptiveSearchBackoffice__score--border-radius: 0.45em;
+$adaptiveSearchBackoffice__score--border: $boxes--border__medium solid $grey__light--100;
+$adaptiveSearchBackoffice__score--font-weight: $font-weight-bold;
+$adaptiveSearchBackoffice__score--padding: 1px 5px;

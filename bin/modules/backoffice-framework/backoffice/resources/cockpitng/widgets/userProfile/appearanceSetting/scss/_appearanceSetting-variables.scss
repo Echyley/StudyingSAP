@@ -1,0 +1,11 @@
+@import "cockpitng-globals.scss";
+
+$user-profile-appearance-default--spacing: $container-spacing-default_two-thirds;
+$user-profile-appearance-title-color: var(--bo-title-color);
+$user-profile-appearance-title-height: 20px;
+$user-profile-appearance-title-size: $font-size__h4;
+$user-profile-appearance-notice-color: var(--bo-tile-text-color);
+$user-profile-appearance-notice-height: 20px;
+$user-profile-appearance-text-color: var(--bo-text-color);
+$user-profile-appearance-selected-color: var(--sapSelectedColor);
+$user-profile-appearance-listitem-shadow: var(--bo-content-shadow-small);

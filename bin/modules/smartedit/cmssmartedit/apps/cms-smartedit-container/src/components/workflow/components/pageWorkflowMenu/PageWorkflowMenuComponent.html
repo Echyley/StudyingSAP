@@ -1,0 +1,84 @@
+<div *ngIf="isReady">
+    <div *ngIf="!pageHasWorkflow && isWorkflowEnabled">
+        <ng-container *seHasOperationPermission="'se.start.page.workflow'">
+            <!-- Workflow not started -->
+            <button
+                fd-button
+                id="smartEditPerspectiveToolbar_option_se.cms.startWorkflow_btn"
+                class="btn toolbar-action--button"
+                type="button"
+                (click)="startWorkflow()"
+                aria-expanded="false"
+            >
+                <span
+                    id="smartEditPerspectiveToolbar_option_se.cms.startWorkflow_btn_lbl"
+                    class="toolbar-action-button__txt"
+                    translate="se.cms.workflow.toolbar.start.workflow"
+                ></span>
+            </button>
+        </ng-container>
+    </div>
+
+    <div *seHasOperationPermission="'se.view.page.workflowMenu'">
+        <!-- Workflow has started -->
+        <fd-popover
+            *ngIf="pageHasWorkflow"
+            class="toolbar-action"
+            [closeOnOutsideClick]="true"
+            [isOpen]="actionItem.isOpen"
+            (isOpenChange)="onDropdownToggle($event)"
+            [additionalBodyClass]="'se-page-workflow-menu-body'"
+        >
+            <fd-popover-control>
+                <button
+                    fd-button
+                    id="pageTaskBtn"
+                    type="button"
+                    class="page-tasks-btn toolbar-action--button"
+                    [attr.aria-expanded]="actionItem.isOpen"
+                >
+                    <span class="page-tasks-btn__icon sap-icon--workflow-tasks"></span>
+                    <span
+                        class="page-tasks-btn__label"
+                        translate="se.cms.workflow.toolbar.view.workflow.menu"
+                    ></span>
+                </button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <div
+                    *ngIf="actionItem.isOpen"
+                    class="toolbar-action--include se-page-workflow-menu-body-content"
+                >
+                    <!-- header -->
+                    <div class="se-page-workflow-menu-body-content__header">
+                        <div
+                            class="se-page-workflow-menu-body-content__header-text"
+                            translate="se.cms.workflow.toolbar.view.workflow.menu"
+                        ></div>
+                        <div class="se-page-workflow-menu-body-content__header-menu">
+                            <se-workflow-item-menu
+                                (isMenuOpenChange)="onDropdownToggle($event)"
+                                [workflowInfo]="workflow"
+                            ></se-workflow-item-menu>
+                        </div>
+                    </div>
+                    <!-- body -->
+                    <div class="se-version-toolbar-menu-content__body">
+                        <div class="se-page-workflow-menu-body__tabs">
+                            <se-tabs
+                                *ngIf="areTabsReady; else spinner"
+                                [tabsList]="tabsList"
+                                [model]="tabsData"
+                                [numTabsDisplayed]="2"
+                            >
+                            </se-tabs>
+                            <ng-template #spinner>
+                                <se-spinner [isSpinning]="true"></se-spinner>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </fd-popover-body>
+        </fd-popover>
+    </div>
+</div>

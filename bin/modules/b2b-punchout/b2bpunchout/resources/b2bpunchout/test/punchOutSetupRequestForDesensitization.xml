@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!DOCTYPE cXML SYSTEM "http://xml.cXML.org/schemas/cXML/1.2.051/cXML.dtd">
+<cXML payloadID="1233444-200@ariba.acme.com"
+      xml:lang="en-US" timestamp="1999-03-12T18:39:09-08:00">
+    <Header>
+        <From>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sysadmin@ariba.com</Identity>
+            </Credential>
+        </From>
+        <To>
+            <Credential domain="DUNS">
+                <Identity>942888711</Identity>
+            </Credential>
+        </To>
+        <Sender>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sysadmin@ariba.com</Identity>
+                <SharedSecret>VerySecret1234$</SharedSecret>
+            </Credential>
+            <UserAgent>Ariba ORMS 5.1P4</UserAgent>
+        </Sender>
+    </Header>
+    <Request>
+        <PunchOutSetupRequest operation="create">
+            <BuyerCookie>34234234ADFSDF234234</BuyerCookie>
+            <Extrinsic name="randomKey">department code</Extrinsic>
+            <BrowserFormPost>
+                <URL>http://ariba.acme.com:1616/punchoutexit</URL>
+            </BrowserFormPost>
+            <Contact>
+                <Name xml:lang="en">jpicard1</Name>
+                <Email>jpicard@acme.com1</Email>
+            </Contact>
+            <Contact>
+                <Name xml:lang="en">jpicard2</Name>
+                <Email>jpicard@acme.com2</Email>
+                <PostalAddress>
+                    <DeliverTo>John Smith</DeliverTo>
+                    <Street>123 Main Street</Street>
+                    <City>Sunnyvale</City>
+                    <State>CA</State>
+                    <PostalCode>94089</PostalCode>
+                    <Country isoCountryCode="US">United States</Country>
+                </PostalAddress>
+                <Email>11@sap.com</Email>
+                <Phone>
+                    <TelephoneNumber>
+                        <CountryCode isoCountryCode="en">chian</CountryCode>
+                        <AreaOrCityCode>08</AreaOrCityCode>
+                        <Number>1234567</Number>
+                    </TelephoneNumber>
+                </Phone>
+                <Fax>
+                    <TelephoneNumber>
+                        <CountryCode isoCountryCode="en">chian</CountryCode>
+                        <AreaOrCityCode>08</AreaOrCityCode>
+                        <Number>1234567</Number>
+                    </TelephoneNumber>
+                </Fax>
+                <URL>http://www.baidu.com</URL>
+                <IdReference identifier="" domain="">
+                    <Creator xml:lang="en">qqq</Creator>
+                    <Description xml:lang="d">dddd</Description>
+                </IdReference>
+            </Contact>
+            <SupplierSetup>
+                <URL>http://workchairs.com/cxml</URL>
+            </SupplierSetup>
+            <ShipTo>
+                <Address addressID="1000467">
+                    <Name xml:lang="en">1000467</Name>
+                    <PostalAddress>
+                        <DeliverTo>John Smith</DeliverTo>
+                        <Street>123 Main Street</Street>
+                        <City>Sunnyvale</City>
+                        <State>CA</State>
+                        <PostalCode>94089</PostalCode>
+                        <Country isoCountryCode="US">United States</Country>
+                    </PostalAddress>
+                </Address>
+            </ShipTo>
+            <SelectedItem>
+                <ItemID>
+                    <SupplierPartID>HW1210-3422</SupplierPartID>
+                </ItemID>
+            </SelectedItem>
+        </PunchOutSetupRequest>
+    </Request>
+</cXML>

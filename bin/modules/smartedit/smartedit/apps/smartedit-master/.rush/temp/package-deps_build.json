@@ -1,0 +1,27 @@
+{
+  "files": {
+    "smartedit/apps/smartedit-master/.eslintrc.js": "5f053b4c65820f4f2ce04c81d23daba9886170d0",
+    "smartedit/apps/smartedit-master/.gitignore": "06a479f13be033987007baec8878e686334f6392",
+    "smartedit/apps/smartedit-master/README.md": "6aaabe131909a42c25ae7abaa70fa31e239c1d33",
+    "smartedit/apps/smartedit-master/package.tpl.json": "e2c8fa7d1684267dbc55aa0e3cbc2d4d41d6230a",
+    "smartedit/apps/smartedit-master/scripts/copy-to-webroot.js": "e6363c73bad5039568b06f2d3e39645ac19696f6",
+    "smartedit/apps/smartedit-master/smartedit.json": "ae3449b764fc809a72844042a72ba7f6f3a7140f",
+    "smartedit/apps/smartedit-master/src/container/index.ts": "b5718c1544d48f0fcf4d14d82a92d47935525bb6",
+    "smartedit/apps/smartedit-master/src/container/thirdparties.js": "da702dd56621713b285034b2b23f5ca15b4c74ad",
+    "smartedit/apps/smartedit-master/src/inner/index.ts": "ff19029efd4b245aa938d3ffc1b19189f3b6edd8",
+    "smartedit/apps/smartedit-master/src/inner/thirdparties.js": "afd646b4d1e309181b9c938def12391c96a1b6a9",
+    "smartedit/apps/smartedit-master/tsconfig.json": "ad8c3b42c2431d234bfe4f97066bd3018b49d6c5",
+    "smartedit/apps/smartedit-master/webpack/container/smarteditContainerTemplate.html": "2747163677c558e02338928bad8d2b366ca1d0b3",
+    "smartedit/apps/smartedit-master/webpack/container/webpack.common.js": "462a7f42e48ac8a82fce992089da01546c897ff4",
+    "smartedit/apps/smartedit-master/webpack/container/webpack.dev.js": "3a9f303a1d9068142cfb4c01abfe2414f55c44df",
+    "smartedit/apps/smartedit-master/webpack/container/webpack.prod.js": "4239a33cc3de4e3f0f15eb520222e373821dcbb1",
+    "smartedit/apps/smartedit-master/webpack/inner/webpack.common.js": "d3a03c7b3ef9db5851577d6a937341bda94621a2",
+    "smartedit/apps/smartedit-master/webpack/inner/webpack.dev.js": "3a9f303a1d9068142cfb4c01abfe2414f55c44df",
+    "smartedit/apps/smartedit-master/webpack/inner/webpack.prod.js": "4239a33cc3de4e3f0f15eb520222e373821dcbb1",
+    "smartedit/apps/smartedit-master/webpack/smartedit-extensions-loader.js": "f659759242eff54e5d174b2d6001dbdf316ed4a2",
+    "smartedit/apps/smartedit-master/webpack/webpack.dev.common.js": "1d0c1a0b0ed4f45706a7c3ae4b656e2d6884a441",
+    "smartedit/apps/smartedit-master/webpack/webpack.prod.common.js": "6b3db9509f3113f88df70c00a39e741714a14253",
+    "smartedit/apps/smartedit-master/.rush/temp/shrinkwrap-deps.json": "d01d3200536692931731391e81f13483f53fa06b"
+  },
+  "arguments": "npm run build:prod "
+}

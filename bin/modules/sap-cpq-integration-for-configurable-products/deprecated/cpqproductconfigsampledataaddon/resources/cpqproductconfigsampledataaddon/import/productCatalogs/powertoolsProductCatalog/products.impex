@@ -1,0 +1,106 @@
+$productCatalog=powertoolsProductCatalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=en
+$supercategories=supercategories(code, $catalogVersion)
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$approved=approvalstatus(code)[default='approved']
+$taxGroup=Europe1PriceFactory_PTG(code)[default=us-sales-tax-full]
+
+
+INSERT_UPDATE Unit;code[unique=true];unitType;conversion;name[lang=de];name[lang=en];
+;PCE;pieces;1;PCE;PCE;
+
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;ean;variantType(code);unit(code)[default=pieces];$catalogVersion;name[lang=$lang];description[lang=$lang];summary[lang=$lang];$prices;$approved;$taxGroup;
+##### CONF_CAMERA_BUNDLE #####
+;CONF_CAMERA_BUNDLE;1358,CloudCPQConfigurableCategory;SAP;;;;PCE;;Configurable Camera Bundle;Configurable Camera Bundle, modeled in CPQ. ;Configurable Camera Bundle;1 PCE = 1500 USD N;;;
+;NIKON_D850;1358;SAP;;;;PCE;;Nikon Camera Body 850a;<h3>Extreme resolution meets extreme speed.</h3><p>When Nikon introduced the <em>D850</em> and <em>D850E</em>, it set a new benchmark for DSLR image quality and super high resolution photography that approached medium format. Now, five years later, Nikon proudly introduces the next evolution in high resolution DSLRs, a camera that allows photographers to capture fast action in 45.7 megapixels of brilliant resolution. With remarkable advancements across the board sensor design, autofocus, dynamic range, sensitivity, Speedlight control, battery life, shutter and mirror drive mechanisms, Silent Photography in Live-View mode, focus shift capability and more this is quite possibly the most impressive, well-rounded DSLR yet.</p>;Nikon Camera Body 850c;1 PCE = 1500 USD N;;;
+;SANDISK_EXTREME_PRO_128GB_SDXC;1358;SAP;;;;PCE;;Sandisk Memory Card;<h2>GEAR THAT DOESNT LIMIT YOUR CREATIVITY</h2> <p>Our most powerful SD UHS-I memory card yet delivers performance that elevates your creativity.</p>;Sandisk Memory Card;1 PCE = 100 USD N;;;
+;INSURANCE_SELECT_2_YEARS;;SAP;;;;PCE;;2 Years Insurance;<h2>Specialist insurance that includes equipment cover and liability insurances</h2><p>As everyones requirements will be different, you may find a tailor-made policy is best. Dealing with the photo trade for the past 12 years, and catering to both amateur and professional, that is exactly what we offer, using a panel of insurers rather than just one.</p>;2 Years Insurance;1 PCE = 44.99 USD N;;;
+;NIKON_D7500;1358;SAP;;;;PCE;;Nikon Camera Body D 7500;<h3>Follow your passion wherever it leads</h3><p>Born from a desire for flagship performance and innovation in a more compact and streamlined connected camera, the D7500 delivers the game-changing resolution, ISO range, image processing and energy efficiency of the award-winning D500 in an enthusiast-level DSLR. Simply put, the D7500 is built to outperform any camera in its class with top-tier image quality, blazing speed, flawless autofocus, 4K Ultra HD video and pro-grade creative tools—all in a comfortable, rugged design. This is a camera for the new generation of creators.</p>;Nikon Camera Body 7500c;;;;
+;CANON_EOS_80D;1358;SAP;;;;PCE;;Canon EOS 80D;<p><em><strong>The Canon EOS 80D features an all-new 24.2MP APS-C CMOS sensor, 45-point all cross-type autofocus system, and the DIGIC 6 processor. </strong></em></p><p>When using live view or recording video users can take advantage of the 80D Dual Pixel CMOS AF for fast and smooth autofocus. Photos can be composed on an Intelligent optical viewfinder or a flip-out-and-rotate touchscreen LCD. The 80D can record 1080/60p video and offers sockets for both a microphone and headphones. Wi-Fi is also built in, with support for NFC technology.</p>;CANON EOS 80D camera body;;;;
+;CANON_EOS_6D_MARK_II;1358;SAP;;;;PCE;;Canon EOS 6D Mark II;<p>Step up into the full-frame game with the <strong>EOS 6D Mark II DSLR Camera</strong> from <strong>Canon</strong>. Making high-performance full-frame imaging more accessible, the 6D Mark II makes numerous advancements over its predecessor to improve upon every aspect of image capture and creation</p>;Canon EOS 6D Mark II Camera Body ;;;;
+;LOWEPRO_STREETLINE_SL_140;1358;SAP;;;;PCE;;LowePro Streetline SL 140;LowePro Streetline SL 140 ;LowePro Streetline SL 140;1 PCE = 110 USD N;;;
+;ONA_THE_CAMPS_BAY;1358;SAP;;;;PCE;;ONA The Camps Bay;ONA The Camps Bay ;ONA The Camps Bay;1 PCE = 472 USD N;;;
+;THINKTANK_SPEED_RACER_V2.0;1358;SAP;;;;PCE;;Thinktank Speed Racer V2.0;Thinktank Speed Racer V2.0 ;Thinktank Speed Racer V2.0;1 PCE = 179 USD N;;;
+;WANDRD_HEXAD_ACCESS_DUFFEL_45;1358;SAP;;;;PCE;;Wandrd Hexad Access Duffel 45;Wandrd Hexad Access Duffel 45 ;Wandrd Hexad Access Duffel 45;1 PCE = 329 USD N;;;
+;EXTENDED_WARRANTY_2_YEARS;1358;SAP;;;;PCE;;Extended warranty 2 years;Extended warranty 2 years ;Extended warranty 2 years;1 PCE = 40 USD N;;;
+;EXTENDED_WARRANTY_3_YEARS;1358;SAP;;;;PCE;;Extended warranty 3 years;Extended warranty 3 years ;Extended warranty 3 years;1 PCE = 80 USD N;;;
+;INSURANCE_PRO_4_YEARS;1358;SAP;;;;PCE;;Insurance Pro 4 years;Insurance Pro 4 years ;Insurance Pro 4 years;1 PCE = 600 USD N;;;
+;INSURANCE_PRO_2_YEARS;1358;SAP;;;;PCE;;Insurance Pro 2 years;Insurance Pro 2 years ;Insurance Pro 2 years;1 PCE = 360 USD N;;;
+;INSURANCE_SELECT_4_YEARS;1358;SAP;;;;PCE;;Insurance Select 4 years;Insurance Select 4 years ;Insurance Select 4 years;1 PCE = 79 USD N;;;
+;CANON_RF_24-105MM_F4L_IS_USM;1358;SAP;;;;PCE;;Canon RF 24-105mm f4L IS USM;Canon RF 24-105mm f4L IS USM ;Canon RF 24-105mm f4L IS USM;1 PCE = 1500 USD N;;;
+;SIGMA_85MM_F1.4_DG_HSM;1358;SAP;;;;PCE;;Sigma 85mm F1.4 DG HSM;Sigma 85mm F1.4 DG HSM ;Sigma 85mm F1.4 DG HSM;1 PCE = 800 USD N;;;
+;TAMRON_18-200MM_F3.5-6.3_DI_II_VC;1358;SAP;;;;PCE;;Tamron 18-200mm F3.5-6.3 Di II VC;Tamron 18-200mm F3.5-6.3 Di II VC ;Tamron 18-200mm F3.5-6.3 Di II VC;1 PCE = 750 USD N;;;
+;TAMRON_SP_15-30MM_F2.8_DI_VC_USD;1358;SAP;;;;PCE;;Tamron SP 15-30mm F2.8 Di VC USD;Tamron SP 15-30mm F2.8 Di VC USD ;Tamron SP 15-30mm F2.8 Di VC USD;1 PCE = 750 USD N;;;
+;NIKON_AF-P_DX_NIKKOR_70-300MM_1:4.5-6.3;1358;SAP;;;;PCE;;Nikon AF-P DX NIKKOR 70-300mm 1:4.5-6.3 G ED VR;Nikon AF-P DX NIKKOR 70-300mm 1:4.5-6.3 G ED VR ;Nikon AF-P DX NIKKOR 70-300mm 1:4.5-6.3 G ED VR;1 PCE = 700 USD N;;;
+;SANDISK_ULTRA_64GB_SDHC;1358;SAP;;;;PCE;;SanDisk Ultra 64GB SDHC;SanDisk Ultra 64GB SDHC ;SanDisk Ultra 64GB SDHC;1 PCE = 20 USD N;;;
+;PANASONIC_AU-XP0512GB;1358;SAP;;;;PCE;;Panasonic AU-XP0512GB;Panasonic AU-XP0512GB ;Panasonic AU-XP0512GB;1 PCE = 200 USD N;;;
+;UNIVERSAL_BOUNCE_DIFFUSER;1358;SAP;;;;PCE;;Universal Bounce Diffuser;Universal Bounce Diffuser ;Universal Bounce Diffuser;1 PCE = 9 USD N;;;
+;ROGUE_GELS_LIGHTING_FILTER_KIT;1358;SAP;;;;PCE;;Rogue Gels Lighting Filter Kit;Rogue Gels Lighting Filter Kit ;Rogue Gels Lighting Filter Kit;1 PCE = 30 USD N;;;
+;REMOTE_RELEASE_CORD_MC-DC2;1358;SAP;;;;PCE;;Remote Release Cord MC-DC2;Remote Release Cord MC-DC2 ;Remote Release Cord MC-DC2;1 PCE = 27 USD N;;;
+;LITEMASTER_PRO_L-478D-U_LIGHT_METER;1358;SAP;;;;PCE;;LiteMaster Pro L-478D-U Light Meter;LiteMaster Pro L-478D-U Light Meter ;LiteMaster Pro L-478D-U Light Meter;1 PCE = 340 USD N;;;
+;WHITE_BALANCE_CARD_SET;1358;SAP;;;;PCE;;White Balance Card Set;White Balance Card Set ;White Balance Card Set;1 PCE = 11 USD N;;;
+;MANFROTTO_BEFREE_2N1_ALUMINIUM_TRIPOD_TW;1358;SAP;;;;PCE;;Manfrotto Befree 2N1 Aluminium Tripod Twist;Manfrotto Befree 2N1 Aluminium Tripod Twist ;Manfrotto Befree 2N1 Aluminium Tripod Twist;1 PCE = 200 USD N;;;
+;HAMA_STAR_63_TRIPOD;1358;SAP;;;;PCE;;Hama Star 63 Tripod;Hama Star 63 Tripod ;Hama Star 63 Tripod;1 PCE = 100 USD N;;;
+;KG_CONCEPT_62_TRIPOD;1358;SAP;;;;PCE;;K&G Concept 62 Tripod;K&G Concept 62 Tripod ;K&G Concept 62 Tripod;1 PCE = 200 USD N;;;
+;DAISEN_CAMERA_TRIPOD_OCTOPUS;1358;SAP;;;;PCE;;DAISEN Camera Tripod Octopus;DAISEN Camera Tripod Octopus ;DAISEN Camera Tripod Octopus;1 PCE = 300 USD N;;;
+##### CONF_COFFEEMACHINE_3000 #####
+;CONF_COFFEEMACHINE_3000;1358,CloudCPQConfigurableCategory;SAP;;;;PCE;;Configurable Coffee Machine 3000;Configurable Coffee Machine 3000;Configurable Coffee Machine 3000;1 PCE = 2000 USD N;;;
+;CONF_BREW_CAP_ESPRESSO_cpq;1358;SAP;;;;PCE;;Espresso;For the most delicious Espresso;Espresso;;;;
+;CONF_BREW_CAP_FILTER_cpq;1358;SAP;;;;PCE;;Filter Coffee;Filter Coffee;Filter Coffee;;;;
+;CONF_BREW_CAP_CHOCOLATE_cpq;1358;SAP;;;;PCE;;Hot Chocolate;Hmmm... Hot Chocolate!;Hmmm... Hot Chocolate!;;;;
+;CONF_BREW_CAP_DECAF_cpq;1358;SAP;;;;PCE;;Decaf Coffee;Decaf Coffee;Decaf Coffee;;;;
+;CONF_CUP_RECOG_cpq;1358;SAP;;;;PCE;;Cup Recognition;Automatically recognizes the cup and calculates the required coffee amount;Automatic Cup Recognition;1 PCE = 0 USD N;;;
+;CONF_CUP_WARMER_cpq;1358;SAP;;;;PCE;;Cup Warmer;Keeps your Cup warm;Keeps your Cup warm;1 PCE = 100 USD N;;;
+;CONF_SEP_HOT_WATER_cpq;1358;SAP;;;;PCE;;Additional Hot Water;Additional Hot Water;Additional Hot Water;1 PCE = 200 USD N;;;
+;CONF_LOCK_BEAN_HOP_cpq;1358;SAP;;;;PCE;;Lock Beans Hop;Lock Beans Hop;Lock Beans Hop;1 PCE = 200 USD N;;;
+;CONF_AUTO_TIMER_cpq;1358;SAP;;;;PCE;;Timer;Timer;Timer;1 PCE = 300 USD N;;;
+;CONF_CONF_SIDE_UNIT_cpq;1358;SAP;;;;PCE;;Side Unit;Side Unit;Side Unit;1 PCE = 300 USD N;;;
+;CONF_UNDER_TABLE_cpq;1358;SAP;;;;PCE;;Under Table;Under Table;Under Table;1 PCE = 500 USD N;;;
+
+
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+##### CONF_CAMERA_BUNDLE #####
+;CONF_CAMERA_BUNDLE;pw_warehouse_s;222;forceInStock;
+;NIKON_D850;pw_warehouse_s;222;forceInStock;
+;NIKON_D7500;pw_warehouse_s;222;forceInStock;
+;CANON_EOS_80D;pw_warehouse_s;222;forceInStock;
+;CANON_EOS_6D_MARK_II;pw_warehouse_s;222;forceInStock;
+;SANDISK_EXTREME_PRO_128GB_SDXC;pw_warehouse_s;222;forceInStock;
+;LOWEPRO_STREETLINE_SL_140;pw_warehouse_s;222;forceInStock;
+;ONA_THE_CAMPS_BAY;pw_warehouse_s;222;forceInStock;
+;THINKTANK_SPEED_RACER_V2.0;pw_warehouse_s;222;forceInStock;
+;WANDRD_HEXAD_ACCESS_DUFFEL_45;pw_warehouse_s;222;forceInStock;
+;EXTENDED_WARRANTY_2_YEARS;pw_warehouse_s;222;forceInStock;
+;EXTENDED_WARRANTY_3_YEARS;pw_warehouse_s;222;forceInStock;
+;INSURANCE_PRO_4_YEARS;pw_warehouse_s;222;forceInStock;
+;INSURANCE_PRO_2_YEARS;pw_warehouse_s;222;forceInStock;
+;INSURANCE_SELECT_4_YEARS;pw_warehouse_s;222;forceInStock;
+;CANON_RF_24-105MM_F4L_IS_USM;pw_warehouse_s;222;forceInStock;
+;SIGMA_85MM_F1.4_DG_HSM;pw_warehouse_s;222;forceInStock;
+;TAMRON_18-200MM_F3.5-6.3_DI_II_VC;pw_warehouse_s;222;forceInStock;
+;TAMRON_SP_15-30MM_F2.8_DI_VC_USD;pw_warehouse_s;222;forceInStock;
+;NIKON_AF-P_DX_NIKKOR_70-300MM_1:4.5-6.3;pw_warehouse_s;222;forceInStock;
+;SANDISK_ULTRA_64GB_SDHC;pw_warehouse_s;222;forceInStock;
+;PANASONIC_AU-XP0512GB;pw_warehouse_s;222;forceInStock;
+;UNIVERSAL_BOUNCE_DIFFUSER;pw_warehouse_s;222;forceInStock;
+;ROGUE_GELS_LIGHTING_FILTER_KIT;pw_warehouse_s;222;forceInStock;
+;REMOTE_RELEASE_CORD_MC-DC2;pw_warehouse_s;222;forceInStock;
+;LITEMASTER_PRO_L-478D-U_LIGHT_METER;pw_warehouse_s;222;forceInStock;
+;WHITE_BALANCE_CARD_SET;pw_warehouse_s;222;forceInStock;
+;MANFROTTO_BEFREE_2N1_ALUMINIUM_TRIPOD_TW;pw_warehouse_s;222;forceInStock;
+;HAMA_STAR_63_TRIPOD;pw_warehouse_s;222;forceInStock;
+;KG_CONCEPT_62_TRIPOD;pw_warehouse_s;222;forceInStock;
+;DAISEN_CAMERA_TRIPOD_OCTOPUS;pw_warehouse_s;222;forceInStock;
+##### CONF_COFFEEMACHINE_3000 #####
+;CONF_COFFEEMACHINE_3000;pw_warehouse_s;222;forceInStock;
+;CONF_BREW_CAP_ESPRESSO_cpq;pw_warehouse_s;222;forceInStock;
+;CONF_BREW_CAP_FILTER_cpq;pw_warehouse_s;222;forceInStock;
+;CONF_BREW_CAP_CHOCOLATE;pw_warehouse_s;222;forceInStock;
+;CONF_CUP_RECOG_cpq;pw_warehouse_s;222;forceInStock;
+;CONF_SEP_HOT_WATER_cpq;pw_warehouse_s;222;forceInStock;
+;CONF_LOCK_BEAN_HOP_cpq;pw_warehouse_s;222;forceInStock;
+;CONF_AUTO_TIMER_cpq;pw_warehouse_s;222;forceInStock;
+;CONF_UNDER_TABLE_cpq;pw_warehouse_s;222;forceInStock;

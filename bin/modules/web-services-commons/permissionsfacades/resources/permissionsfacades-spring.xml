@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultPermissionsFacade" alias="permissionsFacade"/>
+	<bean id="defaultPermissionsFacade" class="de.hybris.platform.permissionsfacades.impl.DefaultPermissionsFacade">
+		<property name="permissionCheckingService" ref="permissionCheckingService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="searchRestrictionService" ref="searchRestrictionService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="catalogSynchronizationService" ref="catalogSynchronizationService"/>
+		<property name="applyPermissionsStrategy" ref="applyPermissionsStrategy"/>
+	</bean>
+
+	<alias name="defaultCatalogPermissionsChecker" alias="catalogPermissionsChecker"/>
+	<bean id="defaultCatalogPermissionsChecker"
+		  class="de.hybris.platform.permissionsfacades.security.impl.DefaultCatalogPermissionsChecker">
+		<property name="permissionsFacade" ref="permissionsFacade"/>
+	</bean>
+
+	<alias name="defaultApplyPermissionsStrategy" alias="applyPermissionsStrategy"/>
+	<bean id="defaultApplyPermissionsStrategy"
+		  class="de.hybris.platform.permissionsfacades.strategy.impl.DefaultApplyPermissionsStrategy">
+		<constructor-arg name="flexibleSearchService" ref="flexibleSearchService"/>
+		<constructor-arg name="permissionManagementService" ref="permissionManagementService"/>
+		<constructor-arg name="typeService" ref="typeService"/>
+		<constructor-arg name="sessionService" ref="sessionService"/>
+		<constructor-arg name="transactionTemplate" ref="transactionTemplate"/>
+		<constructor-arg name="validationStrategies" ref="typePermissionsListValidationStrategies"/>
+	</bean>
+
+	<alias name="defaultTypePopulatedValidationStrategy" alias="typePopulatedValidationStrategy"/>
+	<bean id="defaultTypePopulatedValidationStrategy"
+		  class="de.hybris.platform.permissionsfacades.validation.strategy.impl.TypePopulatedValidationStrategy"/>
+
+	<alias name="defaultTypeExistValidationStrategy" alias="typeExistValidationStrategy"/>
+	<bean id="defaultTypeExistValidationStrategy"
+		  class="de.hybris.platform.permissionsfacades.validation.strategy.impl.TypeExistValidationStrategy">
+		<constructor-arg name="typeService" ref="typeService"/>
+	</bean>
+
+	<alias name="defaultTypesDuplicatedValidationStrategy" alias="typesDuplicatedValidationStrategy"/>
+	<bean id="defaultTypesDuplicatedValidationStrategy"
+		  class="de.hybris.platform.permissionsfacades.validation.strategy.impl.TypesDuplicatedValidationStrategy"/>
+
+	<alias name="defaultPermissionsPopulatedValidationStrategy" alias="permissionsPopulatedValidationStrategy"/>
+	<bean id="defaultPermissionsPopulatedValidationStrategy"
+		  class="de.hybris.platform.permissionsfacades.validation.strategy.impl.PermissionsPopulatedValidationStrategy"/>
+
+	<alias name="defaultPermissionsListPopulatedValidationStrategy" alias="permissionsListPopulatedValidationStrategy"/>
+	<bean id="defaultPermissionsListPopulatedValidationStrategy"
+		  class="de.hybris.platform.permissionsfacades.validation.strategy.impl.PermissionsListPopulatedValidationStrategy"/>
+
+	<alias name="defaultPrincipalPopulatedValidationStrategy" alias="principalPopulatedValidationStrategy"/>
+	<bean id="defaultPrincipalPopulatedValidationStrategy"
+		  class="de.hybris.platform.permissionsfacades.validation.strategy.impl.PrincipalPopulatedValidationStrategy"/>
+
+	<alias name="defaultTypePermissionsListValidationStrategies" alias="typePermissionsListValidationStrategies"/>
+	<util:list id="defaultTypePermissionsListValidationStrategies"
+	value-type="de.hybris.platform.permissionsfacades.validation.strategy.TypePermissionsListValidationStrategy">
+		<ref bean="principalPopulatedValidationStrategy"/>
+		<ref bean="permissionsListPopulatedValidationStrategy"/>
+		<ref bean="typePopulatedValidationStrategy"/>
+		<ref bean="typeExistValidationStrategy"/>
+		<ref bean="typesDuplicatedValidationStrategy"/>
+		<ref bean="permissionsPopulatedValidationStrategy"/>
+	</util:list>
+</beans>

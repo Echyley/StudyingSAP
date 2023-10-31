@@ -1,0 +1,186 @@
+/*Import the default css-es */
+@import "cockpitng-globals.scss";
+@import "../../renderers/dndvalidation/dndvalidation.scss";
+@import "../../renderers/custommenu/custommenu.scss";
+@import "../scss/support/_backoffice-mixins.scss";
+@import "../scss/components/_collaboration.scss";
+@import "../scss/components/_sync.scss";
+@import "../scss/components/_excel.scss";
+@import "../scss/components/_personalization-attributepicker.scss";
+@import "../scss/components/_excel-validation.scss";
+@import "../scss/components/_bulkedit.scss";
+@import "../scss/components/_bulkedit-validation.scss";
+@import "../scss/components/_workflowdesigner.scss";
+
+@import url('cockpit.css');
+
+.mediaInfoHeader.z-label {
+  margin-bottom: $backoffice--media-info-header--margin-bottom;
+}
+
+.mediaInfoValue.z-label {
+  color: $backoffice--media-info-value--color;
+  margin-bottom: $backoffice--media-info-value--margin-bottom;
+}
+
+.mediaInfoCnt {
+  float: left;
+  margin-right: $backoffice--media-info-container--margin-right;
+}
+
+.previewPlaceholder {
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+}
+
+.previewPlaceholder .z-image {
+  margin: auto;
+}
+
+.small-image-preview-cnt img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  z-index: 2000;
+}
+
+.yw-collection-preview {
+  &-cnt {
+    background: $backoffice--collection-preview-container--bg-color;
+  }
+  > div {
+    //&.z-listbox-body {
+    //  background: $backoffice--collection-preview-list-body--bg-color;
+    //}
+    &.z-listbox {
+      border: none;
+    }
+    &.z-listboxdiv .z-listbox-body .z-listitem {
+      background: none;
+    }
+  }
+}
+
+.yw-desc-tooltip {
+  max-width: $backoffice--desc-tooltip--max-width;
+  .z-popup-content .z-label {
+    font-size: $backoffice--desc-tooltip--font-size;
+  }
+}
+
+.yw-image-attribute-sync-status {
+  &-in-sync {
+    @include _attribute-inline-icon-font("status-in-progress", var(--bo-positive-color));
+  }
+  &-out-of-sync {
+    @include _attribute-inline-icon-font ("status-inactive", var(--bo-negative-color));
+  }
+  &-undefined {
+    @include _attribute-inline-icon-font ("incident", var(--bo-neutral-color));
+  }
+  &-error {
+    @include _attribute-inline-icon-font ("status-error", var(--bo-negative-color));
+  }
+  &-no-read {
+    @include _attribute-inline-icon-font ("sys-cancel-2", var(--bo-neutral-color));
+    display: none !important;
+  }
+  &-loading {
+    @include _attribute-inline-icon-font ("synchronize", var(--bo-neutral-color), rotate $backoffice--sync-loading-icon--animation-duration infinite linear);
+  }
+}
+
+.yw-image-attribute-container-sync-status-no-read {
+  padding-left: 0px !important;
+}
+
+.yw-partial-sync-info {
+  padding: $backoffice--partial-sync-info--padding;
+  white-space: nowrap;
+  max-height: $backoffice--partial-sync-info--max-height;
+  overflow: auto;
+  overflow-x: hidden;
+
+  .yw-partial-sync-info-syncJob {
+    padding: $backoffice--partial-sync-info-entry--padding;
+    border-top: $backoffice--partial-sync-info-entry--border-top;
+    display: block;
+  }
+  .yw-partial-sync-info-syncJob:first-child {
+    border-top: none;
+  }
+}
+
+.yw-image-attribute-product-type {
+  &-base,
+  &-variant {
+  	&:before {
+    	@include _status-icon ("product", var(--bo-neutral-color));
+    	position: relative;
+    	top: $backoffice--cng-scripting-action--padding/2;
+    }
+  }
+  &-variant {
+  	&:before {
+    	@include _status-icon ("factory", var(--bo-neutral-color));
+    	position: relative;
+        top: $backoffice--cng-scripting-action--padding/2;
+    }
+  }
+}
+
+.yw-image-attribute-approval-icon {
+  @include _image-attribute-inline-icon ();
+}
+
+.yw-image-attribute-approval-status {
+  &-approved:before {
+    @include _status-icon ("accept", var(--bo-positive-color));
+    text-align: center;
+  }
+  &-unapproved:before {
+    @include _status-icon ("decline", var(--bo-negative-color));
+    text-align: center;
+  }
+  &-check:before{
+    @include _status-icon ("validate", var(--bo-critical-color));
+    text-align: center;
+  }
+}
+
+.yw-compound-renderer-container{
+  display: inline-block;
+}
+
+.yw-workflow-status-container {
+  .yw-workflow-status-label {
+    display: inline;
+  }
+}
+
+.yw-workflow-status-icon {
+  @include _image-attribute-inline-icon ();
+
+  &-planned:before {
+    @include _status-icon ("circle-task-2", var(--bo-informative-color));
+  }
+  &-running:before {
+    @include _status-icon ("busy", var(--bo-critical-color));
+  }
+  &-finished:before {
+    @include _status-icon ("accept", var(--bo-positive-color));
+  }
+  &-terminated:before {
+    @include _status-icon ("stop", var(--bo-neutral-color));
+  }
+}
+
+body > .cke_screen_reader_only.cke_copyformatting_notification {
+  height: 0;
+}
+
+
+
+
+

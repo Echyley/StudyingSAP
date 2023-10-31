@@ -1,0 +1,47 @@
+.se-experience-selector {
+    @include se-flex-row();
+
+    &__control {
+        @include se-flex-row();
+    }
+
+    &__btn {
+        padding: 0;
+        text-decoration: none;
+        @include se-text-btn();
+
+        &--globe {
+            margin-right: se-space('base');
+            color: var(--sapLinkColor);
+        }
+    }
+
+    &__btn-text {
+        vertical-align: middle;
+        position: relative;
+        max-width: 40vw;
+        font-family: '72';
+        color: var(--sapTextColor);
+        text-transform: capitalize;
+        display: inline-block;
+    }
+
+    &__btn-arrow {
+        &.sap-icon--navigation-down-arrow {
+            @include se-type('0');
+            padding: 0 20px !important;
+            color: var(--sapLinkColor) !important;
+        }
+    }
+
+    &__dropdown {
+        min-width: 380px;
+        overflow: visible;
+        display: block;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+}

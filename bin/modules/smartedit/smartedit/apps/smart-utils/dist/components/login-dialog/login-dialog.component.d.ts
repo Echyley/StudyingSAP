@@ -1,0 +1,37 @@
+import { HttpClient } from '@angular/common/http';
+import { OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { DialogRef } from '@fundamental-ngx/core';
+import { ILoginData, ILoginModalFeedback, ISessionService, IStorageService, IEventService } from '../../interfaces';
+import { SSOAuthenticationHelper } from '../../services/authentication/sso-authentication.helper';
+import { LogService } from '../../services/log.service';
+import { UrlUtils } from '../../utils';
+import { LoginDialogResource } from './login-dialog-resource-provider';
+export declare class LoginDialogComponent implements OnInit {
+    private readonly modalRef;
+    private readonly logService;
+    private readonly httpClient;
+    private readonly sessionService;
+    private readonly storageService;
+    private readonly urlUtils;
+    private readonly ssoAuthenticationHelper;
+    resource: LoginDialogResource;
+    protected eventService: IEventService;
+    hostClass: boolean;
+    data: ILoginData;
+    authURIKey: string;
+    authURI: string;
+    isFullScreen: boolean;
+    ssoEnabled: boolean;
+    form: FormGroup;
+    constructor(modalRef: DialogRef, logService: LogService, httpClient: HttpClient, sessionService: ISessionService, storageService: IStorageService, urlUtils: UrlUtils, ssoAuthenticationHelper: SSOAuthenticationHelper, resource: LoginDialogResource, eventService: IEventService);
+    ngOnInit(): void;
+    signinWithSSO: () => Promise<void | ILoginModalFeedback>;
+    signinWithCredentials(): Promise<void | ILoginModalFeedback>;
+    private isMainEndPoint;
+    private storeAccessToken;
+    private readonly sendCredentials;
+    private apiAuthenticationFailureReportFactory;
+    private acceptUser;
+    private hasRequiredCredentialsError;
+}

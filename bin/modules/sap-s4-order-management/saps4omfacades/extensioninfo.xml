@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+               
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Saps4omfacades" jaloLogicFree="true" managername="Saps4omfacadesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="saps4omfacades" usemaven="false">
+                          
+		
+        <requires-extension name="saps4omservices"/>
+        		
+        <requires-extension name="b2bapprovalprocessfacades"/>
+        		
+        <requires-extension name="sapbillinginvoicefacades"/>
+                
+        
+        <coremodule generated="true" manager="de.hybris.platform.sap.saps4omfacades.jalo.Saps4omfacadesManager" packageroot="de.hybris.platform.sap.saps4omfacades"/>
+            
+    
+    </extension>
+    
+</extensioninfo>

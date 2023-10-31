@@ -1,0 +1,9 @@
+<fd-datetime-picker
+    [state]="isInvalid() ? 'error' : 'success'"
+    name="se-datetime-picker"
+    [placeholder]="placeholderText | translate"
+    [disabled]="isDisabled"
+    [(ngModel)]="date"
+    (ngModelChange)="handleDatePickerChange()"
+    [allowNull]="true"
+></fd-datetime-picker>

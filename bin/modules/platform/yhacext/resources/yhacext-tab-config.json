@@ -1,0 +1,13 @@
+[ {
+  "basePath" : "/yhacext",
+  "mainTabLabel" : "yhacext extension",
+  "subTabs" : [ {
+    "path" : "/extension/",
+    "label" : "extension",
+    "skipPrefix" : false
+  }, {
+    "path" : "/statistics/",
+    "label" : "Sample stats",
+    "skipPrefix" : false
+  } ]
+} ]

@@ -1,0 +1,90 @@
+@import '../support/_workflowsearch-variables.scss';
+
+.yw-workflowsearch-filters {
+	display: flex;
+	height: auto;
+	min-width: $workflowsearch__filter-container--min-width;
+
+	// Search Button
+	&-search {
+  		&.z-button{
+  			width: $workflowsearch__button--size;
+	        height: auto;
+	        min-height: $workflowsearch__button--size;
+	        box-sizing: border-box;
+	        padding: 0;
+	        @include _getIconGlyph("search");
+	        font-family: $_workflowsearch__button-icon--font-family;
+			border-style: var(--bo-input-border-style);
+			border-color: $workflowsearch__button--border-color;
+			border-width: var(--bo-input-border-width);
+			border-radius: $workflowsearch__button--border-radius;
+			background: $workflowsearch__button--background;
+
+			&:hover {
+				background: $workflowsearch__button--hover-background;
+				border-color: var(--bo-button-hover-border-color);
+			}
+  		}
+	}
+
+	// Range Inputs
+	&-input {
+		border-radius: $_workflowsearch__range-container--border-radius;
+		border: $workflowsearch__toolbar-filters--border;
+		border-right: none;
+		background: $workflowsearch__input-container--background;
+		box-sizing: border-box;
+
+		&:hover {
+			border-color: var(--bo-input-hover-border-color);
+		}
+
+		.ye-range {
+			display: flex;
+
+			&-editor-java-util-date {
+				height: 100%;
+				
+				> table {
+					height: 100%;
+				}
+			}
+
+			&-endpoint {
+				background: transparent !important;
+
+				&-start {
+					.z-datebox {
+						border-radius: $_workflowsearch__range-container--border-radius;
+					}
+				}
+
+				.z-datebox {
+					height: 100%;
+					min-width: 120px;
+					border: none;
+					box-sizing: border-box;
+				}
+			}
+
+			&-label {
+				display: none !important;
+			}
+
+			&-icon {
+				margin: 0 $_container-spacing-default__core;
+				@include _getIconGlyph("arrow-right");
+				font-family: $_workflowsearch__button-icon--font-family;
+				line-height: $workflowsearch__button--size;
+			}
+		}
+	}
+
+	// Range Container -> start & end data-box
+	&-range {
+		border-radius: $workflowsearch__button--border-radius;
+		height: auto;
+		width: auto;
+	}
+}

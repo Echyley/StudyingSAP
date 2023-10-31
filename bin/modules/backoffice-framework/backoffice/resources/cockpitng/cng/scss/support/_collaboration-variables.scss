@@ -1,0 +1,159 @@
+@import "cockpitng-globals.scss";
+
+
+$collaboration__sidebar--bg-color: var(--bo-list-group-header-background);
+$collaboration__sidebar--z-index: 99;
+$collaboration__sidebar-header--z-index: 17;
+$collaboration__sidebar--width: 410px;
+$collaboration__sidebar-default--max-width: $collaboration__sidebar--width;
+$collaboration__sidebar--box-shadow-blur: 5px;
+$collaboration__sidebar--box-shadow: var(--bo-content-shadow-small);
+$collaboration__sidebar--padding-left: $collaboration__sidebar--box-shadow-blur;
+$collaboration__sidebar--margin-left: $collaboration__sidebar--padding-left * -1;
+$collaboration__sidebar--border-color: var(--bo-list-group-header-border);
+$collaboration__sidebar--border-width: $boxes--border__thin;
+$collaboration__sidebar--border: $collaboration__sidebar--border-width solid $collaboration__sidebar--border-color;
+$collaboration__sidebar-overlap--width: 0;
+
+$collaboration__header-hp--color: var(--bo-button-icon-color);
+$_collaboration__header--line-height: ceil(($font-size__large * 1.25));
+$collaboration__header--padding-x: $container-spacing-default__third;
+$collaboration__header--padding: (floor(($toolbar__default--height - $_collaboration__header--line-height)/2) - $boxes--border__thin) $collaboration__header--padding-x;
+$collaboration__flex-layout-contents--width: calc(100% - #{$collaboration__sidebar--width - $collaboration__sidebar-overlap--width});
+
+$collaboration__toolbar-widget--height: $toolbar__default--height;
+$collaboration__toolbar-widget--bg-color: var(--bo-list-group-header-background);
+$collaboration__toolbar-widget--box-shadow: false; //0 0 3px 0 rgba($black, 0.5);
+$collaboration__toolbar-widget-action-group--line-height: $collaboration__toolbar-widget--height;
+
+$collaboration__toolbar-side-action-group--padding-right: 25px;
+
+$collaboration__toolbar-history--line-height: 32px;
+$collaboration__toolbar-history-title--height: $collaboration__toolbar-history--line-height;
+$collaboration__toolbar-history-title--indent: 100px;
+$collaboration__toolbar-history-title--max-width: 100%;
+$collaboration__toolbar-history-container--padding-v: floor(($collaboration__toolbar-widget--height - $collaboration__toolbar-history--line-height)/2);
+
+
+$collaboration__tabs--bg-color: var(--bo-list-background);
+$collaboration__tabs-tab-content--padding: 0 ($container-spacing-default__third * 2);
+$collaboration__tabs-tab-text--padding: false;
+$collaboration__tabs-outer--padding: 0 $_container-spacing-default__core;
+
+$_collaboration__inner-tabs-tab-text--line-height: $toolbar__button-default--size;
+$collaboration__inner-tabs-tab-text--padding: floor(($toolbar__default--height - $_collaboration__inner-tabs-tab-text--line-height)/2) 0;
+$collaboration__inner-tabs--bg-color: var(--bo-list-background);
+$collaboration__inner-tabs-checkbox--width: $form-defaults__input-icon--size;
+$collaboration__inner-tabs-checkbox--height: $form-defaults__input-icon--size;
+$collaboration__inner-tabs-checkbox--border: $form-defaults__input-icon--border-width solid $form-defaults__input-icon--color;
+$collaboration__inner-tabs-checkbox--border-radius: $editor-defaults__input-field--border-radius;
+$collaboration__inner-tabs-checkbox--margin-right: $_container-spacing-default__tiny;
+$collaboration__inner-tabs-checkbox--margin-left: -($collaboration__inner-tabs-checkbox--width + $collaboration__inner-tabs-checkbox--margin-right);
+$collaboration__inner-tabs-checkbox--line-height: $font-size__base;
+$collaboration__inner-tabs-checkbox--color: var(--bo-button-icon-color);
+$collaboration__inner-tabs-checkbox--font-family: $font-family__icon;
+$collaboration__inner-tabs-checkbox--content: _getIconGlyphContentValue('accept');
+$collaboration__inner-tabs-checkbox--font-size: $font-size__small;
+$collaboration__inner-tabs-checkbox-selected--bg-color: var(--bo-button-active-background);
+$collaboration__inner-tabs-checkbox-selected--border-color: var(--bo-button-active-border-color);
+
+$collaboration__inner-tab--border-width: 2px;
+$collaboration__inner-tab-selected--border-bottom: $collaboration__inner-tab--border-width solid $blue__default;
+
+$collaboration__title--color: var(--bo-group-title-text-color);
+// $collaboration__title--font-weight: $font-weight-bold;
+$_collaboration__title--font-size: $font-size__large;
+$_collaboration__title--padding-left: $container-spacing-default__half;
+
+$_collaboration-center-browser__wrapper--box-shadow: $_layout-panels__panel--box-shadow;
+$_collaboration-center-browser__wrapper--border-radius: $_layout-panels__panel--border-radius;
+
+$collaboration-center-browser__header-actioncontainer--border-radius: $_layout-panels__panel--border-radius $_layout-panels__panel--border-radius 0 0;
+$collaboration-center-browser__header-actioncontainer--padding-x: $_container-spacing-default__small; //$_container-spacing-default__regular;
+$collaboration-center-browser__header-actioncontainer--padding: 0 $collaboration-center-browser__header-actioncontainer--padding-x 0;
+$collaboration-center-browser__header-actioncontainer-nested-center-full-width--margin-x: $collaboration-center-browser__header-actioncontainer--padding-x  * -1;
+// $collaboration-center-browser__header-actioncontainer-nested-center--padding-top: $container-spacing-default__base +  $container-spacing-default__half;
+$collaboration-center-browser__header-actioncontainer--border-bottom: $boxes--border__thin solid var(--primary4);
+$_collaboration-center-browser__header-actioncontainer-caption--padding: floor(($toolbar__default--height - $toolbar__button-default--size)/2) 0 (ceil(($toolbar__default--height - $toolbar__button-default--size)/2) - nth($collaboration-center-browser__header-actioncontainer--border-bottom, 1));
+$_collaboration-center-browser__header-actioncontainer-action-group--top: nth($_collaboration-center-browser__header-actioncontainer-caption--padding, 1) + nth($collaboration-center-browser__header-actioncontainer--padding, 1);
+$_collaboration-center-browser__header-actioncontainer-action-group--right: $collaboration-center-browser__header-actioncontainer--padding-x;
+
+$collaboration-center-overview-default--border-radius: $_layout-panels__panel--border-radius;
+$collaboration-center-overview-title--font-size: $font-size__h4;
+$_collaboration-center-overview-title--line-height: $toolbar__button-default--size;
+
+// $collaboration-center-overview__listitem-hyperlink--font-weight: $font-weight-bold;
+$collaboration-center-overview__listitem-details-current--padding-top: 3px;
+$collaboration-center-overview__listitem-details-current--font-size: $font-size__base; //$font-size__small;
+$_collaboration-center-overview__listitem--vertical-align: middle;
+$_collaboration-center-overview__listitem--padding-y: floor(($editor-defaults__list-item--height - $font-size__large)/2);
+$_collaboration-center-overview__listitem-show-menu-action--vertical-align: false; //middle;
+$_collaboration-center-overview__listitem-show-menu-action--padding-y: 2px;
+$_collaboration-center-overview__listitem-show-menu-action--padding-left: 2px;
+
+$collaboration-center-browser__toolbar-tool--margin-left: $_container-spacing-default__tiny;
+$collaboration-center-browser__toolbar-action-group--height: $toolbar__button-default--size;
+$collaboration-center-browser__toolbar-action-group--top: 0;
+$collaboration-center-browser__toolbar-action-group--right: (2 * $collaboration-center-browser__toolbar-action-group--height) + $collaboration-center-browser__header-actioncontainer--padding-x;//70px;
+
+$collaboration-center-browser__list-side-cell--padding-x: $_container-spacing-default__small;
+//$collaboration-center-browser__tree-view-treecell--padding-x: $collaboration-center-browser__list-side-cell--padding-x;
+
+$collaboration-center-browser__default--border-width: $boxes--border__thin;
+
+$_collaboration-center-browser__bottom-bar--bg-color: var(--bo-page-footer-background);
+$_collaboration-center-browser__bottom-bar--border-top: $boxes--border__thin solid var(--bo-page-footer-border-color);
+$_collaboration-center-browser__bottom-bar--padding: $_container-spacing-default__tiny $_container-spacing-default__small;
+$_collaboration-center-browser__bottom-bar-label--width: 80px;
+$_collaboration-center-browser__bottom-bar--padding-left: $_collaboration-center-browser__bottom-bar-label--width;
+$_collaboration-center-browser__bottom-bar--border-radius: 0 0 $_layout-panels__panel--border-radius $_layout-panels__panel--border-radius;
+$_collaboration-center-browser__bottom-bar-action-container--margin: $_container-spacing-default__core $_container-spacing-default__small 0 $_container-spacing-default__small;
+
+$collaboration-center-browser__status-icon--margin-right: 5px;
+$collaboration-center-browser__listbox-header-border--border-color: var(--bo-page-header-border-color);
+$collaboration-center-browser__listitem--border-color: var(--bo-list-border-color);
+$collaboration-center-browser__listitem--border: $collaboration-center-browser__default--border-width solid $collaboration-center-browser__listitem--border-color;
+$collaboration-center-browser__listbox-table--margin-top: $collaboration-center-browser__default--border-width * -1;
+
+
+$collaboration-center-details__groupbox-title--font-size: $collaboration-center-overview-title--font-size;
+$collaboration-center-details__groupbox-title--font-weight: $font-weight-normal;
+$collaboration-center-details__groupbox-title--line-height: $toolbar__button-default--size;
+$collaboration-center-details__groupbox-title--padding-y: 0;
+@if $collaboration-center-details__groupbox-title--line-height {
+	$collaboration-center-details__groupbox-title--padding-y: floor(($toolbar__button-default--size - $collaboration-center-details__groupbox-title--line-height)/2);
+}
+$collaboration-center-details__instant-edit-label--line-height: $font-size__large;
+$collaboration-center-details__instant-edit-label--margin-bottom: $_container-spacing-default__tiny;
+$collaboration-center-details__attribute-label--color: var(--bo-text-color);
+$collaboration-center-details__attribute-label--font-weight: $font-weight-bold;
+$collaboration-center-details__static-slot--bg-color: var(--bo-list-group-header-background);
+$collaboration-center-details__summaryview-section-no-title--padding-bottom: $container-spacing-default__base;
+
+$collaboration-center-task__quicklist-header-toolbar--padding: 0;
+$collaboration-center-task__quicklist-toolbar--bg-color: var(--bo-list-group-header-background); //$grey__light--1200;
+//$collaboration-center-task__quicklist--border-color: $grey__light--800;
+$collaboration-center-task__quicklist-header-title--font-size: $font-size__base;
+$collaboration-center-task__quicklist-header-title--color: --bo-group-title-text-color;
+$collaboration-center-task__quicklist-header-title--height: $collaboration__toolbar-widget--height;
+$collaboration-center-task__quicklist-header-title--width: 350px;
+$collaboration-center-task__quicklist-header-title--font-weight: $font-weight-bold;
+$collaboration-center-task__quicklist-header-text--padding: 0 ($container-spacing-default__base - $container-spacing-default__third);
+$collaboration-center-task__quicklist-header-text--max-width: $collaboration-center-task__quicklist-header-title--width;
+$collaboration-center-task__quicklist-border-shadow--box-shadow: inset $boxes--border__thin 0 0 0 var(--primary4);
+$collaboration-center-task__quicklist-toolbar-border-shadow--box-shadow: inset $boxes--border__thin $boxes--border__thin 0 0 var(--primary4);
+$collaboration-center-task__quicklist-toolbar--padding-left: $boxes--border__thin;
+$collaboration-center-task__quicklist-toolbar-action-selected--margin: $_container-spacing-default__core 0 0 $_container-spacing-default__small;
+$collaboration-center-task__quicklist-toolbar-action-selected--height: 30px;
+$collaboration-center-task__quicklist-toolbar-action-selected--border-color: $boxes--border__thin solid var(--bo-input-border-color);
+$collaboration-center-task__quicklist-toolbar-action-selected-hover--border-color: $boxes--border__thin solid var(--bo-input-hover-border-color);
+$collaboration-center-task__quicklist-toolbar-action-selected--border-radius: $editor-defaults__inline-box--border-radius;
+// $collaboration-center-task__quicklist-toolbar-element--height: $collaboration__toolbar-widget--height;
+
+$collaboration-center-task__quicklist-toolbar-workflow-select--border-color: var(--bo-list-border-color);
+$collaboration-center-task__quicklist-toolbar-workflow-select-focus--border-color: var(--bo-list-selected-border-color);
+$collaboration-center-task__quicklist-toolbar-workflow-select-container--margin-y: floor(($collaboration__toolbar-widget--height - $editor-defaults__inline-box--height)/2);
+
+$collaboration__widget-cnt-bg-color: var(--bo-container-background);
+
+$collaboration__collaboration_center-toggle-td-color: var(--bo-shell-interactive-color);

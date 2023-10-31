@@ -1,0 +1,15 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products 
+
+# Macros / Replacement Parameter definitions
+$defaultCurrency = USD
+$productCatalog = wsTestCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default=$productCatalog:Online]
+$approved = approvalstatus(code)[default='approved']
+$prices = europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+# Insert Products
+INSERT_UPDATE Product; code[unique = true]; $prices    ; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; $approved
+                     ; 1225694            ; 50 USD     ; Canon           ; 1901B020AA     ; pieces    ; 8714574508740

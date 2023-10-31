@@ -1,0 +1,29 @@
+$lang=pl
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;Konfigurowalna promocja produktu
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;Procentowy rabat od ceny opcji z komunikatem dot. promocji;Zastosuj rabat {discount_value,number,percent*1} do opcji {cstic} / {cstic_value} 
+;y_configurable_product_display_promo_message;Wyświetl komunikat dot. promocji (dotyczy promocji);Wyświetl komunikat dot. promocji
+;y_configurable_product_display_promo_opportunity_message;Wyświetl komunikat szansy dot. promocji (promocja jeszcze nie dotyczy);Wyświetl komunikat szansy dot. promocji
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;Cecha;Cecha, której dotyczy ten rabat i dla której pojawia się ten komunikat
+;y_configurable_product_percentage_discount_for_option;cstic_value;Wartość cechy;Wartość cechy, której dotyczy ten rabat i dla której pojawia się ten komunikat
+;y_configurable_product_percentage_discount_for_option;discount_value;Procentowa wartość rabatu;Procentowy rabat, który dotyczy ceny opcji. Podaj wartość bez znaku procentu.
+;y_configurable_product_percentage_discount_for_option;message;Komunikat;Tekst komunikatu
+;y_configurable_product_percentage_discount_for_option;extended_message;Komunikat rozszerzony;Tekst rozszerzonego komunikatu
+;y_configurable_product_display_promo_message;cstic;Cecha;Cecha, dla której pojawia się ten komunikat
+;y_configurable_product_display_promo_message;cstic_value;Wartość cechy;Wartość cechy, dla której pojawia się ten komunikat
+;y_configurable_product_display_promo_message;message;Komunikat;Tekst komunikatu
+;y_configurable_product_display_promo_message;extended_message;Komunikat rozszerzony;Tekst rozszerzonego komunikatu
+;y_configurable_product_display_promo_opportunity_message;cstic;Cecha;Cecha, dla której pojawia się ten komunikat
+;y_configurable_product_display_promo_opportunity_message;cstic_value;Wartość cechy;Wartość cechy, dla której pojawia się ten komunikat
+;y_configurable_product_display_promo_opportunity_message;message;Komunikat;Tekst komunikatu
+;y_configurable_product_display_promo_opportunity_message;extended_message;Komunikat rozszerzony;Tekst rozszerzonego komunikatu
+
+#% endif:

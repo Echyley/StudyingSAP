@@ -1,0 +1,14 @@
+.se-actionable-search-item {
+    .se-actionable-search-item {
+        @include se-flex-row(space-between);
+        border-bottom: se-border(2);
+        border-top: se-border(2);
+        border-bottom: none;
+        padding-left: se-space('s');
+    }
+    .se-actionable-search-item__action-btn {
+        @include se-weight('bold');
+        border-left: se-border(2) !important;
+        border-radius: 0 var(--sapElement_BorderCornerRadius) var(--sapElement_BorderCornerRadius) 0 !important;
+    }
+}

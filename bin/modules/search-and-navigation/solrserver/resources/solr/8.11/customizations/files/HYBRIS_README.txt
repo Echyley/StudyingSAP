@@ -1,0 +1,191 @@
+
+hybris Changes
+=============================
+
+This is a modified version of Solr.
+
+The following files/directories were removed:
+- docs
+- example
+- dist/test-framework
+- dist/solr-test-framework-8.11.2.jar
+- server/solr-webapp/webapp/WEB-INF/lib/htrace-core4-4.1.0-incubating.jar
+- contrib/langid/lib/jsonic-1.2.7.jar
+- licenses/jsonic-1.2.7.jar.sha1
+- licenses/jsonic-LICENSE-ASL.txt
+- licenses/jsonic-NOTICE.txt
+
+The following files/directories were added:
+- HYBRIS_README.txt
+- contrib/hybris
+- server/solr/security.json.example
+- server/solr/solr.p12
+- server/solr/solr_client.p12
+
+The following files/directories were modified/replaced:
+- bin/solr.cmd:
+	- workaround for https://issues.apache.org/jira/browse/SOLR-7283 (lines 19-20)
+- bin/solr.in.cmd:
+	- authentication and ssl configuration example (lines 217-240)
+	- remove UseLargePages parameter from GC_TUNE parameters due to problems with running solr within docker container (line 242)
+- bin/solr.in.sh:
+	- authentication and ssl configuration example (lines 258-281)
+	- remove UseLargePages parameter from GC_TUNE parameters due to problems with running solr within docker container (line 283)
+- server/resources/log4j2.xml:
+	- change log level for zookeeper to error following changes done as a part of https://issues.apache.org/jira/browse/SOLR-15968 (68-69)
+- server/solr/solr.xml
+- server/solr/configsets
+- calcite libraries (due to https://nvd.nist.gov/vuln/detail/CVE-2022-39135)
+	- licenses/calcite-core-1.27.0.jar.sha1 -> licenses/calcite-core-1.32.0.jar.sha1
+	- server/solr-webapp/webapp/WEB-INF/lib/calcite-core-1.27.0.jar -> server/solr-webapp/webapp/WEB-INF/lib/calcite-core-1.32.0.jar
+	- licenses/calcite-linq4j-1.27.0.jar.sha1 -> licenses/calcite-linq4j-1.32.0.jar.sha1
+	- server/solr-webapp/webapp/WEB-INF/lib/calcite-linq4j-1.27.0.jar -> server/solr-webapp/webapp/WEB-INF/lib/calcite-linq4j-1.32.0.jar
+- commons-lang3 and commons-text (due to https://nvd.nist.gov/vuln/detail/CVE-2022-42889)
+    - licenses/commons-lang3-3.10.0.jar.sha1 -> licenses/commons-lang3-3.12.0.jar.sha1
+    - contrib/velocity/lib/commons-lang3-3.10.0.jar -> contrib/velocity/lib/commons-lang3-3.12.0.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/commons-lang3-3.10.0.jar -> server/solr-webapp/webapp/WEB-INF/lib/commons-lang3-3.12.0.jar
+    - licenses/commons-text-1.6.jar.sha1 ->  licenses/commons-text-1.10.0.jar.sha1
+    - server/solr-webapp/webapp/WEB-INF/lib/commons-text-1.6.jar -> server/solr-webapp/webapp/WEB-INF/lib/commons-text-1.10.0.jar
+- guava library (due to https://nvd.nist.gov/vuln/detail/CVE-2020-8908)
+    - licenses/guava-25.1-jre.jar.sha1 -> licenses/guava-30.0-jre.jar.sha1
+    - server/solr-webapp/webapp/WEB-INF/lib/guava-25.1-jre.jar -> server/solr-webapp/webapp/WEB-INF/lib/guava-30.0-jre.jar
+- failureaccess-1.0.1 (due to https://issues.apache.org/jira/browse/SOLR-15090 which will be fixed for solr 9.0.0)
+	- added licenses/failureaccess-1.0.1.jar.sha1
+	- added licenses/failureaccess-LICENSE-ASL.txt
+	- added licenses/licenses/failureaccess-NOTICE.txt
+	- added server/solr-webapp/webapp/WEB-INF/lib/failureaccess-1.0.1.jar
+- google-gson library (due to https://nvd.nist.gov/vuln/detail/CVE-2022-25647)
+    - licenses/gson-2.7.jar.sha1 -> licenses/gson-2.9.1.jar.sha1
+    - contrib/gcs-repository/lib/gson-2.7.jar -> contrib/gcs-repository/lib/gson-2.9.1.jar
+- Google OAuth Client Library For Java (due to https://nvd.nist.gov/vuln/detail/CVE-2021-22573)
+    - licenses/google-oauth-client-1.32.1.jar.sha1 -> licenses/google-oauth-client-1.34.1.jar.sha1
+    - contrib/gcs-repository/lib/google-oauth-client-1.32.1.jar -> contrib/gcs-repository/lib/google-oauth-client-1.34.1.jar
+- hadoop libraries (due to https://nvd.nist.gov/vuln/detail/CVE-2021-25642, https://nvd.nist.gov/vuln/detail/CVE-2022-26612, and https://nvd.nist.gov/vuln/detail/CVE-2022-25168)
+	- licenses/hadoop-annotations-3.2.2.jar.sha1 -> licenses/hadoop-annotations-3.2.4.jar.sha1
+	- server/solr-webapp/webapp/WEB-INF/lib/hadoop-annotations-3.2.2.jar -> server/solr-webapp/webapp/WEB-INF/lib/hadoop-annotations-3.2.4.jar
+	- licenses/hadoop-auth-3.2.2.jar.sha1 -> licenses/hadoop-auth-3.2.4.jar.sha1
+	- server/solr-webapp/webapp/WEB-INF/lib/hadoop-auth-3.2.2.jar -> server/solr-webapp/webapp/WEB-INF/lib/hadoop-auth-3.2.4.jar
+	- licenses/hadoop-common-3.2.2-tests.jar.sha1 -> licenses/hadoop-common-3.2.4-tests.jar.sha1
+	- licenses/hadoop-common-3.2.2.jar.sha1 -> licenses/hadoop-common-3.2.4.jar.sha1
+	- server/solr-webapp/webapp/WEB-INF/lib/hadoop-common-3.2.2.jar -> server/solr-webapp/webapp/WEB-INF/lib/hadoop-common-3.2.4.jar
+	- licenses/hadoop-hdfs-3.2.2-tests.jar.sha1 -> licenses/hadoop-hdfs-3.2.4-tests.jar.sha1
+	- licenses/hadoop-hdfs-3.2.2.jar.sha1 -> licenses/hadoop-hdfs-3.2.4.jar.sha1
+	- licenses/hadoop-hdfs-client-3.2.2.jar.sha1 -> licenses/hadoop-hdfs-client-3.2.4.jar.sha1
+	- server/solr-webapp/webapp/WEB-INF/lib/hadoop-hdfs-client-3.2.2.jar -> server/solr-webapp/webapp/WEB-INF/lib/hadoop-hdfs-client-3.2.4.jar
+	- licenses/hadoop-minicluster-3.2.2.jar.sha1 -> licenses/hadoop-minicluster-3.2.4.jar.sha1
+	- licenses/hadoop-minikdc-3.2.2.jar.sha1 -> licenses/hadoop-minikdc-3.2.4.jar.sha1
+- jackson-databind library (due to https://nvd.nist.gov/vuln/detail/CVE-2022-42003 and https://nvd.nist.gov/vuln/detail/CVE-2022-42004)
+	- contrib/prometheus-exporter/lib/jackson-databind-2.13.3.jar -> contrib/prometheus-exporter/lib/jackson-databind-2.13.4.2.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/jackson-databind-2.13.3.jar -> server/solr-webapp/webapp/WEB-INF/lib/jackson-databind-2.13.4.2.jar
+	- licenses/jackson-databind-2.13.3.jar.sha1 -> licenses/jackson-databind-2.13.4.2.jar.sha1
+- jetty libraries (due to https://nvd.nist.gov/vuln/detail/CVE-2022-2048)
+	- dist/solrj-lib/jetty-alpn-client-9.4.44.v20210927.jar -> dist/solrj-lib/jetty-alpn-client-9.4.48.v20220622.jar
+	- dist/solrj-lib/jetty-alpn-java-client-9.4.44.v20210927.jar -> dist/solrj-lib/jetty-alpn-java-client-9.4.48.v20220622.jar
+	- dist/solrj-lib/jetty-client-9.4.44.v20210927.jar -> dist/solrj-lib/jetty-client-9.4.48.v20220622.jar
+	- dist/solrj-lib/jetty-http-9.4.44.v20210927.jar -> dist/solrj-lib/jetty-http-9.4.48.v20220622.jar
+	- dist/solrj-lib/jetty-io-9.4.44.v20210927.jar -> dist/solrj-lib/jetty-io-9.4.48.v20220622.jar
+	- dist/solrj-lib/jetty-util-9.4.44.v20210927.jar -> dist/solrj-lib/jetty-util-9.4.48.v20220622.jar
+	- licenses/jetty-alpn-client-9.4.44.v20210927.jar.sha1 -> licenses/jetty-alpn-client-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-alpn-java-client-9.4.44.v20210927.jar.sha1 -> licenses/jetty-alpn-java-client-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-alpn-java-server-9.4.44.v20210927.jar.sha1 -> licenses/jetty-alpn-java-server-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-alpn-server-9.4.44.v20210927.jar.sha1 -> licenses/jetty-alpn-server-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-client-9.4.44.v20210927.jar.sha1 -> licenses/jetty-client-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-continuation-9.4.44.v20210927.jar.sha1 -> licenses/jetty-continuation-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-deploy-9.4.44.v20210927.jar.sha1 -> licenses/jetty-deploy-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-http-9.4.44.v20210927.jar.sha1 -> licenses/jetty-http-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-io-9.4.44.v20210927.jar.sha1 -> licenses/jetty-io-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-jmx-9.4.44.v20210927.jar.sha1 -> licenses/jetty-jmx-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-rewrite-9.4.44.v20210927.jar.sha1 -> licenses/jetty-rewrite-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-security-9.4.44.v20210927.jar.sha1 -> licenses/jetty-security-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-server-9.4.44.v20210927.jar.sha1 -> licenses/jetty-server-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-servlet-9.4.44.v20210927.jar.sha1 -> licenses/jetty-servlet-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-servlets-9.4.44.v20210927.jar.sha1 -> licenses/jetty-servlets-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-util-9.4.44.v20210927.jar.sha1 -> licenses/jetty-util-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-webapp-9.4.44.v20210927.jar.sha1 -> licenses/jetty-webapp-9.4.48.v20220622.jar.sha1
+	- licenses/jetty-xml-9.4.44.v20210927.jar.sha1 -> licenses/jetty-xml-9.4.48.v20220622.jar.sha1
+	- server/lib/jetty-alpn-java-server-9.4.44.v20210927.jar -> server/lib/jetty-alpn-java-server-9.4.48.v20220622.jar
+	- server/lib/jetty-alpn-server-9.4.44.v20210927.jar -> server/lib/jetty-alpn-server-9.4.48.v20220622.jar
+	- server/lib/jetty-continuation-9.4.44.v20210927.jar -> server/lib/jetty-continuation-9.4.48.v20220622.jar
+	- server/lib/jetty-deploy-9.4.44.v20210927.jar -> server/lib/jetty-deploy-9.4.48.v20220622.jar
+	- server/lib/jetty-http-9.4.44.v20210927.jar -> server/lib/jetty-http-9.4.48.v20220622.jar
+	- server/lib/jetty-io-9.4.44.v20210927.jar -> server/lib/jetty-io-9.4.48.v20220622.jar
+	- server/lib/jetty-jmx-9.4.44.v20210927.jar -> server/lib/jetty-jmx-9.4.48.v20220622.jar
+	- server/lib/jetty-rewrite-9.4.44.v20210927.jar -> server/lib/jetty-rewrite-9.4.48.v20220622.jar
+	- server/lib/jetty-security-9.4.44.v20210927.jar -> server/lib/jetty-security-9.4.48.v20220622.jar
+	- server/lib/jetty-server-9.4.44.v20210927.jar -> server/lib/jetty-server-9.4.48.v20220622.jar
+	- server/lib/jetty-servlet-9.4.44.v20210927.jar -> server/lib/jetty-servlet-9.4.48.v20220622.jar
+	- server/lib/jetty-servlets-9.4.44.v20210927.jar -> server/lib/jetty-servlets-9.4.48.v20220622.jar
+	- server/lib/jetty-util-9.4.44.v20210927.jar -> server/lib/jetty-util-9.4.48.v20220622.jar
+	- server/lib/jetty-webapp-9.4.44.v20210927.jar -> server/lib/jetty-webapp-9.4.48.v20220622.jar
+    - server/lib/jetty-xml-9.4.44.v20210927.jar -> server/lib/jetty-xml-9.4.48.v20220622.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/jetty-alpn-client-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/jetty-alpn-client-9.4.48.v20220622.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/jetty-alpn-java-client-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/jetty-alpn-java-client-9.4.48.v20220622.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/jetty-client-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/jetty-client-9.4.48.v20220622.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/jetty-http-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/jetty-http-9.4.48.v20220622.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/jetty-io-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/jetty-io-9.4.48.v20220622.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/jetty-util-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/jetty-util-9.4.48.v20220622.jar
+    - updated server/start.jar
+	- dist/solrj-lib/http2-client-9.4.44.v20210927.jar -> dist/solrj-lib/http2-client-9.4.48.v20220622.jar
+	- dist/solrj-lib/http2-common-9.4.44.v20210927.jar -> dist/solrj-lib/http2-common-9.4.48.v20220622.jar
+	- dist/solrj-lib/http2-hpack-9.4.44.v20210927.jar -> dist/solrj-lib/http2-hpack-9.4.48.v20220622.jar
+	- dist/solrj-lib/http2-http-client-transport-9.4.44.v20210927.jar -> dist/solrj-lib/http2-http-client-transport-9.4.48.v20220622.jar
+	- licenses/http2-client-9.4.44.v20210927.jar.sha1 -> licenses/http2-client-9.4.48.v20220622.jar.sha1
+	- licenses/http2-common-9.4.44.v20210927.jar.sha1 -> licenses/http2-common-9.4.48.v20220622.jar.sha1
+	- licenses/http2-hpack-9.4.44.v20210927.jar.sha1 -> licenses/http2-hpack-9.4.48.v20220622.jar.sha1
+	- licenses/http2-http-client-transport-9.4.44.v20210927.jar.sha1 -> licenses/http2-http-client-transport-9.4.48.v20220622.jar.sha1
+	- licenses/http2-server-9.4.44.v20210927.jar.sha1 -> licenses/http2-server-9.4.48.v20220622.jar.sha1
+	- server/lib/http2-common-9.4.44.v20210927.jar -> server/lib/http2-common-9.4.48.v20220622.jar
+	- server/lib/http2-hpack-9.4.44.v20210927.jar -> server/lib/http2-hpack-9.4.48.v20220622.jar
+	- server/lib/http2-server-9.4.44.v20210927.jar -> server/lib/http2-server-9.4.48.v20220622.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/http2-client-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/http2-client-9.4.48.v20220622.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/http2-common-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/http2-common-9.4.48.v20220622.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/http2-hpack-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/http2-hpack-9.4.48.v20220622.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/http2-http-client-transport-9.4.44.v20210927.jar -> server/solr-webapp/webapp/WEB-INF/lib/http2-http-client-transport-9.4.48.v20220622.jar
+- jQueryUI libraries(due to https://nvd.nist.gov/vuln/detail/CVE-2021-41182, https://nvd.nist.gov/vuln/detail/CVE-2021-41183, https://nvd.nist.gov/vuln/detail/CVE-2021-41184)
+	- updated server/solr-webapp/webapp/libs/jquery-ui.min.js
+	- updated server/solr-webapp/webapp/css/angular/jquery-ui.structure.min.css
+	- updated server/solr-webapp/webapp/css/angular/jquery-ui.min.css
+- netty libraries (due to https://nvd.nist.gov/vuln/detail/CVE-2021-43797, https://nvd.nist.gov/vuln/detail/CVE-2022-24823 and https://nvd.nist.gov/vuln/detail/CVE-2021-41881)
+	- licenses/netty-all-4.1.68.Final.jar.sha1 -> licenses/netty-all-4.1.86.Final.jar.sha1
+	- licenses/netty-buffer-4.1.68.Final.jar.sha1 -> licenses/netty-buffer-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-buffer-4.1.68.Final.jar -> dist/solrj-lib/netty-buffer-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-buffer-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-buffer-4.1.86.Final.jar
+	- licenses/netty-codec-4.1.68.Final.jar.sha1 -> licenses/netty-codec-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-codec-4.1.68.Final.jar -> dist/solrj-lib/netty-codec-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-codec-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-codec-4.1.86.Final.jar
+	- licenses/netty-common-4.1.68.Final.jar.sha1 -> licenses/netty-common-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-common-4.1.68.Final.jar -> dist/solrj-lib/netty-common-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-common-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-common-4.1.86.Final.jar
+	- licenses/netty-handler-4.1.68.Final.jar.sha1 -> licenses/netty-handler-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-handler-4.1.68.Final.jar -> dist/solrj-lib/netty-handler-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-handler-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-handler-4.1.86.Final.jar
+	- licenses/netty-resolver-4.1.68.Final.jar.sha1 -> licenses/netty-resolver-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-resolver-4.1.68.Final.jar -> dist/solrj-lib/netty-resolver-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-resolver-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-resolver-4.1.86.Final.jar
+	- licenses/netty-transport-4.1.68.Final.jar.sha1 -> licenses/netty-transport-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-transport-4.1.68.Final.jar -> dist/solrj-lib/netty-transport-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-transport-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-transport-4.1.86.Final.jar
+	- licenses/netty-transport-native-epoll-4.1.68.Final.jar.sha1 -> licenses/netty-transport-native-epoll-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-transport-native-epoll-4.1.68.Final.jar -> dist/solrj-lib/netty-transport-native-epoll-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-transport-native-epoll-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-transport-native-epoll-4.1.86.Final.jar
+	- licenses/netty-transport-native-unix-common-4.1.68.Final.jar.sha1 -> licenses/netty-transport-native-unix-common-4.1.86.Final.jar.sha1
+	- dist/solrj-lib/netty-transport-native-unix-common-4.1.68.Final.jar -> dist/solrj-lib/netty-transport-native-unix-common-4.1.86.Final.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/netty-transport-native-unix-common-4.1.68.Final.jar -> server/solr-webapp/webapp/WEB-INF/lib/netty-transport-native-unix-common-4.1.86.Final.jar
+- protobuf libraries due to (due to https://nvd.nist.gov/vuln/detail/CVE-2021-22570, https://nvd.nist.gov/vuln/detail/CVE-2021-22569, https://nvd.nist.gov/vuln/detail/CVE-2022-1941)
+	- licenses/protobuf-java-3.11.0.jar.sha1 -> licenses/protobuf-java-3.21.7.jar.sha1
+	- contrib/gcs-repository/lib/protobuf-java-3.11.0.jar -> contrib/gcs-repository/lib/protobuf-java-3.21.7.jar
+	- server/solr-webapp/webapp/WEB-INF/lib/protobuf-java-3.11.0.jar -> server/solr-webapp/webapp/WEB-INF/lib/protobuf-java-3.21.7.jar
+	- licenses/protobuf-java-util-3.11.0.jar.sha1 -> licenses/protobuf-java-util-3.21.7.jar.sha1
+	- contrib/gcs-repository/lib/protobuf-java-util-3.11.0.jar -> contrib/gcs-repository/lib/protobuf-java-util-3.21.7.jar
+- woodstox libraries (due to https://nvd.nist.gov/vuln/detail/CVE-2022-40151)
+	- server/solr-webapp/webapp/WEB-INF/lib/woodstox-core-6.2.4.jar -> server/solr-webapp/webapp/WEB-INF/lib/woodstox-core-6.4.0.jar
+	- contrib/s3-repository/lib/woodstox-core-6.2.4.jar -> contrib/s3-repository/lib/woodstox-core-6.4.0.jar
+    - dist/solrj-lib/woodstox-core-6.2.4.jar -> dist/solrj-lib/woodstox-core-6.4.0.jar
+    - licenses/woodstox-core-6.2.4.jar.sha1 -> licenses/woodstox-core-6.4.0.jar.sha1
+- zookeeper libraries (due to https://nvd.nist.gov/vuln/detail/CVE-2021-4104, https://nvd.nist.gov/vuln/detail/CVE-2022-23305, https://nvd.nist.gov/vuln/detail/CVE-2022-23302, https://nvd.nist.gov/vuln/detail/CVE-2020-36518, https://nvd.nist.gov/vuln/detail/CVE-2021-37533, https://nvd.nist.gov/vuln/detail/CVE-2021-34428, https://nvd.nist.gov/vuln/detail/CVE-2020-15522 and https://nvd.nist.gov/vuln/detail/CVE-2022-41915)
+    - licenses/zookeeper-3.6.2.jar.sha1 -> licenses/zookeeper-3.8.1.jar.sha1
+    - licenses/zookeeper-jute-3.6.2.jar.sha1 -> licenses/zookeeper-jute-3.8.1.jar.sha1
+    - dist/solrj-lib/zookeeper-3.6.2.jar -> dist/solrj-lib/zookeeper-3.8.1.jar
+    - dist/solrj-lib/zookeeper-jute-3.6.2.jar -> dist/solrj-lib/zookeeper-jute-3.8.1.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/zookeeper-3.6.2.jar -> server/solr-webapp/webapp/WEB-INF/lib/zookeeper-3.8.1.jar
+    - server/solr-webapp/webapp/WEB-INF/lib/zookeeper-jute-3.6.2.jar -> server/solr-webapp/webapp/WEB-INF/lib/zookeeper-jute-3.8.1.jar

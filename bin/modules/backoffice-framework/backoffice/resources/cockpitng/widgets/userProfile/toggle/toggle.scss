@@ -1,0 +1,51 @@
+@import "scss/_toggle-variables.scss";
+
+.yw-userprofie {
+    &-container {
+        width:  $userprofile__container--width;
+        .yw-username-label {
+            font-size: $userprofile__container-label--font-size;
+            margin: $userprofile__container-label--margin;
+            color: $form-defaults__label--color;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+        }
+        .yw-profile-settings,
+        .yw-signout {
+            .z-listcell-content {
+                margin-left: $_container-spacing-default__regular;
+            }
+            &:before {
+                font-family: $globals-font-family;
+                position: absolute;
+                margin-top: $_container-spacing-default__core;
+                color: $userprofile__icon-color;
+                font-size: medium;
+            }
+        }
+        .yw-profile-settings:before {
+            content: _getIconGlyphContentValue('action-settings');
+        }
+        .yw-signout:before {
+            content: _getIconGlyphContentValue('log');
+        }
+    }
+    &-btn {
+        img {
+          height: $userprofile__toolbar-btn-img--size;
+          width: $userprofile__toolbar-btn-img--size;
+          border-radius: 50%;
+        }
+        &.z-toolbarbutton{
+           .yw-systemBarContainer &:hover,
+           .yw-systemBarContainer &:active{
+                background-color: transparent !important;
+          }
+          .yw-systemBarContainer .yw-statusToolbar span[style="display: none;"] + & {
+            background-color: transparent;
+          } 
+        }
+    }
+}

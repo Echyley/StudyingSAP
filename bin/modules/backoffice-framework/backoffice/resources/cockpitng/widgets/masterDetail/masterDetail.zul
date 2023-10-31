@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<widget xmlns="http://www.zkoss.org/2005/zul"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+		sclass="yw-masterdetail" height="100%">
+	<style src="${wr}/../masterDetail.css"/>
+	<div sclass="yw-masterdetail-content">
+		<div id="itemContainer" sclass="yw-masterdetail-sidebar" height="100%" width="30%">
+		</div>
+		<div sclass="yw-masterdetail-details" height="100%" width="70%">
+			<widgetslot slotID="detailViewContent" height="100%" width="100%"/>
+		</div>
+	</div>
+	<div sclass="yw-masterdetail-footer">
+		<button sclass="save-button y-btn-primary" id="saveButton"/>
+		<button sclass="save-close-button" id="saveAndCloseButton"/>
+		<button sclass="cancel-button y-btn-transparent" id="cancelButton"/>
+		<button sclass="close-button y-btn-transparent" id="closeButton"/>
+	</div>
+</widget>
+

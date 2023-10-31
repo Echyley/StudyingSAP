@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/>
+
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="loginSuccessForceDefaultTarget"/>
+		<property name="targetMethod" value="addAll"/>
+		<property name="arguments">
+			<list>
+				<value>login/pw/change</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias alias="userService" name="defaultSecureUserServicce"/>
+	<bean id="defaultSecureUserServicce" class="de.hybris.platform.b2bacceleratoraddon.service.impl.SecureUserService" parent="defaultUserService">
+		<property name="cmsSiteService" ref="cmsSiteService" />
+	</bean>
+
+	<!-- Before controller responsible for intercepting request to the storefront and apply the new security rule when a site is secured -->
+	<bean id="securePortalBeforeControllerHandler" class="de.hybris.platform.b2bacceleratoraddon.interceptors.SecurePortalBeforeControllerHandler">
+		<property name="unsecuredUris" ref="unsecuredUris" />
+		<property name="controlUris" ref="controlUris" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="userService" ref="userService" />
+		<property name="defaultLoginUri" value="${default.login.uri}" />
+		<property name="checkoutLoginUri" value="${checkout.login.uri}" />
+		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService" />
+		<property name="redirectStrategy" ref="redirectStrategy" />
+		<property name="requestProcessor" ref="asmRequestProcessor"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="asmRequestProcessor" class="de.hybris.platform.b2bacceleratoraddon.interceptors.AsmRequestProcessor">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="addOnValueProviderRegistry" ref="addOnValueProviderRegistry"/>
+		<property name="assistedServiceAddOnName" value="assistedservicestorefront"/>
+		<property name="asmRequestParameter" value="asm"/>
+		<property name="quitAsmRequestUri" value="/assisted-service/quit"/>
+		<property name="agentLoggedInKey" value="agentLoggedIn"/>
+	</bean>
+
+	<!-- Add our new before controller handler to the existing list using a merge -->
+	<bean depends-on="beforeControllerHandlersList" parent="listMergeDirective">
+		<property name="add" ref="securePortalBeforeControllerHandler" />
+	</bean>
+
+	<!-- Before view responsible for intercepting request to the storefront and apply the new security rule when a site is secured -->
+	<bean id="secureCustomerPortalBeforeViewHandler" class="de.hybris.platform.b2bacceleratoraddon.interceptors.SecurePortalBeforeViewHandler">
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="cmsPageService" ref="cmsPageService" />
+		<property name="pageTitleResolver" ref="pageTitleResolver" />
+		<property name="spViewMap" ref="spViewMap" />
+	</bean>
+
+	<!-- Add our new before view handler to the existing list using a merge -->
+	<bean depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="secureCustomerPortalBeforeViewHandler" />
+	</bean>
+
+	<!--SP Mappings: Map that contains replacement info used in SecureCustomerPortalBeforeViewHandler.java to update the model with SCP
+		components as well replace the views -->
+	<util:map id="spViewMap" key-type="java.lang.String" value-type="java.lang.Map">
+		<entry key="pages/account/accountLoginPage" value-ref="loginPageMap" />
+		<entry key="pages/password/passwordResetChangePage" value-ref="resetPasswordPageMap" />
+		<entry key="addon:/b2bacceleratoraddon/pages/secureportal/accountRegistration" value-ref="registerPageMap" />
+	</util:map>
+
+
+	<!-- Each page that needs replacement has its own map below -->
+	<util:map id="loginPageMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/secureportal/login" />
+		<entry key="cmsPageId" value="SecureCustomerPortalSecuredLoginPage" />
+	</util:map>
+
+	<util:map id="resetPasswordPageMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/secureportal/resetPassword" />
+		<entry key="cmsPageId" value="SecureCustomerPortalSecuredResetPasswordPage" />
+	</util:map>
+
+	<util:map id="registerPageMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/secureportal/securedAccountRegistration" />
+		<entry key="cmsPageId" value="SecureCustomerPortalSecuredRegisterPage" />
+	</util:map>
+
+
+	<util:set id="springUnsecuredUris" value-type="java.lang.String">
+		<value>/_s/**</value>
+		<value>/register/**</value>
+		<value>/punchout/**</value>
+		<value>/cart/rollover/MiniCart</value>
+		<value>/secureLogin/**</value>
+	</util:set>
+
+	<!-- List of unsecured mappings, i.e. those that the SecurePortalBeforeControllerHandler instance will let through regardless
+    of authentication -->
+	<bean id="unsecuredUris" parent="springUnsecuredUris" class="org.springframework.beans.factory.config.SetFactoryBean">
+		<property name="sourceSet">
+			<set merge="true">
+				<value>/assisted-service/emulate</value>
+			</set>
+		</property>
+	</bean>
+
+	<!-- List of control mappings, i.e. those that do not launch a new page but would only change a value on the server side such as language. -->
+	<util:set id="controlUris" value-type="java.lang.String">
+		<value>/_s/**</value>
+		<value>/punchout/**</value>
+		<value>/cart/rollover/MiniCart</value>
+		<value>/assisted-service/emulate</value>
+		<value>/register/captcha/widget/recaptcha</value>
+	</util:set>
+
+	<!-- Take the existing exclusions and add this addons' unsecured mappings to it -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="excludeUrlSet" />
+		<property name="targetMethod" value="addAll" />
+		<property name="arguments" ref="springUnsecuredUris" />
+	</bean>
+
+	<!-- AOP for captcha  -->
+	<aop:config proxy-target-class="true" expose-proxy="true">
+		<aop:pointcut expression="execution(* de.hybris.platform.b2bacceleratoraddon..controllers..*.showRegistrationPage(..))" id="showRegistrationPagePointcut"/>
+		<aop:pointcut expression="execution(* de.hybris.platform.b2bacceleratoraddon..controllers..*.submitRegistration(..))" id="submitRegistrationPointcut"/>
+	</aop:config>
+
+	<!-- Hack the list of allowed workflow attachment data in the B2B Admin Cockpit -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="WorkflowAttachmentData" />
+		<property name="targetMethod" value="addAll" />
+		<property name="arguments" ref="b2bRegistrationWorkflowAttachmentData" />
+	</bean>
+
+	<bean id="b2bRegistrationWorkflowAttachmentData" class="java.util.LinkedList">
+		<constructor-arg>
+			<list value-type="java.lang.String">
+				<value>de.hybris.platform.b2b.model.B2BRegistrationModel</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="WorkflowAttachmentData" class="java.util.LinkedList">
+		<constructor-arg>
+			<list value-type="java.lang.String">
+				<value>de.hybris.platform.core.model.product.ProductModel</value>
+				<value>de.hybris.platform.category.model.CategoryModel</value>
+				<value>de.hybris.platform.core.model.order.OrderModel</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean depends-on="previewUrlResolverPageMappings" parent="mapMergeDirective">
+		<property name="sourceMap">
+			<map>
+				<entry key="SecureCustomerPortalRegisterPage" value="/register"/>
+				<entry key="SecureCustomerPortalSecuredLoginPage" value="/secureLogin"/>
+				<entry key="SecureCustomerPortalSecuredRegisterPage" value="/register"/>
+				<entry key="SecureCustomerPortalSecuredResetPasswordPage" value="/login/pw/request"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Controllers & Mappings (necessary to override controllers with the same mappings in the target storefront) -->
+	<bean name="registerPageController" class="de.hybris.platform.b2bacceleratoraddon.controllers.secureportal.B2BRegistrationController"/>
+	
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultB2bacceleratoraddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="b2bacceleratoraddon"/>
+	</bean>
+
+	<bean id="defaultB2bacceleratoraddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultB2bacceleratoraddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getB2bacceleratoraddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultB2bacceleratoraddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="B2bacceleratoraddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getB2bacceleratoraddonBeforeViewHandler"/>
+	</bean>
+	
+	
+	<bean id="b2bAcceleratorAddonBeforeViewHandler" class="de.hybris.platform.b2bacceleratoraddon.interceptors.B2BAcceleratorAddonBeforeViewHandler">
+		<property name="viewMap" ref="b2bAcceleratorAddonViewMap" />
+	</bean>
+    
+	<bean depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="b2bAcceleratorAddonBeforeViewHandler" />
+	</bean>
+	
+	<util:map id="b2bAcceleratorAddonViewMap" key-type="java.lang.String" value-type="java.lang.Map">
+		<entry key="pages/checkout/multi/checkoutSummaryPage" value-ref="checkoutSummaryMap"/>
+		<entry key="pages/product/productLayout2Page" value-ref="productLayout2Page"/>
+	</util:map>
+
+	<util:map id="checkoutSummaryMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/checkout/multi/checkoutSummaryPage" />
+	</util:map>
+
+	<util:map id="checkoutConfirmationPage" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/checkout/checkoutConfirmationPage" />
+	</util:map>
+	
+	<util:map id="productLayout2Page" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="viewName" value="/pages/product/productLayout2Page" />
+	</util:map>
+
+    <!-- Controllers & Mappings (necessary to override controllers with the same mappings in the target storefront) -->
+    <bean name="checkoutLoginController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.CheckoutLoginController"/>
+	<bean name="summaryCheckoutStepController" class="de.hybris.platform.b2bacceleratoraddon.controllers.pages.checkout.steps.SummaryCheckoutStepController"/>
+
+	<bean depends-on="previewUrlResolverPageMappings" parent="mapMergeDirective">
+		<property name="sourceMap">
+			<map>
+				<entry key="my-replenishment-orders" value="/my-account/my-replenishment"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="b2bAcceleratorProductAddToCartComponentRenderer"  class="de.hybris.platform.b2bacceleratoraddon.component.renderer.B2BAcceleratorProductAddToCartComponentRenderer" parent="addOnJspIncludeCMSComponentRenderer"/>
+
+	<bean id="b2cAcceleratorComponentRendererMapping" parent="addonCmsComponentRendererMapping" >
+      <property name="typeCode" value="ProductAddToCartComponent" />
+      <property name="renderer" ref="b2bAcceleratorProductAddToCartComponentRenderer" />
+	</bean>
+
+	<bean id="reorderActionRenderer" class="de.hybris.platform.b2bacceleratoraddon.component.renderer.B2BAcceleratorReorderActionRenderer" parent="addOnJspIncludeCMSComponentRenderer"/>
+	<bean id="reorderActionRendererMapping" parent="addonCmsComponentRendererMapping" >
+      <property name="typeCode" value="ReorderAction" />
+      <property name="renderer" ref="reorderActionRenderer" />
+	</bean>
+
+	<bean id="approveOrderActionRenderer" class="de.hybris.platform.b2bacceleratoraddon.component.renderer.B2BAcceleratorApproveOrderActionRenderer" parent="addOnJspIncludeCMSComponentRenderer"/>
+    <bean id="approveOrderActionRendererMapping" parent="addonCmsComponentRendererMapping" >
+        <property name="typeCode" value="ApproveOrderAction" />
+        <property name="renderer" ref="approveOrderActionRenderer" />
+    </bean>
+	
+	<alias name="b2bAcceleratorSiteChannels" alias="acceleratorSiteChannels"/>
+	<util:set id="b2bAcceleratorSiteChannels" value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+		<ref bean="SiteChannel.B2B"/>
+	</util:set>
+</beans>

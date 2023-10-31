@@ -1,0 +1,35 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE DroolsKIEModule;name[unique=true];mvnGroupId;mvnArtifactId;mvnVersion;ruleType(code);active;version;
+;preview-module;junit-hybris-rules;preview;1.0.0;DEFAULT;true;0;
+;live-module;junit-hybris-rules;live;1.0.0;DEFAULT;true;0;
+
+
+INSERT_UPDATE DroolsKIEBase;name[unique=true];kieModule(name)[unique=true];equalityBehavior(code);eventProcessingMode(code)
+;live-base;live-module;EQUALITY;STREAM
+
+
+INSERT_UPDATE SourceRule;code[unique=true];startDate[dateformat=yyyy-MM-dd];endDate[dateformat=yyyy-MM-dd]
+;rule1;2015-11-01;2030-11-01
+
+INSERT_UPDATE RuleToEngineRuleTypeMapping;ruleType(code)[unique=true];engineRuleType(code)
+;SourceRule;DEFAULT
+
+
+INSERT_UPDATE DroolsRule;uuid[nuique=true];code;version[unique=true];active[default=false];currentVersion[default=false];kieBase(name);ruleType(code)[default=DEFAULT];
+;"6e5a0e85-g4a0-485f-be14-a758115317e1";"rule1";1;false;false;live-base;
+;"6e4a0e85-b4c0-48df-bb54-a7583153t6d1";"rule1";2;false;false;live-base;
+;"6e3a0e85-b5a0-435f-be54-a758215315e1";"rule1";3;false;false;live-base;
+;"6e1a4e85-b420-485f-be64-a758415327e1";"rule1";4;true;true;live-base;
+
+
+

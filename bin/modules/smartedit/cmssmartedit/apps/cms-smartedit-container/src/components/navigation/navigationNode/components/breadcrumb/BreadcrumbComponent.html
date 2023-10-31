@@ -1,0 +1,13 @@
+<div class="se-breadcrumb">
+    <div *ngFor="let node of breadcrumb; index as idx; last as isLast" class="se-breadcrumb__node">
+        <div class="se-breadcrumb__info" [ngClass]="{'se-breadcrumb__info--last': isLast}">
+            <span class="se-breadcrumb__info--level"
+                >{{ node.formattedLevel | translate: node }}</span
+            >
+            <span class="se-breadcrumb__info--name">{{ node.name }}</span>
+        </div>
+        <div class="se-breadcrumb__divider" *ngIf="idx < breadcrumb.length - 1">
+            <span class="sap-icon--navigation-right-arrow"></span>
+        </div>
+    </div>
+</div>

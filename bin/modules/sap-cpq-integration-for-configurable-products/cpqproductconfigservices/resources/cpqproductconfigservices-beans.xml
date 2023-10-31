@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.CpqCredentialsData">
+		<property name="username" type="String">
+			<description>Guest user name</description>
+		</property>
+		<property name="password" type="String">
+			<description>Guest user password</description>
+		</property>
+		<property name="domain" type="String">
+			<description>CPQ domain</description>
+		</property>
+		<property name="scope" type="String">
+			<description>CPQ Scope</description>
+		</property>
+		<property name="ownerId" type="String">
+			<description>Owner id</description>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.TokenResponseData">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="access_token" type="String">
+			<description>OAuth2 token</description>
+		</property>
+		<property name="expires" type="long">
+			<description>Validity Time in Seconds</description>
+			<annotations>@JsonProperty("expires_in")</annotations>
+		</property>
+	</bean>
+
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.AuthorizationData">
+		<property name="serviceEndpointUrl" type="String">
+			<description>CPQ service URL</description>
+		</property>
+		<property name="accessToken" type="String">
+			<description>Oauth2 token</description>
+		</property>
+		<property name="ownerId" type="String">
+			<description>Owner id for token</description>
+		</property>
+		<property name="expiresAt" type="long">
+			<description>time stamp when this token expires</description>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationCreatedData">
+		<property name="sessionId" type="String">
+			<description>Id of the CPQ session in which the configuration was created</description>
+		</property>
+		<property name="configId" type="String">
+			<description>Id of the configuration</description>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationCreateRequest">
+	<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="productSystemId" type="String">
+		<annotations>@JsonProperty("ProductSystemId")</annotations>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationCreatedResponseData">
+		<property name="configurationId" type="String">
+			<description>Id of the configuration</description>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationPatchRequest">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="isPermanent" type="boolean">
+			<annotations>@JsonProperty("IsPermanent")</annotations>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.BusinessContextRequest">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="ownerId" type="String">
+			<annotations>@JsonProperty("OwnerId")</annotations>
+		</property>
+		<property name="configurationContext" type="de.hybris.platform.cpq.productconfig.services.data.BusinessContext">
+			<annotations>@JsonProperty("ConfigurationContext")</annotations>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.BusinessContext">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="salesArea" type="de.hybris.platform.cpq.productconfig.services.data.SalesArea">
+			<annotations>@JsonProperty("SalesArea")</annotations>
+		</property>
+		<property name="currencyCode" type="String">
+			<annotations>@JsonProperty("CurrencyCode")</annotations>
+		</property>
+		<property name="language" type="String">
+			<annotations>@JsonProperty("Language")</annotations>
+		</property>
+		<property name="involvedParties"
+			type="java.util.List&lt;de.hybris.platform.cpq.productconfig.services.data.InvolvedParty&gt;">
+			<annotations>@JsonProperty("InvolvedParties")</annotations>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.SalesArea">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="salesOrganization" type="String">
+			<annotations>@JsonProperty("SalesOrganization")</annotations>
+		</property>
+		<property name="distributionChannel" type="String">
+			<annotations>@JsonProperty("DistributionChannel")</annotations>
+		</property>
+		<property name="division" type="String">
+			<annotations>@JsonProperty("Division")</annotations>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.InvolvedParty">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="key" type="String">
+			<annotations>@JsonProperty("Key")</annotations>
+		</property>
+		<property name="externalId" type="String">
+			<annotations>@JsonProperty("ExternalId")</annotations>
+		</property>
+	</bean>
+
+	<enum class="de.hybris.platform.cpq.productconfig.services.data.RoleType">
+		<value>BillTo</value>
+	</enum>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryData">
+		<property name="configuration" type="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryDataContent">
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryDataContent">
+		<property name="productSystemId" type="String">
+		</property>
+		<property name="completed" type="boolean">
+		</property>
+		<property name="totalPrice" type="java.math.BigDecimal">
+		</property>
+		<property name="totalMRCPrice" type="java.math.BigDecimal">
+		</property>
+		<property name="baseProductPrice" type="java.math.BigDecimal">
+		</property>
+		<property name="basePrice" type="java.math.BigDecimal">
+		</property>
+		<property name="baseMRCPrice" type="java.math.BigDecimal">
+		</property>
+		<property name="messages" type="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryMessagesData">
+		</property>
+		<property name="lineItems"
+			type="java.util.List&lt;de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryLineItemData>">
+		</property>
+		<property name="currencyISOCode" type="String">
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryLineItemData">
+		<property name="description" type="String">
+		</property>
+		<property name="productSystemId" type="String">
+		</property>
+		<property name="price" type="java.math.BigDecimal">
+		</property>
+		<property name="recurringPrice" type="java.math.BigDecimal">
+		</property>
+		<property name="quantity" type="java.math.BigDecimal">
+		</property>
+		<property name="attribute" type="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryAttributeData">
+		</property>
+		<!-- <property name="subLineItems" type="java.util.List&lt;de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryLineItemData>"/> -->
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryAttributeData">
+		<property name="dataType" type="String">
+				<description>INPUT_STRING = 'String', INPUT_NUMBER = 'Number', QTY_ATTRIBUTE_LEVEL = 'Quantity', QTY_VALUE_LEVEL = 'Attr.Quantity', N_A = 'N/A',</description>	
+		</property>
+		<property name="displayAs" type="int">
+			<description>RADIO_BUTTON = 1, CHECK_BOX = 2, DROPDOWN = 3, LIST_BOX = 4, LIST_BOX_MULTI = 5, READ_ONLY = 71, INPUT = 95, AUTO_COMPLETE_CUSTOM = 102,</description>
+		</property>
+	</bean>
+	
+
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationSummaryMessagesData">
+		<property name="incompleteMessages" type="java.util.List&lt;String>">
+		</property>
+		<property name="invalidMessages" type="java.util.List&lt;String>">
+		</property>
+		<property name="errorMessages" type="java.util.List&lt;String>">
+		</property>
+		<property name="failedValidations" type="java.util.List&lt;String>">
+		</property>
+		<property name="incompleteAttributes" type="java.util.List&lt;String>">
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationCloneRequest">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<property name="isPermanent" type="boolean">
+			<annotations>@JsonProperty("IsPermanent")</annotations>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.ConfigurationCloneData">
+		<property name="configurationId" type="String">
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
+		<property name="cpqConfigToBeDeleted" type="String">
+			<description>The CPQ configuration ID that needs to be deleted.</description>
+		</property>
+		<property name="cpqConfigId" type="String">
+			<description>The CPQ configuration ID of the cart item.</description>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.services.data.QuoteEntryValidationData">
+		<property name="productCode" type="java.lang.String"></property>
+		<property name="withConfigurationIssue" type="boolean"></property>
+	</bean>
+	
+	<enum class="de.hybris.platform.cpq.productconfig.services.integrationtests.CPQEngineForTest">
+		<value>MOCK</value>
+		<value>CPQ</value>
+	</enum>
+
+</beans>

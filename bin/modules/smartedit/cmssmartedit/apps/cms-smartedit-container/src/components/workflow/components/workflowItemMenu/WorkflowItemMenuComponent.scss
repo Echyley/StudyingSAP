@@ -1,0 +1,51 @@
+.popup-anchor {
+    @include se-flex-row(center);
+    @include se-type('1');
+    padding-top: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    &--open {
+        background-color: var(--sapNeutralColor);
+    }
+}
+
+.workflow-item-menu {
+    @include se-dropdown-menu('right', 'no-arrow');
+    transform: translate(5px, 8px);
+    right: -11px;
+    top: -8px;
+}
+
+.workflow-description {
+    min-width: 225px;
+    padding: 20px;
+
+    &__label {
+        color: var(--sapTextColor);
+        display: flex;
+        justify-content: space-between;
+
+        .sap-icon--edit {
+            cursor: pointer;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__text {
+        word-break: normal;
+        word-spacing: normal;
+        word-wrap: break-word;
+        white-space: normal;
+        color: var(--sapNeutralColor);
+    }
+}
+
+.workflow-cancel-btn {
+    cursor: pointer;
+    padding: 12px 20px;
+    border-top: 1px solid var(--sapList_FooterBackground);
+    color: var(--sapButton_Reject_Hover_TextColor);
+}

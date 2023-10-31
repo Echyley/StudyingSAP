@@ -1,0 +1,29 @@
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.zkoss.org/2005/zul">
+
+	<tabbox sclass="report-container"  id="tb" width="100%" mold="accordion">
+		<tabs>
+			<tab id="generalTab" label="${labels.table.column.general}" />
+			<tab label="${labels.table.column.summary}" />
+		</tabs>
+		<tabpanels>
+			<tabpanel sclass="report-paging-grid">
+				<grid id="duplicatedIDsGrid" mold="paging" pageSize="4">
+					<columns>
+						<column hflex="2" label="${labels.composed.type}" align="left" />
+						<column hflex="1" label="${labels.count}" align="left" />
+						<column hflex="5" label="${labels.identifier}" align="left" />
+					</columns>
+					<rows>
+						<row id="emptyRow" sclass="report-empty-row">
+							<label forEach="${labels.no.data.found},'',''"  multiline="true" value="${each}" />
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			<tabpanel sclass="report-text-box-grid">
+				<textbox readonly="true" id="reportTextBox" multiline="true" width="100%" style="margin:0px; min-height: 120px" rows="10"/>
+			</tabpanel>
+
+		</tabpanels>
+	</tabbox>
+</widget>

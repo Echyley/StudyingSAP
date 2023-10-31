@@ -1,0 +1,10 @@
+@import 'cockpitng-globals.scss';
+$attrpicker__up-btn--content: _getIconGlyphContentValue('collapse-group');
+$attrpicker__down-btn--content: _getIconGlyphContentValue('expand-group');
+$wizard-attrpicker__bp-l--min-height: 680px;
+$wizard-attrpicker__bp-m--min-height: 540px;
+$wizard-attrpicker__selected-attr-tree-bp-l--max-height: calc(100vh - 430px + 60px);
+$wizard-attrpicker__selected-attr-tree-bp-m--max-height: calc(100vh - 386px + 60px);
+$attrpicker__values-label--font-weight: 700;
+$attrpicker__available-attributes-treecell--height: 44px;
+$attrpicker__order-btn-container--min-width: 80px;

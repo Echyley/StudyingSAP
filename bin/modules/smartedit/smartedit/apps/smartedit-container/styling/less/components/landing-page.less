@@ -1,0 +1,105 @@
+/****************************************************
+				landing-page
+****************************************************/
+.se-landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.se-landing-page-title {
+    font-size: 28px;
+    color: var(--sapTitleColor);
+    font-weight: @font-weight--medium;
+    margin-bottom: 8px !important;
+}
+
+.se-landing-page-label {
+    font-size: 16px;
+}
+
+/****************************************************
+		landing-page catalog selection
+****************************************************/
+
+.se-catalog-version-container {
+    display: flex;
+}
+
+.se-catalog-version-container__left {
+    width: 75%;
+    font-size: 18px;
+    display: flex;
+}
+
+.se-active-catalog-version-container__thumbnail {
+    width: 100%;
+    margin: 0;
+    height: 250px;
+    position: relative;
+    height: 110px;
+    width: 180px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.se-catalog-version-container__right {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+//to be reviewed
+.se-active-catalog-version-container__thumbnail__default-img {
+    background: url('@{dist-images-path}/icon_site_placeholder.jpg');
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-size: cover;
+    border: 1px solid var(--sapInformativeColor);
+    background-position: center center;
+}
+
+.se-active-catalog-version-container__thumbnail__img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center center;
+}
+
+.se-catalog-details__panel--left {
+    justify-content: flex-start;
+    width: 30%;
+}
+
+.se-catalog-details__panel--right {
+    justify-content: flex-end;
+    margin-left: 0.4 * @se-gutter;
+    width: 70%;
+}
+
+.se-catalog-version-container__left__templates,
+.se-catalog-version-container__left__template {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.se-catalog-version-container__divider::after {
+    content: '|';
+}
+
+.se-catalog-version-container__divider {
+    margin-left: 0.2 * @se-gutter;
+    margin-right: 0.2 * @se-gutter;
+}
+
+.se-catalog-version-container__left__templates {
+    margin-bottom: 10px;
+}

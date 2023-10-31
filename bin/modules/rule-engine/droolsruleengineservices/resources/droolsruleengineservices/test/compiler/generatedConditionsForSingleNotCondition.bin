@@ -1,0 +1,5 @@
+  not (
+    exists (
+      $orderEntry := OrderEntryRAO(productCode == "1234567")
+    )
+  )

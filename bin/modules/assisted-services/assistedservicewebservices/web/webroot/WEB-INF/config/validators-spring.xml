@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <alias name="defaultCustomer360QueryListValidator" alias="customer360QueryListValidator"/>
+    <bean id="defaultCustomer360QueryListValidator"
+          class="de.hybris.platform.assistedservicewebservices.validator.Customer360QueryListWsDTOValidator">
+        <property name="customer360QueryValidator" ref="customer360QueryValidator"/>
+    </bean>
+
+    <alias name="defaultCustomer360QueryValidator" alias="customer360QueryValidator"/>
+    <bean id="defaultCustomer360QueryValidator"
+          class="de.hybris.platform.assistedservicewebservices.validator.Customer360QueryWsDTOValidator">
+        <property name="validTypes">
+            <list>
+                <value>c360StoreLocation</value>
+                <value>c360ReviewList</value>
+                <value>c360Overview</value>
+                <value>c360CustomerProductInterestList</value>
+                <value>c360CouponList</value>
+                <value>c360PromotionList</value>
+                <value>c360CustomerCouponList</value>
+                <value>c360ActivityList</value>
+                <value>c360Cart</value>
+                <value>c360SavedCart</value>
+                <value>c360CustomerProfile</value>
+                <value>c360TicketList</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultCustomerRegistrationDataValidator" alias="customerRegistrationDataValidator"/>
+    <bean id="defaultCustomerRegistrationDataValidator"
+          class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="firstName"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="lastName"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.EmailValidator">
+                    <property name="fieldPath" value="emailAddress"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldTooLongValidator">
+                    <property name="fieldPath" value="firstName"/>
+                    <property name="maxLength" value="#{configurationService.configuration.getProperty('assistedservicewebservices.customers.firstname.max.length')}"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldTooLongValidator">
+                    <property name="fieldPath" value="lastName"/>
+                    <property name="maxLength" value="#{configurationService.configuration.getProperty('assistedservicewebservices.customers.lastname.max.length')}"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

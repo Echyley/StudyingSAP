@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="de.hybris.platform.cpq.productconfig.occ.controllers" />
+
+	<!-- Orika : Mappers -->
+
+	<bean id="cpqAccessControlMapper" parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.cpq.productconfig.facades.data.AccessControlData" />
+		<property name="destClass" value="de.hybris.platform.cpq.productconfig.occ.ConfigurationEngineAccessWsDTO" />
+		<property name="fieldMapping">
+			<map>
+				<entry key="serviceEndpointUrl" value="endpoint" />
+				<entry key="accessTokenExpiration" value="accessTokenExpirationTime" />
+			</map>
+		</property>
+	</bean>
+</beans>

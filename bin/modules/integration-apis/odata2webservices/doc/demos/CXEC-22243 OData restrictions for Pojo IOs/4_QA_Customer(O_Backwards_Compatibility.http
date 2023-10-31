@@ -1,0 +1,29 @@
+### QA 6: items can still be posted
+POST {{fullURL}}/InboundCustomer/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "jbuyer",
+  "name": "Johny Bayern"
+}
+
+### QA 7: items can still be patched
+PATCH {{fullURL}}/InboundCustomer/Customers('jbuyer')
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Johny Buyer"
+}
+
+### QA 8: items can still be retreived
+GET {{fullURL}}/InboundCustomer/Customers('jbuyer')
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/json
+
+### QA 9: items can still be deleted
+DELETE {{fullURL}}/InboundCustomer/Customers('jbuyer')
+Authorization: Basic {{admin_user}} {{admin_pass}}

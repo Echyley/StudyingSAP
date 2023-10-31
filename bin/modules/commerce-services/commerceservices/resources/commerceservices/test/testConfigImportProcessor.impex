@@ -1,0 +1,11 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+INSERT_UPDATE Title;code[unique=true];name
+;test1;$config-db.username
+;test2;testone
+;test3;$config-db.password
+;test4;$config-property.that.is.not.exist

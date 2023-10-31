@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapproductconfigmodel" managername="SapproductconfigmodelManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapproductconfigmodel" usemaven="false">
+              
+        <requires-extension name="sapproductconfigruntimessc"/>
+              
+        <requires-extension name="sapcorejco"/>
+                      
+      
+        <coremodule generated="true" manager="de.hybris.platform.sap.productconfig.model.jalo.SapproductconfigmodelManager" packageroot="de.hybris.platform.sap.productconfig.model"/>
+           
+    </extension>
+    
+</extensioninfo>

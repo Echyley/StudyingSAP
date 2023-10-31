@@ -1,0 +1,38 @@
+@import "cockpitng-globals.scss";
+$brand-setting-header-height: 72px;
+$brand-setting-container-background: var(--bo-base-background);
+$brand-setting-container-margin: $_container-spacing-default__regular;
+$brand-setting-container-height: calc(100% - #{$brand-setting-header-height + ($brand-setting-container-margin * 2)});
+
+.yw-brand-setting {
+  height: 100%;
+  overflow: auto;
+  background: var(--bo-base-background);
+  .brand-setting-header {
+    height: $brand-setting-header-height;
+    background: var(--bo-container-background);
+    display: flex;
+    align-items: center;
+    padding: $_container-spacing-default__regular;
+    box-shadow: var(--bo-content-shadow-small);
+    &-title {
+      font-size: $font-size__h3;
+    }
+    &-buttons {
+       margin-right: 0px;
+       margin-left: auto;
+       .z-button {
+          margin-left: $_container-spacing-default__small;
+       }
+    }
+   }
+  .brand-setting-container {
+    background: var(--bo-container-background);
+    padding: $_container-spacing-default__regular;
+    margin: $brand-setting-container-margin;
+    border-radius: 4px;
+    box-shadow: var(--bo-content-shadow-small);
+    max-height: $brand-setting-container-height;
+    overflow: scroll;
+  }
+}

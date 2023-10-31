@@ -1,0 +1,11 @@
+#Ant properties
+#Fri May 05 18:50:08 UTC 2023
+version.api=2211
+vendor=hybris
+group.id=de.hybris.platform
+name=cms2lib
+description=cms2lib
+builddate=20230505 1848
+releasedate=20230505 1848
+version=2211.FP1
+module.name=platform-module

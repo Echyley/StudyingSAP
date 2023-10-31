@@ -1,0 +1,64 @@
+<se-popup-overlay
+    *ngIf="buttonVisible"
+    class="se-slot-visibility"
+    [popupOverlay]="popupConfig"
+    [popupOverlayTrigger]="isPopupOpened"
+    (popupOverlayOnHide)="hideMenu()"
+>
+    <!-- the following button "id" attribute is meant for e2e -->
+    <button
+        type="button"
+        id="slot-visibility-button-{{ slotId }}"
+        class="se-slot-ctx-menu__dropdown-toggle se-slot-ctx-menu__dropdown-toggle--slot-visibility"
+        [ngClass]="{
+            'se-slot-ctx-menu__dropdown-toggle--open': isPopupOpened
+        }"
+        (click)="toggleMenu()"
+        title="{{ getSlotVisibilityButtonTitle() | translate }}"
+    >
+        <span class="se-slot-ctx-menu__dropdown-toggle-icon sap-icon--hide"></span>
+        <span class="se-slot-ctx-menu__dropdown-toggle-add-on">{{ hiddenComponentCount }}</span>
+    </button>
+    <!-- the following block "id" attribute is used meant for e2e -->
+    <div
+        se-popup-overlay-body
+        id="slot-visibility-list-{{ slotId }}"
+        class="se-slot__dropdown-menu"
+        (click)="onInsideClick($event)"
+    >
+        <div
+            class="se-slot-contextual-menu__header"
+            translate="se.cms.slotvisibility.list.title"
+        ></div>
+
+        <ul class="se-slot-visibility__component-list">
+            <li
+                *ngFor="let component of hiddenComponents; trackBy: hiddenComponentTrackBy"
+                class="se-slot-visibility__component-list-item"
+            >
+                <!-- for external component, display tooltip when mouse is over the item -->
+                <se-tooltip
+                    *ngIf="component.isExternal"
+                    [placement]="'top'"
+                    [triggers]="['mouseenter', 'mouseleave']"
+                >
+                    <se-slot-visibility-component
+                        se-tooltip-trigger
+                        [component]="component"
+                        [slotId]="slotId"
+                    ></se-slot-visibility-component>
+                    <span
+                        se-tooltip-body
+                        translate="se.cms.slotvisibility.external.component"
+                    ></span>
+                </se-tooltip>
+                <!-- non external -->
+                <se-slot-visibility-component
+                    *ngIf="!component.isExternal"
+                    [component]="component"
+                    [slotId]="slotId"
+                ></se-slot-visibility-component>
+            </li>
+        </ul>
+    </div>
+</se-popup-overlay>

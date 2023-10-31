@@ -1,0 +1,274 @@
+// .popover styles are ment to override the default bootstrap styles
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: none;
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    line-break: auto;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 14px;
+}
+
+// arrow styles from bootstrap used by y-popover-popup
+.popover > .arrow {
+    border-width: 11px;
+}
+.popover > .arrow,
+.popover > .arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.popover > .arrow:after {
+    content: '';
+    border-width: 10px;
+}
+.popover.top > .arrow {
+    bottom: -11px;
+    left: 50%;
+    margin-left: -11px;
+    border-top-color: #999999;
+    border-top-color: rgba(0, 0, 0, 0.25);
+    border-bottom-width: 0;
+}
+.popover.top > .arrow:after {
+    bottom: 1px;
+    margin-left: -10px;
+    content: ' ';
+    border-top-color: #fff;
+    border-bottom-width: 0;
+}
+.popover.right > .arrow {
+    top: 50%;
+    left: -11px;
+    margin-top: -11px;
+    border-right-color: #999999;
+    border-right-color: rgba(0, 0, 0, 0.25);
+    border-left-width: 0;
+}
+.popover.right > .arrow:after {
+    bottom: -10px;
+    left: 1px;
+    content: ' ';
+    border-right-color: #fff;
+    border-left-width: 0;
+}
+.popover.bottom > .arrow {
+    top: -11px;
+    left: 50%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999999;
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+}
+.popover.bottom > .arrow:after {
+    top: 1px;
+    margin-left: -10px;
+    content: ' ';
+    border-top-width: 0;
+    border-bottom-color: #fff;
+}
+.popover.left > .arrow {
+    top: 50%;
+    right: -11px;
+    margin-top: -11px;
+    border-right-width: 0;
+    border-left-color: #999999;
+    border-left-color: rgba(0, 0, 0, 0.25);
+}
+.popover.left > .arrow:after {
+    right: 1px;
+    bottom: -10px;
+    content: ' ';
+    border-right-width: 0;
+    border-left-color: #fff;
+}
+.popover-title {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+}
+.popover-content {
+    padding: 9px 14px;
+}
+
+// SmartEdit custom styles
+.popover,
+.se-popover {
+    @include se-popover();
+    position: relative;
+    display: block;
+    max-width: 300px;
+
+    &.top,
+    &.bottom,
+    &.left,
+    &.right {
+        .arrow {
+            margin: 0;
+        }
+    }
+    &.top {
+        margin-top: 0;
+        margin-bottom: 10px;
+        .arrow {
+            bottom: -11px;
+            border-top-color: var(--sapGroup_ContentBorderColor);
+        }
+        .arrow:after {
+            border-top-color: var(--sapBaseColor);
+        }
+    }
+    &.bottom {
+        margin-top: 10px;
+        .arrow {
+            top: -11px;
+            border-bottom-color: var(--sapGroup_ContentBorderColor);
+        }
+        .arrow:after {
+            border-bottom-color: var(--sapBaseColor);
+        }
+    }
+    &.left {
+        margin-right: 10px;
+        .arrow {
+            right: -11px;
+            border-left-color: var(--sapGroup_ContentBorderColor);
+        }
+        .arrow:after {
+            border-left-color: var(--sapBaseColor);
+        }
+    }
+    &.right {
+        margin-left: 10px;
+        .arrow {
+            left: -11px;
+            border-right-color: var(--sapGroup_ContentBorderColor);
+        }
+        .arrow:after {
+            border-right-color: var(--sapBaseColor);
+        }
+    }
+    &__title {
+        background-color: var(--sapBaseColor);
+        padding: 20px 20px 0 20px;
+        border: none;
+        font-family: $font-sap;
+        @include se-weight('bold');
+        @include se-type('2');
+    }
+    &__content {
+        padding: 15px 20px;
+    }
+    &--inner-content {
+        max-width: 320px;
+    }
+}
+
+.se-popover-popup {
+    z-index: 9999;
+    display: block;
+}
+
+.se-popover-outer {
+    position: absolute;
+    width: auto;
+    height: auto;
+    z-index: 99999;
+}
+
+.se-popover-inner {
+    position: absolute;
+    width: auto;
+    height: auto;
+    display: inline-block;
+}
+
+.cdk-overlay-container {
+    // Dropdown Menu
+    .se-dropdown-menu__list {
+        @include se-flex-column;
+        min-width: 100px;
+        &.fd-list {
+            se-dropdown-menu-item {
+                .se-dropdown-menu__item-wrapper {
+                    &.fd-list__item {
+                        border-radius: unset;
+                        border-bottom: none;
+                    }
+                }
+                &:last-child {
+                    .fd-list__item {
+                        .se-dropdown-item,
+                        .se-dropdown-item:hover {
+                            border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+                            border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+                            border-bottom: none;
+                        }
+                    }
+                }
+                &:first-child {
+                    .fd-list__item {
+                        .se-dropdown-item,
+                        .se-dropdown-item:hover {
+                            border-top-left-radius: var(--sapElement_BorderCornerRadius);
+                            border-top-right-radius: var(--sapElement_BorderCornerRadius);
+                        }
+                    }
+                }
+            }
+            .fd-list__item {
+                &:last-child {
+                    border-bottom-left-radius: var(--sapElement_BorderCornerRadius) !important;
+                    border-bottom-right-radius: var(--sapElement_BorderCornerRadius) !important;
+                }
+                &:first-child {
+                    border-top-left-radius: var(--sapElement_BorderCornerRadius) !important;
+                    border-top-right-radius: var(--sapElement_BorderCornerRadius) !important;
+                }
+            }
+        }
+
+        .se-dropdown-item {
+            text-decoration: none !important;
+            white-space: nowrap;
+            color: var(--sapTextColor);
+            width: 100%;
+            padding: 10px 24px;
+        }
+
+        .se-dropdown-item__delete,
+        .se-dropdown-item__delete a {
+            order: 99;
+            &,
+            &:hover {
+                color: var(--sapNegativeColor);
+            }
+            &.se-dropdown-item--disabled,
+            &.se-dropdown-item--disabled:hover {
+                opacity: 0.4;
+                padding-right: se-space('xxs') !important;
+                background: var(--sapBaseColor) !important;
+            }
+        }
+    }
+}

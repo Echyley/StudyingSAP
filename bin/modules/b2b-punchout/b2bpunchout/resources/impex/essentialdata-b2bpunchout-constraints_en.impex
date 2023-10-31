@@ -1,0 +1,8 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$lang = en
+
+insert_update PatternConstraint; id[unique = true, allownull = true]; message[lang = $lang]
+                               ; PunchoutSecretPatternConstraint    ; The shared secret must include both uppercase and lowercase letters, numerical digit(s), special character(s), and 8-100 total characters.

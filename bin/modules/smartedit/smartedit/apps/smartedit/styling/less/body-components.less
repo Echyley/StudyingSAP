@@ -1,0 +1,186 @@
+/**********************************************
+				Overlay
+ **********************************************/
+
+.over-slot-enabled {
+    border: 2px var(--sapLinkColor) solid;
+    opacity: 0.65;
+    cursor: grabbing;
+}
+
+.over-slot-disabled {
+    border: solid var(--sapNegativeTextColor) 1px;
+    background-color: var(--sapNegativeTextColor);
+    opacity: 0.65;
+    cursor: no-drop;
+}
+
+.over-slot-disabled:after {
+    text-align: center;
+    color: var(--sapBaseColor);
+    content: attr(data-content);
+    display: block;
+    z-index: @z-index-level-1;
+}
+
+.eligible-slot {
+    border: dashed var(--sapContent_UnratedColor) 1px;
+}
+
+.ui-sortable-handle {
+    cursor: grab;
+}
+
+.ySEemptySlot {
+    min-height: 72px;
+    border: 1px dashed var(--sapContent_UnratedColor);
+}
+
+// HTML 5 DRAG AND DROP STYLING
+.ySECmsScrollArea {
+    position: fixed;
+    background-color: rgba(74, 80, 85, 70%);
+    left: 0;
+    right: 0;
+    z-index: @z-index-level-5;
+    text-align: center;
+    transition: 1s all;
+
+    color: var(--sapBaseColor);
+    text-transform: uppercase;
+    font-size: 1.8em;
+    vertical-align: middle;
+}
+
+.ySEIconBckg {
+    background-color: var(--sapLink_InvertedColor);
+}
+
+.overlayDnd {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    pointer-events: none;
+}
+
+.smarteditoverlay_dndRendering {
+    animation: fadeInDndRendering 0.5s 1;
+    background-color: rgba(255, 255, 255, 70%);
+
+    .smartEditComponentX[data-smartedit-component-type='ContentSlot'] {
+        border: 1px var(--sapInformationBorderColor) dashed;
+    }
+}
+
+.component_dragged {
+    background-color: transparent;
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 15px,
+        rgba(50, 54, 58, 10%) 15px,
+        rgba(50, 54, 58, 10%) 30px
+    );
+}
+
+.component_dragged_hovered {
+    background-color: rgba(93, 193, 34, 30%);
+    background-image: none;
+}
+
+.overlayDropzone {
+    visibility: hidden;
+    position: absolute;
+    z-index: @z-index-level-1;
+}
+
+.over-slot-enabled .overlayDropzone:not(.overlayDropzone--hovered) {
+    visibility: visible;
+    background-color: rgba(8, 84, 160, 30%);
+}
+
+.over-slot-enabled .component_dragged .overlayDropzone {
+    visibility: hidden;
+}
+//comments by sherry: the color format needs to be modified
+.overlayDropzone.overlayDropzone--hovered {
+    visibility: visible;
+    animation: fadeSuccessContentSlot 0.3s 1;
+    background-color: rgba(93, 193, 34, 30%);
+
+    &.overlayDropzone--mayBeAllowed {
+        background-color: var(--sapIndicationColor_3_Hover_Background);
+    }
+}
+
+.overlayDropzone--left,
+.overlayDropzone--right {
+    height: 100% !important;
+    top: 0 !important;
+    width: 35% !important;
+}
+
+.overlayDropzone--top,
+.overlayDropzone--bottom {
+    top: 0 !important;
+    width: 100% !important;
+    height: 35% !important;
+}
+
+.overlayDropzone--left {
+    left: 0 !important;
+}
+
+.overlayDropzone--right {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.overlayDropzone--top {
+    top: 0 !important;
+}
+
+.overlayDropzone--bottom {
+    bottom: 0 !important;
+    top: auto !important;
+}
+
+.overlayDropzone.overlayDropzone--full {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    animation: fadeSuccessContentSlot 0.3s 1;
+    background-color: rgba(93, 193, 34, 30%) !important;
+    .over-slot-enabled.over-slot-maybeenabled & {
+        background-color: var(--sapContent_Illustrative_Color12) !important;
+    }
+}
+
+.overlayDropzone--hovered.overlayDropzone--top,
+.overlayDropzone--hovered.overlayDropzone--bottom {
+    transform: scale(1, 1.2);
+    transition-duration: 0.2s;
+}
+
+.overlayDropzone--hovered.overlayDropzone--left,
+.overlayDropzone--hovered.overlayDropzone--right {
+    transform: scale(1.2, 1);
+    transition-duration: 0.2s;
+}
+
+/**********************************************
+				Accelerator
+ **********************************************/
+
+.ySEEmptySlot {
+    min-height: 47px;
+}
+
+.se-storefront-component {
+    min-height: 48px;
+}

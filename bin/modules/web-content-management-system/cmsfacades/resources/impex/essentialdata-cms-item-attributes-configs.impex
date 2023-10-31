@@ -1,0 +1,61 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+############ CMSITEMS ############
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;CMSItem;BASIC;itemtype,uid,catalogVersion,uuid
+;CMSItem;SELECT;BASIC,name
+
+
+############ PAGES ############
+# Abstract page
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;AbstractPage;BASIC;CMSItem:BASIC,typeCode,pageStatus
+;AbstractPage;PAGE_LIST;BASIC,defaultPage,masterTemplateId,restrictions,name,displayStatus,title,masterTemplate
+
+# Content page
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+# For requests that care only about the number of items
+;ContentPage;PAGE_LIST;AbstractPage:PAGE_LIST,label,homepage
+
+# Email page
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+# For requests that care only about the number of items
+;EmailPage;PAGE_LIST;AbstractPage:PAGE_LIST,label,homepage,fromName,fromEmail
+
+
+############  RESTRICTIONS ############
+#AbstractRestriction
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;AbstractRestriction;BASIC;CMSItem:BASIC
+;AbstractRestriction;PAGE_LIST;BASIC,typeCode,name,type,description,pages
+
+#CMSUserGroupRestriction
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;CMSUserGroupRestriction;BASIC;CMSItem:BASIC
+;CMSUserGroupRestriction;PAGE_LIST;AbstractRestriction:PAGE_LIST,userGroups
+
+# CMSTimeRestriction
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;CMSTimeRestriction;BASIC;CMSItem:BASIC
+;CMSTimeRestriction;PAGE_LIST;AbstractRestriction:PAGE_LIST,activeFrom,activeUntil
+
+# CMSCategoryRestriction
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;CMSCategoryRestriction;BASIC;CMSItem:BASIC
+;CMSCategoryRestriction;PAGE_LIST;AbstractRestriction:PAGE_LIST,categoryCodes,categories
+
+# CMSCatalogRestriction
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;CMSCatalogRestriction;BASIC;CMSItem:BASIC
+;CMSCatalogRestriction;PAGE_LIST;AbstractRestriction:PAGE_LIST,catalogs
+
+# CMSProductRestriction
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;CMSProductRestriction;BASIC;CMSItem:BASIC
+;CMSProductRestriction;PAGE_LIST;AbstractRestriction:PAGE_LIST,productCodes
+
+############ COMPONENTS ############
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;AbstractCMSComponent;BASIC;CMSItem:BASIC,slots

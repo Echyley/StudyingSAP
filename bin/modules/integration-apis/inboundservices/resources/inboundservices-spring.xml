@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <alias name="defaultInboundServicesConfiguration" alias="inboundServicesConfiguration"/>
+    <bean id="defaultInboundServicesConfiguration"
+          class="de.hybris.platform.inboundservices.config.DefaultInboundServicesConfiguration">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="legacySecurity" value="${integrationservices.legacy.authentication.enabled}"/>
+    </bean>
+
+    <alias name="defaultAbstractAttributePopulator" alias="inboundServicesAbstractAttributePopulator"/>
+    <bean abstract="true" id="defaultAbstractAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.AbstractAttributePopulator">
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultAbstractAttributePopulator" alias="inboundServicesAbstractAttributeCollectionPopulator"/>
+    <bean abstract="true" id="defaultAbstractCollectionAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.AbstractCollectionAttributePopulator"
+          parent="inboundServicesAbstractAttributePopulator"/>
+
+    <alias name="defaultPrimitiveAttributePopulator" alias="inboundServicesPrimitiveAttributePopulator"/>
+    <bean id="defaultPrimitiveAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.PrimitiveAttributePopulator"
+          parent="inboundServicesAbstractAttributePopulator">
+        <property name="primitiveValueHandler" ref="inboundServicesPrimitiveValueHandler"/>
+    </bean>
+
+    <alias name="defaultPrimitiveValueHandler" alias="inboundServicesPrimitiveValueHandler"/>
+    <bean id="defaultPrimitiveValueHandler"
+          class="de.hybris.platform.inboundservices.persistence.populator.DefaultPrimitiveValueHandler">
+        <property name="localizationService" ref="integrationLocalizationService"/>
+    </bean>
+
+    <alias name="defaultInboundServicesItemModelAttributePopulator" alias="inboundServicesItemModelAttributePopulator"/>
+    <bean id="defaultInboundServicesItemModelAttributePopulator" parent="inboundServicesAbstractAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.ItemModelAttributePopulator">
+        <property name="contextReferencedItemModelService" ref="contextReferenceItemModelService"/>
+    </bean>
+
+    <alias name="defaultInboundServicesEnumAttributePopulator" alias="inboundServicesEnumAttributePopulator"/>
+    <bean id="defaultInboundServicesEnumAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.EnumAttributePopulator">
+        <constructor-arg ref="contextReferenceItemModelService"/>
+        <constructor-arg ref="modelService"/>
+    </bean>
+
+    <alias name="defaultItemModelCollectionAttributePopulator"
+           alias="inboundServicesItemModelCollectionAttributePopulator"/>
+    <bean id="defaultItemModelCollectionAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.ItemModelCollectionAttributePopulator"
+          parent="inboundServicesAbstractAttributeCollectionPopulator">
+        <property name="contextReferencedItemModelService" ref="contextReferenceItemModelService"/>
+    </bean>
+
+    <alias name="defaultReplaceItemModelCollectionAttributePopulator"
+           alias="inboundServicesReplaceItemModelCollectionAttributePopulator"/>
+    <bean id="defaultReplaceItemModelCollectionAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.ReplaceItemModelCollectionAttributePopulator"
+          parent="inboundServicesAbstractAttributePopulator">
+        <property name="contextReferencedItemModelService" ref="contextReferenceItemModelService"/>
+    </bean>
+
+    <alias name="defaultMapAttributePopulator" alias="inboundServicesMapAttributePopulator"/>
+    <bean id="defaultMapAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.MapAttributePopulator"
+          parent="inboundServicesAbstractAttributePopulator">
+    </bean>
+
+    <alias name="defaultPrimitiveCollectionAttributePopulator"
+           alias="inboundServicesPrimitiveCollectionAttributePopulator"/>
+    <bean id="defaultPrimitiveCollectionAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.PrimitiveCollectionAttributePopulator"
+          parent="inboundServicesAbstractAttributeCollectionPopulator">
+        <property name="primitiveValueHandler" ref="inboundServicesPrimitiveValueHandler"/>
+    </bean>
+
+    <alias name="defaultReplacePrimitiveCollectionAttributePopulator"
+           alias="inboundServicesReplacePrimitiveCollectionAttributePopulator"/>
+    <bean id="defaultReplacePrimitiveCollectionAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.ReplacePrimitiveCollectionAttributePopulator"
+          parent="inboundServicesAbstractAttributePopulator">
+        <property name="primitiveValueHandler" ref="inboundServicesPrimitiveValueHandler"/>
+    </bean>
+
+    <alias name="defaultReplaceMapAttributePopulator" alias="inboundServicesReplaceMapAttributePopulator"/>
+    <bean id="defaultReplaceMapAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.ReplaceMapAttributePopulator"
+          parent="inboundServicesAbstractAttributePopulator"/>
+
+    <alias name="defaultInboundServicesPartOfAttributePopulator" alias="inboundServicesPartOfAttributePopulator"/>
+    <bean name="defaultInboundServicesPartOfAttributePopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.PartOfAttributePopulator"
+          parent="inboundServicesAbstractAttributeCollectionPopulator"/>
+
+    <alias name="requiredAttributePersistenceContextValidator"
+           alias="inboundServicesNullableAttributePersistenceContextValidator"/>
+    <bean name="requiredAttributePersistenceContextValidator"
+          class="de.hybris.platform.inboundservices.persistence.validation.RequiredAttributePersistenceContextValidator"/>
+
+    <alias name="defaultInstanceCreationOfAbstractTypeValidator"
+           alias="instanceCreationOfAbstractTypeValidator"/>
+    <bean name="defaultInstanceCreationOfAbstractTypeValidator"
+          class="de.hybris.platform.inboundservices.persistence.validation.InstanceCreationOfAbstractTypeValidator"/>
+
+    <alias name="defaultContextReferenceItemModelService" alias="contextReferenceItemModelService"/>
+    <bean name="defaultContextReferenceItemModelService"
+          class="de.hybris.platform.inboundservices.persistence.impl.DefaultContextReferencedItemModelService">
+        <property name="contextItemModelService" ref="contextItemModelService"/>
+    </bean>
+
+    <alias name="defaultContextItemModelService" alias="contextItemModelService"/>
+    <bean name="defaultContextItemModelService"
+          class="de.hybris.platform.inboundservices.persistence.impl.DefaultContextItemModelService">
+        <property name="searchService" ref="integrationServicesItemSearchService"/>
+        <property name="itemFactory" ref="inboundServicesItemFactory"/>
+        <property name="itemModelPopulator" ref="inboundServicesItemModelPopulator"/>
+        <property name="persistenceContextValidators" ref="persistenceContextValidators"/>
+        <property name="itemPersistRequestValidators" ref="itemPersistRequestValidators"/>
+    </bean>
+
+    <alias name="defaultPersistenceContextValidators" alias="persistenceContextValidators"/>
+    <util:list id="defaultPersistenceContextValidators">
+        <ref bean="inboundServicesNullableAttributePersistenceContextValidator"/>
+        <ref bean="defaultInstanceCreationOfAbstractTypeValidator"/>
+    </util:list>
+
+    <alias name="defaultInboundServicesItemFactory" alias="inboundServicesItemFactory"/>
+    <bean name="defaultInboundServicesItemFactory"
+          class="de.hybris.platform.inboundservices.persistence.impl.DefaultItemModelFactory">
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultIntegrationClientCredentialsUserValidateInterceptor"
+           alias="integrationClientCredentialsUserValidateInterceptor"/>
+    <bean id="defaultIntegrationClientCredentialsUserValidateInterceptor"
+          class="de.hybris.platform.inboundservices.interceptor.IntegrationClientCredentialsUserValidateInterceptor"/>
+    <bean id="integrationClientCredentialsUserNameInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="integrationClientCredentialsUserValidateInterceptor"/>
+        <property name="typeCode" value="IntegrationClientCredentialsDetails"/>
+    </bean>
+
+    <alias name="defaultIntegrationClientCredentialsAuthorizedGrantTypesValidateInterceptor"
+           alias="integrationClientCredentialsAuthorizedGrantTypesValidateInterceptor"/>
+    <bean id="defaultIntegrationClientCredentialsAuthorizedGrantTypesValidateInterceptor"
+          class="de.hybris.platform.inboundservices.interceptor.IntegrationClientCredentialsAuthorizedGrantTypesValidateInterceptor"/>
+    <bean id="integrationClientCredentialsAuthorizedGrantTypesValidateInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="integrationClientCredentialsAuthorizedGrantTypesValidateInterceptor"/>
+        <property name="typeCode" value="IntegrationClientCredentialsDetails"/>
+    </bean>
+
+    <alias name="defaultInboundServicesItemModelPopulator" alias="inboundServicesItemModelPopulator"/>
+    <bean id="defaultInboundServicesItemModelPopulator"
+          class="de.hybris.platform.inboundservices.persistence.populator.DefaultItemModelPopulator">
+        <property name="attributePopulators" ref="attributePopulators"/>
+    </bean>
+
+    <alias name="defaultAttributePopulators" alias="attributePopulators"/>
+    <util:list id="defaultAttributePopulators">
+        <ref bean="inboundServicesPrimitiveAttributePopulator"/>
+        <ref bean="inboundServicesItemModelAttributePopulator"/>
+        <ref bean="inboundServicesEnumAttributePopulator"/>
+        <ref bean="inboundServicesPrimitiveCollectionAttributePopulator"/>
+        <ref bean="inboundServicesItemModelCollectionAttributePopulator"/>
+        <ref bean="inboundServicesReplacePrimitiveCollectionAttributePopulator"/>
+        <ref bean="inboundServicesReplaceItemModelCollectionAttributePopulator"/>
+        <ref bean="inboundServicesMapAttributePopulator"/>
+        <ref bean="inboundServicesReplaceMapAttributePopulator"/>
+        <ref bean="inboundServicesPartOfAttributePopulator"/>
+    </util:list>
+
+    <alias name="defaultItemPersistRequestValidators" alias="itemPersistRequestValidators"/>
+    <util:list id="defaultItemPersistRequestValidators">
+        <ref bean="inboundServicesItemPersistRequestPermissionValidator"/>
+    </util:list>
+
+    <alias name="itemPersistRequestPermissionValidator"
+           alias="inboundServicesItemPersistRequestPermissionValidator"/>
+    <bean id="itemPersistRequestPermissionValidator"
+          class="de.hybris.platform.inboundservices.persistence.validation.ItemPersistRequestPermissionValidator">
+        <constructor-arg name="accessRightsService" ref="accessRightsService"/>
+        <constructor-arg name="modelService" ref="modelService"/>
+    </bean>
+
+    <bean id="exposedDestinationCredentialValidateInterceptor"
+          class="de.hybris.platform.inboundservices.interceptor.ExposedDestinationICCMatchedCredentialValidateInterceptor"/>
+    <bean class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="exposedDestinationCredentialValidateInterceptor"/>
+        <property name="typeCode" value="ExposedDestination"/>
+    </bean>
+
+    <bean id="exposedDestinationIntegrationAPIValidateInterceptor"
+          class="de.hybris.platform.inboundservices.interceptor.ExposedDestinationIntegrationAPIValidateInterceptor"/>
+    <bean class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="exposedDestinationIntegrationAPIValidateInterceptor"/>
+        <property name="typeCode" value="ExposedDestination"/>
+    </bean>
+
+    <alias name="iccDestinationTargetCloningValidationCheckStrategy"
+           alias="iccDestinationTargetCloningValidationCheckStrategy"/>
+    <bean id="iccDestinationTargetCloningValidationCheckStrategy"
+          class="de.hybris.platform.inboundservices.strategies.impl.ICCDestinationTargetCloningValidationCheckStrategy"/>
+
+    <bean depends-on="destinationTargetCloningCheckStrategyList" parent="listMergeDirective">
+        <property name="add" ref="iccDestinationTargetCloningValidationCheckStrategy"/>
+    </bean>
+    <bean id="inboundChannelConfigurationDeletionValidator"
+          class="de.hybris.platform.inboundservices.interceptor.InboundChannelConfigurationRemoveInterceptor">
+        <property name="iccDeletionValidationStrategy" ref="iCCDeletionValidationStrategy"/>
+    </bean>
+
+    <alias name="defaultICCDeletionValidationStrategy" alias="iCCDeletionValidationStrategy"/>
+    <bean id="defaultICCDeletionValidationStrategy"
+          class="de.hybris.platform.inboundservices.strategies.impl.DefaultICCDeletionValidationStrategy"/>
+
+    <bean id="inboundChannelConfigurationDeletionValidatorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="inboundChannelConfigurationDeletionValidator"/>
+        <property name="typeCode" value="InboundChannelConfiguration"/>
+    </bean>
+
+    <bean id="noInboundChannelConfigBeforeRemoveIOChecker"
+          class="de.hybris.platform.inboundservices.interceptor.NoInboundChannelConfigBeforeRemoveIOChecker">
+        <constructor-arg name="flexibleSearchService"
+                         ref="flexibleSearchService"/>
+    </bean>
+
+    <alias name="defaultPersistenceHookExecutor" alias="inboundServicesPersistenceHookExecutor"/>
+    <bean id="defaultPersistenceHookExecutor"
+          class="de.hybris.platform.inboundservices.persistence.hook.impl.DefaultPersistenceHookExecutor">
+        <property name="hookProviders" ref="inboundPersistenceHookProviders"/>
+    </bean>
+
+    <util:list id="inboundPersistenceHookProviders"
+               value-type="de.hybris.platform.inboundservices.persistence.hook.PersistenceHookProvider">
+        <ref bean="springBeanPersistenceHookProvider"/>
+    </util:list>
+
+    <alias name="defaultSpringBeanPersistenceHookProvider" alias="springBeanPersistenceHookProvider"/>
+    <bean id="defaultSpringBeanPersistenceHookProvider"
+          class="de.hybris.platform.inboundservices.persistence.hook.impl.SpringBeanPersistenceHookProvider"/>
+
+    <alias name="defaultItemPersistenceService" alias="inboundServicesItemPersistenceService"/>
+    <bean id="defaultItemPersistenceService"
+          class="de.hybris.platform.inboundservices.persistence.impl.DefaultItemPersistenceService">
+        <constructor-arg name="itemModelService" ref="contextItemModelService"/>
+        <constructor-arg name="modelService" ref="modelService"/>
+        <constructor-arg name="executor" ref="inboundServicesPersistenceHookExecutor"/>
+    </bean>
+
+    <bean id="inboundChannelConfigurationValidateInterceptor"
+          class="de.hybris.platform.inboundservices.interceptor.InboundChannelConfigurationValidateInterceptor"/>
+    <bean class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="inboundChannelConfigurationValidateInterceptor"/>
+        <property name="typeCode" value="InboundChannelConfiguration"/>
+    </bean>
+</beans>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="native">
+    <widget xmlns="http://www.zkoss.org/2005/zul" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:zk="http://www.zkoss.org/2005/zk" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd" sclass="yw-theme-preview">
+
+        <!-- preview content container -->
+        <div sclass="yw-theme-preview-container" tooltiptext="${labels.theme.preview.tooltip}">
+            <!-- shell bar -->
+            <div sclass="yw-theme-preview-shellbar">
+                <div style="height:100%;" class="yw-com_hybris_cockpitng_widgets_common_systembar widget_body z-div">
+                    <div class="yw-systemBarContainer yw-systemBarContainer_flexible z-div">
+                        <div class="yw-statusToolbar yw-statusToolbar-left z-div">
+                            <div class="yw-theme-preview-shellbar-action menu"> <a class="cng-action-icon cng-font-icon font-icon--menu2 z-toolbarbutton z-button"><span class="z-toolbarbutton-content"></span></a></div>
+                            <div class="yw-logoContainer z-div">
+                                <image class="yw-shellbar-logo z-image" src="${wr}/images/logo-sap.png" />
+                            </div>
+                            <div class="yw-perspectiveChooser widget_cnt">
+                                <div class="invisibleWidgetChildren z-div">
+                                    <div style="height:100%;" class="widget_cnt widget_children">
+                                        <div class="widget_children_list z-div"></div>
+                                    </div>
+                                </div>
+                                <div style="width:100%;height:100%;" class="yw-com_hybris_backoffice_perspectiveChooser widget_body z-div">
+                                    <div style=" width:100%;" class="yw-perspective-menu z-hlayout">
+                                        <div class="z-hlayout-inner" style="">
+                                            <div class="yw-perspective-breadcrumb z-div">
+                                                <div class="z-caption">
+                                                    <div class="z-caption-content">Administration Cockpit</div>
+                                                </div>
+                                                <div class="z-icon-angle-down z-menu-icon z-div"></div>
+                                                <div class="yw-perspective-breadcrumb-spacer z-div"></div>
+                                                <div class="yw-perspective-breadcrumb-spacerarrow z-div"></div>
+                                                <div class="yw-perspective-breadcrumb-arrow z-div"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yw-statusToolbar yw-statusToolbar-right z-div">
+                            <div class="widget_cnt widget_children">
+                                <div class="widget_children_list z-div">
+                                    <div class="widget_cnt yw-theme-preview-shellbar-action"> <a class="cng-action-icon cng-font-icon font-icon--globe z-toolbarbutton z-button"><span class="z-toolbarbutton-content"></span></a></div>
+                                    <div class="widget_cnt yw-theme-preview-shellbar-action"> <a class="cng-action-icon cng-font-icon font-icon--complete z-toolbarbutton z-button"><span class="z-toolbarbutton-content"></span></a></div>
+                                    <div class="widget_cnt">
+                                        <div class="yw-userprofie-widget yw-pointer-menupopup-widget yw-com_hybris_backoffice_widgets_userprofile_toggle widget_body z-div"><a class="yw-userprofie-btn z-toolbarbutton"><span class="z-toolbarbutton-content"><image src="${wr}/images/user.png" align="absmiddle" /></span></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- main container -->
+            <div sclass="yw-theme-preview-main">
+                <!-- navigation bar -->
+                <div sclass="yw-theme-preview-navbar">
+                	<div class="yw-toolbar yw-toolbar-vertical z-div">
+                        <h:table class="cng-action-group cng-action-separator z-vbox" cellpadding="0" cellspacing="0" border="0">
+                            <h:tr>
+                                <h:td>
+                                    <h:table cellpadding="0" cellspacing="0" border="0">
+                                        <h:tr>
+                                            <h:td>
+                                                <div class="ya-toggle ya-toggle-active z-div">
+                                                    <h:table class="ya-com_hybris_cockpitng_action_toggle cng-action cng-action-enabled z-hbox" cellpadding="0" cellspacing="0" border="0">
+                                                        <h:tr>
+                                                            <h:td>
+                                                                <h:table cellpadding="0" cellspacing="0" border="0">
+                                                                    <h:tr>
+                                                                        <h:td><button type="button" class="cng-action-icon cng-font-icon font-icon--bbyd-dashboard z-button"></button></h:td>
+                                                                    </h:tr>
+                                                                </h:table>
+                                                            </h:td>
+                                                        </h:tr>
+                                                    </h:table>
+                                                </div>
+                                            </h:td>
+                                        </h:tr>
+                                        <h:tr>
+                                            <h:td>
+                                                <div class="ya-toggle ya-toggle-inactive z-div">
+                                                    <h:table class="ya-com_hybris_cockpitng_action_toggle cng-action cng-action-enabled z-hbox" cellpadding="0" cellspacing="0" border="0">
+                                                        <h:tr>
+                                                            <h:td>
+                                                                <h:table cellpadding="0" cellspacing="0" border="0">
+                                                                    <h:tr>
+                                                                        <h:td><button type="button" class="cng-action-icon cng-font-icon font-icon--product z-button"></button></h:td>
+                                                                    </h:tr>
+                                                                </h:table>
+                                                            </h:td>
+                                                        </h:tr>
+                                                    </h:table>
+                                                </div>
+                                            </h:td>
+                                        </h:tr>
+                                        <h:tr>
+                                            <h:td>
+                                                <div class="ya-toggle ya-toggle-inactive z-div">
+                                                    <h:table class="ya-com_hybris_cockpitng_action_toggle cng-action cng-action-enabled z-hbox" cellpadding="0" cellspacing="0" border="0">
+                                                        <h:tr>
+                                                            <h:td>
+                                                                <h:table cellpadding="0" cellspacing="0" border="0">
+                                                                    <h:tr>
+                                                                        <h:td><button type="button" class="cng-action-icon cng-font-icon font-icon--puzzle z-button"></button></h:td>
+                                                                    </h:tr>
+                                                                </h:table>
+                                                            </h:td>
+                                                        </h:tr>
+                                                    </h:table>
+                                                </div>
+                                            </h:td>
+                                        </h:tr>
+                                        <h:tr>
+                                            <h:td>
+                                                <div class="ya-toggle ya-toggle-inactive z-div">
+                                                    <h:table class="ya-com_hybris_cockpitng_action_toggle cng-action cng-action-enabled z-hbox" cellpadding="0" cellspacing="0" border="0">
+                                                        <h:tr>
+                                                            <h:td>
+                                                                <h:table cellpadding="0" cellspacing="0" border="0">
+                                                                    <h:tr>
+                                                                        <h:td><button type="button" class="cng-action-icon cng-font-icon font-icon--compare z-button"></button></h:td>
+                                                                    </h:tr>
+                                                                </h:table>
+                                                            </h:td>
+                                                        </h:tr>
+                                                    </h:table>
+                                                </div>
+                                            </h:td>
+                                        </h:tr>
+                                    </h:table>
+                                </h:td>
+                            </h:tr>
+                        </h:table>
+                    </div>
+                </div>
+
+                <!-- content container -->
+                <div sclass="yw-theme-preview-content">
+                	<div sclass="yw-theme-preview-content-header">
+                		<div sclass="yw-theme-preview-content-header-title">${labels.theme.preview.page.title}</div>
+                		<div sclass="yw-theme-preview-content-header-buttons">
+                        	<button label="${labels.theme.preview.button.cancel}"/>
+                        	<button sclass="y-btn-primary" label="${labels.theme.preview.button.save}"/>
+                        </div>
+                	</div>
+                	<div sclass="yw-theme-preview-content-tabs">
+                        <span sclass="active">${labels.theme.preview.tab.tab1}</span>
+                        <span>${labels.theme.preview.tab.tab2}</span>
+                    </div>
+
+                	<div sclass="yw-theme-preview-content-details">
+                		<div sclass="title">${labels.theme.preview.details.title}</div>
+                		<div sclass="panel">
+                			<div sclass="section1">
+                				<h:label>${labels.theme.preview.function.func1.info}</h:label>
+                            	<checkbox sclass="ye-switch-checkbox" checked="true"/>
+                            </div>
+                		</div>
+                		<div sclass="panel">
+                            <div><h:label>${labels.theme.preview.function.func2.info}</h:label></div>
+                            <div sclass="description">${labels.theme.preview.function.func2.description}</div>
+                            <div>
+                                <radio label="${labels.theme.preview.function.func2.option1}" checked="false"/>
+                                <radio label="${labels.theme.preview.function.func2.option2}" checked="true"/>
+                                <radio label="${labels.theme.preview.function.func2.option3}" checked="false"/>
+                            </div>
+                        </div>
+                        <div sclass="tableHeader">
+                        	<div sclass="title">${labels.theme.preview.table.title}</div>
+                        	<div sclass="mode">
+                        		<h:table class="yw-coll-browser-mold-sel-container z-hbox" cellpadding="0" cellspacing="0" border="0">
+                                    <h:tr>
+                                        <h:td>
+                                            <h:table cellpadding="0" cellspacing="0" border="0">
+                                                <h:tr>
+                                                    <h:td>
+                                                        <div class="yw-coll-browser-mold-sel-btn yw-coll-browser-mold-sel-btn-list-view-active z-div"></div>
+                                                    </h:td>
+                                                    <h:td class="z-hbox-separator"></h:td>
+                                                    <h:td>
+                                                        <div class="yw-coll-browser-mold-sel-btn yw-coll-browser-mold-sel-btn-tree-view-inactive z-div"></div>
+                                                    </h:td>
+                                                    <h:td class="z-hbox-separator"></h:td>
+                                                    <h:td>
+                                                        <div class="yw-coll-browser-mold-sel-btn yw-coll-browser-mold-sel-btn-grid-view-inactive z-div"></div>
+                                                    </h:td>
+                                                </h:tr>
+                                            </h:table>
+                                        </h:td>
+                                    </h:tr>
+                                </h:table>
+                        	</div>
+                        </div>
+                        <div sclass="tableBody">
+                           <div class="yw-coll-browser-container z-div">
+                               <div class="z-listbox">
+                                   <div class="z-listbox-header" style="">
+                                       <h:table style="table-layout: fixed;">
+                                           <h:tr class="yw-listview-colhead z-listhead">
+                                               <h:th class="yw-listview-colheader z-listheader z-listheader-sort" style="width:25%">
+                                                   <div class="z-listheader-content">
+                                                       <div class="z-listheader-sorticon"><h:i ></h:i></div>
+                                                       <span  class="z-listheader-checkable"><h:i class="z-listheader-icon z-icon-check"></h:i></span>
+                                                       ${labels.theme.preview.table.col1.name}
+                                                   </div>
+                                               </h:th>
+                                               <h:th class="yw-listview-colheader z-listheader" style="width:25%">
+                                                   <div class="z-listheader-content">
+                                                       <div class="z-listheader-sorticon"><h:i ></h:i></div>${labels.theme.preview.table.col2.name}
+                                                   </div>
+                                               </h:th>
+                                               <h:th class="yw-listview-colheader z-listheader" style="width:25%">
+                                                   <div class="z-listheader-content">
+                                                       <div class="z-listheader-sorticon"><h:i ></h:i></div>${labels.theme.preview.table.col3.name}
+                                                   </div>
+                                               </h:th>
+                                               <h:th class="yw-listview-colheader z-listheader" style="width:25%">
+                                                   <div class="z-listheader-content">
+                                                       <div class="z-listheader-sorticon"><h:i ></h:i></div>${labels.theme.preview.table.col4.name}
+                                                   </div>
+                                               </h:th>
+                                           </h:tr>
+                                       </h:table>
+                                   </div>
+                                   <div class="z-listbox-header-border"></div>
+                                   <div class="z-listbox-body">
+                                       <h:table style="table-layout: fixed;">
+                                           <h:tr class="yw-coll-browser-hyperlink z-listitem">
+                                               <h:td class="yw-listview-cell z-listcell" style="width:25%">
+                                                   <div class="z-listcell-content"><span  class="z-listitem-checkable z-listitem-checkbox"><h:i class="z-listitem-icon z-icon-check"></h:i></span><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col1.data} A</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col2.data} a</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label positive">${labels.theme.preview.table.col3.data}</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label"><h:b>15.00 ></h:b></span></div>
+                                               </h:td>
+                                           </h:tr>
+                                           <h:tr class="yw-coll-browser-hyperlink z-listitem z-listbox-odd z-listitem-selected">
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="z-listitem-checkable z-listitem-checkbox"><h:i class="z-listitem-icon z-icon-check"></h:i></span><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col1.data} B</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col2.data} b</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label positive">${labels.theme.preview.table.col3.data}</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label"><h:b>15.00 ></h:b></span></div>
+                                               </h:td>
+                                           </h:tr>
+                                           <h:tr class="yw-coll-browser-hyperlink z-listitem">
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="z-listitem-checkable z-listitem-checkbox"><h:i class="z-listitem-icon z-icon-check"></h:i></span><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col1.data} C</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col2.data} c</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label positive">${labels.theme.preview.table.col3.data}</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label"><h:b>15.00 ></h:b></span></div>
+                                               </h:td>
+                                           </h:tr>
+                                           <h:tr class="yw-coll-browser-hyperlink z-listitem z-listbox-odd">
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="z-listitem-checkable z-listitem-checkbox"><h:i class="z-listitem-icon z-icon-check"></h:i></span><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col1.data} D</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col2.data} d</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label positive">${labels.theme.preview.table.col3.data}</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label"><h:b>15.00 ></h:b></span></div>
+                                               </h:td>
+                                           </h:tr>
+                                           <h:tr class="yw-coll-browser-hyperlink z-listitem z-listbox-odd">
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="z-listitem-checkable z-listitem-checkbox"><h:i class="z-listitem-icon z-icon-check"></h:i></span><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col1.data} E</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label">${labels.theme.preview.table.col2.data} e</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label positive">${labels.theme.preview.table.col3.data}</span></div>
+                                               </h:td>
+                                               <h:td class="yw-listview-cell z-listcell">
+                                                   <div class="z-listcell-content"><span  class="yw-listview-cell-label z-label"><h:b>15.00 ></h:b></span></div>
+                                               </h:td>
+                                           </h:tr>
+                                       </h:table>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+                function previewTheme(mappingsStr) {
+
+                    let previewElem = document.querySelector('.yw-theme-preview');
+                    if (previewElem) {
+                        let mappings = mappingsStr.split(";");
+                        mappings.forEach(mapping => {
+                            let pair = mapping.split(":");
+                            previewElem.style.setProperty(pair[0], pair[1]);
+                        })
+                    }
+                };
+        </script>
+    </widget>
+</zk>

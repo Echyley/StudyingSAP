@@ -1,0 +1,71 @@
+/* *
+/* This file includes the styles used in the Customization Modal, sliding panel
+*/
+
+@pe-customization-modal__checkmark--margin-top: @perso-gutter;   //20px
+@pe-customization-modal__checkmark-label--padding-left: 0.5*@perso-gutter;  //10px
+
+.pe-customization-modal__sliderpanel {
+    font-size: @perso__default-text--font-size;
+
+    .form-group {
+        margin-bottom: @pe-customization-modal__form-group--margin-bottom;     //30px
+    }
+
+    // ie/edge fix for the reset x when the user starts typing in the search input of an ui-select
+    .select2-input::-ms-clear {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
+.pe-customization-modal__sliderpanel__btn-layout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pe-customization-modal__sliderpanel__btn-link {
+    .icon_padding_end {
+        padding-inline-end: 5px;
+    }
+}
+
+.pe-customization-modal__expression-text {
+    font-weight: @font-weight-bold;
+}
+
+.pe-customization-modal__expression-alert-icon {
+    color: @fd-color--status-2 !important;
+}
+
+.sliderPanelParentModal.modal-fullscreen #y-modal-dialog {
+    height: 100vh;
+}
+
+.sliderPanelParentModal.modal-fullscreen .se-slider-panel__body{
+    height: 85vh;
+    max-height: 85vh;
+}
+
+.sliderPanelParentModal input.form-control,
+.sliderPanelParentModal textarea.form-control {
+    border-radius: 0;
+}
+
+.pe-customization-modal--check{
+    display: block;
+    margin-top: @pe-customization-modal__checkmark--margin-top;
+    .fd-form__label {
+        display: inline-block;
+        padding-left: @pe-customization-modal__checkmark-label--padding-left;
+        vertical-align: text-top;
+        cursor: pointer;
+    }
+}
+
+.pe-customization-modal__tabs{
+    .nav-tabs{
+        margin-bottom: 20px;
+    }
+}

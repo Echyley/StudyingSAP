@@ -1,0 +1,9 @@
+.se-more-text {
+    &__toggle {
+        &--capitalize {
+            text-transform: capitalize;
+            color: var(--sapInformativeColor);
+            cursor: pointer;
+        }
+    }
+}

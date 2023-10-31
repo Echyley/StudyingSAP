@@ -1,0 +1,53 @@
+<se-tooltip
+    [placement]="'bottom'"
+    [isChevronVisible]="true"
+    [triggers]="['click']"
+    class="se-media-advanced-info"
+    (click)="onClick($event)">
+    <span se-tooltip-trigger class="se-media-advanced-info__trigger">
+        <span
+            class="sap-icon--message-information se-media__action-icon se-media__action-icon--basic"
+            [title]="i18nKeys.INFORMATION | translate"></span>
+        <se-media-action-label [i18nKey]="i18nKeys.INFORMATION"></se-media-action-label>
+    </span>
+
+    <div se-tooltip-body>
+        <div class="se-media-advanced-info-body">
+            <div
+                class="se-media-advanced-info-row advanced-information-description"
+                *ngIf="media.description">
+                <div
+                    class="se-media-advanced-info-row__label se-control-label"
+                    [translate]="i18nKeys.DESCRIPTION"></div>
+                <div
+                    id="se-media-advanced-info-description-id"
+                    class="se-media-advanced-info-row__description">
+                    {{ media.description }}
+                </div>
+            </div>
+            <div class="se-media-advanced-info-row advanced-information-code">
+                <div
+                    class="se-media-advanced-info-row__label se-control-label"
+                    [translate]="i18nKeys.CODE"></div>
+                <div
+                    id="se-media-advanced-info-code-id"
+                    class="se-media-advanced-info-row__description">
+                    {{ media.code }}
+                </div>
+            </div>
+            <div
+                class="se-media-advanced-info-row advanced-information-alt-text"
+                *ngIf="media.altText">
+                <div
+                    class="se-media-advanced-info-row__label se-control-label"
+                    [translate]="i18nKeys.ALT_TEXT"></div>
+                <div
+                    id="se-media-advanced-info-altText-id"
+                    class="se-media-advanced-info-row__description">
+                    {{ media.altText }}
+                </div>
+            </div>
+            <ng-template seMediaAdvancedPropertiesCustom></ng-template>
+        </div>
+    </div>
+</se-tooltip>

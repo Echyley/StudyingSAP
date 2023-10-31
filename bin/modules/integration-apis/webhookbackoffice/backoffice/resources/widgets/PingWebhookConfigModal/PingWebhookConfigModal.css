@@ -1,0 +1,51 @@
+.webhookbackoffice-ping-modal-body {
+    border-bottom: 1px solid var(--bo-list-table-footer-border-color);
+    padding: 20px 20px 25px 20px;
+    height: 618px;
+}
+
+.webhookbackoffice-metadata-tabs {
+    padding-bottom: 10px;
+}
+
+.webhookbackoffice-metadata-textbox-small {
+    width: 100%;
+    height: 420px;
+}
+
+.yw-modal-webhookBackofficeMetadataViewerModal {
+    min-height: 730px;
+    min-width: 1000px;
+}
+
+.webhookbackoffice-metadata-tabpanel {
+    border: none;
+}
+
+.webhookbackoffice-metadata-textbox {
+    resize: none;
+    font-family: monospace;
+    white-space: pre;
+    overflow: auto;
+}
+
+.webhookbackoffice-pingWebhookConfigModal-button {
+    float: right;
+    margin: 15px;
+}
+
+.webhookbackoffice-metadata-url-content {
+    text-overflow: ellipsis;
+}
+
+.webhookbackofficeJsonTextboxTooltip-container {
+    display: inline-block;
+    z-index: 100;
+    position: absolute;
+    left: 119px;
+    top: 10px
+}
+
+.webhookbackoffice-metadata-tabs .z-tab:nth-child(2) {
+    padding-left: 25px;
+}

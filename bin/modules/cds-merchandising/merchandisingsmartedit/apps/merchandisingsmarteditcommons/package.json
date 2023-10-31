@@ -1,0 +1,52 @@
+{
+  "name": "merchandisingsmarteditcommons",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "description": "merchandisingsmartedit Commons library",
+  "scripts": {
+    "build": "se-packagr",
+    "test": "se-test",
+    "test:dev": "se-test --browser"
+  },
+  "files": [
+    "dist",
+    "assets"
+  ],
+  "devDependencies": {
+    "@smartedit/packagr": "0.0.1",
+    "smartedit-build": "0.0.1",
+    "@types/crypto-js": "4.1.1",
+    "@types/jquery": "3.5.16",
+    "@types/scriptjs": "0.0.2",
+    "@types/webpack-env": "1.18.0",
+    "reflect-metadata": "0.1.13",
+    "typescript": "4.1.5"
+  },
+  "dependencies": {
+    "smarteditcommons": "0.0.1",
+    "@angular/cdk": "11.2.13",
+    "@angular/common": "11.2.14",
+    "@angular/compiler": "11.2.14",
+    "@angular/core": "11.2.14",
+    "@angular/elements": "11.2.14",
+    "@angular/forms": "11.2.14",
+    "@angular/platform-browser": "11.2.14",
+    "@angular/platform-browser-dynamic": "11.2.14",
+    "@angular/router": "11.2.14",
+    "@angular/upgrade": "11.2.14",
+    "@fundamental-ngx/core": "0.31.3",
+    "@ngx-translate/core": "13.0.0",
+    "@ngx-translate/http-loader": "4.0.0",
+    "@webcomponents/webcomponentsjs": "2.7.0",
+    "core-js": "3.7.0",
+    "crypto-js": "4.0.0",
+    "intersection-observer": "0.12.2",
+    "jquery": "3.6.4",
+    "rxjs": "6.6.6",
+    "scriptjs": "2.5.9",
+    "tslib": "2.1.0",
+    "lodash": "4.17.21"
+  }
+}

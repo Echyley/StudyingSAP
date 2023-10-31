@@ -1,0 +1,12 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# Language
+$lang=id
+
+#Site
+$siteUid=electronics
+
+INSERT_UPDATE ConsentTemplate;id[unique=true];name[lang=$lang];description[lang=$lang];version[unique=true];baseSite(uid)[unique=true,default=$siteUid]
+;SAPYMKT_EMAIL;"Terima email untuk kampanye pemasaran.";"Saya setuju untuk menerima email dengan berita, harga terbaik, dan penawaran.";0;;
+;SAPYMKT_PERS;"Personalisasi konten dan penawaran";"Saya setuju untuk menerima konten dan penawaran yang dipersonalisasi untuk pengalaman belanja online yang lebih baik.";0;;

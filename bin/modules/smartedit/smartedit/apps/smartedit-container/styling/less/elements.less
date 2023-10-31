@@ -1,0 +1,228 @@
+/****************************************************
+				Elements
+****************************************************/
+/* Basic rules */
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.se-control-label {
+    display: inline-flex;
+}
+
+a:focus,
+a:hover {
+    text-decoration: none;
+}
+
+.clearfix() {
+    &:before,
+    &:after {
+        display: table; // 2
+        content: ' '; // 1
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.clearfix {
+    .clearfix();
+}
+
+.pull-right {
+    float: right !important;
+}
+.pull-left {
+    float: left !important;
+}
+.hide {
+    display: none !important;
+}
+.show {
+    display: block !important;
+}
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    line-height: 1.42857143;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    touch-action: manipulation;
+    border: 1px solid transparent;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+th {
+    text-align: left;
+}
+
+* {
+    box-sizing: border-box;
+}
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+    float: left;
+}
+
+.col-lg-1,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-12 {
+    width: 100%;
+}
+
+.col-xs-11 {
+    width: 91.66666667%;
+}
+
+.col-xs-10 {
+    width: 83.33333333%;
+}
+
+.col-xs-9 {
+    width: 75%;
+}
+
+.col-xs-8 {
+    width: 66.66666667%;
+}
+
+.col-xs-7 {
+    width: 58.33333333%;
+}
+
+.col-xs-6 {
+    width: 50%;
+}
+
+.col-xs-5 {
+    width: 48.666667%;
+}
+
+.col-xs-4 {
+    width: 33.33333333%;
+}
+
+.col-xs-3 {
+    width: 25%;
+}
+
+.col-xs-2 {
+    width: 16.66666667%;
+}
+
+.col-xs-1 {
+    width: 8.33333333%;
+}
+
+input[type='search'] {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+p {
+    margin: 0 0 10px;
+}
+
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+/* Make iFrame 100% height of the screen by default + fix drag and drop jumping */
+body > [data-ng-view] {
+    height: 100vh;
+}
+
+body[data-smartedit-ready] {
+    height: auto;
+    overflow: hidden;
+}
+
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+
+/****************************************************
+				richtexteditor
+****************************************************/
+body.cke_editable {
+    padding-top: 0;
+}

@@ -1,0 +1,200 @@
+@import "cockpitng-globals.scss";
+
+$processes__default-popup--bg-color: var(--bo-container-background);
+
+$_processes__systembar-button--bg-color: $navigation__top-menu-item-selected--bg-color;
+$_processes__systembar__loading-button--content: _getIconGlyphContentValue('refresh');
+
+$processes__header--height: $toolbar__default--height;
+$processes__header--line-height: 40px;
+$processes__header--padding: $_container-spacing-default__core $_container-spacing-default__small; //floor(($processes__header--height - $processes__header--line-height)/2) 0;
+// $processes__header--bg-color: $processes__default-popup--bg-color;
+$_processes__header--border-bottom: $boxes--border__thin solid $_editor-defaults__popup-box-delimiter--border-color;
+//__processes__header-title--margin-left: $container-spacing-default__third;
+$_processes__header-title--font-size: $font-size__large;
+$processes__header-button--size: $toolbar__button-small--size;
+$_processes__header-button-color: var(--bo-shell-interactive-color);
+$_processes__header-button-hover-background: var(--bo-shell-hover-background);
+//__processes__header-close-button--padding: 0 floor((__processes__header--line-height - __processes__header-button--size)/2);
+$processes__header-close-button--hover-bg-color: var(--bo-button-hover-color);
+$processes__header-process-icon-spinner--top: -10px;
+$processes__header-process-icon-spinner--right: 5px;
+$processes__header-process-icon-spinner--size: 8px;
+$processes__header-process-icon-spinner--bg-color: var(--bo-container-background); //$processes__default-popup--bg-color;
+$processes__header-process-icon-spinner--animation-duration: 1000ms;
+$processes__header-process-icon-spinner-before--space: 0; // $boxes--border__thin;
+$processes__header-process-icon-spinner-before--size: $processes__header-process-icon-spinner--size + (2*$processes__header-process-icon-spinner-before--space);
+$processes__header-process-icon-unseen--bg-color: var(--bo-content-badge-background); 
+$processes__header-process-icon-unseen--color: var(--bo-content-badge-text-color);
+$processes__header-process-icon-unseen--size: 8px;
+$processes__header-process-icon-unseen--right: 14px;
+$processes__header-process-icon-unseen--top: 6px;
+
+$processes__item-status-label-border-radius: 1.125rem;
+$processes__item-status-label-padding: 0 0.625rem;
+$processes__item-status-label-font-weight: 400;
+
+$processes__item-status-running--border-color: var(--bo-button-information-border-color);
+$processes__item-status-running--bg-color: var(--bo-button-information-background);
+$processes__item-status-running--color: var(--bo-button-information-text-color);
+
+$processes__item-status-run-restart--border-color: var(--bo-button-information-border-color);
+$processes__item-status-run-restart--bg-color: var(--bo-button-information-background);
+$processes__item-status-run-restart--color: var(--bo-button-information-text-color);
+
+
+$processes__item-status-aborted--border-color: var(--bo-button-error-border-color);
+$processes__item-status-aborted--bg-color: var(--bo-button-error-background);
+$processes__item-status-aborted--color: var(--bo-button-error-text-color);
+
+$processes__item-status-finished--border-color: var(--bo-button-success-border-color);
+$processes__item-status-finished--bg-color: var(--bo-button-success-background);
+$processes__item-status-finished--color: var(--bo-button-success-text-color);
+
+$processes__item-status-paused--border-color: var(--bo-button-warning-border-color);
+$processes__item-status-paused--bg-color: var(--bo-button-warning-background);
+$processes__item-status-paused--color: var(--bo-button-error-text-color);
+
+$processes__item-status-unknown--border-color: var(--bo-neutral-border-color);
+$processes__item-status-unknown--bg-color: var(--bo-neutral-background);
+$processes__item-status-unknown--color: var(--bo-neutral-color);
+
+
+$processes__settings-popup-container--padding-x: $_container-spacing-default__small;
+$_processes__settings-popup-container--padding-y: $_container-spacing-default__tiny;
+$processes__settings-popup-container--padding: $_processes__settings-popup-container--padding-y $processes__settings-popup-container--padding-x;
+$processes__settings-popup-delimiter--border: $boxes--border__thin solid $_default-list__item--border-color; //$grey__light--100;
+$processes__settings-popup-container--width: 220px;
+$processes__settings-popup-range-list--top: 160px;
+$processes__settings-popup-range-list--right: 20px;
+$processes__settings-popup-range-list--width: $processes__settings-popup-container--width/2;
+$processes__settings-popup-range-list--container-shadow: var(--bo-content-shadow-large);
+$_processes__settings-popup-delimiter--indented: false;
+$_processes__settings-popup-state-label--color: $form-defaults__label-info--color;
+$_processes__settings-popup-state-label--font-weight: $font-weight-light;
+$_processes__settings-popup-state-label--padding-top: 3px;
+$_processes__settings-popup-name-label--font-weight: $font-weight-normal;
+
+$processes__settings-popup-setting--width: calc(100% - 40px);
+
+$processes__settings-popup-range-list-toggle-btn--font-family: $font-family__icon;
+$processes__settings-popup-range-list-toggle-btn--size: $container-spacing-default__half;
+$processes__settings-popup-range-list-toggle-btn-down--content: $anglearrow__down--content;
+$processes__settings-popup-range-list-toggle-btn-up--content: $anglearrow__up--content;
+$processes__settings-popup-range-list-toggle-btn--right: $processes__settings-popup-container--padding-x;
+$processes__settings-popup-range-list-toggle-btn-icon--margin-top: - floor($processes__settings-popup-range-list-toggle-btn--size/2);
+$processes__settings-popup-range-list-toggle-btn--margin-top: floor($editor-defaults__inline-box--height/2) + $processes__settings-popup-range-list-toggle-btn-icon--margin-top;
+$processes__settings-popup-range-list-item-hover--color: false; //$blue__default;
+$_processes__settings-popup-range-list-item-selected--font-weight: $font-weight-bold;
+$processes__settings-popup-range-list-toggle-btn-hover--color: $processes__settings-popup-range-list-item-hover--color;
+$processes__settings-popup-range-list-toggle-btn--color: var(--bo-button-icon-color);
+$processes__settings-popup-range-list-item-selected--border-color: var(--bo-list-selected-border-color);
+
+$processes__settings-popup--margin-top: 8px;
+$_processes__settings-popup--margin-left: 8px;
+$processes__sidbar-popup--margin-top: -6px;
+$_processes__settings-action-active--bg-color: var(--bo-button-hover-background); //eq color in _iconButtonDefault :focus/:actvie;
+
+$processes__sidebar--width: 520px;
+$_processes__sidebar--height: $toolbar__shell--height;
+$processes__sidebar--z-index: 100; 
+$_processes__sidebar--text-color: var(--bo-text-color);
+$processes__sidebar--bg-color: var(--bo-list-background);
+$_processes__sidebar--border-radius: $editor-defaults__input-box--border-radius;
+$_processes__sidebar--border: 0;
+// $_processes__sidebar--box-shadow: 0 0 $_editor-defaults__popup-box--default-shadow-blur 0 rgba(0, 0, 0, $_editor-defaults__popup-box--default-shadow-opacity);
+$_processes__sidebar--box-shadow: var(--bo-content-shadow-large);
+$processes__sidebar-default--max-width: $processes__sidebar--width;
+
+$_processes__sidebar-pointer-inner--before-border-color: var(--bo-shell-background);
+$_processes__sidebar-pointer-inner--after-border-color: var(--bo-list-border-color);
+$_processes__sidebar-pointer-inner--border-width: 7px; 
+$_processes__sidebar-pointer--left: 50%;
+$_processes__sidebar-pointer--bottom: -4px;
+$_processes__sidebar-pointer--transform: translate(-50%, 0);
+$_processes__sidebar-pointer-outer--border-color: $_editor-defaults__popup-box--border-color;
+$_processes__sidebar-pointer-outer--border-width: $_processes__sidebar-pointer-inner--border-width + $boxes--border__thin;
+
+$processes__sidebar-default--bp-s: 519px;
+$processes__sidebar-default--bp-m: 1209px;
+
+$processes__sidebar-bp-s--max-width: 300px;
+$processes__sidebar-bp-m--max-width: 420px;
+
+$processes__sidebar--transition: max-width 0.3s ease-in;
+// $processes__sidebar-disabled--transition: max-width 0.2s ease-out;
+
+$processes__list-listcell--padding-x: 5px;
+$processes__list--min-width: $processes__sidebar--width;
+$processes__list--height: calc(100% - #{$processes__header--height});
+$processes__list--transition: $processes__sidebar--transition;
+$_processes__list-item--padding: ($_container-spacing-default__small - $_container-spacing-default__core) $_container-spacing-default__small;
+$_processes__list-item--border-bottom: $boxes--border__thin solid $_default-list__item--border-color;
+$_processes__list-item-default--bg-color: var(--bo-list-background);
+$_processes__list-item-default--hover-bg-color: var(--bo-list-hover-background);
+$_processes__list-item-unseen--bg-color: $_default-list__item-selected--bg-color;
+$_processes__list-item-unseen-indication-dot--visible: false;
+//__processes__list-item-hover--bg-color: $_default-list__item-hover--bg-color;
+// _processes__list-item-content--padding: 0 (__container-spacing-default__base - __processes__list-listcell--padding-x) 0 $container-spacing-default__base;
+$_processes__list-item-content--padding-left: $_container-spacing-default__medium;
+
+$processes__list-item-progress-default--bg-color: var(--bo-information-border-color);
+$processes__list-item-progress--height: $_container-spacing-default__core;
+$processes__list-item-progress--margin: $container-spacing-default__third 0;
+$_processes__list-item-progress--border-radius: $toolbar__button-small--border-radius;
+$_processes__list-item-progress-finished--height: $boxes--border__medium;
+$processes__list-item-progress-before--bg-color: var(--primary5);
+$processes__list-item-progress-before--right: 0;//(nth(__processes__list-item-content--padding, 2) + __processes__list-listcell--padding-x);
+$processes__list-item-progress-before--left: $_processes__list-item-content--padding-left;//(nth(__processes__list-item-content--padding, 4) + __processes__list-listcell--padding-x);
+
+//_processes__list-item-default--bg-color: $black__blueish--200;//
+//_processes__list-item-default--border-color: $blue__dark;
+//_processes__list-item--border: $boxes--border__thin solid _processes__list-item-default--border-color;
+//_processes__list-item-active--bg-color: $blue__dark;
+//_processes__list-item-actvie--border-color: $black__blueish--200;
+
+$processes__list-item-icon--size: $toolbar__button-small--size;
+$processes__list-item-icon--margin: $_container-spacing-default__tiny ($container-spacing-default__third - $processes__list-listcell--padding-x);
+$_processes__list-item-icon--font-family: $font-family__icon;
+$_processes__list-item-icon--content: _getIconGlyphContentValue('synchronize');
+$_processes__list-item-icon-import--content: _getIconGlyphContentValue('upload');
+
+$processes__list-item-edit-btn--size: $toolbar__button-medium--size;
+// $processes__list-item-edit-btn--bottom: $container-spacing-default__half;
+
+// _processes__list-item-status-label--margin-right: -($container-spacing-default__base - $container-spacing-default__third);
+$processes__list-item-status-info-text--color: var(--bo-button-accept-active-text-color);
+// _processes__list-item-status-info-text--font-weight: $font-weight-bold;
+$_processes__list-item-status-info-text--font-size: $font-size__large;
+
+$processes__list-item-label--color: $form-defaults__label--color;
+$_processes__list-item-code--font-size: $font-size__base;
+$_processes__list-item-date--font-size: $font-size__small;
+$processes__list-item-label--text-align: left;
+
+$processes__list-item-no-access-label--color: $form-defaults__label-disabled--color;
+$processes__list-item-no-access-label--font-size: $font-size__base;
+$processes__list-item-no-access-label--font-style: italic;
+$processes__list-item-no-access-label--text-align: center;
+
+$processes__list-item-indicator--top: -2px;
+$processes__list-item-indicator--right: -10px;
+
+$processes__auto-close-layer--z-index: $processes__sidebar--z-index - 1;
+$processes__auto-close-layer--bg-color: $_default__content--color; //$black__blueish--200;
+$processes__auto-close-layer--transition: opacity 0.12s ease-in 0s, width 0s linear 0.12s;
+$processes__auto-close-layer-active--transition: opacity 0.25s ease-out 0.2s, width 0s linear 0.1s;
+$processes__auto-close-layer-active--opacity: 0.6;
+
+// _processes__actiondots-icon--size: $toolbar__button-default--size;
+// _processes__actiondots-cell--width: $editor-defaults__inline-box--height;
+
+$processes__button-icon--font-family: $font-family__icon;
+
+//$processes__actiondots-button--size: 16px;
+//$processes__actiondots-button--left: $container-spacing-default__half;
+//$processes__actiondots-button--color: $blue__greyish--400;
+//$processes__actiondots-buttonr--color: $blue__default;
+//$processes__actiondots-button--color: $grey__default--1000;
+
+$processes__actiondots-button--content: _getIconGlyphContentValue('overflow');

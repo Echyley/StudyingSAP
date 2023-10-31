@@ -1,0 +1,14 @@
+<div class="se-page-tree">
+    <div class="se-page-tree--header">
+        <span class="se-page-tree--header--icon sap-icon--Chart-Tree-Map"></span>
+        <span class="se-page-tree--header--title">{{ 'se.page.tree.title' | translate }}</span>
+    </div>
+
+    <div id="se-page-tree-scroll-area" class="se-page-tree-scroll-area">
+        <se-page-tree-slot
+            *ngFor="let node of slotNodes"
+            [node]="node"
+            (onSlotExpanded)="onSlotExpanded($event)"
+        ></se-page-tree-slot>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+	<util:map id="centralOrderDisplayStatusMap"
+		map-class="java.util.HashMap" key-type="java.lang.String"
+		value-type="java.lang.String">
+		<entry key="RECEIVED" value="created" />
+		<entry key="FULFILLMENT_IN_PROGRESS" value="processing" />
+		<entry key="READY_FOR_TRANSFER" value="processing" />
+		<entry key="IN_TRANSFER" value="processing" />
+		<entry key="TRANSFER_SUCCESSFUL" value="processing" />
+		<entry key="PENDING" value="error" />
+		<entry key="TRANSFER_FAILED" value="error" />
+		<entry key="TRANSFER_PARTIALLY_FAILED" value="error" />
+		<entry key="CANCELLED" value="cancelled" />
+	</util:map>
+
+	<util:map id="centralOrderListSortMap"
+		map-class="java.util.HashMap" key-type="java.lang.String"
+		value-type="java.lang.String">
+		<entry key="byDate" value="pricingDate" />
+		<entry key="byOrderNumber" value="precedingDocumentNumber" />
+	</util:map>
+
+	<alias name="defaultCentralOrderHistoryPopulator"
+		alias="centralOrderHistoryPopulator" />
+	<bean id="defaultCentralOrderHistoryPopulator"
+		class="com.sap.sapcentralorderfacades.populator.impl.DefaultCentralOrderHistoryPopulator">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="orderStatusDisplayMap"
+			ref="centralOrderDisplayStatusMap" />
+	</bean>
+
+	<alias alias="orderFacade" name="defaultCentralOrderFacade" />
+	<bean id="defaultCentralOrderFacade" parent="defaultOrderFacade"
+		class="com.sap.sapcentralorderfacades.facades.impl.DefaultCentralOrderFacade">
+		<property name="centralOrderService"
+			ref="centralOrderService" />
+		<property name="centralOrderListPopulator"
+			ref="centralOrderHistoryPopulator" />
+		<property name="orderListSortMap"
+			ref="centralOrderListSortMap" />
+		<property name="configurationService"
+			ref="coConfigurationService" />
+	</bean>
+
+
+	<!-- append CO specific populator to the default orderConverter -->
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter" />
+		<property name="add" ref="centralOrderPopulator" />
+	</bean>
+			
+
+	<!-- Order Details -->
+	<alias alias="centralOrderPopulator"
+		name="defaultCentralOrderPopulator" />
+	<bean id="defaultCentralOrderPopulator"
+		class="com.sap.sapcentralorderfacades.populator.impl.DefaultCentralOrderDetailsPopulator">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="orderStatusDisplayMap"
+			ref="centralOrderDisplayStatusMap" />
+		<property name="sapCpiOrderDetailPopulators"
+			ref="sapCpiOrderDetailPopulators" />
+		<property name="centralOrderService"
+			ref="centralOrderService" />
+		<property name="centralOrderListPopulator"
+			ref="centralOrderHistoryPopulator" />
+		<property name="orderListSortMap"
+			ref="centralOrderListSortMap" />
+		<property name="centralOrderDetailsPopulator"
+			ref="centralOrderPopulator" />
+		<property name="configurationService"
+			ref="coConfigurationService" />
+		<property name="userService" ref="userService" />
+		<property name="checkoutCustomerStrategy"
+			ref="checkoutCustomerStrategy" />
+	</bean>
+	
+	<alias name="defaultSapCpiOrderDetailPopulators" alias="sapCpiOrderDetailPopulators"/>
+    <util:list id="defaultSapCpiOrderDetailPopulators" value-type="com.sap.sapcentralorderfacades.populator.SapCpiOrderDetailPopulator"/>
+
+	
+	<alias name="defaultCentralOrderAdditionalAttributeMappers" alias="centralOrderAdditionalAttributeMappers"/>
+    <util:list id="defaultCentralOrderAdditionalAttributeMappers" value-type="com.sap.sapcentralorderfacades.order.mapper.SapCpiOrderOutboundAdditionalAttributeMapper"/>
+		
+	
+	<alias alias="centralOrderOutboundAdditionalAttributeMapper" name="defaultCentralOrderOutboundAdditionalAttributeMapper" />
+	<bean id="defaultCentralOrderOutboundAdditionalAttributeMapper"
+		class="com.sap.sapcentralorderfacades.order.mapper.impl.DefaultCentralOrderOutboundAdditionalAttributeMapper">
+		<property name="configurationService" ref="coConfigurationService" />
+	</bean>
+	
+	<bean depends-on="centralOrderAdditionalAttributeMappers" parent="listMergeDirective">
+        <property name="add" ref="centralOrderOutboundAdditionalAttributeMapper"/>
+    </bean>
+    
+   	<alias alias="centralOrderOutboundAdditionalAttributeMapperService" name="defaultCentralOrderOutboundAdditionalAttributeMapperService" />
+	<bean id="defaultCentralOrderOutboundAdditionalAttributeMapperService"
+		class="com.sap.sapcentralorderfacades.order.populator.impl.DefaultCentralOrderOutboundAdditionalAttributePopulator">
+		<property name="centralOrderAdditionalAttributeMappers" ref="centralOrderAdditionalAttributeMappers" />
+	</bean>
+    	
+<!-- Order Conversion Service -->
+    <alias name="defaultCentralOrderCpiConversionService" alias="sapCpiOrderConversionService"/>
+    <bean id="defaultCentralOrderCpiConversionService" parent="sapCpiOmsOrderConversionService" 
+    class="com.sap.sapcentralorderfacades.order.mapper.impl.DefaultCentralOrderCpiConvertor">
+        <property name="sapOrderContributor" ref="sapOrderContributor"/>
+        <property name="sapOrderEntryContributor" ref="sapOrderEntryContributor"/>
+        <property name="sapPaymentContributor" ref="sapPaymentContributor"/>
+        <property name="sapPartnerContributor" ref="sapPartnerContributor"/>
+        <property name="sapSalesConditionsContributor" ref="sapSalesConditionsContributor"/>
+        <property name="sapOrderCancelRequestContributor" ref="sapOrderCancelRequestContributor"/>
+        <property name="configurationService" ref="coConfigurationService" />
+        
+    </bean>
+    
+    <alias name="defaultCentralOrderCpiMapperService" alias="sapCpiOrderMapperService" />
+	<bean id="defaultCentralOrderCpiMapperService"
+		class="com.sap.sapcentralorderfacades.order.mapper.impl.DefaultCentralOrderCpiMapper">
+		<property name="sapCpiOrderConversionService" ref="defaultCentralOrderCpiConversionService"/>
+		<property name="sapCpiOrderOutboundAdditionalAttributePopulator" ref="centralOrderOutboundAdditionalAttributeMapperService"/>
+		<property name="configurationService" ref="coConfigurationService" />
+	</bean>
+ 
+
+</beans>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cng="http://www.hybris.com/cockpitng/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+		   http://www.hybris.com/cockpitng/spring
+		   http://www.hybris.com/cockpitng/spring/cng-spring.xsd">
+
+	<bean id="backofficesearchservicesLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+  		<property name="location" value="/backofficesearchservices-backoffice-labels/"/>
+  		<property name="name" value="labels"/>
+  	</bean>
+
+	<alias name="defaultBackofficeSearchservicesIndexInitializer" alias="backofficeSearchservicesIndexInitializer"/>
+	<bean id="defaultBackofficeSearchservicesIndexInitializer" class="com.hybris.backoffice.searchservices.setup.BackofficeSearchservicesIndexInitializer"
+		  lazy-init="false" init-method="initialize">
+		<property name="backofficeFacetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService"/>
+		<property name="afterInitializationEndBackofficeListener" ref="afterInitializationEndBackofficeSearchservicesListener"/>
+		<property name="snIndexerService" ref="snIndexerService" />
+		<property name="snIndexerItemSourceFactory" ref="snIndexerItemSourceFactory" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultBackofficeSearchServicesFieldSearchFacadeStrategy" alias="backofficeSearchservicesFieldSearchFacadeStrategy"/>
+	<bean id="defaultBackofficeSearchServicesFieldSearchFacadeStrategy"
+		  class="com.hybris.backoffice.searchservices.dataaccess.facades.DefaultSearchServicesFieldSearchFacadeStrategy">
+		<property name="order" value="50"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="itemModelSearchDAO" ref="itemModelSearchDAO"/>
+		<property name="facetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService"/>
+		<property name="snSearchService" ref="snSearchService" />
+		<property name="snSuggestService" ref="snSuggestService" />
+		<property name="searchQueryConverter" ref="backofficeSnSearchQueryConverter" />
+		<property name="searchResultConverter" ref="backofficeSnSearchResultConverter" />
+	</bean>
+
+	<alias name="backofficeAbstractPopulatingConverter" alias="backofficeAbstractPopulatingConverter"/>
+	<bean id="backofficeAbstractPopulatingConverter"
+		  class="de.hybris.platform.converters.impl.AbstractPopulatingConverter" abstract="true"/>
+
+	<alias name="defaultBackofficeSnSearchQueryConverter" alias="backofficeSnSearchQueryConverter" />
+	<bean id="defaultBackofficeSnSearchQueryConverter" parent="backofficeAbstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.searchservices.search.data.SnSearchQuery" />
+		<property name="populators">
+			<list>
+				<ref bean="backofficeSnSearchQueryBasicPopulator" />
+				<ref bean="backofficeSnSearchQueryPaginationPopulator" />
+				<ref bean="backofficeSnSearchQueryFiltersPopulator" />
+				<ref bean="backofficeSnSearchQuerySortsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchResultConverter" alias="backofficeSnSearchResultConverter" />
+	<bean id="defaultBackofficeSnSearchResultConverter" parent="backofficeAbstractPopulatingConverter">
+		<property name="targetClass" value="com.hybris.backoffice.searchservices.populators.SnSearchResultConverterData" />
+		<property name="populators">
+			<list>
+				<ref bean="backofficeSnSearchResultFacetsPopulator" />
+				<ref bean="backofficeSnSearchResultItemModelsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchQueryBasicPopulator" alias="backofficeSnSearchQueryBasicPopulator" />
+	<bean id="defaultBackofficeSnSearchQueryBasicPopulator"
+		  class="com.hybris.backoffice.searchservices.populators.SearchQueryBasicPopulator">
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchQueryPaginationPopulator" alias="backofficeSnSearchQueryPaginationPopulator" />
+	<bean id="defaultBackofficeSnSearchQueryPaginationPopulator"
+		  class="com.hybris.backoffice.searchservices.populators.SearchQueryPaginationPopulator">
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchQueryFiltersPopulator" alias="backofficeSnSearchQueryFiltersPopulator" />
+	<bean id="defaultBackofficeSnSearchQueryFiltersPopulator"
+		  class="com.hybris.backoffice.searchservices.populators.SearchQueryFiltersPopulator">
+		<property name="facetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService" />
+		<property name="typeService" ref="typeService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="catalogTypeService" ref="catalogTypeService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchQuerySortsPopulator" alias="backofficeSnSearchQuerySortsPopulator" />
+	<bean id="defaultBackofficeSnSearchQuerySortsPopulator"
+		  class="com.hybris.backoffice.searchservices.populators.SearchQuerySortsPopulator">
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchResultFacetsPopulator" alias="backofficeSnSearchResultFacetsPopulator" />
+	<bean id="defaultBackofficeSnSearchResultFacetsPopulator"
+		  class="com.hybris.backoffice.searchservices.populators.SearchResultFacetsPopulator">
+		<property name="cockpitLocaleService" ref="cockpitLocaleService" />
+		<property name="categoryFacetValueDisplayNameProvider" ref="categoryFacetValueDisplayNameProvider" />
+	</bean>
+
+	<alias name="defaultBackofficeSnSearchResultItemModelsPopulator" alias="backofficeSnSearchResultItemModelsPopulator" />
+	<bean id="defaultBackofficeSnSearchResultItemModelsPopulator"
+		  class="com.hybris.backoffice.searchservices.populators.SearchResultItemModelsPopulator">
+		<property name="itemModelSearchDAO" ref="itemModelSearchDAO"/>
+	</bean>
+
+	<alias name="defaultSearchservicesIndexSynchronizationStrategy" alias="searchservicesIndexSynchronizationStrategy"/>
+    <bean name="defaultSearchservicesIndexSynchronizationStrategy"
+		    class="com.hybris.backoffice.searchservices.events.DirectSearchservicesIndexSynchronizationStrategy">
+        <property name="modelService" ref="modelService"/>
+        <property name="typeService" ref="typeService"/>
+        <property name="snIndexerService" ref="snIndexerService"/>
+	    <property name="backofficeFacetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService" />
+    </bean>
+
+	<!--Register current strategy to fieldSearchFacadeStrategyRegistry-->
+	<bean class="com.hybris.cockpitng.dataaccess.util.DataAccessStrategyExtender"
+		  lazy-init="false"
+		  init-method="addAll"
+		  destroy-method="removeAll">
+		<property name="fieldSearchFacadeStrategies">
+			<list>
+				<ref bean="backofficeSearchservicesFieldSearchFacadeStrategy" />
+			</list>
+		</property>
+		<property name="fieldSearchFacadeStrategyRegistry" ref="fieldSearchFacadeStrategyRegistry" />
+	</bean>
+
+	<alias name="defaultSearchServicesStrategy" alias="searchServicesStrategy"/>
+	<bean name="defaultSearchServicesStrategy"
+		  class="com.hybris.backoffice.searchservices.dataaccess.facades.SearchServicesStrategy">
+		<property name="backofficeFacetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService"/>
+		<property name="typeMappings">
+			<map key-type="java.lang.String" value-type="java.lang.String">
+				<entry key="TEXT" value="java.lang.String"/>
+				<entry key="LONG" value="java.lang.Long"/>
+				<entry key="STRING" value="java.lang.String"/>
+				<entry key="DOUBLE" value="java.lang.Double"/>
+				<entry key="BOOLEAN" value="java.lang.Boolean"/>
+				<entry key="INTEGER" value="java.lang.Integer"/>
+				<entry key="FLOAT" value="java.lang.Float"/>
+				<entry key="DATE_TIME" value="java.util.Date"/>
+			</map>
+		</property>
+		<property name="operatorConfig">
+			<map key-type="java.lang.String" value-type="com.hybris.cockpitng.search.data.ValueComparisonOperator">
+				<entry key="default" >
+					<set>
+						<value>MATCH</value>
+						<value>IS_EMPTY</value>
+						<value>IS_NOT_EMPTY</value>
+					</set>
+				</entry>
+				<entry key="java.lang.Integer" >
+					<set>
+						<value>GREATER</value>
+						<value>GREATER_OR_EQUAL</value>
+						<value>EQUALS</value>
+						<value>LESS</value>
+						<value>LESS_OR_EQUAL</value>
+					</set>
+				</entry>
+				<entry key="java.lang.Long" >
+					<set>
+						<value>GREATER</value>
+						<value>GREATER_OR_EQUAL</value>
+						<value>EQUALS</value>
+						<value>LESS</value>
+						<value>LESS_OR_EQUAL</value>
+					</set>
+				</entry>
+				<entry key="java.lang.Double" >
+					<set>
+						<value>GREATER</value>
+						<value>GREATER_OR_EQUAL</value>
+						<value>EQUALS</value>
+						<value>LESS</value>
+						<value>LESS_OR_EQUAL</value>
+					</set>
+				</entry>
+				<entry key="java.util.Date" >
+					<set>
+						<value>GREATER</value>
+						<value>GREATER_OR_EQUAL</value>
+						<value>EQUALS</value>
+						<value>LESS</value>
+						<value>LESS_OR_EQUAL</value>
+					</set>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!--Register searchServicesStrategy to fieldQueryFieldRenderer-->
+	<cng:list-extender bean="fieldQueryFieldRenderer" property="searchStrategies">
+		<cng:add value-type="com.hybris.backoffice.widgets.fulltextsearch.FullTextSearchStrategy">
+			<ref bean="searchServicesStrategy"/>
+		</cng:add>
+	</cng:list-extender>
+
+	<cng:property-extender id="servicesStrategyForFieldQueryFieldRenderer" bean="fieldQueryFieldRenderer" property="defaultSearchStrategy">
+		<ref bean="searchServicesStrategy"/>
+	</cng:property-extender>
+
+	<alias name="defaultSearchServicesFilterValidationStrategy" alias="searchServicesFilterValidationStrategy"/>
+	<bean id="defaultSearchServicesFilterValidationStrategy"
+		  class="com.hybris.backoffice.search.core.search.BackofficeSearchFilterValidationStrategy">
+		<property name="typeFacade" ref="typeFacade"/>
+		<property name="searchStrategy" ref="searchServicesStrategy"/>
+	</bean>
+
+	<cng:list-extender bean="searchFilterValidationStrategyRegistry" property="strategies"
+					   getter="@searchFilterValidationStrategies" sort="true">
+		<cng:add value-type="com.hybris.backoffice.widgets.fulltextsearch.SearchFilterValidationStrategy">
+			<ref bean="searchServicesFilterValidationStrategy"/>
+		</cng:add>
+	</cng:list-extender>
+
+	<alias name="searchservicesIndexedLanguagesResolver" alias="searchservicesIndexedLanguagesResolver" />
+	<bean id="searchservicesIndexedLanguagesResolver"
+		  class="com.hybris.backoffice.searchservices.locale.SearchservicesIndexedLanguagesResolver">
+		<property name="backofficeFacetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService" />
+	</bean>
+
+	<cng:property-extender id="searchservicesLabelServiceProxyExtender" bean="itemModelLabelSnIndexerValueProvider" property="labelServiceProxy">
+		<ref bean="labelServiceProxy"/>
+	</cng:property-extender>
+
+	<cng:property-extender id="searchservicesLabelServiceProxyExtenderForCoreData" bean="coreDataQualitySnIndexerValueProvider" property="dataQualityCalculationServiceProxy">
+		<ref bean="dataQualityCalculationServiceProxy"/>
+	</cng:property-extender>
+
+	<cng:property-extender id="searchservicesLabelServiceProxyExtenderForMarketingData" bean="marketingDataQualitySnIndexerValueProvider" property="dataQualityCalculationServiceProxy">
+		<ref bean="dataQualityCalculationServiceProxy"/>
+	</cng:property-extender>
+
+	<cng:property-extender id="searchservicesLabelServiceProxyExtenderForCategoryFacet" bean="defaultCategoryFacetValueDisplayNameProvider" property="labelServiceProxy">
+		<ref bean="labelServiceProxy"/>
+	</cng:property-extender>
+
+	<cng:property-extender id="searchservicesLabelServiceProxyExtenderForItemtype" bean="itemtypeLabelSnIndexerValueProvider" property="labelServiceProxy">
+		<ref bean="labelServiceProxy"/>
+	</cng:property-extender>
+
+	<!-- Aspects -->
+	<alias name="defaultSearchservicesHotUpdater" alias="searchservicesHotUpdater" />
+	<bean id="defaultSearchservicesHotUpdater"
+		  class="com.hybris.backoffice.searchservices.aspects.ObjectFacadeSearchservicesIndexingAspect"
+		  parent="abstractObjectFacadeSearchIndexingAspect" >
+		<property name="searchservicesIndexSynchronizationStrategy" ref="searchservicesIndexSynchronizationStrategy" />
+	</bean>
+
+	<aop:config>
+		<aop:aspect id="searchservicesIndexHotUpdaterAspect" ref="searchservicesHotUpdater" >
+			<aop:after-returning pointcut-ref="objectsModifiedByFacade" method="updateChanged" returning="retVal" />
+			<aop:after-returning pointcut-ref="objectsRemovedByFacade" method="updateRemoved" returning="retVal" />
+			<aop:before pointcut-ref="objectsRemovedDuringSync" method="updateRemovedForMethodParameter"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

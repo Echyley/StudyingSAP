@@ -1,0 +1,14 @@
+{
+  "DigitalPaymentTransaction": {
+    "DigitalPaymentTransaction": "176414755de7925ee69eac74955902fd3d8efdc58d5",
+    "DigitalPaymentDateTime": "2020-12-08T07:36:02.782Z",
+    "DigitalPaytTransResult": "01",
+    "DigitalPaytTransRsltDesc": "Successful"
+  },
+  "PaytCardByDigitalPaymentSrvc": "SJQT3RNKSZFACFXK57VQVBC7",
+  "PaymentCardType": "visa",
+  "PaymentCardExpirationMonth": "05",
+  "PaymentCardExpirationYear": "2026",
+  "PaymentCardMaskedNumber": "************7651",
+  "PaymentCardHolderName": "Some Name"
+}

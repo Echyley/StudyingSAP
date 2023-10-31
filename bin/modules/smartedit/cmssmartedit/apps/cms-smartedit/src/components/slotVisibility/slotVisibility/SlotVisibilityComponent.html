@@ -1,0 +1,36 @@
+<div class="se-slot-visibility-wrapper">
+    <div *ngIf="isReady" class="se-slot-visiblity-component__content">
+        <div class="se-slot-visibility__icon-wrapper">
+            <div class="se-slot-visibility__icon sap-icon--home-share"></div>
+            <div
+                *ngIf="isSharedComponent"
+                class="se-slot-visibility__icon--shared sap-icon--chain-link"
+            ></div>
+        </div>
+
+        <div class="se-slot-visiblity-component__description">
+            <div *ngIf="readOnly" class="se-slot-visiblity-component__name">
+                {{ component.name }}
+            </div>
+            <div
+                *ngIf="!readOnly"
+                class="se-slot-visiblity-component__name--link"
+                (click)="openEditorModal()"
+            >
+                {{ component.name }}
+            </div>
+            <div class="se-slot-visiblity-component__type">{{ component.typeCode }}</div>
+            <div class="se-slot-visiblity-component__visibility">
+                {{ 'se.genericeditor.tab.visibility.title' | translate }} {{
+                componentVisibilitySwitch | translate }} / {{ componentRestrictionsCount }} {{
+                'se.cms.restrictions.editor.tab' | translate }}
+            </div>
+            <!-- for external component, display a globe icon below -->
+            <div
+                *ngIf="component.isExternal"
+                class="sap-icon--globe se-slot-visiblity-component--globe-icon"
+            ></div>
+        </div>
+    </div>
+    <se-hidden-component-menu [slotId]="slotId" [component]="component"></se-hidden-component-menu>
+</div>

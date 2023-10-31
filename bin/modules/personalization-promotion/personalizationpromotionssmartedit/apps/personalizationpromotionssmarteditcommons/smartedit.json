@@ -1,0 +1,22 @@
+{
+  "name": "personalizationpromotionssmarteditcommons",
+  "typescript": {
+    "entry": "./src/index.ts",
+    "dist": "./dist/index.js"
+  },
+  "style": {
+    "global": "node_modules/smartedit-build/styles/se-variables.scss"
+  },
+  "legacy": {
+    "js": [
+      "./src/**/*.js"
+    ],
+    "ngTemplates": {
+      "moduleName": "personalizationpromotionssmarteditCommonTemplates",
+      "includePathInName": false,
+      "files": [
+        "./src/**/*.html"
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+--><items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<!-- JCo Table -->
+		<itemtype autocreate="true" code="RFCDestinationAttribute" generate="true" >
+			<deployment table="RFCDestinationAttribute" typecode="9306" />
+			<attributes>
+				<attribute qualifier="jcoattr_name" type="java.lang.String">
+					<description>Name</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" />
+				</attribute>
+				<attribute qualifier="jcoattr_value" type="java.lang.String">
+					<description>Value</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

@@ -1,0 +1,12 @@
+@import "cockpitng-globals.scss";
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon {
+ @include setTreeIconGlyph("hmc.group.basecommerce", "business-by-design");
+ @include setTreeIconGlyph("hmc.group.basecommerce.deeplink", "chain-link");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+ @include setSideNavigationIconGlyph("hmc.group.basecommerce", "business-by-design");
+ @include setSideNavigationIconGlyph("hmc.group.basecommerce.deeplink", "chain-link");
+}

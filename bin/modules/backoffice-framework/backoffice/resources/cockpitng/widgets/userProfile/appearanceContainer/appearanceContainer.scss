@@ -1,0 +1,39 @@
+/*================================
+    User profile Appearance Container
+================================*/
+// Relevant Changes applied to the User Profile Appearance Container
+
+@import "scss/_appearanceContainer-variables.scss";
+
+.yw-com_hybris_backoffice_widgets_userprofile_appearancecontainer {
+    height: calc(100% - 2px);
+    overflow: auto;
+    .userProfileAppearanceContainer-title {
+        height: $user-profile-appearance-title-height;
+        padding-top: 16px;
+        > span {
+        font-size: $user-profile-appearance-title-size;
+        padding-left: 2 * $user-profile-appearance-default--spacing;
+        color: $user-profile-appearance-title-color;
+        }
+    }
+    .widget_children {
+        height: calc(100% - #{$user-profile-appearance-title-height}) !important;
+        .z-tabs {
+            height: $user-profile-appearance-tab-height;
+            .z-tabs-content {
+                border-bottom: 1px solid var(--bo-container-border-color);
+                padding-left: $user-profile-appearance-default--spacing/2;
+            }
+        }
+        .z-tabpanels {
+            height: calc(100% - #{$user-profile-appearance-tab-height}) !important;
+            .z-tabpanel {
+                height: 100% !important;
+                background: var(--bo-container-background);
+            }
+        }
+
+    }
+}
+

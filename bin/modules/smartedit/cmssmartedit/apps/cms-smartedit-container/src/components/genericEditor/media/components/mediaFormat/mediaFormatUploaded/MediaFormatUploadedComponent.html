@@ -1,0 +1,32 @@
+<div class="se-media--present">
+    <div class="se-media--present-img-container se-media-preview-container">
+        <div *ngIf="isImage()" class="se-media-preview__image-wrapper">
+            <se-media-preview [imageUrl]="getSafeUrl()"></se-media-preview>
+            <img class="se-media-preview__image-thumbnail" [src]="getSafeUrl()" />
+        </div>
+        <div *ngIf="isVideo()" class="se-media-preview__image-wrapper">
+            <video class="se-media-preview__image-thumbnail" controls>
+                <source [src]="getSafeUrl()" type="video/mp4" />
+            </video>
+        </div>
+        <div *ngIf="isPdf()" class="se-media-preview__image-wrapper">
+            <iframe
+                class="se-media-preview__image-thumbnail"
+                [src]="getSafeUrl()"
+                style="width: 100%; height: 100%; border: none"></iframe>
+        </div>
+    </div>
+
+    <se-media-advanced-properties [media]="media"></se-media-advanced-properties>
+
+    <se-media-file-selector
+        [labelI18nKey]="replaceLabelI18nKey"
+        [acceptedFileTypes]="acceptedFileTypes"
+        [customClass]="'media-format-present-replace' + (isFieldDisabled ? ' file-selector-disabled' : '')"
+        [disabled]="isFieldDisabled"
+        (onFileSelect)="onFileSelectorFileSelect($event)"></se-media-file-selector>
+
+    <se-media-remove-button
+        [isDisabled]="isFieldDisabled"
+        (clickHandler)="onRemoveButtonClick()"></se-media-remove-button>
+</div>

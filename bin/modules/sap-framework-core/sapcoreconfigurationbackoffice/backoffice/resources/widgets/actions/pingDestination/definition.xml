@@ -1,0 +1,19 @@
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.PingDestinationAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+ 
+    <name>Ping Destination</name>
+    <description>Ping Destination</description>
+    <author>hybris</author>
+    <version>0.1</version> 
+ 
+    <actionClassName>de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.PingDestinationAction</actionClassName>
+ 
+    <inputType>de.hybris.platform.sap.core.configuration.model.SAPRFCDestinationModel</inputType>
+    <outputType>java.lang.String</outputType>
+ 	
+    <iconUri>target-group</iconUri>
+    
+</action-definition>

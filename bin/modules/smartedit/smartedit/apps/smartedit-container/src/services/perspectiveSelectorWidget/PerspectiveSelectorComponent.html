@@ -1,0 +1,58 @@
+<fd-popover
+    [(isOpen)]="isOpen"
+    [closeOnOutsideClick]="false"
+    [triggers]="['click']"
+    *ngIf="hasActivePerspective()"
+    class="se-perspective-selector"
+    [placement]="'bottom-end'"
+    [disabled]="isDisabled"
+    [options]="popperOptions"
+>
+    <fd-popover-control>
+        <div class="se-perspective-selector__trigger">
+            <se-tooltip
+                [isChevronVisible]="true"
+                [triggers]="['mouseenter', 'mouseleave']"
+                *ngIf="isTooltipVisible()"
+            >
+                <span
+                    se-tooltip-trigger
+                    id="perspectiveTooltip"
+                    class="sap-icon--hint se-perspective-selector__hotkey-tooltip--icon"
+                >
+                </span>
+
+                <div se-tooltip-body>{{ activePerspective.descriptionI18nKey | translate }}</div>
+            </se-tooltip>
+            <button class="se-perspective-selector__btn" [disabled]="isDisabled">
+                {{getActivePerspectiveName() | translate}}
+                <span
+                    class="se-perspective-selector__btn-arrow sap-icon--navigation-down-arrow"
+                    title="{{ getNavigationArrowIconIsCollapse() | translate }}"
+                ></span>
+            </button>
+        </div>
+    </fd-popover-control>
+    <fd-popover-body>
+        <ul
+            fd-list
+            class="se-perspective__list"
+            [ngClass]="{'se-perspective__list--tooltip': isTooltipVisible()}"
+            role="menu"
+        >
+            <li
+                fd-list-item
+                *ngFor="let choice of getDisplayedPerspectives()"
+                class="se-perspective__list-item fd-has-padding-none"
+            >
+                <a
+                    fd-list-link
+                    class="fd-menu__link se-perspective__list-item-text"
+                    (click)="selectPerspective($event, choice.key);"
+                >
+                    {{choice.nameI18nKey | translate}}
+                </a>
+            </li>
+        </ul>
+    </fd-popover-body>
+</fd-popover>

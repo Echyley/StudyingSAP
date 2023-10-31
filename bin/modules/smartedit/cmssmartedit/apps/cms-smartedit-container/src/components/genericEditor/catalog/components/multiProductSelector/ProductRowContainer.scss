@@ -1,0 +1,16 @@
+.se-product-node {
+    display: grid;
+    grid-template-columns: 1fr 5fr 5fr 7fr;
+    grid-column-gap: 12px;
+    width: 100%;
+    align-items: center;
+    padding: 0 se-space('xxs');
+
+    &--no-drag {
+        grid-template-columns: 1fr 6fr 6fr 7fr;
+        cursor: default;
+    }
+    &--drag {
+        grid-template-columns: 1fr 5fr 5fr 7fr 0.5fr;
+    }
+}

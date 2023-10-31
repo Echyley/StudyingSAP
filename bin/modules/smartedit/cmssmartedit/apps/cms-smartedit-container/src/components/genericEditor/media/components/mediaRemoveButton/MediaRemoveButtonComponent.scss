@@ -1,0 +1,6 @@
+.se-media-remove-btn-txt {
+    color: var(--sapIndicationColor_2);
+    &--disabled {
+        color: var(--sapNeutralTextColor);
+    }
+}

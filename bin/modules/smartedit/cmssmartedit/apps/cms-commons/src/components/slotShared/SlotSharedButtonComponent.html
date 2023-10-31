@@ -1,0 +1,47 @@
+<div class="se-shared-slot-button-template" *ngIf="isGlobalSlot || isSlotShared">
+    <se-popup-overlay
+        [popupOverlay]="popupConfig"
+        [popupOverlayTrigger]="isPopupOpened"
+        (popupOverlayOnHide)="hidePopup()"
+    >
+        <button
+            type="button"
+            id="sharedSlotButton-{{ slotId }}"
+            class="se-slot-ctx-menu__dropdown-toggle se-slot-ctx-menu__dropdown-toggle-icon"
+            [ngClass]="{
+                'se-slot-ctx-menu__dropdown-toggle--open': isPopupOpened,
+                'sap-icon--chain-link': isSlotShared,
+                'sap-icon--globe': isGlobalSlot
+            }"
+            (click)="onButtonClick()"
+            title="{{ getSlotSharedButtonComponentIconTitle() | translate }}"
+        ></button>
+
+        <div class="se-slot__dropdown-menu" se-popup-overlay-body>
+            <div class="se-slot-contextual-menu__header" [translate]="labelL10nKey"></div>
+            <div class="se-shared-slot__body">
+                <div
+                    class="se-shared-slot__description"
+                    translate="se.cms.slot.shared.popover.commonmessage"
+                ></div>
+                <div
+                    class="se-shared-slot__description"
+                    [translate]="descriptionL10nKey"
+                    [translateParams]="{ catalogVersion: componentAttributes.smarteditCatalogVersionUuid }"
+                ></div>
+
+                <div *seHasOperationPermission="'se.shared.slot.override.options'">
+                    <div class="se-shared-slot__option">
+                        <a
+                            href="#"
+                            class="se-shared-slot__link replace-slot-link fd-link"
+                            translate="se.cms.slot.shared.popover.button.replaceslot"
+                            (click)="replaceSlot($event)"
+                        >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </se-popup-overlay>
+</div>

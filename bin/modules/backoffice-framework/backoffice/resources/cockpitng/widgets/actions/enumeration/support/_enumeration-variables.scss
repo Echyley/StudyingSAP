@@ -1,0 +1,35 @@
+@import "cockpitng-globals.scss";
+
+$enumeration-action__element--spacing-x: $_container-spacing-default__small; //$container-spacing-default__third;
+$enumeration-action__radiogroup--border: $boxes--border__thin solid $_default-list__item--border-color; //$grey__light--800;
+$enumeration-action__radiogroup--padding: $_container-spacing-default__core $enumeration-action__element--spacing-x;
+$enumeration-action__radio--padding-top: ceil(($toolbar__button-default--size - $font-size__large)/2);
+$enumeration-action__radio--padding-bottom: floor(($toolbar__button-default--size - $font-size__large)/2);
+
+$enumeration-action__radiogroup-first--padding-top: false; //nth($enumeration-action__radiogroup--padding, 2);
+$enumeration-action__button--margin: $_container-spacing-default__tiny $enumeration-action__element--spacing-x; //$enumeration-action__radiogroup-first--padding-top;
+
+// $enumeration-action__popup--margin-left: -7px;
+$enumeration-action__popup--margin-top: 12px;
+$enumeration-action__popup-pointer--left: $container-spacing-default__half; //10px;
+$_enumeration-action__popup-container--padding: 0; //$_container-spacing-default__core 0;
+
+$_enumeration-action__popup-radio--padding-top: ceil(($toolbar__button-medium--size + $_container-spacing-default__tiny - $font-size__large)/2);
+$_enumeration-action__popup-radio--padding-bottom: floor(($toolbar__button-medium--size + $_container-spacing-default__tiny - $font-size__large)/2);
+
+$enumeration-action__menu-popup-shadow--box-shadow: var(--bo-content-shadow-large);
+
+$enumeration-action__menu--color: $_default-list__item--color; //$black__blueish--100;
+$enumeration-action__menu--font-size: $font-size__base;
+$enumeration-action__menu-hover--bg: $_default-list__item-hover--bg-color; //$grey__light--1200;
+$enumeration-action__menu-hover--color: $_default-list__item--color; //$blue__default;
+$enumeration-action__menu-active--bg: var(--bo-list-active-background);
+$enumeration-action__menu-active--color: var(--bo-list-active-text-color);
+$enumeration-action__menu-selected--bg: var(--bo-list-selected-background);
+$enumeration-action__menu-selected--color: var(--bo-list-text-color);
+$enumeration-action__menu--bg: $_editor-defaults__popup-box--bg-color;
+$enumeration-action__menu-icon--opacity: 0.7;
+$enumeration-action__menu-icon--right: $_container-spacing-default__tiny;
+$enumeration-action__menu-container-content--padding: 7px (7px + $enumeration-action__menu-icon--right) 7px 7px;
+
+$enumeration-action__menu-popup--border: $boxes--border__thin solid $_editor-defaults__popup-box--border-color; //$grey__light--100;

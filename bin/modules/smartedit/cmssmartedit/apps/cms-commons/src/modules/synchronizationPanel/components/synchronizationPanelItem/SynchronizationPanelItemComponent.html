@@ -1,0 +1,91 @@
+<div class="se-sync-panel-item-checkbox fd-form__item">
+    <input
+        *ngIf="!item.isExternal"
+        type="checkbox"
+        [id]="'sync-info__checkbox_' + index"
+        class="se-sync-panel-item-checkbox__field fd-form__control"
+        [(ngModel)]="item.selected"
+        (ngModelChange)="onSelectionChange()"
+        [attr.disabled]="isItemDisabled() ? true : null"
+    />
+    <!-- Label for select all item -->
+    <label
+        *ngIf="index === 0"
+        [for]="'sync-info__checkbox_' + index"
+        class="se-sync-panel-item-checkbox__label se-sync-panel-item-checkbox__label--select-all fd-form-label"
+        [title]="getSelectAllLabel() | translate"
+        [translate]="getSelectAllLabel()"
+    >
+    </label>
+    <!-- Label for non external -->
+    <label
+        *ngIf="index !== 0 && !item.isExternal"
+        [for]="'sync-info__checkbox_' + index"
+        class="se-sync-panel-item-checkbox__label fd-form-label"
+        [title]="item.name | translate"
+        [translate]="item.name"
+    >
+    </label>
+    <!-- Label for an external -->
+    <se-tooltip
+        *ngIf="index !== 0 && item.isExternal"
+        [isChevronVisible]="true"
+        [triggers]="['mouseenter', 'mouseleave']"
+    >
+        <label
+            se-tooltip-trigger
+            [for]="'sync-info__checkbox_' + index"
+            class="se-sync-panel-item-checkbox__label fd-form-label"
+            [translate]="item.name"
+        >
+        </label>
+        <div se-tooltip-body translate="se.cms.synchronization.slot.external.component"></div>
+    </se-tooltip>
+</div>
+<!-- sync icon (with tooltip) -->
+<span *ngIf="showPopoverOverSyncIcon()">
+    <se-tooltip
+        [isChevronVisible]="true"
+        [placement]="'left'"
+        [triggers]="['mouseenter', 'mouseleave']"
+        [title]="getInfoTitle()"
+        class="pull-right se-sync-panel-item-info-icon"
+        [ngClass]="{ 'se-sync-panel--icon-globe': item.isExternal }"
+    >
+        <!-- non external trigger -->
+        <ng-container *ngIf="!item.isExternal" se-tooltip-trigger>
+            <ng-container *ngTemplateOutlet="syncInfoIcon"></ng-container>
+        </ng-container>
+
+        <!-- external trigger -->
+        <span *ngIf="item.isExternal" class="sap-icon--globe" se-tooltip-trigger></span>
+
+        <div se-tooltip-body>
+            <!-- Non external. If item has dependent item types out of sync then it displays names of those items -->
+            <ng-container *ngIf="!item.isExternal">
+                <div *ngFor="let dependentItem of item.dependentItemTypesOutOfSync">
+                    {{ dependentItem.i18nKey | translate }}
+                </div>
+            </ng-container>
+            <!-- If the item is external then it displays the catalog version of this item. -->
+            <div *ngIf="item.isExternal">{{ item.catalogVersionName | seL10n | async }}</div>
+        </div>
+    </se-tooltip>
+</span>
+<!-- sync icon (no tooltip), e.g. synchronized checkmark -->
+<span *ngIf="!showPopoverOverSyncIcon()" class="pull-right se-sync-panel-item-info-icon">
+    <ng-container *ngTemplateOutlet="syncInfoIcon"></ng-container>
+</span>
+
+<ng-template #syncInfoIcon>
+    <!-- status attribute is used for e2e -->
+    <span
+        [attr.status]="item.status"
+        class="se-sync-panel-item-info-icon__icon"
+        [ngClass]="{
+                'sap-icon--accept': isInSync(),
+                'sap-icon--message-warning': !isInSync()
+            }"
+    >
+    </span>
+</ng-template>

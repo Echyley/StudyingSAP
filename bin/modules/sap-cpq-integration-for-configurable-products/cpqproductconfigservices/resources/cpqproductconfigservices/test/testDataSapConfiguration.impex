@@ -1,0 +1,21 @@
+$lang=en
+INSERT_UPDATE sapconfiguration;core_name[unique=true];sapcommon_salesOrganization;sapcommon_distributionChannel;sapcommon_division
+;TESTCONFIGURATION;salesorg;dc;division
+
+INSERT_UPDATE BaseStore;uid[unique=true];sapconfiguration(core_name);submitOrderProcessCode
+;testConfigureStore;TESTCONFIGURATION;sap-order-process
+
+insert_update saphttpdestination;httpdestinationname[unique=true];targeturl;userid;password;authenticationtype(code)
+;HTTPLOGICALSYS;https://system/sap/bc/srt/IDoc?sap-client=910;user;pw;BASIC_AUTHENTICATION
+ 
+insert_update sapglobalconfiguration;core_name;sapcommon_erplogicalsystem;sapcommon_erphttpdestination(httpdestinationname)
+;GLOBAL;LOGICALSYS;HTTPLOGICALSYS;
+ 
+insert_update saplogicalsystem;saplogicalsystemname[unique=true];saphttpdestination(httpdestinationname);sapglobalconfiguration(core_name);sendername;senderport;defaultlogicalsystem;sapsystemtype(code)
+;LOGICALSYS;HTTPLOGICALSYS;GLOBAL;DHTIGER;TIGERPORT;true;SAP_S4HANA
+
+INSERT_UPDATE ReferenceDistributionChannelMapping;salesOrganization[unique=true];distChannel[unique=true];distChannelName[lang=$lang];refDistChannelConditions;refDistChannelConditionsName[lang=$lang];refDistChannelCustMat;refDistChannelCustMatName[lang=$lang];
+;salesorg;dc;"Distribution Channel";dc;"Distribution Channel";dc;"Distribution Channel"
+
+INSERT_UPDATE ReferenceDivisionMapping;salesOrganization[unique=true];division[unique=true];divisionName[lang=$lang];refDivisionConditions;refDivisionConditionsName[lang=$lang];refDivisionCustomer;refDivisionCustomerName[lang=$lang]
+;salesorg;division;"Produktdivision";division;"Produktdivision";division;"Product Division"

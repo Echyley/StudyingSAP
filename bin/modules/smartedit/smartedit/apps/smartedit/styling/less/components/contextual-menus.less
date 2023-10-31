@@ -1,0 +1,162 @@
+/********************************************************
+                    Contextual Menu
+*********************************************************/
+
+@se-title-color: var(--sapTitleColor);
+.smartEditComponentX {
+    z-index: @z-index-level-1;
+}
+
+// elements contained by hovered slot are rendered above all other slots
+.smartEditComponentX:hover {
+    z-index: @z-index-level-2;
+}
+
+.smartEditComponentX > * {
+    height: 100%;
+    width: 100%;
+}
+
+.decorative-panel-basic-slot-contextual-menu {
+    position: static;
+    margin-top: -42px;
+}
+
+.decorator-basic-slot-border {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 2px dashed var(--sapContent_Illustrative_Color6);
+}
+
+// Padding added to the body when se-decorative-panel-area is too small to display all the buttons
+.se-decorative-body__padding--left,
+.se-decorative-body__padding--right {
+    background-image: url('@{dist-images-path}/slot_background_v2.png');
+    flex-grow: 1;
+    display: none;
+    box-shadow: inset 0 0 0 2px var(--sapLink_Active_Color);
+    height: 50px;
+}
+.se-decorative-body__padding--right.active,
+.se-decorative-body__padding--left.active {
+    display: flex;
+}
+
+.se-page-sensitive,
+.se-decorator-wrap {
+    height: 100%;
+}
+
+.se-decorator-wrap {
+    display: block; /* mandatory for proper positioning of decorator */
+    > slot-disabled-component {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+    &.ng-transclude {
+        position: absolute;
+    }
+}
+
+@disabled-shared-slot__icon--outer-background: se-fade(
+    var(--sapButton_Neutral_Hover_Background),
+    50%
+);
+@disabled-shared-slot-popover-border-radius: 3px;
+
+.disabled-shared-slot-versioning-mode,
+.disabled-shared-slot {
+    background-color: rgba(89, 91, 94, 35%);
+    width: 100%;
+    height: 100%;
+    color: var(--sapTitleColor);
+    text-align: center;
+    word-wrap: break-word;
+    text-overflow: clip;
+    position: relative;
+}
+
+.disabled-shared-slot-versioning-mode {
+    background-color: none;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(56, 76, 102, 0.5),
+        rgba(56, 76, 102, 0.5) 10px,
+        rgba(66, 87, 115, 0.5) 5px,
+        rgba(66, 87, 115, 0.5) 25px
+    );
+}
+
+.disabled-shared-slot__icon--outer,
+.disabled-shared-slot__icon--outer-hovered {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: @z-index-level-5;
+    opacity: 0.5;
+
+    &.disabled-shared-slot__icon--outer-globe,
+    &.disabled-shared-slot__icon--outer-linked {
+        border: 2px solid var(--sapButton_Lite_Hover_BorderColor);
+        background-color: rgba(29, 45, 62, 0.75);
+    }
+    .disabled-shared-slot__icon--inner {
+        &[class*='sap-icon'] {
+            color: #ffffff;
+        }
+    }
+}
+.disabled-shared-slot__icon--outer {
+    &.disabled-shared-slot__icon--outer-globe,
+    &.disabled-shared-slot__icon--outer-linked {
+        border-color: #f5f6f7;
+        background-color: rgba(85, 107, 130, 0.75);
+    }
+}
+
+.disabled-shared-slot__icon--inner {
+    &[class*='sap-icon'] {
+        font-weight: bold;
+        color: #f5f6f7;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: @z-index-level-5;
+        opacity: 0.5;
+        &.sap-icon--locked:before {
+            font-size: 42px;
+            position: relative;
+            left: 5px;
+        }
+        &.sap-icon--chain-link:before {
+            font-size: 16px;
+        }
+        &.sap-icon--globe:before {
+            font-size: 24px;
+        }
+    }
+}
+
+.disabled-shared-slot-tooltip__wrapper {
+    background: var(--sapTextColor);
+    display: flex;
+    align-items: center;
+    border-radius: @disabled-shared-slot-popover-border-radius;
+}
+
+.disabled-shared-slot-tooltip__info {
+    color: var(--sapBaseColor);
+    padding: 0.4 * @se-gutter;
+}

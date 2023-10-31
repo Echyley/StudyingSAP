@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- orika converter -->
+	<bean class="de.hybris.platform.assistedservicewebservices.converters.C360CouponConverter"/>
+	<bean class="de.hybris.platform.assistedservicewebservices.converters.C360TicketStatusConverter" />
+	<bean class="de.hybris.platform.assistedservicewebservices.converters.C360TicketCategoryConverter" />
+
+	<!-- Field mapping configuration -->
+	<bean id="dataMapper"
+		class="de.hybris.platform.webservicescommons.mapping.impl.DefaultDataMapper">
+		<property name="fieldSetBuilder" ref="fieldSetBuilder" />
+	</bean>
+
+	<alias alias="subclassRegistry" name="defaultSubclassRegistry" />
+	<bean id="defaultSubclassRegistry"
+		  class="de.hybris.platform.webservicescommons.mapping.impl.DefaultSubclassRegistry"
+		  init-method="init">
+	</bean>
+
+	<bean id="fieldSetBuilder"
+		class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetBuilder">
+		<property name="defaultRecurrencyLevel" value="4" />
+		<property name="defaultMaxFieldSetSize" value="50000" />
+		<property name="fieldSetLevelHelper" ref="fieldSetLevelHelper" />
+		<property name="subclassRegistry" ref="subclassRegistry" />
+	</bean>
+
+	<alias alias="fieldSetLevelHelper" name="defaultFieldSetLevelHelper" />
+	<bean id="defaultFieldSetLevelHelper"
+		class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetLevelHelper">
+	</bean>
+
+	<bean class="de.hybris.platform.webservicescommons.mapping.filters.GeneralFieldFilter">
+		<property name="fieldSelectionStrategy" ref="fieldSelectionStrategy"/>
+	</bean>
+
+	<bean id="customCustomer360DataDataObjectFactory" class="de.hybris.platform.webservicescommons.mapping.config.DynamicTypeFactory"
+		  init-method="init" p:baseType="de.hybris.platform.assistedservicewebservices.dto.Customer360DataWsDTO" />
+
+	<!-- Orika : Mappers -->
+	<bean class="de.hybris.platform.assistedservicewebservices.mapping.mappers.OrderEntryDataMapper"
+		  parent="abstractCustomMapper"/>
+	<bean class="de.hybris.platform.assistedservicewebservices.mapping.mappers.CartDataMapper"
+		  parent="abstractCustomMapper"/>
+	<bean class="de.hybris.platform.assistedservicewebservices.mapping.mappers.PaymentDetailDataMapper"
+		  parent="abstractCustomMapper"/>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.CustomerSearchPageWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="results" value="entries"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.user.data.AutoSuggestionCustomerData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.CustomerSuggestionWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="value" value="fullName"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.ReviewData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.ReviewDataWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="SKUNumber" value="productCode"/>
+				<entry key="created" value="createdAt"/>
+				<entry key="updated" value="updatedAt"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.ReviewDataList"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360ReviewList"/>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.StoreLocationData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360StoreLocation"/>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.CustomerProfileData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360CustomerProfileDataWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="paymentInfoList" value="paymentDetails"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.CustomerViewHeadingData" />
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360OverviewDataWsDTO" />
+		<property name="fieldMapping">
+			<map>
+				<entry key="latestOpenedTicketCreated" value="latestOpenedTicketCreatedAt"/>
+				<entry key="signedUp" value="signedUpAt"/>
+				<entry key="profilePicture" value="userAvatar"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.customerinterestsfacades.data.ProductInterestRelationData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360CustomerProductInterestWsDTO"/>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360ProductWsDTO"/>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicepromotionfacades.customer360.CSACouponData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360CouponWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="couponApplied" value="applied"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.customercouponfacades.customercoupon.data.CustomerCouponData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360CustomerCouponWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="couponId" value="code"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicepromotionfacades.customer360.CSAPromoData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360PromoWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="firedMessage" value="message"/>
+				<entry key="fired" value="applied"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.GeneralActivityData"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360TicketWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="created" value="createdAt"/>
+				<entry key="updated" value="updatedAt"/>
+				<entry key="description" value="subject"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+					value="de.hybris.platform.commerceservices.search.pagedata.PaginationData"/>
+		<property name="destClass"
+					value="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PaginationWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="totalNumberOfResults" value="totalResults"/>
+				<entry key="numberOfPages" value="totalPages"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass" value="de.hybris.platform.assistedservicefacades.customer360.GeneralActivityDataList"/>
+		<property name="destClass" value="de.hybris.platform.assistedservicewebservices.dto.C360ActivityList"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="generalActivities" value="activities"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Orika : Mappers -->
+	<bean class="de.hybris.platform.assistedservicewebservices.mapper.CustomerDataMapper" parent="abstractCustomMapper" />
+	<bean class="de.hybris.platform.assistedservicewebservices.mapper.C360ActivityDataMapper" parent="abstractCustomMapper" />
+</beans>

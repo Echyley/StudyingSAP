@@ -1,0 +1,21 @@
+<div class="se-media-upload__file-info-field" [ngClass]="getContainerClassName()">
+    <label
+        class="se-control-label"
+        [ngClass]="{ 'se-media-upload-has-error': hasError(), required: isRequired }"
+        [translate]="labelI18nKey"
+    ></label>
+    <input
+        fd-form-control
+        type="text"
+        [state]="hasError()? 'error': ''"
+        [attr.name]="fieldName"
+        [ngModel]="fieldValue"
+        (ngModelChange)="onChangeValue($event)"
+    />
+    <span
+        class="upload-field-error fd-form__message se-generic-editor__error"
+        [ngClass]="getErrorClassName()"
+        *ngFor="let error of fieldErrors"
+        >{{ error | translate }}</span
+    >
+</div>

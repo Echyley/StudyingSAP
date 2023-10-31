@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="de.hybris.platform.integrationbackoffice.widgets.IntegrationBackofficeStackLayoutContainerReverseFlex">
+    <name>Abstract Integration Editor Container with Reversed Flex</name>
+    <description>Container that has slots for a top and bottom pane.</description>
+    <defaultTitle>Stack Layout Container Reverse Flex</defaultTitle>
+    <author>Hybris</author>
+    <version>1.0</version>
+    <keywords>
+        <keyword>IntegrationBackofficeStackLayoutContainerReverseFlex</keyword>
+    </keywords>
+    <view src="IntegrationBackofficeStackLayoutContainerReverseFlex.zul"/>
+</widget-definition>

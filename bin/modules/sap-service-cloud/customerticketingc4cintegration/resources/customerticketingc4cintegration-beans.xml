@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!-- Root Response DTO with one c4c-object -->
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataSingleResponseData">
+		<property name="d" type="ODataSingleResultsData"/>
+	</bean>
+
+	<!-- Root Response DTO with list c4c-objects -->
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataListResponseData">
+		<property name="d" type="ODataListResultsData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataSingleResultsData">
+		<property name="results" type="ServiceRequestData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ODataListResultsData">
+		<property name="results" type="java.util.List&lt;ServiceRequestData&gt;"/>
+		<property name="__count" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ServiceRequestData">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty"/>
+
+		<property name="Name" type="String"/>
+		<property name="CustomerID" type="String">
+			<annotations>@Deprecated(since = "2102", forRemoval = true)</annotations>
+		</property>
+		<property name="ExternalCustomerID" type="String">
+			<annotations>@Deprecated(since = "2102", forRemoval = true)</annotations>
+		</property>
+		<property name="ExternalContactID" type="String">
+			<annotations>@Deprecated(since = "2102", forRemoval = true)</annotations>
+		</property>
+		<property name="BuyerPartyID" type="String" />
+		<property name="BuyerMainContactPartyID" type="String" />
+		<property name="DataOriginTypeCode" type="String"/>
+		<property name="ID" type="String"/>
+		<property name="ObjectID" type="String"/>
+		<property name="LastChangeDateTime" type="String"/>
+		<property name="CreationDateTime" type="String"/>
+		<property name="StatusCode" type="String">
+			<annotations>@JsonProperty("ServiceRequestUserLifeCycleStatusCode")</annotations>
+		</property>
+		<property name="Notes" type="java.util.List&lt;Note&gt;">
+			<annotations>@JsonProperty("ServiceRequestTextCollection")</annotations>
+		</property>
+		<property name="RelatedTransactions" type="java.util.List&lt;RelatedTransaction&gt;">
+			<annotations>@JsonProperty("ServiceRequestBusinessTransactionDocumentReference")</annotations>
+		</property>
+		<property name="MemoActivities" type="java.util.List&lt;MemoActivity&gt;" />
+	</bean>
+
+	<!-- Also used as Update request dto -->
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.Note">
+		<property name="Text" type="String"/>
+		<property name="TypeCode" type="String"/>
+		<property name="LanguageCode" type="String"/>
+		<property name="ParentObjectID" type="String"/>
+        <property name="CreatedOn" type="String"/>
+		<property name="CreatedBy" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.RelatedTransaction">
+		<property name="BusinessSystemID" type="String"/>
+		<property name="TypeCode" type="String"/>
+		<property name="RoleCode" type="String"/>
+		<property name="ID" type="String"/>
+		<property name="ParentObjectID" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.IndividualCustomer" >
+		<property name="CustomerID" type="String" />
+		<property name="ExternalID" type="String" />
+		<property name="ExternalSystem" type="String" />
+		<property name="RoleCode" type="String" />
+		<property name="LifeCycleStatusCode" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.Contact">
+		<property name="ObjectID" type="String" />
+		<property name="ContactID" type="String" />
+		<property name="ContactUUID" type="String" />
+		<property name="ExternalID" type="String" />
+		<property name="ExternalSystem" type="String" />
+		<property name="FirstName" type="String" />
+		<property name="LastName" type="String" />
+		<property name="AccountID" type="String" />
+		<property name="AccountUUID" type="String" />
+		<property name="Email" type="String" />
+	</bean>
+	
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.MemoActivity">
+		<import type="com.fasterxml.jackson.annotation.JsonProperty"/>
+		
+		<property name="SubjectName" type="String"/>
+		<property name="InitiatorCode" type="String"/>
+		<property name="ID" type="String"/>
+		<property name="ObjectID" type="String"/>
+		<property name="TicketObjectID" type="String"/>
+		<property name="CreationDateTime" type="String"/>
+		<property name="EntityLastChangedOn" type="String"/>
+		<property name="Text" type="String"/>
+		<property name="TypeCode" type="String"/>
+		<property name="ActivityParties" type="java.util.List&lt;ActivityParty&gt;">
+			<annotations>@JsonProperty("ActivityParty")</annotations>
+		</property>
+		<property name="ActivityTexts" type="java.util.List&lt;ActivityText&gt;">
+			<annotations>@JsonProperty("ActivityText")</annotations>
+		</property>
+		
+	</bean>
+	
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ActivityParty">
+		<property name="PartyID" type="String"/>
+		<property name="PartyTypeCode" type="String"/>
+		<property name="RoleCode" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.customerticketingc4cintegration.data.ActivityText">
+		<property name="Text" type="String"/>
+		<property name="TypeCode" type="String"/>
+	</bean>
+
+</beans>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <alias name="defaultPunchOutUserAuthenticationStrategy" alias="punchOutUserAuthenticationStrategy"/>
+    <bean id="defaultPunchOutUserAuthenticationStrategy"
+          class="de.hybris.platform.b2b.punchout.security.impl.DefaultPunchOutUserAuthenticationStrategy">
+        <property name="authenticationProvider" ref="punchOutAuthenticationProvider"/>
+        <property name="authenticationSuccessHandlers">
+            <list>
+                <ref bean="punchOutAuthenticationSuccessHandler"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultPunchOutAuthenticationSuccessHandler" alias="punchOutAuthenticationSuccessHandler"/>
+    <bean id="defaultPunchOutAuthenticationSuccessHandler"
+          class="de.hybris.platform.b2b.punchout.security.impl.PunchOutAuthenticationSuccessHandler">
+        <property name="customerFacade" ref="customerFacade"/>
+    </bean>
+
+</beans>

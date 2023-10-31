@@ -1,0 +1,96 @@
+<div *ngIf="item.isPermissionGranted">
+    <div *ngIf="item.type == type.ACTION" class="toolbar-action">
+        <button
+            fd-button
+            type="button"
+            [ngClass]="{
+                'toolbar-action--button--compact': isCompact,
+                'toolbar-action--button': !isCompact
+            }"
+            class="btn fd-button"
+            (click)="toolbar.triggerAction(item, $event)"
+            attr.aria-label="{{ item.name | translate}}"
+            id="{{toolbar.toolbarName}}_option_{{item.key}}_btn"
+            title="{{ item.name | translate}}"
+        >
+            <span
+                *ngIf="item.iconClassName"
+                id="{{toolbar.toolbarName}}_option_{{item.key}}_btn_iconclass"
+                class="{{item.iconClassName}}"
+                [ngClass]="{ 'se-toolbar-actions__icon': isCompact }"
+            ></span>
+            <img
+                *ngIf="!item.iconClassName && item.icons"
+                id="{{toolbar.toolbarName}}_option_{{item.key}}"
+                src="{{toolbar.imageRoot}}{{item.icons[0]}}"
+                class="file"
+                title="{{item.name | translate}}"
+                alt="{{item.name | translate}}"
+            />
+            <span
+                *ngIf="!isCompact"
+                class="toolbar-action-button__txt"
+                id="{{toolbar.toolbarName}}_option_{{item.key}}_btn_lbl"
+                >{{item.name | translate}}</span
+            >
+        </button>
+    </div>
+    <fd-popover
+        class="se-toolbar-action__wrapper toolbar-action toolbar-action--hybrid"
+        *ngIf="item.type === type.HYBRID_ACTION"
+        [attr.data-item-key]="item.key"
+        [noArrow]="false"
+        [placement]="placement"
+        [(isOpen)]="item.isOpen"
+        [fixedPosition]="true"
+    >
+        <fd-popover-control>
+            <button
+                fd-button
+                *ngIf="item.iconClassName || item.icons"
+                type="button"
+                class="btn fd-button"
+                [ngClass]="{
+                    'toolbar-action--button--compact': isCompact,
+                    'toolbar-action--button': !isCompact
+                }"
+                [disabled]="disabled"
+                id="{{toolbar.toolbarName}}_option_{{item.key}}_btn"
+                attr.aria-label="{{ item.name | translate}}"
+                [attr.aria-expanded]="item.isOpen"
+                (click)="toolbar.triggerAction(item, $event)"
+                title="{{ item.name | translate}}"
+            >
+                <span
+                    *ngIf="item.iconClassName"
+                    class="{{item.iconClassName}}"
+                    [ngClass]="{ 'se-toolbar-actions__icon': isCompact }"
+                ></span>
+                <img
+                    *ngIf="!item.iconClassName && item.icons"
+                    id="{{toolbar.toolbarName}}_option_{{item.key}}"
+                    src="{{toolbar.imageRoot}}{{item.icons[0]}}"
+                    class="file"
+                    title="{{item.name | translate}}"
+                    alt="{{item.name | translate}}"
+                />
+                <span *ngIf="!isCompact" class="toolbar-action-button__txt"
+                    >{{item.name | translate}}</span
+                >
+            </button>
+        </fd-popover-control>
+        <fd-popover-body
+            role="listbox"
+            class="se-toolbar-action__body"
+            [ngClass]="{
+                'toolbar-action--include--compact': isCompact,
+                'toolbar-action--include': !isCompact  
+            }"
+        >
+            <se-prevent-vertical-overflow>
+                <ng-container *ngComponentOutlet="item.component; injector: actionInjector">
+                </ng-container>
+            </se-prevent-vertical-overflow>
+        </fd-popover-body>
+    </fd-popover>
+</div>

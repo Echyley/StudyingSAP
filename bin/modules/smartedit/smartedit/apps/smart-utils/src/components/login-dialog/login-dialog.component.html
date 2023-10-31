@@ -1,0 +1,112 @@
+<div class="su-login-dialog-container">
+    <div class="fd-dialog__content fd-dialog__content--overrides" role="document">
+        <div class="su-login">
+            <div class="su-login--wrapper">
+                <div
+                    class="su-login--logo-wrapper"
+                    [ngClass]="{ 'su-login--logo-wrapper_full': !isFullScreen }"
+                >
+                    <img
+                        *ngIf="resource?.topLogoURL"
+                        [src]="resource?.topLogoURL"
+                        class="su-login--logo"
+                        title="{{ 'se.logo.title' | translate }}"
+                    />
+                    <span class="su-login--logo-text" translate="se.application.name"> </span>
+                </div>
+                <form
+                    autocomplete="off"
+                    novalidate
+                    [formGroup]="form"
+                    (submit)="signinWithCredentials()"
+                    class="su-login--form"
+                >
+                    <div class="su-login--auth-message" *ngIf="isFullScreen">
+                        <div translate="se.logindialogform.reauth.message1"></div>
+                        <div translate="se.logindialogform.reauth.message2"></div>
+                    </div>
+
+                    <!--Validation Errors-->
+                    <div *ngIf="form.errors" class="su-login--form-group">
+                        <fd-message-strip
+                            type="error"
+                            class="su-login--alert-error"
+                            id="invalidError"
+                            [dismissible]="false"
+                        >
+                            <ng-container *ngIf="form.errors?.credentialsRequiredError">
+                                {{ form.errors.credentialsRequiredError | translate }}
+                            </ng-container>
+
+                            <ng-container *ngIf="form.errors?.asyncValidationError">
+                                {{ form.errors.asyncValidationError | translate }}
+                            </ng-container>
+                        </fd-message-strip>
+                    </div>
+
+                    <div class="su-login--form-group">
+                        <input
+                            fd-form-control
+                            type="text"
+                            id="username_{{ authURIKey }}"
+                            name="username"
+                            formControlName="username"
+                            placeholder="{{ 'se.authentication.form.input.username' | translate }}"
+                            autofocus
+                            autocomplete="off"
+                            class="fd-input"
+                        />
+                    </div>
+                    <div class="su-login--form-group">
+                        <input
+                            fd-form-control
+                            type="password"
+                            id="password_{{ authURIKey }}"
+                            name="password"
+                            placeholder="{{ 'se.authentication.form.input.password' | translate }}"
+                            formControlName="password"
+                            autocomplete="off"
+                            required
+                            class="fd-input"
+                        />
+                    </div>
+                    <div class="su-login--form-group">
+                        <su-language-dropdown class="su-login-language"></su-language-dropdown>
+                    </div>
+                    <button
+                        fd-button
+                        options="emphasized"
+                        class="fd-button--emphasized su-login--btn"
+                        id="submit_{{ authURIKey }}"
+                        name="submit"
+                        type="submit"
+                        label="{{ 'se.authentication.form.button.submit' | translate }}"
+                    ></button>
+                </form>
+                <form
+                    *ngIf="ssoEnabled"
+                    class="su-login--form-sso"
+                    name="loginDialogFormSSO"
+                    novalidate
+                    (submit)="signinWithSSO()"
+                >
+                    <button
+                        fd-button
+                        options="emphasized"
+                        class="fd-button--emphasized su-login--btn"
+                        id="submitSSO_{{ authURIKey }}"
+                        name="submitSSO"
+                        type="submit"
+                        label="{{ 'se.authentication.form.button.submit.sso' | translate }}"
+                    ></button>
+                </form>
+            </div>
+        </div>
+        <img
+            *ngIf="resource?.bottomLogoURL"
+            [src]="resource?.bottomLogoURL"
+            class="su-login--logo__best-run"
+            title="{{ 'se.logo.title' | translate }}"
+        />
+    </div>
+</div>

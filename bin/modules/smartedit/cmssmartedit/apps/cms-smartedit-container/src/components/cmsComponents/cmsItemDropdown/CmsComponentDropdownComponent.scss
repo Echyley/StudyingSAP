@@ -1,0 +1,14 @@
+se-cms-component-dropdown {
+    // There are two elements with the same class
+    // se-actionable-search-item and div, only div is desired to have styles
+    div.se-actionable-search-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0 0 13px;
+    }
+
+    se-item-printer {
+        width: 100%;
+    }
+}

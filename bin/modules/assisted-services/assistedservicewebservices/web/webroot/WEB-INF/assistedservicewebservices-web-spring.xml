@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace items or managers you have to do this from the extensions 
+	core configuration file (assistedservicewebservices/resources/assistedservicewebservices-spring.xml) -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:component-scan base-package="de.hybris.platform.assistedservicewebservices"  scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver" >
+		<context:exclude-filter type="assignable" expression="de.hybris.platform.assistedservicewebservices.config.WebConfig"/>
+	</context:component-scan>
+
+	<import resource="config/cache-config-spring.xml"/>
+	<import resource="config/security-spring.xml"/>
+	<import resource="config/error-config-spring.xml"/>
+	<import resource="config/field-mapping-spring.xml"/>
+	<import resource="config/validators-spring.xml"/>
+	<import resource="config/jaxb-converters-spring.xml"/>
+
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages/messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<!-- Spring managed FilterChain for hybris Filter stack -->
+	<bean id="assistedservicewebservicesPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+		<constructor-arg>
+			<list>
+				<!-- Filter that catches and resolves exceptions thrown from other filters. Can be uncommented if you need such functionality -->
+				<ref bean="exceptionTranslationFilter" />
+				<ref bean="log4jFilter" />
+				<ref bean="tenantActivationFilter" />
+				<!-- This filter creates new jalo session and close it after request is handled. -->
+				<ref bean="restSessionFilter" />			
+
+				<!-- If you want to track user session:
+					- uncomment filter below 
+					- comment or remove restSessionFilter above
+					- comment or remove SessionHindingRequestFilter in web.xml -->
+				<!-- ref bean="sessionFilter" /-->
+				<ref bean="baseSiteMatchingFilter" />
+				<!-- Security -->
+				<ref bean="corsFilter"/>
+				<ref bean="springSecurityFilterChain" />
+				<ref bean="userMatchingFilter" />
+				<ref bean="assistedServiceSessionFilter" />
+				<ref bean="assistedServiceSessionCurrencyFilter" />
+				<ref bean="assistedServiceSessionLanguageFilter" />
+				<ref bean="cartMatchingFilter" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<util:list id="filterExcludedUrls">
+		<value>.*swagger.*</value>
+		<value>.*swagger-ui.*</value>
+		<value>.*api-docs.*</value>
+
+	</util:list>
+
+	<util:list id="baseSiteFilterIncludedURLs">
+		<value>/customers</value>
+		<value>/customers/search</value>
+		<value>/customers/autocomplete</value>
+		<value>/bind-cart</value>
+		<value>/customerlists</value>
+		<value>/customerlists/.*</value>
+		<value>.*/users/.*/customer360</value>
+	</util:list>
+
+	<alias alias="baseSiteMatchingFilter" name="defaultBaseSiteMatchingFilter" />
+	<bean id="defaultBaseSiteMatchingFilter" class="de.hybris.platform.assistedservicewebservices.filters.BaseSiteMatchingFilter">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="regexp" value="/([^/]+)(/users/)([^/]+)(/customer360)" />
+		<property name="includedURLs" ref="baseSiteFilterIncludedURLs"/>
+	</bean>
+
+	<bean id="assistedServiceSessionFilter" class="de.hybris.platform.assistedservicewebservices.filters.AssistedServiceSessionFilter">
+		<property name="assistedServiceFacade" ref="assistedServiceFacade"/>
+		<property name="userMatchingService" ref="userMatchingService" />
+		<property name="excludedUrls" ref="filterExcludedUrls"/>
+	</bean>
+
+	<bean id="assistedServiceSessionCurrencyFilter" class="de.hybris.platform.assistedservicewebservices.filters.AssistedServiceSessionCurrencyFilter">
+		<property name="contextInformationLoader" ref="asmContextInformationLoader" />
+	</bean>
+
+	<bean id="assistedServiceSessionLanguageFilter" class="de.hybris.platform.assistedservicewebservices.filters.AssistedServiceSessionLanguageFilter">
+		<property name="contextInformationLoader" ref="asmContextInformationLoader"/>
+	</bean>
+
+	<bean id="asmContextInformationLoader" class="de.hybris.platform.assistedservicewebservices.context.impl.DefaultContextInformationLoader">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+	</bean>
+
+	<bean id="restSessionFilter" class="de.hybris.platform.webservicescommons.filter.RestSessionFilter">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias alias="cartMatchingFilter" name="defaultCartMatchingFilter" />
+	<bean id="defaultCartMatchingFilter" class="de.hybris.platform.assistedservicewebservices.filters.CartMatchingFilter">
+		<property name="cartLoaderStrategy" ref="cartLoaderStrategy" />
+		<property name="userService" ref="userService" />
+		<property name="regexp" value="^/[^/]+/(?:users)/[^/]+/customer360" />
+	</bean>
+
+	<alias alias="userMatchingFilter" name="defaultUserMatchingFilter" />
+	<bean id="defaultUserMatchingFilter" class="de.hybris.platform.assistedservicewebservices.filters.UserMatchingFilter">
+		<property name="regexp" value="^/[^/]+/(?:users|orgUsers)/([^/]+)" />
+		<property name="userService" ref="userService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userMatchingService" ref="userMatchingService" />
+		<property name="excludedUrls" ref="filterExcludedUrls"/>
+	</bean>
+
+	<!-- Filter that catches and resolves exceptions thrown from other filters. Can be added to filter chain if you need such functionality -->
+	<alias alias="exceptionTranslationFilter" name="defaultExceptionTranslationFilter" />
+	<bean id="defaultExceptionTranslationFilter" class="de.hybris.platform.webservicescommons.filter.ExceptionTranslationFilter">
+		<property name="restHandlerExceptionResolver" ref="restHandlerExceptionResolver" />
+	</bean>
+
+	<!-- Beans needed for sample code -->
+
+	<!-- API Endpoint Deactivation -->
+	<bean id="assistedServiceEndpointRestrictionsInterceptor" parent="baseEndpointRestrictionsInterceptor">
+		<constructor-arg name="specificConfigPrefix" value="assistedservicewebservices"/>
+	</bean>
+
+	<alias name="defaultC360FragmentDataAdapter" alias="c360FragmentDataAdapter"/>
+	<bean id="defaultC360FragmentDataAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360FragmentDataAdapter"/>
+
+	<alias name="defaultC360CustomerInterestsListAdapter" alias="c360CustomerInterestsListAdapter"/>
+	<bean id="defaultC360CustomerInterestsListAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360CustomerInterestsListAdapter" parent="c360FragmentDataAdapter" />
+
+	<alias name="defaultC360CustomerCouponListAdapter" alias="c360CustomerCouponListAdapter"/>
+	<bean id="defaultC360CustomerCouponListAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360CustomerCouponListAdapter" parent="c360FragmentDataAdapter"/>
+
+	<alias name="defaultC360CartAdapter" alias="c360CartAdapter"/>
+	<bean id="defaultC360CartAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360CartAdapter" parent="c360FragmentDataAdapter"/>
+
+	<alias name="defaultC360SavedCartAdapter" alias="c360SavedCartAdapter"/>
+	<bean id="defaultC360SavedCartAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360SavedCartAdapter" parent="c360FragmentDataAdapter"/>
+
+	<alias name="defaultC360OverviewAdapter" alias="c360OverviewAdapter"/>
+	<bean id="defaultC360OverviewAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360OverviewAdapter" parent="c360FragmentDataAdapter"/>
+
+	<alias name="defaultC360CouponListAdapter" alias="c360CouponListAdapter"/>
+	<bean id="defaultC360CouponListAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360CouponListAdapter" parent="c360FragmentDataAdapter"/>
+
+	<alias name="defaultC360PromotionListAdapter" alias="c360PromotionListAdapter"/>
+	<bean id="defaultC360PromotionListAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360PromotionListAdapter" parent="c360FragmentDataAdapter"/>
+
+	<alias name="defaultC360CustomerProfileAdapter" alias="c360CustomerProfileAdapter"/>
+	<bean id="defaultC360CustomerProfileAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360CustomerProfileAdapter"/>
+
+	<alias name="defaultC360TicketListAdapter" alias="c360TicketListAdapter"/>
+	<bean id="defaultC360TicketListAdapter" class="de.hybris.platform.assistedservicewebservices.adapters.C360TicketListAdapter"/>
+
+	<alias name="defaultCustomer360FragmentDataAdaptersMap" alias="customer360FragmentDataAdaptersMap"/>
+	<util:map id="defaultCustomer360FragmentDataAdaptersMap" key-type="java.lang.String" value-type="de.hybris.platform.assistedservicewebservices.adapters.FragmentDataAdapter">
+		<entry key="c360CustomerProductInterestList" value-ref="c360CustomerInterestsListAdapter"/>
+		<entry key="c360PromotionList" value-ref="c360PromotionListAdapter"/>
+		<entry key="c360CouponList" value-ref="c360CouponListAdapter"/>
+		<entry key="c360CustomerProfile" value-ref="c360CustomerProfileAdapter"/>
+		<entry key="c360CustomerCouponList" value-ref="c360CustomerCouponListAdapter"/>
+		<entry key="c360Cart" value-ref="c360CartAdapter"/>
+		<entry key="c360SavedCart" value-ref="c360SavedCartAdapter"/>
+		<entry key="c360Overview" value-ref="c360OverviewAdapter"/>
+		<entry key="c360TicketList" value-ref="c360TicketListAdapter"/>
+	</util:map>
+</beans>

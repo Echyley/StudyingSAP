@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    	
+    <extension abstractclassprefix="Generated" classprefix="Assistedservicecustomerinterestsaddon" description="assistedservicecustomerinterestsaddon extension" managername="AssistedservicecustomerinterestsaddonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="assistedservicecustomerinterestsaddon">
+        		
+        <requires-extension name="addonsupport"/>
+        		
+        <requires-extension name="assistedservicecustomerinterestsfacades"/>
+        		
+        <coremodule generated="true" manager="de.hybris.platform.assistedservicecustomerinterestsaddon.jalo.AssistedservicecustomerinterestsaddonManager" packageroot="de.hybris.platform.assistedservicecustomerinterestsaddon"/>
+        		
+		
+        <meta key="classpathgen" value="false"/>
+        		
+        <meta key="deprecated" value="true"/>
+        	
+    </extension>
+    
+</extensioninfo>

@@ -1,0 +1,27 @@
+#
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+#
+
+################################################################
+# Set up Outbound Sync configuration container
+# ##############################################################
+## PLEASE, check whether more cleaning is needed in OutboundSyncEssentialData class
+## whenever the content of this impex changes
+
+INSERT_UPDATE OutboundSyncStreamConfigurationContainer; id[unique = true]       ;
+                                                      ; outboundSyncDataStreams ;
+
+INSERT_UPDATE OutboundSyncJob; code[unique = true]  ; streamConfigurationContainer(id)
+                             ; odataOutboundSyncJob ; outboundSyncDataStreams
+
+INSERT_UPDATE OutboundSyncCronJob; code[unique = true] ; job(code)            ; sessionLanguage(isoCode)[default = en]
+                                 ; outboundSyncCronJob ; odataOutboundSyncJob ;
+
+INSERT_UPDATE ServicelayerJob; code[unique = true]       ; springId                  ; sessionLanguage(isocode)
+                             ; outboundSyncSupervisorJob ; outboundSyncJobSupervisor ; en
+
+INSERT_UPDATE CronJob; code[unique = true]           ; job(code)                 ; sessionLanguage(isocode)
+                     ; outboundSyncSupervisorCronJob ; outboundSyncSupervisorJob ; en
+
+INSERT_UPDATE Trigger; cronjob(code)[unique=true]    ; cronExpression
+                     ; outboundSyncSupervisorCronJob ; 30 2,12,22,32,42,52 * * * ?

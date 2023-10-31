@@ -1,0 +1,8 @@
+<div class="media-container-selector-item__row">
+    <img
+        class="media-container-selector-item__img"
+        [ngClass]="{ 'media-container-selector-item__img--selected': isSelected }"
+        [src]="getThumbnailUrl(item.thumbnailUrl)"
+    />
+    <div class="media-container-selector-item__label">{{ item.qualifier }}</div>
+</div>

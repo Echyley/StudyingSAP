@@ -1,0 +1,142 @@
+@import "cockpitng-globals.scss";
+
+$catalogSelector__popup--font-family: $font-family__text;
+$catalogSelector__popup--font-size: $font-size__base;
+$catalogSelector__popup--font-color: var(--bo-text-color);
+$catalogSelector__popup--item-icon-color: var(--bo-content-icon-color);
+
+$catalogSelector__button--padding-x: $_container-spacing-default__small;
+$catalogSelector__button-icon--font-family: $font-family__icon;
+$catalogSelector__button-icon--size: 30px;
+$_catalogSelector__button-icon--font-size: $font-size__large;
+$_catalogSelector__button-icon--color: var(--bo-button-transparent-text-color);
+$catalogSelector__button-icon-down--content: _getIconGlyphContentValue('slim-arrow-down'); //$anglearrow__down--content;
+$catalogSelector__button-icon-up--content: _getIconGlyphContentValue('slim-arrow-up'); //$anglearrow__up--content;
+$catalogSelector__popup--tree-cell-lable--padding-left: 3px;
+$catalogSelector__button-icon--right: $_container-spacing-default__small;
+$catalogSelector__button-icon--adjust-margin: -(floor($catalogSelector__button-icon--size/2));
+
+$catalogSelector__button--width: 100%;
+$catalogSelector__button--height: 100%;
+$catalogSelector__button--max-width: 400px;
+$catalogSelector__button--min-height: $toolbar__default--height;
+
+$catalogSelector__button--padding: 0 ($catalogSelector__button-icon--size + $catalogSelector__button-icon--right + 2px) 0 $catalogSelector__button--padding-x;
+$catalogSelector__button--font-size: var(--bo-font-size);
+$catalogSelector__button--color: $catalogSelector__popup--font-color;
+$catalogSelector__button--bg-color: var(--bo-button-background);
+$catalogSelector__button-border--bg-color: $catalogSelector__button--bg-color;
+$catalogSelector__button-border--top: 5px;
+$catalogSelector__button-border--bottom: 5px;
+
+$catalogSelector__button-hover--color: false; //$blue__default;
+$catalogSelector__button--border-color: var(--bo-button-border-color);
+$catalogSelector__button--border-width: $boxes--border__thin;
+$catalogSelector__button--border: $catalogSelector__button--border-width solid $catalogSelector__button--border-color;
+
+// $catalogSelector__button-icon-empty--right: $catalogSelector__button-icon--right + $catalogSelector__button--border-width;
+
+$_catalogSelector__toolbar-button--height: $toolbar__button-default--size;
+$_catalogSelector__toolbar-button-container--padding: floor(($toolbar__default--height - $toolbar__button-default--size)/2) $_container-spacing-default__tiny;
+$_catalogSelector__toolbar-button-icon--right: ceil($_container-spacing-default__tiny/2);
+$_catalogSelector__toolbar-button--padding: 0 ($_container-spacing-default__tiny + $catalogSelector__button-icon--size) 0 $_container-spacing-default__tiny;
+$_catalogSelector__toolbar-button--bg-color: transparent;
+$_catalogSelector__toolbar-button--border-radius: $toolbar__button-default--border-radius;
+$_catalogSelector__toolbar-button--min-width: nth($_catalogSelector__toolbar-button--padding, 2) + nth($_catalogSelector__toolbar-button--padding, 4) + $font-size__large;
+$_catalogSelector__toolbar-button-container--min-width: $_catalogSelector__toolbar-button--min-width + nth($_catalogSelector__toolbar-button-container--padding, 1) * 2;
+$_catalogSelector__toolbar-button-icon--font-size: $font-size__base;
+$_catalogSelector__toolbar-button-icon--color: var(--bo-button-icon-color);
+
+
+$_catalogSelector__toolbar-button--color: var(--bo-button-icon-color);
+$_catalogSelector__toolbar-button--border-color: transparent;
+$_catalogSelector__toolbar-button--border: $boxes--border__thin solid $_catalogSelector__toolbar-button--border-color;
+
+$_catalogSelector__toolbar-button-hover--color: var(--bo-button-hover-color);
+$_catalogSelector__toolbar-button-hover--bg-color: var(--bo-button-hover-background);
+$_catalogSelector__toolbar-button-hover--border-color: var(--bo-button-hover-border-color);
+
+$catalogSelector__popup--selected-item-hover--color: false;
+$catalogSelector__popup--item-selected--color: var(--bo-selected-color);
+$catalogSelector__popup--item-caret--color: $catalogSelector__popup--font-color;
+
+$catalogSelector__popup--item-hover--bg-color: var(--bo-list-hover-background);
+
+$catalogSelector__popup--tree-row--padding-x: $catalogSelector__button--padding-x;
+
+$catalogSelector__popup--catalog-all--bg-color: var(--bo-list-background);
+$catalogSelector__popup--catalog-all-icon--bg: url('images/icon_catalog_all_infinity.svg') left center no-repeat;
+$catalogSelector__popup--catalog-all-icon--width: $toolbar__button-medium--size;
+$catalogSelector__popup--catalog-all-icon--height: $toolbar__button-medium--size;
+$catalogSelector__popup--catalog-all-icon-font: _getIconGlyphContentValue("display-more");
+$catalogSelector__popup--catalog-all-icon--adjust-padding-left: 0;
+$catalogSelector__popup--catalog-all-icon--margin-top: - $toolbar__button-medium--size/2;
+$catalogSelector__popup--catalog-all-icon--adjust-left: $toolbar__button-medium--size/6;
+$catalogSelector__popup--catalog-all-icon--adjust-text-indent: 0px;
+$catalogSelector__popup--catalog-all-icon-font-family: $font-family__icon;
+$catalogSelector__popup--catalog-all-icon-font-size: $font-size__large;
+
+$_catalogSelector__popup--tree-icon--width: $toolbar__button-medium--size;
+$_catalogSelector__popup--tree-icon--height: $toolbar__button-small--size;
+$_catalogSelector__popup--tree-icon--vertical-align: top; //baseline;
+
+$catalogSelector__popup--catalog-all-row--padding-left: $catalogSelector__popup--tree-row--padding-x - $catalogSelector__popup--catalog-all-icon--adjust-padding-left;
+$catalogSelector__popup--catalog-all-row-text--padding-left: $_catalogSelector__popup--tree-icon--width + $catalogSelector__popup--catalog-all-icon--adjust-padding-left + $catalogSelector__popup--tree-cell-lable--padding-left;
+
+$catalogSelector__popup--tree-icon-symbol--margin-top: false; //-(floor($_catalogSelector__popup--tree-icon--height/2));
+$catalogSelector__popup--tree-row--line-height: 20px;
+
+$catalogSelector__popup--item--height: $editor-defaults__list-item--height - $boxes--border__thin;
+$catalogSelector__popup--item-selected-hover--bg-color: $_default-list__item-selected-hover--bg-color;
+
+$catalogSelector__popup--tree-row-default--background-color: var(--bo-list-background);
+$catalogSelector__popup--tree-row-default--text-color: var(--bo-list-text-color);
+$catalogSelector__popup--tree-row-default--border-width: $boxes--border__thin;
+$catalogSelector__popup--tree-row--padding-y: (floor(($catalogSelector__popup--item--height - $catalogSelector__popup--tree-row--line-height)/2));
+$catalogSelector__popup--tree-row--padding: 10px 0 10px $catalogSelector__popup--tree-row--padding-x;
+$catalogSelector__popup--tree-row-text--padding-right: $catalogSelector__popup--tree-row--padding-x;
+$_catalogSelector__popup--tree-row-label--font-weight: $font-weight-normal;
+$_catalogSelector__popup--tree-row-selected-label--font-weight: $font-weight-bold;
+$_catalogSelector__popup--tree-row-selected-icon--content: _getIconGlyphContentValue('accept');
+$_catalogSelector__popup--tree-row-selected-icon--font-family: $font-family__icon;
+$_catalogSelector__popup--tree-row-selected-icon--font-weight: $font-weight-normal;
+$_catalogSelector__popup--tree-row-selected-icon--color: var(--bo-selected-color);
+
+$catalogSelector__popup--tree-node-row-opened-subsection--border-top-color: $_default-list__item--border-color; //$grey__default--1000;
+$catalogSelector__popup--tree-node-row-opened-subsection--border-top: $catalogSelector__popup--tree-row-default--border-width solid $catalogSelector__popup--tree-node-row-opened-subsection--border-top-color;
+
+$_catalogSelector__popup--tree-row-check-icon--width: $toolbar__button-small--size;
+$_catalogSelector__popup--tree-row-selected-label--padding-left: $_catalogSelector__popup--tree-row-check-icon--width + $_container-spacing-default__tiny;
+$_catalogSelector__popup--tree-row-check-icon--text-indent: $_catalogSelector__popup--tree-row-check-icon--width * -1;
+
+$catalogSelector__popup-sync-cell-btn--width: $toolbar__button-medium--size;
+$catalogSelector__popup-sync-cell-btn--border-left: false; //$boxes--border__thin solid $grey__default--1000;
+$_catalogSelector__popup-sync-cell-btn--right: $_container-spacing-default__small;
+
+$catalogSelector__popup-sync-cell-icon--size: $toolbar__button-small--size;
+$catalogSelector__popup-sync-cell-icon--margin: -(floor($catalogSelector__popup-sync-cell-icon--size/2));
+$catalogSelector__popup-sync-cell-text--padding-right: $catalogSelector__popup-sync-cell-btn--width + $_catalogSelector__popup-sync-cell-btn--right + $_container-spacing-default__core;
+$_catalogSelector__popup-sync-cell-icon--font-size: $font-size__large;
+$_catalogSelector__popup-sync-cell-icon--font-family: $font-family__icon;
+$_catalogSelector__popup-sync-cell-icon--content: _getIconGlyphContentValue('synchronize');
+$_catalogSelector__popup-sync-cell-icon--line-height: 1;
+
+$catalogSelector__popup-container--width: 320px;
+
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// Deprecated
+// $catalogSelector__popup--border-color: $_editor-defaults__popup-box--border-color;
+// $catalogSelector__popup--border: $boxes--border__thin solid $catalogSelector__popup--border-color;
+// $catalogSelector__popup--icon-check--color: $_action__text--color;
+// $catalogSelector__popup--icon-uncheck--color: rgba($_action__text--color, 0.5);

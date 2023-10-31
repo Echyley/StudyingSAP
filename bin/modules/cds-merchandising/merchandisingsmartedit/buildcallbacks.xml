@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project name="merchandisingsmartedit_buildcallbacks">
+    <patternset id="extension.merchandisingsmartedit.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="smartedit-custom-build/generated/"/>
+    </patternset>
+    <patternset id="extension.merchandisingsmartedit.source.filter">
+        <patternset refid="extension.source.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="smartedit-custom-build/generated/"/>
+    </patternset>
+    <patternset id="extension.merchandisingsmartedit.production.filter">
+        <patternset refid="extension.production.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="smartedit-custom-build/generated/"/>
+    </patternset>
+    <macrodef name="merchandisingsmartedit_before_clean">
+        <sequential>
+            <if>
+                <available file="${ext.smartedittools.path}${file.separator}common${file.separator}temp${file.separator}node_modules" type="dir"/>
+                <then>
+                    <delete dir="${ext.merchandisingsmartedit.path}${file.separator}web${file.separator}webroot${file.separator}merchandisingsmartedit${file.separator}js"/>
+                    <delete dir="${ext.merchandisingsmartedit.path}${file.separator}web${file.separator}webroot${file.separator}css"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+    <macrodef name="merchandisingsmartedit_before_build">
+        <sequential>
+            <build_smartedit_extension extensionName="merchandisingsmartedit" appNames="merchandisingsmartedit,merchandisingsmarteditContainer,merchandisingsmarteditcommons"/>
+        </sequential>
+    </macrodef>
+    <macrodef name="merchandisingsmartedit_before_yunit">
+        <attribute name="includeAngularUT" default="false"/>
+        <sequential>
+            <if>
+                <and>
+                    <istrue value="${testclasses.web}"/>
+                    <istrue value="${includeAngularUT}"/>
+                </and>
+                <then>
+                    <test_smartedit_extension extensionName="merchandisingsmartedit" appNames="merchandisingsmartedit,merchandisingsmarteditContainer,merchandisingsmarteditcommons"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+    <target name="test_merchandisingsmartedit">
+        <merchandisingsmartedit_before_yunit/>
+    </target>
+</project>

@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+
+	<!--OrderList v1 Pojo -->
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.CentralOrderListResponse">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="id" type="java.lang.String">
+			<annotations>@JsonProperty("id")</annotations>
+		</property>
+		<property name="version" type="java.lang.Integer">
+			<annotations>@JsonProperty("version")</annotations>
+		</property>
+
+		<property name="orderNumber" type="java.lang.Integer">
+			<annotations>@JsonProperty("orderNumber")</annotations>
+		</property>
+
+<!-- 		<property name="sourceSystemId" type="java.lang.String">
+			<annotations>@JsonProperty("sourceSystemId")</annotations>
+		</property> -->
+
+		<property name="metadata"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Metadata">
+			<annotations>@JsonProperty("metadata")</annotations>
+		</property>
+		<property name="precedingDocument"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PrecedingDocument">
+			<annotations>@JsonProperty("precedingDocument")</annotations>
+		</property>
+
+		<property name="owner" type="java.lang.String">
+			<annotations>@JsonProperty("owner")</annotations>
+		</property>
+		<property name="market"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Market">
+			<annotations>@JsonProperty("market")</annotations>
+		</property>
+		<property name="payment"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PaymentData&gt;">
+			<annotations>@JsonProperty("payment")</annotations>
+		</property>
+		<property name="customer"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Customer">
+			<annotations>@JsonProperty("customer")</annotations>
+		</property>
+		<property name="description" type="java.lang.String">
+			<annotations>@JsonProperty("description")</annotations>
+		</property>
+		<property name="status" type="java.lang.String">
+			<annotations>@JsonProperty("status")</annotations>
+		</property>
+		<property name="prices"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PriceTotals&gt;">
+			<annotations>@JsonProperty("prices")</annotations>
+		</property>
+		<property name="pricingDate" type="java.lang.String">
+			<annotations>@JsonProperty("pricingDate")</annotations>
+		</property>
+		<property name="orderItems"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.OrderItem&gt;">
+			<annotations>@JsonProperty("orderItems")</annotations>
+		</property>
+	</bean>
+	
+		<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PrecedingDocument">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="externalSystemReference" type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ExternalSystemReference">
+			<annotations>@JsonProperty("externalSystemReference")</annotations>
+		</property>
+
+	</bean>
+	
+	
+
+	
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Metadata">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+
+		<property name="createdAt" type="java.lang.String">
+			<annotations>@JsonProperty("createdAt")</annotations>
+		</property>
+		<property name="createdBy" type="java.lang.String">
+			<annotations>@JsonProperty("createdBy")</annotations>
+		</property>
+		<property name="changedAt" type="java.lang.String">
+			<annotations>@JsonProperty("changedAt")</annotations>
+		</property>
+		<property name="changedBy" type="java.lang.String">
+			<annotations>@JsonProperty("changedBy")</annotations>
+		</property>
+
+	</bean>
+
+
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Market">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+
+		<property name="marketId" type="java.lang.String">
+			<annotations>@JsonProperty("marketId")</annotations>
+		</property>
+		<property name="marketName" type="java.lang.String">
+			<annotations>@JsonProperty("marketName")</annotations>
+		</property>
+		<property name="priceType" type="java.lang.String">
+			<annotations>@JsonProperty("priceType")</annotations>
+		</property>
+		<property name="currency" type="java.lang.String">
+			<annotations>@JsonProperty("currency")</annotations>
+		</property>
+		<property name="timeZone" type="java.lang.String">
+			<annotations>@JsonProperty("timeZone")</annotations>
+		</property>
+
+	</bean>
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PaymentData">
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+
+		<property name="method" type="java.lang.String">
+			<annotations>@JsonProperty("method")</annotations>
+		</property>
+
+		<property name="cardToken" type="java.lang.String">
+			<annotations>@JsonProperty("cardToken")</annotations>
+		</property>
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Customer">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+
+		<property name="customerNumber" type="java.lang.String">
+			<annotations>@JsonProperty("customerNumber")</annotations>
+		</property>
+		<property name="cuid" type="java.lang.String">
+			<annotations>@JsonProperty("cuid")</annotations>
+		</property>
+
+		<property name="customerType" type="java.lang.String">
+			<annotations>@JsonProperty("customerType")</annotations>
+		</property>
+
+		<property name="person"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Person">
+			<annotations>@JsonProperty("person")</annotations>
+		</property>
+
+		<property name="company" type="java.lang.String">
+			<annotations>@JsonProperty("company")</annotations>
+		</property>
+
+
+		<property name="addresses"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Address&gt;">
+			<annotations>@JsonProperty("addresses")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Person">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+
+		<property name="firstName" type="java.lang.String">
+			<annotations>@JsonProperty("firstName")</annotations>
+		</property>
+
+		<property name="middleName" type="java.lang.String">
+			<annotations>@JsonProperty("middleName")</annotations>
+		</property>
+
+		<property name="lastName" type="java.lang.String">
+			<annotations>@JsonProperty("lastName")</annotations>
+		</property>
+
+		<property name="academicTitle" type="java.lang.String">
+			<annotations>@JsonProperty("academicTitle")</annotations>
+		</property>
+
+
+
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Address">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="street" type="java.lang.String">
+			<annotations>@JsonProperty("street")</annotations>
+		</property>
+		<property name="houseNumber" type="java.lang.String">
+			<annotations>@JsonProperty("houseNumber")</annotations>
+		</property>
+		<property name="building" type="java.lang.String">
+			<annotations>@JsonProperty("building")</annotations>
+		</property>
+		<property name="roomNumber" type="java.lang.String">
+			<annotations>@JsonProperty("roomNumber")</annotations>
+		</property>
+		<property name="floorNumber" type="java.lang.String">
+			<annotations>@JsonProperty("floorNumber")</annotations>
+		</property>
+		<property name="poBox" type="java.lang.String">
+			<annotations>@JsonProperty("poBox")</annotations>
+		</property>
+		<property name="postalCode" type="java.lang.String">
+			<annotations>@JsonProperty("postalCode")</annotations>
+		</property>
+		<property name="city" type="java.lang.String">
+			<annotations>@JsonProperty("city")</annotations>
+		</property>
+		<property name="country" type="java.lang.String">
+			<annotations>@JsonProperty("country")</annotations>
+		</property>
+		<property name="district" type="java.lang.String">
+
+			<annotations>@JsonProperty("district")</annotations>
+		</property>
+		<property name="state" type="java.lang.String">
+			<annotations>@JsonProperty("state")</annotations>
+		</property>
+		<property name="phone" type="java.lang.String">
+			<annotations>@JsonProperty("phone")</annotations>
+		</property>
+		<property name="email" type="java.lang.String">
+			<annotations>@JsonProperty("email")</annotations>
+		</property>
+		<property name="fax" type="java.lang.String">
+			<annotations>@JsonProperty("fax")</annotations>
+		</property>
+		<property name="additionalAddressInfo"
+			type="java.lang.String">
+			<annotations>@JsonProperty("additionalAddressInfo")</annotations>
+		</property>
+		<property name="correspondenceLanguage"
+			type="java.lang.String">
+			<annotations>@JsonProperty("correspondenceLanguage")</annotations>
+		</property>
+		<property name="addressType" type="java.lang.String">
+			<annotations>@JsonProperty("addressType")</annotations>
+		</property>
+
+	</bean>
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PriceTotals">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="category" type="java.lang.String">
+			<annotations>@JsonProperty("category")</annotations>
+		</property>
+		
+		<property name="total" type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Total">
+			<annotations>@JsonProperty("total")</annotations>
+		</property>
+		
+				<property name="originalAmount" type="double">
+			<annotations>@JsonProperty("originalAmount")</annotations>
+		</property>
+		<property name="effectiveAmount" type="double">
+			<annotations>@JsonProperty("effectiveAmount")</annotations>
+		</property>
+		<property name="finalAmount" type="double">
+			<annotations>@JsonProperty("finalAmount")</annotations>
+		</property>
+		
+		<property name="period" type="java.lang.String">
+			<annotations>@JsonProperty("period")</annotations>
+		</property>
+
+
+	</bean>
+	
+	
+		<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Total">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+	
+		<property name="originalAmount" type="double">
+			<annotations>@JsonProperty("originalAmount")</annotations>
+		</property>
+		<property name="effectiveAmount" type="double">
+			<annotations>@JsonProperty("effectiveAmount")</annotations>
+		</property>
+		<property name="finalAmount" type="double">
+			<annotations>@JsonProperty("finalAmount")</annotations>
+		</property>
+				<property name="tax" type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Tax">
+			<annotations>@JsonProperty("tax")</annotations>
+		</property>
+		
+		
+
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Tax">
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="totalAmount" type="double">
+			<annotations>@JsonProperty("totalAmount")</annotations>
+		</property>
+		<property name="lines"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.TaxLine&gt;">
+			<annotations>@JsonProperty("lines")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.TaxLine">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="code" type="java.lang.String">
+			<annotations>@JsonProperty("code")</annotations>
+		</property>
+
+		<property name="name" type="java.lang.String">
+			<annotations>@JsonProperty("name")</annotations>
+		</property>
+
+		<property name="amount" type="double">
+			<annotations>@JsonProperty("amount")</annotations>
+		</property>
+
+	</bean>
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.OrderItem">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+
+		<property name="id" type="java.lang.String">
+			<annotations>@JsonProperty("id")</annotations>
+		</property>
+		<property name="lineNumber" type="java.lang.String">
+			<annotations>@JsonProperty("lineNumber")</annotations>
+		</property>
+
+		<property name="product"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Product">
+			<annotations>@JsonProperty("product")</annotations>
+		</property>
+		<property name="quantity"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Quantity">
+			<annotations>@JsonProperty("quantity")</annotations>
+		</property>
+		<property name="followOnDocuments"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.FollowOnData">
+			<annotations>@JsonProperty("followOnDocuments")</annotations>
+		</property>
+		<property name="itemType" type="java.lang.String">
+			<annotations>@JsonProperty("itemType")</annotations>
+		</property>
+
+		<property name="itemPrice"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ItemPrice">
+			<annotations>@JsonProperty("price")</annotations>
+		</property>
+
+		<property name="itemaspectsData"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ItemAspectsData">
+			<annotations>@JsonProperty("aspectsData")</annotations>
+		</property> 
+
+
+	</bean>
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ItemAspectsData">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+		<property name="subscriptionItem"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.SubscriptionItem">
+			<annotations>@JsonProperty("subscriptionItem")</annotations>
+		</property>
+		<property name="physicalItem"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PhysicalItem">
+			<annotations>@JsonProperty("physicalItem")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.SubscriptionItem">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+		<property name="validFrom" type="java.lang.String">
+			<annotations>@JsonProperty("validFrom")</annotations>
+		</property>
+		<property name="validTo" type="java.lang.String">
+			<annotations>@JsonProperty("validTo")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PhysicalItem">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ItemPrice">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+		<property name="itemPriceAspectData"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ItemPriceAspectData">
+			<annotations>@JsonProperty("aspectsData")</annotations>
+		</property>
+
+	</bean>
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ItemPriceAspectData">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+		<property name="subscriptionItemPrice"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.SubscriptionItemPrice">
+			<annotations>@JsonProperty("subscriptionItemPrice")</annotations>
+		</property>
+
+		<property name="physicalItemPrice"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PhysicalItemPrice">
+			<annotations>@JsonProperty("physicalItemPrice")</annotations>
+		</property>
+
+	</bean>
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.SubscriptionItemPrice">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+		<property name="priceTotals"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PriceTotals&gt;">
+			<annotations>@JsonProperty("priceTotals")</annotations>
+		</property>
+
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PhysicalItemPrice">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+
+		<property name="priceTotals"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PriceTotals&gt;">
+			<annotations>@JsonProperty("priceTotals")</annotations>
+		</property>
+
+
+	</bean>
+
+
+
+
+
+
+
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Product">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="name" type="java.lang.String">
+			<annotations>@JsonProperty("name")</annotations>
+		</property>
+		<property name="externalSystemReferences"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ExternalSystemReference&gt;">
+			<annotations>@JsonProperty("externalSystemReferences")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ExternalSystemReference">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="externalSystemId" type="java.lang.String">
+			<annotations>@JsonProperty("externalSystemId")</annotations>
+		</property>
+		<property name="externalId"
+			type="java.lang.String">
+			<annotations>@JsonProperty("externalId")</annotations>
+		</property>
+		
+				<property name="externalNumber"
+			type="java.lang.String">
+			<annotations>@JsonProperty("externalNumber")</annotations>
+		</property>
+		
+				<property name="dispatchedItemQuantity"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Quantity">
+			<annotations>@JsonProperty("dispatchedItemQuantity")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Quantity">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="value" type="int">
+			<annotations>@JsonProperty("value")</annotations>
+		</property>
+		<property name="unit" type="java.lang.String">
+			<annotations>@JsonProperty("unit")</annotations>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.FollowOnData">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="externalSystemReferences"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.ExternalSystemReference&gt;">
+			<annotations>@JsonProperty("externalSystemReferences")</annotations>
+		</property>
+
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.DispatchedItemQuantity">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="value" type="int">
+			<annotations>@JsonProperty("value")</annotations>
+		</property>
+		<property name="unit" type="java.lang.String">
+			<annotations>@JsonProperty("unit")</annotations>
+		</property>
+
+	</bean>
+
+
+	<!--Order Details v1 : Start -->
+
+	<bean
+		class="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.CentralOrderDetailsResponse">
+
+		<import
+			type="com.fasterxml.jackson.annotation.JsonIgnoreProperties" />
+		<import type="com.fasterxml.jackson.annotation.JsonProperty" />
+		<annotations>@JsonIgnoreProperties(ignoreUnknown = true)</annotations>
+
+		<property name="id" type="java.lang.String">
+			<annotations>@JsonProperty("id")</annotations>
+		</property>
+		<property name="version" type="java.lang.String">
+			<annotations>@JsonProperty("version")</annotations>
+		</property>
+		<property name="documentNumber" type="java.lang.String">
+			<annotations>@JsonProperty("documentNumber")</annotations>
+		</property>
+		<property name="precedingDocument"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PrecedingDocument">
+			<annotations>@JsonProperty("precedingDocument")</annotations>
+		</property>
+		<property name="metadata"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Metadata">
+			<annotations>@JsonProperty("metadata")</annotations>
+		</property>
+		<property name="owner" type="java.lang.String">
+			<annotations>@JsonProperty("owner")</annotations>
+		</property>
+		<property name="market"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Market">
+			<annotations>@JsonProperty("market")</annotations>
+		</property>
+		<property name="payment"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PaymentData&gt;">
+			<annotations>@JsonProperty("payment")</annotations>
+		</property>
+		<property name="customer"
+			type="de.hybris.platform.sap.sapcentralorderservices.pojo.v1.Customer">
+			<annotations>@JsonProperty("customer")</annotations>
+		</property>
+		<property name="description" type="java.lang.String">
+			<annotations>@JsonProperty("description")</annotations>
+		</property>
+		<property name="status" type="java.lang.String">
+			<annotations>@JsonProperty("status")</annotations>
+		</property>
+		<property name="prices"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.PriceTotals&gt;">
+			<annotations>@JsonProperty("prices")</annotations>
+		</property>
+		<property name="pricingDate" type="java.lang.String">
+			<annotations>@JsonProperty("pricingDate")</annotations>
+		</property>
+		<property name="orderItems"
+			type="java.util.List&lt;de.hybris.platform.sap.sapcentralorderservices.pojo.v1.OrderItem>">
+			<annotations>@JsonProperty("orderItems")</annotations>
+		</property>
+	</bean>
+
+</beans>

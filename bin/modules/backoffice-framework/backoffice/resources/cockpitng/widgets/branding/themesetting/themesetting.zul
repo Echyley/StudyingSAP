@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul" sclass="yw-brand-setting">
+	<style src="${wr}/themesetting.css"/>
+	<div class="brand-setting-header">
+		<label sclass="brand-setting-header-title" value="${labels.themesetting.widget.title}"/>
+	    <div class="brand-setting-header-buttons">
+			<button id="saveButton" sclass="y-btn-primary" label="${labels.theme.setting.button.save}"/>
+			<button id="cancelButton" label="${labels.theme.setting.button.cancel}"/>
+		</div>
+	</div>
+	<div sclass="brand-setting-container yw-themeSetting">
+		<div class="themeSetting-notice">
+			${labels.notice}
+		</div>
+		<div class="themeSetting-content">
+			<radiogroup id="themeLevelRadioGroup">
+				<div class="themeSetting-option">
+					<radio id="systemRadio" label="${labels.system.theming}" onCheck='$composer.onThemeLevelCheck("SYSTEM")'/>
+				</div>
+				<div id="systemThemeContent">
+					<div class="themeSetting-notice themeSetting-sub-notice">
+						${labels.system.notice}
+					</div>
+					<div class="themeSetting-list">
+						<listbox id="systemThemeList">
+							<template name="model">
+								<listitem value="${each}"
+										  onClick='$composer.onThemeClick(self.getValue())'>
+									<listcell>
+										<if test="${not empty each.getThumbnail()}">
+											<image src="${each.getThumbnail().getURL()}"/>
+										</if>
+										<if test="${empty each.getThumbnail()}">
+											<image src="${wr}/../images/default_theme_thumbnail.png"/>
+										</if>
+										<div class="themeLabel">${empty each.getName() ? each.getCode() : each.getName()}</div>
+										<button class="cng-font-icon font-icon--sys-enter-2 selected-icon" tooltiptext="${labels.themesetting.selected.theme.tooltip}"/>
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+					</div>
+				</div>
+				<div class="themeSetting-option">
+					<radio id="userRadio" label="${labels.user.theming}" onCheck='$composer.onThemeLevelCheck("USER")'/>
+				</div>
+				<div id="userThemeContent">
+					<div class="themeSetting-notice themeSetting-sub-notice">
+						${labels.user.notice}
+					</div>
+					<div class="themeSetting-list">
+						<listbox id="userThemeList">
+							<template name="model">
+								<listitem value="${each}"
+										  onClick='$composer.onThemeClick(self.getValue())'>
+									<listcell>
+										<if test="${not empty each.getThumbnail()}">
+											<image src="${each.getThumbnail().getURL()}"/>
+										</if>
+										<if test="${empty each.getThumbnail()}">
+											<image src="${wr}/../images/default_theme_thumbnail.png"/>
+										</if>
+										<div class="themeLabel">${empty each.getName() ? each.getCode() : each.getName()}</div>
+										<button class="cng-font-icon font-icon--sys-enter-2 selected-icon" tooltiptext="${labels.themesetting.selected.theme.tooltip}"/>
+									</listcell>
+								</listitem>
+							</template>
+						</listbox>
+					</div>
+				</div>
+			</radiogroup>
+		</div>
+	</div>
+</widget>

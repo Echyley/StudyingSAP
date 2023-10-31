@@ -1,0 +1,9 @@
+/*
+ * Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+@import '../../restrictions/restrictions.scss';
+@import '../../restrictions/components/restrictionsTable/RestrictionsTableComponent.scss';
+.se-restrictions-list {
+    box-shadow: none;
+}

@@ -1,0 +1,119 @@
+/*================================
+    User profile locale settings
+================================*/
+// Relevant Changes applied to the User Profile Locale
+
+@import "scss/_localeSetting-variables.scss";
+
+.yw-com_hybris_backoffice_widgets_userprofile_localesetting {
+    height: 100%;
+    width: 100%;
+}
+
+.yw-localeSetting {
+    height: 100%;
+    width: 100%;
+    padding: $user-profile-locale-default--spacing;
+    .localeSetting-title {
+        height: $user-profile-locale-title-height;
+        > span {
+            font-size: $user-profile-locale-title-size;
+            padding-left: 24px;
+            color: $user-profile-locale-title-color;
+        }
+    }
+    .localeSetting-content {
+        height: calc(100% - #{$user-profile-locale-title-height});
+        .z-tabbox {
+            height: 100%;
+            .z-tabs {
+                padding: 20px 50px 20px 50px;
+                width: 100% !important;
+                height: $user-profile-tab-width;
+                .z-tabs-content {
+                    background: var(--bo-button-background);
+                    border-radius: var(--bo-button-border-radius);
+                }
+                .z-tab {
+                    width: 50%;
+                    padding: 0px;
+					border: 1px solid var(--bo-button-border-color);
+                    border-radius: var(--bo-button-segmented-border-radius);
+                    @include _segmented-button-inactive-styles();
+                    .z-tab-text {
+						align-items: center;
+						height: $segmented-button-default-height;
+						justify-content: center;
+						display: flex;
+						min-height: $segmented-button-default-height;
+                        line-height: 0;
+                        padding: 0;
+                        color: inherit;
+                    }
+                    &:first-child {
+                        border-top-left-radius: var(--bo-button-border-radius);
+                        border-bottom-left-radius: var(--bo-button-border-radius);
+                    }
+                    &:last-child {
+                        border-top-right-radius: var(--bo-button-border-radius);
+                        border-bottom-right-radius: var(--bo-button-border-radius);
+                    }
+                }
+                .z-tab-selected {
+                    height: 100%;
+                    @include _segmented-button-active-styles();
+                    .z-tab-text {
+                        color: inherit;
+                        border: none;
+                    }
+                }
+            }
+            .z-tabpanels {
+                height: calc(100% - #{$user-profile-tab-width});
+                .z-tabpanel {
+                    height: 100% !important;
+                    border-width: $user-profile-tab-panels--border-width;
+                    padding: $user-profile-tab-panels-padding;
+                    background: transparent;
+                    padding-top: $user-profile-locale-tabpanel--spacing;
+                    .z-listbox {
+                        border: none;
+                        width: 85% !important;
+                        height: 100%;
+                        position: relative;
+                        left: 50px;
+                        overflow: auto;
+                        .z-listbox-body {
+                            box-shadow: none;
+                        }
+                    }
+                    .z-listitem {
+                        background: transparent;
+                        &:hover {
+                            background: var(--bo-list-hover-background);
+                        }
+                        .z-listcell {
+                            .z-listcell-content {
+                                color: $user-profile-locale-text-color;
+                            }
+                            border-top: none;
+                            .z-listitem-checkable {
+
+                                &:focus,
+                                &:hover{
+                                    border-color: $user-profile-locale-icon-hover-color;
+                                }
+
+                                .z-listitem-icon {
+                                    color: $user-profile-locale-icon-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+}

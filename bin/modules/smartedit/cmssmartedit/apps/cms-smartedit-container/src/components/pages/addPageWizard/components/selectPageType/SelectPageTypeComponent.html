@@ -1,0 +1,19 @@
+<div>
+    <div class="se-add-page__sub-header">
+        {{ 'se.cms.addpagewizard.pagetype.description' | translate }}
+    </div>
+
+    <div class="se-add-page__list" *ngIf="pageTypes.length > 0">
+        <div
+            class="se-add-page__item fd-menu__item"
+            *ngFor="let pageType of pageTypes"
+            [ngClass]="{ 'is-selected': isSelected(pageType)}"
+            (click)="selectType(pageType)"
+        >
+            <div class="se-add-page__item-title">{{ pageType.name | seL10n | async }}</div>
+            <div class="se-add-page__item-description">
+                {{ pageType.description | seL10n | async }}
+            </div>
+        </div>
+    </div>
+</div>

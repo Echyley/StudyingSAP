@@ -1,0 +1,1 @@
+export { MultiProductCatalogVersionSelectorComponent } from './MultiProductCatalogVersionSelectorComponent';

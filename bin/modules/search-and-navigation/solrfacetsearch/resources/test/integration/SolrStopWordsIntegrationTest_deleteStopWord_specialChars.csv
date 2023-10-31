@@ -1,0 +1,6 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+REMOVE SolrStopWord;facetSearchConfig(name)[unique=true];language(isocode)[unique=true];stopWord[unique=true]
+;testFacetSearchConfig${testId};en;abcdef
+;testFacetSearchConfig${testId};en;ghi+jkl

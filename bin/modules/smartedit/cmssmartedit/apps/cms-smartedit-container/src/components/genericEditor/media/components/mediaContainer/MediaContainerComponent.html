@@ -1,0 +1,59 @@
+<!-- Advanced Management Dropdown -->
+<div *ngIf="hasReadPermissionOnMediaRelatedTypes && advancedMediaContainerManagementEnabled">
+    <se-media-container-selector
+        [eventNameAffix]="selectorEventNameAffix"
+        [isAdvancedCloning]="isAdvancedCloning()"
+        [initialName]="initialMediaContainerName"
+        [name]="getMediaContainerName()"
+        [isEditable]="field.editable"
+        (nameChange)="onMediaContainerNameChange($event)"
+        (onCreate)="onMediaContainerCreate($event)"
+        (onRemove)="onMediaContainerRemove()"
+        (onSelect)="setMediaContainer($event)"
+        (onCreationInProgressChange)="onMediaContainerCreationInProgressChange($event)"
+    ></se-media-container-selector>
+</div>
+<!-- Media Format with Upload Form -->
+<div class="se-media-container-field" *ngIf="canShowMediaFormatWithUploadForm()">
+    <div class="se-media-container-field__media-list">
+        <se-media-format
+            class="se-media-container-cell"
+            *ngFor="let format of field.options"
+            [ngClass]="getMediaContainerCellClassName(format.id)"
+            [errorMessages]="field.messages"
+            [lang]="lang"
+            [isEditable]="field.editable"
+            [isUnderEdit]="isMediaFormatUnderEdit(format.id)"
+            [isFieldDisabled]="isFieldDisabled()"
+            [mediaUuid]="model[lang]?.medias[format.id]"
+            [mediaFormat]="format.id"
+            [mediaLabel]="format.label"
+            [allowMediaType]="field.allowMediaType"
+            (onFileSelect)="onFileSelect($event, format.id)"
+            (onDelete)="removeMediaByFormat(format.id)"
+        >
+        </se-media-format>
+    </div>
+    <se-media-upload-form
+        *ngIf="image"
+        class="se-media-upload-form-wrapper se-media-upload-form-wrapper--spaced"
+        [image]="image.file"
+        [allowMediaType]="field.allowMediaType"
+        [maxUploadFileSize]="maxUploadFileSize"
+        (onCancel)="resetImage()"
+        (onSelect)="onFileSelect($event)"
+        (onUploadSuccess)="onFileUploadSuccess($event, image.format)"
+    >
+    </se-media-upload-form>
+    <se-media-errors
+        [errors]="fileValidationErrors"
+        [maxUploadFileSize]="maxUploadFileSize"
+    ></se-media-errors>
+</div>
+
+<div *ngIf="!hasReadPermissionOnMediaRelatedTypes">
+    <span
+        translate="se.cms.media.typepermissions.error"
+        [translateParams]="{ containedTypes: field.containedTypes }"
+    ></span>
+</div>

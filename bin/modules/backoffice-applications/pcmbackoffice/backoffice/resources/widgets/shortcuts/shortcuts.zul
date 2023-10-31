@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+	<widget sclass="yw-shortcuts-widget">
+		<div sclass="yw-shortcuts-header">
+			<label value="${labels.shortcuts.header.label}"/>
+		</div>
+		<listbox id="shortcuts" sclass="yw-listbox-body"></listbox>
+	</widget>
+</zk>

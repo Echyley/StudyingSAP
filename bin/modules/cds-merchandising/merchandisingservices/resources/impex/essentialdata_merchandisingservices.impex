@@ -1,0 +1,37 @@
+#
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+#
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;merchCategoryExporter;merchCategoryExporter
+;merchProductDirectoryCategoryExporter;merchProductDirectoryCategoryExporter
+
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;merchCategoryExporter;merchCategoryExporter;false;en
+;merchProductDirectoryCategoryExporter;merchProductDirectoryCategoryExporter;false;en
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;merchCategoryExporter;0;5;-1;-1;-1;-1;true;false;-1
+;merchProductDirectoryCategoryExporter;0;5;-1;-1;-1;-1;true;false;-1
+
+#Configration for MerchSynchronization objects cleanup
+#for 30 days old objects (30*24*60*60 = 2592000)
+INSERT_UPDATE FlexibleSearchRetentionRule; code[unique = true]      ; searchQuery                                                                                                   ; retentionTimeSeconds; actionReference          ;
+                                         ; merchSynchronizationRule ; "SELECT {o:pk}, {o:itemtype} FROM {MerchSynchronization AS o} WHERE {o:modifiedTime} < ?CALC_RETIREMENT_TIME" ; 2592000             ; basicRemoveCleanupAction ;
+INSERT_UPDATE RetentionJob; code[unique = true]            ; retentionRule(code)      ; batchSize
+                          ; merchSynchronizationCleanupJob ; merchSynchronizationRule ; 1000
+INSERT_UPDATE CronJob; code[unique = true]                ; job(code)[unique = true]       ; sessionLanguage(isoCode)[default = en]
+                     ; merchSynchronizationCleanupCronJob ; merchSynchronizationCleanupJob ;
+# every day at 04:30
+INSERT_UPDATE Trigger; cronJob(code)[unique = true]       ; second; minute; hour; day; month; year; relative; active; maxAcceptableDelay
+                     ; merchSynchronizationCleanupCronJob ; 0     ; 30    ; 4   ; -1 ; -1   ; -1  ; false   ; true  ; -1
+
+
+# variables for constraints on Merchandising Carousel Component
+$annotationMin = annotation[default = javax.validation.constraints.Min]
+$severityError = severity(code[default = ERROR], itemtype(code[default = Severity]))
+$periodicTargetModel = target[default = 'com.hybris.merchandising.addon.model.MerchandisingCarouselComponentModel']
+
+INSERT_UPDATE MinConstraint; id[unique = true]                                   ; active[allownull = true]; type(code)                     ; qualifier          ; value; descriptor(enclosingType(code), qualifier)        ; $periodicTargetModel; $annotationMin; $severityError
+                           ; merchandisingCarouselComponentMinNumberToDisplay    ; true                    ; MerchandisingCarouselComponent ; numberToDisplay    ; 1    ; MerchandisingCarouselComponent:numberToDisplay    ;                     ;               ;
+                           ; merchandisingCarouselComponentMinViewportPercentage ; true                    ; MerchandisingCarouselComponent ; viewportPercentage ; 1    ; MerchandisingCarouselComponent:viewportPercentage ;                     ;               ;

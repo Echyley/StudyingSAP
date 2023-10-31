@@ -1,0 +1,14 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$lang=en;
+
+INSERT_UPDATE AsFacet ; uid[unique=true]                     ; name[lang=$lang] ;  
+                      ; ba01fe6d-c2ca-4cff-a699-438e4a6aaebb ; Approval status  ;  
+                      ; 5fcbd84d-5ad3-4b8c-8bcb-2982eb58f87a ; Catalog version  ;  
+                      ; 86a8220b-3fc0-400e-8798-3afe09dcc973 ; catalog          ;  
+                      ; 3bf25fa8-d97a-42f7-8a4d-75b11dbb869d ; Category         ;  
+                      ; 138c9eb7-d359-46a8-87a7-a4d2ac1c5839 ; Product Type     ;  

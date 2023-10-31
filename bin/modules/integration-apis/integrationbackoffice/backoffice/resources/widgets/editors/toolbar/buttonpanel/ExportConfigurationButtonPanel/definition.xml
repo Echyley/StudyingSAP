@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="de.hybris.platform.integrationbackoffice.widgets.ExportConfigurationButtonPanel"
+                   extends="de.hybris.platform.integrationbackoffice.widgets.AbstractIntegrationButtonPanel">
+    <name>Export Configuration Button Panel</name>
+    <description>The buttons available in Export Configuration toolbar.</description>
+    <defaultTitle>Export Configuration Button Panel</defaultTitle>
+    <author>Hybris</author>
+    <version>1.0</version>
+    <keywords>
+        <keyword>ExportConfigurationButtonPanel</keyword>
+    </keywords>
+
+    <controller
+            class="de.hybris.platform.integrationbackoffice.widgets.configuration.controllers.ExportConfigurationButtonPanelController"/>
+</widget-definition>

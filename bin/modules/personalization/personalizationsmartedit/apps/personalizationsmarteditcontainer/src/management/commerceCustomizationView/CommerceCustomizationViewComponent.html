@@ -1,0 +1,35 @@
+<div id="commerceCustomizationBody-002" class="perso-cc-modal">
+    <div class="perso-cc-modal__title-layout">
+        <div class="perso-wrap-ellipsis perso-cc-modal__title-cname" [textContent]="customization.name"
+            title="{{customization.name}}"></div>
+        <div class="perso-cc-modal__title-status" [ngClass]="customizationStatus"
+            [textContent]="' (' + customizationStatusText + ') '"></div>
+        <span> > </span>
+        <div class="perso-wrap-ellipsis perso-cc-modal__title-vname" [textContent]="variation.name"
+            title="{{variation.name}}"></div>
+        <div class="perso-cc-modal__title-status" [ngClass]="variationStatus"
+            [textContent]="' (' + variationStatusText + ')'"></div>
+    </div>
+    <div class="form-group perso-cc-modal__content-layout">
+        <label for="commerce-customization-type-1" class="fd-form-label"
+            translate="personalization.modal.commercecustomization.action.type"></label>
+        <se-select [id]="commerce-customization-type-1" class="fd-form__control"
+            [fetchStrategy]="customizationTypeFetchStrategy" [searchEnabled]="false" [(model)]="select.typeId"
+            [onChange]="onActionTypeChange"></se-select>
+    </div>
+    <ng-container>
+        <ng-container *ngComponentOutlet="promotionComponent.component; injector: promotionComponent.injector">
+        </ng-container>
+    </ng-container>
+    <ng-container>
+        <ng-container *ngComponentOutlet="searchProfileComponent.component; injector: searchProfileComponent.injector">
+        </ng-container>
+    </ng-container>
+    <div class="select2-choices">
+        <div class="ui-select-match-item select2-search-choice" *ngFor="let action of getActionsToDisplay()">
+            <span [textContent]="displayAction(action)"></span>
+            <span class="ui-select-match-close select2-search-choice-close sap-icon--decline"
+                (click)="removeSelectedAction(action)"></span>
+        </div>
+    </div>
+</div>

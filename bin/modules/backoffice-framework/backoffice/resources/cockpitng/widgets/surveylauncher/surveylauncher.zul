@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="native">
+    <widget xmlns="http://www.zkoss.org/2005/zul"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:h="http://www.w3.org/1999/xhtml"
+            xmlns:zk="http://www.zkoss.org/2005/zk"
+            xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+            sclass="yw-qualtrics-survey-launcher-widget">
+
+		<script type="text/javascript">
+            function updateQtxContextParam(key, value) {
+                document.querySelector('cx-qtx-survey-button').updateContextParam(key, value);
+            };
+
+			/**
+			 * @param params
+			 *  like: [["appId", "hmc2"], ["appTitle", "Administration Cockpit"]]
+			 */
+            function updateQtxContextParams(params) {
+            	try {
+            		const paramArr = JSON.parse(params);
+                    paramArr.forEach(pair => {
+                        updateQtxContextParam(pair[0], pair[1]);
+                    })
+            	} catch(e) {
+            		console.error(e);
+            	}
+            };
+        </script>
+
+    	<h:cx-qtx-survey-button
+            title="${labels.launcher.title}"
+            data-label-key="launcher.title"
+            class="z-toolbarbutton"
+    		tabIndex="-1"
+            intercept-url="${widgetModel.intercept_url}"
+            context-params="${widgetModel.context_params}">
+            <button class="yw-cx-qtx-survey-button cng-font-icon"/>
+        </h:cx-qtx-survey-button>
+    </widget>
+</zk>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!--
+    Ordering three line items for delivery on the same day (a few days
+    after the order date).
+-->
+<!DOCTYPE cXML SYSTEM "http://xml.cXML.org/schemas/cXML/1.2.051/cXML.dtd">
+<cXML payloadID="32232995@ariba.acme.com"
+      timestamp="2000-10-12T18:39:09-08:00" xml:lang="en-US">
+    <Header>
+        <From>
+            <!-- The buying marketplace and member organization. -->
+            <Credential domain="AribaNetworkUserId" type="marketplace">
+                <Identity>bigadmin@marketplace.org</Identity>
+            </Credential>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sysadmin@ariba.com</Identity>
+            </Credential>
+        </From>
+        <To>
+            <Credential domain="DUNS">
+                <Identity>942888711</Identity>
+            </Credential>
+        </To>
+        <Sender>
+            <!-- This document has passed through Ariba CSN to the
+                 supplier. -->
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sysadmin@ariba.com</Identity>
+                <SharedSecret>VerySecret1234$</SharedSecret>
+            </Credential>
+            <UserAgent>Ariba CSN 33</UserAgent>
+        </Sender>
+    </Header>
+    <Request deploymentMode="test">
+        <OrderRequest>
+            <OrderRequestHeader orderID="DO1234" orderDate="2000-10-12T18:41:29-08:00" type="new">
+                <Total>
+                    <Money currency="USD">76.00</Money>
+                </Total>
+                <ShipTo>
+                    <Address>
+                        <Name xml:lang="en">Acme</Name>
+                        <PostalAddress name="default">
+                            <DeliverTo>Joe Smith</DeliverTo>
+                            <DeliverTo>Mailstop M-543</DeliverTo>
+                            <Street>123 Anystreet</Street>
+                            <City>Sunnyvale</City>
+                            <State>CA</State>
+                            <PostalCode>90489</PostalCode>
+                            <Country isoCountryCode="US">United States</Country>
+                        </PostalAddress>
+                    </Address>
+                </ShipTo>
+                <BillTo>
+                    <Address>
+                        <Name xml:lang="en">Acme</Name>
+                        <PostalAddress name="default">
+                            <Street>123 Anystreet</Street>
+                            <City>Sunnyvale</City>
+                            <State>CA</State>
+                            <PostalCode>90489</PostalCode>
+                            <Country isoCountryCode="US">United States</Country>
+                        </PostalAddress>
+                    </Address>
+                </BillTo>
+                <Payment>
+                    <PCard number="4111111111111111" expiration="2020-03-12"/>
+                </Payment>
+                <Comments xml:lang="en-US">Anything well formed in XML.</Comments>
+            </OrderRequestHeader>
+            <ItemOut quantity="2">
+                <ItemID>
+                    <SupplierPartID>3755219</SupplierPartID>
+                    <SupplierPartAuxiliaryID>00004018</SupplierPartAuxiliaryID>
+                </ItemID>
+                <ItemDetail>
+                    <UnitPrice>
+                        <Money currency="USD">38.00</Money>
+                    </UnitPrice>
+                    <Description xml:lang="en">Cordless drill/driver 2006</Description>
+                    <UnitOfMeasure>unit</UnitOfMeasure>
+                    <Classification domain="UNSPSC">5136030000</Classification>
+                </ItemDetail>
+            </ItemOut>
+            <ItemOut quantity="2">
+                <ItemID>
+                    <SupplierPartID>3755210</SupplierPartID>
+                    <SupplierPartAuxiliaryID>00004019</SupplierPartAuxiliaryID>
+                </ItemID>
+                <ItemDetail>
+                    <UnitPrice>
+                        <Money currency="USD">38.00</Money>
+                    </UnitPrice>
+                    <Description xml:lang="en">Cordless drill/driver 2006</Description>
+                    <UnitOfMeasure>unit</UnitOfMeasure>
+                    <Classification domain="UNSPSC">5136030000</Classification>
+                </ItemDetail>
+            </ItemOut>
+        </OrderRequest>
+    </Request>
+</cXML>

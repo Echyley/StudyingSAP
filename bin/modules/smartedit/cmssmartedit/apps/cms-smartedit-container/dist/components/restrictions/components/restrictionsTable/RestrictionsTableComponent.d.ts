@@ -1,0 +1,33 @@
+import { EventEmitter, OnChanges, OnInit } from '@angular/core';
+import { GenericEditorFieldMessage, IDropdownMenuItem } from 'smarteditcommons';
+import { IPageRestrictionCriteria, PageRestrictionsCriteriaService } from '../../../../services/pageRestrictions/PageRestrictionsCriteriaService';
+import { RestrictionCMSItem } from '../../types';
+export declare class RestrictionsTableComponent implements OnInit, OnChanges {
+    private pageRestrictionsCriteriaService;
+    restrictions: RestrictionCMSItem[];
+    customClass: string;
+    editable: boolean;
+    restrictionCriteria?: IPageRestrictionCriteria;
+    errors?: GenericEditorFieldMessage[];
+    onEdit?: EventEmitter<RestrictionCMSItem>;
+    onRemove: EventEmitter<number>;
+    criteriaOptions: IPageRestrictionCriteria[];
+    defaultActions: IDropdownMenuItem[];
+    private readonly REMOVE_RESTRICTION_KEY;
+    private readonly EDIT_RESTRICTION_KEY;
+    private oldRestrictionsEditability;
+    constructor(pageRestrictionsCriteriaService: PageRestrictionsCriteriaService);
+    ngOnInit(): void;
+    ngOnChanges(): void;
+    resetRestrictionCriteria(): void;
+    removeRestriction(restrictionToRemove: RestrictionCMSItem): void;
+    editRestriction(restriction: RestrictionCMSItem): void;
+    isInError(index: number): boolean;
+    getRestrictionsEditability(restrictions: RestrictionCMSItem[]): boolean[];
+    private modifyErrorPositions;
+    private removeUnnecessaryError;
+    private getDefaultActions;
+    private getRestrictionActions;
+    private provideActionsForRestrictions;
+    private restrictionsEditabilityChanged;
+}

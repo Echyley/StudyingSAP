@@ -1,0 +1,12 @@
+@import "../AbstractIntegrationEditorContainer/AbstractIntegrationEditorContainer.scss";
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationEditorContainer {
+
+  // to make searchConditions widget for ExportConfiguration more compact
+  .yw-textsearch > .yw-advancedsearch-header-container {
+    margin: 0
+  }
+  .yw-collapsibleContainer-caption .z-caption-content {
+    line-height: 0;
+  }
+}

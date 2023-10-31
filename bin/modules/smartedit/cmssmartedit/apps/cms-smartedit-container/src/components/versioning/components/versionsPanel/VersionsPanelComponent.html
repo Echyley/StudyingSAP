@@ -1,0 +1,58 @@
+<div class="se-toolbar-menu-content--wrapper">
+    <div class="se-toolbar-menu-content__header">
+        <div
+            class="se-toolbar-menu-content__header-title"
+            translate="se.cms.actionitem.page.versions"
+        ></div>
+        <button
+            class="se-versions-panel__manage-btn fd-button--compact"
+            *ngIf="showManageButton"
+            (click)="switchToVersioningMode()"
+            fd-button
+            [label]="'se.cms.toolbaritem.versioning.manageversions.name' | translate"
+        ></button>
+    </div>
+    <div
+        class="se-versions-toolbar-menu-content__body"
+        [ngClass]="{ 'se-versions-toolbar-menu-content__body--narrow': showManageButton }"
+    >
+        <se-versions-search
+            [versionsFoundCount]="versionsFound"
+            [showSearchControls]="pageHasVersions()"
+            (searchTermChange)="onSearchTermChanged($event)"
+        ></se-versions-search>
+        <div>
+            <se-infinite-scrolling
+                class="se-versions-panel__infinite-scroll"
+                *ngIf="pageHasVersionsOrIsLoading()"
+                [pageSize]="10"
+                [mask]="searchTerm"
+                [fetchPage]="fetchPageOfVersions"
+                (itemsChange)="onVersionItemsLoaded($event)"
+            >
+                <div *ngFor="let item of versionItems; let isLast = last">
+                    <se-version-item
+                        [ngClass]="{ 'se-version-item--last': isLast }"
+                        [pageVersion]="item"
+                    ></se-version-item>
+                </div>
+            </se-infinite-scrolling>
+            <div class="se-versions-panel__empty-list" *ngIf="!pageHasVersionsOrIsLoading()">
+                <img src="static-resources/images/emptyVersions.svg" alt="no versions" />
+                <span
+                    class="se-versions-panel__no-versions-message"
+                    translate="se.cms.toolbaritem.versioning.noversionsfound"
+                >
+                </span>
+                <a
+                    fd-link
+                    class="se-versions-panel__manage-link fd-link"
+                    *ngIf="showManageLink"
+                    (click)="switchToVersioningMode()"
+                    translate="se.cms.toolbaritem.versioning.manageversionslink.name"
+                >
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

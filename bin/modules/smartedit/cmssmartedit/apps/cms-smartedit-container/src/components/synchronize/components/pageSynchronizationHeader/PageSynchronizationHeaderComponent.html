@@ -1,0 +1,20 @@
+<ng-container *ngIf="ready">
+    <div class="se-sync-panel-header">
+        <span class="se-sync-panel-header__sub-header" [translate]="getSubHeaderText()"></span>
+    </div>
+
+    <div *ngIf="isNewPage()" class="se-sync-panel-new-page">
+        <div
+            class="se-sync-panel-new-page__header"
+            translate="se.cms.synchronization.page.new.header"
+        ></div>
+        <div class="se-sync-panel-new-page__message">{{ headerText }}</div>
+    </div>
+
+    <div class="se-sync-panel-header__timestamp" *ngIf="!isNewPage()">
+        <div translate="se.cms.synchronization.panel.lastsync.text"></div>
+        <span class="se-sync-panel-header__timestamp-text">
+            {{ syncStatus.lastSyncStatus | date: 'M/d/yy h:mm a' }}
+        </span>
+    </div>
+</ng-container>

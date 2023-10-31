@@ -1,0 +1,155 @@
+[
+	{
+		"testId": 1,
+		"description": "One word query - compare BASIC, MEDIUM and RELAXED for slop",
+		"data": {
+			"query": "Green"
+		},
+		"toleranceVariants": [
+			{
+				"searchTolerance": "BASIC",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "BASIC"
+					}
+				]
+			},
+			{
+				"searchTolerance": "MEDIUM",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "MEDIUM"
+					}
+				]
+			},
+			{
+				"searchTolerance": "RELAXED",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "RELAXED"
+					}
+				]
+			}
+		],
+		"expectedData": {
+			"size": 2,
+			"totalSize": 2,
+			"searchHits": [
+				{
+					"id": "doc2"
+				},
+				{
+					"id": "doc3"
+				}
+			]
+		}
+	},
+	{
+		"testId": 2,
+		"description": "Two word query - compare BASIC, MEDIUM and RELAXED for slop",
+		"data": {
+			"query": "Green pullover"
+		},
+		"toleranceVariants": [
+			{
+				"searchTolerance": "BASIC",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "BASIC"
+					}
+				]
+			},
+			{
+				"searchTolerance": "MEDIUM",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "MEDIUM"
+					}
+				]
+			},
+			{
+				"searchTolerance": "RELAXED",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "RELAXED"
+					}
+				]
+			}
+		],
+		"expectedData": {
+			"size": 2,
+			"totalSize": 2,
+			"searchHits": [
+				{
+					"id": "doc3"
+				},
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 3,
+		"description": "Two word not exact query - compare BASIC, MEDIUM and RELAXED for slop",
+		"data": {
+			"query": "pullover tratata Green "
+		},
+		"toleranceVariants": [
+			{
+				"searchTolerance": "BASIC",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "BASIC"
+					}
+				]
+			},
+			{
+				"searchTolerance": "MEDIUM",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "MEDIUM"
+					}
+				]
+			},
+			{
+				"searchTolerance": "RELAXED",
+				"fields": [
+					{
+						"id": "field_text",
+						"searchable": true,
+						"searchTolerance": "RELAXED"
+					}
+				]
+			}
+		],
+		"expectedData": {
+			"size": 2,
+			"totalSize": 2,
+			"searchHits": [
+				{
+					"id": "doc3"
+				},
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	}
+]

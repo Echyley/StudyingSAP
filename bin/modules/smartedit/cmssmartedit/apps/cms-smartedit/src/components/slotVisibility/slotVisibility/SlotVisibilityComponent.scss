@@ -1,0 +1,23 @@
+.se-slot-visiblity-component {
+    &--globe-icon {
+        margin-left: se-space('base');
+    }
+    &__content {
+        @include se-flex-row;
+        flex-grow: 1;
+    }
+    &__description {
+        margin-right: se-space('s');
+    }
+    &__name,
+    &__visibility {
+        color: var(--sapTextColor);
+    }
+    &__name--link {
+        cursor: pointer;
+        color: var(--sapLinkColor);
+    }
+    &__type {
+        color: var(--sapNeutralColor);
+    }
+}

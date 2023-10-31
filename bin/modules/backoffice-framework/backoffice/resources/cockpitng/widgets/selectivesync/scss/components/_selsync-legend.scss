@@ -1,0 +1,129 @@
+//Legend 
+
+//Checkboxes
+@mixin _syncCheckbox ($color:$selsync__tree-icon--color){
+    input {
+        &,
+        &[disabled] {
+            &,
+            &:hover,
+            &:checked {
+                ~ .z-checkbox-content:before {
+                    color: $color;
+                    @content;
+                }
+            }
+        }
+    }
+}
+
+.ye-selsync-legend-item,
+.ye-selsync-tree-cell {
+    .z-checkbox {
+        label:before,
+        input:checked ~ label.z-checkbox-content:before {
+            height: $selsync__tree-check-box--size;
+            width: $selsync__tree-check-box--size;
+            line-height: $selsync__tree-check-box--size;
+            font-family: $selsync__tree-icon--font-family;
+            text-align: center;
+            border-color: transparent;
+            margin-top: 0;
+            position: static;
+        }
+        &.ye-selsync {
+            &-all-selected {
+                @include _syncCheckbox() {
+                    background-color: $selsync__legend-checkbox-selected--bg-color;
+                    border-color: $selsync__legend-checkbox-selected--border-color;
+                    color: $selsync__legend-checkbox-selected--color;
+                }
+            }
+            &-partially-selected {
+                @include _syncCheckbox(inherit) {
+                    content: $_selsync__tree-checkbox-grey--content;
+                    color: $_selsync__tree-checkbox-grey--color;
+                    background-color: $_selsync__tree-checkbox-grey--bg-color;
+                    border: $_selsync__tree-checkbox-grey--border;
+                }
+            }
+            &-none-selected {
+                @include _syncCheckbox() {
+                    content: $selsync__tree-checkbox-red--content;
+                    background-color: $selsync__tree-checkbox-red--bg-color;
+                    border-color: $selsync__tree-checkbox-red--border-color;
+                    color: $selsync__tree-checkbox-red--color;
+                }
+            }
+        }
+    }
+}
+
+//Legend
+.ye-selsync-legend {
+    &-item {
+        // margin-top: $selsync__legend-item--margin-top;
+        padding-right: $selsync__legend-item--padding-right;
+        display: block;
+        float: left;
+        max-width: 25%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media all and (max-width: $selsync__content-bp-s--width){
+            max-width: 50%;
+            display: inline-block;
+            float: none;
+        }
+
+        @media all and (max-width: $selsync__content-bp-m--width){
+            padding-right: $selsync__legend-item-bp-s--padding-right;
+
+            .ye-selsync-tree-attribute-icon,
+            .z-checkbox {
+                padding-left: $_selsync__legend-checkbox-bp-s--padding-left;
+            }
+        }
+
+        .z-checkbox {
+            padding-left: $selsync__legend-checkbox--padding-left;
+            padding-top: $selsync__legend-checkbox--padding-top;
+            height: $selsync__tree-icon-attribute--size;
+            line-height: 0;
+            float: right;
+            display: inline;
+
+            .z-checkbox-content:empty {
+                padding-right: 0;
+            }
+        }
+
+        &-label {
+            margin-left: $_selsync__legend-item-label--margin-left; //$selsync__legend-item-label--margin-left;
+            line-height: $selsync__legend-item--line-height;
+            font-size: $selsync__legend-item-label--font-size;
+            // padding: $_selsync__legend-item-label--padding;
+            display: inline;
+        }
+
+        .ye-selsync-tree-attribute-icon {
+            width: auto;
+            height: $selsync__tree-icon-attribute--size;
+            position: relative;
+            float: right;
+            display: inline-block;
+
+            &:after {
+                width: $selsync__tree-icon-attribute--size;
+                height: $selsync__tree-icon-attribute--size;
+                content: $selsync__tree-icon-attribute--content;
+                color: $selsync__tree-icon-attribute--icon-color;
+                font-family: $selsync__tree-icon--font-family;
+                line-height: $_selsync__tree-icon-attribute--line-height;
+                text-align: center;
+                display: block;
+            }
+        }            
+    }
+}

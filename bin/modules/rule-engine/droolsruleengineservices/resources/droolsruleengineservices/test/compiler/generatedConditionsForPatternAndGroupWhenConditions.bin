@@ -1,0 +1,15 @@
+  (
+    exists (WebsiteGroupRAO(id == "electronicsPromoGroup"))
+    and
+    (
+      $rao_orderEntry := OrderEntryRAO(productCode == "1234567", quantity >= new Integer(1))
+      and
+      exists (CartRAO(entries contains $rao_orderEntry))
+    )
+    and
+    (
+      $rao_orderEntry := OrderEntryRAO(categoryCodes == "902", quantity >= new Integer(1))
+      and
+      exists (CartRAO(entries contains $rao_orderEntry))
+    )
+  )

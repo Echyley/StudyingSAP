@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+
+	<bean
+		class="de.hybris.platform.sap.saps4omfacades.scheduleline.data.DeliveryScheduleLineData">
+		<property name="confirmedQuantity" type="String" >
+		<description>Confirmed Quantity for an item</description>
+            <hints>
+                <hint name="example">16</hint>
+            </hints>  
+        </property>    
+		<property name="confirmedDate" type="java.util.Date" >
+		<description>Confirmed Date for an item</description>
+            <hints>
+                <hint name="example">2022-03-23T00:00:00+0000</hint>
+            </hints>  
+        </property> 
+	</bean>
+
+	<bean
+		class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="deliveryScheduleLines"
+			type="java.util.List&lt;de.hybris.platform.sap.saps4omfacades.scheduleline.data.DeliveryScheduleLineData>" />
+	</bean>
+
+</beans>

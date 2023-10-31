@@ -1,0 +1,73 @@
+<div class="se-slot-sync-button-template" *ngIf="isReady">
+    <se-popup-overlay
+        #popupOverlayComponent
+        [popupOverlay]="popupConfig"
+        [popupOverlayTrigger]="isPopupOpened"
+        (popupOverlayOnHide)="onPopupHide()"
+    >
+        <div>
+            <se-tooltip
+                *ngIf="newSlotIsNotSynchronized && !slotIsShared"
+                [triggers]="['mouseenter', 'mouseleave']"
+                [placement]="'bottom'"
+                [additionalClasses]="['se-slot-ctx-menu__tooltip-area']"
+            >
+                <span class="se-slot-ctx-menu__popover-ancor" se-tooltip-trigger></span>
+                <div
+                    class="se-popover--inner-content"
+                    se-tooltip-body
+                    translate="se.cms.slot.sync.from.page.level"
+                ></div>
+            </se-tooltip>
+
+            <se-tooltip
+                *ngIf="newSlotIsNotSynchronized && slotIsShared"
+                [triggers]="['mouseenter', 'mouseleave']"
+                [placement]="'bottom'"
+                [additionalClasses]="['se-slot-ctx-menu__tooltip-area']"
+            >
+                <span class="se-slot-ctx-menu__popover-ancor" se-tooltip-trigger></span>
+                <div
+                    se-tooltip-body
+                    class="se-popover--inner-content"
+                    translate="se.cms.slot.sync.from.catalog.level"
+                ></div>
+            </se-tooltip>
+
+            <button
+                type="button"
+                (click)="dropdownToggle()"
+                class="se-slot-ctx-menu__dropdown-toggle"
+                [ngClass]="{
+                'se-slot-ctx-menu__dropdown-toggle--open': isPopupOpened,
+                'se-slot-ctx-menu__dropdown-toggle--disabled': newSlotIsNotSynchronized
+            }"
+                id="slot-sync-button-{{slotId}}"
+            >
+                <span
+                    class="sap-icon--synchronize se-slot-ctx-menu__dropdown-toggle-icon"
+                    title="{{ 'se.cms.pagetree.slot.node.menu.icon.synchronize.title' | translate }}"
+                ></span>
+                <span
+                    *ngIf="!isSlotInSync"
+                    class="sap-icon--alert se-slot-sync__btn-status se-slot-ctx-menu__dropdown-toggle-add-on"
+                ></span>
+            </button>
+        </div>
+
+        <div class="se-slot__dropdown-menu" se-popup-overlay-body>
+            <div class="se-toolbar-menu-content__wrapper" *ngIf="isPopupOpened">
+                <div
+                    class="se-slot-contextual-menu__header"
+                    translate="se.cms.synchronization.slot.header"
+                ></div>
+                <div class="se-slot-sync__body">
+                    <se-slot-synchronization-panel-wrapper
+                        [slotId]="slotId"
+                        (slotSyncItemsUpdated)="updatePosition()"
+                    ></se-slot-synchronization-panel-wrapper>
+                </div>
+            </div>
+        </div>
+    </se-popup-overlay>
+</div>

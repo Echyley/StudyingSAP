@@ -1,0 +1,37 @@
+<div class="pe-combinedview-ranking">
+    <div class="pe-combinedview-ranking__info-layout">
+        <div class="pe-combinedview-ranking__title"
+            translate="personalization.modal.showactionlist.title"></div>
+        <div class="perso__page-level-help-message"
+            translate="personalization.modal.showactionlist.help.label"></div>
+    </div>
+    <div class="pe-combinedview-ranking__list-item"
+    *ngFor="let item of selectedItems; index as i"
+        [hidden]="!item.visible">
+        <div class="pe-combinedview-ranking__letter-layout">
+            <div [ngClass]="getClassForElement(i)"
+            [textContent]="getLetterForElement(i)"></div>
+        </div>
+        <div class="pe-combinedview-ranking__names-layout">
+            <div class="perso-wrap-ellipsis"
+            [textContent]="item.customization.name"
+                title="{{item.customization.name}}"></div>
+            <div class="perso-wrap-ellipsis perso-tree__primary-data"
+            [textContent]="item.variation.name"
+                title="{{item.variation.name}}"></div>
+        </div>
+        <div class="pe-combinedview-ranking__icon">
+            <se-tooltip *ngIf="!isCustomizationFromCurrentCatalog(item.customization)"
+            [triggers]="['mouseenter', 'mouseleave']"
+            [placement]="'top right'">
+                <span
+                    se-tooltip-trigger
+                    class="perso__globe-icon sap-icon--globe">
+                </span>
+                <span se-tooltip-body>
+                    {{ item.variation.catalogVersionNameL10N | seL10n | async }}
+                </span>
+            </se-tooltip>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+$lang=ko
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;구성 가능 제품 판촉
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;판촉 메시지가 있는 옵션 가격에 대한 백분율 할인;{discount_value,number,percent*1} 할인을 {cstic} / {cstic_value} 옵션에 적용
+;y_configurable_product_display_promo_message;판촉 메시지 조회(판촉 적용);판촉 메시지 조회
+;y_configurable_product_display_promo_opportunity_message;판촉 기회 메시지 조회(판촉이 적용되지 않음);판촉 기회 메시지 조회
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;특징;이 할인이 적용되고 이 메시지가 표시되는 특징입니다.
+;y_configurable_product_percentage_discount_for_option;cstic_value;특징 값;이 할인이 적용되고 이 메시지가 표시되는 특징 값입니다.
+;y_configurable_product_percentage_discount_for_option;discount_value;백분율 할인 값;옵션 가격에 적용되는 백분율 할인입니다. 백분율 부호 없이 값을 입력하십시오.
+;y_configurable_product_percentage_discount_for_option;message;메시지;메시지 텍스트
+;y_configurable_product_percentage_discount_for_option;extended_message;확장 메시지;확장 메시지 텍스트
+;y_configurable_product_display_promo_message;cstic;특징;이 메시지가 표시되는 특징
+;y_configurable_product_display_promo_message;cstic_value;특징 값;이 메시지가 표시되는 특징 값
+;y_configurable_product_display_promo_message;message;메시지;메시지 텍스트
+;y_configurable_product_display_promo_message;extended_message;확장 메시지;확장 메시지 텍스트
+;y_configurable_product_display_promo_opportunity_message;cstic;특징;이 메시지가 표시되는 특징
+;y_configurable_product_display_promo_opportunity_message;cstic_value;특징 값;이 메시지가 표시되는 특징 값
+;y_configurable_product_display_promo_opportunity_message;message;메시지;메시지 텍스트
+;y_configurable_product_display_promo_opportunity_message;extended_message;확장 메시지;확장 메시지 텍스트
+
+#% endif:

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+    <widget xmlns="http://www.zkoss.org/2005/zul"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:h="http://www.w3.org/1999/xhtml"
+            xmlns:zk="http://www.zkoss.org/2005/zk"
+            xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+            sclass="yw-userprofie-widget"
+    >
+        <style src="${wr}/toggle.css"/>
+        <popup id="profilePopup" sclass="yw-systemBarMenu-popup">
+            <div id="profileContainer" sclass="yw-userprofie-container">
+                <label id="userNameLabel" sclass="yw-username-label"/>
+                <listbox>
+                    <listitem id="openSettingsBtn">
+                        <listcell sclass="yw-profile-settings" label="${labels.userprofile.settings}"/>
+                    </listitem>
+                    <listitem id="signOutBtn" >
+                        <listcell sclass="yw-signout" label="${labels.userprofile.signout}"/>
+                    </listitem>
+                </listbox>
+            </div>
+        </popup>
+        <toolbarbutton id="userProfileBtn" sclass="yw-userprofie-btn" popup="profilePopup, position=after_end"
+                       image="${wr}/../images/user.png" tooltiptext="${labels.userprofile.tooltip}"/>
+    </widget>
+</zk>

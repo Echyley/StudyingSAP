@@ -1,0 +1,15 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+#% if: de.hybris.platform.core.Registry.getCurrentTenant().getTenantSpecificExtensionNames().contains("adaptivesearch")
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$lang=ja
+
+INSERT_UPDATE AsFacet;uid[unique=true];name[lang=$lang];
+;b80fb32b-a9f7-4095-f1b0-f9296c98bd5e;コア属性;
+;2cf550a1-7749-0624-d8a8-c1fd37ad37b7;Marketingattribute;
+
+#% endif:

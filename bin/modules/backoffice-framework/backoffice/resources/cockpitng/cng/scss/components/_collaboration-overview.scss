@@ -1,0 +1,35 @@
+@import "../support/_collaboration-variables.scss";
+
+.yw-collaboration-center-overview {
+    > .yw-listLayout-container > .widget_children_list > .widget_cnt {
+        border-radius: $collaboration-center-overview-default--border-radius;
+    }
+
+    .yw-workflow-detailed-name {
+        span {
+            display: block;
+        }
+        .yw-workflow-currenttask {
+            padding-top: $collaboration-center-overview__listitem-details-current--padding-top;
+            font-size: $collaboration-center-overview__listitem-details-current--font-size;
+        }
+    }
+
+    &-workflows {
+        .yw-listview-actioncontainer {
+            .yw-listview-actionSlot {
+                float: right;
+            }
+        }
+        .yw-workflowsearch-filters {
+            margin: 0;
+        }
+
+        .yw-valuechooser-option.z-button {
+        	padding: 0 5px;
+        }
+        .yw-listview-actioncontainer > .y-toolbar {
+        	display: inline !important;
+        }
+    }
+}

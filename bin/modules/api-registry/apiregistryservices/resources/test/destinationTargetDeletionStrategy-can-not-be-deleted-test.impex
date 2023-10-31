@@ -1,0 +1,48 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+
+$destination_target_2 = test_destination_target_2
+$destination_target_3 = test_destination_target_3
+
+$end_point_2 = test_endpoint_2
+$end_point_3 = test_endpoint_3
+$end_point_version = v1
+
+$url=https://localhost
+
+$consumed_oauth_credential_2=test_consumed_oauth_credential_2
+
+$oauth_client_detail_2=test_oauth_client_detail_2
+$exposed_oauth_credential_2=test_exposed_oauth_credential_2
+$exposed_oauth_credential_3=test_exposed_oauth_credential_3
+
+$consumed_destination_2 = test_consumed_dest_2
+$consumed_destination_3 = test_consumed_dest_3
+
+$exposed_destinaion_3=test_exposed_destinaiton_3
+
+INSERT_UPDATE DestinationTarget; id[unique = true]     ; destinationChannel(code)[default = DEFAULT]; template
+                               ; $destination_target_2 ;                                            ; false
+                               ; $destination_target_3 ;                                            ; false
+
+INSERT_UPDATE Endpoint; id[unique = true]; version[unique = true]; description     ; specUrl; name
+                      ; $end_point_2     ; $end_point_version    ; "EventsEndpoint"; $url   ; "Events Endpoint v1"
+                      ; $end_point_3     ; $end_point_version    ; "EventsEndpoint"; $url   ; "Events Endpoint v1"
+
+INSERT_UPDATE ConsumedOAuthCredential; id[unique = true]           ; clientId; clientSecret
+                                     ; $consumed_oauth_credential_2; foo     ; bar
+
+INSERT_UPDATE ConsumedDestination; id[unique = true]       ; url ; endpoint(id, version)          ; credential(id)              ; destinationTarget(id)[unique = true,default=$destination_target_2]
+                                 ; $consumed_destination_2 ; $url; $end_point_2:$end_point_version; $consumed_oauth_credential_2;
+                                 ; $consumed_destination_3 ; $url; $end_point_2:$end_point_version; $consumed_oauth_credential_2; $destination_target_3
+
+INSERT_UPDATE OAuthClientDetails;clientId[unique = true]; oAuthUrl
+                                ;$oauth_client_detail_2 ; $url
+
+INSERT_UPDATE ExposedOAuthCredential;id[unique=true]            ; oAuthClientDetails(clientId); password
+                                    ;$exposed_oauth_credential_2; $oauth_client_detail_2      ; secret
+                                    ;$exposed_oauth_credential_3; $oauth_client_detail_2      ; secret
+
+INSERT_UPDATE ExposedDestination;id[unique=true]      ; url ; endpoint(id, version)          ; credential(id)             ; destinationTarget(id)[unique = true,default=$destination_target_2]
+                                ;$exposed_destinaion_3; $url; $end_point_3:$end_point_version; $exposed_oauth_credential_2;

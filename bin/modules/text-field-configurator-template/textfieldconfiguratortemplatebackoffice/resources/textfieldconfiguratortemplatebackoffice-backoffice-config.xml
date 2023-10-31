@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<config xmlns="http://www.hybris.com/cockpit/config"
+        xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+        xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+        xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+        xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+        xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+        xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+        xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+        xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+        xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
+        >
+    <context type="TextFieldConfiguredProductInfo" component="base" merge-by="type">
+        <y:base>
+            <y:labels>
+                <y:label>configuratorType + ': ' + configurationLabel + '=' + configurationValue</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+
+    <context type="TextFieldConfiguratorSetting" component="base" merge-by="type">
+        <y:base>
+            <y:labels>
+                <y:label>qualifier + ': ' + textFieldLabel + '=' + textFieldDefaultValue</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

@@ -1,0 +1,57 @@
+<div class="slot-unshared-button-template" *ngIf="isLocalSlot || isNonSharedSlot">
+    <se-popup-overlay
+        [popupOverlay]="popupConfig"
+        [popupOverlayTrigger]="isPopupOpened"
+        (popupOverlayOnHide)="hidePopup()"
+    >
+        <button
+            type="button"
+            id="slot-unshared-button-{{ slotId }}"
+            class="se-slot-ctx-menu__dropdown-toggle se-slot-ctx-menu__dropdown-toggle-icon"
+            [ngClass]="{
+                'se-slot-ctx-menu__dropdown-toggle--open': isPopupOpened,
+                'sap-icon--chain-link': isLocalSlot,
+                'sap-icon--broken-link': isNonSharedSlot
+            }"
+            (click)="toggle()"
+            title="{{ getSlotNotSharedButtonComponentIconTitle() | translate }}"
+        ></button>
+
+        <div class="se-toolbar-menu-content se-slot__dropdown-menu" se-popup-overlay-body>
+            <div class="se-slot-contextual-menu__header" [translate]="getHeader()"></div>
+
+            <div class="se-shared-slot__body">
+                <div
+                    class="se-shared-slot__description"
+                    translate="se.cms.slot.unshared.popover.commonmessage"
+                ></div>
+                <div
+                    *seHasOperationPermission="'se.shared.slot.override.options'"
+                    class="se-shared-slot-replace__div"
+                >
+                    <div *ngIf="isLocalSlot" class="se-shared-slot__option">
+                        <a
+                            href="#"
+                            class="se-shared-slot__link replace-slot-link fd-link"
+                            translate="se.cms.slot.shared.popover.button.replaceslot"
+                            (click)="replaceSlot($event)"
+                        >
+                        </a>
+                    </div>
+                </div>
+                <div
+                    *seHasOperationPermission="'se.revert.to.global.or.shared.slot.link'"
+                    class="se-shared-slot__option"
+                >
+                    <a
+                        href="#"
+                        class="se-shared-slot__link revert-slot-link fd-link"
+                        [translate]="removeSlotLinkLabel"
+                        (click)="removeSlot($event)"
+                    >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </se-popup-overlay>
+</div>

@@ -1,0 +1,29 @@
+@import "cockpitng-globals.scss";
+@import "../support/_promotionenginebackoffice-variables.scss";
+
+div.yrb-promo-detailedDescription {
+	color: var(--bo-title-color);
+}
+
+/*============================================================================
+    Messages help tables
+============================================================================ */
+
+table.promo-messageParams {
+	padding-bottom: $promotionengine__message-params--padding-bottom;
+
+	th, 
+	td {
+		border-bottom: $promotionengine__message-param--border-bottom;
+		padding: $promotionengine__message-param--padding;
+		color: var(--bo-list-text-color);
+		background: var(--bo-list-background);
+		text-align: left;
+	}
+
+	th {
+		background: var(--bo-list-table-header-background);
+		border-bottom: $promotionengine__message-param-head--border-bottom;
+		color: var(--bo-list-table-header-color);
+	}
+}

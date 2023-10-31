@@ -1,0 +1,16 @@
+.integrationbackoffice-stack-container {
+  .integrationbackoffice-widget-slot {
+    background-color: var(--bo-list-table-header-background);
+    width: 100%;
+  }
+
+  .integrationbackoffice-widget-slot .yw-textsearch-single {
+    padding: 0 !important;
+  }
+}
+
+.integrationbackoffice-stack-title .z-label {
+  font-size: $font-size__large;
+  font-weight: 600;
+  font-style: normal;
+}

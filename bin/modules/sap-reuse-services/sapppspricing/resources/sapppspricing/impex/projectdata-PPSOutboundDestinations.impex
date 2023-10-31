@@ -1,0 +1,61 @@
+#***************************************************************************#
+#*** Please change only the sample data and do NOT change anything else! ***#                                                                                       #
+#***************************************************************************#
+
+#*********************************#
+#*** Sample Data To Be Changed ***#
+#*********************************#
+
+
+#**************************#
+#***  OAuth CredentialS ***#
+#**************************#    
+$oAuthUrl = https://test.sap.hana.ondemand.com/oauth/token
+$clientId = sampleClientId        
+$password = samplePassword   
+
+#******************#
+#***  OPPS URL ***#
+#******************#
+$oppsUrl = https://tenant.sap.hana.ondemand.com/restapi/subaccount
+$oppsinterfaceversion = VERSION20
+$businessUnitId=TEST1
+$retailClient=TESTCLIENT100
+$storeId=apparel-uk
+
+     
+#*****************************************#
+#***  DO NOT Change The Section Below! ***#
+#*****************************************#
+
+#**************************#      
+#***  OAuth CredentialS ***#      
+#**************************#   
+                                 
+INSERT_UPDATE ConsumedOAuthCredential ; id[unique=true]        ; clientId  ; clientSecret ; oAuthUrl 
+                                      ; scpOPPSOauthCredential ; $clientId ; $password    ; $oAuthUrl
+                                      
+#******************#                  
+#***  Endpoints ***#                  
+#******************#                  
+INSERT_UPDATE Endpoint ; id[unique = true]     ; version[unique = true] ; specUrl    ; name                 
+                       ; scpOPPServiceEndpoint ; unknown                ; "$oppsUrl" ; scpOPPServiceEndpoint
+
+#****************************#
+#***  Destination Target  ***#
+#****************************#
+INSERT_UPDATE DestinationTarget ; id[unique = true]       
+                                ; scpOPPSDestinationTarget
+                                           
+#*******************************#
+#***  Consumed Destinations  ***#
+#*******************************#
+INSERT_UPDATE ConsumedDestination ; id[unique = true]        ; url        ; endpoint(id, version)         ; credential(id)         ; destinationTarget(id)[default = scpOPPSDestinationTarget][forceWrite=true]
+                                  ; scpOPPServiceDestination ; "$oppsUrl" ; scpOPPServiceEndpoint:unknown ; scpOPPSOauthCredential ;                                                          ;  
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true]
+                       ;$storeId
+					   
+INSERT_UPDATE SAPConfiguration ; core_name[unique=true] ; sappps_active ; sappps_interfaceVersion(code) ; sappps_businessUnitId ; sappps_sourceSystemId ; baseStores(uid)
+                               ; SAP_RETAIL             ; FALSE          ; $oppsinterfaceversion         ; $businessUnitId       ; $retailClient         ; $storeId     

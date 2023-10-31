@@ -1,0 +1,55 @@
+$lang=ja
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;選定可能製品
+;productconfig_customer_category;顧客
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;指定された設定を持つカート内商品;カートには製品 {product} があります (特性 {cstic} は価額 {cstic_value} を{value_operator})。
+;y_configurable_product;現在設定している製品;現在設定している製品は {product} です (特性 {cstic} は価額 {cstic_value} を{value_operator})。
+;y_configurable_product_customer;顧客;次の一覧\: {customers}の顧客 {customers_operator} 
+;y_configurable_product_customer_group;顧客グループ;次のグループ\: {customer_groups} の顧客 {customer_groups_operator} 
+;y_configurable_product_customer_support_mode;カスタマサポート;支援されたサービスセッションは有効です\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;商品;カート内の商品;Item Type (Product)
+;y_configurable_product_in_cart;cstic;特性;特性名
+;y_configurable_product_in_cart;value_operator;演算子;特性と値の演算子
+;y_configurable_product_in_cart;cstic_value;値;特性値名称;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;商品;現在設定している商品
+;y_configurable_product;cstic;特性;特性名
+;y_configurable_product;value_operator;演算子;特性と値の演算子
+;y_configurable_product;cstic_value;値;特性値名称
+;y_configurable_product_customer;customers_operator;顧客選択演算子;顧客がリストに含まれているかどうかを定義
+;y_configurable_product_customer;customers;顧客;顧客一覧
+;y_configurable_product_customer_group;customer_groups_operator;顧客グループ選択演算子;顧客がいずれかまたはすべての顧客グループに含まれているかどうかを定義
+;y_configurable_product_customer_group;customer_groups;顧客グループ;顧客グループ一覧
+;y_configurable_product_customer_support_mode;value;支援されたサービスセッション有効;カスタマサポート担当者が顧客に代わってログイン
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;選定可能製品
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;選定可能製品の特性値を設定;特性 {cstic} の値 {cstic_value} を設定
+;y_configurable_product_remove_assignable_value;選定可能製品の割当可能な値を非表示にする;特性 {cstic} の値 {cstic_value} を非表示にする
+;y_configurable_product_hide_cstic;選定可能製品の特性を非表示;特性 {cstic} 非表示
+;y_configurable_product_display_cstic_readonly;選定可能製品の特性を読込専用として表示;特性 {cstic} を読込専用として表示
+;y_configurable_product_display_message;メッセージ表示;メッセージ表示
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;特性;値が設定される特性
+;y_configurable_product_set_cstic_value;cstic_value;値;設定される特性値
+;y_configurable_product_remove_assignable_value;cstic;特性;割当可能な値が削除される特性
+;y_configurable_product_remove_assignable_value;cstic_value;値;割当可能な値の一覧から削除される値
+;y_configurable_product_hide_cstic;cstic;特性;非表示特性
+;y_configurable_product_display_cstic_readonly;cstic;特性;読込専用として照会する特性
+;y_configurable_product_display_message;message;メッセージ;メッセージテキスト
+;y_configurable_product_display_message;message_severity;重大度;メッセージの重大度
+;y_configurable_product_display_message;cstic;特性;このメッセージが表示される特性
+;y_configurable_product_display_message;cstic_value;特性値;このメッセージが表示される特性値
+
+#% endif:

@@ -1,0 +1,28 @@
+<div class="fd-form__set">
+    <div class="fd-form-item fd-form__item--check">
+        <label class="fd-form__label">
+            <input
+                type="checkbox"
+                class="fd-form__control"
+                name="createVersion"
+                [(ngModel)]="model.createVersion"
+            />
+            {{ 'se.cms.workflow.editor.create.version' | translate }}
+        </label>
+    </div>
+    <div class="fd-form-item" *ngIf="model.createVersion">
+        <label
+            class="fd-form__label version-label__title"
+            for="versionLabel"
+            translate="se.cms.workflow.editor.create.version.label"
+        >
+        </label>
+        <input
+            type="text"
+            name="versionLabel"
+            class="fd-form__control"
+            [class.has-error]="field.hasErrors"
+            [(ngModel)]="model.versionLabel"
+        />
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.se-product-row {
+    &__product,
+    &__catalog {
+        @include se-text-ellipsis;
+        text-align: left;
+    }
+    &__img {
+        padding: 2px;
+        width: 36px;
+        height: 36px;
+        font-size: 0.35rem;
+    }
+}

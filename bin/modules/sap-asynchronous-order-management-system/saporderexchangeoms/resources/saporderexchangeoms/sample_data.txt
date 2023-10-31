@@ -1,0 +1,11 @@
+Sample data for mapByLogSysSalesOrg
+
+{
+LOGSYS001={ 1000_10_00=[ConsignmentModel (8797240100819),
+ConsignmentModel (8797240100888)], 2000_20_00=[ConsignmentModel
+(8797240068051)]}
+
+LOGSYS002={ 3000_30_00=[ConsignmentModel (8797240100777),
+ConsignmentModel (8797240100666)], 2000_20_00=[ConsignmentModel
+(8797240068555)]}
+}

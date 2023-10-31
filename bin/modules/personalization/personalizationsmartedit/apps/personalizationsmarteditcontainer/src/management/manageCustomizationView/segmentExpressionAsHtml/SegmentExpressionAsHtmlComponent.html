@@ -1,0 +1,21 @@
+<span *ngFor="let word of expression">
+    <span
+        *ngIf="operators.includes(word)"
+        class="pe-customization-modal__expression-text"
+        >&nbsp;{{ segmentActionI18n[word] | translate }}&nbsp;</span
+    >
+    <se-tooltip
+        *ngIf="word === emptyGroup"
+        [triggers]="['mouseenter', 'mouseleave']"
+    >
+        <span
+            se-tooltip-trigger
+            class="pe-customization-modal__expression-alert-icon sap-icon--alert"
+        ></span>
+        <span
+            se-tooltip-body
+            translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments.group.tooltip"
+        ></span>
+    </se-tooltip>
+    <span *ngIf="!emptyGroupAndOperators.includes(word)">{{ word }}</span>
+</span>

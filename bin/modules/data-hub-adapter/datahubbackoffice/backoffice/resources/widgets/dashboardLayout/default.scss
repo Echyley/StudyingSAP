@@ -1,0 +1,217 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2018 SAP SE or an SAP affiliate company.
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with SAP.
+ */
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout {
+    background-color: var(--bo-container-background);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .title-cnt {
+    background-color: var(--bo-base-background);
+    padding: 30px;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .title-cnt .z-label{
+    font-size: $font-size__h2;
+    color: var(--bo-title-color);
+    font-weight: bold;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .subtitle-cnt{
+    padding: 20px 30px 10px;
+    color: var(--bo-title-color);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .subtitle-cnt .z-label{
+    font-size: $font-size__large;
+    font-weight: $font-family__text_bold;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .content-cnt {
+    padding: 0 30px;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .widget_body .status-cnt{
+    padding: 10px;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .widget_body {
+    background-color: var(--bo-container-background);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .widget_body .z-tabbox {
+    padding: 0 30px;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout.widget_body .z-tabbox-top .z-tabs .z-tab.z-tab-selected {
+    box-shadow: none;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout.widget_body .z-tabbox-top .z-tabs .z-tab.z-tab-selected .z-tab-content {
+    border-bottom: 2px solid var(--bo-selected-color);
+    padding-bottom: 8px;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabs {
+    margin-bottom: 40px;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabs .z-tab {
+    background-color: var(--bo-container-background);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tab.z-tab-selected .z-tab-text{
+    color: var(--bo-selected-color);
+    border: none;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tab .z-tab-text{
+    color: var(--bo-tile-title-color);
+    padding: 0px !important;
+    font-size: $font-size__base;
+    // font-weight: $font-weight-normal;
+    font-family: var(--bo-font-family);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tab, .yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tab-selected {
+    border-width: 0px !important;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabs-content {
+    border-bottom: 1px solid var(--bo-page-footer-border-color);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabs-content .z-tab {
+    padding-right: 20px;
+    padding-left: 0;
+    text-transform: uppercase;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabs-content .z-tab:last-child {
+    padding-right: 0;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabpanels {
+    border: 1px solid var(--bo-page-footer-border-color);
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .ye-default-reference-editor {
+    width:300px;
+    float:right;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .status-cnt .z-label {
+    font-size: $font-size__large;
+    color: var(--bo-tile-title-color);
+    width:300px;
+    float:left;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .z-tabpanel {
+    height: 100% !important;
+    padding-top: 0 !important;
+}
+
+.yw-dashboard-item {
+	margin-top:30px;
+	margin-bottom:30px;
+	background-color: var(--bo-base-background);
+	border: 1px solid var(--bo-container-border-color);
+	height: 200px;
+}
+
+.yw-dashboarditem-column {
+	width:25%;
+	float: left;
+	border-left: 2px solid var(--bo-container-border-color);
+	height:180px;
+	background-color: var(--bo-container-background);
+}
+
+.yw-dashboarditem-column:first-child {
+    border-left: none;
+}
+
+.yw-dashboarditem-column.yw-fivecol {
+    width: 20%;
+}
+
+.yw-dashboarditem-content{
+	color: var(--bo-chart-ordered-color3);
+	text-align: center;
+	vertical-align: middle;
+	margin-top:50px;
+	font-size: $font-size__small;
+	text-transform: uppercase;
+	background:var(--bo-container-background);
+}
+
+.yw-dashboarditem-content.inprogress .z-label{
+	color: var(--bo-accent-color6);
+}
+
+.yw-dashboarditem-content.failure2 .z-label{
+	color: var(--bo-accent-color2);
+	background:transparent;
+}
+
+.yw-dashboarditem-content.complete .z-label{
+	color: var(--primary1);
+}
+
+.yw-dashboarditem-content .z-label{
+	font-weight:$font-family__text_bold;
+	font-size: $font-size__kpi_large;
+}
+
+
+.yw-dashboarditem-content .yw-stat-label{
+	color: var(--primary5) !important;
+	font-size: $font-size__small;
+	text-transform: uppercase;
+}
+
+.z-tabpanels .yw-dashboard-horizontal-space{
+	/*height:20px;*/
+	/*clear:both;*/
+}
+
+.z-tabpanels .yw-dashboarditem-info-column .z-label {
+	color: var(--primary6);
+	font-size: $font-size__base;
+	font-weight: $font-family__text_bold;
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.z-tabpanels .yw-dashboarditem-info-column {
+	padding-top: 70px;
+	text-align: center;
+}
+
+/**Custom Styles**/
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .widget_cnt .yw-dashboarditem-column .yw-stat-label {
+	font-weight: $font-family__text_bold;
+	font-size: $font-size__base;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout .widget_cnt .yw-dashboarditem-column .yw-stat-label .z-label {
+	font-weight: $font-family__text_bold;
+	font-size: $font-size__kpi_large;
+}
+
+.yw-de_hybris_platform_datahubbackoffice_dashboardLayout.widget_body .z-tabbox-top .z-tabs .z-tabs-content {
+    box-shadow: none;
+    border-bottom: 1px solid var(--bo-page-footer-border-color);
+    padding-left: 0;
+}

@@ -1,0 +1,7 @@
+<div (click)="onClick($event)">
+    <div class="se-announcement__title">{{ task.action.name | seL10n | async }}</div>
+    <div class="se-announcement__message">
+        {{ task.attachments[0].catalogName | seL10n | async }} | {{ task.attachments[0].pageName }}
+    </div>
+    <div class="se-announcement__time-stamp">{{ startedAgo }}</div>
+</div>

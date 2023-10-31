@@ -1,0 +1,7 @@
+<span
+    fd-menu-title
+    [attr.title]="((data.item.label || data.item.name) | seL10n | async) | translate"
+    class="se-item-printer-text se-nowrap-ellipsis"
+>
+    {{ ((data.item.label || data.item.name) | seL10n | async) | translate }}
+</span>

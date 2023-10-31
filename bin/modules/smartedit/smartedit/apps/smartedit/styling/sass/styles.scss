@@ -1,0 +1,38 @@
+@import '~smarteditcommons/styling/sass/styles';
+// Sets global font size in order for se-type mixin to work within Smartedit. Do Not Remove!!!
+html {
+    font-size: $se-font-size;
+}
+
+//import icon to smartedit inner
+.cdk-overlay-container,
+#smarteditoverlay {
+    height: initial;
+    font-family: $font-sap !important;
+
+    a {
+        display: initial;
+    }
+
+    h1,
+    h2,
+    h3 {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+.owl-prev::before,
+.owl-next::before,
+.carousel__item--name::after {
+    display: none;
+}
+
+.carousel__item--name::before {
+    background-color: transparent !important;
+}
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper {
+    height: 100%;
+    width: 100%;
+}

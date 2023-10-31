@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+	<bean class="de.hybris.platform.b2b.punchout.PunchOutSession">
+		<property name="operation" type="String"/>
+		<property name="buyerCookie" type="String"/>
+		<property name="browserFormPostUrl" type="String"/>
+		<property name="time" type="java.util.Date"/>
+		<property name="initiatedBy" type="java.util.List"/>
+		<property name="targetedTo" type="java.util.List"/>
+        <property name="sentBy" type="java.util.List"/>
+        <property name="sentByUserAgent" type="String"/>
+		<property name="key" type="String"/>
+        <property name="salt" type="String"/>
+        <property name="punchoutLevel" type="de.hybris.platform.b2b.punchout.enums.PunchOutLevel"/>
+        <property name="selectedItem" type="String"/>
+	</bean>
+
+	<enum class="de.hybris.platform.b2b.punchout.enums.PunchOutLevel">
+		<description>The punchoutLevel is an attribute that allows suppliers to specify how procurement applications
+			should present the PunchOut item to users.
+		</description>
+		<value>STORE</value>
+		<value>PRODUCT</value>
+		<value>AISLE</value>
+		<value>SHELF</value>
+	</enum>
+
+	<enum class="de.hybris.platform.b2b.punchout.constants.PunchOutSetupOperation">
+		<description>Supported PunchOut operations</description>
+		<value>CREATE</value>
+		<value>EDIT</value>
+		<value>INSPECT</value>
+	</enum>
+
+	<bean class="de.hybris.platform.b2b.punchout.Organization">
+		<property name="domain" type="String"/>
+		<property name="identity" type="String"/>
+        <property name="sharedsecret" type="String"/>
+	</bean>
+
+</beans>

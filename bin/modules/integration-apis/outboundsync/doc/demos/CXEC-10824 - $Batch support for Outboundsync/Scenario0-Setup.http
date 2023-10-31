@@ -1,0 +1,492 @@
+### Create Test IO. Customer as root
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "{{customer_io_code}}",
+    "items": [
+      {
+        "root": true,
+        "code": "Customer",
+        "type": {
+          "code": "Customer"
+        },
+        "attributes": [
+          {
+            "attributeName": "uid",
+            "attributeDescriptor": {
+              "enclosingType": {
+                "code": "Customer"
+              },
+              "qualifier": "uid"
+            },
+            "returnIntegrationObjectItem": null,
+            "unique": true,
+            "autoCreate": false
+          },
+          {
+            "attributeName": "name",
+            "attributeDescriptor": {
+              "enclosingType": {
+                "code": "Customer"
+              },
+              "qualifier": "name"
+            },
+            "returnIntegrationObjectItem": null,
+            "unique": false,
+            "autoCreate": false
+          },
+          {
+            "attributeName": "contactEmail",
+            "attributeDescriptor": {
+              "enclosingType": {
+                "code": "Customer"
+              },
+              "qualifier": "contactEmail"
+            },
+            "returnIntegrationObjectItem": null,
+            "unique": false,
+            "autoCreate": false
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+### Create outbound sync configuration to local spring boot app
+POST {{fullURL}}/OutboundChannelConfig/OutboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "code": "springBootPayloadReceiver",
+  "integrationObject": {
+    "code": "{{customer_io_code}}"
+  },
+  "destination": {
+    "id": "springBootPayloadReceiverDestination",
+    "url": "https://localhost:7654/BatchController",
+    "credentialBasic": {
+      "id": "springBootPayloadReceiverCredential",
+      "username": "doesnt",
+      "password": "matter"
+    },
+    "endpoint": {
+      "name": "springBootPayloadReceiverer",
+      "id": "springBootPayloadReceiverer",
+      "specUrl": "https://foo.bar",
+      "version": "version1.0"
+    },
+    "destinationTarget": {
+      "id": "springBootPayloadReceiverTarget"
+    }
+  },
+  "autoGenerate": true,
+  "batch": true
+}
+
+### Create outbound sync configuration to local platform running in 7002 port
+POST {{fullURL}}/OutboundChannelConfig/OutboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "code": "7002PlatformPayloadReceiver",
+  "integrationObject": {
+    "code": "{{customer_io_code}}"
+  },
+  "destination": {
+    "id": "7002PlatformPayloadReceiverDestination",
+    "url": "https://localhost:7002/odata2webservices/{{customer_io_code}}",
+    "credentialBasic": {
+      "id": "7002PlatformPayloadReceiverCredential",
+      "username": "{{admin_user}}",
+      "password": "{{admin_pass}}"
+    },
+    "endpoint": {
+      "name": "7002PlatformPayloadReceiverer",
+      "id": "7002PlatformPayloadReceiverer",
+      "specUrl": "https://foo.bar",
+      "version": "version1.0"
+    },
+    "destinationTarget": {
+      "id": "7002PlatformPayloadReceiverTarget"
+    }
+  },
+  "autoGenerate": true,
+  "batch": true
+}
+
+### Create Order IO. Order as root
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "{{order_batch_test_io}}",
+    "items": [
+      {
+        "code": "User",
+        "type": {
+          "code": "User"
+        },
+        "attributes": [
+          {
+            "attributeName": "uid",
+            "unique": true,
+            "attributeDescriptor": {
+              "qualifier": "uid",
+              "enclosingType": {
+                "code": "User"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "Currency",
+        "type": {
+          "code": "Currency"
+        },
+        "attributes": [
+          {
+            "attributeName": "isocode",
+            "unique": true,
+            "attributeDescriptor": {
+              "qualifier": "isocode",
+              "enclosingType": {
+                "code": "Currency"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "Catalog",
+        "type": {
+          "code": "Catalog"
+        },
+        "attributes": [
+          {
+            "attributeName": "id",
+            "attributeDescriptor": {
+              "qualifier": "id",
+              "enclosingType": {
+                "code": "Catalog"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "CatalogVersion",
+        "type": {
+          "code": "CatalogVersion"
+        },
+        "attributes": [
+          {
+            "attributeName": "version",
+            "attributeDescriptor": {
+              "qualifier": "version",
+              "enclosingType": {
+                "code": "CatalogVersion"
+              }
+            }
+          },
+          {
+            "attributeName": "catalog",
+            "attributeDescriptor": {
+              "qualifier": "catalog",
+              "enclosingType": {
+                "code": "CatalogVersion"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "Catalog"
+            }
+          }
+        ]
+      },
+      {
+        "code": "Unit",
+        "type": {
+          "code": "Unit"
+        },
+        "attributes": [
+          {
+            "attributeName": "code",
+            "attributeDescriptor": {
+              "qualifier": "code",
+              "enclosingType": {
+                "code": "Unit"
+              }
+            }
+          },
+          {
+            "attributeName": "name",
+            "attributeDescriptor": {
+              "qualifier": "name",
+              "enclosingType": {
+                "code": "Unit"
+              }
+            }
+          },
+          {
+            "attributeName": "unitType",
+            "attributeDescriptor": {
+              "qualifier": "unitType",
+              "enclosingType": {
+                "code": "Unit"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "Product",
+        "type": {
+          "code": "Product"
+        },
+        "attributes": [
+          {
+            "attributeName": "code",
+            "attributeDescriptor": {
+              "qualifier": "code",
+              "enclosingType": {
+                "code": "Product"
+              }
+            }
+          },
+          {
+            "attributeName": "catalogVersion",
+            "attributeDescriptor": {
+              "qualifier": "catalogVersion",
+              "enclosingType": {
+                "code": "Product"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "CatalogVersion"
+            }
+          }
+        ]
+      },
+      {
+        "code": "OrderEntry",
+        "type": {
+          "code": "OrderEntry"
+        },
+        "attributes": [
+          {
+            "attributeName": "entryNumber",
+            "unique": true,
+            "attributeDescriptor": {
+              "qualifier": "entryNumber",
+              "enclosingType": {
+                "code": "OrderEntry"
+              }
+            }
+          },
+          {
+            "attributeName": "product",
+            "unique": false,
+            "autoCreate": true,
+            "attributeDescriptor": {
+              "qualifier": "product",
+              "enclosingType": {
+                "code": "OrderEntry"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "Product"
+            }
+          },
+          {
+            "attributeName": "quantity",
+            "unique": false,
+            "attributeDescriptor": {
+              "qualifier": "quantity",
+              "enclosingType": {
+                "code": "OrderEntry"
+              }
+            }
+          },
+          {
+            "attributeName": "unit",
+            "unique": false,
+            "autoCreate":true,
+            "attributeDescriptor": {
+              "qualifier": "unit",
+              "enclosingType": {
+                "code": "OrderEntry"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "Unit"
+            }
+          }
+        ]
+      },
+      {
+        "root": true,
+        "code": "Order",
+        "type": {
+          "code": "Order"
+        },
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "attributeDescriptor": {
+              "qualifier": "code",
+              "enclosingType": {
+                "code": "Order"
+              }
+            }
+          },
+          {
+            "attributeName": "description",
+            "unique": false,
+            "attributeDescriptor": {
+              "qualifier": "description",
+              "enclosingType": {
+                "code": "Order"
+              }
+            }
+          },
+          {
+            "attributeName": "date",
+            "unique": true,
+            "attributeDescriptor": {
+              "qualifier": "date",
+              "enclosingType": {
+                "code": "Order"
+              }
+            }
+          },
+          {
+            "attributeName": "user",
+            "unique": false,
+            "attributeDescriptor": {
+              "qualifier": "user",
+              "enclosingType": {
+                "code": "Order"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "User"
+            }
+          },
+          {
+            "attributeName": "currency",
+            "unique": false,
+            "attributeDescriptor": {
+              "qualifier": "currency",
+              "enclosingType": {
+                "code": "Order"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "Currency"
+            }
+          },
+          {
+            "attributeName": "entries",
+            "unique": false,
+            "autoCreate":true,
+            "attributeDescriptor": {
+              "qualifier": "entries",
+              "enclosingType": {
+                "code": "Order"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "OrderEntry"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### Modifiy the Order IO just created. The IO creation is split into two requests to avoid circular reference issue
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "{{order_batch_test_io}}",
+    "items": [
+      {
+        "code": "OrderEntry",
+        "type": {
+          "code": "OrderEntry"
+        },
+        "attributes": [
+          {
+            "attributeName": "order",
+            "unique": false,
+            "attributeDescriptor": {
+              "qualifier": "order",
+              "enclosingType": {
+                "code": "OrderEntry"
+              }
+            },
+            "returnIntegrationObjectItem": {
+              "code": "Order"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### Create outbound sync configuration to local platform running in 7002 port
+POST {{fullURL}}/OutboundChannelConfig/OutboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "code": "7002OrderReceiver",
+  "integrationObject": {
+    "code": "{{order_batch_test_io}}"
+  },
+  "destination": {
+    "id": "7002OrderDestination",
+    "url": "https://localhost:7002/odata2webservices/{{order_batch_test_io}}",
+    "credentialBasic": {
+      "id": "7002PlatformPayloadReceiverCredential",
+      "username": "{{admin_user}}",
+      "password": "{{admin_pass}}"
+    },
+    "endpoint": {
+      "name": "7002OrderReceiverer",
+      "id": "7002OrderReceiverer",
+      "specUrl": "https://foo.bar",
+      "version": "version1.0"
+    },
+    "destinationTarget": {
+      "id": "7002OrderTarget"
+    }
+  },
+  "autoGenerate": true,
+  "batch": true
+}
+
+

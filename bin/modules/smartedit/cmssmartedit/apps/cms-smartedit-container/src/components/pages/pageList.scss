@@ -1,0 +1,139 @@
+.se-page-list {
+    $root: &;
+
+    background-color: var(--sapShell_Background);
+    min-height: 100vh;
+    height: 100%; // if page is longer than the view height
+
+    &__page-link-anchor {
+        text-decoration: none !important;
+        color: var(--sapNeutralTextColor);
+        &:hover {
+            color: var(--sapLinkColor);
+        }
+    }
+
+    &__header {
+        padding: se-space('s') 30px;
+        background-color: var(--sapBaseColor);
+        -webkit-box-shadow: var(--sapContent_HeaderShadow);
+        box-shadow: var(--sapContent_HeaderShadow);
+    }
+
+    &__page-link-icon {
+        @include se-type('-1');
+        color: var(--sapNeutralTextColor);
+    }
+
+    &__catalog-name {
+        @include se-type('4');
+        display: block;
+        margin-bottom: se-space('base');
+        font-weight: 800;
+        font-size: 2rem !important;
+        color: var(--sapTitleColor);
+    }
+
+    &__sub-title {
+        font-size: 0.875rem;
+        color: var(--sapField_PlaceholderTextColor);
+    }
+
+    &__body {
+        padding: 20px 20px 70px;
+    }
+
+    &__page-link--left {
+        cursor: pointer;
+
+        #{$root}__page-link-anchor {
+            margin-left: 3px;
+        }
+    }
+
+    &__page-link--right {
+        cursor: pointer;
+
+        #{$root}__page-link-anchor {
+            margin-right: 3px;
+        }
+    }
+
+    &__table-header {
+        @include se-flex-row(space-between);
+        background-color: var(--sapBaseColor);
+        height: 56px;
+        padding: 20px;
+        border-radius: var(--sapElement_BorderCornerRadius) var(--sapElement_BorderCornerRadius) 0 0;
+
+        &--right {
+            @include se-flex-row();
+        }
+
+        .se-paged-list__page-count-wrapper {
+            @include se-type('1');
+            margin-right: auto;
+        }
+    }
+
+    &__table-body {
+        padding-bottom: se-space('s');
+
+        .se-data-table__arrow {
+            margin-left: 2px;
+        }
+        .se-paged-list-item {
+            cursor: default;
+        }
+    }
+
+    &__search {
+        margin-right: se-space('s');
+        width: 380px;
+    }
+
+    &__add {
+        text-transform: capitalize;
+    }
+}
+// Table cells
+.se-paged-list {
+    &__header {
+        @include se-type('0');
+    }
+    &__header-syncStatus,
+    &__header-dropdownitems {
+        text-align: right;
+    }
+    &__header-pageStatus {
+        cursor: default;
+    }
+}
+
+.se-paged-list-item-name a {
+    text-decoration: none !important;
+}
+.se-sync-btn {
+    &__status--done {
+        color: var(--sapIndicationColor_4);
+    }
+    &__status--not {
+        color: var(--sapIndicationColor_3);
+    }
+}
+
+.ySmartEditTrashPageToolbar {
+    background-color: var(--sapBaseColor);
+}
+
+.fd-table {
+    th.se-paged-list__header-numberOfRestrictions,
+    td.se-paged-list-item-numberOfRestrictions,
+    td.se-paged-list-item-syncStatus,
+    th.se-paged-list__header-syncStatus {
+        text-align: center;
+    }
+    td.se-paged-list-item-syncStatus {
+        @include se-type('1');
+    }
+}

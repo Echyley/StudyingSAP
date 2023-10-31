@@ -1,0 +1,104 @@
+.yw-com_hybris_backoffice_widgets_customthemes_themes {
+    .theme-display-view {
+        height: $brand-setting-container-height;
+        margin: $_container-spacing-default__regular;
+        overflow-y: scroll;
+        background: var(--bo-container-background);
+        box-shadow: var(--bo-content-shadow-small);
+        border-radius: 4px;
+        .theme-list-item-btns {
+            display: flex;
+            padding-right: $_container-spacing-default__tiny;
+            padding-top: $_container-spacing-default__tiny;
+            .theme-edit-btn,
+            .theme-delete-btn {
+                font-size: $font-size__large;
+                font-family: $font-family__icon;
+            }
+            .theme-edit-btn {
+                margin-left: auto;
+                margin-right: 0;
+                &:after {
+                    content: $theme-list-edit-btn-content;
+                }
+            }
+            .theme-delete-btn {
+                margin-left: $_container-spacing-default__tiny;
+                &:after {
+                    content: $theme-list-delete-btn-content
+                }
+            }
+        }
+        .z-listbox {
+            height: 100%;
+            overflow: auto;
+            border: none;
+            .z-listbox-body {
+                box-shadow: none;
+                > table > tbody {
+                    text-align: center;
+                    display: flex;
+                    align-content: flex-start;
+                    flex-flow: row wrap;
+                    padding: 12px;
+                    overflow: scroll;
+                }
+                .z-listitem {
+                    flex: 0 0 30%;
+                    box-shadow: $theme-list-item-shadow;
+                    border-radius: 4px;
+                    margin: 12px;
+                    max-width: $theme-list-item-max--width;
+                    border: 0;
+                }
+                .z-listcell {
+                    height: 100%;
+                    border: none;
+                    display: flex;
+                    justify-content: center;
+                    .z-listcell-content {
+                        padding-top: $_container-spacing-default__regular;
+                        padding-bottom: 0px;
+                        height: $theme-list-item--height;
+                        width: $theme-list-item-max--width;
+                        .themeLabel {
+                            padding-top: 12px;
+                            width: 100%;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
+                        .z-image {
+                            height: 60%;
+                            width: 60%;
+                            border-radius: 8px;
+                            background-size: 100% 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .empty-list-view {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            text-align: center;
+            .z-image {
+                max-width: 420px;
+                max-height: 158px;
+            }
+            &-title {
+                display: block;
+                font-size: $font-size__h3;
+                margin-top: $_container-spacing-default__regular;
+                margin-bottom: $_container-spacing-default__tiny;
+            }
+            &-subtitle {
+                display: block;
+                font-size: $font-size__h5;
+                color: var(--bo-content-label-color);
+            }
+        }
+    }
+}

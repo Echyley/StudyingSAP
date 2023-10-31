@@ -1,0 +1,65 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+#% if: de.hybris.platform.core.Registry.getCurrentTenant().getTenantSpecificExtensionNames().contains("adaptivesearch")
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$snIndexType=backoffice-product
+$backofficeSearchProfileCode = backoffice-product-default
+$backofficeSearchProfileName = Backoffice Product Default
+$backofficeSearchCfgId = 42d46b84-3b85-42ad-a057-382fcbae294b
+
+INSERT_UPDATE AsSearchProfileActivationSet;     indexType[unique=true];
+                                          ;     $snIndexType;
+
+INSERT_UPDATE AsSimpleSearchProfile;    code[unique=true];                      name[lang=en];       indexType;                 activationSet(indexType);
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.adaptivesearch.model.AsSimpleSearchProfileModel;
+String asSimpleSearchProfileCode = line.get(Integer.valueOf(1));
+AsSimpleSearchProfileModel asSimpleSearchProfile;
+try
+{
+    asSimpleSearchProfile = Registry.getApplicationContext().getBean(""asSearchProfileService"").getSearchProfileForCode(null, asSimpleSearchProfileCode).get();
+}
+catch (Exception e)
+{
+    asSimpleSearchProfile = null;
+}
+if (asSimpleSearchProfile != null)
+{
+    line.clear();
+}"
+                                   ;    $backofficeSearchProfileCode;           $backofficeSearchProfileName;      $snIndexType;     $snIndexType;
+
+INSERT_UPDATE AsSimpleSearchConfiguration;  searchProfile(code)[unique=true];           uid[unique=true];
+                                         ;  $backofficeSearchProfileCode;      $backofficeSearchCfgId;
+
+#This script is to solve the problem of importing multiple times when initialize.
+INSERT_UPDATE AsFacet;  searchConfiguration(uid);   uid[unique=true];                       indexProperty;        facetType(code);    priority;   ranged[default=false]
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import de.hybris.platform.adaptivesearch.model.AsFacetModel;
+String asFacetUid = line.get(Integer.valueOf(2));
+AsFacetModel asFacet;
+try
+{
+    asFacet = Registry.getApplicationContext().getBean(""asConfigurationService"").getConfigurationForUid(AsFacetModel.class, null, asFacetUid).get();
+}
+catch (Exception e)
+{
+    asFacet = null;
+}
+if (asFacet != null)
+{
+    line.clear();
+}"
+                     ;  $backofficeSearchCfgId;     b8c0b01b-eb76-f8fa-5caf-b4247a723aef;   colour;               MULTISELECT;        100;        false
+                     ;  $backofficeSearchCfgId;     cff1e746-c6ab-76dc-1d2b-b23c284a46ac;   audiorecorder;        MULTISELECT;        100;        false
+                     ;  $backofficeSearchCfgId;     2d6da1c6-63e3-d8af-4289-ceff4c73d180;   height;               MULTISELECT;        100;        false
+                     ;  $backofficeSearchCfgId;     e371859e-6bc0-dabb-4ef0-b75ef0668812;   weight;               MULTISELECT;        100;        false
+                     ;  $backofficeSearchCfgId;     49da1d5f-6f1a-12b0-6d98-14fbd7237d80;   width;                MULTISELECT;        100;        false
+
+#% endif:

@@ -1,0 +1,160 @@
+@import "cockpitng-globals.scss";
+@import "atpformula/_warehousingbackoffice_atpformula.scss";
+@import "inbox/_warehousingbackoffice_inbox.scss";
+
+$warehousing-action-buttons--background: $white;
+$warehousing-action-buttons--color: $blue__default--100;
+
+/**
+* Add icon for ordermanagement explorer tree in admin cockpit
+*/
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("warehousing.treenode.order.management", "customer-order-entry");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("warehousing.treenode.order.management", "customer-order-entry");
+}
+
+//old css converted to scss
+.yw-warehousingbackoffice {
+    .y-toolbar-leftslot {
+      .cng-action-group {
+        td.z-hbox-separator {
+          margin-left: -2px;
+          display: inline-block;
+          height: 32px;
+        }
+        .cng-action {
+          td.z-hbox-separator {
+            margin: 0;
+            height: auto;
+          }
+          margin-right: 2px;
+        }
+      }
+      .cng-action.cng-action-disabled {
+        display: none;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        &:hover {
+          background: none;
+        }
+        tr {
+          display: none;
+        }
+      }
+    }
+
+    .cng-action {
+      .z-hbox-separator {
+        background-color: inherit;
+      }
+    }
+
+    button.z-button {
+      &.edititem {
+        background-image: url("images/icon_action_edit_default.png");
+        background-color: $white;
+        width: 20px;
+        border: 1px solid var(--bo-list-border-color);;
+        background-position: center;
+        background-repeat: no-repeat;
+        &:before {
+            font-family: $font-family__icon;
+            content: _getIconGlyphContentValue("edit");
+            color: var(--bo-button-icon-color);
+            font-size: $font-size__base;
+        }
+      }
+    }
+
+    .y-editor-area-attributes-cnt-max {
+      .z-groupbox-content .z-hbox, &.z-groupbox-content table {
+        width: 100%;
+      }
+    }
+
+    .y-toolbar-leftslot .cng-action-group {
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printpickslipaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printpackaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printshippinglabelaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_shipaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_confirmpickupaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_reallocateaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_returns_acceptgoods.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_returns_cancelreturnaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_exportforms.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_stock_adjustment.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_internaltransfer_accept:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_internaltransfer_reject:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_asn_accept.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_asn_reject.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printreturnshippinglabelaction.cng-action:not(.cng-action-disabled),
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printreturnformaction.cng-action:not(.cng-action-disabled)
+      {
+        tr {
+          vertical-align: middle;
+        }
+      }
+    }
+
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_taskassignment_done_doneaction.cng-action:not(.cng-action-disabled),
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_taskassignment_done_doneaction.cng-action.cng-action-disabled
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_printconsolidatedpickslip_printconsolidatedpickslipaction.cng-action:not(.cng-action-disabled),
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_printconsolidatedpickslip_printconsolidatedpickslipaction.cng-action.cng-action-disabled,
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_exportpointsofservice.cng-action:not(.cng-action-disabled),
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_exportpointsofservice.cng-action.cng-action-disabled {
+        tr {
+          vertical-align: middle;
+        }
+      }
+
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_taskassignment_done_doneaction.cng-action,
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_printconsolidatedpickslip_printconsolidatedpickslipaction.cng-action,
+      .yw-listview-actioncontainer .cng-action-group .ya-de_hybris_platform_warehousingbackoffice_actions_exportpointsofservice.cng-action {
+        &.cng-action-disabled:hover {
+          color: inherit;
+          background: none;
+        }
+      }
+
+    .y-toolbar-leftslot .cng-action-group {
+      .ya-de_hybris_platform_warehousingbackoffice_actions_shipaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printpickslipaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printpackaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printshippinglabelaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_confirmpickupaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_reallocateaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_returns_acceptgoods,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_returns_cancelreturnaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_stock_adjustment,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_asn_accept,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_asn_reject,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_taskassignment_done_doneaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_internaltransfer_reject,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_internaltransfer_accept,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_exportforms,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printreturnshippinglabelaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printreturnformaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_printconsolidatedpickslip_printconsolidatedpickslipaction,
+      .ya-de_hybris_platform_warehousingbackoffice_actions_exportpointsofservice {
+        &.cng-action-disabled:hover {
+          color: inherit;
+          background: none;
+        }
+      }
+    }
+
+    div.yw-explorerTree .y-tree-icon {
+        @include setTreeIconGlyph("warehousing.treenode.taskassignment.inbox", "inbox");
+        @include setTreeIconGlyph("warehousing.treenode.inventory", "inventory");
+        @include setTreeIconGlyph("warehousing.treenode.fulfillmentlocations", "functional-location");
+        @include setTreeIconGlyph("warehousing.treenode.order.shipping", "consignments");
+        @include setTreeIconGlyph("warehousing.treenode.returns", "confirm_createreturnrequest");
+
+    }
+
+
+}

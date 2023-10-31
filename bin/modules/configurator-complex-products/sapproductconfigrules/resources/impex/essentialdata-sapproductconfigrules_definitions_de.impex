@@ -1,0 +1,55 @@
+$lang=de
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Konfigurierbares Produkt
+;productconfig_customer_category;Kunde
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Produkt mit spezifizierter Konfiguration im Warenkorb;Warenkorb enthält Produkt {product}. Merkmal {cstic} {value_operator} Wert {cstic_value}.
+;y_configurable_product;Zu konfigurierendes Produkt;Zu konfigurierendes Produkt ist {product}. Merkmal {cstic} {value_operator} Wert {cstic_value}.
+;y_configurable_product_customer;Kunden;Kunde {customers_operator} der folgenden Liste\: {customers}
+;y_configurable_product_customer_group;Kundengruppen;Kunde {customer_groups_operator} der folgenden Gruppen\: {customer_groups}
+;y_configurable_product_customer_support_mode;Kunden-Support;ASM-Sitzung ist aktiv\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Produkt;Produkt im Warenkorb;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Merkmal;Merkmalsname
+;y_configurable_product_in_cart;value_operator;Operator;Operator zwischen Merkmal und Merkmalswert
+;y_configurable_product_in_cart;cstic_value;Wert;Name des Merkmalswertes;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Produkt;Zu konfigurierendes Produkt
+;y_configurable_product;cstic;Merkmal;Merkmalsname
+;y_configurable_product;value_operator;Operator;Operator zwischen Merkmal und Merkmalswert
+;y_configurable_product;cstic_value;Wert;Name des Merkmalswertes
+;y_configurable_product_customer;customers_operator;Operator für die Kundenselektion;Legt fest, ob ein Kunde in der Liste enthalten ist
+;y_configurable_product_customer;customers;Kunden;Kundenliste
+;y_configurable_product_customer_group;customer_groups_operator;Operator für die Selektion von Kundengruppen;Legt fest, ob ein Kunde in einer oder in allen Kundengruppen enthalten ist
+;y_configurable_product_customer_group;customer_groups;Kundengruppen;Liste der Kundengruppen
+;y_configurable_product_customer_support_mode;value;ASM-Sitzung aktiv;Ein Kundenbetreuer ist im Namen eines Kunden eingeloggt
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Konfigurierbares Produkt
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Merkmalswert für konfigurierbares Produkt setzen;Merkmalswert {cstic_value} für Merkmal {cstic}
+;y_configurable_product_remove_assignable_value;Merkmalswert für konfigurierbares Produkt ausblenden;Merkmalswert {cstic_value} für Merkmal {cstic} ausblenden
+;y_configurable_product_hide_cstic;Merkmal für konfigurierbares Produkt ausblenden;Merkmal {cstic} ausblenden
+;y_configurable_product_display_cstic_readonly;Merkmal für konfigurierbares Produkt schreibgeschützt anzeigen;Merkmal {cstic} schreibgeschützt anzeigen
+;y_configurable_product_display_message;Meldung anzeigen;Meldung anzeigen
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Merkmal;Merkmal, für das der Wert gesetzt wird
+;y_configurable_product_set_cstic_value;cstic_value;Wert;Zu setzender Merkmalswert
+;y_configurable_product_remove_assignable_value;cstic;Merkmal;Merkmal, für das der Merkmalswert entfernt werden soll
+;y_configurable_product_remove_assignable_value;cstic_value;Wert;Zu entfernender Merkmalswert
+;y_configurable_product_hide_cstic;cstic;Merkmal;Auszublendendes Merkmal
+;y_configurable_product_display_cstic_readonly;cstic;Merkmal;Merkmal, das schreibgeschützt angezeigt werden soll
+;y_configurable_product_display_message;message;Meldung;Meldungstext
+;y_configurable_product_display_message;message_severity;Schweregrad;Schweregrad der Meldung
+;y_configurable_product_display_message;cstic;Merkmal;Merkmal, für das diese Meldung angezeigt wird
+;y_configurable_product_display_message;cstic_value;Merkmalswert;Merkmalswert, für den diese Meldung angezeigt wird
+
+#% endif:

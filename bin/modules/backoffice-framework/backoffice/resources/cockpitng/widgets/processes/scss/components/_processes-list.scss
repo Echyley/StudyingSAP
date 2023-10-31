@@ -1,0 +1,105 @@
+@import "../support/_processes-mixins.scss";
+
+.yw-processes {  
+  &-list {
+    min-width: $processes__list--min-width;
+    transition: $processes__list--transition;
+    height: $processes__list--height;
+    overflow: auto;
+    border: none;
+    .z-listitem {
+      padding: 0;
+      
+      .z-listcell-content {
+        margin: 0;
+        padding: $_processes__list-item--padding;
+        border-bottom: $_processes__list-item--border-bottom;
+        @if $_processes__list-item-default--bg-color {
+          background-color: $_processes__list-item-default--bg-color;
+        }
+
+        .z-label,
+        .z-stopwatch {
+          text-align: $processes__list-item-label--text-align;
+        }
+      }
+    }
+    
+    .yw-processes-no-access.z-label{
+      width: 100%;
+      color: $processes__list-item-no-access-label--color;
+      font-size: $processes__list-item-no-access-label--font-size;
+      font-style: $processes__list-item-no-access-label--font-style;
+      text-align: $processes__list-item-no-access-label--text-align;
+      display: inline-block;
+    }
+
+    &-item {
+        &-content {
+            padding-left: $_processes__list-item-content--padding-left;
+            position: relative;
+
+            &-code {
+                clear: left;
+                display: block;
+                text-align: left;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: $_processes__list-item-code--font-size;
+            }
+            &-edit {
+                bottom: 0;
+                clear: left;
+                float: right;
+                text-align: center;
+                position: absolute;
+                right: 0;
+
+                &:empty {
+                    &,
+                    &:hover,
+                    &:focus,
+                    &:active,
+                    span + & {
+                      color:$form-defaults__input-icon-active--color;
+                      width: $processes__list-item-edit-btn--size;
+                      height: $processes__list-item-edit-btn--size;
+                      line-height: $processes__list-item-edit-btn--size;
+                      display: block;
+                      padding: 0;
+                      min-height: 0;
+                      background: transparent;
+                      box-shadow: none;
+                      border: transparent;
+                    }
+                  &:after {
+                    font-family: $processes__button-icon--font-family;
+                    content:$processes__actiondots-button--content;
+                    cursor: pointer;
+                  }
+                }   
+            }
+            &-date {
+                display: block;
+                font-size: $_processes__list-item-date--font-size
+            }
+        }
+    }
+
+    tr.z-listitem {
+        &, &:hover, &-selected, &-selected:hover {
+        }
+        &:hover {
+            cursor: default;
+            background-color: $_processes__list-item-default--hover-bg-color;
+        }
+        .z-listcell {
+            border-top-width: 0;
+        }
+    }
+    tbody.z-listbox-emptybody td {
+      background: transparent;
+    }
+  }
+}

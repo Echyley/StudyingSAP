@@ -1,0 +1,5 @@
+$lang=hi
+
+UPDATE DynamicConstraint;id[unique=true,allownull=true] ;message[lang=$lang]
+                        ;oppsClientInterfaceVersionConstraint                       ;"क्लाइंट इंटरफ़ेस प्रमुख संस्करण फ़ील्ड के लिए आवश्यक संस्करण का चयन करें."
+

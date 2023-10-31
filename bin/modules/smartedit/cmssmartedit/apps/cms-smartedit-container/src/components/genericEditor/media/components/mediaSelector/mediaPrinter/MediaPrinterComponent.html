@@ -1,0 +1,54 @@
+<!-- Selected -->
+<div class="se-media-selector" *ngIf="isSelected">
+    <span class="se-media-selector__left-section se-media-preview-container">
+        <div *ngIf="isImage()" class="se-media-selector__left-section se-media-preview-container">
+            <se-media-preview [imageUrl]="getSafeUrl()"></se-media-preview>
+            <img
+                class="se-media-preview__image-thumbnail"
+                [alt]="media.code"
+                [src]="getSafeUrl()" />
+        </div>
+        <div *ngIf="isVideo()" class="se-media-selector__left-section se-media-preview-container">
+            <video class="se-media-preview__image-thumbnail" controls>
+                <source [src]="getSafeUrl()" type="video/mp4" />
+            </video>
+        </div>
+        <div *ngIf="isPdf()" class="se-media-selector__left-section se-media-preview-container">
+            <iframe
+                class="se-media-preview__image-thumbnail"
+                [src]="getSafeUrl()"
+                style="width: 100%; height: 100%; border: none"></iframe>
+        </div>
+    </span>
+
+    <span class="se-media-selector__right-section">
+        <se-media-advanced-properties [media]="media"></se-media-advanced-properties>
+        <button class="se-media-action-btn replace-image" [disabled]="isDisabled()">
+            <span class="sap-icon--share se-media__action-icon"></span>
+            <se-media-action-label
+                [state]="isDisabled() ? 'disabled' : null"
+                [i18nKey]="'se.upload.image.replace'"></se-media-action-label>
+        </button>
+        <se-media-remove-button
+            [isDisabled]="isDisabled()"
+            (clickHandler)="select.removeSelectedOption($event, media)"></se-media-remove-button>
+    </span>
+</div>
+<!-- Not selected dropdown option -->
+<div class="se-media-selector__search" *ngIf="!isSelected">
+    <div *ngIf="isImage()" class="se-media-selector__search-img-wrapper">
+        <img [src]="getSafeUrl()" class="se-media-selector__search-img" [alt]="media.code" />
+    </div>
+    <div *ngIf="isVideo()" class="se-media-selector__search-img-wrapper">
+        <video class="se-media-selector__search-img" controls>
+            <source [src]="getSafeUrl()" type="video/mp4" />
+        </video>
+    </div>
+    <div *ngIf="isPdf()" class="se-media-selector__search-img-wrapper">
+        <iframe
+            class="se-media-selector__search-img"
+            [src]="getSafeUrl()"
+            style="width: 100%; height: 100%; border: none"></iframe>
+    </div>
+    <div class="se-media-selector__search-name">{{ media.code }}</div>
+</div>

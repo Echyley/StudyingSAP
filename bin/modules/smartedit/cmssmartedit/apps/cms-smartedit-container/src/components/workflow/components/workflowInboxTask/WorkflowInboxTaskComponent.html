@@ -1,0 +1,5 @@
+<div class="se-workflow-inbox-task-header">
+    <a href="#" (click)="onClick($event)">{{ taskName | async }}</a>
+</div>
+<div class="se-workflow-inbox-task-desc">{{ taskDescription | async }}</div>
+<div class="se-workflow-inbox-task-body">{{ getTaskCreatedAgo() }}</div>

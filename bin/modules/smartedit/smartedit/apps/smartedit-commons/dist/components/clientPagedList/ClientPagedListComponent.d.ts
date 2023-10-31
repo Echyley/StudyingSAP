@@ -1,0 +1,34 @@
+import { SlicePipe } from '@angular/common';
+import { ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import { TypedMap } from '@smart/utils';
+import { FilterByFieldPipe, StartFromPipe } from '../../pipes';
+import { IDropdownMenuItem } from '../dropdown/dropdownMenu';
+import { ClientPagedList, ClientPagedListColumnKey, ClientPagedListItem } from './interfaces';
+export declare class ClientPagedListComponent implements ClientPagedList, OnChanges {
+    private cdr;
+    private filterByFieldPipe;
+    private startFromPipe;
+    private slicePipe;
+    items: ClientPagedListItem[];
+    itemFilterKeys: string[];
+    keys: ClientPagedListColumnKey[];
+    itemsPerPage: number;
+    sortBy: string;
+    reversed: boolean;
+    query: string;
+    displayCount: boolean;
+    dropdownItems: IDropdownMenuItem[];
+    totalItems: number;
+    currentPage: number;
+    columnWidth: number;
+    columnToggleReversed: boolean;
+    headersSortingState: TypedMap<boolean>;
+    visibleSortingHeader: string;
+    filteredItems: ClientPagedListItem[];
+    constructor(cdr: ChangeDetectorRef, filterByFieldPipe: FilterByFieldPipe, startFromPipe: StartFromPipe, slicePipe: SlicePipe);
+    ngOnChanges(changes: SimpleChanges): void;
+    keysTrackBy(_index: number, key: ClientPagedListColumnKey): string;
+    onOrderByColumn(columnKeyProp: string): void;
+    onCurrentPageChange(page: number): void;
+    private filterItems;
+}

@@ -1,0 +1,55 @@
+$lang=ko
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;구성 가능 제품
+;productconfig_customer_category;고객
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;장바구니의 지정된 구성이 있는 제품;카트에 {product} 제품이 포함되어 있습니다. 특징 {cstic} {value_operator} 값 {cstic_value}.
+;y_configurable_product;현재 구성 중인 제품;현재 구성 중인 제품은 {product}입니다. 특징 {cstic} {value_operator} 값 {cstic_value}.
+;y_configurable_product_customer;고객;고객 {customers_operator} - 소속 리스트\: {customers}
+;y_configurable_product_customer_group;고객 그룹;고객 {customer_groups_operator} - 소속 그룹\: {customer_groups}
+;y_configurable_product_customer_support_mode;고객 지원;지원 서비스 세션 활성\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;제품;장바구니의 제품;Item Type (Product)
+;y_configurable_product_in_cart;cstic;특징;특징 이름
+;y_configurable_product_in_cart;value_operator;연산자;특징과 값 사이의 연산자
+;y_configurable_product_in_cart;cstic_value;값;특징 값 이름;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;제품;현재 구성 중인 제품
+;y_configurable_product;cstic;특징;특징 이름
+;y_configurable_product;value_operator;연산자;특징과 값 사이의 연산자
+;y_configurable_product;cstic_value;값;특징 값 이름
+;y_configurable_product_customer;customers_operator;고객 선택 연산자;고객이 리스트에 포함되는지 정의합니다.
+;y_configurable_product_customer;customers;고객;고객 리스트
+;y_configurable_product_customer_group;customer_groups_operator;고객 그룹 선택 연산자;고객이 고객 그룹에 포함되는지 여부를 정의합니다.
+;y_configurable_product_customer_group;customer_groups;고객 그룹;고객 그룹 리스트
+;y_configurable_product_customer_support_mode;value;지원 서비스 세션 활성;고객 지원 담당자가 고객 대신 로그인함
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;구성 가능 제품
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;구성 가능 제품에 대한 특징 값 설정;특징 {cstic}에 대한 값 {cstic_value} 설정
+;y_configurable_product_remove_assignable_value;구성 가능 제품의 지정 가능 값 숨기기;특징 {cstic}의 값 {cstic_value} 숨기기
+;y_configurable_product_hide_cstic;구성 가능 제품의 특징 숨기기;특징 {cstic} 숨기기
+;y_configurable_product_display_cstic_readonly;구성 가능 제품의 특징을 읽기 전용으로 표시;{cstic} 특징을 읽기 전용으로 표시
+;y_configurable_product_display_message;메시지 표시;메시지 표시
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;특징;값이 설정된 특징
+;y_configurable_product_set_cstic_value;cstic_value;값;설정할 특징 값
+;y_configurable_product_remove_assignable_value;cstic;특징;제거할 지정 가능 값에 대한 특징
+;y_configurable_product_remove_assignable_value;cstic_value;값;지정 가능 값 리스트에서 제거할 값
+;y_configurable_product_hide_cstic;cstic;특징;숨길 특징
+;y_configurable_product_display_cstic_readonly;cstic;특징;읽기 전용으로 표시할 특징
+;y_configurable_product_display_message;message;메시지;메시지 텍스트
+;y_configurable_product_display_message;message_severity;심각도;메시지 심각도
+;y_configurable_product_display_message;cstic;특징;이 메시지가 표시되는 특징
+;y_configurable_product_display_message;cstic_value;특징 값;이 메시지가 표시되는 특징 값
+
+#% endif:

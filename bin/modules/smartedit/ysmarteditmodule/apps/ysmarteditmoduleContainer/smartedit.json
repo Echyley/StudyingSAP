@@ -1,0 +1,19 @@
+{
+    "name": "ysmarteditmodulecontainer",
+    "extension": {
+        "type": "container",
+        "angularApp": "ysmarteditmoduleContainer"
+    },
+    "typescript": {
+        "entry": "./src/index.ts",
+        "dist": "./dist/index.js"
+    },
+    "legacy": {
+        "js": ["./src/**/*.js"],
+        "ngTemplates": {
+            "moduleName": "ysmarteditmoduleContainerTemplates",
+            "includePathInName": false,
+            "files": ["./src/**/*.html"]
+        }
+    }
+}

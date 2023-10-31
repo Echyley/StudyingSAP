@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    	
+    <extension abstractclassprefix="Generated" classprefix="Sapsalesordersimulationbackoffice" name="sapsalesordersimulationbackoffice" usemaven="false">
+        		
+        <requires-extension name="sapsalesordersimulation"/>
+        		
+        <requires-extension name="saps4ombackoffice"/>
+        		
+        <coremodule generated="true" manager="de.hybris.platform.sap.sapsalesordersimulationbackoffice.jalo.SapsalesordersimulationbackofficeManager" packageroot="de.hybris.platform.sap.sapsalesordersimulationbackoffice"/>
+        		
+        <meta key="backoffice-module" value="true"/>
+        		
+        <meta key="deprecated" value="true"/>
+        	
+    </extension>
+    
+</extensioninfo>

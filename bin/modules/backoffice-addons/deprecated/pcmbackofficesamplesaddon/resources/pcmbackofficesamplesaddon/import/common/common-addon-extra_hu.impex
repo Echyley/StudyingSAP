@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=hu
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;Az „Azonosító” attribútumnak minden nyelvre vonatkozóan kell értéket tartalmaznia.;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;Az „Árak” attribútumnak legalább 1 elemet tartalmaznia kell.;
+;ProductSupercategoriesSizeConstraint;;;A „Szuperkategóriák” attribútumnak legalább 1 elemet tartalmaznia kell.;
+;ProductGalleryImagesSizeConstraint;;;A „Galériaképek” attribútumnak legalább 1 elemet tartalmaznia kell.;
+;ProductReferencesSizeConstraint;;;A „Termékhivatkozások” attribútumnak legalább 1 elemet tartalmaznia kell.;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;A „Cikkszám” attribútum nem lehet üres.;
+;ProductDescriptionNotEmptyConstraint;;;A „Leírás” attribútum nem lehet üres.;
+;ProductEanNotEmptyConstraint;;;Az „EAN" attribútum nem lehet üres.;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;A „Jóváhagyás” attribútumértéke „jóváhagyva” kell, hogy legyen.;

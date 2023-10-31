@@ -1,0 +1,5 @@
+<button class="fd-button fd-button--light pe-customization-modal__sliderpanel__btn-link" (click)="toggle()">
+    <fd-icon class="icon_padding_end" *ngIf="!isFullscreen" glyph="full-screen"></fd-icon>
+    <fd-icon class="icon_padding_end" *ngIf="isFullscreen" glyph="exitfullscreen"></fd-icon>
+    {{(isFullscreen ? 'personalization.modal.customizationvariationmanagement.targetgrouptab.fullscreen.close' : 'personalization.modal.customizationvariationmanagement.targetgrouptab.fullscreen.open') | translate}}
+</button>

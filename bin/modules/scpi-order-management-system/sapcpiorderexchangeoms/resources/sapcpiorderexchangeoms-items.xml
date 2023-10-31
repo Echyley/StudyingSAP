@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+	<itemtypes>
+
+		<itemtype code="SAPOrder" autocreate="false" generate="false">
+			<description>Extending SAPOrder type with additional attributes for SCPI integration to handle OData actions.</description>
+			<attributes>
+
+				<attribute qualifier="orderEntryNumber" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="quantity" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="rejectionReason" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="goodsIssueDate" type="java.util.Date">
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+
+</items>

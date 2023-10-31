@@ -1,0 +1,14 @@
+<div class="se-catalog-hierarchy-header">
+    <span>{{ 'se.catalog.hierarchy.modal.tree.header' | translate }}</span>
+</div>
+<div *ngIf="this.catalogs$ | async as catalogs" class="se-catalog-hierarchy-body">
+    <se-catalog-hierarchy-node
+        *ngFor="let catalog of catalogs; let i = index"
+        [catalog]="catalog"
+        [index]="i"
+        [isLast]="i === catalogs.length - 1"
+        [siteId]="siteId"
+        (siteSelect)="onSiteSelected()"
+    >
+    </se-catalog-hierarchy-node>
+</div>

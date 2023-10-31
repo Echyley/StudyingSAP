@@ -1,0 +1,179 @@
+body {
+    color: var(--sapTextColor) !important;
+}
+.fd-button,
+.fd-input {
+    &:focus {
+        outline: 0 !important;
+    }
+}
+.fd-button.fd-alert__close:before {
+    top: 0.125rem;
+    left: 0.3125rem;
+}
+
+.fd-table td,
+.fd-table th {
+    padding: 1rem 0.5rem;
+    &:last-child {
+        padding-right: 16px;
+    }
+}
+.fd-table tbody {
+    background-color: var(--sapBaseColor);
+}
+.fd-table tbody tr {
+    border: 1px solid var(--sapBaseColor);
+    border-color: var(--sapBaseColor);
+    border-left: none;
+    border-right: none;
+    &:hover {
+        background-color: var(--sapLegend_WorkingBackground);
+    }
+}
+.se-language-selector {
+    &.fd-menu__list {
+        flex-wrap: initial;
+    }
+}
+
+.se-hidden {
+    display: none !important;
+}
+.fd-button--menu {
+    max-width: unset !important;
+    width: 100%;
+}
+.fd-list__item {
+    height: auto !important;
+}
+
+fd-icon {
+    min-width: 1.25rem;
+    vertical-align: middle;
+}
+.fd-link {
+    font-size: inherit !important;
+}
+.fd-tabs {
+    padding-left: 3px !important;
+    box-shadow: unset !important;
+    background-color: transparent !important;
+}
+.fd-wizard__content {
+    height: auto !important;
+}
+.se-none-cursor,
+.se-none-cursor *,
+//temporary solution for CXEC-18227
+fd-action-sheet * {
+    cursor: default !important;
+    pointer-events: none !important;
+}
+.se-wizard-dialog {
+    .fd-dialog__body {
+        padding: 0;
+    }
+}
+.fd-tabs__content {
+    margin-top: 20px;
+}
+.se-modal-wizard__content {
+    margin: 10px 24px 0 24px;
+}
+se-modal-wizard-step-outlet {
+    .se-add-page__list {
+        .fd-menu__item {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+}
+.fd-wizard-container-wrapper {
+    height: 0 !important;
+}
+
+.fd-dialog__content--with-header {
+    .fd-dialog__body {
+        position: static;
+    }
+}
+.fd-pagination-direction-override-display {
+    display: inline-flex !important;
+}
+.fd-pagination__more {
+    padding: 8px !important;
+}
+.fd-menu__item,
+.fd-list__item {
+    color: var(--sapNeutralColor);
+    &:hover {
+        cursor: pointer;
+        color: var(--sapList_TextColor);
+        background-color: var(--sapList_Hover_Background);
+    }
+}
+
+.form-readonly-text {
+    padding: 0 12px 10px 0;
+}
+.fd-switch.is-hover .fd-switch__handle,
+.fd-switch:hover .fd-switch__handle {
+    border-color: var(--sapContent_ForegroundBorderColor);
+    background-color: var(--sapButton_Hover_Background);
+}
+
+.fd-switch:hover .fd-switch__slider {
+    border-color: var(--sapContent_ForegroundBorderColor);
+}
+
+.fd-popover__popper .fd-popover__arrow-x--start {
+    left: 0.4rem !important;
+}
+
+.fd-button {
+    &.is-active,
+    &.is-pressed,
+    &.is-selected,
+    &:active,
+    &[aria-pressed='true'],
+    &[aria-selected='true'] {
+        &.fd-button--emphasized {
+            background-color: var(--sapButton_Emphasized_Active_Background) !important;
+            border-color: var(--sapButton_Emphasized_Active_BorderColor) !important;
+            color: var(--sapButton_Emphasized_Active_TextColor) !important;
+        }
+    }
+}
+
+// to make width adapt to our requirement
+fd-datetime-picker {
+    .fd-popover-custom {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+}
+
+// to make it work correctly when select time
+.fd-datetime__container {
+    overflow: auto;
+    max-height: 400px;
+    fd-calendar {
+        max-height: 400px;
+    }
+
+    fd-time {
+        max-height: 400px;
+    }
+}
+
+.se-sync-menu-content__dropdown {
+    &.toolbar-action--include {
+        .se-sync-panel-header {
+            &__timestamp {
+                bottom: 18px;
+            }
+        }
+    }
+}

@@ -1,0 +1,165 @@
+.yw-modal-integrationBackofficeMetadataViewerModal {
+    min-height: 750px;
+    min-width: 1000px;
+}
+
+.integrationbackoffice-metadata-json-tabs {
+    text-align: right;
+}
+
+.integrationbackoffice-metadata-tabpanel {
+    border: none;
+}
+
+/* Need this font to align lines in textarea */
+.integrationbackoffice-metadata-textbox {
+    resize: none;
+    font-family: monospace;
+    white-space: pre;
+    overflow: auto;
+}
+
+.integrationbackoffice-metadata-textbox-large {
+    width: 100%;
+    height: 450px;
+}
+
+.integrationbackoffice-metadata-textbox-small {
+    width: 100%;
+    height: 420px;
+}
+
+/*move the tooltip icon close to JSON*/
+.integrationbackofficeJsonTabTooltip {
+    cursor: pointer;
+    z-index: 100;
+    position: absolute;
+    left: 198px;
+    top: 11px;
+    width: 28px;
+}
+
+.integrationbackoffice-metadata-visualizer.z-networkchart {
+    height: 535px !important;
+}
+
+.integrationbackoffice-metadata-tabs .z-tab:nth-child(4) {
+    padding-left: 25px !important;
+}
+
+.integrationbackoffice-metadata-visualizer {
+    height: 550px;
+}
+
+.vis-tooltip {
+    border: 2px solid var(--bo-field-border-color) !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-up {
+    background-image: url("images/up_arrow.png");
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-down {
+    background-image: url("images/down_arrow.png");
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-left {
+    background-image: url("images/left_arrow.png");
+
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-right {
+    background-image: url("images/right_arrow.png");
+
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-zoomIn {
+    background-image: url("images/plus.png");
+
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-zoomOut {
+    background-image: url("images/minus.png");
+
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+    background-image: url("images/zoomextends.png");
+}
+
+
+div.vis-network div.vis-navigation div.vis-button:hover {
+    box-shadow: 1px 1px 8px var(--bo-button-hover-border-color);
+}
+
+/* make modal flex so the textarea will stretch automatically. */
+.yw-de_hybris_platform_integrationbackoffice_widgets_MetadataViewerModal {
+    display: flex;
+    flex-direction: column;
+}
+
+.yw-modal-integrationBackofficeMetadataViewerModal .metadataViewerFooter {
+    height: 52px;
+}
+
+/*make modal-body take all remaining height*/
+.yw-modal-integrationBackofficeMetadataViewerModal .integrationbackoffice-modal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.yw-modal-integrationBackofficeMetadataViewerModal .integrationbackoffice-modal-body .z-vlayout-inner:nth-child(3) {
+    flex: 1
+}
+
+.integrationbackoffice-integrationbackofficeMetadataTabbox .z-tabpanels{
+    height: 540px;
+}
+
+.integrationbackoffice-integrationbackofficeMetadataTabbox .integrationbackoffice-metadata-tabpanel {
+    height: 100%;
+}
+
+.integrationbackoffice-integrationbackofficeMetadataTabbox .integrationbackoffice-metadata-tabpanel .integrationbackoffice-integrationbackofficeImpexTextbox {
+    height: 100%;
+}
+
+.integrationbackoffice-integrationbackofficeJsonPersistenceTab span {
+    font-size: var(--bo-font-size);
+}
+
+.integrationbackoffice-integrationbackofficeJsonOutboundTab span {
+    font-size: var(--bo-font-size);
+}
+
+/* make all tabpanel's background color white. */
+.integrationbackoffice-integrationbackofficeMetadataTabbox > .z-tabpanels > .integrationbackoffice-metadata-tabpanel {
+    background: var(--bo-base-color) !important;
+}
+
+/* adjust jsonTabbox layout */
+.integrationbackoffice-intgerationbackofficeJsonTabbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.integrationbackoffice-intgerationbackofficeJsonTabbox .integrationbackoffice-integratonbackofficeJsonTabs {
+    height: 36px;
+}
+
+.integrationbackoffice-intgerationbackofficeJsonTabbox .z-tabpanels {
+    flex: 1
+}
+
+.integrationbackoffice-intgerationbackofficeJsonTabbox {
+    height: 540px;
+}
+
+.integrationbackoffice-integrationbackofficeJsonTextBox {
+    height: 100% !important;
+}
+
+.integrationbackoffice-integrationbackofficeJsonOutboundTextBox {
+    height: 100% !important;
+}

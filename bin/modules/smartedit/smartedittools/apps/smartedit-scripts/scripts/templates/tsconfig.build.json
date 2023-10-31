@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "ES2016",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "lib": ["dom", "ES2016", "scripthost"],
+        "baseUrl": ".",
+        "declaration": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "importHelpers": true,
+        "paths": {}
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["src/**/*Test.ts"]
+}

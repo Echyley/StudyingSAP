@@ -1,0 +1,25 @@
+<div class="se-versions-panel__search" *ngIf="showSearchControls">
+    <div class="se-input-group">
+        <input
+            type="text"
+            class="fd-input se-input-group__input-area"
+            name="search-term"
+            [ngModel]="searchTerm"
+            (ngModelChange)="onChange($event)"
+            [placeholder]="'se.cms.versions.search.placeholder' | translate"
+        />
+        <span class="sap-icon--search se-input-group__addon"></span>
+        <button
+            class="se-input-group__addon se-input-group__clear-btn se-button--text sap-icon--decline"
+            [style.visibility]="showResetButton ? 'visible' : 'hidden'"
+            (click)="resetSearchBox()"
+        ></button>
+    </div>
+
+    <span
+        class="se-versions-panel__count"
+        [translate]="'se.cms.versions.search.versions.found'"
+        [translateParams]="{ versionsFound: versionsFoundCount }"
+    >
+    </span>
+</div>

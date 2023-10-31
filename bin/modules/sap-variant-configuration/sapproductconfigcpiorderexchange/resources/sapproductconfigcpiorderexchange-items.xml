@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+			
+			<relations>
+			   <relation code="SAPCpiOutboundOrder2SAPCpiOutboundOrderItemConfigHeader" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrder" qualifier="sapCpiOutboundOrder" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderItemConfigHeader" qualifier="productConfigHeaders" cardinality="many" collectiontype="set">
+                	<modifiers partof="true" />
+            </targetElement>
+        		</relation>
+				<relation code="SAPCpiOutboundOrder2SAPCpiOutboundOrderItemConfigInstance" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrder" qualifier="sapCpiOutboundOrder" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderItemConfigInstance" qualifier="productConfigInstances" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation>
+				<relation code="SAPCpiOutboundOrder2SAPCpiOutboundOrderItemConfigHierarchy" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrder" qualifier="sapCpiOutboundOrder" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderItemConfigHierarchy" qualifier="productConfigHierarchies" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation>				
+        		<relation code="SAPCpiOutboundOrder2SAPCpiOutboundOrderItemConfigValue" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrder" qualifier="sapCpiOutboundOrder" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderItemConfigValue" qualifier="productConfigValues" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation>				
+        		<relation code="SAPCpiOutboundOrder2SAPCpiOutboundOrderItemConfigConditions" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrder" qualifier="sapCpiOutboundOrder" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderItemConfigCondition" qualifier="productConfigConditions" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation>	     
+        		<relation code="SAPCpiOutboundS4hcConfigHeaderToValuation" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrderS4hcConfigHeader" qualifier="sapCpiS4hcConfigHeader" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderS4hcConfigValuation" qualifier="sapCpiS4hcConfigValuations" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation> 
+        		<relation code="SAPCpiOutboundS4hcConfigHeaderToStructureNode" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrderS4hcConfigHeader" qualifier="sapCpiS4hcConfigHeader" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderS4hcConfigStructureNode" qualifier="sapCpiS4hcConfigStructureNodes" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation>
+        		<relation code="SAPCpiOutboundS4hcConfigStructureNodeToValuation" localized="false">
+            	<sourceElement type="SAPCpiOutboundOrderS4hcConfigStructureNode" qualifier="sapCpiS4hcConfigStructureNodes" cardinality="one" />
+            	<targetElement type="SAPCpiOutboundOrderS4hcConfigValuation" qualifier="sapCpiS4hcConfigValuations" cardinality="many" collectiontype="set">
+               	 <modifiers partof="true" />
+            	</targetElement>
+        		</relation>     		
+        	</relations>
+			
+			<itemtypes>		
+			
+			   <itemtype code="SAPCpiOutboundOrderItemConfigHeader"
+                  jaloclass="de.hybris.platform.sap.sapcpiadapter.jalo.SAPCpiOutboundOrderItemConfigHeader"
+                  extends="GenericItem">
+
+            	<deployment table="SAPCpiOOIConfigHeader" typecode="9915"/>
+
+            	<attributes>
+
+	                <attribute qualifier="externalItemId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="configurationId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="rootInstanceId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="commerceLeading" type="java.lang.Boolean">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="complete" type="java.lang.Boolean">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="consistent" type="java.lang.Boolean">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="kbName" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="kbVersion" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="kbProfile" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+
+            	</attributes>
+        		</itemtype>
+        		
+			   <itemtype code="SAPCpiOutboundOrderItemConfigInstance"
+                  jaloclass="de.hybris.platform.sap.sapcpiadapter.jalo.SAPCpiOutboundOrderItemConfigInstance"
+                  extends="GenericItem">
+
+            	<deployment table="SAPCpiOOIConfigInstance" typecode="9916"/>
+
+            	<attributes>
+
+	                <attribute qualifier="configurationId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="instanceId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="objectType" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="classType" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="objectKey" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="quantity" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="quantityUnit" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="author" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="complete" type="java.lang.Boolean">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="consistent" type="java.lang.Boolean">
+	                    <persistence type="property"/>
+	                </attribute>
+
+            	</attributes>
+        		</itemtype>        		
+
+			   <itemtype code="SAPCpiOutboundOrderItemConfigHierarchy"
+                  jaloclass="de.hybris.platform.sap.sapcpiadapter.jalo.SAPCpiOutboundOrderItemConfigHierarchy"
+                  extends="GenericItem">
+
+            	<deployment table="SAPCpiOOIConfigHierarchy" typecode="9917"/>
+
+            	<attributes>
+
+	                <attribute qualifier="configurationId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="instanceId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="parentId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="bomNumber" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="objectType" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="classType" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="objectKey" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="author" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="salesRelevant" type="java.lang.Boolean">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+            	</attributes>
+        		</itemtype>    
+        		
+			   <itemtype code="SAPCpiOutboundOrderItemConfigValue"
+                  jaloclass="de.hybris.platform.sap.sapcpiadapter.jalo.SAPCpiOutboundOrderItemConfigValue"
+                  extends="GenericItem">
+
+            	<deployment table="SAPCpiOOIConfigValue" typecode="9918"/>
+
+            	<attributes>
+
+	                <attribute qualifier="configurationId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="instanceId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="characteristicId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="characteristicText" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="valueId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="valueText" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>                
+	                
+	                <attribute qualifier="valueCode" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="author" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+            	</attributes>
+        		</itemtype>     
+        		
+			   <itemtype code="SAPCpiOutboundOrderItemConfigCondition"
+                  jaloclass="de.hybris.platform.sap.sapcpiadapter.jalo.SAPCpiOutboundOrderItemConfigConditions"
+                  extends="GenericItem">
+
+            	<deployment table="SAPCpiOOIConfigCond" typecode="9919"/>
+
+            	<attributes>
+
+	                <attribute qualifier="configurationId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+	                <attribute qualifier="instanceId" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="conditionKey" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	
+	                <attribute qualifier="conditionFactor" type="java.lang.String">
+	                    <persistence type="property"/>
+	                </attribute>
+	                
+            	</attributes>
+        		</itemtype>         		     		
+	
+		<itemtype code="SAPCpiOutboundOrderS4hcConfigHeader" extends="GenericItem">
+           <deployment table="SAPCpiS4hcConfigHeader" typecode="9920"/>
+           <attributes>
+               <attribute qualifier="orderId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="entryNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>           
+	              <attribute qualifier="status" type="java.lang.String">
+	                  <persistence type="property"/>
+	              </attribute>
+           </attributes>
+      </itemtype>
+      
+      <itemtype code="SAPCpiOutboundOrderS4hcConfigValuation" extends="GenericItem">
+           <deployment table="SAPCpiS4hcConfigVal" typecode="9921"/>
+           <attributes>
+                <attribute qualifier="orderId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="entryNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="nodeId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+	              <attribute qualifier="characteristic" type="java.lang.String">
+	                  <persistence type="property"/>
+	              </attribute>
+	              <attribute qualifier="value" type="java.lang.String">
+	                  <persistence type="property"/>
+	              </attribute>
+	              <attribute qualifier="author" type="java.lang.String">
+	                  <persistence type="property"/>
+	              </attribute>
+           </attributes>
+      </itemtype>
+      
+      <itemtype code="SAPCpiOutboundOrderS4hcConfigStructureNode" extends="GenericItem">
+           <deployment table="SAPCpiS4hcConfigStN" typecode="9922"/>
+           <attributes>
+                <attribute qualifier="nodeId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="parentNodeId" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="bomPositionIdentifier" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="orderId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+                <attribute qualifier="entryNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+           </attributes>
+      </itemtype>
+      
+ 		<itemtype code="SAPCpiOutboundOrderItem" autocreate="false"
+			generate="false">			
+			 <attributes>
+				<attribute qualifier="s4hcConfigHeader"
+					type="SAPCpiOutboundOrderS4hcConfigHeader" generate="true" autocreate="true" >					 
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<persistence type="property" />
+				</attribute> 
+			 </attributes>
+      	</itemtype>      
+        	
+	</itemtypes>
+</items>

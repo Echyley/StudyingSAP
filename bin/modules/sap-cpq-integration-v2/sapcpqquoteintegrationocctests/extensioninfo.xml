@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+            	
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Sapcpqquoteintegrationocctests" jaloLogicFree="true" managername="SapcpqquoteintegrationocctestsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapcpqquoteintegrationocctests" usemaven="false">
+                        		
+        
+        
+        <requires-extension name="commercewebservicestests"/>
+                
+        <requires-extension name="sapcpqquoteintegrationocc"/>
+                
+        <requires-extension name="b2bocctests"/>
+                
+        
+        <coremodule generated="true" manager="com.sap.hybris.sapcpqquoteintegrationocctests.jalo.SapcpqquoteintegrationocctestsManager" packageroot="com.sap.hybris.sapcpqquoteintegrationocctests"/>
+                        		
+        
+        	
+    
+    
+    </extension>
+            
+
+
+</extensioninfo>

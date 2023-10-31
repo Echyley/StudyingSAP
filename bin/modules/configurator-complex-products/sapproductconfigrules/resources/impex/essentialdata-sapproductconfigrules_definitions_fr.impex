@@ -1,0 +1,55 @@
+$lang=fr
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Produit configurable
+;productconfig_customer_category;Client
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Produit ayant une configuration indiquée dans le panier;Le panier contient le produit {product}. La caractéristique {cstic} {value_operator} la valeur {cstic_value}.
+;y_configurable_product;Produit en cours de configuration;Le produit que vous configurez actuellement est {product}. La caractéristique {cstic} {value_operator} la valeur {cstic_value}.
+;y_configurable_product_customer;Clients;Le client {customers_operator} la liste suivante\: {customers}
+;y_configurable_product_customer_group;Groupes de clients;Client {customer_groups_operator} des groupes suivants\: {customer_groups}
+;y_configurable_product_customer_support_mode;Support client;La session de service assisté est active\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Produit;Produit dans le panier;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Caractéristique;Nom de la caractéristique
+;y_configurable_product_in_cart;value_operator;Opérateur;Opérateur entre caractéristique et valeur
+;y_configurable_product_in_cart;cstic_value;Valeur;Nom de la valeur de caractéristique;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Produit;Produit en cours de configuration
+;y_configurable_product;cstic;Caractéristique;Nom de la caractéristique
+;y_configurable_product;value_operator;Opérateur;Opérateur entre caractéristique et valeur
+;y_configurable_product;cstic_value;Valeur;Nom de la valeur de caractéristique
+;y_configurable_product_customer;customers_operator;Opérateur de sélection de client;Définit si le client est inclus ou non dans la liste
+;y_configurable_product_customer;customers;Clients;Liste des clients
+;y_configurable_product_customer_group;customer_groups_operator;Opérateur de sélection de groupe de clients;Définit si le client est inclus dans UN ou TOUS les groupes de clients
+;y_configurable_product_customer_group;customer_groups;Groupes de clients;Liste de groupes de clients
+;y_configurable_product_customer_support_mode;value;Session de service assisté active;Un agent du support client est connecté à la place d'un client
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Produit configurable
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Définir la valeur de caractéristique pour le produit configurable;Définir la valeur {cstic_value} pour la caractéristique {cstic}
+;y_configurable_product_remove_assignable_value;Masquer la valeur pouvant être affectée pour le produit configurable;Masquer la valeur {cstic_value} pour la caractéristique {cstic}
+;y_configurable_product_hide_cstic;Masquer la caractéristique pour le produit configurable;Masquer la caractéristique {cstic}
+;y_configurable_product_display_cstic_readonly;Afficher la caractéristique en lecture seule pour le produit configurable;Afficher la caractéristique {cstic} en lecture seule
+;y_configurable_product_display_message;Afficher le message;Afficher le message
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Caractéristique;Caractéristique pour laquelle une valeur est définie
+;y_configurable_product_set_cstic_value;cstic_value;Valeur;Valeur de caractéristique à définir
+;y_configurable_product_remove_assignable_value;cstic;Caractéristique;Caractéristique pour laquelle une valeur pouvant être affectée doit être supprimée
+;y_configurable_product_remove_assignable_value;cstic_value;Valeur;Valeur à supprimer de la liste des valeurs pouvant être affectées
+;y_configurable_product_hide_cstic;cstic;Caractéristique;Caractéristique à masquer
+;y_configurable_product_display_cstic_readonly;cstic;Caractéristique;Caractéristique à afficher en lecture seule
+;y_configurable_product_display_message;message;Message;Texte du message
+;y_configurable_product_display_message;message_severity;Gravité;Degré de gravité du message
+;y_configurable_product_display_message;cstic;Caractéristique;Caractéristique pour laquelle ce message est affiché
+;y_configurable_product_display_message;cstic_value;Valeur de caractéristique;Valeur de caractéristique pour laquelle ce message est affiché
+
+#% endif:

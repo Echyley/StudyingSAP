@@ -1,0 +1,31 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+#
+# Import Sample multisite Data
+
+INSERT_UPDATE UserGroup; uid[unique = true]; locname[lang = en]    ; locname[lang = en]
+                       ; multisitegroup    ; Multi-site User Group ; Multi-site Group
+
+
+INSERT_UPDATE BaseSite; uid[unique = true]; dataIsolationEnabled
+                      ; test-site-a       ; true
+                      ; test-site-b       ; true
+                      ; test-site-c       ; true
+                      ; test-site         ; false
+
+
+INSERT_UPDATE SiteEmployeeGroup; uid[unique = true]    ; visibleSite(uid);
+                               ; site-a-employee-group ; test-site-a     ;
+                               ; site-b-employee-group ; test-site-b     ;
+                               ; site-c-employee-group ; test-site-c     ;
+
+
+INSERT_UPDATE Employee; name                                                    ; groups(uid)                                                          ; uid[unique = true]
+                      ; Standalone Site A Customer Support Agent                ; site-a-employee-group                                             ; customer.support.standalone_site_a@nakano.com
+                      ; Standalone Site B Customer Support Agent                ; site-b-employee-group                                             ; customer.support.standalone_site_b@nakano.com
+                      ; Standalone Site A and C Customer Support Agent          ; site-a-employee-group,site-c-employee-group                       ; customer.support.standalone_site_ac@nakano.com
+                      ; Standalone Site B and C Customer Support Agent ; site-b-employee-group,site-c-employee-group                       ; customer.support.standalone_site_bc@nakano.com
+                      ; Standalone Site A, B and C Customer Support Agent       ; site-a-employee-group,site-b-employee-group,site-c-employee-group ; customer.support.standalone_site_all@nakano.com
+                      ; None-Isolated Customer Support Agent                    ;                                                                   ; customer.support.none_isolated@nakano.com

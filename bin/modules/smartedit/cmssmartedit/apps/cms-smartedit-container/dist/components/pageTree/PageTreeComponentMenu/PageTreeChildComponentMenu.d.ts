@@ -1,0 +1,30 @@
+import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { ComponentAttributes, CrossFrameEventService, IContextualMenuButton, IContextualMenuConfiguration, PopupOverlayConfig, TypedMap } from 'smarteditcommons';
+import { ComponentNode, NodeInfoService, PageTreeChildComponentMenuService } from '../../../services/pageTree';
+import { ParentMenu } from './ParentMenu';
+export declare class PageTreeChildComponentMenu implements ParentMenu, OnInit, OnDestroy {
+    private readonly pageTreeChildComponentMenuService;
+    private readonly nodeInfoService;
+    private readonly cdr;
+    private crossFrameEventService;
+    component: ComponentNode;
+    parentMenuConfiguration: IContextualMenuConfiguration;
+    slotId: string;
+    slotUuid: string;
+    menuItems: IContextualMenuButton[];
+    componentAttributes: ComponentAttributes;
+    menuConfiguration: IContextualMenuConfiguration;
+    remainOpenMap: TypedMap<boolean>;
+    itemTemplateOverlayWrapper: PopupOverlayConfig;
+    templateOverlayIsOpen: boolean;
+    private displayedItem;
+    private unregisterInnerFrameClicked;
+    constructor(pageTreeChildComponentMenuService: PageTreeChildComponentMenuService, nodeInfoService: NodeInfoService, cdr: ChangeDetectorRef, crossFrameEventService: CrossFrameEventService);
+    ngOnInit(): Promise<void>;
+    ngOnDestroy(): void;
+    canShowTemplate(menuItem: IContextualMenuButton): boolean;
+    onHideItemPopup(): void;
+    triggerMenuItemAction(item: IContextualMenuButton, $event: Event): void;
+    setRemainOpen(key: string, remainOpen: boolean): void;
+    getItems(): IContextualMenuButton[];
+}

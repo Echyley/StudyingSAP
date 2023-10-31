@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="cmssmartedit_buildcallbacks">
+
+    <patternset id="extension.cmssmartedit.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="smartedit-custom-build/generated/"/>
+    </patternset>
+
+    <patternset id="extension.cmssmartedit.source.filter">
+        <patternset refid="extension.source.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="smartedit-custom-build/generated/"/>
+    </patternset>
+
+    <patternset id="extension.cmssmartedit.production.filter">
+        <patternset refid="extension.production.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="smartedit-custom-build/generated/"/>
+    </patternset>
+
+    <macrodef name="cmssmartedit_before_clean">
+        <sequential>
+            <if>
+                <available file="${ext.smartedittools.path}${file.separator}common${file.separator}temp${file.separator}node_modules" type="dir"/>
+                <then>
+                    <delete dir="${ext.cmssmartedit.path}${file.separator}web${file.separator}webroot${file.separator}css"/>
+                    <delete dir="${ext.cmssmartedit.path}${file.separator}web${file.separator}webroot${file.separator}cmssmartedit${file.separator}js"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="cmssmartedit_before_build">
+        <sequential>
+            <build_smartedit_extension extensionName="cmssmartedit" appNames="cms-commons,cms-smartedit-container,cms-smartedit" />
+        </sequential>
+    </macrodef>
+
+    <!-- Please find details in https://cxjira.sap.com/browse/CMSX-10210
+   that why we can use 'web' property to ensure our frontend UT only execute once in team & commerce-suite pipeline -->
+    <macrodef name="cmssmartedit_before_yunit">
+        <!-- 'includeAngularUT' flag will be set as true in team pipeline.
+        It will be removed after ECPP install Chrome -->
+        <attribute name="includeAngularUT" default="false"/>
+        <sequential>
+            <if>
+                <and>
+                    <istrue value="${testclasses.web}"/>
+                    <istrue value="${includeAngularUT}"/>
+                </and>
+                <then>
+                    <test_smartedit_extension extensionName="cmssmartedit" appNames="cms-commons,cms-smartedit-container,cms-smartedit"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!--
+        How-to run unit tests in the extension:
+        1- Execute the command "ant allwebtests" within "platform" folder (will execute tests for ALL extensions).
+        2- OR Execute the command "npm run test" or "npm run test:dev" in each apps/*/* folder individually.
+        3- OR Execute the command "ant test_cmssmartedit"
+    -->
+    <target name="test_cmssmartedit">
+        <test_smartedit_extension extensionName="cmssmartedit" appNames="cms-commons,cms-smartedit-container,cms-smartedit"/>
+    </target>
+
+    <target name="lint_cmssmartedit">
+        <sequential>
+            <lint_smartedit_extension extensionName="cmssmartedit" appNames="cms-backend-mock,cms-commons,cms-smartedit,cms-smartedit-container,cms-smartedit-e2e"/>
+        </sequential>
+    </target>
+
+    <target name="generate_cmssmartedit_docs">
+        <generate_smartedit_extension_docs extensionName="cmssmartedit" appNames="cms-commons,cms-smartedit-container" />
+    </target>
+
+</project>

@@ -1,0 +1,26 @@
+{
+  "name": "personalizationpromotionssmarteditcontainer",
+  "typescript": {
+    "entry": "./src/index.ts",
+    "dist": "./dist/index.js"
+  },
+  "style": {
+    "global": "node_modules/smartedit-build/styles/se-variables.scss"
+  },
+  "legacy": {
+    "js": [
+      "./src/**/*.js"
+    ],
+    "ngTemplates": {
+      "moduleName": "personalizationpromotionssmarteditContainerTemplates",
+      "includePathInName": false,
+      "files": [
+        "./src/**/*.html"
+      ]
+    }
+  },
+  "extension": {
+    "type": "container",
+    "angularApp": "personalizationpromotionssmarteditContainer"
+  }
+}

@@ -1,0 +1,10 @@
+.se-page-info {
+    &__name {
+        @include se-flex-row();
+    }
+
+    &__name-value {
+        word-break: break-all;
+        white-space: normal;
+    }
+}

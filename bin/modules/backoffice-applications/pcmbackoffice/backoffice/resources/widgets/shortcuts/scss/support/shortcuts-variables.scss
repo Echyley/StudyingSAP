@@ -1,0 +1,7 @@
+@import 'cockpitng-globals.scss';
+
+$shortcuts-header-border-bottom: var(--bo-container-border-width) solid var(--bo-list-border-color);
+$shortcuts-header-padding: $container-spacing-default_two-thirds;
+$shortcuts-item-padding-left: $container-spacing-default_two-thirds;
+$shortcuts-item-selected-border-bottom: var(--bo-container-border-width) solid var(--bo-list-selected-border-color);
+$shortcuts-item-dragged-over-background: var(--bo-list-hover-background);

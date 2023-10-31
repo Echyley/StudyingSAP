@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+#% if: de.hybris.platform.core.Registry.getCurrentTenant().getTenantSpecificExtensionNames().contains("backofficesolrsearch")
+
+$lang=de
+$solrIndexedType = solrIndexedType(identifier)[unique=true, default='BackofficeProduct'];
+
+INSERT_UPDATE SolrIndexedProperty;name[unique = true];$solrIndexedType;backofficeDisplayName[lang = $lang];
+;colour;;Farbe;
+;audiorecorder;;Audiorekorder;
+;height;;Höhe;
+;weight;;Gewicht;
+;width;;Breite;
+
+#% endif:

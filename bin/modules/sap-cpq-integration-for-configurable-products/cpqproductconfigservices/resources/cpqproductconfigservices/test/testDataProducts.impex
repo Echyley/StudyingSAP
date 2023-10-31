@@ -1,0 +1,96 @@
+$defaultCurrency=EUR
+$lang=en
+$defaultLanguage=en
+$deliveryCountries=US
+$catalog-id=testConfigureCatalog
+$catalog-version=Online
+$testCategory-id=CPQConfigurableCategory
+$testSubCategory-id=CPQConfigurableSubCategory
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$approved=approvalstatus(code)[default='approved']
+
+#################################################################################
+# Language, Currency and Units
+#################################################################################
+INSERT_UPDATE Language;isocode[unique=true];active;
+;de;true;
+;en;true;
+
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];
+;de;Deutsch;German;
+;en;Englisch;English;
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol
+;EUR;Euro;Euro;true;true;1;2;€
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$
+;CAD;Canadian Dollar;Canadian Dollar;true;false;1,4;2;C$
+
+#INSERT_UPDATE Currency;isocode[unique=true];sapCode
+#;EUR;EUR
+#;USD;USD
+#;CAD;CAD
+
+INSERT_UPDATE Unit;code[unique=true];unitType;conversion;name[lang=de];name[lang=en];
+;PCE;pieces;1;PCE;PCE;
+;EA;EA;1;EA;EA;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;
+;DE;Deutschland;Germany;true;
+;US;Vereinigte Staaten von Amerika;United States of America;true;
+
+INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en];
+;dr;Dr.;dr.;
+;prof;Prof.;prof.;
+
+
+
+
+#################################################################################
+# Product Catalog
+#################################################################################
+INSERT_UPDATE Catalog;id[unique=true];name[lang=en];defaultCatalog;
+;$catalog-id;$catalog-id;true;
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;defaultCurrency(isocode);
+;$catalog-id;$catalog-version;true;EUR;
+
+INSERT_UPDATE cloudcpqconfiguratorsettings;$catalogversion[unique=true];id[unique=true];configuratortype(code);configurationcategory(code,$catalogversion);qualifier
+;;CloudCPQConfiguratorSettings;CLOUDCPQCONFIGURATOR;$testCategory-id;CLOUDCPQCONFIGURATORSETTINGS
+
+INSERT_UPDATE configurationcategory;$catalogversion[unique=true];code[unique=true];name[lang=$lang];configuratorsettings(id,$catalogversion)
+;;$testCategory-id;Cloud CPQ Configurable Category;CloudCPQConfiguratorSettings
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=en];$supercategories;
+;$testSubCategory-id;;$testSubCategory-id,$testCategory-id;
+
+
+#*************************************************************************************************************
+#Base Site, Store
+#*************************************************************************************************************
+                                
+INSERT_UPDATE CMSSite;uid[unique=true];channel(code);active;
+;testConfigureSite;B2B;true;
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);solrFacetSearchConfiguration(name);submitOrderProcessCode;paymentProvider;cmsSites(uid);
+;testConfigureStore;$catalog-id;$defaultCurrency;false;;km;$defaultCurrency;$defaultLanguage;$defaultLanguage;$deliveryCountries;;order-process;Mockup;testConfigureSite;
+
+
+#################################################################################
+# Products
+#################################################################################
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;ean;variantType(code);unit(code)[default=PCE];$catalogversion;name[lang=en];description[lang=en];summary[lang=en];$prices;$approved;
+;CONF_LAPTOP;$testCategory-id;SAP;;;;PCE;;Laptop;Laptop;laptop;1 PCE = 199 EUR N;
+;CONF_POWER_SUPPLY;;SAP;;;;PCE;;Power Supply;Power Supply;power supply;1 PCE = 19 EUR N;
+;CONF_COFFEEMACHINE_3000;$testCategory-id;SAP;;;;PCE;;Coffee Machine;Coffee Machine;Coffee Machine;1 PCE = 1949 EUR N;
+;CONF_TECH_PRODUCT;$testCategory-id;SAP;;;;PCE;;Configurable TechDemo Product;Demonstrating different UI Types, modeled in CPQ. ;Configurable TechDemo Product;1 PCE = 299 EUR N;;;
+;CONF_COMPUTER_BUNDLE;$testCategory-id;SAP;;;;PCE;;Computer;Computer;Computer;1 PCE = 199 EUR N;
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;ean;variantType(code);unit(code)[default=pieces];$catalogversion;name[lang=en];description[lang=en];summary[lang=en];$prices;$approved;
+;CONF_CAMERA_BUNDLE;$testCategory-id;SAP;;;;PCE;;Configurable Camera Bundle;Configurable Camera Bundle, modeled in CPQ. ;Configurable Camera Bundle;1 PCE = 1999 EUR N;;;
+;NIKON_D850;;SAP;;;;PCE;;Nikon Camera Body 850a;<h3>Extreme resolution meets extreme speed.</h3><p>When Nikon introduced the <em>D850</em> and <em>D850E</em>, it set a new benchmark for DSLR image quality and super high resolution photography that approached medium format. Now, five years later, Nikon proudly introduces the next evolution in high resolution DSLRs, a camera that allows photographers to capture fast action in 45.7 megapixels of brilliant resolution. With remarkable advancements across the board sensor design, autofocus, dynamic range, sensitivity, Speedlight control, battery life, shutter and mirror drive mechanisms, Silent Photography in Live-View mode, focus shift capability and more this is quite possibly the most impressive, well-rounded DSLR yet.</p>;Nikon Camera Body 850c;1 PCE = 599 EUR N;;;
+;SANDISK_EXTREME_PRO_128GB_SDXC;;SAP;;;;PCE;;Sandisk Memory Card;<h2>GEAR THAT DOESNT LIMIT YOUR CREATIVITY</h2> <p>Our most powerful SD UHS-I memory card yet delivers performance that elevates your creativity.</p>;Sandisk Memory Card;1 PCE = 37.99 EUR N;;;
+;INSURANCE_SELECT_2_YEARS;;SAP;;;;PCE;;2 Years Insurance;<h2>Specialist insurance that includes equipment cover and liability insurances</h2><p>As everyones requirements will be different, you may find a tailor-made policy is best. Dealing with the photo trade for the past 12 years, and catering to both amateur and professional, that is exactly what we offer, using a panel of insurers rather than just one.</p>;2 Years Insurance;1 PCE = 0 EUR N;;;
+;NIKON_D7500;;SAP;;;;PCE;;Nikon Camera Body D 7500;<h3>Follow your passion wherever it leads</h3><p>Born from a desire for flagship performance and innovation in a more compact and streamlined connected camera, the D7500 delivers the game-changing resolution, ISO range, image processing and energy efficiency of the award-winning D500 in an enthusiast-level DSLR. Simply put, the D7500 is built to outperform any camera in its class with top-tier image quality, blazing speed, flawless autofocus, 4K Ultra HD video and pro-grade creative tools—all in a comfortable, rugged design. This is a camera for the new generation of creators.</p>;Nikon Camera Body 7500c;1 PCE = 599 EUR N;;;
+;CANON_EOS_80D;;SAP;;;;PCE;;Canon EOS 80D;<p><em><strong>The Canon EOS 80D features an all-new 24.2MP APS-C CMOS sensor, 45-point all cross-type autofocus system, and the DIGIC 6 processor. </strong></em></p><p>When using live view or recording video users can take advantage of the 80D Dual Pixel CMOS AF for fast and smooth autofocus. Photos can be composed on an Intelligent optical viewfinder or a flip-out-and-rotate touchscreen LCD. The 80D can record 1080/60p video and offers sockets for both a microphone and headphones. Wi-Fi is also built in, with support for NFC technology.</p>;CANON EOS 80D camera body;1 PCE = 699 EUR N;;;
+;CANON_EOS_6D_MARK_II;;SAP;;;;PCE;;Canon EOS 6D Mark II;<p>Step up into the full-frame game with the <strong>EOS 6D Mark II DSLR Camera</strong> from <strong>Canon</strong>. Making high-performance full-frame imaging more accessible, the 6D Mark II makes numerous advancements over its predecessor to improve upon every aspect of image capture and creation</p>;Canon EOS 6D Mark II Camera Body ;1 PCE = 599 EUR N;;;

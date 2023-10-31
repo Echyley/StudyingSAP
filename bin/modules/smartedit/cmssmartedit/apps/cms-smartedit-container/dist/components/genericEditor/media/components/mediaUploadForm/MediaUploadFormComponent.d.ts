@@ -1,0 +1,52 @@
+import { ChangeDetectorRef, ComponentFactoryResolver, EventEmitter, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { ErrorContext, FileValidatorFactory, GenericEditorMediaType, IMediaToUpload, MediaUploadFieldsCustom } from 'smarteditcommons';
+import { MediaUploadFieldsCustomDirective } from '../../directives/MediaUploadFieldsCustomDirective';
+import { MediaBackendValidationHandler, MediaUtilService, MediaFolderService, MediaFolderFetchStrategy } from '../../services';
+interface ImageEditableParams {
+    code: string;
+    description: string;
+    altText: string;
+}
+export declare class MediaUploadFormComponent implements OnChanges, OnDestroy {
+    private cdr;
+    private fileValidatorFactory;
+    private mediaBackendValidationHandler;
+    private mediaUploaderService;
+    private mediaFolderService;
+    private mediaUtilService;
+    private resolver;
+    private mediaUploadFieldsCustom;
+    image: any;
+    allowMediaType: GenericEditorMediaType;
+    maxUploadFileSize: number;
+    onCancel: EventEmitter<void>;
+    onSelect: EventEmitter<FileList | string>;
+    onUploadSuccess: EventEmitter<string>;
+    mediaUploadFieldsCustomDirective: MediaUploadFieldsCustomDirective;
+    acceptedFileTypes: string[];
+    isUploading: boolean;
+    fieldErrors: ErrorContext[];
+    imageParams: ImageEditableParams | null;
+    folderSelected: string;
+    folderFetchStrategy: MediaFolderFetchStrategy;
+    folderErrors: string[];
+    private fileValidator;
+    private subscriptions;
+    private customFields;
+    constructor(cdr: ChangeDetectorRef, fileValidatorFactory: FileValidatorFactory, mediaBackendValidationHandler: MediaBackendValidationHandler, mediaUploaderService: IMediaToUpload, mediaFolderService: MediaFolderService, mediaUtilService: MediaUtilService, resolver: ComponentFactoryResolver, mediaUploadFieldsCustom: MediaUploadFieldsCustom);
+    ngOnInit(): Promise<void>;
+    ngOnDestroy(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    getErrorsForFieldByCode(code: keyof ImageEditableParams): string[];
+    uploadMedia(): Promise<void>;
+    cancel(): void;
+    onChangeFieldValue(value: string, paramName: keyof ImageEditableParams): void;
+    onFileSelect(file: FileList | string): void;
+    hasError(): boolean;
+    folderSelectedChanged(folder: string): void;
+    private onMediaUploadSuccess;
+    private onMediaUploadFail;
+    private reset;
+    private loadMediaUploadFieldsCustom;
+}
+export {};

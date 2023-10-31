@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=es_CO
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;El atributo "Identificador debe incluir valores para todos los idiomas.;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;El atributo "Precios" debe incluir al menos 1 elemento.;
+;ProductSupercategoriesSizeConstraint;;;El atributo “Supercategorías” debe incluir al menos 1 elemento.;
+;ProductGalleryImagesSizeConstraint;;;El atributo "Imágenes de la galería" debe incluir al menos 1 elemento.;
+;ProductReferencesSizeConstraint;;;El atributo "Referencias de producto" debe incluir al menos 1 elemento.;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;El atributo "Número de artículo" no debe estar vacío.;
+;ProductDescriptionNotEmptyConstraint;;;El atributo “Descripción” no debe estar vacío.;
+;ProductEanNotEmptyConstraint;;;El atributo "EAN" no debe estar vacío.;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;El valor del atributo para “Aprobación” debe ser “aprobado”.;

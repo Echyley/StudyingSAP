@@ -1,0 +1,3 @@
+REMOVE UserRight; code[unique = true]
+                ; read
+

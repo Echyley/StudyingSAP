@@ -1,0 +1,26 @@
+ol {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.cdk-drag {
+    list-style-type: none;
+}
+.cdk-drag-preview {
+    z-index: 2000 !important;
+}
+.cdk-drag-placeholder {
+    opacity: 0 !important;
+}
+
+.cdk-drop-list-dragging {
+    border-top: 2px dashed rgba(0, 0, 0, 0.4);
+    border-right: 2px dashed rgba(0, 0, 0, 0.4);
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.4);
+}
+
+.se-select-creategroup {
+    display: inline-block;
+    width: 5rem;
+}

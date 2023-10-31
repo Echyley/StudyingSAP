@@ -1,0 +1,35 @@
+/****************************************************
+				genericeditor
+****************************************************/
+// TODO: Uncommenting this line causes a JS heap out of space exception.
+
+se-localized-element {
+    nav.nav-tabs > .dropdown {
+        ul > li {
+            background-color: var(--sapBaseColor);
+            a {
+                color: var(--sapLinkColor);
+            }
+        }
+
+        a.sm-tab-error {
+            color: var(--sapErrorColor);
+        }
+    }
+
+    &.multi-tabs-editor * {
+        transition: none;
+    }
+}
+
+se-generic-editor-field .ySEField .ySEFieldPostfix {
+    padding-top: 20px;
+}
+
+.mce-content-body {
+    padding-top: 0;
+}
+
+.se-ge-modal--messages {
+    margin-bottom: 1rem;
+}

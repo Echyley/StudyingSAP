@@ -1,0 +1,17 @@
+/**
+* Add icon for gigyagroup explorer tree in admin cockpit
+*/
+div.yw-sideNavigation .yw-treeCellInner {
+    @include setSideNavigationIconGlyph("gigyagroup", "customer_data_cloud");
+}
+
+div.yw-explorerTree .y-tree-icon {
+    @include setSideNavigationIconGlyph("gigyagroup", "customer_data_cloud"); 
+}
+
+div.yw-explorerTree .y-tree-icon-gigyagroup.y-tree-icon {
+  background-image: none; }
+  div.yw-explorerTree .y-tree-icon-gigyagroup.y-tree-icon:before {
+    font-family: var(--bo-content-icon-font-family);
+    content: _getIconGlyphContentValue("customer_data_cloud");
+    color: var(--bo-content-icon-color); }

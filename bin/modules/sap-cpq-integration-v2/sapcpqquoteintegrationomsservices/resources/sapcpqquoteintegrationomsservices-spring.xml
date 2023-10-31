@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+    <bean id="sapcpqquoteintegrationomsservicesSystemSetup" class="com.sap.hybris.sapcpqquoteintegrationomsservices.setup.SapcpqquoteintegrationomsservicesSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="sapcpqquoteintegrationomsservicesService"/>
+    </bean>
+
+    <bean id="sapcpqquoteintegrationomsservicesService" class="com.sap.hybris.sapcpqquoteintegrationomsservices.service.impl.DefaultSapcpqquoteintegrationomsservicesService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <alias name="defaultCpqInboundQuoteOrderHelper"
+		alias="sapCpqDataHubInboundOrderHelper" />
+	<bean id="defaultCpqInboundQuoteOrderHelper"
+		class="com.sap.hybris.sapcpqquoteintegrationomsservices.inbound.helper.impl.DefaultCpqInboundQuoteOrderHelper"
+		parent="sapOmsDataHubInboundOrderHelper">
+	</bean>
+    
+    <bean id="sapCpiCpqOmsOrderConfirmationPersistenceHook"
+		class="com.sap.hybris.sapcpqquoteintegrationomsservices.inbound.SapCpiCpqOmsOrderConfirmationPersistenceHook">
+		<property name="sapDataHubInboundOrderHelper"
+			ref="sapCpqDataHubInboundOrderHelper" />
+	</bean>
+			
+</beans>

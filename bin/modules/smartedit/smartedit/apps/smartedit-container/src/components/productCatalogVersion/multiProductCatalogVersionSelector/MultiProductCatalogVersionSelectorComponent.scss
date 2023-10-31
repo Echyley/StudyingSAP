@@ -1,0 +1,43 @@
+.se-multi-product-catalog-version-selector {
+    .se-products-catalog-select-multiple {
+        display: flex;
+        justify-content: stretch;
+        color: var(--sapTile_IconColor);
+        cursor: pointer;
+
+        &__catalogs {
+            width: calc(100% - 35px);
+            background-color: var(--sapField_ReadOnly_Background);
+            box-shadow: none;
+            border: 0;
+            cursor: inherit;
+            pointer-events: none; // prevent selecting a text when input has been clicked
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        &__icon {
+            font-size: 18px;
+            width: 32px;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--sapField_ReadOnly_Background);
+        }
+    }
+
+    .se-product-catalogs-tooltip {
+        margin: var(--fd-width-gutter);
+        &__h {
+            @include se-weight('bold');
+            margin-bottom: se-space('tiny');
+        }
+        .se-product-catalogs-tooltip__h {
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+    }
+}

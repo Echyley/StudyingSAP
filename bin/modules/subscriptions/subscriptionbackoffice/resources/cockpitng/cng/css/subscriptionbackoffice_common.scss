@@ -1,0 +1,9 @@
+@import "cockpitng-globals.scss";
+
+div.yw-explorerTree .y-tree-icon {
+	@include setTreeIconGlyph("hmc_treenode_subscription", "batch-payments");
+}
+div.yw-sideNavigation .yw-treeCellInner {
+	@include setSideNavigationIconGlyph("hmc_treenode_subscription", "batch-payments");
+}
+

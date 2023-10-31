@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+# ImpEx for Importing Products Stock Levels into wsTest Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default=$productCatalog:Online]
+$vendor=wsTestVendor
+$testCategory0-id = testCategory0
+$prices = europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$supercategories = supercategories(code, catalogversion(catalog(id[default=wsTestCatalog]), version[default='Online']))
+
+INSERT_UPDATE StockLevel; available; warehouse(code)[unique = true]; inStockStatus(code); maxPreOrder; maxStockLevelHistoryCount; overSelling; preOrder; productCode[unique = true]; reserved
+                        ; 20       ; ws_warehouse_n                ; forceInStock       ; 1          ; -1                       ; 0          ; 0       ; TW1210-9342               ; 0
+                        ; 21       ; ws_warehouse_n                ; forceInStock       ; 1          ; -1                       ; 0          ; 0       ; TW1210-9343               ; 0
+
+
+INSERT_UPDATE Product; code[unique = true]; $catalogVersion; name[lang = de]; name[lang = en]; unit(code); $prices ; approvalStatus(code); startLineNumber; $supercategories
+                     ; TW1210-9342        ;                ; test1DE        ; test1EN        ; pieces    ; 7,5 USD ; approved            ; 0              ; $testCategory0-id
+                     ; TW1210-9343        ;                ; test1DE        ; test1EN        ; pieces    ; 7,5 USD ; approved            ; 0              ; $testCategory0-id
+
+UPDATE Product; code[unique = true]; $catalogVersion; stockLevels(productCode, warehouse(code)); vendors(code)
+              ; TW1210-9342        ;                ; TW1210-9342:ws_warehouse_n               ; $vendor
+              ; TW1210-9343        ;                ; TW1210-9342:ws_warehouse_n               ; $vendor

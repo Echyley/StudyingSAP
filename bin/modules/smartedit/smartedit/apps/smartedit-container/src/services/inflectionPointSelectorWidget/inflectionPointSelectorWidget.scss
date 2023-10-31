@@ -1,0 +1,41 @@
+.se-inflection-point__toggle {
+    width: 80px;
+    height: 45px;
+    border: inherit;
+    border-left: thin solid var(--sapGroup_ContentBorderColor);
+    background-color: transparent;
+    &:hover {
+        background-color: se-color-state('hover');
+    }
+}
+.se-inflection-point___selected {
+    color: var(--sapLinkColor);
+    @include se-type('4');
+}
+.se-inflection-point.open .se-inflection-point-dropdown {
+    display: block;
+}
+.se-inflection-point-dropdown {
+    @include se-dropdown-menu('center');
+    display: none;
+    min-width: 60px;
+}
+
+.inflection-point__device.fd-menu__item {
+    width: 100%;
+    padding: 0;
+    @include se-flex-row(center);
+    margin: auto;
+    text-decoration: none;
+    height: 46px;
+    @include se-type('4');
+    &.selected {
+        background-color: se-color-state('selected');
+    }
+    &:hover {
+        color: var(--sapLink_Active_Color);
+    }
+    & [class*='sap-icon'] {
+        @include se-type('4');
+    }
+}

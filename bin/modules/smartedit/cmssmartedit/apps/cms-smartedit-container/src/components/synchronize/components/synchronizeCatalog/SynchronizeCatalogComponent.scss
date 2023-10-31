@@ -1,0 +1,31 @@
+.se-synchronize-catalog {
+    @include se-flex-row(flex-end);
+
+    &__sync-info {
+        @include se-flex-row();
+    }
+
+    &__sync-btn {
+        margin-left: 20px;
+    }
+
+    &__sync-info__sync-label:first-child {
+        font-weight: 700;
+    }
+
+    &__sync-info__sync-label,
+    &__sync-info__last-synched {
+        color: var(--sapTextColor);
+        display: block;
+        text-align: right;
+        margin: 0;
+    }
+
+    &__in-progress {
+        color: var(--sapIndicationColor_4);
+    }
+
+    &__sync-failed {
+        color: var(--sapErrorColor);
+    }
+}

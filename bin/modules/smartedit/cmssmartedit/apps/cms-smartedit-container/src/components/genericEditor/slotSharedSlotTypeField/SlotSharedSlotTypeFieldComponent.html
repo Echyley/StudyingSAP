@@ -1,0 +1,40 @@
+<div class="fd-form__set">
+    <div class="fd-form__item fd-form__item--check">
+        <label
+            for="slot-replacement-type-options"
+            class="se-control-label"
+            [translate]="'se.cms.slot.shared.replace.editor.slotreplacementtype'"
+        >
+        </label>
+        <div id="slot-replacement-type-options">
+            <div class="se-form-control-row">
+                <input
+                    class="fd-form__control"
+                    type="radio"
+                    name="slotReplacementType"
+                    id="slot-type-custom"
+                    [(ngModel)]="page.isSlotCustom"
+                    [value]="true"
+                />
+                <label
+                    for="slot-type-custom"
+                    [translate]="'se.cms.slot.shared.replace.editor.slotreplacementtype.nonshared'"
+                ></label>
+            </div>
+            <div class="se-form-control-row">
+                <input
+                    class="fd-form__control"
+                    type="radio"
+                    name="slotReplacementType"
+                    id="slot-type-local"
+                    [(ngModel)]="page.isSlotCustom"
+                    [value]="false"
+                />
+                <label
+                    for="slot-type-local"
+                    [translate]="'se.cms.slot.shared.replace.editor.slotreplacementtype.local'"
+                ></label>
+            </div>
+        </div>
+    </div>
+</div>

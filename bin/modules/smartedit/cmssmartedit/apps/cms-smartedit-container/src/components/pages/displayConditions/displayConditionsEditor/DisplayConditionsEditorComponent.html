@@ -1,0 +1,50 @@
+<div>
+    <se-event-message
+        class="existing-homepage__ymessage"
+        [showEvent]="'CMS_EVENT_SHOW_REPLACE_PARENT_HOMEPAGE_INFO'"
+        [hideEvent]="'CMS_EVENT_HIDE_REPLACE_PARENT_HOMEPAGE_INFO'"
+    >
+    </se-event-message>
+    <se-display-conditions-page-info
+        [pageName]="getPageName()"
+        [pageType]="getPageType()"
+        [isPrimary]="isPagePrimary()"
+    ></se-display-conditions-page-info>
+    <se-display-conditions-page-variations
+        *ngIf="isPagePrimary()"
+        [variations]="getVariations()"
+    ></se-display-conditions-page-variations>
+    <se-display-conditions-primary-page
+        *ngIf="!isPagePrimary()"
+        [readOnly]="getIsAssociatedPrimaryReadOnly()"
+        [associatedPrimaryPage]="getAssociatedPrimaryPage()"
+        [pageType]="getPageType()"
+        (onPrimaryPageSelect)="onPrimaryPageSelect($event)"
+    ></se-display-conditions-primary-page>
+
+    <div *ngIf="showHomePageWidget()">
+        <div class="se-component-homepage">
+            <label class="se-control-label">
+                <input
+                    type="checkbox"
+                    id="set-homepage-checkbox"
+                    class="fd-form__control se-display-conditions__homepage-input"
+                    name="clone-on-drop"
+                    [disabled]="disableHomepageCheckbox()"
+                    (ngModelChange)="homePageChanged($event)"
+                    [ngModel]="page.homepage"
+                />
+                <span translate="se.cms.display.conditions.homepage.set"></span>
+                <se-help *ngIf="disableHomepageCheckbox()">
+                    <span translate="se.cms.display.conditions.homepage.disabled"></span
+                ></se-help>
+            </label>
+        </div>
+        <div
+            class="se-display-conditions__replace-home-message"
+            *ngIf="showReplaceLabel"
+            translate="se.cms.display.conditions.homepage.replace"
+            [translateParams]="{ currentHomepage: currentHomePageName }"
+        ></div>
+    </div>
+</div>

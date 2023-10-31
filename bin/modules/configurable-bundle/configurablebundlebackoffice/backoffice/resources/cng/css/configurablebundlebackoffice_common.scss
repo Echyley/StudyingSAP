@@ -1,0 +1,7 @@
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("pcmbackoffice-bundle-view", "overview-chart");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+    @include setSideNavigationIconGlyph("pcmbackoffice-bundle-view", "overview-chart");
+}

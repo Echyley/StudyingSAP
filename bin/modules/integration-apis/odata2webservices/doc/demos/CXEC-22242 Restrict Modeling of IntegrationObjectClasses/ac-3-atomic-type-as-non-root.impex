@@ -1,0 +1,22 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; TestOrder
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]; type(code)                                         ; root
+                                    ; TestOrder                             ; Order              ; de.hybris.platform.core.model.order.OrderModel     ; true
+                                    ; TestOrder                             ; Product            ; de.hybris.platform.core.model.product.ProductModel ; false
+                                    ; TestOrder                             ; User               ; de.hybris.platform.core.model.user.UserModel       ; false
+                                    ; TestOrder                             ; Currency           ; de.hybris.platform.core.model.c2l.CurrencyModel    ; false
+                                    ; TestOrder                             ; TaxValue           ; de.hybris.platform.util.TaxValue                   ; false
+$integrationClass = integrationObjectClass(integrationObject(code), code)
+$returnClass = returnIntegrationObjectClass(integrationObject(code), code)
+INSERT_UPDATE IntegrationObjectClassAttribute; $integrationClass[unique = true]; attributeName[unique = true]; readMethod        ; $returnClass       ; unique[default = false]
+                                             ; TestOrder:Order                 ; code                        ; getCode           ;                    ; true
+                                             ; TestOrder:Order                 ; user                        ; getUser           ; TestOrder:User     ;
+                                             ; TestOrder:Order                 ; date                        ; getDate           ;                    ;
+                                             ; TestOrder:Order                 ; currency                    ; getCurrency       ; TestOrder:Currency ;
+                                             ; TestOrder:Order                 ; totalTaxValues              ; getTotalTaxValues ; TestOrder:TaxValue ;
+                                             ; TestOrder:Product               ; code                        ; getCode           ;                    ; true
+                                             ; TestOrder:User                  ; uid                         ; getUid            ;                    ; true
+                                             ; TestOrder:Currency              ; isocode                     ; getIsocode        ;                    ; true
+                                             ; TestOrder:TaxValue              ; code                        ; getCode           ;                    ; true
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]
+                                         ; TestOrder

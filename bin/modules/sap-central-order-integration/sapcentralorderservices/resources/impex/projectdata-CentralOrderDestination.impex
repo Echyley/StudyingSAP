@@ -1,0 +1,75 @@
+
+#***************************************************************************#
+#*** Please change only the sample data and do NOT change anything else! ***#                                                                                       #
+#***************************************************************************#
+
+#*********************************#
+#*** Sample Data To Be Changed ***#
+#*********************************#
+
+#**************************#
+#***  Basic CredentialS ***#
+#**************************#
+$username = sampleUsername
+$password = samplePassword
+
+#**************************#
+#***  OAuth CredentialS ***#
+#**************************#
+$oAuthUrl = https://test.sap.hana.ondemand.com/oauth/token
+$clientId = sampleClientId        
+$clientSecret = samplePassword
+
+#*********************************#
+#*** SAP CENTRAL ORDER API URL ***#
+#*********************************#
+$centralOrderListUrl = https://tenant.cfapps.eu10.hana.ondemand.com/api/v1/orders
+
+#***********************#
+#***  SCPI Order URL ***#
+#***********************#
+$orderUrl=https://test.hana.ondemand.com/gw/odata/SAP/REPLICATE-ORDER-FROM-SAP-COMMERCE-CLOUD-TO-CENTRAL-ORDER
+$orderVersion=v=1
+
+#*****************************************#
+#***  DO NOT Change The Section Below! ***#
+#*****************************************#
+
+#**************************#
+#***  Basic Credentials ***#
+#**************************#
+
+INSERT_UPDATE BasicCredential ; id[unique=true] ; password  ; username
+                              ; scpiCredentials ; $password ; $username
+
+#**************************#
+#***  OAuth CredentialS ***#
+#**************************#
+INSERT_UPDATE ConsumedOAuthCredential ; id[unique=true]               ; clientId  ; clientSecret  ; oAuthUrl
+                                      ; scpCentalOrderOauthCredential ; $clientId ; $clientSecret ; $oAuthUrl
+
+
+
+#******************#
+#***  Endpoints ***#
+#******************#
+INSERT_UPDATE Endpoint ; id[unique = true]      		; version[unique = true] ; specUrl    ; name
+                       ; scpiCentralOrderEndpoint 		; unknown                ; "$orderUrl;$orderVersion/" 	; scpiCentralOrderEndpoint
+                       ; scpCentralOrderListEndpoint 	; unknown                ; "$centralOrderListUrl" 		; scpCentralOrderListEndpoint
+
+
+#****************************#
+#***  Destination Target  ***#
+#****************************#
+INSERT_UPDATE DestinationTarget ; id[unique = true]
+                                ; scpiCentralOrderDestinationTarget
+								; centralOrderDestTarget
+
+#*******************************#
+#***  Consumed Destinations  ***#
+#*******************************#
+INSERT_UPDATE ConsumedDestination ; id[unique = true]       		; url        														; endpoint(id, version)               	; credential(id)         		; destinationTarget(id)        				; additionalProperties(key, value)[map-delimiter = |]
+                                  ; scpiCentralOrderDestination 	; "$orderUrl;$orderVersion/SAPCpiOutboundOrders" 					; scpiCentralOrderEndpoint:unknown 		; scpiCredentials               ; scpiCentralOrderDestinationTarget       	; "csrfURL->$orderUrl;$orderVersion/"
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]              	; url                    	; endpoint(id, version)               	; credential(id)                		; destinationTarget(id)
+                                  ; centralOrderServiceDest        	; "$centralOrderListUrl" 	; scpCentralOrderListEndpoint:unknown 	; scpCentalOrderOauthCredential 		; centralOrderDestTarget

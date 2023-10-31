@@ -1,0 +1,24 @@
+/*!
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+div.yw-explorerTree .y-tree-icon-hmc_b2bcommercegroup .y-tree-icon {
+  &:before {
+    font-family: var(--bo-content-icon-font-family);
+    content: "\e6a3";
+    color: var(--bo-content-icon-color);
+  }
+}
+
+div.yw-explorerTree .y-tree-icon-hmc_b2bapprovalprocessgroup .y-tree-icon {
+    &:before {
+        font-family: var(--bo-content-icon-font-family);
+        content: "\e04f";
+        color: var(--bo-content-icon-color);
+    }
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+    @include setSideNavigationIconGlyph("hmc.b2bcommercegroup", "b2bcommerce");
+    @include setSideNavigationIconGlyph("hmc.b2bapprovalprocessgroup", "approvals");
+}

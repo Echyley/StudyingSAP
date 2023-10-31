@@ -1,0 +1,24 @@
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;kie-modules;kie-modules
+
+INSERT_UPDATE DroolsKIEModule;name[unique=true];mvnGroupId;mvnArtifactId;mvnVersion;ruleType(code);active;version;
+;promotion-module;hybris-rules;promotion;1.0.0;PROMOTION;true;-1;
+
+INSERT_UPDATE DroolsKIEBase;name[unique=true];kieModule(name)[unique=true];equalityBehavior(code);eventProcessingMode(code)
+;promotion-base;promotion-module;EQUALITY;STREAM
+
+INSERT_UPDATE DroolsKIESession;name[unique=true];kieBase(name)[unique=true];sessionType(code)
+;promotion-session;promotion-base;STATELESS
+
+INSERT_UPDATE DroolsRuleEngineContext;name[unique=true];kieSession(name);ruleFiringLimit
+;promotion-context;promotion-session;200;
+
+UPDATE DroolsKIEModule;name[unique=true];defaultKIEBase(name)
+"#% afterEach: de.hybris.platform.core.Registry.getApplicationContext().getBean(""ruleEngineSystemSetup"").initializeModule(impex.getLastImportedItem());"
+;promotion-module;promotion-base
+
+UPDATE DroolsKIEBase;name[unique=true];defaultKIESession(name)
+;promotion-base;promotion-session
+
+INSERT_UPDATE BaseStore;uid[unique=true];
+;dummyStore

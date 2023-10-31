@@ -1,0 +1,24 @@
+.se-user-account-dropdown__role,
+.user-account-dropdown__name {
+    padding: se-space('base') se-space('small');
+    cursor: default;
+}
+.se-user-account-dropdown__role {
+    @include se-type('-1');
+    color: var(--sapNeutralColor);
+}
+.user-account-dropdown__name {
+    color: var(--sapTextColor);
+    white-space: nowrap;
+}
+.se-theme-switch__link.fd-menu__item,
+.se-sign-out__link.fd-menu__item {
+    @include se-type('0');
+    padding: se-space('base') se-space('small');
+    color: var(--sapNeutralColor);
+    white-space: nowrap;
+    display: block;
+    &:hover {
+        text-decoration: none;
+    }
+}

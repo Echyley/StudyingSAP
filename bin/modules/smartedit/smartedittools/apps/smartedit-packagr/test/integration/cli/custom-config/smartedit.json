@@ -1,0 +1,9 @@
+{
+    "typescript": {
+        "config": "./typescript.json",
+        "entry": "./src/myIndex.ts"
+    },
+    "style": {
+        "global": "./src/style.scss"
+    }
+}

@@ -1,0 +1,79 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+#
+# Import the CMS Site configuration for the wsB2BTest store
+#
+
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# 
+# Create the wsB2BTest BaseStore
+#
+
+$storeUid=wsB2BTest
+$defaultLanguage=en
+
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];defaultLanguage(isocode)
+;$storeUid;$defaultLanguage
+
+
+
+# Language
+$lang=en
+
+# Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+ ;$storeUid;"wsB2BTest Store"
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;wsB2BTestPromoGrp;
+
+
+$defaultLanguage=en
+$storeUid=wsB2BTest
+$siteUid=wsB2BTest
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# CMS Site
+INSERT_UPDATE CMSSite;uid[unique=true];channel(code);stores(uid);defaultLanguage(isoCode);urlPatterns;active
+;$siteUid;B2B;$storeUid;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$;true;$storefrontContextRoot/?site=$siteUid;true
+
+
+UPDATE CMSSite;uid[unique=true];name[lang=en];locale[lang=en]
+;$siteUid;"wsB2BTest Site";en_GB
+ 
+
+
+# OAUTH Client Credentials
+INSERT_UPDATE OAuthClientDetails;clientId[unique=true];resourceIds;scope;authorizedGrantTypes;clientSecret;authorities;accessTokenValiditySeconds;refreshTokenValiditySeconds
+                                ;trusted_client;hybris;basic;authorization_code,refresh_token,password,client_credentials;secret;ROLE_GIGYAWEBSERVICES_CLIENT;946080000;946080000
+
+
+# ESSENTIAL DATA
+                      
+# Sample B2B Unit Data for B2B Site
+INSERT_UPDATE B2BUnit;uid[unique=true];
+;110;
+
+# Create B2B Groups
+INSERT_UPDATE Usergroup;uid[unique=true];
+;b2bgroup;
+;b2bapprovergroup;
+;b2badmingroup;
+;b2bcustomergroup;
+;b2bmanagergroup;
+
+
+# IMPEX FOR B2B TENANT
+# With Site Secret
+INSERT_UPDATE GigyaConfig;code[unique=true];gigyaApiKey;deleteUser;mode(code);sites(uid);gigyaDataCenter;partnerId;authorizationUrl;authRequestKey;authRequestSecret;authRequestTokenValidity;applicationClientId;gigyaUserKey;gigyaUserSecret
+;gigyaConfigForWsB2BTestSite;3_ABA6f3Vjk8papbVT9SN7xS40ZWLYf8M0tHSrz7qJft4rgWFUKW4CyJkBqggSxCd2;true;raas;wsB2BTest;eu1.gigya.com;2287792;https://eu1api.b2b-gigya.com/runtime/3_ABA6f3Vjk8papbVT9SN7xS40ZWLYf8M0tHSrz7qJft4rgWFUKW4CyJkBqggSxCd2/authorization/token/AO3GB7XYXUPZ88OIKU4B;zOjDBZ8p1HRSYwfrGSSs76QqSlM95MKl;X2FvcnhDN0g5b1AxVkJmV0VZOWd6N2NvemNGX3pLU2FTSXUzdlg1WXNSZFMwZm9D;3600;AO3GB7XYXUPZ88OIKU4B;AInzOVW/clXD;vGZIiOnzaUqpwgn+Ie2VyrxoNCew5Iwg

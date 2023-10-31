@@ -1,0 +1,23 @@
+@import "cockpitng-globals.scss";
+
+div.yw-sideNavigation .yw-treeCellInner {
+	@include setSideNavigationIconGlyph("backoffice_group_sapdigitalpayment_name", "digital_payment");
+}
+
+ 
+div.yw-explorerTree .y-tree-icon {
+ 
+    @include setTreeIconGlyph("backoffice_group_sapdigitalpayment_name", "digital_payment");
+
+ 
+}
+
+div.yw-explorerTree .y-tree-icon-backoffice_group_sapdigitalpayment_name.y-tree-icon {
+    background-image: none; 
+}
+div.yw-explorerTree .y-tree-icon-backoffice_group_sapdigitalpayment_name.y-tree-icon:before {
+      font-family: var(--bo-content-icon-font-family);
+      content: _getIconGlyphContentValue("digital_payment");
+      color: var(--bo-content-icon-color); 
+    }
+

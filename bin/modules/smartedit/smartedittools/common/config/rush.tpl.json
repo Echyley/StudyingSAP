@@ -1,0 +1,35 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+    "rushVersion": "5.93.1",
+    "pnpmVersion": "6.32.9",
+    "pnpmOptions": {
+        "pnpmStore": "global",
+        "strictPeerDependencies": true
+    },
+    "nodeSupportedVersionRange": ">=14.15.0 <15.0.0 || >=16.0.0 <17.0.0",
+    "projectFolderMinDepth": 1,
+    "projectFolderMaxDepth": 20,
+    "gitPolicy": {},
+    "repository": {},
+    "eventHooks": {
+        "preRushInstall": [],
+        "postRushInstall": [],
+        "preRushBuild": [],
+        "postRushBuild": []
+    },
+    "variants": [],
+    "projects": [
+        {
+            "packageName": "@smartedit/packagr",
+            "projectFolder": "apps/smartedit-packagr"
+        },
+        {
+            "packageName": "@smartedit/scripts",
+            "projectFolder": "apps/smartedit-scripts"
+        },
+        {
+            "packageName": "smartedit-build",
+            "projectFolder": "apps/smartedit-build"
+        }
+    ]
+}

@@ -1,0 +1,48 @@
+/*
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+package de.hybris.platform.sap.orderexchange.inbound.events;
+
+
+import de.hybris.platform.impex.jalo.ImpExException;
+import de.hybris.platform.jalo.Item;
+import de.hybris.platform.jalo.security.JaloSecurityException;
+import de.hybris.platform.sap.orderexchange.constants.DataHubInboundConstants;
+import de.hybris.platform.sap.orderexchange.datahub.inbound.DataHubInboundDeliveryHelper;
+
+
+
+/**
+ * This class includes the translator for delivery that creates consignments and processes status.
+ */
+public class DataHubDeliveryTranslator extends DataHubTranslator<DataHubInboundDeliveryHelper>
+{
+	
+	public static final String HELPER_BEAN = "sapDataHubInboundDeliveryHelper";
+	
+	
+	public DataHubDeliveryTranslator() {
+		super(HELPER_BEAN);
+	}
+	
+	@Override
+	public void performImport(final String delivInfo, final Item processedItem) throws ImpExException
+	{
+		String orderCode = null;
+
+		try
+		{
+			orderCode = processedItem.getAttribute(DataHubInboundConstants.CODE).toString();
+		}
+		catch (final JaloSecurityException e)
+		{
+			throw new ImpExException(e);
+		}
+
+		if (delivInfo != null && !delivInfo.equals(DataHubInboundConstants.IGNORE))
+		{
+			final String warehouseId = delivInfo;
+			getInboundHelper().processDeliveryAndGoodsIssue(orderCode, warehouseId, null);
+		}
+	}
+}

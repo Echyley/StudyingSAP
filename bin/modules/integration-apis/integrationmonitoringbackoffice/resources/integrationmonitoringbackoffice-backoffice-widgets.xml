@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+	<widget-extension widgetId="integrationTypeCodeRouter"
+			widgetDefinitionId="com.hybris.cockpitng.widgets.common.multiplexer"
+			slotId="cockpitWidgetChildrenInvisible">
+		<setting key="inboundRequests_expression" type="String">#root eq 'InboundRequest'</setting>
+		<setting key="outboundRequests_expression" type="String">#root eq 'OutboundRequest'</setting>
+		<virtual-sockets>
+			<output id="inboundRequests" type="java.lang.String" />
+			<output id="outboundRequests" type="java.lang.String" />
+		</virtual-sockets>
+	</widget-extension>
+
+	<widget-extension widgetId="integrationBackofficeViewSwitcher">
+        <widget id="inboundMonitor"
+                widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer"
+                slotId="views" template="false" title="Inbound Monitoring">
+            <widget id="inboundRequestSearchCondition" widgetDefinitionId="com.hybris.cockpitng.advancedsearch"
+                    slotId="center" template="false">
+
+                <widget id="inboundRequestHeaderTitle"
+                        widgetDefinitionId="com.hybris.backoffice.widgets.title"
+                        slotId="pageTitle" template="false">
+                </widget>
+
+                <widget id="inboundRequestSearchEngine"
+                        widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine"
+                        slotId="cockpitWidgetChildrenInvisible" template="false">
+                    <virtual-sockets/>
+                </widget>
+
+                <widget id="inboundRequestSearchResult"
+                        widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
+                        slotId="nestedWidget" template="false">
+                    <setting key="socketDataType_$T" type="String">de.hybris.platform.inboundservices.model.InboundRequestModel</setting>
+                </widget>
+
+                <setting key="enableNestedWidgetView" type="Boolean">true</setting>
+                <setting key="disableSubtypesCheckbox" type="Boolean">true</setting>
+                <setting key="disableAdvancedSearchToolbar" type="Boolean">true</setting>
+                <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+                <virtual-sockets/>
+            </widget>
+            <widget id="inboundRequestDetails"
+                    widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea"
+                    slotId="bottom" template="false">
+                <setting key="socketDataType_$T" type="String">de.hybris.platform.inboundservices.model.InboundRequestModel</setting>
+                <setting key="toolbarDisabled" type="Boolean">true</setting>
+                <setting key="editorAreaConfigCtx" type="String">integration-editor-area</setting>
+            </widget>
+
+            <widget id="inboundRequestSpaceManagement"
+                    widgetDefinitionId="com.hybris.backoffice.spaceManagement"
+                    slotId="cockpitWidgetChildrenInvisible" template="false">
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+
+            <setting key="topPanelCollapsed">true</setting>
+            <setting key="topHeight" type="String">33%</setting>
+            <setting key="centerHeight" type="String">50%</setting>
+            <setting key="thirdSectionDisabled" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String">yw-collapsibleContainer-caption-large-font-size</setting>
+            <setting key="topPanelCollapsed" type="Boolean">true</setting>
+            <setting key="centerPanelInitiallyLocked" type="Boolean">true</setting>
+        </widget>
+        <widget id="outboundMonitor"
+                widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer"
+                slotId="views" template="false" title="Outbound Monitoring">
+            <widget id="outboundRequestSearchCondition" widgetDefinitionId="com.hybris.cockpitng.advancedsearch"
+                    slotId="center" template="false">
+
+                <widget id="outboundRequestHeaderTitle"
+                        widgetDefinitionId="com.hybris.backoffice.widgets.title"
+                        slotId="pageTitle" template="false">
+                </widget>
+
+                <widget id="outboundRequestSearchEngine"
+                        widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine"
+                        slotId="cockpitWidgetChildrenInvisible" template="false">
+                    <virtual-sockets/>
+                </widget>
+
+                <widget id="outboundRequestSearchResult"
+                        widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
+                        slotId="nestedWidget" template="false">
+                    <setting key="socketDataType_$T" type="String">de.hybris.platform.outboundservices.model.OutboundRequestModel</setting>
+                </widget>
+
+                <setting key="enableNestedWidgetView" type="Boolean">true</setting>
+                <setting key="disableSubtypesCheckbox" type="Boolean">true</setting>
+                <setting key="disableAdvancedSearchToolbar" type="Boolean">true</setting>
+                <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+                <virtual-sockets/>
+            </widget>
+            <widget id="outboundRequestDetails"
+                    widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea"
+                    slotId="bottom" template="false">
+                <setting key="socketDataType_$T" type="String">de.hybris.platform.outboundservices.model.OutboundRequestModel</setting>
+                <setting key="toolbarDisabled" type="Boolean">true</setting>
+                <setting key="editorAreaConfigCtx" type="String">integration-editor-area</setting>
+            </widget>
+
+            <widget id="outboundRequestSpaceManagement"
+                    widgetDefinitionId="com.hybris.backoffice.spaceManagement"
+                    slotId="cockpitWidgetChildrenInvisible" template="false">
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+
+            <setting key="topPanelCollapsed">true</setting>
+            <setting key="topHeight" type="String">33%</setting>
+            <setting key="centerHeight" type="String">50%</setting>
+            <setting key="thirdSectionDisabled" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String">yw-collapsibleContainer-caption-large-font-size</setting>
+            <setting key="topPanelCollapsed" type="Boolean">true</setting>
+            <setting key="centerPanelInitiallyLocked" type="Boolean">true</setting>
+        </widget>
+
+		<setting key="selectInboundMonitor_eval" type="String" value="'inboundMonitor'" />
+		<setting key="selectOutboundMonitor_eval" type="String" value="'outboundMonitor'" />
+		<virtual-sockets>
+			<input id="selectInboundMonitor" type="java.lang.Object" />
+			<input id="selectOutboundMonitor" type="java.lang.Object" />
+		</virtual-sockets>
+	</widget-extension>
+
+	<!-- Inbound Monitoring -->
+	<widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="inboundRequests"
+					   targetWidgetId="integrationBackofficeViewSwitcher" inputId="selectInboundMonitor" />
+	<widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="inboundRequests"
+					   targetWidgetId="inboundMonitor" inputId="activate" />
+	<widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="inboundRequests"
+					   targetWidgetId="inboundRequestSearchCondition" inputId="type" />
+	<widget-connection sourceWidgetId="inboundRequestSearchCondition" outputId="searchData"
+					   targetWidgetId="inboundRequestSearchEngine" inputId="searchData" />
+	<widget-connection sourceWidgetId="inboundRequestSearchEngine" outputId="pageable"
+					   targetWidgetId="inboundRequestSearchResult" inputId="pageable" />
+	<widget-connection sourceWidgetId="inboundRequestSearchResult" outputId="selectedItem"
+					   targetWidgetId="inboundRequestDetails" inputId="inputObject" />
+    <widget-connection sourceWidgetId="integrationBackofficeExplorerTree" outputId="nodeSelected"
+                       targetWidgetId="inboundRequestHeaderTitle" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="inboundMonitor" outputId="centerPanelLocked"
+                       targetWidgetId="inboundRequestSearchCondition" inputId="centerPanelLocked"/>
+    <widget-connection sourceWidgetId="integrationBackofficeExplorerTree" outputId="dataSelected" targetWidgetId="inboundRequestSpaceManagement" inputId="navigationTreeSelectedObject"/>
+    <widget-connection sourceWidgetId="inboundRequestSpaceManagement" outputId="collapseState" targetWidgetId="inboundMonitor" inputId="collapseState"/>
+    <widget-connection sourceWidgetId="inboundRequestSearchCondition" outputId="searchData" targetWidgetId="inboundRequestSpaceManagement" inputId="searchData"/>
+    <widget-connection sourceWidgetId="inboundRequestSearchResult" outputId="focusedItem" targetWidgetId="inboundRequestSpaceManagement" inputId="listSelectedObject"/>
+    <widget-connection sourceWidgetId="inboundRequestDetails" outputId="com.hybris.cockpitng.action.delete.success" targetWidgetId="inboundRequestSpaceManagement" inputId="navigationTreeSelectedObject"/>
+    <widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="editorArea" targetWidgetId="inboundRequestSpaceManagement" inputId="listSelectedObject"/>
+
+	<!-- Outbound Monitoring -->
+	<widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="outboundRequests"
+					   targetWidgetId="integrationBackofficeViewSwitcher" inputId="selectOutboundMonitor" />
+	<widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="outboundRequests"
+					   targetWidgetId="outboundMonitor" inputId="activate" />
+	<widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="outboundRequests"
+					   targetWidgetId="outboundRequestSearchCondition" inputId="type" />
+	<widget-connection sourceWidgetId="outboundRequestSearchCondition" outputId="searchData"
+					   targetWidgetId="outboundRequestSearchEngine" inputId="searchData" />
+	<widget-connection sourceWidgetId="outboundRequestSearchEngine" outputId="pageable"
+					   targetWidgetId="outboundRequestSearchResult" inputId="pageable" />
+	<widget-connection sourceWidgetId="outboundRequestSearchResult" outputId="selectedItem"
+					   targetWidgetId="outboundRequestDetails" inputId="inputObject" />
+    <widget-connection sourceWidgetId="integrationBackofficeExplorerTree" outputId="nodeSelected"
+                       targetWidgetId="outboundRequestHeaderTitle" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="outboundMonitor" outputId="centerPanelLocked"
+                       targetWidgetId="outboundRequestSearchCondition" inputId="centerPanelLocked"/>
+    <widget-connection sourceWidgetId="integrationBackofficeExplorerTree" outputId="dataSelected" targetWidgetId="outboundRequestSpaceManagement" inputId="navigationTreeSelectedObject"/>
+    <widget-connection sourceWidgetId="outboundRequestSpaceManagement" outputId="collapseState" targetWidgetId="outboundMonitor" inputId="collapseState"/>
+    <widget-connection sourceWidgetId="outboundRequestSearchCondition" outputId="searchData" targetWidgetId="outboundRequestSpaceManagement" inputId="searchData"/>
+    <widget-connection sourceWidgetId="outboundRequestSearchResult" outputId="focusedItem" targetWidgetId="outboundRequestSpaceManagement" inputId="listSelectedObject"/>
+    <widget-connection sourceWidgetId="outboundRequestDetails" outputId="com.hybris.cockpitng.action.delete.success" targetWidgetId="outboundRequestSpaceManagement" inputId="navigationTreeSelectedObject"/>
+    <widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="editorArea" targetWidgetId="outboundRequestSpaceManagement" inputId="listSelectedObject"/>
+
+</widgets>

@@ -1,0 +1,53 @@
+{
+  "thumbnail": {
+    "code": "Test_code",
+    "altText": "Test_altText",
+    "catalogVersion": {
+      "version": "Test_version",
+      "catalog": {
+        "id": "Test_id",
+        "integrationKey": "TEST_KEY"
+      },
+      "integrationKey": "TEST_KEY"
+    },
+    "integrationKey": "TEST_KEY"
+  },
+  "catalogVersion": {
+    "version": "Test_version",
+    "catalog": {
+      "id": "Test_id",
+      "integrationKey": "TEST_KEY"
+    },
+    "integrationKey": "TEST_KEY"
+  },
+  "picture": {
+    "code": "Test_code",
+    "catalogVersion": {
+      "version": "Test_version",
+      "catalog": {
+        "id": "Test_id",
+        "integrationKey": "TEST_KEY"
+      },
+      "integrationKey": "TEST_KEY"
+    },
+    "dataPK": "12345",
+    "integrationKey": "TEST_KEY"
+  },
+  "detail": [
+    {
+      "code": "Test_code",
+      "catalogVersion": {
+        "version": "Test_version",
+        "catalog": {
+          "id": "Test_id",
+          "integrationKey": "TEST_KEY"
+        },
+        "integrationKey": "TEST_KEY"
+      },
+      "dataPK": "12345",
+      "integrationKey": "TEST_KEY"
+    }
+  ],
+  "code": "Test_code",
+  "integrationKey": "TEST_KEY"
+}

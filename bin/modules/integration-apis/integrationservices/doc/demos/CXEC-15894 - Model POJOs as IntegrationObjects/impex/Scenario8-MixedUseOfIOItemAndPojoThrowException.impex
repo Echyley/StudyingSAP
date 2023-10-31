@@ -1,0 +1,23 @@
+$io = Pojo_IO_S8
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; $io
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]; type(code) ; root
+                                   ; $io                                   ; SavedQuery         ; SavedQuery ; true
+
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]; type(code)                                     ; root
+                                    ; $io                                   ; OrderModel         ; de.hybris.platform.core.model.order.OrderModel ; true
+
+
+$integrationObjectItem = integrationObjectItem(integrationObject(code), code)
+$attributeDescriptor = attributeDescriptor(enclosingType(code), qualifier)
+$returnIntegrationObjectItem = returnIntegrationObjectItem(integrationObject(code), code)
+$integrationClass = integrationObjectClass(integrationObject(code), code)
+INSERT_UPDATE IntegrationObjectItemAttribute; $integrationObjectItem[unique = true]; attributeName[unique = true]; $attributeDescriptor; $returnIntegrationObjectItem; unique[default = false]
+                                            ; $io:SavedQuery                       ; code                        ; SavedQuery:code     ;                             ; true
+
+INSERT_UPDATE IntegrationObjectClassAttribute; $integrationClass[unique = true]; attributeName[unique = true]; unique[default = false]; readMethod;
+                                             ; $io:OrderModel                  ; code                        ; true                   ;           ;
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code)
+                                         ; $io                                   ; BASIC

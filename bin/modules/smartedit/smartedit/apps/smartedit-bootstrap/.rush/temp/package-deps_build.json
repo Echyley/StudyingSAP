@@ -1,0 +1,14 @@
+{
+  "files": {
+    "smartedit/apps/smartedit-bootstrap/.eslintrc.js": "4e48b6019663312b651e581a007d0eb6beab50e0",
+    "smartedit/apps/smartedit-bootstrap/README.md": "e37cdfad358e3016407fda409d27c6e5ed6add6a",
+    "smartedit/apps/smartedit-bootstrap/package.json": "256399ca699b4bb0e0b1334554bc1c06d57d243f",
+    "smartedit/apps/smartedit-bootstrap/smartedit.json": "0735907fb47b5d71335f00dd01c5cf684b7f200c",
+    "smartedit/apps/smartedit-bootstrap/src/BootstrapService.ts": "0e30f8444f3c2505bee27ee17f73134dc942957e",
+    "smartedit/apps/smartedit-bootstrap/src/index.ts": "65597ca317be3e555081e9ed1359a673b062d73f",
+    "smartedit/apps/smartedit-bootstrap/tsconfig.build.json": "f48afcac5a3ea481ff6c5f2178d19684dd5be65f",
+    "smartedit/apps/smartedit-bootstrap/tsconfig.json": "9396129eb09d5e9b140450638b12108a74b02838",
+    "smartedit/apps/smartedit-bootstrap/.rush/temp/shrinkwrap-deps.json": "2243fc287dff9957d3d3d4fb9e19421e6505805b"
+  },
+  "arguments": "se-packagr "
+}

@@ -1,0 +1,57 @@
+@import "../support/_workflows-variables.scss";
+.yw-workflows-droparea {
+	&,
+	&-plus-button {
+		border-radius: $workflows__drop-area--border-radius;
+		border: $workflows__drop-area--border;
+		padding: $workflows__drop-area--padding;
+		text-align: center;
+		position: relative;
+		line-height: $workflows__drop-area--line-height;
+		margin-top: $workflows__drop-area--margin-top;
+	}
+	&-plus-icon,
+	&-plus-button {
+		&:before {
+			font-family: $workflows__drop-area-plus-icon--font-family;
+			font-size: $workflows__list-title--font-size;
+			content: $workflows__drop-area-plus-icon--content;
+			color: $workflows__drop-area-plus-icon--color;
+			display: block;
+		}
+	}
+	&-plus-icon {
+		height: $workflows__drop-area-plus-icon--size;
+		width: $workflows__drop-area-plus-icon--size;
+		cursor: default;
+		border-width: 0;
+		position: absolute;
+		top: 50%;
+		transform:translateY(-50%);
+		left: $workflows__drop-area-plus-icon--left;
+	}
+	&-plus-button {
+		height: $workflows__drop-area-plus-button--size;
+		width: $workflows__drop-area-plus-button--size;
+		min-height: 0;
+		margin: 0 auto;
+	}
+	&.z-drag-over {
+		background: transparent;
+	}
+	&.z-drag-matching-drop-target.z-drag-over {
+		color: $workflows__drop-area-hover--color;
+		border-color: $workflows__drop-area-hover--color;
+
+		span {
+			color: $workflows__drop-area-hover--color;
+		}
+	}
+	&-plus-button:hover,
+	&-plus-button:active,
+	&-plus-button:focus,
+	&.z-drag-matching-drop-target.z-drag-over .yw-workflows-droparea-plus-button,
+	&.z-drag-matching-drop-target.z-drag-over .yw-workflows-droparea-plus-icon {
+		background-color: $workflows__drop-area-hover--background-color;
+	}
+}

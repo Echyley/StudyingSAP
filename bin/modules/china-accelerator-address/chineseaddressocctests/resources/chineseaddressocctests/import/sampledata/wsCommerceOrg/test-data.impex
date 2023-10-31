@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+
+$defaultCurrency = USD
+
+$siteUid = wsTest
+$storeUid = wsTest
+
+$defaultLanguage = en
+$defaultPassword = 1234
+
+$testCategory0-id = testCategory0;
+
+$paymentProvider = Mockup
+
+INSERT_UPDATE BaseStore; uid[unique = true]; currencies(isocode); net   ; taxGroup(code); storelocatorDistanceUnit(code); defaultCurrency(isocode); languages(isocode); defaultLanguage(isocode); cmsSites(uid); paymentProvider
+                       ; $storeUid         ; $defaultCurrency   ; false ;               ; km                            ; $defaultCurrency        ; $defaultLanguage  ; $defaultLanguage        ; $siteUid     ; $paymentProvider
+
+INSERT_UPDATE Language; isocode[unique = true]; active;
+                      ; $defaultLanguage      ; true  ;
+                      ; de                    ; true  ;
+
+INSERT_UPDATE Currency; isocode[unique = true]; name[lang = en]; active; base  ; conversion; digits; symbol
+                      ; USD                   ; US Dollar      ; true  ; false ; 1,38      ; 2     ; $
+                      ; EUR                   ; Euro           ; true  ; true  ; 1,38      ; 2     ; €
+
+INSERT_UPDATE Country; isocode[unique = true]; name[lang = en]          ; active;
+                     ; DE                    ; Germany                  ; true  ;
+                     ; US                    ; United States of America ; true  ;
+                     ; CN                    ; China                    ; true  ;
+
+INSERT_UPDATE CMSSite; uid[unique = true]; stores(uid); channel(code)
+                     ; $siteUid          ; $storeUid  ; B2C
+
+
+INSERT_UPDATE OAuthClientDetails; clientId[unique = true]; resourceIds; scope    ; authorizedGrantTypes                                         ; authorities         ; clientSecret; registeredRedirectUri
+                                ; client-side            ; hybris     ; basic    ; implicit,client_credentials                                  ; ROLE_CLIENT         ; secret      ; http://localhost:9001/authorizationserver/oauth2_implicit_callback ;
+                                ; mobile_android         ; hybris     ; basic    ; authorization_code,refresh_token,password,client_credentials ; ROLE_CLIENT         ; secret      ; http://localhost:9001/authorizationserver/oauth2_callback          ;
+                                ; trusted_client         ; hybris     ; extended ; authorization_code,refresh_token,password,client_credentials ; ROLE_TRUSTED_CLIENT ; secret      ;                                                                    ;
+
+INSERT_UPDATE Region; country(isocode); isocode[unique = true]; isocodeShort; name[lang = en]; active[default = true]
+                    ; CN              ; CN-51                 ; 51          ; "Sichuan"
+
+$lang = en
+INSERT_UPDATE City; isocode[unique = true]; name[lang = en]; region(isocode); active[default = true]
+                  ; "CN-51-1"             ; "Leshan"       ; "CN-51"
+                  ; "CN-51-2"             ; "Neijiang"     ; "CN-51"
+                  ; "CN-51-3"             ; "Liangzhou"    ; "CN-51"
+                  ; "CN-51-4"             ; "Nanchong"     ; "CN-51"
+                  ; "CN-51-5"             ; "Yibin"        ; "CN-51"
+                  ; "CN-51-6"             ; "Bazhong"      ; "CN-51"
+                  ; "CN-51-7"             ; "Guangyuan"    ; "CN-51"
+                  ; "CN-51-8"             ; "Guangan"      ; "CN-51"
+                  ; "CN-51-9"             ; "Deyang"       ; "CN-51"
+                  ; "CN-51-10"            ; "Chengdu"      ; "CN-51"
+                  ; "CN-51-11"            ; "Panzhihua"    ; "CN-51"
+                  ; "CN-51-12"            ; "Luzhi"        ; "CN-51"
+                  ; "CN-51-13"            ; "Ganzhizhou"   ; "CN-51"
+                  ; "CN-51-14"            ; "Meishan"      ; "CN-51"
+                  ; "CN-51-15"            ; "Mianyang"     ; "CN-51"
+                  ; "CN-51-16"            ; "Zigong"       ; "CN-51"
+                  ; "CN-51-17"            ; "Ziyang"       ; "CN-51"
+                  ; "CN-51-18"            ; "Dazhou"       ; "CN-51"
+                  ; "CN-51-19"            ; "Suining"      ; "CN-51"
+                  ; "CN-51-20"            ; "Aba"          ; "CN-51"
+                  ; "CN-51-21"            ; "Yaan"         ; "CN-51"
+
+INSERT_UPDATE District; isocode[unique = true, allownull = false]; name[lang = en]         ; city(isocode); active[default = true]
+                      ; "CN-51-10-1"                             ; "Shuangliu District"    ; "CN-51-10"
+                      ; "CN-51-10-2"                             ; "Dayi District"         ; "CN-51-10"
+                      ; "CN-51-10-3"                             ; "Chongzhou District"    ; "CN-51-10"
+                      ; "CN-51-10-4"                             ; "Pengzhou District"     ; "CN-51-10"
+                      ; "CN-51-10-5"                             ; "Chenghua District"     ; "CN-51-10"
+                      ; "CN-51-10-6"                             ; "Xinjin District"       ; "CN-51-10"
+                      ; "CN-51-10-7"                             ; "Xindu District"        ; "CN-51-10"
+                      ; "CN-51-10-8"                             ; "Wuhou District"        ; "CN-51-10"
+                      ; "CN-51-10-9"                             ; "Wenjiang District"     ; "CN-51-10"
+                      ; "CN-51-10-10"                            ; "Pujiang District"      ; "CN-51-10"
+                      ; "CN-51-10-11"                            ; "Qionglai District"     ; "CN-51-10"
+                      ; "CN-51-10-12"                            ; "Pi District"           ; "CN-51-10"
+                      ; "CN-51-10-13"                            ; "Dujiangyan District"   ; "CN-51-10"
+                      ; "CN-51-10-14"                            ; "Jintang District"      ; "CN-51-10"
+                      ; "CN-51-10-15"                            ; "Jinniu District"       ; "CN-51-10"
+                      ; "CN-51-10-16"                            ; "Jinjiang District"     ; "CN-51-10"
+                      ; "CN-51-10-17"                            ; "Qingbaijiang District" ; "CN-51-10"
+                      ; "CN-51-10-18"                            ; "Qingyang District"     ; "CN-51-10"
+                      ; "CN-51-10-19"                            ; "Longquanyi District"   ; "CN-51-10"

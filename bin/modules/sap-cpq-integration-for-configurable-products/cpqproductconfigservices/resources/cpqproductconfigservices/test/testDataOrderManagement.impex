@@ -1,0 +1,2 @@
+INSERT_UPDATE OrderCancelConfig;orderCancelAllowed;cancelAfterWarehouseAllowed;completeCancelAfterShippingStartedAllowed;partialCancelAllowed;partialOrderEntryCancelAllowed;queuedOrderWaitingTime;
+;true;true;true;true;true;100;

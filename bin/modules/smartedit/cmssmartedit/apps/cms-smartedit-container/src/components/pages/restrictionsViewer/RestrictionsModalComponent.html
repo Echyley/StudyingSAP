@@ -1,0 +1,11 @@
+<div class="se-restrictions-list fd-menu__list fd-menu__list--separated">
+    <div class="se-restriction__item fd-menu__item" *ngFor="let restriction of restrictions">
+        <div class="se-restrictions-list__item-content">
+            <div class="se-restriction__item-name">{{ restriction.name }}</div>
+            <div class="se-restriction__item-type-and-id">
+                {{ restriction.type | seL10n | async }}
+            </div>
+            <div class="se-restriction__item-description">{{ restriction.description }}</div>
+        </div>
+    </div>
+</div>

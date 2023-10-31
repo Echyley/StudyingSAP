@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+
+$destination_target=template_default
+$end_point=destination_endpoint
+$end_point_version=v1
+$consumed_certificate_credential=consumed_certificate_credential
+$consumed_oauth_credential=consumed_oauth_credential
+$consumed_destination_certificate=consumed_destination_certificate_credential
+$consumed_destination_oauth=consumed_destination_oauth_credential
+
+$oauth_client_detail=oauth_client_detail
+$exposed_oauth_credential=exposed_oauth_credential
+$exposed_destinaion_oauth_1=exposed_destinaiton_1
+$exposed_destinaion_oauth_2=exposed_destinaiton_2
+
+INSERT_UPDATE DestinationTarget; id[unique=true]    ; destinationChannel(code)[default=DEFAULT]; template
+                               ; $destination_target;                                          ; false
+
+INSERT_UPDATE Endpoint;id[unique=true]; version[unique=true]; description     ; specUrl; specData; name
+                      ;$end_point     ; $end_point_version  ; "EventsEndpoint"; "empty";         ; "Events Endpoint v1"
+
+INSERT_UPDATE ConsumedCertificateCredential; id[unique=true]
+                                           ; $consumed_certificate_credential
+INSERT_UPDATE ConsumedOAuthCredential; id[unique = true]          ; clientId; clientSecret
+                                     ; $consumed_oauth_credential ; foo     ; bar
+INSERT_UPDATE ConsumedDestination; id[unique = true]                 ; url                    ; credential(id)                   ;destinationTarget(id)[unique = true,default=$destination_target]
+                                 ; $consumed_destination_oauth       ; https://localhost:9002 ; $consumed_oauth_credential
+                                 ; $consumed_destination_certificate ; https://localhost:9002 ; $consumed_certificate_credential
+INSERT_UPDATE OAuthClientDetails;clientId[unique = true]; oAuthUrl
+                                ;$oauth_client_detail   ; "https://localhost"
+INSERT_UPDATE ExposedOAuthCredential;id[unique=true]           ; oAuthClientDetails(clientId); password
+                                    ;$exposed_oauth_credential ; $oauth_client_detail        ; secret
+INSERT_UPDATE ExposedDestination;id[unique=true]            ; url                    ; endpoint(id, version)         ; credential(id)           ; destinationTarget(id)[unique = true,default=$destination_target]
+                                ;$exposed_destinaion_oauth_1; "http://localhost:9002"; $end_point:$end_point_version ; $exposed_oauth_credential
+                                ;$exposed_destinaion_oauth_2; "http://localhost:9002"; $end_point:$end_point_version ; $exposed_oauth_credential

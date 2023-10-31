@@ -1,0 +1,14 @@
+@import "cockpitng-globals.scss";
+$logo-setting-label-color: var(--bo-content-label-color);
+$logo-preview-container-width: 372px;
+$logo-preview-container-height: 112px;
+$logo-preview-container-padding: $_container-spacing-default__tiny $_container-spacing-default__small;
+$logo-preview-img-max-width: ($logo-preview-container-width - ($_container-spacing-default__small * 2));
+$logo-preview-img-max-height: ($logo-preview-container-height - $_container-spacing-default__tiny * 2);
+$logo-upload-container-padding: $_container-spacing-default__small 0px;
+$logo-preview-container-shadow: var(--bo-content-shadow-small);
+$logo-setting-upload-btn-content: _getIconGlyphContentValue('edit');
+$logo-setting-reset-btn-content: _getIconGlyphContentValue('reset');
+$logo-upload-btn-width: 28px;
+$logo-upload-btn-height: 28px;
+$logo-upload-label-padding-y: 8px;

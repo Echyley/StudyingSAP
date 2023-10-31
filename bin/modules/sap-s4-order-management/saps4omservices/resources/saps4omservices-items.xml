@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+		<enumtype code="S4ProceduresSubtotal" generate="true"
+			autocreate="true" dynamic="true">
+			<description>This enumeration denotes Pricing procedures</description>
+			<value code="NetAmount" />
+			<value code="TaxAmount" />
+			<value code="CostAmount" />
+			<value code="Subtotal1Amount" />
+			<value code="Subtotal2Amount" />
+			<value code="Subtotal3Amount" />
+			<value code="Subtotal4Amount" />
+			<value code="Subtotal5Amount" />
+			<value code="Subtotal6Amount" />
+			
+		</enumtype>
+		<enumtype code="SapOrderType" autocreate="false" generate="false" >
+			<value code="SALES_SYNCHRONOUS"/>
+		</enumtype>
+		<enumtype code="ConsignmentStatus" autocreate="false" generate="false" dynamic="true">
+			<value code="IN_PROCESS"/>
+		</enumtype>
+		<enumtype code="OrderStatus" autocreate="false" generate="false" dynamic="true">
+			<value code="IN_PROCESS"/>
+		</enumtype>
+	</enumtypes>
+	
+
+	<itemtypes>
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false" >
+			<attributes>
+			    <attribute qualifier="saps4omatpcheckactive"  type="java.lang.Boolean" >
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Determine whether the site should perform live availability-to-purchase(ATP) check</description>
+				</attribute>
+					
+			    <attribute qualifier="saps4omcreditcheckactive"  type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Determine whether the site should use SAP credit check</description>
+				</attribute>
+				
+				<attribute qualifier="saps4omcatalogpricing" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Determine whether the site should use external catalog pricing</description>
+				</attribute>
+				
+				<attribute qualifier="saps4omcartpricing" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Determine whether the site should use external order pricing</description>
+				</attribute>
+				
+				<attribute qualifier="saps4omcacheprice" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Determine whether the site should cache external catalog prices</description>
+				</attribute>
+				
+				<attribute qualifier="saps4om_pricesub" type="S4ProceduresSubtotal">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Assigned procedure for price</description>
+				</attribute>
+				
+				<attribute qualifier="saps4om_discountsub" type="S4ProceduresSubtotal">
+					<modifiers optional="true" />
+					<description>Assigned procedure for discounts</description>
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="saps4om_taxessub" type="S4ProceduresSubtotal">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Assigned procedure for taxes</description>
+				</attribute>
+				
+				<attribute qualifier="saps4om_deliverysub" type="S4ProceduresSubtotal">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Assigned procedure for delivery</description>
+				</attribute>
+				
+				<attribute qualifier="saps4om_paymentsub" type="S4ProceduresSubtotal">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Assigned procedure for payment</description>
+				</attribute>
+				
+				<attribute qualifier="saps4synchronousorderandhistoryenabled"  type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Determine whether the site should use synchronous order management and fetch order history synchronously</description>
+				</attribute>
+				
+				<attribute qualifier="saps4synchronousorderhistoryenabled"  type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<description>Can be enabled if order history has to be fetched synchronously</description>
+				</attribute>
+
+				<attribute qualifier="soldToPartnerFunctionCode"  type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Partner function code for sold-to party</description>
+				</attribute>
+				
+				<attribute qualifier="shipToPartnerFunctionCode"  type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Partner function code for ship-to party</description>
+				</attribute>
+				
+				<attribute qualifier="billToPartnerFunctionCode"  type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Partner function code for bill-to party</description>
+				</attribute>
+				
+				<attribute qualifier="contactPersonPartnerFunctionCode"  type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Partner function code for contact person</description>
+				</attribute>				
+				
+				<attribute qualifier="saps4itempriceconditiontype" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Assigned condition type for item price</description>
+				</attribute>
+				
+				<attribute qualifier="saps4deliverycostconditiontype" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Assigned condition type for delivery cost</description>
+				</attribute>
+				
+			</attributes>
+		</itemtype>
+
+		<itemtype code="AbstractOrderEntry" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="deliveryScheduleLines"
+					type="StringCollection">
+					<description>Schedule Lines</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

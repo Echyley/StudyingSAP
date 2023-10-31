@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dummyWebserviceErrorFactory"
+		class="de.hybris.platform.webservicescommons.errors.factory.impl.DefaultWebserviceErrorFactory">
+		<property name="converters">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="abstractRestHandlerExceptionResolver" abstract="true">
+		<property name="webserviceErrorFactory" ref="dummyWebserviceErrorFactory" />
+		<property name="messageConverters" ref="jaxbMessageConverters" />
+	</bean>
+
+	<bean id="dummyRestHandlerExceptionResolverDefaultOrder"
+		class="de.hybris.platform.webservicescommons.resolver.RestHandlerExceptionResolver"
+		parent="abstractRestHandlerExceptionResolver">
+		<property name="propertySpecificKey" value="dummykey" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<bean id="dummyRestHandlerExceptionResolverOrderTen"
+		class="de.hybris.platform.webservicescommons.resolver.RestHandlerExceptionResolver"
+		parent="abstractRestHandlerExceptionResolver">
+		<property name="propertySpecificKey" value="dummykey" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="order" value="10" />
+	</bean>
+
+	<bean id="testRestExceptionResolver"
+		  class="de.hybris.platform.webservicescommons.resolver.RestExceptionResolver"
+		  parent="wsBaseRestExceptionResolver">
+		<property name="webserviceErrorFactory" ref="dummyWebserviceErrorFactory" />
+		<property name="messageConverters"><list></list></property>
+		<property name="extensionName" value="ycommercewebservices" />
+	</bean>
+
+	<bean id="testRestExceptionResolverOrderTen"
+		  class="de.hybris.platform.webservicescommons.resolver.RestExceptionResolver"
+		  parent="wsBaseRestExceptionResolver">
+		<property name="webserviceErrorFactory" ref="dummyWebserviceErrorFactory" />
+		<property name="messageConverters"><list></list></property>
+		<property name="extensionName" value="ycommercewebservices" />
+		<property name="order" value="10" />
+	</bean>
+
+</beans>

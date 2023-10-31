@@ -1,0 +1,22 @@
+#################
+#Set up Warehouse
+#################
+
+$wareHouseCode=co_warehouse
+$wareHouseName=Central Order Warehouse
+$vendor=default
+$sapcoconfig=sapcoconfig
+
+INSERT_UPDATE Vendor ; code[unique=true]
+                     ; $vendor          
+                     
+INSERT_UPDATE Warehouse ; code[unique=true] ; name[lang=en]  ; vendor(code)[unique=true] ; default ;  ;  ;  ;  ;  
+                        ; $wareHouseCode    ; $wareHouseName ; $vendor                   ; true    ;  ;  ;  ;  ;  
+
+INSERT_UPDATE SAPCentralOrderConfiguration ; id[unique=true] ; warehouses(code) ;  
+                                           ; $sapcoconfig    ; $wareHouseCode   ;  
+                                           
+UPDATE Warehouse ; code[unique=true] ; name[lang=en]  ; external ; sapCentralOrderConfigs(id)
+                 ; $wareHouseCode    ; $wareHouseName ; TRUE     ; $sapcoconfig             
+                 
+                 

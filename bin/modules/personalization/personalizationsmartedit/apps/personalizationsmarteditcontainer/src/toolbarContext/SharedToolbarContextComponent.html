@@ -1,0 +1,16 @@
+<div *ngIf="visible"
+     class="pe-toolbar-item-context">
+    <span class="sap-icon--slim-arrow-right pe-toolbar-item-context__icon"></span>
+    <div class="pe-toolbar-item-context__btn">
+        <div class="pe-toolbar-item-context__btn-txt">
+            <div title="{{title}}"
+                 class="perso-wrap-ellipsis pe-toolbar-item-context__btn-title">{{title}}</div>
+            <div title="{{subtitle}}"
+                 class="perso-wrap-ellipsis pe-toolbar-item-context__btn-subtitle">{{subtitle}}</div>
+        </div>
+    </div>
+    <div class="pe-toolbar-item-context__btn-hyicon"
+         (click)="clear()">
+        <span class="sap-icon--decline"></span>
+    </div>
+</div>

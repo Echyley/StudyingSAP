@@ -1,0 +1,21 @@
+<div class="se-catalog-details" [attr.data-catalog]="catalog.name | seL10n | async">
+    <div class="se-catalog-header">
+        <div class="se-catalog-header-flex">
+            <div class="se-catalog-details__header">{{ catalog.name | seL10n | async }}</div>
+            <div *ngIf="catalog.parents?.length">
+                <a fd-link href="javascript:void(0)" (click)="onOpenCatalogHierarchy()">
+                    {{ 'se.landingpage.catalog.hierarchy' | translate }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="se-catalog-details__content">
+        <se-catalog-version-details
+            *ngFor="let catalogVersion of sortedCatalogVersions"
+            [catalog]="catalog"
+            [catalogVersion]="catalogVersion"
+            [activeCatalogVersion]="activeCatalogVersion"
+            [siteId]="siteId"
+        ></se-catalog-version-details>
+    </div>
+</div>

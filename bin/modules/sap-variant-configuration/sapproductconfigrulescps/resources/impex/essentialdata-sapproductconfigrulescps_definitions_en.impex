@@ -1,0 +1,29 @@
+$lang=en
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;Configurable Product Promo
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;Percentage discount on option price with promo message;Apply {discount_value,number,percent*1} discount to {cstic} / {cstic_value} option
+;y_configurable_product_display_promo_message;Display promo message (promo applies);Display promo message
+;y_configurable_product_display_promo_opportunity_message;Display promo opportunity message (promo does not yet apply);Display promo opportunity message
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;Characteristic;Characteristic to which this discount applies and for which this message appears
+;y_configurable_product_percentage_discount_for_option;cstic_value;Characteristic Value;Characteristic value to which this discount applies and for which this message appears
+;y_configurable_product_percentage_discount_for_option;discount_value;Percentage Discount Value;Percentage discount that applies to option price. Enter value without percent sign.
+;y_configurable_product_percentage_discount_for_option;message;Message;Message Text
+;y_configurable_product_percentage_discount_for_option;extended_message;Extended Message;Extended Message Text
+;y_configurable_product_display_promo_message;cstic;Characteristic;Characteristic for which this message appears
+;y_configurable_product_display_promo_message;cstic_value;Characteristic Value;Characteristic value for which this message appears
+;y_configurable_product_display_promo_message;message;Message;Message Text
+;y_configurable_product_display_promo_message;extended_message;Extended Message;Extended Message Text
+;y_configurable_product_display_promo_opportunity_message;cstic;Characteristic;Characteristic for which this message appears
+;y_configurable_product_display_promo_opportunity_message;cstic_value;Characteristic Value;Characteristic value for which this message appears
+;y_configurable_product_display_promo_opportunity_message;message;Message;Message Text
+;y_configurable_product_display_promo_opportunity_message;extended_message;Extended Message;Extended Message Text
+
+#% endif:

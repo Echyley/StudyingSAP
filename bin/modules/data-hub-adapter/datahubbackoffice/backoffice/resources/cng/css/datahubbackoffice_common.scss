@@ -1,0 +1,25 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+@import "cockpitng-globals.scss";
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("Datahub_Dashboard", "bbyd-dashboard");
+}
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("QuickUpload", "upload");
+}
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("Errors_And_Failures", "status-error");
+}
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("Datahub_Pool", "pool");
+}
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("Datahub_Feed", "feed");
+}

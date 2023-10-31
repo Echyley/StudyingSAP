@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+    <itemtypes>
+        <itemtype code="Theme"
+                  extends="GenericItem"
+                  autocreate="true"
+                  generate="true"
+                  jaloclass="com.hybris.backoffice.jalo.Theme">
+            <deployment table="Themes" typecode="6404"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String" generate="true">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" initial="true" optional="false" unique="true"/>
+                </attribute>
+                <attribute qualifier="name" type="localized:java.lang.String">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="sequence" type="java.lang.Integer">
+                	<description>Sequence for the theme list, this will affect the position of the list when getting list of theme lists, lower values are displayed first</description>
+                    <modifiers read="true" write="true" search="true" optional="true" />
+                    <persistence type="property" />
+                    <defaultvalue>100</defaultvalue>
+                </attribute>
+            </attributes>
+            <indexes>
+                <index name="BackofficeTheme_Code">
+                    <key attribute="code"/>
+                </index>
+            </indexes>
+        </itemtype> 
+    </itemtypes>
+</items>

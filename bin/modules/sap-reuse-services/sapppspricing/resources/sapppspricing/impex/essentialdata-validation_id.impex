@@ -1,0 +1,5 @@
+$lang=id
+
+UPDATE DynamicConstraint;id[unique=true,allownull=true] ;message[lang=$lang]
+                        ;oppsClientInterfaceVersionConstraint                       ;"Pilih versi yang diperlukan untuk bidang Versi Utama Antarmuka Klien."
+

@@ -1,0 +1,55 @@
+<div class="btn-block pe-toolbar-action--include">
+    <div class="pe-toolbar-menu-content se-toolbar-menu-content--pe-customized-customizations-panel" role="menu">
+        <div class="se-toolbar-menu-content--pe-customized__headers">
+            <div class="se-toolbar-menu-content--pe-customized__headers--wrapper">
+                <h2 class="se-toolbar-menu-content--pe-customized__headers--h2">
+                    <span translate="personalization.toolbar.pagecustomizations.header.title"></span>
+                    ({{pagination.totalCount}})
+                </h2>
+                <se-help class="se-toolbar-menu-content__y-help">
+                    <span translate="personalization.toolbar.pagecustomizations.header.description"></span>
+                </se-help>
+            </div>
+
+            <div class="se-input-group se-component-search">
+                <input type="text" id="customization-search-name"
+                    class="se-input-group--input se-component-search--input fd-input" [(ngModel)]="nameFilter"
+                    [placeholder]="'personalization.toolbar.pagecustomizations.search.placeholder' | translate"
+                    (ngModelChange)="nameInputKeypress()" />
+
+                <span class="sap-icon--search se-input-group__addon"></span>
+
+                <!-- <div *ngIf="showResetButton" class="se-input-group__addon se-input-group__clear-btn"
+                    (click)="resetSearch($event)"> -->
+                <span *ngIf="showResetButton" class="se-input-group__addon se-input-group__clear-btn sap-icon--decline"
+                (click)="resetSearch($event)"></span>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div role="menuitem">
+            <div id="personalizationsmartedit-right-toolbar-item-template">
+                <div class="pe-customize-panel__filter-label-layout">
+                    <div class="pe-customize-panel__filter-layout">
+                        <page-filter-dropdown (onSelectCallback)="pageFilterChange($event)" [initialValue]="pageFilter"
+                            class="perso-filter__wrapper perso-filter__wrapper--page"></page-filter-dropdown>
+                        <has-multicatalog class="perso-filter__wrapper perso-filter__wrapper--catalog">
+                            <catalog-filter-dropdown (onSelectCallback)="catalogFilterChange($event)"
+                                [initialValue]="catalogFilter">
+                            </catalog-filter-dropdown>
+                        </has-multicatalog>
+                        <status-filter-dropdown (onSelectCallback)="statusFilterChange($event)"
+                            [initialValue]="statusFilter" class="perso-filter__wrapper perso-filter__wrapper--status">
+                        </status-filter-dropdown>
+                    </div>
+                </div>
+
+                <personalization-infinite-scrolling [dropDownContainerClass]="'pe-customize-panel__wrapper'"
+                    [fetchPage]="getPage">
+                    <customizations-list [customizationsList]="customizationsList"
+                        [requestProcessing]="moreCustomizationsRequestProcessing"></customizations-list>
+                </personalization-infinite-scrolling>
+
+            </div>
+        </div>
+    </div>
+</div>

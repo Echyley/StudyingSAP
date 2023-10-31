@@ -1,0 +1,66 @@
+<div id="editConfigurationsBody-001" class="perso-library">
+
+    <personalization-infinite-scrolling [fetchPage]="getPage">
+        <div #managerScrollZone id="managerScrollZone" class="perso-library__scroll-zone perso__scrollbar--hidden">
+            <div class="perso-library__header">
+                <div class="perso-library__title">
+                    <span [textContent]="catalogName"></span> |
+                    {{'personalization.toolbar.pagecustomizations.header.title' | translate}}
+                    ({{pagination.totalCount}})
+                </div>
+
+                <div class="se-input-group">
+                    <div class="perso-input-group">
+                        <input fd-form-control id="customizationSearchInput" name="customizationSearchInput" type="text"
+                            class="se-input-group--input se-component-search--input"
+                            [placeholder]="'personalization.modal.manager.search.placeholder' | translate"
+                            [(ngModel)]="customizationSearch.name" (ngModelChange)="searchInputKeypress()">
+                        </input>
+
+                        <span class="sap-icon--search se-input-group__addon"></span>
+
+                        <!-- <div *ngIf="showResetButton" 
+                            (click)="resetSearch($event)"> -->
+                            <span *ngIf="showResetButton" 
+                            (click)="resetSearch($event)" class="se-input-group__addon se-input-group__clear-btn sap-icon--decline"></span>
+                        <!-- </div> -->
+                    </div>
+                </div>
+
+                <status-filter-dropdown (onSelectCallback)="statusFilterChange($event)"
+                    [initialValue]="customizationSearch.status" class="perso-library__header-space">
+                </status-filter-dropdown>
+                <div class="perso-library__header-space">
+                    <button class="fd-button" type="button" id="ps_manager_add_btn" (click)="openNewModal()">
+                        <span translate="personalization.modal.manager.add.button"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="y-tree perso-library__y-tree">
+                <div class="y-tree-header">
+                    <manager-view-grid-header></manager-view-grid-header>
+                </div>
+                <manager-view-tree [customizations]="customizations"></manager-view-tree>
+                <div
+                    *ngIf="moreCustomizationsRequestProcessing"
+                    class="se-spinner fd-busy-indicator-extended"
+                >
+                    <div class="spinner">
+                        <fd-busy-indicator [loading]="true" size="m"></fd-busy-indicator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </personalization-infinite-scrolling>
+
+    <personalizationsmartedit-scroll-zone *ngIf="scrollZoneElement != null && elementToScroll" [isTransparent]="true"
+        [scrollZoneVisible]="scrollZoneVisible" [elementToScroll]="elementToScroll">
+    </personalizationsmartedit-scroll-zone>
+
+    <a class="perso-library__back-to-top fd-link" translate="personalization.commons.button.title.backtotop"
+        [hidden]="!isReturnToTopButtonVisible()" (click)="scrollZoneReturnToTop()">
+        <span class="sap-icon--back-to-top"></span>
+    </a>
+
+</div>

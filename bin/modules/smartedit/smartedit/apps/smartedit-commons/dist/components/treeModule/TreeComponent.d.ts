@@ -1,0 +1,33 @@
+import { EventEmitter, Type } from '@angular/core';
+import { TypedMap } from '@smart/utils';
+import { TreeDragAndDropService } from './TreeDragAndDropService';
+import { TreeService } from './TreeService';
+import { ITreeNodeItem, TreeDragAndDropOptions } from './types';
+export declare class TreeComponent<T, D> {
+    private treeService;
+    private treeDragAndDropService;
+    nodeTemplateUrl: string;
+    nodeComponent: Type<any>;
+    nodeUri: string;
+    nodeActions: TypedMap<(...args: any[]) => void>;
+    rootNodeUid: string;
+    dragOptions: TreeDragAndDropOptions<T>;
+    removeDefaultTemplate: string;
+    showAsList: boolean;
+    onTreeUpdated: EventEmitter<ITreeNodeItem<T>[]>;
+    isDropDisabled: boolean;
+    constructor(treeService: TreeService<T, D>, treeDragAndDropService: TreeDragAndDropService<T, D>);
+    ngOnInit(): void;
+    fetchData(nodeData: ITreeNodeItem<T>): Promise<ITreeNodeItem<T>[]>;
+    hasChildren(node: ITreeNodeItem<T>): boolean;
+    collapseAll(): void;
+    expandAll(): void;
+    remove(node: ITreeNodeItem<T>): void;
+    newSibling(node: ITreeNodeItem<T>): void;
+    refresh(node: ITreeNodeItem<T>): Promise<ITreeNodeItem<T>[]>;
+    refreshParent(node: ITreeNodeItem<T>): void;
+    newChild(node?: ITreeNodeItem<T>): Promise<void>;
+    getNodeById(nodeUid: string, nodeArray?: ITreeNodeItem<T>[]): ITreeNodeItem<T>;
+    get dragEnabled(): boolean;
+    private setNodeActions;
+}

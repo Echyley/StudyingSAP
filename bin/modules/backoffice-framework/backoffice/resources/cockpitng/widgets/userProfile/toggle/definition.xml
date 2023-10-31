@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="com.hybris.backoffice.widgets.userprofile.toggle">
+    <name>User Profile Toggle Widget</name>
+    <description>User Profile Toggle Widget</description>
+    <defaultTitle>User Profile Toggle</defaultTitle>
+    <author>hybris</author>
+    <version>1.0</version>
+    <view src="toggle.zul" />
+    <controller class="com.hybris.backoffice.widgets.userprofile.toggle.ToggleController"/>
+    <sockets>
+        <output id="openProfileSettings" type="java.lang.Object"/>
+        <input id="avatarChanged" type="de.hybris.platform.core.model.media.MediaModel"/>
+    </sockets>
+    <keywords>
+        <keyword>User</keyword>
+        <keyword>Profile</keyword>
+    </keywords>
+</widget-definition>

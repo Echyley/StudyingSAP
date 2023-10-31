@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.hybris.platform</groupId>
+	<artifactId>backoffice</artifactId>
+	<version>2211.FP1</version>
+
+	<properties>
+		<apache.poi.version>5.2.2</apache.poi.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-lite</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.23.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.virtuald</groupId>
+			<artifactId>curvesapi</artifactId>
+			<version>1.07</version>
+		</dependency>
+
+	</dependencies>
+</project>

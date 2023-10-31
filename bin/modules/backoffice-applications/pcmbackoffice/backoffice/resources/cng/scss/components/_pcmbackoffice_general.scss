@@ -1,0 +1,268 @@
+@import "../support/_pcmbackoffice_general-variables.scss";
+
+.yw-pcmbackoffice-collection-toolbar,
+.yw-pcmbackoffice-navibar {
+    .z-hbox-separator {
+        display: none;
+    }
+}
+.yw-pcmbackoffice-collection-toolbar,
+.yw-extendedsplitlayout-toolbar,
+.yw-pcmbackoffice-navibar,
+.yw-explorerTree-toolbar {
+    .z-vbox-separator {
+        display: none;
+    }
+}
+
+.yw-pcmbackoffice {
+    &-contents {
+        width: $pcmbackoffice__contents--width;
+        height: $pcmbackoffice__contents--height;
+        //background-color: $pcmbackoffice__contents--bg-color; [Mark:remove]
+    }
+
+     &-navibar {
+         height: $pcmbackoffice__navibar--toolbar-vertical--height;
+
+        .ya-navigation {
+            padding: $pcmbackoffice__navibar--navigation--padding;
+        }
+
+        .yw-toolbar-vertical {
+            width: $pcmbackoffice__navibar--toolbar-vertical--width;
+            height: $pcmbackoffice__navibar--toolbar-vertical--height;
+            font-size: $pcmbackoffice__navibar--toolbar-vertical--font-size;
+
+            .ya-toggle {
+                width: $pcmbackoffice__navibar--toolbar-toogle--width;
+                height: $pcmbackoffice__navibar--toolbar-toogle--height;
+                border-bottom: $pcmbackoffice__navibar--toolbar-toogle--border-bottom;
+                cursor: pointer;
+
+                &-active {
+                    background-color: $pcmbackoffice__navibar--toolbar-toogle-selected--bg-color;
+                    border-bottom: $pcmbackoffice__navibar--toolbar-toogle-hover--border-bottom;
+                }
+                &:hover:not(.ya-toggle-active) {
+                    background-color: $pcmbackoffice__navibar--toolbar-toogle-hover--bg-color;
+                }
+
+                .cng-action {
+                    padding: $pcmbackoffice__navibar--toolbar-action--padding;
+                }
+                .cng-action-icon {
+                    border: none;
+                    background: none;
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .yw-toolbar {
+            &-actions {
+                overflow: hidden;
+
+                table {
+                    width: 100%;
+                }
+            }
+
+            .cng-action-text {
+                padding-left: $pcmbackoffice__navibar--toolbar-action-text--padding-left;
+                padding-right: $pcmbackoffice__navibar--toolbar-action-text--padding-right;
+            }
+        }
+    }
+
+    //would be transfered as borderlayout will be be made available in both molds
+    //details on that need to be defined.
+
+    &-toolbar-summary {
+        min-height: $pcmbackoffice__toolbar-summary--height;
+        
+        .yw-pcmbackoffice-actions-summary.ya-action-slot {
+            height: $pcmbackoffice__toolbar-summary--height;
+            width: auto;
+            padding: $pcmbackoffice__toolbar-summary--padding;
+
+            .ya-toggle.ya-toggle-inactive .yw-flexlayout-trigger-summary {
+                margin-right: $pcmbackoffice__toolbar-summary-trigger-action--margin-right;
+                @include _add-button-styles("-transparent");
+                font-family: var(--bo-content-icon-font-family);
+            }
+            .ya-toggle.ya-toggle-active .yw-flexlayout-trigger-summary {
+                margin-right: $pcmbackoffice__toolbar-summary-trigger-action--margin-right;
+                @include _toggle-button-open-styles();
+                font-family: var(--bo-content-icon-font-family);
+            }
+        }
+        
+        .cng-action {
+            margin: $pcmbackoffice__toolbar-summary-action--margin;
+        }
+
+        .yw-flexlayout-trigger,
+        .yw-flexlayout-trigger-summary {
+            margin: $pcmbackoffice__toolbar-summary-flex-trigger--margin;
+        }
+    }
+
+    &-collection-toolbar {
+        font-weight: $pcmbackoffice__collection-toolbar--font-weight;
+        border-left: $pcmbackoffice__collection-toolbar-delimited--border-left;
+
+        .yw-flexlayout-contents & {
+            border-left-color: $pcmbackoffice__collection-toolbar-delimited-light--border-left-color;
+            background-color: $pcmbackoffice__light--bg-color;
+        }
+        .cng-action .cng-action-text {
+            line-height: $pcmbackoffice__collection-toolbar-action-text--line-height;
+            padding-left: $pcmbackoffice__collection-toolbar-action-text--padding-left;
+            padding-right: $pcmbackoffice__collection-toolbar-action-text--padding-right;
+
+            .z-label {
+                font-size: $pcmbackoffice__collection-browser-toolbar-title--font-size;
+            }
+
+//             &:hover {
+//                 color: $pcmbackoffice__collection-toolbar-action-text-hover--color;
+//             }
+        }
+        .yw-toolbar-after {
+            float: $pcmbackoffice__toolbar-after--float;
+        }
+        > .yw-toolbar > .yw-toolbar-content > .yw-toolbar-actions .ya-toggle {
+            min-width: $pcmbackoffice__collection-toolbar-toggle-container--min-width;
+            padding-left: $pcmbackoffice__collection-toolbar-toggle-container--padding-x;
+            padding-right: $pcmbackoffice__collection-toolbar-toggle-container--padding-x;
+        }
+    }
+    
+    &-products-sidebar .yw-explorerTree-widget {
+        .yw-catalog-selector {
+            width: $pcmbackoffice__catalog-selector--width;
+            &:before,
+            &:after {
+                display: none;
+            }
+            .yw-catalog-selector-button.z-button::after {
+                top: 50%;
+            }
+        }
+        .yw-explorerTree-toolbar {
+            .yw-catalog-selector {
+                &:before {
+                    left: $pcmbackoffice__catalog-selector-delimiter-border--border-width * -1;
+                    display: block;
+                }
+                &:after {
+                    right: $pcmbackoffice__catalog-selector-delimiter-border--border-width * -1;
+                    display: block;
+                }
+            }
+            
+            .yw-explorerTree-right-holder {
+                .yw-explorerTree-widget-slot {
+                    -webkit-flex: 1 1 auto;
+                    -ms-flex: 1 1 auto;
+                    flex: 1 1 auto;
+                }
+            }
+        }
+    }
+
+    .cng-action-group {
+        height: 100%;
+    }
+
+    .y-toolbar-inner {
+        width: auto;
+    }
+
+    // .yw-listview-actioncontainer {
+    //     padding: $pcmbackoffice__listview-actioncontainer--padding;
+    // }
+
+    .yw-panel-navigation {
+        .z-panelchildren {
+            background-color: $pcmbackoffice__general--bg-color;
+        }
+        .z-panel-body {
+            background-color: $pcmbackoffice__general--bg-color;
+        }
+    }
+
+    .yw-borderlayout .yw-layoutregion {
+        background-color: $pcmbackoffice__general--bg-color;
+    }
+    
+    //D&D between missing
+    .yw-extendedsplitlayout-box .yw-coll-browser-container .z-listitem.z-dragged,
+    .z-treerow.z-dragged {
+        background-color: $pcmbackoffice__dragn-n-drop-dragged-highlight--bg-color;
+        
+        .z-treecell-content{
+            &:before {
+                border: $pcmbackoffice__dragn-n-drop-dragged-highlight--border;
+                display: block;
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+        }
+    }
+    .z-drag-matching-drop-target.z-treerow {
+        .z-treecell{
+            background: $pcmbackoffice__dragn-n-drop-target--bg-color;
+
+            &:before {
+                height: $pcmbackoffice__dragn-n-drop-target-indicator-icon--size;
+                width: $pcmbackoffice__dragn-n-drop-target-indicator-icon--size;
+                margin-top: $pcmbackoffice__dragn-n-drop-target-indicator-icon--margin-top;
+                right: $pcmbackoffice__dragn-n-drop-target-indicator-icon--right;
+                border: $pcmbackoffice__dragn-n-drop-target-indicator-icon--border;
+                display: block;
+                content: '';
+                top: 50%;                
+                position: absolute;
+            }
+        }
+        &.z-drag-over .z-treecell {
+            background-color: $pcmbackoffice__dragn-n-drop-highlight--color;
+        }
+    }
+}
+
+.yw-image-shortcuts-product-type {
+    &-blockedlist:before {
+        content: $pcmbackoffice__shortcuts-blockedlist-icon-content;
+        font-family: $pcmbackoffice__shortcuts-blockedlist-icon-family;
+        font-size: $pcmbackoffice__shortcuts-blockedlist-icon-size;
+        color: $pcmbackoffice__shortcuts-blockedlist-icon-color;
+    }
+    &-quicklist:before{
+        content: $pcmbackoffice__shortcuts-quicklist-icon-content;
+        font-family: $pcmbackoffice__shortcuts-quicklist-icon-family;
+        font-size: $pcmbackoffice__shortcuts-quicklist-icon-size;
+        color: $pcmbackoffice__shortcuts-quicklist-icon-color;
+    }
+  }
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("pcmbackoffice-dashboard-view", "bbyd-dashboard");
+    @include setTreeIconGlyph("pcmbackoffice-collectionBrowser-view", "product");
+    @include setTreeIconGlyph("pcmbackoffice-assortment-view", "puzzle");
+    @include setTreeIconGlyph("pcmbackoffice-compare-view", "compare");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+    @include setSideNavigationIconGlyph("pcmbackoffice-dashboard-view", "bbyd-dashboard");
+    @include setSideNavigationIconGlyph("pcmbackoffice-collectionBrowser-view", "product");
+    @include setSideNavigationIconGlyph("pcmbackoffice-assortment-view", "puzzle");
+    @include setSideNavigationIconGlyph("pcmbackoffice-compare-view", "compare");
+}

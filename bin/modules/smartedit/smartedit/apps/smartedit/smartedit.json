@@ -1,0 +1,27 @@
+{
+    "name": "smartedit",
+    "extension": {
+        "type": "inner"
+    },
+    "typescript": {
+        "entry": "./src/index.ts",
+        "dist": "./dist/index.js"
+    },
+    "style": {
+        "global": "node_modules/smartedit-build/styles/se-variables.scss",
+        "urlsToRewrite": [
+            {
+                "urlMatcher": "../../../Base/baseLib/baseTheme/fonts/*",
+                "assetsLocation": "node_modules/@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts"
+            }
+        ]
+    },
+    "legacy": {
+        "js": ["./src/**/*[!Test].js"],
+        "ngTemplates": {
+            "moduleName": "coretemplates",
+            "includePathInName": false,
+            "files": ["./src/**/*.html"]
+        }
+    }
+}

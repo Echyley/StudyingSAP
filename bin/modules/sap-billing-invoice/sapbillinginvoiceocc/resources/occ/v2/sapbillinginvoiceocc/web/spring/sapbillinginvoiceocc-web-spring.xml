@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.sap.hybris.sapbillinginvoiceocc.controllers"/>
+    
+    
+    <bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="DEFAULT"
+					   value="billingDocuments(DEFAULT)"/>
+				<entry key="FULL"
+					   value="billingDocuments(FULL)"/>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+				  value="com.sap.hybris.sapbillinginvoiceocc.dto.document.BillingDocumentWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="id,date"/>
+                <entry key="DEFAULT"
+                       value="id,type,date,totalPrice(DEFAULT)"/>
+                <entry key="FULL"
+                       value="id,type,date,totalPrice(FULL)"/>
+            </map>
+        </property>
+	</bean>
+	
+	
+	<!-- Field Mappings : OrderWsDTO -->
+
+	<bean id="billingDocumentsFieldMapping" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="destClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="extBillingDocuments" value="billingDocuments"/>
+				<entry key="b2bPermissionResult" value="permissionResults"/>
+				<entry key="b2bCustomerData" value="orgCustomer" />
+			</map>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- Field Mappings : ExternalSystemBillingDocumentData -->
+
+	<bean id="billingDocumentFieldMapper" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="com.sap.hybris.sapbillinginvoicefacades.document.data.ExternalSystemBillingDocumentData"/>
+		<property name="destClass"
+				  value="com.sap.hybris.sapbillinginvoiceocc.dto.document.BillingDocumentWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="billingDocumentId" value="id"/>
+				<entry key="billingDocType" value="type"/>
+				<entry key="billingInvoiceDate" value="date"/>
+				<entry key="totalPrice" value="totalPrice"/>
+			</map>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="addCustomByteArrayHttpMessageToMessageConverters" depends-on="messageConvertersV2" parent="listMergeDirective">
+        <property name="add" ref="customByteArrayHttpMessageConverter"/>
+    </bean>
+    
+    <alias name="customBillingByteArrayHttpMessageConverter" alias="customByteArrayHttpMessageConverter"/>
+    <bean id="customBillingByteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+	
+</beans>

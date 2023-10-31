@@ -1,0 +1,18 @@
+.se-page-tree-slot-node-menu {
+    display: flex;
+    &--hide {
+        color: var(--sapContent_LabelColor);
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    &--hideCount {
+        font-family: '72';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: var(--sapContent_LabelColor);
+        margin-left: 2px;
+    }
+}

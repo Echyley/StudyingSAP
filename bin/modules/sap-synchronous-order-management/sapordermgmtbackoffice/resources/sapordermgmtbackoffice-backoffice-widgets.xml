@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    
+
+    <widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="sapordermgmtbackoffice-explorer-tree" targetWidgetId="sapordermgmtbackoffice-tree-node-adapter"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="sapordermgmtbackoffice-tree-node-adapter" targetWidgetId="sapordermgmtbackoffice-typecode-extractor"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="sapordermgmtbackoffice-tree-node-adapter" targetWidgetId="sapordermgmtbackoffice-search-enabler"/>
+    <widget-connection inputId="genericInput" outputId="false" sourceWidgetId="sapordermgmtbackoffice-tree-node-adapter" targetWidgetId="sapordermgmtbackoffice-search-disabler"/>
+    <widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="sapordermgmtbackoffice-typecode-extractor" targetWidgetId="sapordermgmtbackoffice-search-logic"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="sapordermgmtbackoffice-search-enabler" targetWidgetId="sapordermgmtbackoffice-text-search"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="sapordermgmtbackoffice-search-disabler" targetWidgetId="sapordermgmtbackoffice-text-search"/>
+    <widget-connection inputId="searchtext" outputId="query" sourceWidgetId="sapordermgmtbackoffice-text-search" targetWidgetId="sapordermgmtbackoffice-search-logic"/>
+    <widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="sapordermgmtbackoffice-search-logic" targetWidgetId="sapordermgmtbackoffice-simple-list"/>
+
+</widgets>

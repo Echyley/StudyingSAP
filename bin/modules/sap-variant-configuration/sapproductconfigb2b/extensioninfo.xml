@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapproductconfigb2b" managername="Sapproductconfigb2bManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapproductconfigb2b">
+                       
+      
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                 
+      
+        <!-- <requires-extension name="cms"/> -->
+          
+      
+        <requires-extension name="sapproductconfigfacades"/>
+          
+      
+        <requires-extension name="sapproductconfigb2bservices"/>
+          
+      
+        <requires-extension name="b2bacceleratorfacades"/>
+              
+        <requires-extension name="sapcustomerb2b"/>
+             
+      
+
+      
+        <coremodule generated="true" manager="de.hybris.platform.sap.productconfig.b2b.jalo.Sapproductconfigb2bManager" packageroot="de.hybris.platform.sap.productconfig.b2b"/>
+        				
+	
+
+   
+    </extension>
+          
+
+</extensioninfo>

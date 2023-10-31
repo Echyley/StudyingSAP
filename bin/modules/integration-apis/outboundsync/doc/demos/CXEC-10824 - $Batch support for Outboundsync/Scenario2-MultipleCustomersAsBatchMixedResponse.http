@@ -1,0 +1,21 @@
+### Create Customer 11
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_11",
+  "name": "name_11"
+}
+
+### Create Customer 22
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_22",
+  "name": "name_22"
+}

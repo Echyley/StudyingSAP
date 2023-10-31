@@ -1,0 +1,7 @@
+<ng-container *ngIf="inboxCount$ | async as count">
+    <div *ngIf="count > 0" aria-label="Notifications">
+        <div class="fd-button__badge se-inbox-badge" aria-label="Unread count">
+            {{ stringifyCount(count) }}
+        </div>
+    </div>
+</ng-container>

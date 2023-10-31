@@ -1,0 +1,42 @@
+<label
+    class="fd-form-label"
+    translate="personalization.modal.customizationvariationmanagement.targetgrouptab.targetgroupexpression"
+></label>
+<div>
+    <!-- <personalizationsmartedit-scroll-zone
+        [scrollZoneVisible]="scrollZoneVisible"
+        [elementToScroll]="elementToScroll"
+    >
+    </personalizationsmartedit-scroll-zone> -->
+    <div class="form-group">
+        <segment-expression-as-html
+            [segmentExpression]="expression[0]"
+        ></segment-expression-as-html>
+    </div>
+
+    <div class="form-group">
+        <label
+            fd-form-label
+            for="segment-select"
+        >{{ 'personalization.modal.customizationvariationmanagement.targetgrouptab.segments' | translate }}</label>
+        <se-select
+            id="segment-select"
+            [model]="singleSegment.code"
+            (modelChange)="segmentSelectedEvent($event)"
+            [fetchStrategy]="segmentFetchStrategy"
+            [itemComponent]="segmentPrinterComponent"
+            [(reset)]="resetSelect"
+            [placeholder]="'personalization.modal.customizationvariationmanagement.targetgrouptab.segments.placeholder'"
+        ></se-select>
+    </div>
+
+    <segment-node
+        *ngFor="let node of expression"
+        [node]="node"
+        [expression]="expression"
+        [connectedDropListsIds]="connectedDropListsIds"
+        (expressionChange)="handleTreeUpdated($event)"
+        (onDrop)="onDropHandler($event)"
+        (onDragStart)="onDragStart($event)"
+    ></segment-node>
+</div>

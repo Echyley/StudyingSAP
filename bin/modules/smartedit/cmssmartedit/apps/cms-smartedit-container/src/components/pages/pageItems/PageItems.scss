@@ -1,0 +1,21 @@
+.se-dropdown-item {
+    &__delete-wrapper {
+        @include se-flex-row();
+        width: 100%;
+    }
+
+    &__delete-page-popover {
+        margin-right: se-space('s');
+        .sap-icon--message-error {
+            color: var(--sapInformativeColor);
+        }
+    }
+
+    &__delete-link-wrapper {
+        width: 100%;
+
+        &--disabled {
+            cursor: not-allowed;
+        }
+    }
+}

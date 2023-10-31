@@ -1,0 +1,9 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+#
+# Import customer attribute constraint
+#
+INSERT_UPDATE AttributeConstraint;id[unique=true];annotation[allownull=true];descriptor(enclosingType(code),qualifier);qualifier;severity(code,itemtype(code));target;type(code)
+                                 ;CustomerSite;de.hybris.platform.commerceservices.customer.constraint.CustomerSite;Customer:site;site;ERROR:Severity;de.hybris.platform.core.model.user.CustomerModel;Customer

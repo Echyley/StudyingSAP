@@ -1,0 +1,17 @@
+{
+  "manufacturerAID": "Test_manufacturerAID",
+  "numberContentUnits": "123.0",
+  "catalogVersion": {
+    "active": true,
+    "catalog": {
+      "id": "Test_id",
+      "integrationKey": "TEST_KEY"
+    },
+    "version": "Test_version",
+    "integrationKey": "TEST_KEY"
+  },
+  "offlineDate": "/Date(1577836800000)/",
+  "code": "Test_code",
+  "numberOfReviews": 123,
+  "integrationKey": "TEST_KEY"
+}

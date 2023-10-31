@@ -1,0 +1,433 @@
+@import "../support/_collaboration-variables.scss";
+@import "../components/_collaboration-overview.scss";
+@import "../components/_collaboration-toolbar.scss";
+@import "../components/_collaboration-browser.scss";
+
+.yw-collaboration-center {
+  a {
+	 text-decoration: none;
+  }
+
+  &-browser {
+    box-shadow: $_collaboration-center-browser__wrapper--box-shadow;
+    border-radius: $_collaboration-center-browser__wrapper--border-radius;
+  }
+
+  &-styled {
+  	background-color: $collaboration__sidebar--bg-color;
+  	border-bottom: $collaboration__sidebar--border-width solid $collaboration__sidebar--border-color;
+  }
+
+  &-container-view .yw-view-switch-views > .y-switch > .yw-borderlayout,
+  &-container-view &-toolbar {
+  	> .yw-borderlayout-bl,
+  	> .yw-borderlayout-bl > div > .yw-layoutregion {
+  	  background-color: transparent;
+  	}
+  }
+
+  &-container-view {
+  	> .z-borderlayout > div > .z-north {
+      @if $collaboration__toolbar-widget--box-shadow {
+        box-shadow: $collaboration__toolbar-widget--box-shadow;
+      }
+  	}
+    &.yw-borderlayout.yw-widget-mold-light .opaquetrue .yw-layoutregion {
+      background-color: transparent;
+    }
+  }
+
+  &-toggle {
+    img:hover,
+    &.yw-flexlayout-trigger,
+    &.cng-action-enabled img:hover {
+      background: transparent;
+    }
+    > tbody {
+      display: block;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      table-layout: fixed;
+
+      td {
+        text-align: center;
+        color: $collaboration__collaboration_center-toggle-td-color;
+      }
+    }
+    .yw-systemBarContainer .yw-statusToolbar .z-toolbarbutton & {
+      height: auto;
+    }
+  }
+
+  &-title {
+    float: left;
+    color: $collaboration__title--color;
+
+    .cng-action-text {
+      cursor: text;
+
+      .z-label {
+        font-size: $_collaboration__title--font-size;
+      }
+    }
+  }
+
+  &-header {
+    .yw-toolbar-after,
+    .yw-toolbar-actions {
+      padding: $collaboration__header--padding;
+      line-height: $_collaboration__header--line-height;
+    }
+    > .yw-toolbar {
+      min-height: $toolbar__default--height;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      > .yw-toolbar-content {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+      }
+    }
+    .yw-toolbar-after {
+      text-align: right;
+      float: right;
+    }
+
+    &-toolbar {
+      .yw-toolbar-after,
+      .yw-toolbar-actions {
+        padding: 0;
+      }
+      .yw-toolbar-after {
+        text-align: left;
+        float: none;
+      }
+      &-action {
+        color: $collaboration__header-hp--color;
+      }
+    }
+  }
+  &-header &-title {
+    .cng-action-text {
+      padding-left: $_collaboration__title--padding-left;
+    }
+  }
+
+  &-tabs {
+    .z-tabpanel,
+    .yw-workflows-list-item .z-listcell {
+      border-color: $collaboration__sidebar--border-color;
+    }
+    .z-tabs-content {
+      table-layout: fixed;
+
+      .z-tab-content {
+        padding: $collaboration__tabs-tab-content--padding;
+      }
+      .z-tab {
+        padding: 0;
+      }
+    }
+    .z-tabs {
+      background-color: $collaboration__sidebar--bg-color;
+      border-bottom: $collaboration__sidebar--border;
+
+      .z-tab .z-tab-text {
+        @if $collaboration__tabs-tab-text--padding {
+          padding: $collaboration__tabs-tab-text--padding;
+        }
+      }
+    }
+    > .widget_cnt > .z-tabbox-top > .z-tabs .z-tabs-content {
+      padding: $collaboration__tabs-outer--padding;
+    }
+    .z-tabpanel {
+      border-left: 0;
+      border-right: 0;
+      > .widget_cnt {
+        background: $collaboration__widget-cnt-bg-color;
+        overflow: auto;
+      }
+    }
+    .yw-collaboration-center-tab-workflows {
+      .z-tabs-content .z-tab {
+        border-left: $collaboration__sidebar--border;
+        background-color: $collaboration__inner-tabs--bg-color;
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50%;
+        padding: 0;
+
+        &:first-child,
+        &:nth-child(odd) {
+          border-left: none;
+        }
+        &-text {
+          @if $collaboration__inner-tabs-tab-text--padding {
+            padding: $collaboration__inner-tabs-tab-text--padding;
+          }
+          @if $_collaboration__inner-tabs-tab-text--line-height {
+            line-height: $_collaboration__inner-tabs-tab-text--line-height;
+          }
+          border-bottom: none;
+          text-align: center;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          -ms-justify-content: center;
+          justify-content: center;
+
+          &:hover {
+
+            &:before {
+              border-color: $_container__action-hover--color;
+            }
+          }
+        }
+      }
+      .z-tab {
+        &-content {
+          width: 100%;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  &-task-item-toolbar .yw-toolbar-content > .yw-toolbar-actions {
+    float: right;
+  }
+
+  &-sidebar-header {
+    .yw-toolbar-actions {
+      float: left;
+    }
+    .ya-three-dots-group-cnt {
+      float: right;
+    }
+  }
+
+  &-task-quicklist {
+    &,
+    &-header-title {
+      box-shadow: $collaboration-center-task__quicklist-border-shadow--box-shadow;
+    }
+    &-header {
+      .yw-toolbar {
+        padding: $collaboration-center-task__quicklist-header-toolbar--padding;
+        height: 100%;
+        line-height: 1;
+
+        &-content {
+          display: inline-table;
+          vertical-align: top;
+          height: 100%;
+        }
+        .yw-toolbar-content .yw-toolbar-actions {
+          display: table-cell;
+        }
+      }
+      &-title {
+        font-size: $collaboration-center-task__quicklist-header-title--font-size;
+        font-weight: $collaboration-center-task__quicklist-header-title--font-weight;
+        height: $collaboration-center-task__quicklist-header-title--height;
+        color: $collaboration-center-task__quicklist-header-title--color;
+
+        .cng-action-text {
+          padding: $collaboration-center-task__quicklist-header-text--padding;
+          max-width: $collaboration-center-task__quicklist-header-text--max-width;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+    }
+    &-toolbar {
+      background-color: $collaboration-center-task__quicklist-toolbar--bg-color;
+      box-shadow: $collaboration-center-task__quicklist-toolbar-border-shadow--box-shadow;
+      padding-left: $collaboration-center-task__quicklist-toolbar--padding-left;
+
+      .yw-workflowaction-decision-container {
+        display: inline-table;
+        width: 100%;
+        height: 100%;
+        padding: $collaboration-center-task__quicklist-toolbar-workflow-select-container--margin-y;
+
+        .z-hlayout-inner {
+          display: table-cell;
+          width: initial;
+          padding: 1px;
+
+          &:first-child {
+            width: 100%;
+          }
+        }
+        .z-button {
+          // margin: $_collaboration-center-browser__bottom-bar-action-container--margin;
+          &[disabled],
+          &[disabled]:hover,
+          &[disabled]:active {
+            background-color: transparent !important;
+          }
+        }
+      }
+      .yw-toolbar-actions .cng-action-group {
+        width: 100%;
+        table-layout: fixed;
+
+        table {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &-details {
+    &-workflow-details {
+      &.yw-centered-panel-editor-area {
+        .yw-editorarea-tabbox-tabpanels-tabpanel .z-groupbox-header {
+          .yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption {
+            &.z-caption {
+              background-color: var(--bo-container-background) !important;
+            }
+          }
+        }
+      }
+
+      .yw-editor-area-main-content {
+        .yw-editorarea-tabbox {
+          .z-tabbox-content-wrapper {
+            padding: 0;
+            display: block;
+            position: relative;
+            
+            .z-tabbox-content {
+              margin: 0;
+            }
+          }
+          &.yw-static-section-active > .z-tabbox-content-wrapper,
+          .cng-adminmode & > .z-tabbox-content-wrapper {
+            display: block;
+            padding: 0;
+          }
+
+          &.yw-static-section-active,
+          .cng-adminmode & .yw-editorarea-tabbox {
+            .z-tabbox-static-section {
+              background: var(--bo-container-background);
+            }
+          }
+
+          .yw-editorarea-tabbox-tabpanels-tabpanel-groupbox {
+            background-color: var(--bo-container-background);
+          }
+        }
+        .ye-instant-editor-attribute-label,
+        .yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-attrcell-label {
+          color: $collaboration-center-details__attribute-label--color;
+          font-weight: $collaboration-center-details__attribute-label--font-weight;
+        }
+        .z-tabbox-static-section {
+          background-color: $collaboration-center-details__static-slot--bg-color;
+
+          .yw-summaryview {
+            background: transparent;
+          }
+        }
+        .z-groupbox-header .yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption .z-caption-content {
+          font-size: $collaboration-center-details__groupbox-title--font-size;
+          font-weight: $collaboration-center-details__groupbox-title--font-weight;
+          @if $collaboration-center-details__groupbox-title--line-height {
+            line-height: $collaboration-center-details__groupbox-title--line-height;
+            padding-top: $collaboration-center-details__groupbox-title--padding-y;
+            padding-bottom: $collaboration-center-details__groupbox-title--padding-y;
+          }
+          text-transform: none;
+        }
+        .yw-editorarea-tabbox-tabpanels {
+          background-color: var(--bo-container-background);
+        }
+        .yw-editorarea-tabbox-tabpanels-tabpanel {
+          .ye-instant-editor-component-visible.z-label {
+            line-height: $collaboration-center-details__instant-edit-label--line-height;
+            margin-bottom: $collaboration-center-details__instant-edit-label--margin-bottom;
+            white-space: pre-line;
+          }
+          .ye-instant-editor-attribute-label:empty {
+            display: none;
+          }
+        }
+
+        .yw-summaryview-section-container.z-groupbox-notitle {
+          padding-bottom: $collaboration-center-details__summaryview-section-no-title--padding-bottom;
+
+          &:last-child {
+            padding-bottom: 0;
+          }
+        }
+      }
+      > .yw-editorarea-body > .z-vlayout-inner {
+        &,
+        > .yw-editor-area-main-content {
+          display: inline;
+        }
+      }
+    }
+
+    .yw-workflow-detailed-novalue {
+      font-style: italic;
+    }
+  }
+}
+
+.yw-perspective-viewswitcher-container-collaboration {
+  > .yw-flexlayout-sidebar-right {
+    > .yw-flexlayout-sidebar > .yw-flexlayout-sidebar-wrapper {
+      width: $collaboration__sidebar--width;
+    }
+  }
+  > .yw-flexlayout-rootpane {
+    > .yw-flexlayout-sidebar {
+      z-index: $collaboration__sidebar--z-index;
+      background-color: $collaboration__tabs--bg-color;
+      width: $collaboration__sidebar--width;
+      max-width: $collaboration__sidebar-default--max-width;
+      height: 100%;
+      right: 0;
+
+      > .widget_cnt {
+        overflow: hidden;
+        padding-left: $collaboration__sidebar--padding-left;
+        margin-left: $collaboration__sidebar--margin-left;
+
+        > .widget_body {
+          box-shadow: $collaboration__sidebar--box-shadow;
+        }
+      }
+
+      > .yw-flexlayout-sidebar-header {
+        z-index: $collaboration__sidebar-header--z-index;
+      }
+      .yw-flexlayout-sidebar-header-btn {
+        display: none;
+      }
+    }
+  }
+  > .yw-flexlayout-sidebar-opened  {
+    > .yw-flexlayout-contents {
+      width: $collaboration__flex-layout-contents--width;
+    }
+    &.yw-flexlayout-sidebar-overlap > .yw-flexlayout-contents {
+      width: 100%;
+    }
+  }
+}

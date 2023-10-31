@@ -1,0 +1,96 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2020 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=en];priority;icon(code)
+;general;General;100;
+
+INSERT_UPDATE RuleConditionDefinition;id[unique=true];name[lang=en];priority;breadcrumb[lang=en];allowsChildren;translatorId;translatorParameters;categories(id)
+;y_group;Group;200;{operator};true;ruleGroupConditionTranslator;;general
+;y_container;Container;100;{id};true;ruleContainerConditionTranslator;;general
+
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=AbstractRule][unique=true]
+;y_group;
+;y_container;
+
+INSERT_UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=en];description[lang=en];type;value;required[default=true]
+;y_group;operator;100;Group operator;Combine the conditions in the group using OR/AND;Enum(de.hybris.platform.ruleengineservices.definitions.conditions.RuleGroupOperator);"""AND""";
+;y_container;id;100;Container ID;Enter ID of the container to be referred in actions;java.lang.String;;
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=en];priority
+;cart;Cart;1300
+;customer;Customer;1200
+
+INSERT_UPDATE RuleConditionDefinition;id[unique=true];name[lang=en];priority;breadcrumb[lang=en];allowsChildren;translatorId;translatorParameters;categories(id)
+;y_cart_total;Cart total;300;Cart total {operator} {value};false;ruleCartTotalConditionTranslator;;cart
+;y_qualifying_products;Qualifying products;200;Cart contains {products_operator} products {products};false;ruleQualifyingProductsConditionTranslator;;cart
+;y_qualifying_categories;Qualifying categories;100;Cart contains products from {categories_operator} categories {categories};false;qualifyingCategoriesConditionTranslator;;cart
+;y_target_customers;Target customers;100;Target {customer_groups_operator} customer groups {customer_groups} or customers {customers};false;ruleTargetCustomersConditionTranslator;;customer
+;y_product_price;Product price threshold;900;Product price {operator} {value};false;ruleProductPriceConditionTranslator;;cart
+;y_qualifying_group_types;Qualifying Group Types;800;Cart entry group {operator} {groupTypes};false;ruleEntryGroupTypeConditionTranslator;;cart
+;y_order_threshold_perfect_partner;Order Threshold Perfect Partner;700;Test;false;ruleOrderThresholdPerfectPartnerConditionTranslator;;cart;
+
+INSERT_UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=en];description[lang=en];type;value;required[default=true]
+;y_cart_total;operator;200;Operator;Operator to compare the cart total value;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";
+;y_cart_total;value;100;Cart total value;Map of currency and value of the cart total to be used;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_qualifying_products;operator;400;Operator;Operator to compare the quantity required for qualifying products;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";
+;y_qualifying_products;quantity;300;Quantity;Quantity of qualifying products required;java.lang.Integer;1;
+;y_qualifying_products;products_operator;200;Product selection operator;Select ANY product or select ALL products from list of qualifying products;Enum(de.hybris.platform.ruledefinitions.CollectionOperator);"""CONTAINS_ANY""";
+;y_qualifying_products;products;100;Products;List of qualifying products;List(ItemType(Product));;false
+;y_qualifying_categories;operator;600;Operator;Operator to compare the quantity required for products in qualifying categories;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";
+;y_qualifying_categories;quantity;500;Quantity;Quantity of products required from qualifying categories;java.lang.Integer;1;
+;y_qualifying_categories;categories_operator;400;Category selection operator;Select ANY category or select ALL categories from list of qualifying categories;Enum(de.hybris.platform.ruledefinitions.CollectionOperator);"""CONTAINS_ANY""";
+;y_qualifying_categories;categories;300;Categories;List of qualifying categories;List(ItemType(Category));;false
+;y_qualifying_categories;excluded_categories;200;Excluded categories;List of sub-categories to be excluded from qualifying categories;List(ItemType(Category));;false
+;y_qualifying_categories;excluded_products;100;Excluded products;List of products from qualifying categories to be excluded;List(ItemType(Product));;false
+;y_target_customers;customer_groups_operator;500;Customer group selection operator;Customer should be part of ANY or ALL customer groups;Enum(de.hybris.platform.ruledefinitions.CollectionOperator);"""CONTAINS_ANY""";
+;y_target_customers;customer_groups;400;Customer groups;List of qualifying customer groups;List(ItemType(UserGroup));;false
+;y_target_customers;customers;300;Customers;List of qualifying customers;List(ItemType(Customer));;false
+;y_target_customers;excluded_customer_groups;200;Excluded customer groups;List of sub-groups that should be excluded from qualifying customer groups;List(ItemType(UserGroup));;false
+;y_target_customers;excluded_customers;100;Excluded customers;List of customers that should be excluded from qualifying customer groups;List(ItemType(Customer));;false
+;y_product_price;operator;1100;Operator;Operator to compare the product value;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";;
+;y_product_price;value;1000;Price threshold;Map of currency and threshold value of the products to be used to qualify for this promotion;Map(ItemType(Currency),java.math.BigDecimal);;;
+;y_qualifying_group_types;operator;1100;Operator;Group type seletion operator;Enum(de.hybris.platform.ruledefinitions.MembershipOperator);"""NOT_IN""";;
+;y_qualifying_group_types;groupTypes;1000;Group types;List of qualifying group types;List(ItemType(GroupType));;;
+;y_order_threshold_perfect_partner;product;1200;Partner Product;Partner Product;ItemType(Product);;;
+;y_order_threshold_perfect_partner;cart_threshold;1100;Cart Threshold;Cart Threshold;Map(ItemType(Currency),java.math.BigDecimal);;;
+;y_order_threshold_perfect_partner;is_discounted_price_included;1000;Is Discounted Proce Included;Is discounted price included;java.lang.Boolean;;;
+
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=AbstractRule][unique=true]
+;y_cart_total;
+;y_qualifying_products;
+;y_qualifying_categories;
+;y_target_customers;
+;y_product_price;
+;y_qualifying_group_types;
+;y_order_threshold_perfect_partner;
+
+INSERT_UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=en];description[lang=en]
+;y_cart_total;operator;Operator;Operator to compare the cart total value
+;y_cart_total;value;Cart total value;Map of currency and value of the cart total to be used
+
+INSERT_UPDATE DroolsKIEModule;name[unique=true];mvnGroupId;mvnArtifactId;mvnVersion;ruleType(code);active;version;
+;module-junit;hybris-rules;rule-junit;1.0.0;DEFAULT;true;0;
+
+INSERT_UPDATE DroolsKIEBase;name[unique=true];kieModule(name)[unique=true];equalityBehavior(code);eventProcessingMode(code);
+;base-junit;module-junit;EQUALITY;STREAM;
+
+INSERT_UPDATE DroolsKIESession;name[unique=true];kieBase(name)[unique=true];sessionType(code)
+;session-junit;base-junit;STATEFUL
+
+INSERT_UPDATE DroolsRuleEngineContext;name[unique=true];kieSession(name);ruleFiringLimit;
+;junit-context;session-junit;200;
+
+UPDATE DroolsKIEModule;name[unique=true];defaultKIEBase(name)
+;module-junit;base-junit
+
+UPDATE DroolsKIEBase;name[unique=true];defaultKIESession(name)
+;base-junit;session-junit

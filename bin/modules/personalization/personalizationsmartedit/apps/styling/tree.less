@@ -1,0 +1,103 @@
+.y-tree {
+    color: var(--sapTextColor);
+
+    * {
+        transition: all .25s ease;
+    }
+
+    .row {  
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .desktop-layout {
+        border: 1px solid var(--sapList_HeaderBorderColor);
+        margin-top: -1px;
+        padding: 20px 15px 10px 15px;
+
+        &:hover{
+            background-color: var(--sapList_Hover_Background);
+        }
+    }
+    
+    .mobile-layout {
+        border: 1px solid var(--sapList_HeaderBorderColor);
+        margin-top: -1px;
+        padding: 15px;
+        position: relative;
+
+        &:hover{
+            background-color: var(--sapList_Hover_Background);
+        }
+
+        .tree-head {
+            padding: inherit;
+            background: inherit;
+        }
+        
+        .mobile-data {
+            padding-bottom: 20px;
+        }
+
+        .mobile-more-menu{
+            position: absolute;
+            right: 0;
+            top:0;
+            padding:20px;
+        }
+    }
+    
+    .tree-head {
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: var(--sapList_HeaderTextColor);
+        background: 0 0;
+        background-color: var(--sapList_BackgroundColor);
+        padding: 50px 15px 15px 15px;
+    }
+
+    .primaryData {
+        font-weight: 600;
+        color: var(--sapTextColor);
+    }
+
+    .inactive-level{
+        background-color: var(--sapLegendBackgroundColor8);  
+    }
+
+    .active-level{
+        .desktop-layout, 
+        .mobile-layout {
+            background-color: var(--sapBaseColor);
+
+            &:hover{
+                background-color: var(--sapList_Hover_Background);
+            }
+        }
+    }
+
+    .active-level--last {
+        margin-bottom: 12px;
+    }
+
+    .category-toggle, 
+    .dropdown-toggle {
+        padding: 0;
+    }
+
+    .category-toggle{
+        margin: -5px 0 0 -10px;
+    }
+
+    .hyicon-chevron:before{
+        font-size: 30px;
+        transition: all 0.25s ease;
+    }
+
+    .category-toggle[aria-expanded=true]{
+        .hyicon-chevron:before{
+            transform: rotate(90deg);
+        }
+    }
+}

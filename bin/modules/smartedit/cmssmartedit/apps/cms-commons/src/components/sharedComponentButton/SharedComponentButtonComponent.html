@@ -1,0 +1,8 @@
+<div class="se-ctx-menu-btn__msg">
+    <div
+        class="se-ctx-menu-btn__msg-title"
+        translate="se.cms.contextmenu.shared.component.info.title"
+    ></div>
+    <div *ngIf="isReady" class="se-ctx-menu-btn__msg-description" [translate]="message"></div>
+    <se-spinner [isSpinning]="!isReady"></se-spinner>
+</div>

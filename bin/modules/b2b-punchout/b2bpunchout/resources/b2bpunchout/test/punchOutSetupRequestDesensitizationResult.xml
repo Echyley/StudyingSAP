@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<cXML payloadID="1233444-200@ariba.acme.com" timestamp="1999-03-12T18:39:09-08:00" xml:lang="en-US">
+    <Header>
+        <From>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sys*****</Identity>
+            </Credential>
+        </From>
+        <To>
+            <Credential domain="DUNS">
+                <Identity>942*****</Identity>
+            </Credential>
+        </To>
+        <Sender>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sys*****</Identity>
+                <SharedSecret>*****</SharedSecret>
+            </Credential>
+            <UserAgent>Ariba ORMS 5.1P4</UserAgent>
+        </Sender>
+    </Header>
+    <Request>
+        <PunchOutSetupRequest operation="create">
+            <BuyerCookie>342*****</BuyerCookie>
+            <Extrinsic name="randomKey">department code</Extrinsic>
+            <BrowserFormPost>
+                <URL>http://ariba.acme.com:1616/punchoutexit</URL>
+            </BrowserFormPost>
+            <Contact>
+                <Name xml:lang="en">jpi*****</Name>
+                <Email>jpi*****</Email>
+            </Contact>
+            <Contact>
+                <Name xml:lang="en">jpi*****</Name>
+                <Email>jpi*****</Email>
+                <PostalAddress>
+                    <DeliverTo>Joh*****</DeliverTo>
+                    <Street>123*****</Street>
+                    <City>Sun*****</City>
+                    <State>C*****</State>
+                    <PostalCode>940*****</PostalCode>
+                    <Country isoCountryCode="US">Uni*****</Country>
+                </PostalAddress>
+                <Email>11@*****</Email>
+                <Phone>
+                    <TelephoneNumber>
+                        <CountryCode isoCountryCode="en">chi*****</CountryCode>
+                        <AreaOrCityCode>0*****</AreaOrCityCode>
+                        <Number>123*****</Number>
+                    </TelephoneNumber>
+                </Phone>
+                <Fax>
+                    <TelephoneNumber>
+                        <CountryCode isoCountryCode="en">chi*****</CountryCode>
+                        <AreaOrCityCode>0*****</AreaOrCityCode>
+                        <Number>123*****</Number>
+                    </TelephoneNumber>
+                </Fax>
+                <URL>htt*****</URL>
+                <IdReference domain="" identifier="">
+                    <Creator xml:lang="en">q*****</Creator>
+                    <Description xml:lang="d">ddd*****</Description>
+                </IdReference>
+            </Contact>
+            <SupplierSetup>
+                <URL>http://workchairs.com/cxml</URL>
+            </SupplierSetup>
+            <ShipTo>
+                <Address addressID="1000467">
+                    <Name xml:lang="en">100*****</Name>
+                    <PostalAddress>
+                        <DeliverTo>Joh*****</DeliverTo>
+                        <Street>123*****</Street>
+                        <City>Sun*****</City>
+                        <State>C*****</State>
+                        <PostalCode>940*****</PostalCode>
+                        <Country isoCountryCode="US">Uni*****</Country>
+                    </PostalAddress>
+                </Address>
+            </ShipTo>
+            <SelectedItem>
+                <ItemID>
+                    <SupplierPartID>HW1210-3422</SupplierPartID>
+                </ItemID>
+            </SelectedItem>
+        </PunchOutSetupRequest>
+    </Request>
+</cXML>

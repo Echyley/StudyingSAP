@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=de
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;Das Attribut "Bezeichner" sollte Werte für alle Sprachen enthalten.;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;Das Attribut "Preise" muss mindestens 1 Element enthalten.;
+;ProductSupercategoriesSizeConstraint;;;Das Attribut "Übergeordnete Kategorien" muss mindestens 1 Element enthalten.;
+;ProductGalleryImagesSizeConstraint;;;Das Attribut "Galeriebilder" muss mindestens 1 Element enthalten.;
+;ProductReferencesSizeConstraint;;;Das Attribut "Produktreferenzen" muss mindestens 1 Element enthalten.;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;Das Attribut "Artikelnummer" darf nicht leer sein.;
+;ProductDescriptionNotEmptyConstraint;;;Das Attribut "Beschreibung" sollte nicht leer sein.;
+;ProductEanNotEmptyConstraint;;;Das Attribut "EAN" sollte nicht leer sein.;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;Der Attributwert für "Genehmigung" sollte "genehmigt" sein.;

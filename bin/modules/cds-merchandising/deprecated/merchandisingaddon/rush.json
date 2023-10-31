@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.62.4",
+  "pnpmVersion": "6.19.0",
+  "pnpmOptions": {
+    "pnpmStore": "global",
+    "strictPeerDependencies": true
+  },
+  "nodeSupportedVersionRange": ">=14.15.0 <15.0.0 || >=16.0.0 <17.0.0",
+  "projectFolderMinDepth": 1,
+  "projectFolderMaxDepth": 20,
+  "gitPolicy": {},
+  "repository": {},
+  "eventHooks": {
+    "preRushInstall": [],
+    "postRushInstall": [],
+    "preRushBuild": [],
+    "postRushBuild": []
+  },
+  "variants": [],
+  "projects": [
+    {
+      "packageName": "merchandisingaddon",
+      "projectFolder": "acceleratoraddon/web/features"
+    }
+  ]
+}

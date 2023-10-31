@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+                   
+    
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Sapcentralorderservices" jaloLogicFree="true" managername="SapcentralorderservicesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapcentralorderservices" usemaven="false">
+                                  
+
+      
+        
+        <requires-extension name="sapcpiorderexchangeoms"/>
+                        
+        
+        
+        <coremodule generated="true" manager="com.sap.sapcentralorderservices.jalo.SapcentralorderservicesManager" packageroot="com.sap.sapcentralorderservices"/>
+                                	
+        
+           
+    
+    
+    
+    </extension>
+                
+
+
+
+</extensioninfo>

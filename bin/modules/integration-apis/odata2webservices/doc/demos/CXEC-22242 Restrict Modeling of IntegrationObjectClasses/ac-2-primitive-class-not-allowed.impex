@@ -1,0 +1,20 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; TestIO
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]; type(code)           ; root
+                                    ; TestIO                                ; BigDecimal         ; java.math.BigDecimal ; false
+                                    ; TestIO                                ; BigInteger         ; java.math.BigInteger ; false
+                                    ; TestIO                                ; Boolean            ; java.lang.Boolean    ; false
+                                    ; TestIO                                ; Byte               ; java.lang.Byte       ; false
+                                    ; TestIO                                ; Character          ; java.lang.Character  ; false
+                                    ; TestIO                                ; Date               ; java.util.Date       ; false
+                                    ; TestIO                                ; Double             ; java.lang.Double     ; false
+                                    ; TestIO                                ; Float              ; java.lang.Float      ; false
+                                    ; TestIO                                ; Integer            ; java.lang.Integer    ; false
+                                    ; TestIO                                ; Long               ; java.lang.Long       ; false
+                                    ; TestIO                                ; Short              ; java.lang.Short      ; false
+                                    ; TestIO                                ; String             ; java.lang.String     ; false
+                                    ; TestIO                                ; Calendar           ; java.util.Calendar   ; false
+                                    ; TestIO                                ; Object             ; java.lang.Object     ; false
+                                    ; TestIO                                ; Class              ; java.lang.Class      ; false
+
+

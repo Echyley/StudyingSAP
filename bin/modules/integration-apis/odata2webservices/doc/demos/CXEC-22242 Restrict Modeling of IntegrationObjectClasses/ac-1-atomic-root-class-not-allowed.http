@@ -1,0 +1,31 @@
+###
+# Cannot create an IntegrationObjectClass as root for an atomic type
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "TestIO",
+    "classes": [
+      {
+        "root": true,
+        "code": "ItemPropertyValue",
+        "type": "de.hybris.platform.util.ItemPropertyValue",
+        "integrationObject": {
+          "code": "TestIO"
+        }
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+%}

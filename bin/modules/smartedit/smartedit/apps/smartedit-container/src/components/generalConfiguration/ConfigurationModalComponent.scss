@@ -1,0 +1,72 @@
+.se-config {
+    max-height: 70vh;
+    width: 600px;
+    max-width: 80vw;
+}
+
+.se-config__sub-header {
+    @include se-flex-row(space-between);
+    align-items: center;
+}
+.se-config__sub-title {
+    color: var(--sapNeutralColor);
+}
+.se-config__add-entry-btn.fd-button--compact {
+    @include se-flex-row();
+    text-transform: capitalize;
+    border: se-border(2);
+    // &:hover {
+    //     color: se-color-state('hover', 'action');
+    //     border: se-border(se-color-state('hover', 'action'));
+    //     background: transparent;
+    // }
+}
+.se-config__entry-remove-btn {
+    background-color: transparent;
+}
+
+// Entry list
+.se-config__entry {
+    @include se-flex-row(center);
+    margin: 0;
+    padding: se-space('s') 0;
+    border-bottom: se-border();
+    &:last-child {
+        border-bottom: none;
+    }
+}
+.se-config__entry-data {
+    flex: 1 1 auto;
+    margin-right: se-space('xxs');
+}
+input.se-config__entry-key-input {
+    border: se-border();
+}
+.se-config__error,
+.se-config__entry-key,
+.se-config__entry-value {
+    .error-input {
+        color: var(--sapErrorColor);
+    }
+}
+.se-config__entry-key {
+    margin-bottom: se-space('base');
+}
+.se-config__entry-key--disabled {
+    background-color: var(--sapLegend_WorkingBackground) !important;
+}
+.se-config__entry-remove-btn::before {
+    margin: 0 !important;
+}
+.se-config__entry-text-area {
+    overflow: auto;
+    min-height: 52px;
+    border: se-border();
+}
+.se-config__entry-value {
+    .se-config__entry-value-checkbox {
+        height: auto;
+        width: auto;
+        appearance: auto;
+    }
+}

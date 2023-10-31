@@ -1,0 +1,6 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+INSERT_UPDATE FutureStock; productCode[unique = true]; quantity; date[unique = true, dateformat = yyyy-MM-dd]
+                         ; testProduct0               ; 50      ; 2018-03-10
+                         ; testProduct0               ; 85      ; 2018-06-15

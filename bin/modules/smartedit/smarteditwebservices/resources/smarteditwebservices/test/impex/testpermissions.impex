@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$defaultPassword = 1234
+
+INSERT_UPDATE UserGroup;UID[unique=true]    ;
+                       ;employeegroup       ;
+                       ;se-group1           ;
+                       ;se-group2           ;
+
+
+INSERT_UPDATE Employee ;UID[unique=true]       ;groups(uid)[mode=append]    ; password[default = $defaultPassword]
+                       ;se-permission-tester1  ;employeegroup,se-group1     ;
+                       ;se-permission-tester2  ;employeegroup,se-group2     ;
+
+INSERT_UPDATE User     ;UID[unique = true]    ;groups(uid)[append = true];password[default = $defaultPassword]
+                       ;testadmin             ;admingroup                ;
+
+INSERT_UPDATE OAuthClientDetails; clientId[unique = true]; resourceIds; scope                        ; authorizedGrantTypes                                         ; authorities ; clientSecret; registeredRedirectUri
+                                ; mobile_android         ; hybris     ; basic,permissionswebservices ; authorization_code,refresh_token,password,client_credentials ; ROLE_CLIENT ; secret      ; http://localhost:9001/authorizationserver/oauth2_callback ;
+
+INSERT_UPDATE UserRight; code[unique = true]    ;
+                       ; se-global-permission   ;
+                       ; read                   ;
+                       ; create                 ;
+                       ; change                 ;
+                       ; remove                 ;
+
+$START_USERRIGHTS; ; ; ; ; ; ; ; ;
+Type      ; UID         ; MemberOfGroups ; Password ; Target                ; read ; change ; create ; remove ; change_perm ;
+UserGroup ; se-group1   ;                ;          ;                       ;      ;        ;        ;        ;             ;
+          ;             ;                ;          ; AbstractCMSComponent  ; +    ; +      ;        ; +      ;             ;
+          ;             ;                ;          ; Item.owner            ; +    ; +      ; +      ;        ; +           ;
+$END_USERRIGHTS; ; ; ; ;
+
+#Catalog Permissions
+INSERT_UPDATE Catalog; id[unique = true]; name[lang = en]; defaultCatalog; ; ; ; ; ;
+                     ; se-catalog1      ; se-catalog1    ; true          ; ; ; ; ; ;
+
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique = true]; version[unique = true]; active; readPrincipals(uid)[mode = append]; writePrincipals(uid)[mode = append]; ; ; ;
+                            ; se-catalog1               ; Staged                ; false ; se-group1                         ; se-group1                          ; ; ; ;
+
+
+

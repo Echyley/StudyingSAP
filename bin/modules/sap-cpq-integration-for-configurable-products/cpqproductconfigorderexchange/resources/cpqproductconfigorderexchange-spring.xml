@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <alias name="cpqProductConfigDefaultOrderEntryMapper" alias="cpqProductConfigOrderEntryMapper"/>
+    <bean id="cpqProductConfigDefaultOrderEntryMapper"
+          class="de.hybris.platform.cpq.productconfig.orderexchange.impl.DefaultCpqOrderEntryMapper">
+          <constructor-arg ref="cpqProductConfigConfigurationService" />
+          <constructor-arg ref="cpqProductConfigConfigurationServiceLayerHelper" />
+          <constructor-arg name="subItemsSpacing" value="${cpqproductconfigorderexchange.spacing.subitems}"/>
+    </bean>
+
+    <alias name="cpqProductConfigDefaultItemHierarchyMapperService" alias="cpqProductConfigItemHierarchyMapperService"/>
+    <bean id="cpqProductConfigDefaultItemHierarchyMapperService"
+          class="de.hybris.platform.cpq.productconfig.orderexchange.impl.CpqItemHierarchyMapperService">
+        <constructor-arg name="orderEntryMapper" ref="cpqProductConfigOrderEntryMapper"/>
+        <constructor-arg name="itemsSpacing" value="${cpqproductconfigservices.items.increment}"/>
+        <constructor-arg name="subItemsSpacing" value="${cpqproductconfigorderexchange.spacing.subitems}"/>
+    </bean>
+    <bean id="cpqProductConfigCpiOrderMapper" depends-on="sapCpiOrderMappers" parent="listMergeDirective">
+        <property name="add" ref="cpqProductConfigItemHierarchyMapperService"/>
+    </bean>
+</beans>

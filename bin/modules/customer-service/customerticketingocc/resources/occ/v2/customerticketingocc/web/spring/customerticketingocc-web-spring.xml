@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="de.hybris.platform.customerticketingocc.controllers"/>
+
+    <!-- orika converter -->
+    <bean class="de.hybris.platform.customerticketingocc.converters.TicketStatusConverter" />
+    <bean class="de.hybris.platform.customerticketingocc.converters.TicketCategoryConverter" />
+    <bean class="de.hybris.platform.customerticketingocc.converters.TicketAssociatedObjectConverter" />
+    <bean class="de.hybris.platform.customerticketingocc.converters.MapToTicketStatusConverter" />
+
+    <bean id="ticketAssociatedObjectMapper" parent="fieldMapper">
+        <property name="sourceClass"
+                  value="de.hybris.platform.customerticketingfacades.data.TicketAssociatedData" />
+        <property name="destClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketAssociatedObjectWsDTO" />
+        <property name="fieldMapping">
+            <map>
+                <entry key="modifiedtime" value="modifiedAt" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="ticketEventMapper" parent="fieldMapper">
+        <property name="sourceClass"
+                  value="de.hybris.platform.customerticketingfacades.data.TicketEventData" />
+        <property name="destClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketEventWsDTO" />
+        <property name="fieldMapping">
+            <map>
+                <entry key="startDateTime" value="createdAt"/>
+                <entry key="modifiedFields" value="toStatus"/>
+                <entry key="text" value="message"/>
+                <entry key="attachments" value="ticketEventAttachments"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="ticketMapper" parent="fieldMapper">
+        <property name="sourceClass"
+                  value="de.hybris.platform.customerticketingfacades.data.TicketData" />
+        <property name="destClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketWsDTO" />
+        <property name="fieldMapping">
+            <map>
+                <entry key="creationDate" value="createdAt" />
+                <entry key="lastModificationDate" value="modifiedAt" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="ticketListMapper" parent="fieldMapper">
+        <property name="sourceClass"
+                  value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData" />
+        <property name="destClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketListWsDTO" />
+        <property name="fieldMapping">
+            <map>
+                <entry key="results" value="tickets" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="ticketEventToTicketDataMapper" parent="fieldMapper">
+        <property name="sourceClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketEventWsDTO" />
+        <property name="destClass"
+                  value="de.hybris.platform.customerticketingfacades.data.TicketData" />
+        <property name="fieldMapping">
+            <map>
+                <entry key="toStatus" value="status"/>
+            </map>
+        </property>
+    </bean>
+
+    <alias name="defaultAssociatedToObjectValidator" alias="associatedToObjectValidator"/>
+    <bean id="defaultAssociatedToObjectValidator"
+          class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list merge="true">
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="associatedTo.type"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="associatedTo.code"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultTicketStarterValidator" alias="ticketStarterValidator"/>
+    <bean id="defaultTicketStarterValidator"
+          class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="subject"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="message"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="ticketCategory"/>
+                </bean>
+                <bean class="de.hybris.platform.customerticketingocc.validators.TicketStarterCategoryValidator"/>
+                <bean class="de.hybris.platform.customerticketingocc.validators.OptionalObjectValidator">
+                    <property name="fieldPath" value="associatedTo"/>
+                    <constructor-arg ref="associatedToObjectValidator"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultTicketStatusObjectValidator" alias="ticketStatusObjectValidator"/>
+    <bean id="defaultTicketStatusObjectValidator"
+          class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="toStatus.id"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultTicketEventValidator" alias="ticketEventValidator"/>
+    <bean id="defaultTicketEventValidator"
+          class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="message"/>
+                </bean>
+                <bean class="de.hybris.platform.customerticketingocc.validators.OptionalObjectValidator">
+                    <property name="fieldPath" value="toStatus"/>
+                    <constructor-arg ref="ticketStatusObjectValidator"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="ticketWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketWsDTO" />
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="id,subject,ticketCategory,createdAt,modifiedAt,status" />
+                <entry key="DEFAULT"
+                       value="id,subject,ticketEvents(DEFAULT),ticketCategory,createdAt,modifiedAt,status,associatedTo,availableStatusTransitions" />
+                <entry key="FULL"
+                       value="id,subject,ticketEvents(FULL),ticketCategory,createdAt,modifiedAt,status,associatedTo,availableStatusTransitions,customerId" />
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="ticketEventWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketEventWsDTO" />
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,message,author,createdAt" />
+                <entry key="DEFAULT"
+                       value="code,message,author,createdAt,addedByAgent,ticketEventAttachments(DEFAULT),toStatus" />
+                <entry key="FULL"
+                       value="code,message,author,createdAt,addedByAgent,ticketEventAttachments(FULL),toStatus" />
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="ticketEventAttachmentWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketEventAttachmentWsDTO" />
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="id" />
+                <entry key="DEFAULT" value="id,filename" />
+                <entry key="FULL" value="id,filename" />
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="ticketListWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.customerticketingocc.dto.ticket.TicketListWsDTO" />
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="tickets,pagination,sorts" />
+                <entry key="DEFAULT"
+                       value="tickets(DEFAULT),pagination(DEFAULT),sorts(DEFAULT)" />
+                <entry key="FULL"
+                       value="tickets(FULL),pagination(FULL),sorts(FULL)" />
+            </map>
+        </property>
+    </bean>
+</beans>

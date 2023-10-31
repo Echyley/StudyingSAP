@@ -1,0 +1,30 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$productCatalog=testConfigureCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+
+# Root category of configurable categories
+INSERT_UPDATE Category;code[unique=true];$supercategories;allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;configurations;
+
+# Sample configurable categories with configurations
+INSERT_UPDATE ConfigurationCategory;code[unique=true];$supercategories;allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;drill_engraving;configurations
+
+INSERT_UPDATE TextFieldConfiguratorSetting;id[unique=true];$catalogVersion;configuratorType(code)[default='TEXTFIELD'];configurationCategory(code, $catalogVersion);qualifier
+;KD990KA_Company_Name;;;drill_engraving;drillEngravingCompanyName
+;KD990KA_Font_Type;;;drill_engraving;drillEngravingFontType
+;KD990KA_Font_Size;;;drill_engraving;drillEngravingFontSize
+
+# Assign the categories to some products
+INSERT_UPDATE Product;code[unique=true];$supercategories[mode='append'];unit(code)[default=PCE];$catalogVersion;name[lang=en];description[lang=en];summary[lang=en];$prices;$approved
+;2116282;drill_engraving;PCE;;2116282;2116282;2116282 product;1 PCE = 79 EUR N;
+
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;2116282;pw_warehouse_s;333;forceInStock;

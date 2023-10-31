@@ -1,0 +1,72 @@
+
+.yw-modal-masterdetail {
+    max-width: $masterDetail__window-container--width;
+    .z-window-header .z-caption-content {
+        width: 100%;
+        text-align: center;
+    }
+    .yw-masterdetail {
+        &-footer {
+            width: 100%;
+            text-align: right;
+            min-height: $masterDetail__footer--height;
+            border-top: 1px solid $_default__delimiter--border-color;
+            bottom: 0;
+            position: absolute;
+            .z-button {
+                height: $masterDetail__footer-button--height;
+                margin: $_container-spacing-default__core $masterDetail__footer-button--margin-right $_container-spacing-default__core 0;
+            }
+        }
+    }
+}
+
+
+.yw-masterdetail-content {
+	height: $masterDetail__content--height;
+	.yw-masterdetail {
+		&-sidebar {
+			float: left;
+			border-right: 1px solid $_default-list__item--border-color;
+			overflow: auto;
+			.yw-sidebar-item {
+				border-bottom: 1px solid $_default-list__item--border-color;
+				background-color: $_default-list__item--bg-color;
+				padding: $_container-spacing-default__small;
+				cursor: pointer;
+				display: flex;
+				&-title {
+					font-size: $font-size__base;
+					color: $masterDetail__sidebar-title--color;
+					padding-left: $_container-spacing-default__tiny;
+				}
+				&-subtitle {
+					color: $masterDetail__sidebar-subtitle--color;
+					padding-left: $_container-spacing-default__tiny;
+				}
+				&:hover {
+					background-color: $_default-list__item-hover--bg-color;
+				}
+				.cng-action-icon {
+					color: $masterDetail__sidebar-icon--color !important;
+					font-size: $masterDetail__sidebar-icon--font-size;
+					border: none;
+					background: none;
+					outline: none;
+					box-shadow: none;
+				}
+				&-selected {
+					background-color: $_default-list__item-selected--bg-color;
+					border-bottom: $_default-list__item-selected--border-bottom;
+					&:hover {
+						background-color: $_default-list__item-selected-hover--bg-color;
+					}
+				}
+			}
+		}
+		&-details {
+			float: right;
+		}
+
+	}
+}

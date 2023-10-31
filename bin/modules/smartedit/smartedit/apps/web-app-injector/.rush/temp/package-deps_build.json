@@ -1,0 +1,17 @@
+{
+  "files": {
+    "smartedit/apps/web-app-injector/.eslintrc.js": "4e48b6019663312b651e581a007d0eb6beab50e0",
+    "smartedit/apps/web-app-injector/README.md": "92255e60882d51c886ed1bfff36d468dcd3140b4",
+    "smartedit/apps/web-app-injector/package.json": "1c4843bb5589a1a3e3ad4a7c1288db9116465ced",
+    "smartedit/apps/web-app-injector/smartedit.json": "603fa58b04c675849e102488404ea85d4c7cb521",
+    "smartedit/apps/web-app-injector/src/heartbeat.ts": "37550f1384b810d6f6c397779684168f24a3c59c",
+    "smartedit/apps/web-app-injector/src/web-utils.ts": "4b313de8bb745efab46e4298ab60123fab7ee13e",
+    "smartedit/apps/web-app-injector/src/webapp-injector.ts": "62a1837dafa059b8d4679b45e0f80846bba47007",
+    "smartedit/apps/web-app-injector/src/whitelisting-utils.ts": "d31d762e85e005d14a043179d742c7e731e078db",
+    "smartedit/apps/web-app-injector/tsconfig.json": "aafa8793ec60fd9edca19062b6453e7bb1a5f82d",
+    "smartedit/apps/web-app-injector/tsconfig.lint.json": "e729a390420235afdcb8192411223fad3fa3b719",
+    "smartedit/apps/web-app-injector/webpack.conf.js": "5a292e902703d5f084bc741352199540462cc5b6",
+    "smartedit/apps/web-app-injector/.rush/temp/shrinkwrap-deps.json": "ad545615babb9540d26ab7debad1446305977228"
+  },
+  "arguments": "webpack --config=webpack.conf.js "
+}

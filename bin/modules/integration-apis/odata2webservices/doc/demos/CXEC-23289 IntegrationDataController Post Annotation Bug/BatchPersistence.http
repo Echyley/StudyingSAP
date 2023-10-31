@@ -1,0 +1,80 @@
+### Create an IO for the Category type
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "pcm",
+    "items": [
+      {
+        "code": "Category",
+        "type": {
+          "code": "Category"
+        },
+        "root": true,
+        "attributes": [
+          {
+            "attributeName": "code",
+            "attributeDescriptor": {
+              "qualifier": "code",
+              "enclosingType": {
+                "code": "Category"
+              }
+            }
+          },
+          {
+            "attributeName": "name",
+            "attributeDescriptor": {
+              "qualifier": "name",
+              "enclosingType": {
+                "code": "Category"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### POST a batch with a few changesets
+POST {{fullURL}}/pcm/$batch
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: multipart/mixed; boundary=batch
+Accept: multipart/mixed; boundary=batch
+
+--batch
+Content-Type: multipart/mixed; boundary=changeset
+
+--changeset
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+POST Categories HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "@odata.context": "$metadata#Categories/$entity",
+  "code": "category-1",
+  "name": "Category One"
+}
+
+--changeset
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+POST Categories HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "@odata.context": "$metadata#Categories/$entity",
+  "code": "category-2",
+  "name": "Category Two"
+}
+
+--changeset--
+--batch--

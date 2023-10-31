@@ -1,0 +1,7 @@
+{
+  "dateLibrary": "legacy",
+  "interfaceOnly": true,
+  "typeMappings": {
+    "Any": "java.lang.Object"
+  }
+}

@@ -1,0 +1,35 @@
+<div class="se-page-type-step-template">
+    <div class="se-add-page__sub-header">
+        <div class="se-add-page__sub-header-title">
+            {{ 'se.cms.addpagewizard.pagetemplate.description' | translate }}
+        </div>
+
+        <div class="se-input-group se-page-type-step-template-list-search">
+            <input
+                type="text"
+                class="se-input-group__input-area ySEPage-list-search-input fd-input"
+                placeholder="{{ 'se.cms.pagewizard.templatestep.searchplaceholder' | translate }}"
+                [ngModel]="searchString"
+                (ngModelChange)="onSearchChange($event)"
+                name="query"
+            />
+            <span class="sap-icon--search se-input-group__addon"></span>
+            <div
+                *ngIf="searchString"
+                class="se-input-group__addon se-input-group__clear-btn sap-icon--decline"
+                (click)="clearSearch()"
+            ></div>
+        </div>
+    </div>
+
+    <div class="se-add-page__list" *ngIf="pageTemplates.length > 0">
+        <div
+            *ngFor="let template of filteredPageTemplates"
+            [ngClass]="{ 'is-selected': isSelected(template)}"
+            (click)="templateSelected(template)"
+            class="se-add-page__item se-add-page__item--page-template fd-menu__item"
+        >
+            <div class="se-add-page__item-title">{{ template.name }}</div>
+        </div>
+    </div>
+</div>

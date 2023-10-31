@@ -1,0 +1,137 @@
+@import "../support/_processes-mixins.scss";
+
+.yw-processes-header {
+    height: $processes__header--height;
+    padding: $processes__header--padding;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: $_processes__header--border-bottom;
+
+    &-title {
+        font-size: $_processes__header-title--font-size;
+        flex: 0 0 auto;
+    }
+    &-right-pack {
+        flex: 0 0 auto;
+    }
+    &-close-btn {
+        @include _iconButtonDefault('decline');
+
+        &:hover {
+            background: $_processes__header-button-hover-background;
+        }
+        
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: none;
+        }
+    }
+    & &-settings-btn.z-toolbarbutton.z-button.y-btn-transparent {
+        @include _add-button-styles("-transparent");
+        &:before {
+            content: _getIconGlyphContentValue('settings');
+            font-family: $font-family__icon;;
+            font-size: var(--bo-content-icon-font-size);
+            vertical-align: baseline;  //overwrite zk style
+        }
+    }
+}
+
+.yw-processes-open-btn {
+
+    &.yw-processes-unseen,
+    &-spin {
+        .z-toolbarbutton-content {
+            position: absolute;
+            @include _addIndicatorDot($processes__header-process-icon-unseen--bg-color, $processes__header-process-icon-spinner--bg-color);
+            border: none;
+            color: $processes__header-process-icon-unseen--color;
+            transform: none;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+            .z-toolbarbutton-content {
+                &, &:before {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+    &-spin {
+        &.yw-processes-unseen {
+            .z-toolbarbutton-content:after {
+                background: transparent;
+            }
+        }
+        .z-toolbarbutton-content {
+            font-family: $processes__settings-popup-range-list-toggle-btn--font-family;
+            display: inline-block;
+            -webkit-animation: process-icon-rotate $processes__header-process-icon-spinner--animation-duration infinite linear;
+            -moz-animation: process-icon-rotate $processes__header-process-icon-spinner--animation-duration infinite linear;
+            -o-animation: process-icon-rotate $processes__header-process-icon-spinner--animation-duration infinite linear;
+            animation: process-icon-rotate $processes__header-process-icon-spinner--animation-duration infinite linear;
+            top: $processes__header-process-icon-spinner--top;
+            right: $processes__header-process-icon-spinner--right;
+
+            &:before {
+                position: relative;
+                font-size: $processes__header-process-icon-spinner--size;
+                content: $_processes__systembar__loading-button--content;
+                color: $_processes__header-button-color;
+            }
+            &:after {
+                display: none;
+            }
+        }
+
+        @-moz-keyframes process-icon-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+
+        @-webkit-keyframes process-icon-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+
+        @-o-keyframes process-icon-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+
+        @-ms-keyframes process-icon-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+
+        @keyframes process-icon-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+    }
+}

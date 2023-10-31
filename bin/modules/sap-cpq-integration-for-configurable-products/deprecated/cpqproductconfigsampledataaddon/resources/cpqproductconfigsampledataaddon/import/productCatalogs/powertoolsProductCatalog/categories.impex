@@ -1,0 +1,17 @@
+$productCatalog=powertoolsProductCatalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=en
+$supercategories=supercategories(code, $catalogVersion)
+
+# Add CPQ configurator settings
+INSERT_UPDATE CloudCPQConfiguratorSettings;$productCV[unique=true];id[unique=true];configuratortype(code);configurationcategory(code,$catalogVersion);qualifier
+;;CloudCPQConfiguratorSettings;CLOUDCPQCONFIGURATOR;CloudCPQConfigurableCategory;CLOUDCPQCONFIGURATORSETTINGS
+
+# Add CPQ configurable product category
+INSERT_UPDATE Configurationcategory;$productCV[unique=true];code[unique=true];name[lang=$lang];configuratorsettings(id,$catalogVersion)
+;;CloudCPQConfigurableCategory;Cloud CPQ Configurable Category;CloudCPQConfiguratorSettings
+
+# define a category for CPQ Products
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion;name[lang=$lang];description[lang=$lang];;
+;CPQ;;;CPQ;CPQ Cloud Products for use of integration functionality;

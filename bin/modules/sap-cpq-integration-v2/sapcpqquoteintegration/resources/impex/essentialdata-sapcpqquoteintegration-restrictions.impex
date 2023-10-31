@@ -1,0 +1,20 @@
+#*******************************************
+#*** Create SAP Integration User Groups ****
+#*******************************************
+INSERT_UPDATE UserGroup; UID[unique = true]                         ; locname[lang = en]                                     ; description
+                       ; sapCpqQuoteApiGroup         		        ; Inbound SAP CPQ Quote API Group 						 ; Group with access to Inbound SAP CPQ Quote API
+
+#**************************************************************************
+#*** Assign SAP Integration User Groups to The Parent Integration Group ***
+#**************************************************************************
+INSERT_UPDATE UserGroup; UID[unique = true]        				    ; groups(uid)[mode = append]
+                       ; sapCpqQuoteApiGroup 						; integrationadmingroup ;
+
+#**********************************************************
+#*** Create SAP Integration Flexible Search Restriction ***
+#**********************************************************
+INSERT_UPDATE SearchRestriction; code[unique = true]                   				 ; name[lang = en]                             			; query                                                                                                                                                                                                                                               ; principal(UID)       ; restrictedType(code); active; generate                          
+                               ; sapCpqInboundQuoteRestriction        					 ; SAP CPQ Inbound Quote Restriction         				; ({code}='CPQInboundQuote' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='CPQInboundQuote')                               		   ; integrationadmingroup ; IntegrationObject   ; true  ; true
+                               
+ 
+ 

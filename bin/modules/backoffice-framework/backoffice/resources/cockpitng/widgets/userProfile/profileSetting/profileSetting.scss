@@ -1,0 +1,44 @@
+@import "scss/_profileSetting-variables.scss";
+
+.yw-profile-setting {
+  height: 100%;
+  overflow: auto;
+  padding: $profile-setting-padding;
+  .profile-setting-title {
+    font-size: $profile-setting-title-size;
+  }
+  .profile-setting-content {
+    .profile-setting-avatar-container {
+      display: inline-flex;
+      position: relative;
+      margin-bottom: $_container-spacing-default__tiny;
+      .profile-setting-avatar-upload-btn {
+        border-radius: 50%;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: $font-size__large;
+        font-family: $font-family__icon;
+        padding: 0;
+        &:after {
+          content: $profile-setting-avatar-upload-btn-content;
+        }
+      }
+      .profile-setting-avatar {
+        width: $profile-setting-avatar-width;
+        height: $profile-setting-avatar-height;
+        border-radius: 50%;
+      }
+    }
+  	
+    .z-vlayout {
+    	padding-top: $_container-spacing-default__regular;
+    }
+    .z-label {
+    	color: $profile-setting-label-color;
+    }
+    .profile-setting-field-values {
+    	color: $_default__content--color;
+    }
+  }
+}

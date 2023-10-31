@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- deprecated due to new bean cpqProductConfigDefaultConfigurationQuoteValidator -->
+	<bean id="cpqProductConfigDefaultQuoteActionValidationStrategy"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.DefaultConfigurationQuoteActionValidationStrategy">
+		<constructor-arg ref="defaultQuoteActionValidationStrategy" />
+		<constructor-arg ref="cpqProductConfigConfigurableChecker" />
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+	</bean>
+	
+	<alias name="cpqProductConfigDefaultConfigurationQuoteValidator" alias="cpqProductConfigConfigurationQuoteValidator" />
+	<bean id="cpqProductConfigDefaultConfigurationQuoteValidator"
+		class="de.hybris.platform.cpq.productconfig.services.validator.DefaultConfigurationQuoteValidator">
+		<constructor-arg ref="cpqProductConfigConfigurableChecker" />
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+	</bean>
+	
+	<bean id="cpqProductConfigConfigurationQuoteValidatorMergeDirective" depends-on="commerceQuoteValidatorList"
+		parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigConfigurationQuoteValidator" />
+	</bean>
+
+	<bean id="cpqProductConfigProductConfigurationHandlerMergeDirective" parent="mapMergeDirective"
+		depends-on="productConfigurationHandlers">
+		<property name="key" value="CLOUDCPQCONFIGURATOR" />
+		<property name="value" ref="cpqProductConfigCloudCPQConfigurationHandler" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCloudCPQConfigurationHandler" alias="cpqProductConfigCloudCPQConfigurationHandler" />
+	<bean id="cpqProductConfigDefaultCloudCPQConfigurationHandler"
+		class="de.hybris.platform.cpq.productconfig.services.impl.CloudCPQConfigurationHandler">
+	</bean>
+
+	<alias name="cpqProductConfigDefaultAuthorizationService" alias="cpqProductConfigAuthorizationService" />
+	<bean id="cpqProductConfigDefaultAuthorizationService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultAuthorizationService">
+		<constructor-arg ref="cpqProductConfigAuthorizationDataCacheAccessService" />
+		<constructor-arg ref="cpqProductConfigCacheKeyService" />
+		<constructor-arg ref="cpqProductConfigAuthorizationStrategyDeterminationService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurableChecker" alias="cpqProductConfigConfigurableChecker" />
+	<bean id="cpqProductConfigDefaultConfigurableChecker"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultConfigurableChecker">
+		<constructor-arg name="configuratorSettingsService" ref="configuratorSettingsService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurationService" alias="cpqProductConfigConfigurationService" />
+	<bean id="cpqProductConfigDefaultConfigurationService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultConfigurationService">
+		<constructor-arg ref="cpqProductConfigConfigurationSummaryCacheAccessService" />
+		<constructor-arg ref="cpqProductConfigCacheKeyService" />
+		<constructor-arg ref="cpqProductConfigConfigurationLifecycleStrategyDeterminationService" />
+		<constructor-arg ref="cpqProductConfigBusinessContextService" />
+		<constructor-arg ref="cpqProductConfigConfigurationServiceLayerHelper" />
+		<constructor-arg ref="impersonationService" />
+		<constructor-arg ref="eventService" />
+	</bean>
+
+	<bean id="ProductConfigurationCPQCacheInvalidationListener"
+		class="de.hybris.platform.cpq.productconfig.services.event.ProductConfigurationCPQCacheInvalidationListener"
+		parent="abstractEventListener">
+		<lookup-method name="getCPQCache" bean="cpqProductConfigDefaultConfigurationSummaryCacheAccessService" />
+		<lookup-method name="getCacheKeyService" bean="cpqProductConfigDefaultConfigurationService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultAbstractOrderIntegrationService"
+		alias="cpqProductConfigAbstractOrderIntegrationService" />
+	<bean id="cpqProductConfigDefaultAbstractOrderIntegrationService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultAbstractOrderIntegrationService">
+	</bean>
+
+	<alias name="cpqProductConfigConfigurationDefaultAddToCartHook" alias="cpqProductConfigConfigurationAddToCartHook" />
+	<bean id="cpqProductConfigConfigurationDefaultAddToCartHook"
+		class="de.hybris.platform.cpq.productconfig.services.hooks.DefaultConfigurationAddToCartHook">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigConfigurableChecker" />
+	</bean>
+
+	<bean id="cpqProductConfigConfigurationAddToCartHookHooksListMergeDirective" depends-on="commerceAddToCartMethodHooks"
+		parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigConfigurationAddToCartHook" />
+	</bean>
+
+
+	<alias name="cpqProductConfigDefaultCacheKeyService" alias="cpqProductConfigCacheKeyService" />
+	<bean id="cpqProductConfigDefaultCacheKeyService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultCacheKeyService">
+		<constructor-arg ref="baseSiteService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultAuthorizationDataCacheAccessService"
+		alias="cpqProductConfigAuthorizationDataCacheAccessService" />
+	<bean id="cpqProductConfigDefaultAuthorizationDataCacheAccessService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultCacheAccessService">
+		<constructor-arg ref="cpqProductConfigAuthorizationDataCacheRegion" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurationSummaryCacheAccessService"
+		alias="cpqProductConfigConfigurationSummaryCacheAccessService" />
+	<bean id="cpqProductConfigDefaultConfigurationSummaryCacheAccessService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultCacheAccessService">
+		<constructor-arg ref="cpqProductConfigConfigurationSummaryCacheRegion" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultFindPriceHook" alias="cpqProductConfigFindPriceHook" />
+	<bean id="cpqProductConfigDefaultFindPriceHook"
+		class="de.hybris.platform.cpq.productconfig.services.hooks.DefaultConfigurationFindPriceHook">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+	</bean>
+	
+	<bean id="cpqProductConfigFindPriceHookMergeDirective"
+		depends-on="findPriceHooks" parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigFindPriceHook" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCloneAbstractOrderHook" alias="cpqProductConfigCloneAbstractOrderHook" />
+	<bean id="cpqProductConfigDefaultCloneAbstractOrderHook"
+		class="de.hybris.platform.cpq.productconfig.services.hooks.DefaultProductConfigCloneAbstractOrderHook">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigConfigurationServiceLayerHelper" />
+		<constructor-arg name="itemsStart" value="${cpqproductconfigservices.items.start}"/>
+		<constructor-arg name="itemsIncrement" value="${cpqproductconfigservices.items.increment}"/>		
+	</bean>
+	
+	<bean id="cpqProductConfigCloneAbstractOrderHooMergeDirective"
+		depends-on="cloneAbstractOrderHookList" parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigCloneAbstractOrderHook" />
+	</bean>
+
+	<bean id="cpqProductConfigCloneAbstractOrderSkippedAttributesListMergeDirective"
+		depends-on="cloneAbstractOrderSkippedAttributesList" parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigCloneAbstractOrderSkippedAttributeConfigurationId" />
+	</bean>
+	<util:constant id="cpqProductConfigCloneAbstractOrderSkippedAttributeConfigurationId"
+		static-field="de.hybris.platform.cpq.productconfig.services.model.CloudCPQOrderEntryProductInfoModel.CONFIGURATIONID" />
+
+	<alias name="cpqProductConfigDefaultEngineDeterminationService" alias="cpqProductConfigEngineDeterminationService" />
+	<bean id="cpqProductConfigDefaultEngineDeterminationService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultEngineDeterminationService">
+		<constructor-arg ref="cpqProductConfigAuthorizationDataCacheAccessService" />
+		<constructor-arg name="defaultMockEngineActive" value="${cpqproductconfigservices.mockEngineActive}" />
+	</bean>
+	
+	<bean id="cpqProductConfigStrategyDeterminationService" abstract="true"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultStrategyDeterminationService">
+		<constructor-arg ref="cpqProductConfigEngineDeterminationService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCleanUpConfigurationRemoveInterceptor"
+		alias="cpqProductConfigCleanUpConfigurationRemoveInterceptor" />
+	<bean id="cpqProductConfigDefaultCleanUpConfigurationRemoveInterceptor"
+		class="de.hybris.platform.cpq.productconfig.services.interceptor.DefaultCleanUpConfigurationRemoveInterceptor">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigConfigurationServiceLayerHelper" />
+		<constructor-arg ref="cpqProductConfigCloudCPQOrderEntryProductInfoDao" />
+	</bean>
+
+	<bean id="cpqProductConfigAbstractOrderEntryRemoveMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="cpqProductConfigCleanUpConfigurationRemoveInterceptor" />
+		<property name="typeCode" value="AbstractOrderEntry" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurationServiceLayerHelper"
+		alias="cpqProductConfigConfigurationServiceLayerHelper" />
+	<bean id="cpqProductConfigDefaultConfigurationServiceLayerHelper"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultConfigurationServiceLayerHelper">
+		<constructor-arg ref="baseSiteService" />
+		<constructor-arg ref="userService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCloudCPQOrderEntryProductInfoDao"
+		alias="cpqProductConfigCloudCPQOrderEntryProductInfoDao" />
+	<bean id="cpqProductConfigDefaultCloudCPQOrderEntryProductInfoDao"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultCloudCPQOrderEntryProductInfoDao">
+		<constructor-arg ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultAuthorizationStrategy" alias="cpqProductConfigAuthorizationStrategy" />
+	<bean id="cpqProductConfigDefaultAuthorizationStrategy"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.DefaultAuthorizationStrategy">
+		<constructor-arg ref="consumedDestinationLocatorStrategy" />
+		<constructor-arg ref="apiRegistryClientService" />
+		<constructor-arg ref="cpqProductConfigCpqClientUtil" />
+	</bean>
+
+	<bean id="cpqProductConfigMockAuthorizationStrategy"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.mock.MockAuthorizationStrategy">
+	</bean>
+	
+	<alias name="cpqProductConfigDefaultAuthorizationStrategyDeterminationService" alias="cpqProductConfigAuthorizationStrategyDeterminationService" />
+	<bean id="cpqProductConfigDefaultAuthorizationStrategyDeterminationService" parent="cpqProductConfigStrategyDeterminationService">
+		<constructor-arg ref="cpqProductConfigAuthorizationStrategy" />
+		<constructor-arg ref="cpqProductConfigMockAuthorizationStrategy" />
+	</bean>
+
+	<bean id="cpqProductConfigInitStartEventListener"
+		class="de.hybris.platform.cpq.productconfig.services.event.CleanUpConfigurationAfterInitializationStartEventListener"
+		parent="abstractEventListener">
+		<lookup-method name="getConfigurationService" bean="cpqProductConfigConfigurationService" />
+		<lookup-method name="getConfigurationServiceLayerHelper" bean="cpqProductConfigConfigurationServiceLayerHelper" />
+		<lookup-method name="getBaseSiteService" bean="baseSiteService" />
+		<lookup-method name="getProductInfoDao" bean="cpqProductConfigCloudCPQOrderEntryProductInfoDao" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCPQInteractionStrategy" alias="cpqProductConfigCPQInteractionStrategy" />
+	<bean id="cpqProductConfigDefaultCPQInteractionStrategy"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.DefaultCPQInteractionStrategy">
+		<constructor-arg ref="apiRegistryClientService" />
+		<constructor-arg ref="cpqProductConfigAuthorizationService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurationLifecycleStrategy" alias="cpqProductConfigConfigurationLifecycleStrategy" />
+	<bean id="cpqProductConfigDefaultConfigurationLifecycleStrategy"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.DefaultConfigurationLifecycleStrategy">
+		<constructor-arg ref="cpqProductConfigCPQInteractionStrategy" />
+		<constructor-arg ref="cpqProductConfigCpqClientUtil" />
+		<constructor-arg ref="cpqProductConfigBusinessContextService" />
+	</bean>
+
+	<bean id="cpqProductConfigMockConfigurationLifecycleStrategy"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.mock.MockConfigurationLifecycleStrategy">
+	</bean>
+	
+	<alias name="cpqProductConfigDefaultConfigurationLifecycleStrategyDeterminationService" alias="cpqProductConfigConfigurationLifecycleStrategyDeterminationService" />
+	<bean id="cpqProductConfigDefaultConfigurationLifecycleStrategyDeterminationService" parent="cpqProductConfigStrategyDeterminationService">
+		<constructor-arg ref="cpqProductConfigConfigurationLifecycleStrategy" />
+		<constructor-arg ref="cpqProductConfigMockConfigurationLifecycleStrategy" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultBusinessContextService" alias="cpqProductConfigBusinessContextService" />
+	<bean id="cpqProductConfigDefaultBusinessContextService"
+		class="de.hybris.platform.cpq.productconfig.services.impl.DefaultBusinessContextService">
+		<constructor-arg ref="cpqProductConfigCPQInteractionStrategy" />
+		<constructor-arg ref="b2bCustomerService" />
+		<constructor-arg ref="b2bUnitService" />
+		<constructor-arg ref="commonI18NService" />
+		<constructor-arg ref="sapDefaultSalesAreaService" />
+		<constructor-arg ref="cpqProductConfigEngineDeterminationService" />
+		<constructor-arg ref="cpqProductConfigCpqClientUtil" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurationCartValidationHook"
+		alias="cpqProductConfigConfigurationCartValidationHook" />
+	<bean id="cpqProductConfigDefaultConfigurationCartValidationHook"
+		class="de.hybris.platform.cpq.productconfig.services.strategies.impl.DefaultConfigurationCartValidationHook">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigConfigurableChecker" />
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+	</bean>
+	<bean id="cpqProductConfigCartValidationHookListMergeDirective" depends-on="cartValidationHooks" parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigConfigurationCartValidationHook" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCpqClientUtil" alias="cpqProductConfigCpqClientUtil" />
+	<bean id="cpqProductConfigDefaultCpqClientUtil"
+		class="de.hybris.platform.cpq.productconfig.services.client.DefaultCpqClientUtil">
+	</bean>
+	
+</beans>

@@ -1,0 +1,53 @@
+/*
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+package de.hybris.platform.order.strategies;
+
+import de.hybris.bootstrap.annotations.UnitTest;
+import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.order.OrderEntryModel;
+import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.order.InvalidCartException;
+import de.hybris.platform.order.strategies.impl.DefaultCreateOrderFromCartStrategy;
+import de.hybris.platform.order.strategies.ordercloning.CloneAbstractOrderStrategy;
+import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
+@UnitTest
+public class CreateOrderFromCartStrategyTest
+{
+	@InjectMocks
+	private final DefaultCreateOrderFromCartStrategy defaultCreateOrderFromCartStrategy = new DefaultCreateOrderFromCartStrategy();
+
+	@Mock
+	private CartValidator cartValidator;
+
+	//gets injected at defaultCreateOrderFromCartStrategy automatically
+	@SuppressWarnings("unused")
+	@Mock
+	private KeyGenerator keyGenerator;
+
+	@Mock
+	private CloneAbstractOrderStrategy cloneAbstractOrderStrategy;
+
+	@Test
+	public void testSubmitOrder() throws InvalidCartException
+	{
+		final CartModel cart = new CartModel();
+		final OrderModel order = new OrderModel();
+		Mockito.lenient().when(cloneAbstractOrderStrategy.clone(null, null, cart, null, OrderModel.class, OrderEntryModel.class))
+		       .thenReturn(
+				       order);
+
+		defaultCreateOrderFromCartStrategy.createOrderFromCart(cart);
+
+		Mockito.verify(cartValidator).validateCart(cart);
+	}
+}

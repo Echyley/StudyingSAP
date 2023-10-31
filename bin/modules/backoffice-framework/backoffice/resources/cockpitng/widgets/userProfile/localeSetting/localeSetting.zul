@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul">
+  <style src="${wr}/localeSetting.css"/>
+  <div sclass="yw-localeSetting">
+    <div class="localeSetting-title">
+      ${labels.userprofile.localesetting.title}
+    </div>
+    <div class="localeSetting-content">
+      <tabbox>
+        <tabs>
+          <tab id="dataLocalesTab" label="${labels.data.locale}" />
+          <tab id="uiLocalesTab" label="${labels.ui.locale}" />
+        </tabs>
+        <tabpanels>
+          <tabpanel>
+            <listbox id="localesList" multiple="true" checkmark="true" mold="default"
+                    emptyMessage="${labels.noAvailable}">
+            </listbox>
+          </tabpanel>
+          <tabpanel>
+            <listbox id="uiLocalesList" multiple="false" checkmark="true" mold="default"
+                  emptyMessage="${labels.noAvailable}">
+            </listbox>
+          </tabpanel>
+        </tabpanels>
+      </tabbox>
+    </div>
+  </div>
+</widget>

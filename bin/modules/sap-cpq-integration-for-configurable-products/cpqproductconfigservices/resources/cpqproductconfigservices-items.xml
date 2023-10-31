@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+	
+		<enumtype code="ConfiguratorType" generate="true" autocreate="false" dynamic="true">
+			<value code="CLOUDCPQCONFIGURATOR" />
+		</enumtype>
+		
+	</enumtypes>
+	<itemtypes>
+
+		<!-- need to define jalo class, as type would be detected otherwise as abstract -->
+		<itemtype code="CloudCPQConfiguratorSettings" extends="AbstractConfiguratorSetting" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.cpq.productconfig.services.jalo.CloudCPQConfiguratorSettings" />
+			
+		<itemtype code="CloudCPQOrderEntryProductInfo" extends="AbstractOrderEntryProductInfo" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.cpq.productconfig.services.jalo.CloudCPQOrderEntryProductInfo">
+			<description>Cloud CPQ configuration result for abstract order entry</description>
+			<attributes>
+				<attribute qualifier="configurationId" type="java.lang.String">
+                <persistence type="property" />
+                <description>Configuration id for the persisted configuration in the CPQ system</description>
+            </attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

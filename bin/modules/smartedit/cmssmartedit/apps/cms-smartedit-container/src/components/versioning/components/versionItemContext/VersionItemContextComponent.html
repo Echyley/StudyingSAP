@@ -1,0 +1,33 @@
+<div class="se-version-item-context">
+    <span class="sap-icon--navigation-right-arrow"></span>
+
+    <se-tooltip
+        *ngIf="(pageVersion$ | async) as pageVersion"
+        [triggers]="['mouseenter', 'mouseleave']"
+        [placement]="'bottom'"
+        [isChevronVisible]="true">
+        <div se-tooltip-trigger class="se-version-item-context__info">
+            <div class="se-version-item-context__info-label" [title]="pageVersion.label">
+                {{ pageVersion.label }}
+            </div>
+            <div class="se-version-item-context__info-date">
+                {{ pageVersion.creationtime | date: 'M/d/yy h:mm a' }}
+            </div>
+        </div>
+
+        <div se-tooltip-body class="se-version-item-context__description-wrapper">
+            <span class="se-version-item-context__description"
+                >{{ pageVersion.description || (EMPTY_DESCRIPTION_MSG_KEY | translate) }}</span
+            >
+        </div>
+    </se-tooltip>
+
+    <button
+        fd-button
+        type="button"
+        (click)="deselectPageVersion()"
+        title="{{ 'se.cms.actionitem.page.versions.deselect' | translate }}"
+        class="se-version-item-context__remove-btn fd-button fd-button--transparent">
+        <span class="sap-icon--decline"></span>
+    </button>
+</div>

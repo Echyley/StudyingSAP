@@ -1,0 +1,214 @@
+@import "cockpitng-globals.scss";
+@import "components/platformbackoffice_compareview";
+@import "components/platformbackoffice_bulkedit";
+@import "components/platformbackoffice_sidenavigation";
+
+//$upload_disabled-button--bckg: $white;
+//$upload_default-button--bckg: $blue__default;
+$upload_disabled-button--color: $_button-disabled--color;//$grey__default--500;
+$upload_button--font-weight: 500;
+$mediaupload_buttons--margin-bottom: 15px;
+$mediaupload_buttons--margin-top: $_container-spacing-default__small;
+$mediaupload_buttons--width: 160px;
+$mediaupload_buttons-border: $boxes--border__thin solid $upload_disabled-button--color;
+$mediadownload_inline-button--size: $toolbar__button-default--height;
+$mediadownload_buttons--width: 49%;
+$mediadownload_buttons--margin-right: 1%;
+$workflowaction-decision-section-apply-button--height: $editor-defaults__inline-box--height;
+$editor-area__tabpanel-attribute-cell--padding-bottom: ($_container-spacing-default__small + $_container-spacing-default__core);//$container-spacing-default__half;
+$workflowaction-decision-section-padding: 0px $_container-spacing-default__tiny $editor-area__tabpanel-attribute-cell--padding-bottom $_container-spacing-default__tiny;
+
+@mixin _addTreeIcon($key,$image,$folder:"images/explorer-tree/icons"){
+	@if $key and $image {
+		&#{$key} .y-tree-icon {
+			background-image: url("#{$folder}/#{$image}");
+		}
+	}
+}
+
+.media {
+	&-fileupload {
+		margin-top: $mediaupload_buttons--margin-top;
+	}
+  &-fileupload,
+  &-download-btn,
+  &-clear-content-btn {
+	width: $mediaupload_buttons--width;
+	margin-bottom: $mediaupload_buttons--margin-bottom;
+  }
+}
+
+/* Fix for IE versions <=10 */
+/* http://tracker.zkoss.org/browse/ZK-2471 */
+/* Fix version set to 7.0.4, but it seems it's still there, */
+/* at least for ie10 emulation in ie11 */
+.ie8, .ie9, .ie10 {
+  span.z-upload {
+	display: inline-block;
+  }
+
+  input {
+	z-index: 1;
+  }
+}
+
+/* End of IE fix for ZK-2471 */
+
+/* there is not table as a nested html component */
+/* IE 9 FIX */
+/*.media-fileupload.z-button > table{
+    width: 160px;
+}*/
+
+.yw-import-wizard-toolbar input {
+  width: 100px;
+}
+
+.y-workflow-apply.z-button {
+  height: $workflowaction-decision-section-apply-button--height;
+}
+
+.yw-editorarea-tabbox-tabpanels-tabpanel-groupbox {
+  .yw-workflowaction-decision-section {
+    padding: $workflowaction-decision-section-padding;
+  
+    .yw-workflowaction-selected-decision {
+      width: 300px;
+    }
+  
+    .z-hlayout-inner {
+      padding: 1px;
+    }
+  }
+}
+
+
+/*Icons for explorer tree */
+
+div.yw-explorerTree .y-tree-icon {
+	&-hmc_typenode {
+// 		@include _addTreeIcon("_savedvalues", "011_last_changes.png");
+// 		@include _addTreeIcon("_format", "013_documents_templates.png");
+// 		@include _addTreeIcon("_itemformatter", "014_format_converter.png");
+// 		@include _addTreeIcon("_mediaformatter", "015_layer_converter.png");
+// 		@include _addTreeIcon("_document", "016_all_documents.png");
+// 		@include _addTreeIcon("_renderertemplate", "017_communcation_template.png");
+// 		@include _addTreeIcon("_type", "018_types.png");
+// 		@include _addTreeIcon("_savedquery", "019_saved_queries.png");
+// 		@include _addTreeIcon("_backofficesavedquery", "019_saved_queries.png");
+// 		@include _addTreeIcon("_viewtype", "020_report_definitions.png");
+// 		@include _addTreeIcon("_searchrestriction", "021_personalization.png");
+// 		@include _addTreeIcon("_workflowtemplate", "029_workflow_templates.png");
+// 		@include _addTreeIcon("_workflow", "030_workflows.png");
+// 		@include _addTreeIcon("_workflowaction", "031_actions.png");
+// 		@include _addTreeIcon("_cronjob", "023_cronJobs.png");
+// 		@include _addTreeIcon("_constraintgroup", "026_constraint_groups.png");
+// 		@include _addTreeIcon("_abstractconstraint", "027_constraints.png");
+// 		@include _addTreeIcon("_businessprocess", "032_business_process.png");
+// 		@include _addTreeIcon("_category", "038_categories.png");
+// 		@include _addTreeIcon("_varianttype", "040_product_variant_types.png");
+// 		@include _addTreeIcon("_catalog", "037_catalogs.png");
+// 		@include _addTreeIcon("_catalogversion", "0107_catalog_version.png");
+// 		@include _addTreeIcon("_product", "039_products.png");
+// 		@include _addTreeIcon("_unit", "041_units.png");
+// 		@include _addTreeIcon("_keyword", "042_keywords.png");
+// 		@include _addTreeIcon("_classificationclass", "047_classifying_categories.png");
+// 		@include _addTreeIcon("_classificationattribute", "048_feature_list.png");
+// 		@include _addTreeIcon("_classificationattributevalue", "049_feature_values.png");
+// 		@include _addTreeIcon("_classificationattributeunit", "050_classification_units.png");
+// 		@include _addTreeIcon("_media", "051_media.png");
+// 		@include _addTreeIcon("_mediafolder", "052_media_folders.png");
+// 		@include _addTreeIcon("_mediacontainer", "053_media_containers.png");
+// 		@include _addTreeIcon("_mediaformat", "054_media_formats.png");
+// 		@include _addTreeIcon("_mediacontext", "055_media_context.png");
+// 		@include _addTreeIcon("_company", "056_companies.png");
+// 		@include _addTreeIcon("_usergroup", "057_user_groups.png");
+// 		@include _addTreeIcon("_employee", "058_employees.png");
+// 		@include _addTreeIcon("_customer", "059_castomers.png");
+// 		@include _addTreeIcon("_address", "060_addresses.png");
+// 		@include _addTreeIcon("_title", "061_titles.png");
+// 		@include _addTreeIcon("_agreement", "062_agreements.png");
+// 		@include _addTreeIcon("_order", "063_orders.png");
+// 		@include _addTreeIcon("_orderentry", "064_order_entries.png");
+// 		@include _addTreeIcon("_quote", "063_orders.png");
+// 		@include _addTreeIcon("_quoteentry", "064_order_entries.png");
+// 		@include _addTreeIcon("_productpricegroup", "066_product_prices_claces.png");
+// 		@include _addTreeIcon("_userpricegroup", "067_customer_prices_claces.png");
+// 		@include _addTreeIcon("_pricerow", "068_price_rows.png");
+// 		@include _addTreeIcon("_tax", "070_taxes.png");
+// 		@include _addTreeIcon("_producttaxgroup", "071_product_class_taxes.png");
+// 		@include _addTreeIcon("_usertaxgroup", "072_customer_taxes_jurisdiction.png");
+// 		@include _addTreeIcon("_taxrow", "073_tax_rows.png");
+// 		@include _addTreeIcon("_discount", "075_discounts.png");
+// 		@include _addTreeIcon("_productdiscountgroup", "076_product_discount_classes.png");
+// 		@include _addTreeIcon("_userdiscountgroup", "076_customer_discount_groups.png");
+// 		@include _addTreeIcon("_abstractdiscountrow", "077_discount_rows.png");
+// 		@include _addTreeIcon("_zonedeliverymode", "079_delivery_costs.png");
+// 		@include _addTreeIcon("_standardpaymentmode", "078_payment_methods.png");
+// 		@include _addTreeIcon("_language", "080_languages.png");
+// 		@include _addTreeIcon("_currency", "081_currencies.png");
+// 		@include _addTreeIcon("_country", "082_countries.png");
+// 		@include _addTreeIcon("_region", "083_regions.png");
+// 		@include _addTreeIcon("_cart", "085_carts.png");
+// 		@include _addTreeIcon("_cartentry", "086_cart_entries.png");
+// 		@include _addTreeIcon("_productreference", "087_product_references.png");
+// 		@include _addTreeIcon("_abstractlinkentry", "094_link.png");
+// 		@include _addTreeIcon("_abstractlinkentry", "094_link.png");
+// 		@include _addTreeIcon("_scripting", "0109_script.png");
+// 		@include _addTreeIcon("_scriptingjob", "0110_scriptingJob.png");
+// 		@include _addTreeIcon("_scriptingtask", "0111_scriptingTask.png");
+// 		@include _addTreeIcon("_dynamic_process_definition", "0112_dynamicProcessDefinition.png");
+// 		@include _addTreeIcon("_jalotranslatorconfiguration", "02_configuration_for_content.png");
+// 		@include _addTreeIcon("_job", "0122_job.png");
+// 		@include _addTreeIcon("_joblog", "0123_job_log.png");
+// 		@include _addTreeIcon("_task", "0124_task.png");
+// 		@include _addTreeIcon("_taskcondition", "0125_task_condition.png");
+// 		@include _addTreeIcon("_auditreportconfig", "0126_audit_report_config.png");
+// 		@include _addTreeIcon("_catalogversionsyncjob", "044_synchronization.png");
+	}
+// 	@include _addTreeIcon("-hmc_treenode_impex_import_wizard", "07_import.png");
+// 	@include _addTreeIcon("-hmc_treenode_impex_export_wizard", "06_export.png");
+// 	@include _addTreeIcon("-hmc_treenode_script_generator_wizard", "06_export.png");
+// 	@include _addTreeIcon("-hmc_backoffice-workflow-inbox", "icon_tree_inbox.png");
+// 	@include _addTreeIcon("-jalotranslatorconfiguration", "02_configuration_for_content.png");
+// 	@include _addTreeIcon("-backoffice_dashboard", "icon_tree_backoffice_dashboard.png");
+
+    @include setTreeIconGlyph("backoffice_dashboard", "home");
+    @include setTreeIconGlyph("hmc_backoffice-workflow-inbox", "inbox");
+    @include setTreeIconGlyph("hmc_treenode_system", "it-system");
+    @include setTreeIconGlyph("hmc_treenode_catalog", "sap-box");
+    @include setTreeIconGlyph("hmc_treenode_medias", "documents");
+    @include setTreeIconGlyph("hmc_treenode_user", "account");
+    @include setTreeIconGlyph("hmc_treenode_order", "sales-order");
+    @include setTreeIconGlyph("hmc_treenode_pricesettings", "accounting-document-verification");
+    @include setTreeIconGlyph("hmc_treenode_c2l", "globe");
+    @include setTreeIconGlyph("hmc_treenode_marketing", "marketing-campaign");
+    @include setTreeIconGlyph("hmc.cockpit", "developer-settings");
+}
+
+.yw-generate-out-doc-data-row {
+  .z-combobox {
+	display: inline-table;
+	width: $mediadownload_buttons--width;
+	margin-right: $mediadownload_buttons--margin-right;
+  }
+
+  .yw-generate-out-doc-data-row-top-selector {
+	padding-bottom: $mediaupload_buttons--margin-bottom;
+	display: flex;
+
+	> * {
+	  flex: 0 1 auto;
+	}
+  }
+}
+
+.ya-download-media-inline {
+  width: $mediadownload_inline-button--size;
+  height: $mediadownload_inline-button--size;
+  background-image: url("images/custom-renderer/icons/download-icon-active.png");
+
+  &:hover {
+	background-image: url("images/custom-renderer/icons/download-icon-active-hover.png");
+  }
+}

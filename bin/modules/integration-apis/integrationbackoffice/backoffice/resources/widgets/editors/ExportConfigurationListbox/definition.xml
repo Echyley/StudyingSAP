@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="de.hybris.platform.integrationbackoffice.widgets.ExportConfigurationListbox">
+    <name>ExportConfigurationListbox</name>
+    <description>Listbox to display instances</description>
+    <defaultTitle>ExportConfigurationListbox</defaultTitle>
+    <author>Hybris</author>
+    <version>1.0</version>
+    <keywords>
+        <keyword>ExportConfigurationListbox</keyword>
+    </keywords>
+    <view src="ExportConfigurationListbox.zul"/>
+    <controller
+            class="de.hybris.platform.integrationbackoffice.widgets.configuration.controllers.ExportConfigurationListboxController"/>
+    <sockets>
+        <input id="showListboxOfItem" type="de.hybris.platform.integrationservices.model.IntegrationObjectModel"/>
+        <input id="clearListboxOfItem" type="java.lang.Object"/>
+        <input id="pageable" type="com.hybris.cockpitng.search.data.pageable.Pageable"/>
+        <output id="advancedSearchType" type="java.lang.String"/>
+        <output id="currentSelectedCount" type="java.lang.String"/>
+    </sockets>
+</widget-definition>

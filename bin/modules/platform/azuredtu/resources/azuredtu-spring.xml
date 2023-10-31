@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="abstractAzureDatabaseService" class="de.hybris.platform.azure.dtu.impl.AbstractAzureDatabaseService" abstract="true">
+        <property name="databaseAccessService" ref="databaseAccessService" />
+    </bean>
+
+    <alias alias="databaseUtilizationService" name="bufferedDatabaseUtilizationService"/>
+    <bean id="bufferedDatabaseUtilizationService"
+          class="de.hybris.platform.azure.dtu.impl.BufferedDatabaseUtilizationService">
+        <constructor-arg name="origin" ref="azureDatabaseUtilizationService"/>
+    </bean>
+
+    <alias alias="azureDatabaseUtilizationService" name="defaultAzureDatabaseUtilizationService"/>
+    <bean id="defaultAzureDatabaseUtilizationService" parent="abstractAzureDatabaseService"
+          class="de.hybris.platform.azure.dtu.impl.AzureDatabaseUtilizationService">
+        <constructor-arg name="jdbcTemplate" ref="jdbcTemplateWithMasterDataSource"/>
+    </bean>
+
+    <bean id="jdbcTemplateWithMasterDataSource" class="de.hybris.platform.azure.dtu.impl.HybrisJdbcTemplateWithMasterDataSource" />
+
+    <alias alias="databaseAccessService" name="defaultDatabaseAccessService" />
+    <bean id="defaultDatabaseAccessService" class="de.hybris.platform.azure.dtu.impl.DefaultDatabaseAccessService" />
+</beans>

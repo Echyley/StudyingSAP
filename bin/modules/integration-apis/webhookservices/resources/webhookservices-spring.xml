@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/integration
+           http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+    <import resource="webhookservices-retry-spring.xml"/>
+
+    <bean id="webhookConfigValidateInterceptor"
+          class="de.hybris.platform.webhookservices.model.WebhookConfigurationValidateInterceptor">
+    </bean>
+
+
+    <bean id="webhookConfigValidateInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="webhookConfigValidateInterceptor"/>
+        <property name="typeCode" value="WebhookConfiguration"/>
+    </bean>
+
+    <bean id="webhookConfigurationDestinationValidateInterceptor"
+          class="de.hybris.platform.webhookservices.model.WebhookConfigurationDestinationValidateInterceptor"/>
+    <bean id="webhookConfigurationDestinationValidateInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="webhookConfigurationDestinationValidateInterceptor"/>
+        <property name="typeCode" value="WebhookConfiguration"/>
+    </bean>
+
+    <alias name="defaultWebhookConfigurationService" alias="webhookConfigurationService"/>
+    <bean id="defaultWebhookConfigurationService"
+          class="de.hybris.platform.webhookservices.service.impl.DefaultWebhookConfigurationService">
+        <constructor-arg name="flexibleSearchService" ref="flexibleSearchService"/>
+        <constructor-arg name="descriptorFactory" ref="integrationServicesDescriptorFactory"/>
+        <constructor-arg name="itemSearchService" ref="itemModelSearchService"/>
+    </bean>
+
+    <alias name="defaultWebhookValidationService" alias="webhookValidationService"/>
+    <bean id="defaultWebhookValidationService"
+          class="de.hybris.platform.webhookservices.service.impl.DefaultWebhookValidationService">
+        <constructor-arg ref="remoteSystemClient"/>
+        <constructor-arg ref="outboundServiceFacade"/>
+        <constructor-arg ref="cloudEventHeadersService"/>
+    </bean>
+
+    <alias name="afterSaveEventListener" alias="webhookServicesAfterSaveEventListener"/>
+    <bean id="afterSaveEventListener"
+          class="de.hybris.platform.webhookservices.event.WebhookServicesAfterSaveEventListener">
+        <constructor-arg name="tenantLifecycle" ref="integrationTenantLifecycle"/>
+        <constructor-arg name="webhookEventFactory" ref="webhookEventFactory"/>
+        <constructor-arg name="rootEventSender" ref="rootEventSender"/>
+        <property name="webhookConfigurationService" ref="webhookConfigurationService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <int:gateway id="rootEventSender"
+                 service-interface="de.hybris.platform.webhookservices.event.RootEventSender"
+                 default-request-channel="webhookServicesAggregatorChannel"/>
+
+    <int:channel id="webhookServicesAggregatorChannel"/>
+
+    <int:aggregator id="rootEventGroupAggregator"
+                    input-channel="webhookServicesAggregatorChannel"
+                    output-channel="webhookServicesAggregatedQueueChannel"
+
+                    send-partial-result-on-expiry="true"
+                    send-timeout="${webhookservices.aggregating.send.timeout}"
+
+                    release-strategy="webhookServicesReleaseStrategy"
+
+                    ref="webhookServicesAggregator"
+                    method="aggregate"
+
+                    correlation-strategy="rootEventCorrelationStrategy"
+                    correlation-strategy-method="correlationKey"
+
+                    group-timeout="${webhookservices.aggregating.group.timeout}"
+
+                    expire-groups-upon-completion="true"
+                    scheduler="webhookServicesAggregatedTaskScheduler"/>
+
+    <bean id="webhookServicesAggregator"
+          class="de.hybris.platform.webhookservices.service.impl.WebhookEventAggregator">
+        <constructor-arg name="webhookServicesConfiguration" ref="webhookServicesConfiguration"/>
+    </bean>
+
+    <bean id="webhookServicesReleaseStrategy"
+          class="org.springframework.integration.aggregator.SimpleSequenceSizeReleaseStrategy"/>
+
+    <bean id="rootEventCorrelationStrategy"
+          class="de.hybris.platform.webhookservices.dto.EventRootItemCorrelationStrategy"/>
+
+    <int:channel id="webhookServicesAggregatedQueueChannel">
+        <int:queue capacity="${webhookservices.aggregated.queue.channel.capacity}"/>
+        <int:interceptors>
+            <int:wire-tap channel="webhookServicesAggregatedQueueChannelLogger"/>
+        </int:interceptors>
+    </int:channel>
+
+    <int:service-activator id="webhookServicesServiceActivator" input-channel="webhookServicesAggregatedQueueChannel"
+                           ref="webhookSyncItemRouter" method="route">
+        <int:poller fixed-delay="${webhookservices.queue.polling.frequency.milliseconds}"
+                    max-messages-per-poll="${webhookservices.queue.max.messages.per.poll}"
+                    task-executor="webhookServicesRootEventTaskExecutor"
+                    receive-timeout="${webhookservices.queue.polling.frequency.milliseconds}"/>
+    </int:service-activator>
+
+    <alias name="defaultWebhookServicesRootEventTaskExecutor" alias="webhookServicesRootEventTaskExecutor"/>
+    <bean id="defaultWebhookServicesRootEventTaskExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="threadFactory" ref="webhookServicesThreadFactory"/>
+        <property name="corePoolSize" value="${webhookservices.taskexecutor.pool.size}"/>
+        <property name="maxPoolSize" value="${webhookservices.taskexecutor.max.pool.size}"/>
+        <property name="keepAliveSeconds" value="${webhookservices.taskexecutor.thread.keep.alive.seconds}"/>
+        <property name="queueCapacity" value="${webhookservices.taskexecutor.queue.capacity}"/>
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy"/>
+        </property>
+    </bean>
+
+    <bean id="webhookServicesTaskSchedulerUpdater"
+          class="de.hybris.platform.integrationservices.util.PollingConsumerTaskSchedulerUpdater">
+        <constructor-arg name="pollingConsumer" ref="webhookServicesServiceActivator"/>
+        <constructor-arg name="taskScheduler" ref="webhookServicesAggregatedTaskScheduler"/>
+    </bean>
+
+    <alias name="defaultWebhookServicesAggregatedScheduler" alias="webhookServicesAggregatedTaskScheduler"/>
+    <bean id="defaultWebhookServicesAggregatedScheduler"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+        <property name="threadFactory" ref="webhookServicesThreadFactory"/>
+        <property name="poolSize" value="${webhookservices.task.scheduler.pool.size}"/>
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy"/>
+        </property>
+    </bean>
+
+    <alias name="defaultWebhookSyncItemRouter" alias="webhookSyncItemRouter"/>
+    <bean id="defaultWebhookSyncItemRouter"
+          class="de.hybris.platform.webhookservices.service.impl.DefaultWebhookSyncItemRouter">
+        <constructor-arg name="eventSender" ref="exportEventSender"/>
+    </bean>
+
+    <int:logging-channel-adapter level="DEBUG" log-full-message="true"
+                                 id="webhookServicesAggregatedQueueChannelLogger"/>
+
+    <alias name="defaultWebhookServicesTaskExecutor" alias="webhookServicesTaskExecutor"/>
+    <bean id="defaultWebhookServicesTaskExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="${webhookservices.taskexecutor.pool.size}"/>
+        <property name="keepAliveSeconds" value="${webhookservices.taskexecutor.thread.keep.alive.seconds}"/>
+        <property name="maxPoolSize" value="${webhookservices.taskexecutor.max.pool.size}"/>
+        <property name="queueCapacity" value="${webhookservices.taskexecutor.queue.capacity}"/>
+        <property name="threadFactory" ref="webhookServicesThreadFactory"/>
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy"/>
+        </property>
+    </bean>
+
+    <!-- the tenant thread factory provides the tenant and user to the threads so we have permission to search for certain types -->
+    <alias name="defaultWebhookServicesThreadFactory" alias="webhookServicesThreadFactory"/>
+    <bean id="defaultWebhookServicesThreadFactory"
+          class="de.hybris.platform.integrationservices.util.TenantAdminUserAwareThreadFactory">
+        <constructor-arg name="tenant" ref="tenantFactory"/>
+    </bean>
+
+    <alias name="defaultWebhookEventRouter" alias="webhookEventRouter"/>
+    <bean id="defaultWebhookEventRouter"
+          class="de.hybris.platform.webhookservices.service.impl.DefaultWebhookEventRouter"/>
+
+    <bean depends-on="eventRoutingMap" parent="mapMergeDirective">
+        <property name="key" value="WEBHOOKSERVICES"/>
+        <property name="value" value="webhookServicesChannel"/>
+    </bean>
+
+    <!-- Routing events based on the event type -->
+    <int:router input-channel="webhookServicesChannel" ref="webhookEventRouter" method="route"/>
+
+    <int:channel id="persistenceEventChannel">
+        <int:dispatcher task-executor="webhookServicesTaskExecutor"/>
+    </int:channel>
+    <int:chain input-channel="persistenceEventChannel">
+        <int:service-activator ref="webhookEventToItemSender" method="send"/>
+        <int:logging-channel-adapter level="ERROR" log-full-message="true" logger-name="WebhookServicesChannelLogger"/>
+    </int:chain>
+
+    <int:channel id="deleteEventChannel">
+        <int:dispatcher task-executor="webhookServicesTaskExecutor"/>
+    </int:channel>
+    <int:chain input-channel="deleteEventChannel">
+        <int:service-activator ref="webhookDeleteEventToItemSender" method="send"/>
+        <int:logging-channel-adapter level="ERROR" log-full-message="true" logger-name="WebhookServicesChannelLogger"/>
+    </int:chain>
+
+    <alias name="defaultWebhookEventToItemSender" alias="webhookEventToItemSender"/>
+    <bean id="defaultWebhookEventToItemSender"
+          class="de.hybris.platform.webhookservices.service.impl.WebhookEventToItemSender">
+        <constructor-arg name="webhookConfigurationService" ref="webhookConfigurationService"/>
+        <constructor-arg name="itemModelSearchService" ref="itemModelSearchService"/>
+        <constructor-arg name="outboundServiceFacade" ref="webhookImmediateRetryOutboundServiceFacade"/>
+        <property name="filterService" ref="webhookFilterService"/>
+    </bean>
+
+    <alias name="defaultWebhookDeleteEventToItemSender" alias="webhookDeleteEventToItemSender"/>
+    <bean id="defaultWebhookDeleteEventToItemSender"
+          class="de.hybris.platform.webhookservices.service.impl.WebhookDeleteEventToItemSender">
+        <constructor-arg name="webhookConfigurationService" ref="webhookConfigurationService"/>
+        <constructor-arg name="itemModelSearchService" ref="itemModelSearchService"/>
+        <constructor-arg name="outboundServiceFacade" ref="webhookImmediateRetryOutboundServiceFacade"/>
+        <constructor-arg name="webhookCacheService" ref="webhookCacheService"/>
+    </bean>
+
+    <alias name="defaultWebhookImmediateRetryOutboundServiceFacade" alias="webhookImmediateRetryOutboundServiceFacade"/>
+    <bean name="defaultWebhookImmediateRetryOutboundServiceFacade"
+          class="de.hybris.platform.webhookservices.service.impl.WebhookImmediateRetryOutboundServiceFacade">
+        <constructor-arg ref="outboundServiceFacade"/>
+        <constructor-arg ref="webhookServicesRetryTemplate"/>
+    </bean>
+
+    <alias name="defaultWebhookFilterService" alias="webhookFilterService"/>
+    <bean id="defaultWebhookFilterService"
+          class="de.hybris.platform.webhookservices.filter.impl.DefaultWebhookFilterService">
+        <constructor-arg ref="scriptingLanguagesService"/>
+    </bean>
+
+    <!--the list is used for verifying if consumed destination is assigned to WebhookConfiguration-->
+    <bean depends-on="consumedDestinationPreventRemoveList" parent="listMergeDirective">
+        <property name="add">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+                <entry key="#{T(de.hybris.platform.apiregistryservices.constants.ApiregistryservicesConstants).ITEM_DESTINATION_ATTRIBUTE}"
+                       value="#{T(de.hybris.platform.webhookservices.model.WebhookConfigurationModel).DESTINATION}"/>
+                <entry key="#{T(de.hybris.platform.apiregistryservices.constants.ApiregistryservicesConstants).ITEM_TYPE_CODE}"
+                       value="#{T(de.hybris.platform.webhookservices.model.WebhookConfigurationModel)._TYPECODE}"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="noWebhookConfigBeforeRemoveIOChecker"
+          class="de.hybris.platform.webhookservices.interceptor.NoWebhookConfigBeforeRemoveIOChecker">
+        <constructor-arg name="flexibleSearchService"
+                         ref="flexibleSearchService"/>
+    </bean>
+
+    <alias name="defaultCloudEventHeadersService" alias="cloudEventHeadersService"/>
+    <bean id="defaultCloudEventHeadersService"
+          class="de.hybris.platform.webhookservices.service.impl.DefaultCloudEventHeadersService">
+        <constructor-arg name="cloudEventConfigurationService" ref="cloudEventConfigurationService"/>
+    </bean>
+
+    <alias name="defaultCloudEventConfigurationService" alias="cloudEventConfigurationService"/>
+    <bean id="defaultCloudEventConfigurationService"
+          class="de.hybris.platform.webhookservices.service.impl.DefaultCloudEventConfigurationService"/>
+
+    <alias name="defaultCloudEventHeadersRequestDecorator" alias="cloudEventHeadersRequestDecorator"/>
+    <bean id="defaultCloudEventHeadersRequestDecorator"
+          class="de.hybris.platform.webhookservices.decorator.DefaultCloudEventHeadersRequestDecorator">
+        <constructor-arg ref="cloudEventHeadersService"/>
+    </bean>
+    <bean id="cloudEventHeadersDecoratorList" depends-on="outboundRequestDecoratorList" parent="listMergeDirective">
+        <property name="add" ref="cloudEventHeadersRequestDecorator"/>
+    </bean>
+
+    <alias name="defaultWebhookEventFactory" alias="webhookEventFactory"/>
+    <bean id="defaultWebhookEventFactory"
+          class="de.hybris.platform.webhookservices.event.impl.DefaultWebhookEventFactory">
+        <property name="itemModelSearchService" ref="webhookSearchService"/>
+        <property name="webhookConfigurationService" ref="webhookConfigurationService"/>
+        <property name="rootItemSearchService" ref="integrationServicesRootItemSearchService"/>
+    </bean>
+
+    <alias name="webhookNonLocalizedMapType2MapPopulator" alias="nonLocalizedMapType2MapPopulator"/>
+    <bean id="webhookNonLocalizedMapType2MapPopulator" parent="defaultNonLocalizedMapType2MapPopulator"
+          class="de.hybris.platform.webhookservices.populator.WebhookNonLocalizedMapType2MapPopulator"/>
+
+    <alias name="defaultWebhookPayloadBuildingRequestDecorator" alias="buildPayloadRequestDecorator"/>
+    <bean id="defaultWebhookPayloadBuildingRequestDecorator" parent="defaultBuildPayloadRequestDecorator"
+          class="de.hybris.platform.webhookservices.decorator.WebhookPayloadBuildingRequestDecorator">
+    </bean>
+
+    <alias name="defaultWebhookItemPayloadConverter" alias="webhookItemPayloadConverter"/>
+    <bean name="defaultWebhookItemPayloadConverter"
+          class="de.hybris.platform.webhookservices.cache.DefaultWebhookItemPayloadConverter">
+        <constructor-arg name="webhookConfigurationService" ref="webhookConfigurationService"/>
+        <constructor-arg name="conversionService" ref="integrationObjectConversionService"/>
+        <constructor-arg name="webhookFilterService" ref="webhookFilterService"/>
+    </bean>
+
+    <alias name="defaultWebhookCacheService" alias="webhookCacheService"/>
+    <bean id="defaultWebhookCacheService"
+          class="de.hybris.platform.webhookservices.cache.DefaultWebhookCacheService">
+        <constructor-arg name="itemPayloadsCache" ref="webhookConvertedItemCache"/>
+        <constructor-arg name="deletedItemCache" ref="webhookDeletedItemCache"/>
+        <constructor-arg name="configurationService" ref="webhookConfigurationService"/>
+        <constructor-arg name="itemPayloadConverter" ref="webhookItemPayloadConverter"/>
+    </bean>
+
+    <alias name="defaultWebhookSearchService" alias="webhookSearchService"/>
+    <bean id="defaultWebhookSearchService"
+          class="de.hybris.platform.webhookservices.search.DefaultWebhookSearchService">
+        <constructor-arg name="webhookCacheService" ref="webhookCacheService"/>
+        <constructor-arg name="itemModelSearchService" ref="itemModelSearchService"/>
+    </bean>
+
+    <alias name="defaultWebhookItemRemoveInterceptor" alias="webhookItemRemoveInterceptor"/>
+    <bean id="defaultWebhookItemRemoveInterceptor"
+          class="de.hybris.platform.webhookservices.interceptor.WebhookItemRemoveInterceptor">
+        <constructor-arg name="cacheService" ref="webhookCacheService"/>
+    </bean>
+
+    <bean class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="webhookItemRemoveInterceptor"/>
+        <property name="typeCode" value="Item"/>
+    </bean>
+
+    <alias name="defaultWebhookServicesConfiguration" alias="webhookServicesConfiguration"/>
+    <bean id="defaultWebhookServicesConfiguration"
+          class="de.hybris.platform.webhookservices.config.impl.DefaultWebhookServicesConfiguration">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+</beans>

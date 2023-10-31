@@ -1,0 +1,41 @@
+se-restriction-management-select {
+    .se-restriction-management-select__select,
+    .se-restriction-management-select__restriction-info {
+        margin-bottom: se-space('s');
+    }
+
+    .se-restriction-management-select__restriction-editor {
+        border-top: se-border();
+        padding-top: se-space('s');
+    }
+
+    .se-restriction-management-select__new-restriction-message {
+        @include se-weight('bold');
+    }
+
+    .fd-menu__list-header {
+        @include se-type('1');
+        padding: se-space('xxs') se-space('xs');
+        border-bottom: se-border();
+        color: var(--sapNeutralColor);
+        list-style: none;
+        padding-left: 24px;
+    }
+
+    .se-select-list__item.is-disabled {
+        opacity: 0.65;
+
+        .fd-menu__item {
+            cursor: not-allowed;
+        }
+    }
+
+    // There are two elements with the same class
+    // se-actionable-search-item and div, only div is desired to have styles
+    div.se-actionable-search-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0 0 13px;
+    }
+}

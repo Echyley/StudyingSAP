@@ -1,0 +1,13 @@
+
+<div>
+    <div>
+        <label class="missing-primary-content-page-message__label" [translate]="'se.cms.page.restore.content.page.noprimaryforvariation.msg'">
+        </label>
+    </div>
+    <se-select
+            id="se-page-restore-change-primary-selector-dropdown"
+            [(model)]="cmsPage.label"
+            [fetchStrategy]="fetchStrategy"
+    >
+    </se-select>
+</div>

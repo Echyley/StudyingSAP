@@ -1,0 +1,43 @@
+<ng-container *ngIf="isDecisionComment; then decisionComment; else generalComment"></ng-container>
+
+<ng-template #decisionComment>
+    <div class="se-workflow-action-comment">
+        <div class="se-tile-content">
+            <h2
+                class="fd-tile__title se-workflow-action-comment__header sap-icon--workflow-tasks sap-icon--m"
+                [class.sap-icon--flip-h]="!isIncomingDecision()"
+            >
+                {{ actionComment.decisionName }}
+            </h2>
+            <p class="fd-has-type-minus-1 fd-tile__content-byline">
+                {{ actionComment.authorName }} | {{ createdAgo }}
+            </p>
+            <p *ngIf="!!actionComment.text">
+                <strong>{{'se.cms.page.workflow.action.item.comment.header' | translate}}:</strong>
+                <ng-container *ngTemplateOutlet="comment"></ng-container>
+            </p>
+        </div>
+    </div>
+</ng-template>
+<ng-template #generalComment>
+    <div class="se-workflow-action-comment">
+        <div class="fd-tile">
+            <div class="fd-tile__content">
+                <h2 class="fd-panel__title">
+                    {{'se.cms.page.workflow.action.item.comment.header' | translate}}
+                </h2>
+                <p>{{ createdAgo }}</p>
+                <p class="se-workflow-action-comment__author">{{ actionComment.authorName }}</p>
+                <ng-container *ngTemplateOutlet="comment"></ng-container>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #comment>
+    <se-more-text
+        class="se-workflow-action-comment__body"
+        [ellipsis]="'...'"
+        [text]="actionComment.text"
+    ></se-more-text>
+</ng-template>

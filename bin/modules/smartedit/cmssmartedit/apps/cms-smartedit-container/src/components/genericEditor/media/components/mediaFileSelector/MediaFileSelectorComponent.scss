@@ -1,0 +1,55 @@
+@import '../../media';
+
+.se-file-selector {
+    $block: &;
+    @include se-flex-row;
+
+    &--disabled {
+        .se-file-selector__btn {
+            &:focus,
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    &__btn {
+        @include se-media-action-btn;
+        position: relative;
+
+        #{$block}--disabled & {
+            &:focus,
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
+        & > *:first-child {
+            display: block;
+            top: 0;
+        }
+    }
+
+    &__custombtn {
+        @include se-media-action-btn;
+        position: relative;
+
+        #{$block}--disabled & {
+            &:focus,
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
+        & > *:first-child {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__label {
+        @include se-text-ellipsis;
+        color: var(--sapInformativeColor);
+    }
+}

@@ -1,0 +1,67 @@
+.cdk-drag-preview {
+    z-index: 2000 !important;
+}
+
+.cdk-drag-row-layout {
+    display: flex;
+}
+
+.pe-manager-view-tree-more-list {
+    &__item {
+        padding: 10px 10px;
+        cursor: pointer;
+    }
+
+    &__item {
+        &:first-child{
+            &:hover{
+                border-top-left-radius: var(--sapElement_BorderCornerRadius);
+                border-top-right-radius: var(--sapElement_BorderCornerRadius);
+            }
+        }
+        &:last-child{
+            &:hover{
+                border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+                border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+            }
+        }
+        &:hover{
+            background-color: var(--sapList_Hover_Background);
+            cursor: pointer;
+        }
+    }
+    
+
+    &__item-active {
+        color: fd-color("text", 1);
+        cursor: pointer;
+    }
+
+    &__item-inactive {
+        color: fd-color("text", 4);
+        cursor: not-allowed;
+    }
+
+    &__item-deletion {
+        color: fd-color("status", 3);
+        cursor: pointer;
+    }
+
+    &__dropdown {
+        @include se-dropdown-menu("right", "no-arrow");
+    }
+}
+
+.drop-before {
+    border-top: 1px solid black;
+    z-index: 2000 !important;
+}
+
+.drop-after {
+    border-bottom: 1px solid black;
+    z-index: 2000 !important;
+}
+
+.perso__cc-icon-padding {
+    padding-right: 15px;
+}

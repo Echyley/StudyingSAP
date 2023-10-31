@@ -1,0 +1,65 @@
+<fd-layout-grid class="pe-datetime-range">
+    <div [fdLayoutGridCol]="6" class="pe-datetime-range__from" [ngClass]="{ 'has-error': !isFromDateValid }">
+        <label for="pe-start-date" fd-form-label class="perso__datetimepicker__label">
+        {{ 'personalization.modal.customizationvariationmanagement.basicinformationtab.details.startdate' | translate }}
+        </label>
+        <se-help>
+            <span
+                translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.startdate.help"
+            ></span>
+        </se-help>
+        <fd-datetime-picker
+            [allowNull]="true" 
+            id="pe-start-date"
+            name="pe-dateFrom" 
+            [placeholder]="placeholderText | translate"
+            [disabled]="!isEditable"
+            [(ngModel)]="fdDateFrom"
+            (ngModelChange)="dateFromOnChange(fdDateFrom)"
+        ></fd-datetime-picker>   
+        <span
+            *ngIf="!isFromDateValid"
+            class="pe-datetime__error-msg pe-datetime__msg"
+            translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.wrongdateformatfrom.description"
+        >
+        </span>
+    </div>
+    <!-- date to -->
+    <div
+        [fdLayoutGridCol]="6"
+        class="pe-datetime-range__to"
+        [ngClass]="{ 'has-error': !isToDateValid, 'has-warning': isEndDateInThePast }"
+    >
+        <label for="pe-end-date" fd-form-label class="perso__datetimepicker__label">
+        {{ 'personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddate' | translate }}
+        </label>
+        <se-help>
+            <span
+                translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddate.help"
+            ></span>
+        </se-help> 
+        <fd-datetime-picker
+            [allowNull]="true" 
+            id="pe-end-date"
+            name="pe-dateTo"
+            [placeholder]="placeholderText | translate"
+            [disabled]="!isEditable"
+            [(ngModel)]="fdDateTo"
+            (ngModelChange)="dateToOnChange(fdDateTo)"
+        ></fd-datetime-picker>  
+        <span
+            *ngIf="!isToDateValid"
+            class="pe-datetime__error-msg pe-datetime__msg"
+            translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.wrongdateformatfrom.description"
+        >
+        </span>
+        <span
+            *ngIf="isEndDateInThePast"
+            class="help-block pe-datetime__warning-msg pe-datetime__msg"
+        >
+            <span
+                translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddateinthepast.description"
+            ></span>
+        </span>
+    </div>
+</fd-layout-grid>

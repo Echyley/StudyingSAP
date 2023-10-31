@@ -1,0 +1,10 @@
+.results-header {
+    .fd-menu__list-header {
+        @include se-type('1');
+        padding: se-space('xxs') se-space('xs');
+        border-bottom: se-border();
+        color: var(--sapNeutralColor);
+        display: block;
+        padding-left: 24px;
+    }
+}

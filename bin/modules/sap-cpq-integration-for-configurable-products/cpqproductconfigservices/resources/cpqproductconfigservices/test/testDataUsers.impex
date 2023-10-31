@@ -1,0 +1,14 @@
+$defaultCurrency=EUR
+$lang=en
+$passwordEncoding=md5
+$defaultPassword=welcome
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+
+###################################################################################
+# CPQ Test Users
+###################################################################################
+
+INSERT_UPDATE Customer;description;uid[unique=true];originalUid;email;name;sessionCurrency(isocode)[default=$defaultCurrency];$setPassword;groups(uid);
+;CPQ Customer 01;cpq01;cpq01;cpq01@sap.com;cpq01;;;customergroup;
+;CPQ Customer 02;cpq02;cpq02;cpq02@sap.com;cpq02;;;customergroup;

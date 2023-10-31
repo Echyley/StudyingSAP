@@ -1,0 +1,15 @@
+<ng-container *ngIf="isReady">
+    <se-select
+        *ngIf="isSingleVersionSelector"
+        [id]="geData.qualifier"
+        [(model)]="geData.model.productCatalogVersions[0]"
+        [(reset)]="reset"
+        [fetchStrategy]="fetchStrategy"
+    ></se-select>
+    <se-multi-product-catalog-version-selector
+        *ngIf="isMultiVersionSelector"
+        [productCatalogs]="productCatalogs"
+        [(selectedProductCatalogVersions)]="geData.model[geData.qualifier]"
+    >
+    </se-multi-product-catalog-version-selector>
+</ng-container>

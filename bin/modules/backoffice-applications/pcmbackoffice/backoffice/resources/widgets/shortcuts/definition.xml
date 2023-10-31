@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="com.hybris.pcmbackoffice.shortcuts">
+    <name>Shortcuts</name>
+    <description>Shortcuts Widget displays the list of quick list and blocked list</description>
+    <defaultTitle>Shortcuts</defaultTitle>
+    <author>hybris</author>
+    <version>0.1</version>
+    <view src="shortcuts.zul"/>
+
+    <sockets>
+        <output id="selectedItem" type="java.lang.String"/>
+        <output id="deselectAllItems" type="java.lang.Object"/>
+        <output id="resetFullTextSearch" type="java.util.Map"/>
+        <output id="updateFullTextSearch" type="com.hybris.backoffice.widgets.advancedsearch.impl.SearchConditionData" multiplicity="List"/>
+        <output id="updateAssortmentFullTextSearch" type="com.hybris.backoffice.widgets.advancedsearch.impl.SearchConditionData" multiplicity="List"/>
+        <output id="initSearch" type="java.lang.String"/>
+        <input id="reset" type="java.lang.Object"/>
+        <input id="refresh" type="java.lang.Object"/>
+        <input id="searchInit" type="java.lang.String"/>
+        <input id="updateContext" type="com.hybris.backoffice.widgets.advancedsearch.impl.AdvancedSearchInitContext"/>
+        <input id="refreshAssortmentFullTextSearch" type="java.lang.Object"/>
+    </sockets>
+
+    <controller class="com.hybris.pcmbackoffice.widgets.shortcuts.ShortcutsController"/>
+
+</widget-definition>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean parent="subclassMapping">
+		<property name="parentClass"
+				  value="de.hybris.platform.assistedservicewebservices.dto.Customer360DataWsDTO"/>
+		<property name="subclassesSet">
+			<set>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360ReviewList</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360StoreLocation</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360Overview</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360CustomerProductInterestList</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360CouponList</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360PromotionList</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360CustomerCouponList</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360ActivityList</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360CustomerProfile</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360Cart</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360SavedCart</value>
+				<value>de.hybris.platform.assistedservicewebservices.dto.C360TicketList</value>
+			</set>
+		</property>
+	</bean>
+
+	<alias name="defaultCustomer360DataTypeSectionMap" alias="customer360DataTypeSectionMap"/>
+	<util:map id="defaultCustomer360DataTypeSectionMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="c360ReviewList" value="feedbackSection"/>
+		<entry key="c360StoreLocation" value="storeLocationsSection"/>
+		<entry key="c360PromotionList" value="promotionSection"/>
+		<entry key="c360CouponList" value="promotionSection"/>
+		<entry key="c360CustomerProfile" value="customerProfileSection"/>
+		<entry key="c360CustomerCouponList" value="promotionSection"/>
+		<entry key="c360CustomerProductInterestList" value="customerOverviewSection"/>
+		<entry key="c360ActivityList" value="activitySection"/>
+		<entry key="c360TicketList" value="feedbackSection"/>
+		<entry key="c360Cart" value="customerOverviewSection"/>
+		<entry key="c360SavedCart" value="customerOverviewSection"/>
+	</util:map>
+
+	<alias name="defaultCustomer360DataTypeFragmentMap" alias="customer360DataTypeFragmentMap"/>
+	<util:map id="defaultCustomer360DataTypeFragmentMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="c360ReviewList" value="reviewFragment"/>
+		<entry key="c360StoreLocation" value="storeLocationsFragment"/>
+		<entry key="c360Overview" value="headingFragment" />
+		<entry key="c360CustomerProductInterestList" value="customerInterestsFragment"/>
+		<entry key="c360PromotionList" value="CSAPromotionsFragment"/>
+		<entry key="c360CouponList" value="CSACouponsFragment"/>
+		<entry key="c360ActivityList" value="generalActivityFragment"/>
+		<entry key="c360CustomerProfile" value="customerProfileFragment"/>
+		<entry key="c360CustomerCouponList" value="CSACustomerCouponsFragment"/>
+		<entry key="c360Cart" value="customerCartFragment"/>
+		<entry key="c360SavedCart" value="customerSavedCartFragment"/>
+		<entry key="c360TicketList" value="ticketsFragment"/>
+	</util:map>
+
+	<bean id="pointOfServiceDataMapper" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData" />
+		<property name="destClass"
+				  value="de.hybris.platform.assistedservicewebservices.dto.ASMPointOfServiceWsDTO" />
+		<property name="fieldMapping">
+			<map>
+				<entry key="name" value="id" />
+				<entry key="displayName" value="name" />
+			</map>
+		</property>
+	</bean>
+</beans>

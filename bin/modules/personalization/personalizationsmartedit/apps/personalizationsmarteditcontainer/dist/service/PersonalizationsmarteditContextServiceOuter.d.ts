@@ -1,0 +1,30 @@
+import { PersonalizationsmarteditContextUtils, Personalization, Customize, CombinedView, SeData, IPersonalizationsmarteditContextServiceProxy } from 'personalizationcommons';
+import { ISharedDataService } from 'smarteditcommons';
+import { LoadConfigManagerService } from 'smarteditcontainer';
+import { PersonalizationsmarteditContextServiceProxy } from './PersonalizationsmarteditContextServiceOuterProxy';
+export declare class PersonalizationsmarteditContextService {
+    protected sharedDataService: ISharedDataService;
+    protected loadConfigManagerService: LoadConfigManagerService;
+    protected personalizationsmarteditContextServiceProxy: IPersonalizationsmarteditContextServiceProxy;
+    protected personalizationsmarteditContextUtils: PersonalizationsmarteditContextUtils;
+    protected personalization: Personalization;
+    protected customize: Customize;
+    protected combinedView: CombinedView;
+    protected seData: SeData;
+    protected customizeFiltersState: any;
+    constructor(sharedDataService: ISharedDataService, loadConfigManagerService: LoadConfigManagerService, personalizationsmarteditContextServiceProxy: IPersonalizationsmarteditContextServiceProxy, personalizationsmarteditContextUtils: PersonalizationsmarteditContextUtils);
+    getPersonalization(): Personalization;
+    setPersonalization(personalization: Personalization): void;
+    getCustomize(): Customize;
+    setCustomize(customize: Customize): void;
+    getCombinedView(): CombinedView;
+    setCombinedView(combinedView: CombinedView): void;
+    getSeData(): SeData;
+    setSeData(seData: SeData): void;
+    refreshExperienceData(): any;
+    refreshConfigurationData(): any;
+    applySynchronization(): void;
+    getContexServiceProxy(): PersonalizationsmarteditContextServiceProxy;
+    getCustomizeFiltersState(): any;
+    setCustomizeFiltersState(filters: any): any;
+}

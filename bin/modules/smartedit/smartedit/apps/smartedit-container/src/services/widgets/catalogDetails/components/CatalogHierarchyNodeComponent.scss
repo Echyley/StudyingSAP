@@ -1,0 +1,39 @@
+se-catalog-hierarchy-node {
+    display: flex;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 12px 20px;
+    & + & {
+        border-top: 1px solid var(--sapBackgroundColor);
+    }
+}
+
+.se-cth-node-name {
+    display: flex;
+    fd-icon {
+        color: var(--sapBrandColor);
+        padding-right: 10px;
+    }
+
+    &__last {
+        font-weight: 700;
+    }
+}
+
+.se-cth-node-sites {
+    margin-left: auto;
+    color: var(--sapBrandColor);
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.se-cth-node-anchor {
+    display: flex;
+    color: var(--sapBrandColor);
+
+    > fd-icon {
+        margin-left: 5px;
+    }
+}

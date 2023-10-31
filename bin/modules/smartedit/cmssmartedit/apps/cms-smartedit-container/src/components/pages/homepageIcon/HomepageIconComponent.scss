@@ -1,0 +1,11 @@
+.se-homepage-icon {
+    margin-right: se-space('base');
+
+    &--current {
+        color: var(--sapInformativeColor);
+    }
+
+    &--old {
+        color: var(--sapTextColor);
+    }
+}

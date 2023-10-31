@@ -1,0 +1,20 @@
+# Creates an integration object to reproduce the problem.
+# Note that "type" attribute in "Phone" item is autocreate and will attempt to create a non-existent enum value
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; TestIO
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]; type(code)          ; root
+                                   ; TestIO                                ; Phone              ; PhoneContactInfo    ; true
+                                   ; TestIO                                ; PhoneType          ; PhoneContactInfoType; false
+                                   ; TestIO                                ; Customer           ; Customer            ; false
+$item=integrationObjectItem(integrationObject(code), code)
+$attrDescriptor=attributeDescriptor(enclosingType(code), qualifier)
+$attributeType=returnIntegrationObjectItem(integrationObject(code), code)
+INSERT_UPDATE IntegrationObjectItemAttribute; $item[unique = true]; attributeName[unique = true]; $attrDescriptor             ; $attributeType  ; unique; autoCreate[default = false]
+                                            ; TestIO:Phone        ; code                        ; PhoneContactInfo:code       ;                 ; true  ;
+                                            ; TestIO:Phone        ; number                      ; PhoneContactInfo:phoneNumber;                 ; false ;
+                                            ; TestIO:Phone        ; type                        ; PhoneContactInfo:type       ; TestIO:PhoneType; false ; true
+                                            ; TestIO:Phone        ; user                        ; PhoneContactInfo:user       ; TestIO:Customer ; false ;
+                                            ; TestIO:PhoneType    ; code                        ; PhoneContactInfoType:code   ;                 ; true  ;
+                                            ; TestIO:Customer     ; id                          ; User:uid                    ;                 ; true  ;
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique=true]; authenticationType(code)
+                                         ; TestIO                              ; BASIC

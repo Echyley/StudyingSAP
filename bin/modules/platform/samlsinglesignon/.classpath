@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry exported="true" kind="lib" path="lib/cryptacular-1.1.4.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/java-support-8.0.0.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-core-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-messaging-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-profile-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-saml-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-saml-impl-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-security-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-security-impl-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-soap-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-soap-impl-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-storage-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-xmlsec-api-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/opensaml-xmlsec-impl-4.1.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spring-security-saml2-service-provider-5.6.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.5.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/classes" />
+	<classpathentry exported="true" kind="lib" path="bin/samlsinglesignonserver.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="false" kind="src" path="/platform" />
+				
+</classpath>
+				

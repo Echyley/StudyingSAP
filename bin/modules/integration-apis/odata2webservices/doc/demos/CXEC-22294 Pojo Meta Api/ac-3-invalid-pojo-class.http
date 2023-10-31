@@ -1,0 +1,47 @@
+###
+# AC 3:
+# Scenario 1: IntegrationObjectClass type does not exist
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-IO-3",
+    "classes": [
+      {
+        "root": true,
+        "code": "TestItem",
+        "type": "class.path.that.does.not.exist.for.TestItemModel",
+        "attributes": [
+          {
+            "attributeName": "double",
+            "unique": true,
+            "readMethod": "getDouble"
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_pojo_class';
+  const expectedMsg = 'The IntegrationObjectClass [class.path.that.does.not.exist.for.TestItemModel] does not exist in the specified classpath.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}

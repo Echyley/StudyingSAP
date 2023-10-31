@@ -1,0 +1,11 @@
+storage: ./.cache
+packages:
+  "@*/*":
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  "**":
+    access: $all
+    proxy: npmjs
+logs:
+  - { type: stdout, format: pretty, level: http }

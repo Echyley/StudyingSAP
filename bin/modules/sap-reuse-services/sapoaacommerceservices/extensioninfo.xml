@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapoaacommerceservices" managername="SapoaacommerceservicesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapoaacommerceservices" usemaven="false">
+              
+        <requires-extension name="sapoaamodel"/>
+              
+        <requires-extension name="promotionengineservices"/>
+              
+        <requires-extension name="odata2webservices"/>
+              
+        <requires-extension name="warehousing"/>
+              
+        <requires-extension name="outboundservices"/>
+              
+        <coremodule generated="true" manager="com.sap.retail.oaa.commerce.services.jalo.SapoaacommerceservicesManager" packageroot="com.sap.retail.oaa.commerce.services"/>
+           
+    </extension>
+    
+</extensioninfo>

@@ -1,0 +1,11 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;backofficeexcelimport;backofficeexcelimport
+;backofficeconfiguration;backofficeconfiguration;
+;backofficelogos;backoffice/logos;
+;backofficeuseravatars;backoffice/useravatars;
+;backofficethemes;backoffice/themes;
+;backofficewidgetsconfig;backofficewidgetsconfig

@@ -1,0 +1,6 @@
+##Billing Entry
+INSERT_UPDATE SAPOrderType; code[unique = true]; name[lang = en];
+;MOCK_ORDER_TYPE; Mock Order Type;
+
+INSERT_UPDATE SAPOrder;code[unique=true];sapOrderType(code);order(code);serviceOrderId;
+;testSAPOrder1;MOCK_ORDER_TYPE;testOrder1;testServiveOrderId

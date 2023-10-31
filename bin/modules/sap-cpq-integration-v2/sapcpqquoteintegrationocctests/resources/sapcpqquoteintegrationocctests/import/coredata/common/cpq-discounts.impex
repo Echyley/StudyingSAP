@@ -1,0 +1,7 @@
+# INSERT QUOTE
+INSERT_UPDATE Quote; code[unique = true]      ; version[unique = true]; currency(isocode); user(uid)                 ; date[dateformat = dd.MM.yyyy HH:mm:ss]; state(code) ; net   ; calculated; site(uid); store(uid); expirationTime[dateformat = dd.MM.yyyy HH:mm:ss];
+                   ; testCpqDiscount          ; 2                     ; USD              ; mark.rivers@rustic-hw.com ; 05.04.2023 00:00:00                   ; BUYER_OFFER ; true ; false     ;     ; wsTest    ; 10.04.2021 00:00:00                             ;
+
+
+INSERT_UPDATE QuoteEntry ;order(code)       ;product(code,catalogVersion(catalog(id),version)) ;quantity ;unit(code) ;entryNumber[unique=true] ;basePrice ;totalPrice
+                         ;testCpqDiscount   ;1225694:wsTestCatalog:Online              		   ;2        ;pieces		 ;						   ;100		  ;176

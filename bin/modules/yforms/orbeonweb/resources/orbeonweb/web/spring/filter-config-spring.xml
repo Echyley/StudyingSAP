@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans>
+
+        <alias alias="orbeonAuthFilter" name="defaultOrbeonAuthFilter"/>
+        <bean id="defaultOrbeonAuthFilter" class="de.hybris.platform.orbeonweb.filter.OrbeonAuthFilter">
+            <property name="hybrisProxyHeader"
+                      value="#{configurationService.configuration.getProperty('orbeonweb.orbeon.hybris-proxy-header')}"/>
+            <property name="hybrisProxyValue"
+                      value="#{configurationService.configuration.getProperty('orbeonweb.orbeon.hybris-proxy-value')}"/>
+        </bean>
+
+        <!-- Spring managed FilterChain for hybris Filter stack -->
+        <alias alias="orbeonwebPlatformFilterChain" name="defaultOrbeonwebPlatformFilterChain"/>
+        <bean id="defaultOrbeonwebPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+            <constructor-arg>
+                <list>
+                    <ref bean="log4jFilter"/>
+                    <ref bean="tenantActivationFilter"/>
+                    <ref bean="sessionFilter"/>
+
+                    <!-- Security -->
+                    <ref bean="springSecurityFilterChain"/>
+                    <ref bean="orbeonAuthFilter"/>
+                </list>
+            </constructor-arg>
+        </bean>
+
+    </beans>
+</beans>

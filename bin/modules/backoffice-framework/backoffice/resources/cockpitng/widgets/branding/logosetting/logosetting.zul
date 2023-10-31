@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul" sclass="yw-brand-setting">
+	<style src="${wr}/logosetting.css"/>
+	<div class="brand-setting-header">
+		<label sclass="brand-setting-header-title" value="${labels.logo.setting.widget.title}"/>
+	    <div class="brand-setting-header-buttons">
+			<button id="saveButton" sclass="y-btn-primary" label="${labels.logo.setting.button.save}"/>
+			<button id="cancelButton" label="${labels.logo.setting.button.cancel}"/>
+		</div>
+	</div>
+	<div sclass="brand-setting-container">
+		<div>
+			<label value="${labels.logo.setting.info}"/>
+			<label class="logo-setting-info" value="${labels.logo.setting.file.upload.limit.info}"/>
+		</div>
+		<div id="logoSettingDiv" class="logo-setting-content"/>
+	</div>
+</widget>

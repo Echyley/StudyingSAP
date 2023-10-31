@@ -1,0 +1,9 @@
+<div [ngClass]="isItemSelected(combinedViewSelectItem) ? 'pe-combinedview-config__ui-select-item--selected': ''"
+     class="pe-combinedview-config__ui-select-choices-layout">
+    <div class="pe-combinedview-config__ui-select-choices-col1">
+        <div [title]="combinedViewSelectItem.customization.name + ' > ' + combinedViewSelectItem.variation.name"
+             [textContent]="combinedViewSelectItem.customization.name + ' > ' + combinedViewSelectItem.variation.name"
+             class="perso-wrap-ellipsis">
+        </div>
+    </div>
+</div>

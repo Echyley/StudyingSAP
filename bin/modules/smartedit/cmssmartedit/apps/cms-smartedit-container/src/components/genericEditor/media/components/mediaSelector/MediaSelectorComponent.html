@@ -1,0 +1,10 @@
+<div class="media-selector">
+    <se-select
+        [id]="id"
+        [(model)]="mediaId"
+        (modelChange)="onMediaIdChange($event)"
+        [fetchStrategy]="fetchStrategy"
+        [isReadOnly]="isDisabled"
+        [itemComponent]="mediaPrinterComponent"
+    ></se-select>
+</div>

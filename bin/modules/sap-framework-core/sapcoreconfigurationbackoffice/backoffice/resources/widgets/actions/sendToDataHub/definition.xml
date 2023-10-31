@@ -1,0 +1,19 @@
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.SendToDataHubAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+ 
+    <name>Send To Datahub</name>
+    <description>Send to Datahub</description>
+    <author>hybris</author>
+    <version>0.1</version> 
+ 
+    <actionClassName>de.hybris.platform.sap.sapcoreconfigurationbackoffice.actions.SendToDataHubAction</actionClassName>
+ 
+    <inputType>de.hybris.platform.sap.core.configuration.model.SAPAdministrationModel</inputType>
+    <outputType>java.lang.String</outputType>
+ 	
+    <iconUri>mirrored-task-circle</iconUri>
+  
+</action-definition>

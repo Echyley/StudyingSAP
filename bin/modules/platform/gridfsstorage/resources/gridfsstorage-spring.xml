@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/data/mongo
+			  http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+	 		  http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <mongo:mongo-client id="mongo"
+                        credential="${media.globalSettings.gridFsStorageStrategy.mongo.username}:${media.globalSettings.gridFsStorageStrategy.mongo.password}@${media.globalSettings.gridFsStorageStrategy.mongo.dbname}"
+                        host="${media.globalSettings.gridFsStorageStrategy.mongo.host}"
+                        port="${media.globalSettings.gridFsStorageStrategy.mongo.port}"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="${media.globalSettings.gridFsStorageStrategy.mongo.dbname}"/>
+    </bean>
+
+    <bean id="mongoAdmin" class="org.springframework.data.mongodb.core.MongoAdmin">
+        <constructor-arg ref="mongo"/>
+    </bean>
+
+    <mongo:db-factory
+            mongo-client-ref="mongo"
+            dbname="${media.globalSettings.gridFsStorageStrategy.mongo.dbname}"/>
+
+    <mongo:mapping-converter id="converter" db-factory-ref="mongoDbFactory"/>
+
+
+    <bean id="gridFsStorageStrategy" class="de.hybris.platform.gridfs.media.storage.GridFSMediaStorageStrategy"
+          init-method="setTenantPrefix">
+        <constructor-arg ref="mediaLocationHashService"/>
+        <constructor-arg ref="mongoDbFactory"/>
+        <constructor-arg ref="converter"/>
+    </bean>
+
+    <bean id="gridFsStorageCleaner" class="de.hybris.platform.gridfs.media.storage.GridFSMediaStorageCleaner"
+          init-method="setTenantPrefix">
+        <constructor-arg value="${media.globalSettings.gridFsStorageStrategy.cleanOnInit}"/>
+        <constructor-arg ref="mediaStorageConfigService"/>
+        <constructor-arg ref="mongoTemplate"/>
+        <constructor-arg ref="mongoAdmin"/>
+    </bean>
+</beans>

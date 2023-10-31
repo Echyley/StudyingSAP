@@ -1,0 +1,46 @@
+$input-color: var(--sapTextColor);
+
+.se-page-info-menu__header {
+    @include se-container-section('header', 'dropdown');
+}
+.se-page-info-menu__body {
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+}
+.se-page-info-menu__body--title {
+    text-transform: capitalize;
+}
+.se-page-info__dropdown-menu {
+    @include se-dropdown-menu('left');
+    input {
+        color: $input-color !important;
+    }
+}
+.se-page-info-menu se-ge-tab {
+    @include se-grid-columns(1, 0 16px);
+    width: 368px;
+}
+.se-tabset-wrapper,
+.se-page-info-menu__body {
+    .fd-form-control[type='email']:disabled,
+    .fd-form-control[type='text']:disabled,
+    // override "Robot Tag" dropdown styles to ShortString text
+    .se-select.is-disabled {
+        .fd-popover-custom {
+            opacity: 1;
+
+            .toggle-button {
+                border: none;
+                opacity: 1;
+                color: $input-color;
+                padding: 0;
+                line-height: 1rem;
+
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+$integrationClass = integrationObjectClass(integrationObject(code), code)
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; Pojo_IO_S1
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]; type(code)                                       ; root
+                                    ; Pojo_IO_S1                            ; TestItem           ; de.hybris.platform.core.model.test.TestItemModel ; true
+
+INSERT_UPDATE IntegrationObjectClassAttribute; $integrationClass[unique = true]; attributeName[unique = true]; unique[default = false]; readMethod
+                                             ; Pojo_IO_S1:TestItem             ; integer                     ; true                   ; getInteger
+                                             ; Pojo_IO_S1:TestItem             ; double                      ;                        ; getDouble
+                                             ; Pojo_IO_S1:TestItem             ; character                   ;                        ; getCharacter
+                                             ; Pojo_IO_S1:TestItem             ; string                      ;                        ; getString
+                                             ; Pojo_IO_S1:TestItem             ; boolean                     ;                        ; getBoolean
+                                             ; Pojo_IO_S1:TestItem             ; date                        ;                        ; getDate
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code)
+                                         ; Pojo_IO_S1                            ; BASIC

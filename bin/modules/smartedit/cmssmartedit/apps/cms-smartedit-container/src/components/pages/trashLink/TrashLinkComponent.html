@@ -1,0 +1,8 @@
+<div *ngIf="isNonActiveCatalog" (click)="goToTrash()" class="se-page-list__page-link--right">
+    <a
+        translate="se.cms.pagelist.trashcan.link.text"
+        [translateParams]="trashedPagesTranslationData"
+        class="se-page-list__page-link-anchor"
+    ></a>
+    <span class="se-page-list__page-link-icon sap-icon--navigation-right-arrow"></span>
+</div>

@@ -1,0 +1,172 @@
+@import 'cockpitng-globals.scss';
+$excel-popups__configurable-flow-container-outer--space-x: $container-spacing-default__third * 2;
+$excel-popups__configurable-flow-container-outer--space-y: $container-spacing-default__third;
+$excel-popups__configurable-flow-container--margin: ($excel-popups__configurable-flow-container-outer--space-y  * -1) ($excel-popups__configurable-flow-container-outer--space-x * -1);
+
+$attrpicker__value-container--width: 45%;
+$attrpicker__main-container--bg-color: $_layout-panels__panel--bg-color;
+$attrpicker__main-container--border-top: $boxes--border__thin solid $_editor-defaults__popup-box-delimiter--border-color;
+$attrpicker__main-container--min-height: 250px;
+$_attrpicker__main-container--height: $boxes--border__thin;
+
+$attrpicker__container-inner--space: $_container-spacing-default__small;
+
+$attrpicker__configurable-flow-main-container--margin: ($_container-spacing-default__small * -1) ($_container-spacing-default__tiny * -1);
+
+$_attrpicker__value-tree--margin: -($attrpicker__container-inner--space);
+$_attrpicker__value-tree--padding: $attrpicker__container-inner--space;
+$attrpicker__value-filter--margin: $container-spacing-default__third 0;
+$_attrpicker__value-container--padding: $_container-spacing-default__small $_container-spacing-default__small 0;
+$_attrpicker__value-label--color:  $form-defaults__label--color;
+
+// $_attrpicker__include-all-attributes--margin-bottom: $_container-spacing-default__tiny;
+
+$attrpicker__choose-button-container--padding: 0 $_container-spacing-default__small;
+$attrpicker__choose-button-container--border: $boxes--border__thin solid $_editor-defaults__popup-box-delimiter--border-color;
+$attrpicker__choose-button-container--border-width: 0 nth($attrpicker__choose-button-container--border, 1);
+$attrpicker__choose-button--border: $boxes--border__thin solid $_container__action--color;
+$attrpicker__choose-button--color: $_container__action--color;
+$attrpicker__choose-button--bg-color: transparent;
+$attrpicker__choose-button--margin-top: $attrpicker__container-inner--space;
+$attrpicker__choose-button-hover--bg-color: $_button-hover--color;
+$attrpicker__choose-button-hover--color: $_button-secondary--color;
+$_attrpicker__choose-button-hover--border-color: $attrpicker__choose-button-hover--bg-color;
+$_attrpicker__choose-button-disabled--color: $_button-disabled--color;
+$_attrpicker__choose-button-disabled--border-color: $_attrpicker__choose-button-disabled--color;
+$_attrpicker__choose-button-arrow-side--right: $container-spacing-default__half;
+$_attrpicker__choose-button-arrow-side--left: $_attrpicker__choose-button-arrow-side--right;
+$attrpicker__choose-button-arrow-side--padding: 0 $_container-spacing-default__regular;
+$attrpicker__choose-button-arrow--font: $font-family__icon;
+$attrpicker__choose-button--border-radius: $toolbar__button-default--border-radius;
+
+$attrpicker__add-button--content: _getIconGlyphContentValue('navigation-right-arrow');
+$attrpicker__remove-button--content: _getIconGlyphContentValue('navigation-left-arrow');
+$_attrpicker__attr-check-icon--content: _getIconGlyphContentValue('accept');
+$_attrpicker__attr-partially-check-icon--content: _getIconGlyphContentValue('color-fill');
+
+$attrpicker__attr-selected-icon--color: var(--bo-selected-color); //$_menu-item-check-icon--color;
+$attrpicker__attr-selected-border-color: var(--bo-selected-color);
+$attrpicker__attr-active-border-color: var(--bo-input-hover-border-color);
+$attrpicker__attr-mandatory-icon--color: $_menu-item-check-icon-disabled--color; //$grey__default;
+$attrpicker__attr-mandatory-cell--bg-color: $form-defaults__box-disabled--bg-color; //rgba($grey__light--600, 0.5);
+$attrpicker__attr-mandatory-label-after--margin-left: 2px;
+
+$_attrpicker__attr-check-border: $boxes--border__thin solid;
+$_attrpicker__attr-check-border-radius: $editor-defaults__input-field--border-radius;
+$_attrpicker__attr-check-border-color: $_form-defaults__input-switch-unactive---border-color;
+
+$_attrpicker__attr-treecell-content-height: 28px;
+$_attrpicker__attr-check-btn--size: $font-size__base;
+$_attrpicker__attr-check-icon--size: $toolbar__button-small--size;
+$_attrpicker__attr-check-icon--font-size: $font-size__small;
+$_attrpicker__attr-tree-icon-line-height: $_attrpicker__attr-treecell-content-height;
+
+// ___attrpicker__attr-check-icon--line-height: __attrpicker__attr-check-icon--font-size;
+$_attrpicker__attr-check-icon-unchecked--color: $_menu-item-check-icon-disabled--color; //$_menu-item-check-icon-unchecked--color;
+$_attrpicker__attr-switch-inner--height: $toolbar__button-default--size; //as inline-block rendered at this height by default
+$_attrpicker__attr-switch--margin-top: floor(($editor-defaults__inline-box--height - $_attrpicker__attr-switch-inner--height)/2);
+$_attrpicker__attr-switch--margin-bottom: ceil(($editor-defaults__inline-box--height - $_attrpicker__attr-switch-inner--height)/2);
+$_attrpicker__attr-switch-bar--padding-top: floor(($editor-defaults__popup-box-header--height - $editor-defaults__inline-box--height)/2);
+$_attrpicker__attr-switch-bar--padding-bottom: ceil(($editor-defaults__popup-box-header--height - $editor-defaults__inline-box--height)/2);
+
+$attrpicker__attr-cell--border-radius: $toolbar__button-default--border-radius;
+$attrpicker__attr-cell--border: $boxes--border__thin solid var(--bo-input-border-color);
+$attrpicker__attr-cell--margin-bottom: $_container-spacing-default__core;
+$attrpicker__attr-cell--padding: $_container-spacing-default__core $_container-spacing-default__tiny;
+$_attrpicker__attr-cell-selected--border-color: var(--bo-button-selected-border-color); //$form-defaults__box--border-color;//$blue__default;
+$_attrpicker__attr-cell-label--color: var(--bo-list-text-color);
+$_attrpicker__attr-cell-label--padding-right: $_container-spacing-default__tiny; // __attrpicker__attr-localized-language-label--min-width + nth( __attrpicker__attr-localized-language-label--margin, 2);
+
+$attrpicker__notifier-label--color: $_button-secondary--color;
+$attrpicker__notifier-container--bg-color: $_default__modal-overlay-shadow--bg-color; //$_default__grayout-area--bg-color;
+$attrpicker__notifier-container--animation: prompt-animation 0.2s linear;
+
+// Deprecated styling
+// __attrpicker__options-container--height: 40px;
+// __attrpicker__notifier-container--top: __attrpicker__options-container--height;
+
+$attrpicker__attr-tree--max-height: 550px;
+
+$attrpicker__attr-expand-btn--height: 18px;
+$attrpicker__attr-localized-expand-btn--margin-right: $_container-spacing-default__tiny; //$container-spacing-default__third;
+$attrpicker__attr-localized-expand-btn-icon--size: $_attrpicker__attr-treecell-content-height;
+$attrpicker__attr-localized-expand-btn-selected--color: $_button__icon--color;
+$_attrpicker__attr-localized-expand-btn-icon--left: 50%;
+$_attrpicker__attr-localized-expand-btn-icon--top: 50%;
+$_attrpicker__attr-localized-expand-btn-icon--transform: translate(-50%, -50%);
+$attrpicker__attr-localized-child-cell--margin-left: $_container-spacing-default__regular;
+// $attrpicker__attr-localized-child-cell--width: calc(100% - #{$attrpicker__attr-localized-child-cell--margin-left});
+$attrpicker__attr-localized-language-label--padding: 3px 5px;
+$attrpicker__attr-localized-language-label--bg-color: var(--bo-information-background);
+$attrpicker__attr-localized-language-label--border-color: var(--bo-information-border-color);
+$attrpicker__attr-localized-language-label--min-width: 25px;
+$attrpicker__attr-localized-language-label--border-radius: $_layout-panels__panel--border-radius;
+$_attrpicker__attr-localized-language-label--margin-right: $attrpicker__attr-localized-expand-btn--margin-right;
+$_attrpicker__attr-localized-language-label--font-size: $font-size__small;
+$_attrpicker__attr-localized-language-label--line-height: $font-size__base;
+$_attrpicker__attr-localized-language-label--color: var(--bo-information-color);
+
+$_attrpicker__attr-cell-arrow-icon--margin-right: $_container-spacing-default__tiny;
+
+
+//DEPRECATED - file excel-import-wizard.scss is probably not used anymore (replaced by dndfileupload-defaults.scss)
+
+$excel-import-wizard__upload-btn--border: $attrpicker__choose-button--border;
+$excel-import-wizard__upload-btn--color: $attrpicker__choose-button--color;
+$excel-import-wizard__upload-btn--bg-color: $attrpicker__choose-button--bg-color;
+$excel-import-wizard__upload-btn-hover--bg-color: $attrpicker__choose-button-hover--bg-color;
+$excel-import-wizard__upload-btn-hover--color: $attrpicker__choose-button-hover--color;
+
+$excel-import-wizard__drop-area--height: 140px;
+
+$excel-import-wizard__component-container--margin: $container-spacing-default__half 0;
+
+$excel-import-wizard__drop-area-icon--width: 120px;
+$excel-import-wizard__drop-area-icon--height: 48px;
+$excel-import-wizard__drop-area-icon--margin-top: $container-spacing-default__third;// ceil($excel-import-wizard__drop-area-icon--height/2)*-1;
+$excel-import-wizard__drop-area-icon--margin-left: $excel-import-wizard__drop-area-icon--width*-1;
+$excel-import-wizard__drop-area-icon--bg: url('../images/excel/icon_upload-file-area.svg') no-repeat 0 0;
+
+$excel-import-wizard__drop-area--color: $form-defaults__box--border-color;
+$excel-import-wizard__drop-area--border-radius: $attrpicker__attr-cell--border-radius;
+$excel-import-wizard__drop-area--border: $boxes--border__thin dashed $excel-import-wizard__drop-area--color;
+$excel-import-wizard__drop-area--bg-color: transparent;
+$excel-import-wizard__drop-area-on-add--bg-color: $grey__light--1200;
+$excel-import-wizard__drop-area-label--padding-left: $excel-import-wizard__drop-area-icon--width;
+
+$excel-import-wizard__attachment-item--border-top: $boxes--border__thin solid $grey__default;
+$excel-import-wizard__attachment-item--padding: 5px 0;
+$excel-import-wizard__attachment-delete-btn--size: $toolbar__button-medium--size;
+$excel-import-wizard__attachment-label--height: $excel-import-wizard__attachment-delete-btn--size;
+$excel-import-wizard__attachment-label--line-height: $excel-import-wizard__attachment-delete-btn--size;
+$excel-import-wizard__attachment-label--max-width: calc(100% - #{$excel-import-wizard__attachment-delete-btn--size + 5px});
+$excel-import-wizard__attachment-entry--font-size: $font-size__small;
+$excel-import-wizard__attachment-entry-icon--margin-right: 5px;
+
+//DEPRECATED - end
+
+
+$wizard-attrpicker__bp-l--min-height: 680px;
+$wizard-attrpicker__bp-m--min-height: 540px;
+
+$wizard-attrpicker__attr-tree-bp-l--max-height: calc(100vh - 430px);
+$wizard-attrpicker__attr-tree-bp-m--max-height: calc(100vh - 386px);
+
+/* Small Window */
+$small-wizard-attrpicker__attr-tree--max-height: 300px;
+$small-wizard-attrpicker__choose-button-container--padding: $attrpicker__container-inner--space $attrpicker__container-inner--space;
+$small-wizard-attrpicker__choose-button-container--border-width: nth($attrpicker__choose-button-container--border, 1) 0;
+$small-wizard-attrpicker__choose-button--max-width: 40%;
+
+$small-wizard-attrpicker__remove-button--margin-right: $_container-spacing-default__small;
+$small-wizard-attrpicker__remove-button--content: _getIconGlyphContentValue('navigation-up-arrow');
+$small-wizard-attrpicker__add-button--content: _getIconGlyphContentValue('navigation-down-arrow');
+
+/*** MIXINS ***/
+
+@mixin _attributepicker-level($level){
+	.y-attributepicker-level-#{$level} .z-treecell {
+		width: calc(100% - #{($level - 1)*$attrpicker__attr-localized-child-cell--margin-left});
+		margin-left: ($level - 1)*$attrpicker__attr-localized-child-cell--margin-left;
+	}
+}

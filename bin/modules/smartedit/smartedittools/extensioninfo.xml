@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+        
+    <extension abstractclassprefix="Generated" classprefix="Smartedittools" jaloLogicFree="true" managername="SmartedittoolsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="smartedittools" usemaven="false">
+                
+        <requires-extension name="npmancillary"/>
+                
+        <coremodule generated="true" manager="com.sap.smartedittools.jalo.SmartedittoolsManager" packageroot="com.sap.smartedittools"/>
+            
+    </extension>
+    
+</extensioninfo>

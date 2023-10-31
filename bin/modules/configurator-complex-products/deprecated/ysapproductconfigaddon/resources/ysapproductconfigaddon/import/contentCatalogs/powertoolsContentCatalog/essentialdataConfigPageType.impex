@@ -1,0 +1,4 @@
+# create a new page type for config UI
+INSERT_UPDATE CmsPageType;code[unique=true];restrictionTypes(code)
+;ProductConfigPage;CMSCategoryRestriction,CMSProductRestriction,CMSTimeRestriction,CMSUserRestriction,CMSUserGroupRestriction
+;ProductConfigOverviewPage;CMSCategoryRestriction,CMSProductRestriction,CMSTimeRestriction,CMSUserRestriction,CMSUserGroupRestriction

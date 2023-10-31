@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<context merge-by="module" type="SAPConfiguration" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="backoffice.tab.s4OrderManagement" position="3">
+                <section name="backoffice.section.s4OrderSimulation">
+                	<editorArea:attribute qualifier="saps4omatpcheckactive"/>
+                    <editorArea:attribute qualifier="saps4omcreditcheckactive"/>
+                    <editorArea:attribute qualifier="saps4omcatalogpricing"/>
+                    <editorArea:attribute qualifier="saps4omcartpricing"/>
+                    <editorArea:attribute qualifier="saps4omcacheprice"/>
+                    <editorArea:attribute qualifier="saps4om_pricesub"/>
+                    <editorArea:attribute qualifier="saps4om_discountsub"/>
+                    <editorArea:attribute qualifier="saps4om_taxessub"/>
+                    <editorArea:attribute qualifier="saps4om_deliverysub"/>
+                    <editorArea:attribute qualifier="saps4om_paymentsub"/>
+                </section>               
+                <section name="backoffice.section.s4SynchronousOrderManagement">
+                	<editorArea:attribute qualifier="saps4synchronousorderandhistoryenabled"/>
+                    <editorArea:attribute qualifier="saps4synchronousorderhistoryenabled"/>     
+                </section>
+                <section name="backoffice.section.s4PartnerFunctions">
+                	<editorArea:attribute qualifier="soldToPartnerFunctionCode"/>
+                    <editorArea:attribute qualifier="shipToPartnerFunctionCode"/>     
+                    <editorArea:attribute qualifier="billToPartnerFunctionCode"/>     
+                    <editorArea:attribute qualifier="contactPersonPartnerFunctionCode"/> 
+                </section>
+                <section name="backoffice.section.s4PricingConditionTypes">
+                	<editorArea:attribute qualifier="saps4itempriceconditiontype"/>
+                    <editorArea:attribute qualifier="saps4deliverycostconditiontype"/>
+                </section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <context type="SAPConfiguration" component="editorAreaDynamicForms" merge-by="type">
+		<df:dynamicForms xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms">
+			<df:attribute id="disabledSaps4synchronousorderhistory" qualifier="saps4synchronousorderhistoryenabled" disabledIf="saps4synchronousorderandhistoryenabled" />
+		</df:dynamicForms>
+	</context>
+
+</config>

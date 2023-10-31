@@ -1,0 +1,50 @@
+<ng-container *seHasOperationPermission="'se.sync.catalog'">
+    <fd-popover [(isOpen)]="toolbarItem.isOpen" [closeOnOutsideClick]="true">
+        <fd-popover-control>
+            <button
+                fd-button
+                type="button"
+                class="btn toolbar-action--button"
+                title="{{ 'se.cms.toolbaritem.pagesyncmenu.tooltip' | translate }}"
+                [attr.aria-expanded]="toolbarItem.isOpen"
+            >
+                <span class="sap-icon--synchronize se-toolbar-menu-ddlb--button__icon">
+                    <span
+                        *ngIf="isNotInSync"
+                        class="sap-icon--message-warning se-toolbar-menu-ddlb--button__caution"
+                    ></span>
+                </span>
+                <span
+                    class="toolbar-action-button__txt"
+                    [ngClass]="{'se-toolbar-menu-ddlb--button__txt': isNotInSync }"
+                    [translate]="toolbarItem.name"
+                >
+                </span>
+            </button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div
+                *ngIf="toolbarItem.isOpen && isReady"
+                class="toolbar-action--include se-sync-menu-content__dropdown"
+            >
+                <se-prevent-vertical-overflow>
+                    <div class="se-sync-menu-content__header">
+                        <span
+                            class="se-sync-menu-content__header-title"
+                            translate="se.cms.synchronization.page.title"
+                        ></span>
+                        <se-help
+                            *ngIf="!syncPageConditions?.canSyncHomepage && !syncPageConditions?.pageHasNoDepOrNoSyncStatus"
+                            class="se-page-sync__y-help"
+                            ><span>{{ helpText }}</span>
+                        </se-help>
+                    </div>
+                    <se-page-synchronization-panel
+                        [cmsPage]="cmsPage"
+                        [uriContext]="uriContext"
+                    ></se-page-synchronization-panel>
+                </se-prevent-vertical-overflow>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</ng-container>

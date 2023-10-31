@@ -1,0 +1,76 @@
+<div>
+    <se-message [style.display]="showWarningMessage() ? 'block' : 'none'" [type]="'warning'">
+        <span
+            se-message-title
+            translate="se.cms.restriction.management.select.type.not.supported.warning"
+        ></span>
+    </se-message>
+
+    <div class="se-restriction-management-select__select">
+        <label class="se-control-label"
+            >{{ 'se.cms.restriction.management.select.type.label' | translate }}</label
+        >
+
+        <se-select
+            id="restriction-type"
+            [fetchStrategy]="fetchStrategy"
+            [itemComponent]="itemComponent"
+            [placeholder]="'se.cms.restriction.management.select.type.placeholder'"
+            [(model)]="selectModel.selectedIds.restrictionType"
+            (modelChange)="selectRestrictionType()"
+            [searchEnabled]="false"
+        >
+        </se-select>
+    </div>
+
+    <div
+        *ngIf="viewConfig.showRestrictionSelector"
+        class="se-restriction-management-select__restriction-info"
+    >
+        <label
+            class="se-control-label"
+            translate="se.cms.restriction.management.select.restriction.label"
+        ></label>
+        <se-select
+            id="restriction-name"
+            [fetchStrategy]="fetchOptions"
+            [(model)]="selectModel.selectedIds.restriction"
+            (modelChange)="selectRestriction()"
+            [placeholder]="'se.cms.restriction.management.select.restriction.placeholder'"
+            [disableChoiceFn]="disableRestrictionChoice"
+            [itemComponent]="itemComponent"
+            [resultsHeaderLabel]="resultsHeaderLabel"
+            [actionableSearchItem]="actionableSearchItem"
+            [(reset)]="reset"
+        >
+        </se-select>
+    </div>
+
+    <div
+        class="se-restriction-management-select__restriction-editor"
+        *ngIf="viewConfig.showRestrictionEditor"
+    >
+        <p
+            class="se-restriction-management-select__new-restriction-message"
+            [translate]="editorHeader"
+        ></p>
+        <div *ngIf="selectModel.isTypeSupported()">
+            <se-item-manager
+                [item]="selectModel.getRestriction()"
+                [mode]="viewConfig.mode"
+                [structureApi]="viewConfig.structureApi"
+                [contentApi]="viewConfig.contentApi"
+                [uriContext]="uriContext"
+                [componentType]="selectModel.getRestrictionTypeCode()"
+                [(submitFunction)]="submitInternal"
+                [(isDirty)]="isDirtyInternal"
+            ></se-item-manager>
+        </div>
+        <div *ngIf="!selectModel.isTypeSupported()">
+            <p class="se-restriction__item-name">{{ selectModel.getRestriction().name }}</p>
+            <div class="se-restriction__item-description">
+                {{ selectModel.getRestriction().description }}
+            </div>
+        </div>
+    </div>
+</div>

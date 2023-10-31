@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias name="sapOrderexchangeDefaultCheckOrderAction" alias="sapOrderexchangeCheckOrderAction" />
+	<bean id="sapOrderexchangeDefaultCheckOrderAction" class="de.hybris.platform.sap.yorderfulfillment.actions.CheckSAPOrderAction"
+		parent="abstractAction">
+	</bean>
+
+	<alias name="sapOrderexchangeDefaultCustomerReplicationCheckAction" alias="sapCustomerexchangeCheckOrderAction" />
+	<bean id="sapOrderexchangeDefaultCustomerReplicationCheckAction" class="de.hybris.platform.sap.yorderfulfillment.actions.CheckCustomerReplicationAction"
+		parent="abstractAction">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+		<property name="sAPGlobalConfigurationService" ref="sapCoreDefaultSAPGlobalConfigurationService"></property>
+	   <property name="b2CCustomerHelper" ref="sapOrderexchangeB2CCustomerHelper"></property>
+	</bean>
+
+	<alias name="sapOrderexchangeDefaultCheckOrderSendStatusAction" alias="sapOrderexchangeCheckOrderSendStatusAction"/>
+	<bean id="sapOrderexchangeDefaultCheckOrderSendStatusAction" class="de.hybris.platform.sap.yorderfulfillment.actions.CheckOrderSendStatusAction"
+		  parent="abstractAction">
+	</bean>
+
+	<alias name="sapOrderexchangeDefaultSetConfirmationStatusAction" alias="sapOrderexchangeSetConfirmationStatusAction" />
+	<bean id="sapOrderexchangeDefaultSetConfirmationStatusAction" class="de.hybris.platform.sap.yorderfulfillment.actions.SetConfirmationStatusAction"
+		parent="abstractAction">
+	</bean>
+
+	<alias name="sapOrderexchangeDefaultSetCompletionStatusAction" alias="sapOrderexchangeSetCompletionStatusAction" />
+	<bean id="sapOrderexchangeDefaultSetCompletionStatusAction" class="de.hybris.platform.sap.yorderfulfillment.actions.SetCompletionStatusAction"
+		parent="abstractAction">
+	</bean>
+
+	<alias name="sapOrderexchangeDefaultSetCancelAction" alias="sapOrderexchangeSetCancelAction" />
+	<bean id="sapOrderexchangeDefaultSetCancelAction" class="de.hybris.platform.sap.yorderfulfillment.actions.SetCancelAction"
+		parent="abstractAction">
+	</bean>
+
+</beans>

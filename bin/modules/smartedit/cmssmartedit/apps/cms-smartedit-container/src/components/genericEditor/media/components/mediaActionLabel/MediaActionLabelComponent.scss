@@ -1,0 +1,8 @@
+.se-media-action-label {
+    @include se-text-ellipsis;
+    color: var(--sapInformativeColor);
+
+    &--disabled {
+        color: var(--sapContent_LabelColor);
+    }
+}

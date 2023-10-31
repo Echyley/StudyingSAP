@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Authorization Data Cache -->
+    <alias alias="cpqProductConfigAuthorizationDataCacheRegion" name="cpqProductConfigDefaultAuthorizationDataCacheRegion"/>
+    <bean class="de.hybris.platform.regioncache.region.impl.EHCacheRegion"
+          id="cpqProductConfigDefaultAuthorizationDataCacheRegion">
+        <constructor-arg name="name" value="cpqProductConfigDefaultAuthorizationDataCacheRegion"/>
+        <constructor-arg name="maxEntries" value="${regioncache.cpqproductconfigauthorizationdatacacheregion.size}"/>
+        <constructor-arg name="evictionPolicy"
+                         value="${regioncache.cpqproductconfigauthorizationdatacacheregion.evictionpolicy}"/>
+        <constructor-arg name="statsEnabled" value="${regioncache.stats.enabled}"/>
+        <constructor-arg name="exclusiveComputation" value="${regioncache.exclusivecomputation}"/>
+        <constructor-arg name="ttlSeconds" value="${regioncache.cpqproductconfigauthorizationdatacacheregion.timeToLive}"/>
+        <property name="handledTypes">
+            <array>
+            </array>
+        </property>
+    </bean>
+
+    <!-- Configuration Summary Cache -->
+    <alias alias="cpqProductConfigConfigurationSummaryCacheRegion" name="cpqProductConfigDefaultConfigurationSummaryCacheRegion"/>
+    <bean class="de.hybris.platform.regioncache.region.impl.EHCacheRegion"
+          id="cpqProductConfigDefaultConfigurationSummaryCacheRegion">
+        <constructor-arg name="name" value="cpqProductConfigDefaultConfigurationSummaryCacheRegion"/>
+        <constructor-arg name="maxEntries" value="${regioncache.cpqproductconfigconfigurationsummarycacheregion.size}"/>
+        <constructor-arg name="evictionPolicy"
+                         value="${regioncache.cpqproductconfigconfigurationsummarycacheregion.evictionpolicy}"/>
+        <constructor-arg name="statsEnabled" value="${regioncache.stats.enabled}"/>
+        <constructor-arg name="exclusiveComputation" value="${regioncache.exclusivecomputation}"/>
+        <constructor-arg name="ttlSeconds" value="${regioncache.cpqproductconfigconfigurationsummarycacheregion.timeToLive}"/>
+        <property name="handledTypes">
+            <array>
+            </array>
+        </property>
+    </bean>
+
+
+    <!-- Add the cache region to the list displayed in the hac -->
+    <bean id="cpqProductConfigDefaultAuthorizationDataCacheRegionRegistrar"
+          class="de.hybris.platform.regioncache.region.CacheRegionRegistrar"
+          c:region-ref="cpqProductConfigAuthorizationDataCacheRegion"/>
+    <bean id="cpqProductConfigDefaultConfigurationSummaryCacheRegionRegistrar"
+          class="de.hybris.platform.regioncache.region.CacheRegionRegistrar"
+          c:region-ref="cpqProductConfigConfigurationSummaryCacheRegion"/>
+</beans>

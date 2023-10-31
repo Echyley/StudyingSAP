@@ -1,0 +1,45 @@
+<div *ngIf="getSelectedTypeCode() === getSearchProfileCode()" class="form-group">
+    <label for="search-profile-selector-1" class="fd-form-label"
+        translate="personalizationsearchsmartedit.commercecustomization.search.label"></label>
+    <personalization-infinite-scrolling [fetchPage]="getPage">
+        <se-select [id]="search-profile-selector-1" class="fd-form__control"
+            [placeholder]="'personalizationsearchsmartedit.commercecustomization.search.placeholder'"
+            [searchEnabled]="true" [fetchStrategy]="fetchStrategy" [(model)]="selectedSearchProfile"
+            [onSelect]="searchProfileSelectedEvent"></se-select>
+        <div class="pe-spinner--outer" [hidden]="!requestProcessing">
+            <div class="spinner-md spinner-light"></div>
+        </div>
+    </personalization-infinite-scrolling>
+
+    <div *ngIf="searchProfileActions.length !== 0" class="ps-search-profile__selection">
+        <label class="control-label ps-control-label">
+            <span translate="personalizationsearchsmartedit.commercecustomization.search.selection.label"></span>
+        </label>
+        <se-help>
+            <span translate="personalizationsearchsmartedit.commercecustomization.search.helpmsg"></span>
+        </se-help>
+
+        <div cdkDropList [cdkDropListData]="searchProfileActions" [cdkDropListConnectedTo]="dragDroppedTargetIds"
+            (cdkDropListDropped)="dragDropped($event)" [cdkDropListSortingDisabled]="true"
+            class="ps-search-profile__sel-tree">
+            <div class="ps-search-profile__sel-tbody">
+                <div *ngFor="let searchProfileAction of searchProfileActions" cdkDrag
+                    [cdkDragData]="searchProfileAction.searchProfileCode" (cdkDragMoved)="dragMoved($event)"
+                    class="ps-search-profile__sel-tree-row">
+                    <div class="node-item" [attr.data-id]="searchProfileAction.searchProfileCode"
+                        [attr.id]=" 'node-' + searchProfileAction.searchProfileCode">
+                        <div class="ps-search-profile__sel-tree-row-wrapper">
+                            <div class="ps-search-profile__sel-profile ps-search-profile-height">
+                                <span class="ps-search-profile__sel-profile-code"
+                                    [textContent]="searchProfileAction.searchProfileCode"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <label class="control-label ps-control-label__cust">
+        <span translate="personalizationsearchsmartedit.commercecustomization.search.label.cust"></span>
+    </label>
+</div>

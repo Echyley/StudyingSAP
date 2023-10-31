@@ -1,0 +1,63 @@
+###
+# AC 4: Cannot autocreate IntegrationObjectClass referenced by a returnIntegrationObjectClass.
+#
+# Scenario 1: IntegrationObjectClass does not exist
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "Cant-Autocreate-Pojo",
+    "classes": [
+      {
+        "root": true,
+        "code": "Product",
+        "type": "de.hybris.platform.core.model.product.ProductModel",
+        "integrationObject": {
+          "code": "Cant-Autocreate-Pojo"
+        },
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          },
+          {
+            "attributeName": "catalogVersion",
+            "unique": true,
+            "readMethod": "getCatalogVersion",
+            "returnIntegrationObjectClass": {
+              "code": "NewIntegrationObjectClassForCatalogVersion",
+              "type": "de.hybris.platform.catalog.model.CatalogVersionModel",
+              "integrationObject": {
+                "code": "Cant-Autocreate-Pojo"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'missing_nav_property';
+  const expectedMsg = 'Item referenced by attribute [returnIntegrationObjectClass] in [IntegrationObjectClassAttribute] item does not exist in the system. Cannot create referenced item for this attribute because it is not partof or autocreate for the item that it belongs to.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}

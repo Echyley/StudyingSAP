@@ -1,0 +1,8 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$lang=ja
+
+insert_update PatternConstraint;id[unique = true, allownull = true];message[lang = $lang]
+;PunchoutSecretPatternConstraint;共有シークレットには、大文字と小文字の両方、数字、特殊文字を使用し、合計長を 8～100 文字にする必要があります。

@@ -1,0 +1,22 @@
+{
+  "name": "merchandisingsmarteditcommons",
+  "typescript": {
+    "entry": "./src/index.ts",
+    "dist": "./dist/index.js"
+  },
+  "style": {
+    "global": "node_modules/smartedit-build/styles/se-variables.scss"
+  },
+  "legacy": {
+    "js": [
+      "./src/**/*.js"
+    ],
+    "ngTemplates": {
+      "moduleName": "merchandisingsmarteditCommonTemplates",
+      "includePathInName": false,
+      "files": [
+        "./src/**/*.html"
+      ]
+    }
+  }
+}

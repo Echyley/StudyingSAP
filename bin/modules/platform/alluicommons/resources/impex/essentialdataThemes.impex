@@ -1,0 +1,28 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+# Change theme code for old release
+UPDATE Theme; code[unique=true]; code
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.Optional;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+String code = line.get(Integer.valueOf(1));
+
+Optional themeOpt = Registry.getApplicationContext().getBean(""themeDao"").findByCode(code);
+if (themeOpt.isEmpty())
+{
+	LOG.info(""Updating theme [{}] is skipped because it does not exist"", code);
+	line.clear();
+}"
+;sap_quartz_light;sap_fiori_3
+;sap_quartz_dark;sap_fiori_3_dark
+
+INSERT_UPDATE Theme; code[unique=true]; sequence
+;sap_fiori_3;1
+;sap_fiori_3_dark;2
+;sap_horizon;3

@@ -1,0 +1,105 @@
+/* TODO: This is just an initial CSS styling! It should be adjusted by the UI team! */
+@import "cockpitng-globals.scss";
+$productstats__chartcontainer--box-shadow: var(--bo-content-shadow-small);
+$productstats__chartcontainer-main--bg-color: var(--bo-base-background);
+$productstats__chartcontainer-main--height: 404px;
+
+.yw-product-stats-container {
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    box-shadow: $productstats__chartcontainer--box-shadow;
+//  .yw-product-stats-container-main {
+    &-main {
+      overflow: hidden;
+      background-color: $productstats__chartcontainer-main--bg-color;
+      height: $productstats__chartcontainer-main--height;
+    }
+
+    &-charts-wrapper {
+      float: left;
+      width: 80%;
+      text-align: center;
+      
+
+      .highcharts-container.z-charts {
+        width: 100% !important;
+        > .highcharts-root {
+          width: 100% !important;
+        }
+      }
+    }
+
+    &-right-pane {
+      float: left;
+      text-align: center;
+      width: 20%;
+      padding-top: 6%;
+      padding-left: 1%;
+      padding-right: 1%;
+      position: relative;
+      z-index: 1;
+      line-height: 350%;
+
+      button.ye-text-button {
+        float: left;
+        width: 100%;
+        cursor: pointer;
+        color: var(--bo-button-icon-color);
+        text-transform: none;
+        margin-bottom: 5px;
+      }
+
+      .yw-product-stats {
+        &-total-count {
+          float: left;
+          width: 100%;
+          margin-bottom: 15px;
+          border-bottom: $boxes--border__thin solid var(--bo-list-border-color);
+          color: var(--bo-text-color);
+
+          
+        }
+        &-chart-info-value {
+          display: block;
+          font-size: $font-size__title-large;
+          font-weight: bold;
+        }
+
+        &-chart-info-label {
+          font-size: $font-size__base;
+        }
+      }
+    }
+//  }
+  
+  &-bottom-pane {
+      float: left;
+      width: 100%;
+  
+    .yw-product-stats-chart-info-container {
+      width: 100%;
+      min-height: 85px;
+      height: 85px;
+      display: table;
+      padding: 10px;
+      text-align: center;
+      background-color: var(--bo-base-background);
+      
+      .yw-product-stats-chart-info-container-wrapper {
+        width: 33.33%;
+        float: left;
+
+        .yw-product-stats-chart-info-value {
+          display: block;
+          font-size: $font-size__title-large;
+          font-weight: bold;
+       }
+
+        .yw-product-stats-chart-info-label {
+          font-size: $font-size__base;
+        }
+      }
+    }
+  }
+}

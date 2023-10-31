@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:n="http://www.zkoss.org/2005/zk/native"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <style src="${wr}/CreateWebhookConfigurationModal.css"/>
+
+    <vlayout spacing="15px" sclass="webhookbackoffice-modal-body">
+        <widgetslot slotID="wizardNotificationarea2" sclass="yw-notification"/>
+        <span sclass="yw-webhookbackoffice-modal-label">
+            ${labels.webhookbackoffice.createWebhookConfiguration.integrationObject.code}
+        </span>
+        <combobox id="integrationObjectComboBox"/>
+
+        <span sclass="yw-webhookbackoffice-modal-label">
+            ${labels.webhookbackoffice.createWebhookConfiguration.consumedDestination.code}
+        </span>
+        <editor id="consumedDestinationEditor" sclass="webhookbackoffice-consumedDestinationEditor" type="Reference(ConsumedDestination)"
+                defaultEditor="webhookbackoffice.editors.webhookConsumedDestinationEditor">
+                <custom-attributes pageSize="5" configurableFlowConfigCtx="create-wizard-webhook-consumed-destination"/>
+        </editor>
+        <span sclass="yw-webhookbackoffice-modal-label">
+            ${labels.webhookbackoffice.createWebhookConfiguration.filterLocation.code}
+        </span>
+        <combobox id="filterLocationComboBox"/>
+
+        <hlayout sclass="eventTypeField" valign="middle">
+            <span sclass="yw-webhookbackoffice-modal-label">
+               ${labels.webhookbackoffice.createWebhookConfiguration.eventType}
+            </span>
+            <div id="selectEventTypeTooltip-container" sclass="selectEventTypeTooltip-container">
+                <button id="selectEventTypeTooltip"
+                        sclass="selectEventTypeTooltip icon-default-class cng-action-icon cng-font-icon font-icon--sys-help"
+                        popup="selectorEventTypesPopup"/>
+            </div>
+        </hlayout>
+        <combobox id="eventTypesComboBox"/>
+    </vlayout>
+
+    <div sclass="CreateWebhookConfigurationModal-Navigation">
+        <button id="createButton" label="${labels.webhookbackoffice.createWebhookConfiguration.createButton}"
+                sclass="y-btn-primary webhookbackoffice-createWebhookConfigurationModal-button"/>
+    </div>
+
+     <popup id="selectorEventTypesPopup" sclass="yw-desc-tooltip">
+            <div>
+                <n:span>
+                  ${labels.tooltip.webhookbackoffice.createWebhookConfiguration.eventType}
+                </n:span>
+            </div>
+     </popup>
+</widget>
+
+

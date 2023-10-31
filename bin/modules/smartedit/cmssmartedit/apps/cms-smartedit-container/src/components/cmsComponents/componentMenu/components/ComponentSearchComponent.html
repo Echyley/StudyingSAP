@@ -1,0 +1,18 @@
+<div class="se-input-group se-component-menu__input-group fd-input-group">
+    <input
+        type="text"
+        fd-form-control
+        class="se-input-group__input-area fd-input-group__input fd-input"
+        name="search-term"
+        (ngModelChange)="onSearchQueryChange($event)"
+        [(ngModel)]="searchQuery"
+        placeholder="{{ placeholderI18nKey | translate }}"
+    />
+    <span class="sap-icon--search se-input-group__addon"> </span>
+
+    <div
+        *ngIf="showResetButton"
+        class="se-input-group__addon se-input-group__clear-btn sap-icon--decline"
+        (click)="resetSearch($event)"
+    ></div>
+</div>

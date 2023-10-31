@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+INSERT_UPDATE Catalog;id[unique=true]
+;test
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];languages(isocode);active
+;test;default;en;true
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];catalogVersions(catalog(id),version)
+;testFacetSearchConfig${testId};test:default
+
+INSERT_UPDATE SolrIndexConfig;name[unique=true];indexMode(code);numberOfThreads;batchSize
+;testIndexConfig${testId};DIRECT;10;1000
+
+INSERT_UPDATE SolrServerConfig;name[unique=true];solrQueryMethod(code);
+;testServerConfig${testId};POST

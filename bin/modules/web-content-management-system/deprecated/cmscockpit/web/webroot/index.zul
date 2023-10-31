@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?init 				class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?taglib 			uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
+<?page title="hybris CMS Cockpit" ?>
+<?script src="/cmscockpit/js/jquery-3.6.1.min.js"?>
+<?script src="/cmscockpit/js/trackingUserActions.js"?>
+<?script src="/cmscockpit/js/trackingNavigation.js"?>
+<?script src="/cmscockpit/js/trackingLiveEdit.js"?>
+<?script src="/cmscockpit/js/trackingWcmsPageView.js"?>
+
+<div width="100%" height="100%">
+
+	<!--  custom styles in here -->
+	<style src="/cockpit/css/cockpit.css" />
+	<style src="/cmscockpit/css/cmscockpit.css" />
+
+	<include src="/cockpit/commonCSA.zul" visible="false"/>
+
+	<window xmlns="http://www.zkoss.org/2005/zul"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:h="http://www.w3.org/1999/xhtml"
+			xmlns:zk="http://www.zkoss.org/2005/zk"
+			xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd "
+			id="mainWin" mode="embedded" height="100%" sclass="hywin" use="de.hybris.platform.cockpit.components.impl.MainWindow"
+			shadow="false">
+
+		<zscript>
+			boolean isTrackingEnabled = configurationService.configuration.getBoolean("cmscockpit.default.click.tracking.enabled", false);
+			String projectCode = configurationService.configuration.getString("modelt.project.code", "localProject");
+			String customerCode = configurationService.configuration.getString("modelt.customer.code", "localCustomer");
+			String environmentCode = configurationService.configuration.getString("modelt.environment.code", "localEnvironment");
+			String siteId = customerCode + "-" + projectCode + "-" + environmentCode;
+		</zscript>
+
+		<script type="text/javascript">
+			const isTrackingEnalble = ${isTrackingEnabled};
+			const siteId = "${siteId}";
+			if (isTrackingEnalble) {
+				window.onload = function () { embedTrackingCode(); }
+			}
+		</script>
+
+	</window>
+</div>

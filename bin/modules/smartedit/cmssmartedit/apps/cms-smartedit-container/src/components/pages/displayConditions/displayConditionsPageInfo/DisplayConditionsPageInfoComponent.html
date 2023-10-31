@@ -1,0 +1,27 @@
+<div class="se-edit-page-info__display-conditions">
+    <div class="se-edit-page-info-display-conditions__basic-info">
+        <div>
+            <label class="se-control-label" translate="se.cms.pagelist.headerpagename"></label>
+            <div class="form-readonly-text form-readonly-text__tight dc-page-name">
+                {{ pageName }}
+            </div>
+        </div>
+        <div>
+            <label class="se-control-label" translate="se.cms.pagelist.headerpagetype"></label>
+            <div class="form-readonly-text form-readonly-text__tight dc-page-type">
+                {{ pageType }}
+            </div>
+        </div>
+    </div>
+
+    <label class="se-control-label">
+        <span translate="se.cms.display.conditions.label"></span>
+        <se-help>
+            <span [translate]="getPageDisplayConditionDescriptionI18nKey()"></span>
+        </se-help>
+    </label>
+    <p
+        class="form-readonly-text form-readonly-text__tight dc-page-display-condition"
+        [translate]="getPageDisplayConditionI18nKey()"
+    ></p>
+</div>

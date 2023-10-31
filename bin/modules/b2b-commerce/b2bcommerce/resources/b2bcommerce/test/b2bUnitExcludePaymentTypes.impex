@@ -1,0 +1,16 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+insert_update B2BUserGroup;Unit(uid)[allownull=true];uid[unique=true,allownull=true]
+;DC;DCUserGroup;
+
+insert_update B2BCustomer;uid[unique=true,allownull=true];active[allownull=true];email[allownull=true];loginDisabled[allownull=true];name;groups(uid);sessionCurrency(isocode)[default='USD'];
+                         ;DCAdmin;TRUE;DC.Admin@gmail.com;FALSE;Admin;DC,DCUserGroup;;
+
+# A DC ORGANIZATION
+INSERT_UPDATE B2BUnit;&DCCustID;uid[unique=true,allownull=true];groups(uid);active[allownull=true];reportingOrganization(uid)
+;DCCust1;DC;;TRUE;DC;
+;DCCust2;DC Sales;DC;TRUE;DC;
+;DCCust3;DC Sales US;DC Sales;TRUE;DC;
+;DCCust4;DC Test Center;DC Sales US;TRUE;DC;

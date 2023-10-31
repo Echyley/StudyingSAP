@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<project name="sapproductconfigbackofficessc_buildcallbacks">
+	<macrodef name="sapproductconfigbackofficessc_before_build">
+		<sequential>
+			<register_sass_extension extensionname="sapproductconfigbackofficessc"/>
+			<register_sass_extension extensionname="sapproductconfigbackofficessc" resources="resources" destination=""/>
+		</sequential>
+	</macrodef>
+</project>
+ 

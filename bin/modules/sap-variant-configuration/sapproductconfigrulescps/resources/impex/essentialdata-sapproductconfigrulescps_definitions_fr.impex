@@ -1,0 +1,29 @@
+$lang=fr
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;Promotion du produit configurable
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;Pourcentage de remise sur le prix de l'option avec message de promotion;Appliquer la remise de {discount_value,number,percent*1} à l'option {cstic} / {cstic_value}
+;y_configurable_product_display_promo_message;Afficher le message de promotion (la promotion s'applique);Afficher le message de promotion
+;y_configurable_product_display_promo_opportunity_message;Afficher le message d'opportunité de promotion (la promotion ne s'applique pas encore);Afficher le message d'opportunité de promotion
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;Caractéristique;Caractéristique à laquelle s'applique la remise et pour laquelle ce message s'affiche
+;y_configurable_product_percentage_discount_for_option;cstic_value;Valeur de caractéristique;Valeur de caractéristique à laquelle s'applique la remise et pour laquelle ce message s'affiche
+;y_configurable_product_percentage_discount_for_option;discount_value;Valeur du pourcentage de remise;Pourcentage de remise qui s'applique au prix de l'option. Saisissez une valeur sans signe de pourcentage.
+;y_configurable_product_percentage_discount_for_option;message;Message;Texte du message
+;y_configurable_product_percentage_discount_for_option;extended_message;Message étendu;Texte du message étendu
+;y_configurable_product_display_promo_message;cstic;Caractéristique;Caractéristique pour laquelle ce message est affiché
+;y_configurable_product_display_promo_message;cstic_value;Valeur de caractéristique;Valeur de caractéristique pour laquelle ce message est affiché
+;y_configurable_product_display_promo_message;message;Message;Texte du message
+;y_configurable_product_display_promo_message;extended_message;Message étendu;Texte du message étendu
+;y_configurable_product_display_promo_opportunity_message;cstic;Caractéristique;Caractéristique pour laquelle ce message est affiché
+;y_configurable_product_display_promo_opportunity_message;cstic_value;Valeur de caractéristique;Valeur de caractéristique pour laquelle ce message est affiché
+;y_configurable_product_display_promo_opportunity_message;message;Message;Texte du message
+;y_configurable_product_display_promo_opportunity_message;extended_message;Message étendu;Texte du message étendu
+
+#% endif:

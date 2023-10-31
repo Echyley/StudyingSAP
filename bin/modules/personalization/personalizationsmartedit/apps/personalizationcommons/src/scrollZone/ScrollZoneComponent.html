@@ -1,0 +1,21 @@
+<ng-template #scrollZoneBody>
+    <personalizationsmartedit-scroll-zone-body-container>
+        <personalizationsmartedit-scroll-zone-body
+            [hidden]="!scrollZoneTop"
+            [isTransparent]="isTransparent"
+            [additionalClasses]="['perso__scrollzone--top']"
+            (scrollZoneBodyMouseenter)="onScrollTopMouseenter()"
+            (scrollZoneBodyMouseleave)="stopScroll()"
+        >
+        </personalizationsmartedit-scroll-zone-body>
+
+        <personalizationsmartedit-scroll-zone-body
+            [hidden]="!scrollZoneBottom"
+            [isTransparent]="isTransparent"
+            [additionalClasses]="['perso__scrollzone--bottom']"
+            (scrollZoneBodyMouseenter)="onScrollBottomMouseenter()"
+            (scrollZoneBodyMouseleave)="stopScroll()"
+        >
+        </personalizationsmartedit-scroll-zone-body>
+    </personalizationsmartedit-scroll-zone-body-container>
+</ng-template>

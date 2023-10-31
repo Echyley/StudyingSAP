@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    	
+    <extension abstractclassprefix="Generated" classprefix="Ysapomsfulfillment" managername="YsapomsfulfillmentManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="ysapomsfulfillment">
+        		
+        <requires-extension name="saporderexchangeoms"/>
+        		
+		
+        <coremodule generated="true" manager="de.hybris.platform.sap.ysapomsfulfillment.jalo.YsapomsfulfillmentManager" packageroot="de.hybris.platform.sap.ysapomsfulfillment"/>
+        		
+        <meta key="modulegen-name" value="ysapomsfulfillment"/>
+        		
+        <meta key="extgen-template-extension" value="true"/>
+        	
+    </extension>
+    
+</extensioninfo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="C4ccpiquote" jaloLogicFree="true" managername="C4ccpiquoteManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="c4ccpiquote" usemaven="false">
+          
+      
+        <!-- for more information on maven managed libraries please consult https://wiki.hybris.com/x/Nq8sDQ -->
+                       
+      
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                 
+      
+        <!-- <requires-extension name="cms"/> -->
+                 
+      
+      
+        <requires-extension name="commerceservices"/>
+         
+      
+        <requires-extension name="integrationservices"/>
+           
+      
+        <requires-extension name="outboundservices"/>
+         
+      
+        <requires-extension name="inboundservices"/>
+            
+      
+        <requires-extension name="sapcpiadapter"/>
+           
+      
+        <requires-extension name="saporderexchange"/>
+             
+	  
+        <requires-extension name="odata2webservices"/>
+        	  
+        <requires-extension name="b2bacceleratorservices"/>
+               
+        <requires-extension name="sapmodel"/>
+              
+        <coremodule generated="true" manager="com.sap.hybris.c4ccpiquote.jalo.C4ccpiquoteManager" packageroot="com.sap.hybris.c4ccpiquote"/>
+        	  
+        <meta key="backoffice-module" value="true"/>
+        					
+	
+
+   
+    </extension>
+          
+
+</extensioninfo>

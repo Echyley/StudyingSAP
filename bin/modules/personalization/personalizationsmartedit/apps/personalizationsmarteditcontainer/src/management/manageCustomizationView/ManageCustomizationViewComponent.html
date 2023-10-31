@@ -1,0 +1,10 @@
+<div class="pe-customization-modal__tabs">
+    <se-tabs
+        *ngIf="isReady"
+        [tabsList]="tabs"
+        [numTabsDisplayed]="2"
+        (onTabSelected)="onTabSelected($event)"
+    >
+    </se-tabs>
+</div>
+

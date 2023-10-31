@@ -1,0 +1,38 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$defaultPassword=12341234
+$storeUid=testStore
+
+INSERT_UPDATE BaseStore;uid[unique=true];net;
+                       ;$storeUid;false;
+
+INSERT_UPDATE UserGroup;uid[unique=true];locname[lang=en];
+;salesemployeegroup;Sales Employee;
+;salesapprovergroup;Sales Approver;
+;customergroup;Customer;
+;orgemployeegroup;Organization Employee Group;
+;asagentgroup; Assisted Service Group;
+
+INSERT_UPDATE PrincipalGroupRelation;source(uid)[unique=true];target(uid)[unique=true]
+;salesapprovergroup;salesemployeegroup;
+;orgemployeegroup;employeegroup;
+
+
+INSERT_UPDATE Customer;uid[unique=true];name;groups(uid)
+;customer@ichikawa.com;Test Quote Buyer;customergroup
+
+INSERT_UPDATE StoreEmployeeGroup;UID[unique=true];locname[lang=en];store(name)
+                                ;nakanostoreemployees;Nakano Store Employee Group;Nakano
+                                ;warehousestoreemployees;Warehouse Store Employee Group;ws_warehouse_n
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;type(code);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];basestore(uid)[default=$storeUid];
+                            ;Nakano;Nakano;STORE;35.7091;139.6732;29-04-2011;
+                            ;ws_warehouse_n;Warehouse North;WAREHOUSE;43.070542;141.3533259;29-04-2011;
+
+INSERT_UPDATE Employee; name                                      ; groups(uid)[mode = append]                                ; password[default = $defaultPassword]; uid[unique = true]
+                      ; Sales employee                            ; salesemployeegroup,orgemployeegroup                       ;                                     ; salesemployee@nakano.com
+                      ; Sales approver                            ; salesapprovergroup,orgemployeegroup                       ;                                     ; salesapprover@ichikawa.com
+                      ; Assisted Service Agent                    ; asagentgroup,nakanostoreemployees,warehousestoreemployees ;                                     ; asagent
+                      ; Assisted Service Agent for multisiteAgent ; asagentgroup,nakanostoreemployees,warehousestoreemployees ;                                     ; customer.support.standalone_site_ac@nakano.com

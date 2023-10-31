@@ -1,0 +1,181 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2019 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImPex for Importing Product Media into Powertools Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=powertoolsProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$siteResource=jar:de.hybris.platform.cpq.productconfig.frontend.constants.CpqproductconfigsampledataaddonConstants&/cpqproductconfigsampledataaddon/import/images
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+
+
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];$catalogVersion;folder(qualifier)[default=images]
+##### CONF_CAMERA_BUNDLE #####
+;1200Wx1200H	;CameraKit.jpg                          			;$siteResource/CameraKit.jpg;
+;515Wx515H  	;CameraKit_515.jpg                            	;$siteResource/CameraKit_515.jpg;
+;300Wx300H  	;CameraKit_300.jpg                         		;$siteResource/CameraKit_300.jpg;
+;96Wx96H    	;CameraKit_96.jpg                           		;$siteResource/CameraKit_96.jpg;
+;65Wx65H    	;CameraKit_65.jpg                           		;$siteResource/CameraKit_65.jpg;
+;30Wx30H    	;CameraKit_30.jpg                           		;$siteResource/CameraKit_30.jpg;
+;1200Wx1200H	;insurance2.png                          			;$siteResource/insurance2_515.png;
+;515Wx515H  	;insurance2_515.png                            	;$siteResource/insurance2_515.png;
+;300Wx300H  	;insurance2_300.png                         		;$siteResource/insurance2_300.png;
+;96Wx96H    	;insurance2_96.png                          		;$siteResource/insurance2_96.png;
+;65Wx65H    	;insurance2_65.png                              ;$siteResource/insurance2_65.png;
+;30Wx30H    	;insurance2_30.png                              ;$siteResource/insurance2_30.png;
+;1200Wx1200H	;nikon850.png                          			;$siteResource/nikon850_515.png;
+;515Wx515H  	;nikon850_515.png                               ;$siteResource/nikon850_515.png;
+;300Wx300H  	;nikon850_300.png                         		;$siteResource/nikon850_300.png;
+;96Wx96H    	;nikon850_96.png                          		;$siteResource/nikon850_96.png;
+;65Wx65H    	;nikon850_65.png                                ;$siteResource/nikon850_65.png;
+;30Wx30H    	;nikon850_30.png                                ;$siteResource/nikon850_30.png;
+;1200Wx1200H	;sandisk_128.png                          		;$siteResource/sandisk_128_515.png;
+;515Wx515H  	;sandisk_128_515.png                            ;$siteResource/sandisk_128_515.png;
+;300Wx300H  	;sandisk_128_300.png                         	;$siteResource/sandisk_128_300.png;
+;96Wx96H    	;sandisk_128_96.png                          	;$siteResource/sandisk_128_96.png;
+;65Wx65H    	;sandisk_128_65.png                             ;$siteResource/sandisk_128_65.png;
+;30Wx30H    	;sandisk_128_30.png                             ;$siteResource/sandisk_128_30.png;
+;96Wx96H    	;sandisk_ultra_96.png                           ;$siteResource/Mem_SANDISK_ULTRA_64GB_SDHC_96x96.png;
+;96Wx96H    	;mem_panasonic_96.png                           ;$siteResource/Mem_Panasonic-memory-card-128GB_96x96.jpg;
+;1200Wx1200H	;nikon7500.png                          			;$siteResource/nikon7500.png;
+;515Wx515H  	;nikon7500_515.png                              ;$siteResource/nikon7500_515.png;
+;300Wx300H  	;nikon7500_300.png                         		;$siteResource/nikon7500_300.png;
+;96Wx96H    	;nikon7500_96.png                          		;$siteResource/nikon7500_96.png;
+;65Wx65H    	;nikon7500_65.png                               ;$siteResource/nikon7500_65.png;
+;30Wx30H    	;nikon7500_30.png                               ;$siteResource/nikon7500_30.png;
+;1200Wx1200H	;canon6dMark2.png                          		;$siteResource/canon6dMark2_515.png;
+;515Wx515H  	;canon6dMark2_515.png                           ;$siteResource/canon6dMark2_515.png;
+;300Wx300H  	;canon6dMark2_300.png                         	;$siteResource/canon6dMark2_300.png;
+;96Wx96H    	;canon6dMark2_96.png                          	;$siteResource/canon6dMark2_96.png;
+;65Wx65H    	;canon6dMark2_65.png                            ;$siteResource/canon6dMark2_65.png;
+;30Wx30H    	;canon6dMark2_30.png                            ;$siteResource/canon6dMark2_30.png;
+;1200Wx1200H	;canon80d.png                          			;$siteResource/canon80d_515.png;
+;515Wx515H  	;canon80d_515.png                               ;$siteResource/canon80d_515.png;
+;300Wx300H  	;canon80d_300.png                         		;$siteResource/canon80d_300.png;
+;96Wx96H    	;canon80d_96.png                          		;$siteResource/canon80d_96.png;
+;65Wx65H    	;canon80d_65.png                                ;$siteResource/canon80d_65.png;
+;30Wx30H    	;canon80d_30.png                                ;$siteResource/canon80d_30.png;
+;96Wx96H    	;accLitemasterPro_96.png                        ;$siteResource/Acc_LITEMASTER_PRO_L-478D-U_LIGHT_METER_96x96.jpg;
+;96Wx96H    	;accRemoteReleaseCord_96.png                    ;$siteResource/Acc_REMOTE_RELEASE_CORD_MC-DC2_96x96.jpg;
+;96Wx96H    	;accLightingFilter_96.png                       ;$siteResource/Acc_ROGUE_GELS_LIGHTING_FILTER_KIT_96x96.jpg;
+;96Wx96H    	;accBounceDiffuser_96.png                       ;$siteResource/Acc_UNIVERSAL_BOUNCE_DIFFUSER_96x96.jpg;
+;96Wx96H    	;accWhiteBalanceCards_96.png                    ;$siteResource/Acc_WHITE_BALANCE_CARD_SET_96x96.jpg;
+;96Wx96H    	;bagLowePro_96.png                              ;$siteResource/Bag_LOWEPRO_STREETLINE_SL_140_96x96.jpg;
+;96Wx96H    	;bagOnaCamps_96.png                             ;$siteResource/Bag_ONA_THE_CAMPS_BAY_96x96.jpg;
+;96Wx96H    	;bagThinkTank_96.png                            ;$siteResource/Bag_THINKTANK_SPEED_RACER_V2.0_96x96.jpg;
+;96Wx96H    	;bagWandrd_96.png                               ;$siteResource/Bag_WANDRD_HEXAD_ACCESS_DUFFEL_45_96x96.jpg;
+;96Wx96H    	;triDaisen_96.png                               ;$siteResource/Tri_DAISEN_OCTOPUS_96x96.jpg;
+;96Wx96H    	;triManfrotto_96.png                            ;$siteResource/Tri_MANFROTTO_BEFREE_96x96.jpg;
+;96Wx96H    	;triKFConcept_96.png                            ;$siteResource/Tri_KF_CONCEPT_62_TRIPOD_96x96.jpg;
+;96Wx96H    	;triHama_96.png                                 ;$siteResource/Tri_HAMA_STAR_63_TRIPOD_96x96.jpg;
+;96Wx96H    	;lensNikonAF_96.png                             ;$siteResource/Lens_NIKON_AF-P_70-300_96x96.jpg;
+;300Wx300H    	;lensNikonAF_300.png                            ;$siteResource/Lens_NIKON_AF-P_70-300_300x300.jpg;
+;96Wx96H    	;lensSigma85_96.png                             ;$siteResource/Lens_SIGMA_85_96x96.jpg;
+;96Wx96H    	;lensTamron18_96.png                            ;$siteResource/Lens_TAMRON_18-200_96x96.jpg;
+;96Wx96H    	;lensTamronSP_96.png                            ;$siteResource/Lens_TAMRON_SP_15-30_96x96.jpg;
+;300Wx300H    	;lensTamronSP_300.png                           ;$siteResource/Lens_TAMRON_SP_15-30_300x300.jpg;
+;96Wx96H    	;lensCanonRF_96.png                            ;$siteResource/Lens_CANON_RF_24-105_96x96.jpg;
+##### CONF_COFFEEMACHINE_3000 #####
+;1200Wx1200H	;standard_foammaster_1200                       ;$siteResource/standard_foammaster_1200.jpg;
+;515Wx515H  	;standard_foammaster_515					         ;$siteResource/standard_foammaster_515.jpg;
+;300Wx300H  	;standard_foammaster_300		                  ;$siteResource/standard_foammaster_300.jpg;
+;96Wx96H    	;standard_foammaster_96	                        ;$siteResource/standard_foammaster_96.jpg;
+;65Wx65H    	;standard_foammaster_65	                   		;$siteResource/standard_foammaster_65.jpg;
+;30Wx30H    	;standard_foammaster_30	                        ;$siteResource/standard_foammaster_30.jpg
+;96Wx96H    	;graffiti_foammaster_96	                        ;$siteResource/graffiti_foammaster_96x96.jpg;
+;96Wx96H    	;steampunk_foammaster_96	                    ;$siteResource/steampunk_foammaster_96x96.jpg;
+;96Wx96H    	;artisanale_foammaster_96	                    ;$siteResource/artisanale_foammaster_96x96.jpg;
+
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+##### CONF_CAMERA_BUNDLE #####
+;MediaContainer_CameraKit					 ;CameraKit.jpg,CameraKit_515.jpg,CameraKit_300.jpg,CameraKit_96.jpg,CameraKit_65.jpg,CameraKit_30.jpg;
+;MediaContainer_insurance2 				 ;insurance2.png,insurance2_515.png,insurance2_300.png,insurance2_96.png,insurance2_65.png,insurance2_30.png;
+;MediaContainer_nikon850					 ;nikon850.png,nikon850_515.png,nikon850_300.png,nikon850_96.png,nikon850_65.png,nikon850_30.png;
+;MediaContainer_sandisk_128				 ;sandisk_128.png,sandisk_128_515.png,sandisk_128_300.png,sandisk_128_96.png,sandisk_128_65.png,sandisk_128_30.png;
+;MediaContainer_nikon7500					 ;nikon7500.png,nikon7500_515.png,nikon7500_300.png,nikon7500_96.png,nikon7500_65.png,nikon7500_30.png;
+;MediaContainer_canon6dMark2				 ;canon6dMark2.png,canon6dMark2_515.png,canon6dMark2_300.png,canon6dMark2_96.png,canon6dMark2_65.png,canon6dMark2_30.png;
+;MediaContainer_canon80d					 ;canon80d.png,canon80d_515.png,canon80d_300.png,canon80d_96.png,canon80d_65.png,canon80d_30.png;
+;MediaContainer_LITEMASTER_PRO					 ;accLitemasterPro_96.png;
+;MediaContainer_REMOTE_RELEASE_CORD_MC-DC2       ;accRemoteReleaseCord_96.png;
+;MediaContainer_ROGUE_GELS_LIGHTING_FILTER_KIT   ;accLightingFilter_96.png;
+;MediaContainer_UNIVERSAL_BOUNCE_DIFFUSER        ;accBounceDiffuser_96.png;
+;MediaContainer_WHITE_BALANCE_CARD_SET           ;accWhiteBalanceCards_96.png;
+;MediaContainer_LOWEPRO_STREETLINE_SL_140        ;bagLowePro_96.png;
+;MediaContainer_ONA_THE_CAMPS_BAY                ;bagOnaCamps_96.png;
+;MediaContainer_THINKTANK_SPEED_RACER_V2.0       ;bagThinkTank_96.png;
+;MediaContainer_WANDRD_HEXAD_ACCESS_DUFFEL_45    ;bagWandrd_96.png;
+;MediaContainer_DAISEN_CAMERA_TRIPOD_OCTOPUS     ;triDaisen_96.png;
+;MediaContainer_MANFROTTO_BEFREE_2N1_ALUMINIUM_TRIPOD_TW   ;triManfrotto_96.png;
+;MediaContainer_KG_CONCEPT_62_TRIPOD                       ;triKFConcept_96.png;
+;MediaContainer_HAMA_STAR_63_TRIPOD                        ;triHama_96.png;
+;MediaContainer_LENS_NIKON                        ;lensNikonAF_96.png;
+;MediaContainer_LENS_SIGMA                        ;lensSigma85_96.png;
+;MediaContainer_LENS_TAMRON_18                        ;lensTamron18_96.png;
+;MediaContainer_LENS_TAMRON_SP                        ;lensTamronSP_96.png;
+;MediaContainer_LENS_CANON_RF                        ;lensCanonRF_96.png;
+;MediaContainer_Scandisk_Ultra                        ;sandisk_ultra_96.png;
+;MediaContainer_Mem_Panasonic                        ;mem_panasonic_96.png;
+##### CONF_COFFEEMACHINE_3000 #####
+;MediaContainer_Coffee_Maschine_Default ;standard_foammaster_1200,standard_foammaster_515,standard_foammaster_300,standard_foammaster_96,standard_foammaster_65,standard_foammaster_30;
+;MediaContainer_CONF_BREW_CAP_ESPRESSO_cpq                 ;standard_foammaster_96;
+;MediaContainer_CONF_BREW_CAP_FILTER_cpq                   ;graffiti_foammaster_96;
+;MediaContainer_CONF_BREW_CAP_CHOCOLATE_cpq                ;steampunk_foammaster_96;
+;MediaContainer_CONF_BREW_CAP_DECAF_cpq                    ;artisanale_foammaster_96;
+
+
+INSERT_UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+##### CONF_CAMERA_BUNDLE #####
+;CONF_CAMERA_BUNDLE;CameraKit_300.jpg;CameraKit_96.jpg;CameraKit.jpg;CameraKit_515.jpg,CameraKit_65.jpg,CameraKit_30.jpg;CameraKit_300.jpg;CameraKit_96.jpg;MediaContainer_CameraKit;
+;INSURANCE_SELECT_2_YEARS;insurance2_300.png;insurance2_96.png;insurance2.png;insurance2_515.png,insurance2_65.png,insurance2_30.png;insurance2_300.png;insurance2_96.png;MediaContainer_insurance2;
+;NIKON_D850;nikon850_300.png;nikon850_96.png;nikon850.png;nikon850_515.png,nikon850_65.png,nikon850_30.png;nikon850_300.png;nikon850_96.png;MediaContainer_nikon850;
+;SANDISK_EXTREME_PRO_128GB_SDXC;sandisk_128_300.png;sandisk_128_96.png;sandisk_128.png;sandisk_128_515.png,sandisk_128_65.png,sandisk_128_30.png;sandisk_128_300.png;sandisk_128_96.png;MediaContainer_sandisk_128;
+;NIKON_D7500;nikon7500_300.png;nikon7500_96.png;nikon7500.png;nikon7500_515.png,nikon7500_65.png,nikon7500_30.png;nikon7500_300.png;nikon7500_96.png;MediaContainer_nikon7500;
+;CANON_EOS_80D;canon80d_300.png;canon80d_96.png;canon80d.png;canon80d_515.png,canon80d_65.png,canon80d_30.png;canon80d_300.png;canon80d_96.png;MediaContainer_canon80d;
+;CANON_EOS_6D_MARK_II;canon6dMark2_300.png;canon6dMark2_96.png;canon6dMark2.png;canon6dMark2_515.png,canon6dMark2_65.png,canon6dMark2_30.png;canon6dMark2_300.png;canon6dMark2_96.png;MediaContainer_canon6dMark2;
+;LITEMASTER_PRO_L-478D-U_LIGHT_METER;accLitemasterPro_96.png;accLitemasterPro_96.png;;;;accLitemasterPro_96.png;;
+;REMOTE_RELEASE_CORD_MC-DC2;accRemoteReleaseCord_96.png;accRemoteReleaseCord_96.png;;;;accRemoteReleaseCord_96.png;;
+;ROGUE_GELS_LIGHTING_FILTER_KIT;accLightingFilter_96.png;accLightingFilter_96.png;;;;accLightingFilter_96.png;;
+;UNIVERSAL_BOUNCE_DIFFUSER;accBounceDiffuser_96.png;accBounceDiffuser_96.png;;;;accBounceDiffuser_96.png;;
+;WHITE_BALANCE_CARD_SET;accWhiteBalanceCards_96.png;accWhiteBalanceCards_96.png;;;;accWhiteBalanceCards_96.png;;
+;LOWEPRO_STREETLINE_SL_140;bagLowePro_96.png;bagLowePro_96.png;;;;bagLowePro_96.png;;
+;ONA_THE_CAMPS_BAY;bagOnaCamps_96.png;bagOnaCamps_96.png;;;;bagOnaCamps_96.png;;
+;THINKTANK_SPEED_RACER_V2.0;bagThinkTank_96.png;bagThinkTank_96.png;;;;bagThinkTank_96.png;;
+;WANDRD_HEXAD_ACCESS_DUFFEL_45;bagWandrd_96.png;bagWandrd_96.png;;;;bagWandrd_96.png;;
+;DAISEN_CAMERA_TRIPOD_OCTOPUS;triDaisen_96.png;triDaisen_96.png;;;;triDaisen_96.png;;
+;MANFROTTO_BEFREE_2N1_ALUMINIUM_TRIPOD_TW;triManfrotto_96.png;triManfrotto_96.png;;;;triManfrotto_96.png;;
+;KG_CONCEPT_62_TRIPOD;triKFConcept_96.png;triKFConcept_96.png;;;;triKFConcept_96.png;;
+;HAMA_STAR_63_TRIPOD;triHama_96.png;triHama_96.png;;;;triHama_96.png;;
+;SIGMA_85MM_F1.4_DG_HSM;lensSigma85_96.png;lensSigma85_96.png;;;;lensSigma85_96.png;;
+;TAMRON_18-200MM_F3.5-6.3_DI_II_VC;lensTamron18_96.png;lensTamron18_96.png;;;;lensTamron18_96.png;;
+;TAMRON_SP_15-30MM_F2.8_DI_VC_USD;lensTamronSP_96.png;lensTamronSP_96.png;;;;lensTamronSP_96.png;;
+;NIKON_AF-P_DX_NIKKOR_70-300MM_1:4.5-6.3;lensNikonAF_96.png;lensNikonAF_96.png;;;;lensNikonAF_96.png;;
+;CANON_RF_24-105MM_F4L_IS_USM;lensCanonRF_96.png;lensCanonRF_96.png;;;;lensCanonRF_96.png;;
+;SANDISK_ULTRA_64GB_SDHC;sandisk_ultra_96.png;sandisk_ultra_96.png;;;;sandisk_ultra_96.png;;
+;PANASONIC_AU-XP0512GB;mem_panasonic_96.png;mem_panasonic_96.png;;;;mem_panasonic_96.png;;
+##### CONF_COFFEEMACHINE_3000 #####
+;CONF_COFFEEMACHINE_3000;standard_foammaster_300;standard_foammaster_96;standard_foammaster_1200;standard_foammaster_515,standard_foammaster_65,standard_foammaster_30;standard_foammaster_300;standard_foammaster_96;MediaContainer_Coffee_Maschine_Default;
+;CONF_BREW_CAP_ESPRESSO_cpq;standard_foammaster_96;standard_foammaster_96;;;;standard_foammaster_96;;
+;CONF_BREW_CAP_FILTER_cpq;graffiti_foammaster_96;graffiti_foammaster_96;;;;graffiti_foammaster_96;;
+;CONF_BREW_CAP_CHOCOLATE_cpq;steampunk_foammaster_96;steampunk_foammaster_96;;;;steampunk_foammaster_96;;
+;CONF_BREW_CAP_DECAF_cpq;artisanale_foammaster_96;artisanale_foammaster_96;;;;artisanale_foammaster_96;;

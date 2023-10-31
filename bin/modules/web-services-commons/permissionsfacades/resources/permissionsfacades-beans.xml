@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="de.hybris.platform.permissionsfacades.data.PermissionsData">
+        <property name="id" type="String"/>
+        <property name="permissions" type="java.util.Map&lt;String, String>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.permissionsfacades.data.CatalogPermissionsData">
+        <property name="catalogId" type="String"/>
+        <property name="catalogVersion" type="String"/>
+        <property name="permissions" type="java.util.Map&lt;String, String>"/>
+        <property name="syncPermissions"
+                  type="java.util.List&lt;de.hybris.platform.permissionsfacades.data.SyncPermissionsData>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.permissionsfacades.data.SyncPermissionsData">
+        <property name="targetCatalogVersion" type="String" equals="true"/>
+        <property name="canSynchronize" type="boolean" equals="true"/>
+    </bean>
+
+	<bean class="de.hybris.platform.permissionsfacades.data.PermissionValuesData">
+		<description>CRUD permission values for any specific principal and type.</description>
+		<property name="read" type="Boolean">
+			<description>Specifies if permission to read the type should be granted.</description>
+		</property>
+		<property name="create" type="Boolean">
+			<description>Specifies if permission to create the type should be granted.</description>
+		</property>
+		<property name="change" type="Boolean">
+			<description>Specifies if permission to update the type should be granted.</description>
+		</property>
+		<property name="remove" type="Boolean">
+			<description>Specifies if permission to delete the type should be granted.</description>
+		</property>
+		<property name="changerights" type="Boolean">
+			<description>Specifies if permission to change permissions on the type should be granted.</description>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.permissionsfacades.data.TypePermissionsData">
+		<description>Type with CRUD permission assignment values.</description>
+		<property name="type" type="String">
+			<description>A Type specifying which type the permission assignment values are for.</description>
+		</property>
+		<property name="permissions" type="PermissionValuesData">
+			<description>Type with CRUD permission assignment values.</description>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.permissionsfacades.data.TypePermissionsDataList">
+		<description>List type of permissions for any specific principal.</description>
+		<property name="principalUid" type="String">
+			<description>ID of the principal to replace the permissions</description>
+		</property>
+		<property name="permissionsList" type="java.util.List&lt;TypePermissionsData&gt;">
+			<description>List type of permissions for any specific principal.</description>
+		</property>
+	</bean>
+</beans>
+

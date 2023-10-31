@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%"
+        width="100%">
+    <style src="${wr}/IntegrationBackofficeStackLayoutContainerReverseFlex.scss"/>
+
+    <div class="integrationbackoffice-stack-container">
+        <span class="integrationbackoffice-stack-title">${labels.integrationbackoffice.accessRightsTitle}</span>
+        <div class="integrationbackoffice-widget-slot integrationbackoffice-widget-slot--top">
+            <widgetslot slotID="topSlot" width="100%" height="100%"/>
+        </div>
+        <div class="integrationbackoffice-widget-slot" vflex="1">
+            <widgetslot slotID="bottomSlot" width="100%" height="100%"/>
+        </div>
+    </div>
+
+</widget>

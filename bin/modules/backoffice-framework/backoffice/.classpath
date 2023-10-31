@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry exported="false" kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="src" path="/auditreportservices"/>
+	<classpathentry exported="true" kind="src" path="/alluicommons" />
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-5.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-lite-5.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-5.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-compress-1.23.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/curvesapi-1.07.jar"/>
+	<classpathentry exported="true" kind="lib" path="bin/backofficeserver.jar" sourcepath="doc/sources/backoffice-module-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/classes" sourcepath="doc/sources/backoffice-module-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/atlantic-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/backoffice-core-2211.FP1-RC11.jar" sourcepath="doc/sources/backoffice-core-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/backoffice-widgets-2211.FP1-RC11.jar" sourcepath="doc/sources/backoffice-widgets-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/ckez-4.20.1.0-hybris-patched.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpitadmin-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpitadmin-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpitcore-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpitcore-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-data-integration-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpit-data-integration-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-demo-widgets-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpit-demo-widgets-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpitframework-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpitframework-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-module-aggregator-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpit-module-aggregator-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpit-standard-editors-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpit-standard-editors-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpittesting-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpittesting-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/cockpitwidgets-2211.FP1-RC11.jar" sourcepath="doc/sources/cockpitwidgets-2211.FP1-RC11-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/gmapsz-3.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zcommon-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zel-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zhtml-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zk-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zkbind-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zkcharts-10.2.1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zkex-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zkmax-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zkplus-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zkspring-core-3.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zul-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zuti-9.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="web/webroot/WEB-INF/lib/zweb-9.6.2.jar"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

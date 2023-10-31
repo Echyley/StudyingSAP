@@ -1,0 +1,22 @@
+.media-container-selector-item {
+    &__row {
+        display: grid;
+        grid-template-columns: 2fr 4fr;
+        grid-column-gap: 12px;
+        width: 100%;
+        align-items: center;
+        padding: 0 8px;
+    }
+
+    &__img {
+        max-width: 90%;
+        max-height: 100%;
+        margin: 12px;
+
+        &--selected {
+            max-width: 35%;
+            height: 30px;
+            margin: 0;
+        }
+    }
+}

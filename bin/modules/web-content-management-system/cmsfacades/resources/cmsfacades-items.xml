@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype code="CMSItemTypeAttributeFilterConfig" generate="true" jaloclass="de.hybris.platform.cmsfacades.jalo.CMSItemTypeAttributeFilterConfig"
+				  extends="GenericItem" autocreate="true">
+			<deployment table="CMSItemTypeAttrFltCfg" typecode="1105" />
+			<attributes>
+				<attribute qualifier="typeCode" type="java.lang.String">
+					<modifiers initial="true" optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="mode" type="java.lang.String">
+					<modifiers initial="true" optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="attributes" type="java.lang.String">
+					<modifiers initial="true" optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="attributeUniqueIndex" unique="true">
+					<key attribute="typeCode" />
+					<key attribute="mode" />
+				</index>
+			</indexes>
+		</itemtype>
+	</itemtypes>
+</items>

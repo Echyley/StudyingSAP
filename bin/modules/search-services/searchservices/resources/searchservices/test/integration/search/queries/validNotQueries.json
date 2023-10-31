@@ -1,0 +1,47 @@
+[
+	{
+		"testId": 1,
+		"description": "'not' query",
+		"data": {
+			"type": "not",
+			"query": {
+				"type": "matchTerm",
+				"expression": "code",
+				"value": "doc2"
+			}
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc3",
+			"doc4"
+		]
+	},
+	{
+		"testId": 2,
+		"description": "'not' exists code field query",
+		"data": {
+			"type": "not",
+			"query": {
+				"type": "exists",
+				"expression": "code"
+			}
+		},
+		"matchingDocuments": [
+			"doc4"
+		]
+	},
+	{
+		"testId": 3,
+		"description": "'not' exists field_text_mv field query",
+		"data": {
+			"type": "not",
+			"query": {
+				"type": "exists",
+				"expression": "field_text_mv"
+			}
+		},
+		"matchingDocuments": [
+			"doc4"
+		]
+	}
+]

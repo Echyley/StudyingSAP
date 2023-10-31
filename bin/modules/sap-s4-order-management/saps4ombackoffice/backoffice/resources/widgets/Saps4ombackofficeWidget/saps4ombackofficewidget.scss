@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "./support/saps4ombackofficewidget-variables.scss";
+
+.yw-labelstyle
+{
+	color: $saps4ombackoffice-label-text-color;
+}
+
+.saps4ombackoffice-container {
+	background: $saps4ombackoffice-container-background;
+	font-family: $saps4ombackoffice-container-font-family;
+	font-size: $saps4ombackoffice-container-font-size;
+}

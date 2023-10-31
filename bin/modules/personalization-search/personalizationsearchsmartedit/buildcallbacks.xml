@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="personalizationsearchsmartedit_buildcallbacks">
+  <patternset id="extension.personalizationsearchsmartedit.binary.filter">
+    <patternset refid="extension.binary.filter" />
+    <exclude name="build/" />
+    <exclude name="smartedit-build/**" />
+    <exclude name="smartedit-custom-build/generated/" />
+    <exclude name="**/node_modules/" />
+    <exclude name="jsTarget/" />
+    <exclude name="package.json" />
+  </patternset>
+  <patternset id="extension.personalizationsearchsmartedit.source.filter">
+    <patternset refid="extension.source.filter" />
+    <exclude name="build/" />
+    <exclude name="smartedit-build/**" />
+    <exclude name="smartedit-custom-build/generated/" />
+    <exclude name="**/node_modules/" />
+    <exclude name="jsTarget/" />
+    <exclude name="package.json" />
+  </patternset>
+  <patternset id="extension.personalizationsearchsmartedit.production.filter">
+    <patternset refid="extension.production.filter" />
+    <exclude name="build/" />
+    <exclude name="smartedit-build/**" />
+    <exclude name="smartedit-custom-build/generated/" />
+    <exclude name="**/node_modules/" />
+    <exclude name="jsTarget/" />
+    <exclude name="package.json" />
+  </patternset>
+  <macrodef name="personalizationsearchsmartedit_before_clean">
+    <sequential>
+      <if>
+        <available file="${ext.smartedittools.path}${file.separator}common${file.separator}temp${file.separator}node_modules" type="dir" />
+        <then>
+          <delete dir="${ext.personalizationsearchsmartedit.path}${file.separator}web${file.separator}webroot${file.separator}personalizationsearchsmartedit${file.separator}js" />
+          <delete dir="${ext.personalizationsearchsmartedit.path}${file.separator}web${file.separator}webroot${file.separator}css" />
+        </then>
+      </if>
+    </sequential>
+  </macrodef>
+  <macrodef name="personalizationsearchsmartedit_before_build">
+    <sequential>
+      <build_smartedit_extension extensionName="personalizationsearchsmartedit" appNames="personalizationsearchsmartedit,personalizationsearchsmarteditContainer" />
+    </sequential>
+  </macrodef>
+  <macrodef name="personalizationsearchsmartedit_before_yunit">
+    <!-- 'includeAngularUT' flag will be set as true in team pipeline.
+    It will be removed after ECPP install Chrome -->
+    <attribute name="includeAngularUT" default="false" />
+    <sequential>
+      <if>
+        <and>
+          <istrue value="${testclasses.web}" />
+          <istrue value="${includeAngularUT}" />
+        </and>
+        <then>
+          <test_smartedit_extension extensionName="personalizationsearchsmartedit" appNames="personalizationsearchsmartedit,personalizationsearchsmarteditContainer" />
+        </then>
+      </if>
+    </sequential>
+  </macrodef>
+  <target name="test_personalizationsearchsmartedit">
+    <test_smartedit_extension extensionName="personalizationsearchsmartedit" appNames="personalizationsearchsmartedit,personalizationsearchsmarteditContainer" />
+  </target>
+  <target name="lint_personalizationsearchsmartedit">
+    <sequential>
+      <lint_smartedit_extension extensionName="personalizationsearchsmartedit" appNames="personalizationsearchsmartedit,personalizationsearchsmarteditContainer" />
+    </sequential>
+  </target>
+</project>

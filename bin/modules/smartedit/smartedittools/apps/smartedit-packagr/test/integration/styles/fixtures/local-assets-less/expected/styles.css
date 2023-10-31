@@ -1,0 +1,9 @@
+body {
+  background: url("../assets/img1.png");
+}
+.test {
+  background: url("../src/other-assets/other-img/img3.png");
+}
+.test {
+  background: url("../src/other-assets/other-img/img2.png");
+}

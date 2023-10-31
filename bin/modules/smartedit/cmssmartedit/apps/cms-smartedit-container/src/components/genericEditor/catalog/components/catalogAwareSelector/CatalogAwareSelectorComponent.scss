@@ -1,0 +1,33 @@
+.se-catalog-aware-selector {
+    &__add-item-btn {
+        @include se-flex-row;
+        color: var(--sapIndicationColor_5);
+    }
+
+    &__add-more-btn-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__list {
+        .se-tree-node {
+            color: var(--sapList_TextColor);
+            background-color: $smartedit-white;
+        }
+        .se-tree__nodes--item {
+            .se-tree-node__ol {
+                padding-inline-start: 0;
+            }
+            .se-tree-node,
+            .se-tree-node__ol {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .se-tree-node__li {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

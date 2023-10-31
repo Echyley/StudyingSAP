@@ -1,0 +1,15 @@
+<div class="categoryTable">
+    <div class="tablehead clearfix hidden-xs se-navigation-editor-tree__head">
+        <div
+            translate="se.ytree.template.header.name"
+            class="se-navigation-editor-tree__name col-md-offset-1 col-sm-5"
+        ></div>
+    </div>
+    <se-tree
+        [nodeUri]="nodeURI"
+        [rootNodeUid]="rootNodeUid"
+        [nodeComponent]="nodePickerRenderComponent"
+        [removeDefaultTemplate]="removeDefaultTemplate"
+        [nodeActions]="actions"
+    ></se-tree>
+</div>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="com.hybris.backoffice.jalo.YbackofficeProductManager" 	init-method="init"	destroy-method="destroy" />
+	-->
+
+
+ 	<!--  Example how to configure the class to use for jalo session creation -->
+	<!--
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="com.hybris.backoffice.jalo.YbackofficeJaloSession"/>
+	</bean>
+	-->
+
+
+	<!--  Example how to override an item  -->
+	<!--
+	<bean id="de.hybris.platform.jalo.product.Product" class="com.hybris.backoffice.jalo.YbackofficeProduct" scope="prototype" />
+ 	-->
+
+	<!--
+	 Example how to register and use an AOP aspect
+     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html
+     -->
+
+	<!--
+	<bean id="backofficesearchservicesProfBean" class="com.hybris.backoffice.aop.YbackofficeProfilingAspect"/>
+	<aop:config proxy-target-class="true">
+  		<aop:aspect id="backofficesearchservicesProfAspect" ref="backofficesearchservicesProfBean" >
+    	  <aop:pointcut id="profiledMethods"
+	      	expression="execution(* getModificationTime(..))" />
+	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
+  		</aop:aspect>
+	</aop:config>
+	 -->
+
+
+	<!-- some other examples of a pointcut that matches everything:
+
+    	  <aop:pointcut id="profiledMethods"
+	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp;
+	      	            !execution(* getPK(..))" />
+	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />
+	  -->
+
+
+	<alias name="searchservicesFacetSearchConfigDAO" alias="searchservicesFacetSearchConfigDAO"/>
+	<bean id="searchservicesFacetSearchConfigDAO"
+		  class="com.hybris.backoffice.searchservices.daos.impl.SearchservicesFacetSearchConfigDAO">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="typeService" ref="typeService"/>
+	</bean>
+
+	<alias name="backofficeSearchservicesFacetSearchConfigService" alias="backofficeSearchservicesFacetSearchConfigService"/>
+	<bean id="backofficeSearchservicesFacetSearchConfigService"
+		  class="com.hybris.backoffice.searchservices.services.impl.BackofficeSearchservicesFacetSearchConfigService">
+		<property name="typeService" ref="typeService"/>
+		<property name="facetSearchConfigDAO" ref="searchservicesFacetSearchConfigDAO"/>
+		<property name="backofficeFacetSearchConfigCache" ref="backofficeSearchservicesFacetSearchConfigCache"/>
+	</bean>
+
+	<alias name="backofficeSearchservicesFacetSearchConfigCache" alias="backofficeSearchservicesFacetSearchConfigCache"/>
+	<bean id="backofficeSearchservicesFacetSearchConfigCache"
+		  class="com.hybris.backoffice.searchservices.cache.impl.BackofficeSearchservicesFacetSearchConfigCache" init-method="initialize">
+		<property name="invalidatingTypecodes">
+			<set value-type="java.lang.String">
+				<!--BackofficeIndexedTypeToSearchservicesIndexConfig -->
+				<value>6703</value>
+				<!-- SnIndexConfiguration -->
+				<value>2261</value>
+				<!--SnIndexType-->
+				<value>2262</value>
+				<!--SnField-->
+				<value>2263</value>
+			</set>
+		</property>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<alias name="defaultSearchservicesIndexerJobsService" alias="searchservicesIndexerJobsService"/>
+	<bean id="defaultSearchservicesIndexerJobsService"
+		  class="com.hybris.backoffice.search.services.impl.DefaultSearchIndexerJobsService" lazy-init="false">
+		<property name="modelService" ref="modelService"/>
+		<property name="backofficeJobsDao" ref="backofficeJobsDao"/>
+		<property name="jobNames">
+			<set value-type="java.lang.String">
+				<value>backofficeSearchservicesIndexerDeleteCronJob</value>
+			</set>
+		</property>
+	</bean>
+
+	<alias name="defaultAfterInitializationEndBackofficeSearchservicesListener" alias="afterInitializationEndBackofficeSearchservicesListener"/>
+	<bean id="defaultAfterInitializationEndBackofficeSearchservicesListener"
+		  class="com.hybris.backoffice.search.events.AfterInitializationEndBackofficeSearchListener" lazy-init="false"
+		  parent="abstractEventListener"/>
+
+	<alias name="defaultBackofficeSnIndexerListener" alias="backofficeSnIndexerListener"/>
+	<bean id="defaultBackofficeSnIndexerListener"
+		  class="com.hybris.backoffice.searchservices.indexer.listeners.BackofficeSnIndexerListener">
+		<property name="backofficeFacetSearchConfigService" ref="backofficeSearchservicesFacetSearchConfigService"/>
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="backofficeSnIndexerListenerDefinition" parent="snListenerDefinition">
+		<property name="priority" value="100" />
+		<property name="listener" ref="backofficeSnIndexerListener" />
+	</bean>
+
+	<alias name="defaultBackofficeSearchservicesStartupHandler" alias="backofficeSearchservicesStartupHandler"/>
+	<bean id="defaultBackofficeSearchservicesStartupHandler"
+		  class="com.hybris.backoffice.search.setup.BackofficeSearchStartupHandler"
+		  init-method="initialize" destroy-method="destroy" lazy-init="false">
+		<property name="afterInitializationEndBackofficeSearchListener" ref="afterInitializationEndBackofficeSearchservicesListener"/>
+		<property name="searchIndexerJobsService" ref="searchservicesIndexerJobsService"/>
+	</bean>
+
+	<alias name="backofficeSearchservicesSystemSetupConfig" alias="defaultBackofficeSearchservicesSystemSetupConfig" />
+	<bean id="backofficeSearchservicesSystemSetupConfig" class="com.hybris.backoffice.searchservices.setup.impl.DefaultBackofficeSearchservicesSystemSetupConfig" >
+		<constructor-arg name="configStringResolver">
+			<bean class="com.hybris.backoffice.search.setup.impl.ConfigStringResolver" />
+		</constructor-arg>
+	</bean>
+
+	<alias name="backofficeSearchservicesSystemSetup" alias="defaultBackofficeSearchservicesSystemSetup" />
+	<bean id="backofficeSearchservicesSystemSetup" class="com.hybris.backoffice.searchservices.setup.impl.DefaultBackofficeSearchservicesImpexImportSystemSetup">
+		<constructor-arg name="importService" ref="defaultImportService" />
+		<constructor-arg name="commonI18NService" ref="commonI18NService" />
+		<constructor-arg name="modelService" ref="modelService" />
+		<constructor-arg name="cronJobService" ref="cronJobService" />
+		<constructor-arg name="configurationService" ref="configurationService" />
+		<constructor-arg name="backofficeSearchservicesSystemSetupConfig" ref="defaultBackofficeSearchservicesSystemSetupConfig" />
+		<constructor-arg name="fileBasedImpExResourceFactory">
+			<bean class="com.hybris.backoffice.search.setup.impl.FileBasedImpExResourceFactory" />
+		</constructor-arg>
+	</bean>
+
+	<alias name="defaultProductAttributeSnIndexerValueProvider" alias="productAttributeSnIndexerValueProvider" />
+	<bean id="defaultProductAttributeSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.ProductAttributeSnIndexerValueProvider"
+		  parent="abstractSnIndexerValueProvider">
+		<property name="snExpressionEvaluator" ref="snExpressionEvaluator" />
+	</bean>
+
+	<alias name="defaultVariantAwareCategorySnIndexerValueProvider" alias="variantAwareCategorySnIndexerValueProvider" />
+	<bean id="defaultVariantAwareCategorySnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.VariantAwareCategorySnIndexerValueProvider"
+		  parent="productAttributeSnIndexerValueProvider">
+	</bean>
+
+	<alias name="defaultItemModelLabelSnIndexerValueProvider" alias="itemModelLabelSnIndexerValueProvider" />
+	<bean id="defaultItemModelLabelSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.ItemModelLabelSnIndexerValueProvider"
+		  parent="abstractSnIndexerValueProvider">
+		<property name="snExpressionEvaluator" ref="snExpressionEvaluator" />
+		<!-- labelService proxy is set by property-extender -->
+	</bean>
+
+	<alias name="defaultBooleanSnIndexerValueProvider" alias="booleanSnIndexerValueProvider" />
+	<bean id="defaultBooleanSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.BooleanSnIndexerValueProvider"
+		  parent="modelAttributeSnIndexerValueProvider">
+	</bean>
+
+	<alias name="defaultCategoryCodeWithCatalogVersionMappingSnIndexerValueProvider" alias="categoryCodeWithCatalogVersionMappingSnIndexerValueProvider" />
+	<bean id="defaultCategoryCodeWithCatalogVersionMappingSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.CategoryCodeWithCatalogVersionMappingSnIndexerValueProvider"
+		  parent="variantAwareCategorySnIndexerValueProvider">
+		<property name="categoryCatalogVersionMapper" ref="categoryCatalogVersionMapper"/>
+	</bean>
+
+	<alias name="defaultClassificationSnIndexerValueProvider" alias="classificationSnIndexerValueProvider" />
+	<bean id="defaultClassificationSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.ClassificationSnIndexerValueProvider"
+		  parent="modelAttributeSnIndexerValueProvider">
+	</bean>
+
+	<alias name="defaultItemtypeLabelSnIndexerValueProvider" alias="itemtypeLabelSnIndexerValueProvider" />
+	<bean id="defaultItemtypeLabelSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.ItemtypeLabelSnIndexerValueProvider"
+		  parent="abstractSnIndexerValueProvider">
+		<property name="typeService" ref="typeService"/>
+	</bean>
+
+	<alias name="defaultDateSnIndexerValueProvider" alias="dateSnIndexerValueProvider" />
+	<bean id="defaultDateSnIndexerValueProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.DateSnIndexerValueProvider"
+		  parent="modelAttributeSnIndexerValueProvider">
+	</bean>
+
+	<bean id="defaultBackofficeDataQualitySnIndexerValueProvider" class="com.hybris.backoffice.searchservices.providers.impl.DataQualitySnIndexerValueProvider" parent="abstractSnIndexerValueProvider" abstract="true">
+        <property name="domainGroupId" value=""/>
+    </bean>
+
+	<bean id="coreDataQualitySnIndexerValueProvider" parent="defaultBackofficeDataQualitySnIndexerValueProvider">
+		<property name="domainGroupId" value="pcmCoreAttributesCoverageGroup"/>
+	</bean>
+
+	<bean id="marketingDataQualitySnIndexerValueProvider" parent="defaultBackofficeDataQualitySnIndexerValueProvider">
+		<property name="domainGroupId" value="pcmMarketingAttributesCoverageGroup"/>
+	</bean>
+
+	<alias name="defaultProductClassificationAttributeFormatSnIndexerValueProvider"
+		alias="productClassificationAttributeFormatSnIndexerValueProvider" />
+	<bean id="defaultProductClassificationAttributeFormatSnIndexerValueProvider"
+		class="com.hybris.backoffice.searchservices.providers.impl.ProductClassificationAttributeFormatSnIndexerValueProvider"
+		parent="abstractSnIndexerValueProvider">
+		<property name="classificationSystemService" ref="classificationSystemService" />
+		<property name="classificationService" ref="classificationService" />
+		<property name="snSessionService" ref="snSessionService" />
+		<property name="snClassificationAttributeAssignmentModelDao" ref="snClassificationAttributeAssignmentModelDao" />
+	</bean>
+
+  <alias name="defaultCategoryFacetValueDisplayNameProvider" alias="categoryFacetValueDisplayNameProvider" />
+	<bean id="defaultCategoryFacetValueDisplayNameProvider"
+		  class="com.hybris.backoffice.searchservices.providers.impl.CategoryFacetValueDisplayNameProvider">
+		<property name="categoryCatalogVersionMapper" ref="categoryCatalogVersionMapper" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<!-- labelService proxy is set by property-extender -->
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<!-- DAOs -->
+
+	<alias name="defaulSnClassificationAttributeAssignmentModelDao" alias="snClassificationAttributeAssignmentModelDao" />
+	<bean id="defaulSnClassificationAttributeAssignmentModelDao"
+		class="com.hybris.backoffice.searchservices.daos.impl.DefaultSnClassificationAttributeAssignmentModelDao" />
+
+</beans>

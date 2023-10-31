@@ -1,0 +1,83 @@
+<div class="se-media-upload-form">
+    <div class="se-media-upload-form__header">
+        <div class="se-media-upload-form__header-content">
+            <div
+                class="se-media-upload-form__header-title"
+                translate="se.upload.image.to.folder"></div>
+            <se-select
+                id="se-media-upload-form__header-folder"
+                class="se-media-upload-form__header-folder"
+                [ngClass]="{ 'is-invalid': hasError() }"
+                [multiSelect]="false"
+                [controls]="false"
+                [(model)]="folderSelected"
+                (modelChange)="folderSelectedChanged($event)"
+                [fetchStrategy]="folderFetchStrategy"
+                [placeholder]="folderSelected"></se-select>
+            <div class="se-media-upload-form__header-actions">
+                <button
+                    id="se-media-upload-btn-id__cancel"
+                    type="button"
+                    class="fd-button--transparent se-media-upload-btn__cancel fd-button--compact"
+                    fd-button
+                    [label]="'se.upload.image.cancel' | translate"
+                    (click)="cancel()"></button>
+                <button
+                    id="se-media-upload-btn-id__submit"
+                    type="button"
+                    class="se-media-upload-btn__submit fd-button--compact"
+                    fd-button
+                    [label]="'se.upload.image.submit' | translate"
+                    (click)="uploadMedia()"></button>
+            </div>
+        </div>
+        <div class="se-media-upload-form__header-error">
+            <span
+                class="upload-field-error fd-form__message fd-form__message--error"
+                *ngFor="let error of folderErrors"
+                >{{ error | translate }}</span
+            >
+        </div>
+    </div>
+
+    <div class="se-media-upload-form__replace-file">
+        <div class="se-media-upload-form__file-name">{{ image.name }}</div>
+        <se-media-file-selector
+            [labelI18nKey]="'se.upload.image.replace'"
+            [acceptedFileTypes]="acceptedFileTypes"
+            (onFileSelect)="onFileSelect($event)"></se-media-file-selector>
+    </div>
+
+    <form class="se-media-upload-form__file-info">
+        <se-media-upload-field
+            [fieldName]="'code'"
+            [fieldValue]="imageParams?.code"
+            [fieldErrors]="getErrorsForFieldByCode('code')"
+            [isRequired]="true"
+            [labelI18nKey]="'se.uploaded.image.code'"
+            (fieldValueChange)="onChangeFieldValue($event, 'code')">
+        </se-media-upload-field>
+
+        <se-media-upload-field
+            [fieldName]="'description'"
+            [fieldValue]="imageParams?.description"
+            [fieldErrors]="getErrorsForFieldByCode('description')"
+            [isRequired]="true"
+            [labelI18nKey]="'se.uploaded.image.description'"
+            (fieldValueChange)="onChangeFieldValue($event, 'description')">
+        </se-media-upload-field>
+
+        <se-media-upload-field
+            [fieldName]="'alt-text'"
+            [fieldValue]="imageParams?.altText"
+            [fieldErrors]="getErrorsForFieldByCode('altText')"
+            [isRequired]="true"
+            [labelI18nKey]="'se.uploaded.image.alt.text'"
+            (fieldValueChange)="onChangeFieldValue($event, 'altText')">
+        </se-media-upload-field>
+
+        <ng-template seMediaUploadFieldsCustom></ng-template>
+    </form>
+
+    <se-spinner [isSpinning]="isUploading"></se-spinner>
+</div>

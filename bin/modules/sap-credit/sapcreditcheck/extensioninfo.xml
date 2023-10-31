@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapcreditcheck" managername="SapcreditcheckManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapcreditcheck">
+                       
+      
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                 
+
+      
+        <requires-extension name="b2bapprovalprocess"/>
+              
+      
+        <requires-extension name="sapmodel"/>
+              
+        <requires-extension name="sapcore"/>
+              
+        <requires-extension name="sapcorebol"/>
+              
+        <requires-extension name="sapcoreconfiguration"/>
+         
+      
+        <requires-extension name="sapcoretest"/>
+        	  
+        <requires-extension name="sapcorejco"/>
+         
+	  
+        <requires-extension name="sapcorejcorec"/>
+        	  
+        <requires-extension name="b2bacceleratorfacades"/>
+         
+      
+        <coremodule generated="true" manager="de.hybris.platform.sap.sapcreditcheck.jalo.SapcreditcheckManager" packageroot="de.hybris.platform.sap.sapcreditcheck"/>
+        	  		
+   
+    </extension>
+          
+
+</extensioninfo>

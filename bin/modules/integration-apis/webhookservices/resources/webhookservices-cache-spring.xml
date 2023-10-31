@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+
+    <!-- ********************************* -->
+    <!-- Webhook Delete Items Cache Region -->
+    <!-- ********************************* -->
+    <alias name="defaultWebhookDeletedItemCacheRegion" alias="webhookDeletedItemCacheRegion"/>
+    <bean name="defaultWebhookDeletedItemCacheRegion"
+          class="de.hybris.platform.webhookservices.cache.WebhookDeletedItemCacheRegion"
+          lazy-init="true">
+        <constructor-arg name="name" value="webhookDeletedItemCacheRegion"/>
+        <constructor-arg name="maxEntries" value="${webhookservices.cache.maxEntries}"/>
+        <constructor-arg name="evictionPolicy" value="${webhookservices.cache.eviction.policy}"/>
+        <constructor-arg name="exclusiveComputation" value="${webhookservices.cache.exclusiveComputation}"/>
+        <constructor-arg name="statsEnabled" value="${webhookservices.cache.statsEnabled}"/>
+        <constructor-arg name="ttlSeconds" value="${webhookservices.cache.ttlSeconds}"/>
+        <property name="handledTypes">
+            <array>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="webhookDeletedItemCacheRegionRegistrar" class="de.hybris.platform.regioncache.region.CacheRegionRegistrar"
+          c:region-ref="webhookDeletedItemCacheRegion"/>
+
+    <alias name="defaultWebhookDeletedItemCache" alias="webhookDeletedItemCache"/>
+    <bean id="defaultWebhookDeletedItemCache" class="de.hybris.platform.webhookservices.cache.WebhookDeletedItemCache">
+        <property name="cacheRegion" ref="webhookDeletedItemCacheRegion"/>
+    </bean>
+
+    <!-- ************************************ -->
+    <!-- Webhook Converted Items Cache Region -->
+    <!-- ************************************ -->
+    <alias name="defaultWebhookConvertedItemCacheRegion" alias="webhookConvertedItemCacheRegion"/>
+    <bean name="defaultWebhookConvertedItemCacheRegion"
+          class="de.hybris.platform.webhookservices.cache.WebhookDeletedItemCacheRegion"
+          lazy-init="true">
+        <constructor-arg name="name" value="webhookConvertedItemCacheRegion"/>
+        <constructor-arg name="maxEntries" value="${webhookservices.cache.maxEntries}"/>
+        <constructor-arg name="evictionPolicy" value="${webhookservices.cache.eviction.policy}"/>
+        <constructor-arg name="exclusiveComputation" value="${webhookservices.cache.exclusiveComputation}"/>
+        <constructor-arg name="statsEnabled" value="${webhookservices.cache.statsEnabled}"/>
+        <constructor-arg name="ttlSeconds" value="${webhookservices.cache.ttlSeconds}"/>
+        <property name="handledTypes">
+            <array>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="webhookConvertedItemCacheRegionRegistrar" class="de.hybris.platform.regioncache.region.CacheRegionRegistrar"
+          c:region-ref="webhookConvertedItemCacheRegion"/>
+
+    <alias name="defaultWebhookConvertedItemCache" alias="webhookConvertedItemCache"/>
+    <bean id="defaultWebhookConvertedItemCache" class="de.hybris.platform.webhookservices.cache.WebhookConvertedItemCache">
+        <property name="cacheRegion" ref="webhookConvertedItemCacheRegion"/>
+    </bean>
+
+</beans>

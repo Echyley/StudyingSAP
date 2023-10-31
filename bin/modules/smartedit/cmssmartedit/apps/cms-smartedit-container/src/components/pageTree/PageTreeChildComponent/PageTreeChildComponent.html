@@ -1,0 +1,61 @@
+<ng-template #templateTreeNode let-component="component" let-subIndex="subIndex">
+    <div
+        class="se-page-tree-node"
+        [ngClass]="component.isExpanded && 'se-page-tree-node-expand'"
+        [attr.node-smartedit-element-uuid]="!component.isHidden ?
+                     component.elementUuid :
+                     'hidden-component-has-no-uuid'"
+    >
+        <div
+            (click)="onClickComponentNode($event, component)"
+            class="se-page-tree-component-node--content"
+            [ngStyle]="{ 'padding-left.px': subIndex*8 }"
+        >
+            <span
+                *ngIf="component.children && component.children.length > 0"
+                [ngClass]="component.isExpanded ?
+                                'sap-icon--navigation-down-arrow' :
+                                'sap-icon--navigation-right-arrow'"
+                class="se-page-tree-node--icon"
+                title="{{ component.isExpanded ?
+                                'se.cms.pagetree.slot.node.navigation.icon.collapse.title' :
+                                'se.cms.pagetree.slot.node.navigation.icon.expand.title'
+                          | translate }}"
+            ></span>
+            <span
+                *ngIf="!component.children || component.children.length === 0"
+                class="se-page-tree-node--icon"
+            ></span>
+            <span class="se-page-tree-node--icon sap-icon--background"></span>
+            <div class="se-page-tree-component-node--name">
+                <span class="se-page-tree-component-node--name--up" title="{{component.name}}"
+                    >{{component.name}}</span
+                >
+                <span class="se-page-tree-component-node--name--down" title="{{component.typeCode}}"
+                    >{{component.typeCode}}</span
+                >
+            </div>
+        </div>
+        <se-pagetree-child-component-menu
+            [component]="component"
+            [slotId]="slotId"
+            [slotUuid]="slotUuid"
+            [parentMenuConfiguration]="parentMenuConfiguration"
+            class="se-page-tree-menu"
+        ></se-pagetree-child-component-menu>
+    </div>
+    <div
+        *ngIf="component.isExpanded && component.componentNodes"
+        class="se-page-tree-component-node-children"
+    >
+        <div *ngFor="let child of component.componentNodes">
+            <ng-container
+                *ngTemplateOutlet="templateTreeNode,context:{component:child, subIndex: subIndex+1 }"
+            ></ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<ng-container
+    *ngTemplateOutlet="templateTreeNode,context:{component:component, subIndex:2}"
+></ng-container>

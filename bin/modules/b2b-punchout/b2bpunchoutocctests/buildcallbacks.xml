@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="b2bpunchoutocctests_buildcallbacks">
+
+    <macrodef name="b2bpunchoutocctests_clean_classpath_file">
+        <sequential>
+            <copy file="${ext.b2bpunchoutocctests.path}/.classpath" tofile="${ext.b2bpunchoutocctests.path}/.classpath.edit"
+                  overwrite="true"
+                  failonerror="true">
+                <filterchain>
+                    <linecontainsregexp negate="true">
+                        <regexp pattern="^(\t\t\t\t|)$" />  <!-- added by script -->
+                    </linecontainsregexp>
+                </filterchain>
+            </copy>
+            <move file="${ext.b2bpunchoutocctests.path}/.classpath.edit" tofile="${ext.b2bpunchoutocctests.path}/.classpath"
+                  overwrite="true"
+                  failonerror="true" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="b2bpunchoutocctests_after_clean">
+        <sequential>
+            <echo level="info" message="Generating .classpath file for b2bpunchoutocctests" />
+            <create_extension_classpath_file extname="b2bpunchoutocctests" />
+            <b2bpunchoutocctests_clean_classpath_file />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="b2bpunchoutocctests_importwstestdata">
+
+        <sequential>
+            <yrun>
+                de.hybris.platform.b2bpunchoutocctests.setup.TestSetupUtils.loadExtensionDataInJunit();
+                de.hybris.platform.util.RedeployUtilities.shutdown();
+            </yrun>
+
+        </sequential>
+
+    </macrodef>
+
+</project>

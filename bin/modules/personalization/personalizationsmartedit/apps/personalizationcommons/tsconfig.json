@@ -1,0 +1,11 @@
+{
+ 	"extends": "./tsconfig.build.json",
+	"compilerOptions": {
+		"typeRoots": ["node_modules/@types", "node_modules/smartedit-build/test/@types"],
+		"paths": {
+		  "personalizationcommons": ["src"],
+		  "personalizationcommons/*": ["src/*"]
+		}
+	},
+	"include": ["src/**/*.ts", "tests/**/*.ts", "tests/**/*.js"]
+}

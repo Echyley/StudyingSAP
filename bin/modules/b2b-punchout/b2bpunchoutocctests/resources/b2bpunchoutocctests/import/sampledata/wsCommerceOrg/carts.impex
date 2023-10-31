@@ -1,0 +1,24 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$productCatalog = wsTestCatalog
+$catalogVersion = Online
+$siteUid = wsTest
+$storeUid = wsTest
+
+INSERT_UPDATE Cart; user(uid)                         ; code[unique = true]; currency(isocode); date[dateformat = dd.MM.yyyy HH:mm:ss]; net   ; calculated; site(uid); store(uid); guid   ;
+                  ; punchout.customer@punchoutorg.com ; TEST0001           ; USD              ; 27.04.2010 00:00:00                   ; false ; false     ; $siteUid ; $storeUid ; guid10 ;
+                  ; punchout.customer@punchoutorg.com ; TEST0002           ; USD              ; 27.04.2010 00:00:00                   ; false ; false     ; $siteUid ; $storeUid ; guid20 ;
+                  ; punchout.customer@punchoutorg.com ; TEST0003           ; USD              ; 27.04.2010 00:00:00                   ; false ; false     ; $siteUid ; $storeUid ; guid30 ;
+                  ; punchout.customer@punchoutorg.com ; TEST0004           ; USD              ; 27.04.2010 00:00:00                   ; false ; false     ; $siteUid ; $storeUid ; guid40 ;
+                  ; punchout.customer@punchoutorg.com ; TEST0005           ; USD              ; 27.04.2010 00:00:00                   ; false ; false     ; $siteUid ; $storeUid ; guid50 ;
+                  ; punchout.customer@punchoutorg.com ; TEST0006           ; USD              ; 27.04.2010 00:00:00                   ; false ; false     ; $siteUid ; $storeUid ; guid60 ;
+
+INSERT CartEntry; order(Cart.code); creationTime[dateformat = dd.MM.yyyy HH:mm:ss]; product(code, catalogVersion(catalog(id), version)); quantity; unit(code); entryNumber;
+                ; TEST0001        ; 27.04.2010 00:00:00                           ; TW1210-9342:$productCatalog:$catalogVersion        ; 1       ; pieces    ; 1          ;
+                ; TEST0002        ; 27.04.2010 00:00:00                           ; TW1210-9342:$productCatalog:$catalogVersion        ; 1       ; pieces    ; 1          ;
+                ; TEST0003        ; 27.04.2010 00:00:00                           ; TW1210-9342:$productCatalog:$catalogVersion        ; 1       ; pieces    ; 1          ;
+                ; TEST0004        ; 27.04.2010 00:00:00                           ; TW1210-9342:$productCatalog:$catalogVersion        ; 1       ; pieces    ; 1          ;
+                ; TEST0005        ; 27.04.2010 00:00:00                           ; TW1210-9342:$productCatalog:$catalogVersion        ; 1       ; pieces    ; 1          ;
+                ; TEST0006        ; 27.04.2010 00:00:00                           ; TW1210-9342:$productCatalog:$catalogVersion        ; 1       ; pieces    ; 1          ;

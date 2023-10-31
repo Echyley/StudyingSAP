@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    	
+    <extension abstractclassprefix="Generated" classprefix="Textfieldconfiguratortemplateocc" description="textfieldconfiguratortemplateocc extension" jaloLogicFree="true" managername="TextfieldconfiguratortemplateoccManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="textfieldconfiguratortemplateocc">
+        		
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+        		
+        <requires-extension name="commercewebservices"/>
+        		
+        <requires-extension name="commercewebservicescommons"/>
+        		
+        <requires-extension name="textfieldconfiguratortemplatefacades"/>
+        		
+        <coremodule generated="true" manager="de.hybris.platform.textfieldconfiguratortemplateocc.jalo.TextfieldconfiguratortemplateoccManager" packageroot="de.hybris.platform.textfieldconfiguratortemplateocc"/>
+        	
+    </extension>
+    
+</extensioninfo>

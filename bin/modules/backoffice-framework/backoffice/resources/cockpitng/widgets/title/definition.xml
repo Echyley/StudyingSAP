@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						 xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+						 id="com.hybris.backoffice.widgets.title">
+	<name>Backoffice Title</name>
+	<description>Backoffice Title</description>
+	<defaultTitle>Title</defaultTitle>
+	<author>hybris</author>
+	<version>1.0</version>
+	<controller class="com.hybris.backoffice.widgets.title.TitleController"/>
+	<view src="title.zul"/>
+
+	<sockets>
+		<input id="nodeSelected" type="com.hybris.backoffice.navigation.NavigationNode"/>
+	</sockets>
+
+	<settings>
+		<setting key="titleLocKey" type="java.lang.String" />
+	</settings>
+
+	<keywords>
+		<keyword>Title</keyword>
+	</keywords>
+</widget-definition>

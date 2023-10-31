@@ -1,0 +1,14 @@
+/*!
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+@import "cockpitng-globals.scss";
+
+/*Icons for explorer tree */
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("hmc_treenode_y2ysync", "y2ysync");
+}
+
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("hmc_treenode_y2ysync", "y2ysync");
+}

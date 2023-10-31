@@ -1,0 +1,83 @@
+<div class="btn-block pe-toolbar-action--include">
+
+    <div class="pe-toolbar-menu-content se-toolbar-menu-content--pe-customized se-toolbar-menu-content--pe-combine"
+         role="menu">
+        <div class="se-toolbar-menu-content--pe-customized__headers">
+
+            <h2 class="se-toolbar-menu-content--pe-customized__headers--h2"
+                translate="personalization.toolbar.combinedview.header.title"></h2>
+            <se-help class="se-toolbar-menu-content__y-help">
+                <span translate="personalization.toolbar.combinedview.header.description"></span>
+            </se-help>
+
+        </div>
+        <div role="menuitem">
+            <div *ngIf="!isCombinedViewConfigured">
+                <div class="pe-combined-view-panel__wrapper pe-combined-view-panel__wrapper--empty ">
+                    <img src="static-resources/images/emptyVersions.svg"
+                         alt="no Configurationss"
+                         class="pe-combined-view-panel--empty-img">
+                    <span class="pe-combined-view-panel--empty-text"
+                          translate="personalization.toolbar.combinedview.openconfigure.empty"></span>
+                    <a class="fd-link pe-combined-view-panel--empty-link"
+                       (click)="combinedViewClick()"
+                       translate="personalization.toolbar.combinedview.openconfigure.link"
+                       [title]="'personalization.toolbar.combinedview.openconfigure.link' | translate">
+                    </a>
+                </div>
+            </div>
+
+            <div *ngIf="isCombinedViewConfigured">
+                <div class="pe-combined-view-panel__wrapper">
+                    <div class="pe-combined-view-panel__configure-layout">
+                        <button fd-button 
+                                [label]="'personalization.toolbar.combinedview.openconfigure.button' | translate"
+                                [title]="'personalization.toolbar.combinedview.openconfigure.button' | translate"
+                                class="pe-combined-view-panel__configure-btn perso-wrap-ellipsis"
+                                (click)="combinedViewClick()">
+                        </button>
+                        <button fd-button 
+                                label="Transparent Button" 
+                                class="pe-combined-view-panel__configure-btn perso-wrap-ellipsis"
+                                (click)="clearAllCombinedViewClick()"
+                                [label]="'personalization.toolbar.combinedview.clearall.button' | translate"
+                                [title]="'personalization.toolbar.combinedview.clearall.button' | translate"
+                                [fdType]="'transparent'">
+                        </button>
+                    </div>
+                    <div [ngClass]="combinedView.enabled ? null : 'pe-combined-view-panel--disabled'">
+                        <div class="pe-combined-view-panel__list-layout"
+                             *ngFor="let item of selectedItems; index as i"
+                             (click)="itemClick(item)"
+                             [ngClass]="{'pe-combined-view-panel-list__item--highlighted': item.highlighted}">
+                            <div class="pe-combined-view-panel-list__letter-layout">
+                                <div [ngClass]="getClassForElement(i)"
+                                     [textContent]="getLetterForElement(i)"></div>
+                            </div>
+                            <div class="pe-combined-view-panel-list__names-layout">
+                                <div class="perso-wrap-ellipsis"
+                                     [textContent]="item.customization.name"
+                                     [title]="item.customization.name"></div>
+                                <div class="perso-wrap-ellipsis perso-tree__primary-data"
+                                     [textContent]="item.variation.name"
+                                     [title]="item.variation.name"></div>
+                            </div>
+                            <div class="pe-combined-view-panel-list__icon">
+                                <se-tooltip *ngIf="!isItemFromCurrentCatalog(item.variation) && combinedView.enabled"
+                                            [placement]="'top-end'"
+                                            [triggers]="['mouseenter', 'mouseleave']"
+                                            [isChevronVisible]="true"
+                                            [appendTo]="'body'">
+                                    <span class="perso__globe-icon sap-icon--globe"
+                                          se-tooltip-trigger></span>
+                                    <div se-tooltip-body [translate]="item.variation.catalogVersionNameL10N"></div>
+                                </se-tooltip>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

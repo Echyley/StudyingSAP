@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans            http://www.springframework.org/schema/beans/spring-beans.xsd            http://www.springframework.org/schema/aop            http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- ====================== -->
+	<!-- Abstract BO Definition -->
+	<!-- ====================== -->
+	<alias alias="sapCoreBusinessObject" name="sapCoreDefaultBusinessObject"/>
+	<bean abstract="true" destroy-method="destroy" id="sapCoreDefaultBusinessObject" init-method="init" scope="sapSession">
+		<property name="genericFactory" ref="sapCoreGenericFactory"/>
+		<!-- Abstract Properties to be set -->
+		<!-- <property name="moduleConfigurationAccess" ref="..." /> -->
+	</bean>
+
+	<!-- ====================== -->
+	<!-- Abstract BE Definition -->
+	<!-- ====================== -->
+	<alias alias="sapCoreBackendObject" name="sapCoreDefaultBackendObject"/>
+	<bean abstract="true" destroy-method="destroyBackendObject" id="sapCoreDefaultBackendObject" init-method="initBackendObject" scope="sapSession">
+		<property name="genericFactory" ref="sapCoreGenericFactory"/>
+		<!-- Abstract Properties to be set -->
+		<!-- <property name="moduleConfigurationAccess" ref="..." /> -->
+	</bean>
+
+	<alias alias="sapCoreBackendObjectJCo" name="sapCoreDefaultBackendObjectJCo"/>
+	<bean abstract="true" id="sapCoreDefaultBackendObjectJCo" parent="sapCoreBackendObject">		
+		<property name="defaultConnectionName" value="JCoStateless"/>    <!-- default value -->
+		<property name="managedConnectionContainer" ref="sapCoreManagedConnectionContainer"/>  
+		<!-- Abstract Properties to be set -->
+		<!-- <property name="moduleConfigurationAccess" ref="..." /> -->
+	</bean>
+	
+</beans>

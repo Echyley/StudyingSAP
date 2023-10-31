@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Assistedservicewebservices" managername="AssistedservicewebservicesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="assistedservicewebservices" usemaven="false">
+                        
+       
+        <requires-extension name="commercewebservicescommons"/>
+               
+        <requires-extension name="assistedservicepromotionfacades"/>
+               
+        <requires-extension name="assistedservicecustomerinterestsfacades"/>
+              
+        <coremodule generated="true" manager="de.hybris.platform.assistedservicewebservices.jalo.AssistedservicewebservicesManager" packageroot="de.hybris.platform.assistedservicewebservices"/>
+              
+        <webmodule jspcompile="false" webroot="/assistedservicewebservices"/>
+           
+    </extension>
+          
+
+</extensioninfo>

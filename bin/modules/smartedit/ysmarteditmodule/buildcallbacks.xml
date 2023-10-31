@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="ysmarteditmodule_buildcallbacks">
+
+    <patternset id="extension.ysmarteditmodule.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="build/"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="jsTarget/"/>
+    </patternset>
+
+    <patternset id="extension.ysmarteditmodule.source.filter">
+        <patternset refid="extension.source.filter"/>
+        <exclude name="build/"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="jsTarget/"/>
+    </patternset>
+
+    <patternset id="extension.ysmarteditmodule.production.filter">
+        <patternset refid="extension.production.filter"/>
+        <exclude name="build/"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="jsTarget/"/>
+    </patternset>
+
+    <macrodef name="ysmarteditmodule_after_extgen">
+        <sequential>
+            <!-- This property is needed to ensure the extension is registered in SmartEdit -->
+            <concat destfile="${extension.directory.target}/project.properties" append="true">${extgen.extension.name}.smartedittools.config=true</concat>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ysmarteditmodule_before_build">
+        <sequential>
+            <build_smartedit_extension extensionName="ysmarteditmodule" appNames="ysmarteditmodulecommons,ysmarteditmoduleContainer,ysmarteditmodule" />
+        </sequential>
+    </macrodef>
+
+    <!-- Please find details in https://cxjira.sap.com/browse/CMSX-10210
+   that why we can use 'web' property to ensure our frontend UT only execute once in team & commerce-suite pipeline -->
+    <macrodef name="ysmarteditmodule_before_yunit">
+        <sequential>
+            <if>
+                <istrue value="${testclasses.web}"/>
+                <then>
+                    <test_smartedit_extension extensionName="ysmarteditmodule" appNames="ysmarteditmodulecommons,ysmarteditmoduleContainer,ysmarteditmodule" />
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!--
+        How-to run unit tests in the extension:
+        1- Execute the command "ant allwebtests" within "platform" folder (will execute tests for ALL extensions).
+        2- OR Execute the command "npm run test" or "npm run test:dev" in each apps/*/* folder individually.
+        3- OR Execute the command "ant test_ysmarteditmodule"
+    -->
+    <target name="test_ysmarteditmodule">
+        <test_smartedit_extension extensionName="ysmarteditmodule" appNames="ysmarteditmodulecommons,ysmarteditmoduleContainer,ysmarteditmodule" />
+    </target>
+
+</project>

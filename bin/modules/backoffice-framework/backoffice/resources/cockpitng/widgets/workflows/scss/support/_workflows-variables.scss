@@ -1,0 +1,69 @@
+@import "cockpitng-globals.scss";
+
+$workflows__default--border-color: var(--bo-list-border-color);
+$workflows__default--padding: floor($container-spacing-default__base  - $container-spacing-default__third);
+$workflows__hyperlink-hover--color: var(--bo-link-hover-color);
+$workflows__hyperlink-active--color: var(--bo-link-active-color);
+$workflows__header--padding: $workflows__default--padding;
+
+$workflows__list-item--border-width: $boxes--border__thin;
+$workflows__list-item--border-color: $workflows__default--border-color;
+$workflows__list-item-hover--bg-color: var(--bo-list-hover-background);
+$workflows__list-item-last--margin-bottom: $workflows__list-item--border-width * -1;
+
+$workflows__list-item-content--padding: $_container-spacing-default__small;
+
+$workflows__list-content--padding: 0;
+$workflows__list-inner-content--padding: $container-spacing-default__third 8px 0 0;
+$workflows__list-button--width: 24px;
+$workflows__list-button-empty-width: $workflows__list-button--width;
+$workflows__list-button-disabled--color: $form-defaults__input-icon-selected-disabled--color; //$grey__default;
+$workflows__list-text-button--font-size: $font-size__base;
+$workflows__list-text-button--color: var(--bo-list-text-color);
+$workflows__list-text-button-hover--color: var(--bo-link-hover-color);
+$workflows__list-title--max-width: calc(100% - #{$workflows__list-button--width});
+$workflows__list-title--font-size: $font-size__large;
+$workflows__list-title--color: var(--bo-list-group-header-text-color);
+$workflows__list-title--line-height: 20px;
+$workflows__list-subtitle--color: var(--bo-list-text-color);
+$workflows__list-info-container--padding-top: 5px;
+$workflows__list-info-label--padding-x: 5px;
+$workflows__list-info-label--color: var(--bo-list-text-color);
+$workflows__list-info-label--line-height: $workflows__list-title--line-height;
+
+$workflows__list-bottom--padding: $container-spacing-default__third 0;
+$workflows__list-bottom--padding-top: $container-spacing-default__third;
+
+$workflows__drop-area-plus--color: var(--bo-tile-title-color);
+$workflows__drop-area-plus--border-radius: $_layout-panels__panel--border-radius;
+
+$workflows__drop-area-plus-icon--size: $form-defaults__input-icon--size;
+$workflows__drop-area-plus-icon--border-width: $boxes--border__thin;
+$workflows__drop-area-plus-icon--left: floor($workflows__drop-area-plus-icon--size/2);
+$workflows__drop-area-plus-icon--content: _getIconGlyphContentValue('add');
+$workflows__drop-area-plus-icon--font-family: $font-family__icon;
+$workflows__drop-area-plus-icon--color: var(--bo-button-icon-color);
+
+$workflows__drop-area--border: $boxes--border__medium dotted $workflows__drop-area-plus-icon--color;
+$workflows__drop-area--border-radius: $workflows__drop-area-plus--border-radius;
+$workflows__drop-area--padding: $container-spacing-default__third;
+$workflows__drop-area--line-height: $workflows__drop-area-plus-icon--size;
+$workflows__drop-area--margin-top: $_container-spacing-default__tiny;
+$workflows__drop-area-hover--color: var(--bo-list-text-color);
+$workflows__drop-area-hover--background-color: var(--bo-button-hover-background);
+
+$workflows__drop-area-plus-button--size: $editor-defaults__inline-box--height;
+
+$workflows__footer--border-top: $boxes--border__thin solid $workflows__default--border-color;
+$workflows__footer--padding: $workflows__default--padding;
+
+$workflows__footer-plus-label--margin-top: $container-spacing-default__third;
+$workflows__footer-plus-label--color: var(--bo-tile-title-color);
+
+$workflows__menu-popup-right--margin-top: -32px;
+$workflows__menu-popup-right--margin-left: -24px;
+
+$workflows__menu-popup-top-right-pointer--indent: $container-spacing-default__third;
+$workflows__menu-popup-top-right--margin-top: 4px;
+$workflows__menu-popup-top-right--margin-left: $workflows__menu-popup-top-right-pointer--indent - 2px;
+$workflows__menu-popup-top--margin-top: 7px;

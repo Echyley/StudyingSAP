@@ -1,0 +1,125 @@
+fd-dialog .modal-lg {
+    width: 650px;
+}
+.modal-dialog.modal-md,
+.fd-dialog.modal-md,
+.modal-dialog,
+.fd-dialog {
+    width: 600px;
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        margin: 30px auto;
+    }
+}
+.fd-dialog .modal-stretched {
+    .fd-dialog__body {
+        min-height: 400px;
+    }
+}
+#y-modal-dialog.fd-dialog {
+    max-width: 100%;
+    .se-generic-editor__body {
+        padding: 0;
+    }
+}
+
+.fd-dialog .fd-dialog__body {
+    padding: 20px;
+}
+
+.fd-dialog__body .se-generic-editor__body {
+    padding: 0;
+}
+
+.fd-dialog__title {
+    @include se-text-ellipsis();
+}
+
+.fd-dialog__header {
+    @include se-container-section('header');
+}
+.se-modal__header--no-title,
+.fd-dialog__header--no-title {
+    @include se-flex-row(flex-end);
+}
+.se-modal-close {
+    @include se-flex-row(center);
+    &::before {
+        margin: 0 !important;
+    }
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 36px;
+    background-color: unset;
+}
+.fd-dialog__body {
+    @include se-container-section('body');
+    position: initial;
+    .se-generic-editor__body {
+        padding: 0;
+    }
+}
+.fd-dialog__footer {
+    @include se-container-section('footer');
+}
+
+// Wizard
+.se-wait-spinner-dialog {
+    .modal-dialog.modal-lg {
+        width: initial;
+        text-align: center;
+    }
+    &.fd-dialog__content {
+        box-shadow: none;
+        .fd-dialog__body {
+            background: transparent;
+        }
+    }
+}
+
+// Confirm
+
+.se-confirmation-dialog {
+    top: 30px;
+    width: 600px;
+}
+
+// login
+.su-login-dialog {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;
+    &-container {
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--sapShell_Background);
+
+        .fd-dialog__content {
+            background-color: transparent;
+        }
+        .fd-dialog__content--overrides {
+            height: 100%;
+            width: 100%;
+            min-height: inherit;
+            min-width: inherit;
+            max-height: inherit;
+            max-width: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        // .su-login-dialog {
+        //     padding-top: 120px;
+        //     width: 100%;
+        //     height: 100%;
+        // }
+    }
+}

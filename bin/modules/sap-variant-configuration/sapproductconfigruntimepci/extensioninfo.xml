@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapproductconfigruntimepci" managername="SapproductconfigruntimepciManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapproductconfigruntimepci" usemaven="false">
+              
+        <!-- for more information on maven managed libraries please consult https://wiki.hybris.com/x/Nq8sDQ -->
+                       
+      
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                 
+      
+        <requires-extension name="sapproductconfigruntimeinterface"/>
+          
+      
+        <requires-extension name="sapproductconfigruntimecps"/>
+             
+      
+        <requires-extension name="apiregistryservices"/>
+               
+      
+
+      
+        <coremodule generated="true" manager="de.hybris.platform.sap.productconfig.runtime.pci.jalo.SapproductconfigruntimepciManager" packageroot="de.hybris.platform.sap.productconfig.runtime.pci"/>
+        					
+	
+
+   
+    </extension>
+          
+
+</extensioninfo>

@@ -1,0 +1,23 @@
+<fd-popover
+    [placement]="getPlacement()"
+    [noArrow]="true"
+    [triggers]="trigger && trigger.length ? [] : trigger"
+    (isOpenChange)="handleOpenChange($event)"
+    [additionalBodyClass]="'se-popup-overlay-container'"
+    class="popup-overlay popover-outer"
+    [ngClass]="popupOverlay.additionalClasses">
+    <fd-popover-control> <ng-content></ng-content> </fd-popover-control>
+
+    <fd-popover-body #popoverBody class="popover-inner popup-overlay__inner">
+        <ng-container *ngIf="isOpen">
+            <ng-container *ngIf="popupOverlay.component">
+                <ng-container
+                    *ngComponentOutlet="
+                        popupOverlay.component;
+                        injector: popupOverlayInjector
+                    "></ng-container>
+            </ng-container>
+            <ng-content select="[se-popup-overlay-body]"></ng-content>
+        </ng-container>
+    </fd-popover-body>
+</fd-popover>

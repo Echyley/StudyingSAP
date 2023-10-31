@@ -1,0 +1,59 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$lang=en
+$defaultPromoGrp=testPromoGrp
+
+############################# CONDITIONS ##########################
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang];priority;icon(code)
+;general;General;100;
+
+INSERT_UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];priority;breadcrumb[lang=$lang];allowsChildren;translatorId;translatorParameters;categories(id)
+;y_customer_support;Customer support;1000;Assisted service session is active: {value};false;ruleCustomerSupportConditionTranslator;;customer
+
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=AbstractRule][unique=true]
+;y_customer_support;
+
+INSERT_UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=$lang];description[lang=$lang];type;value;required[default=true];validators
+;y_customer_support;value;1000;Assisted service session active;Enable the promotion based on if a customer support agent is assisting the customer on the storefront or not;java.lang.Boolean;true;
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang];priority
+;cart;Cart;1300
+;customer;Customer;1200
+
+############################# ACTIONS ##########################
+
+INSERT_UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang];priority;icon(code)
+;general;General;100
+
+INSERT_UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang];priority
+;cart_discounts;Cart discounts;500
+
+
+INSERT_UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];priority;breadcrumb[lang=$lang];translatorId;translatorParameters;categories(id)
+;y_order_fixed_discount;Fixed discount on cart;1000;Apply {value} discount on the cart total;ruleExecutableActionTranslator;actionId->ruleOrderFixedDiscountAction;cart_discounts
+
+INSERT_UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=$lang];description[lang=$lang];type;value;required[default=true];validators
+;y_order_fixed_discount;value;1000;Absolute discount value;Map of currency and absolute discount value that will be applied on the cart total;Map(ItemType(Currency),java.math.BigDecimal);;;
+
+
+
+############################# CONDITON DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=SourceRule][unique=true]
+;y_customer_support;
+
+############################# ACTION DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleActionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=SourceRule][unique=true]
+;y_order_fixed_discount;
+
+INSERT_UPDATE RuleToEngineRuleTypeMapping;ruleType(code)[unique=true];engineRuleType(code)[default=DEFAULT]
+;SourceRule;

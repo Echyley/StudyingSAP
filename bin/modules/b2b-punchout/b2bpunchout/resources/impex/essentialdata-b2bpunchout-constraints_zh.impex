@@ -1,0 +1,8 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$lang=zh
+
+insert_update PatternConstraint;id[unique = true, allownull = true];message[lang = $lang]
+;PunchoutSecretPatternConstraint;共享密钥必须同时包含大写和小写字母、数字、特殊字符和总共 8-100 个字符。

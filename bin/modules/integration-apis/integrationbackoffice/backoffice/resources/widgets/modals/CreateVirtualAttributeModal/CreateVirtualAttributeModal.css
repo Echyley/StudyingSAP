@@ -1,0 +1,20 @@
+.yw-modal-createVirtualAttributeModal {
+    min-height: 580px !important;
+}
+
+.yw-modal-createVirtualAttributeModal .z-hlayout .z-hlayout-inner:first-child{
+    width: 400px;
+}
+
+.yw-modal-createVirtualAttributeModal .vADescriptorTip-container {
+    display: inline-block;
+}
+
+.yw-modal-createVirtualAttributeModal .typeDropdownTip-container {
+    display: inline-block;
+}
+
+.yw-modal-createVirtualAttributeModal .z-hlayout.z-valign-middle{
+    margin-top: 8px;
+}
+

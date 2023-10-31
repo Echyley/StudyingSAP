@@ -1,0 +1,89 @@
+@import "cockpitng-globals.scss";
+// $syncPopup__icons-folder-path: "../../cng/images/sync/";
+$syncPopup__icons-font-family: $font-family__icon;
+$syncPopup__icons-font-size: $font-size__large;
+$syncPopup__input-placeholder--icon-content: _getIconGlyphContentValue("search");
+// $syncPopup__input-placeholder--bg-image: url(#{$syncPopup__icons-folder-path + "icon-search-sync.png"});
+$syncPopup__input-placeholder--bg-repeat: no-repeat;
+$syncPopup__input-placeholder--bg-position: center;
+$syncPopup__input-placeholder--bg-size: $form-defaults__input-icon--size $form-defaults__input-icon--size;
+$syncPopup__input-placeholder--width: $form-defaults__input-icon--size;
+$syncPopup__input-placeholder--height: $form-defaults__input-icon--size;
+$syncPopup__input-placeholder--color: var(--bo-placeholder-text-color);
+$syncPopup__input-placeholder--text-indent: -9999px;
+
+$syncPopup__window-header--padding-bottom: 0;
+$syncPopup__window-header-caption--min-height: 0;
+
+$_syncPopup__content-side--spacing: $_container-spacing-default__small;
+
+$syncPopup__title--font-size: $font-size__large;
+$syncPopup__title--padding: 0 ($toolbar__button-medium--size + $_syncPopup__content-side--spacing + $_container-spacing-default__tiny) $_container-spacing-default__tiny $_container-spacing-default__small;
+$_syncPopup__title--font-weight: $font-weight-bold;
+
+$syncPopup__subtitle--padding: $_container-spacing-default__tiny $_syncPopup__content-side--spacing;
+$syncPopup__subtitle--display: block;
+
+$syncPopup__textbox-holder--padding: $_container-spacing-default__tiny $_syncPopup__content-side--spacing;
+$syncPopup__textbox-holder--margin: 0 auto;
+$syncPopup__textbox--margin: $_container-spacing-default__small 0;
+
+$syncPopup__bold-label--font-size: $font-size__large;
+$syncPopup__bold-label--font-weight: $font-weight-bold;
+
+$syncPopup__label--padding-left: 0;//floor($_syncPopup__content-side--spacing/2);
+
+$syncPopup__cell-icon--width: ($toolbar__button-medium--size + $_container-spacing-default__tiny);
+$syncPopup__cell-icon--text-align: center;
+
+$syncPopup__icons--width: $toolbar__button-small--size;
+$syncPopup__icons--height: $toolbar__button-small--size;
+$syncPopup__icons-display: inline-block;
+
+$syncPopup__icons-push--bg-font-size: $font-family__icon;
+$syncPopup__icons-push--bg-font-family: $font-family__icon;
+
+$syncPopup__icons--bg-repeat: no-repeat;
+$syncPopup__icons--bg-position: center;
+$syncPopup__icons--bg-size: $toolbar__button-small--size $toolbar__button-small--size;
+
+$syncPopup__content-delimiter--border-color: $_editor-defaults__popup-box-delimiter--border-color;
+$syncPopup__content-delimiter--border-top: $boxes--border__thin solid $syncPopup__content-delimiter--border-color;
+
+$syncPopup__navigation--bg-color: var(--bo-page-footer-background);
+$syncPopup__navigation--height: $editor-defaults__inline-box--height + 2* $_container-spacing-default__small; //button-height + 2* padding (top/bottom)
+$syncPopup__navigation-pack--padding: ceil($_syncPopup__content-side--spacing/2);
+
+$syncPopup__navigation-component-wrapper--display: inline-block;
+$syncPopup__navigation-component-wrapper--padding: floor($_syncPopup__content-side--spacing/2);
+
+$syncPopup__navigation-pack-right-component-wrapper--position: absolute;
+$syncPopup__navigation-pack-right-component-wrapper--right: 0;
+$syncPopup__navigation-pack-right-component-wrapper--top: 0;
+$syncPopup__navigation-pack-component-wrapper-sibling--padding: 0;
+
+$syncPopup__tabpanel--max-height: 305px;
+$syncPopup__tabpanel--overflow: auto;
+$syncPopup__tabpanel--padding: 0;
+$syncPopup__tabpanel--border: none;
+
+$_syncPopup__tabs--bg-color: var(--bo-list-group-header-background);
+
+$syncPopup__tab--width: auto; //50%;
+$syncPopup__tab--padding: 0 $_syncPopup__content-side--spacing;
+
+$syncPopup__tab--height: 15px;
+$syncPopup__tab--content: '';
+$syncPopup__tab--float: left;
+$syncPopup__tab--border-left: false; //$boxes--border__thin solid $grey__light--1100;
+$syncPopup__tab--margin-left: $_syncPopup__content-side--spacing * -1;
+
+$syncPopup__tab-text--font-size: $font-size__base;
+$syncPopup__tab-text--font-weight: $font-weight-normal;
+$syncPopup__tab-text--padding-bottom: $_container-spacing-default__tiny;
+
+$_syncPopup__listcell-content--padding-right: floor($_syncPopup__content-side--spacing/2);
+$_syncPopup__listcell-content--padding-left: floor($_syncPopup__content-side--spacing/2);
+$_syncPopup__listitem--padding-x: ceil($_syncPopup__content-side--spacing/2);
+
+$syncPopup__btn-primary--width: 110px;

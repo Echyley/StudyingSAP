@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=ru
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;Атрибут «Идентификатор» должен иметь значения для всех языков.;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;Атрибут «Цены» должен содержать минимум 1 элемент.;
+;ProductSupercategoriesSizeConstraint;;;Атрибут «Суперкатегории» должен содержать минимум 1 элемент.;
+;ProductGalleryImagesSizeConstraint;;;Атрибут «Изображения из галереи» должен содержать минимум 1 элемент.;
+;ProductReferencesSizeConstraint;;;Атрибут «Ссылки на продукты» должен содержать минимум 1 элемент.;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;Атрибут «Номер товара» не должен быть пустым.;
+;ProductDescriptionNotEmptyConstraint;;;Атрибут «Описание» не должен быть пустым.;
+;ProductEanNotEmptyConstraint;;;Атрибут «EAN» не должен быть пустым.;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;Атрибут «Утверждение» должен иметь значение «Утверждено».;

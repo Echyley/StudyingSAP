@@ -1,0 +1,13 @@
+{
+    "name": "@smart/utils",
+    "typescript": {
+        "entry": "./src/index.ts",
+        "dist": "./dist/index.js"
+    },
+    "instrumentation": {
+        "skipInstrumentation": true
+    },
+    "style": {
+        "global": "./styling/sass/index.scss"
+    }
+}

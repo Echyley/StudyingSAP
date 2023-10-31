@@ -1,0 +1,5 @@
+$lang=fr
+
+UPDATE DynamicConstraint;id[unique=true,allownull=true] ;message[lang=$lang]
+                        ;oppsClientInterfaceVersionConstraint                       ;"Sélectionnez la version requise pour la zone Version principale d'interface client."
+

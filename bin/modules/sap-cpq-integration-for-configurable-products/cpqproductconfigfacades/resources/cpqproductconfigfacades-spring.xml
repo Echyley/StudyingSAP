@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<alias name="cpqProductConfigDefaultConfigurationInfoDataPopulator" alias="cpqProductConfigConfigurationInfoDataPopulator" />
+	<bean id="cpqProductConfigDefaultConfigurationInfoDataPopulator"
+		class="de.hybris.platform.cpq.productconfig.facades.populator.ConfigurationInfoDataPopulator">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="priceDataFactory" />
+		<constructor-arg ref="commonI18NService" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryProductInfoConverter" />
+		<property name="add" ref="cpqProductConfigConfigurationInfoDataPopulator" />
+	</bean>
+	
+	<alias name="cpqProductConfigDefaultAccessControlFacade" alias="cpqProductConfigAccessControlFacade" />
+	<bean id="cpqProductConfigDefaultAccessControlFacade"
+		class="de.hybris.platform.cpq.productconfig.facades.impl.DefaultAccessControlFacade">
+		<constructor-arg ref="cpqProductConfigBusinessContextService" />
+		<constructor-arg ref="cpqProductConfigAuthorizationService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCartIntegrationFacade" alias="cpqProductConfigCartIntegrationFacade" />
+	<bean id="cpqProductConfigDefaultCartIntegrationFacade"
+		class="de.hybris.platform.cpq.productconfig.facades.impl.DefaultCartIntegrationFacade">
+		<constructor-arg ref="cartService" />
+		<constructor-arg ref="modelService" />
+		<constructor-arg ref="commerceCartService" />
+		<constructor-arg ref="productService" />
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultCommerceParametersFacade" alias="cpqProductConfigCommerceParametersFacade" />
+	<bean id="cpqProductConfigDefaultCommerceParametersFacade"
+		class="de.hybris.platform.cpq.productconfig.facades.impl.DefaultCommerceParametersFacade">
+		<constructor-arg ref="i18NService" />
+		<constructor-arg ref="commonI18NService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultConfigurationOrderEntryPopulator"
+		alias="cpqProductConfigConfigurationOrderEntryPopulator" />
+	<bean id="cpqProductConfigDefaultConfigurationOrderEntryPopulator"
+		class="de.hybris.platform.cpq.productconfig.facades.populator.ConfigurationOrderEntryPopulator">
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigConfigurationServiceLayerHelper" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryConverter" />
+		<property name="add" ref="cpqProductConfigConfigurationOrderEntryPopulator" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultSavedCartIntegrationFacade" alias="cpqProductConfigSavedCartIntegrationFacade" />
+	<bean id="cpqProductConfigDefaultSavedCartIntegrationFacade"
+		class="de.hybris.platform.cpq.productconfig.facades.impl.DefaultSavedCartIntegrationFacade">
+		<constructor-arg ref="userService" />
+		<constructor-arg ref="commerceCartService" />
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+	</bean>
+
+
+	<alias name="cpqProductConfigDefaultOrderIntegrationFacade" alias="cpqProductConfigOrderIntegrationFacade" />
+	<bean id="cpqProductConfigDefaultOrderIntegrationFacade"
+		class="de.hybris.platform.cpq.productconfig.facades.impl.DefaultOrderIntegrationFacade">
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+		<constructor-arg ref="baseStoreService" />
+		<constructor-arg ref="orderService" />
+		<constructor-arg ref="customerAccountService" />
+	</bean>
+
+	<alias name="cpqProductConfigDefaultQuoteIntegrationFacade" alias="cpqProductConfigQuoteIntegrationFacade" />
+	<bean id="cpqProductConfigDefaultQuoteIntegrationFacade"
+		class="de.hybris.platform.cpq.productconfig.facades.impl.DefaultQuoteIntegrationFacade">
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+		<constructor-arg ref="quoteService" />
+	</bean>
+
+</beans>

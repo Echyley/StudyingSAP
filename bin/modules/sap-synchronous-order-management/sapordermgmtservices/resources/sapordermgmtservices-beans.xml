@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.sap.sapordermgmtservices.schedline.data.ScheduleLineData">
+		<property name="confirmedQuantity" type="Double"/>
+		<property name="quantityUnit" type="String"/>
+		<property name="confirmedDate" type="java.util.Date"/>
+		<property name="formattedValue" type="String"/>
+	</bean>
+	
+	
+	<bean class="de.hybris.platform.commerceservices.search.pagedata.SearchPageData&lt;RESULT>">
+		<property name="dateRange" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="scheduleLines"
+		          type="java.util.List&lt;de.hybris.platform.sap.sapordermgmtservices.schedline.data.ScheduleLineData>"/>
+		<property name="backendDown"
+		          type="boolean"/>		          
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="condensedStatus"
+		          type="String"/>
+		<property name="createdDateSAPFormat"
+		          type="String[]"/>
+	</bean>	
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.CartData">
+		<property name="backendDown"
+		          type="boolean"/>
+	</bean>		
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="condensedStatus"
+		          type="String"/>
+	</bean>		
+
+</beans>

@@ -1,0 +1,17 @@
+<div class="se-announcement-content">
+    <span
+        *ngIf="isCloseable()"
+        class="sap-icon--decline se-announcement-close"
+        (click)="closeAnnouncement()"
+    ></span>
+
+    <div *ngIf="hasMessage()">
+        <h4 *ngIf="hasMessageTitle()">{{ announcement.messageTitle | translate }}</h4>
+        <span>{{ announcement.message | translate }}</span>
+    </div>
+    <ng-container *ngIf="hasComponent()">
+        <ng-container
+            *ngComponentOutlet="announcement.component; injector: announcementInjector"
+        ></ng-container>
+    </ng-container>
+</div>

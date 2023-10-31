@@ -1,0 +1,43 @@
+.se-page-tree {
+    &-component-menu {
+        margin: 0 0 0 auto;
+        display: flex;
+        flex-direction: row;
+
+        @mixin spans {
+            margin: 0 0 0 16px;
+            font-size: 14px;
+            line-height: 16px;
+        }
+        &--hide {
+            @include spans;
+            color: var(--sapContent_LabelColor);
+        }
+        &--icon {
+            @include spans;
+            color: var(--sapLinkColor);
+        }
+    }
+
+    &-component-more {
+        min-width: 118px;
+        &-list {
+            @include se-flex-column;
+            padding: 0;
+        }
+        &-menu {
+            &--span {
+                font-family: var(--sapFontFamily);
+                font-size: 14px;
+                color: var(--sapLinkColor);
+                display: block;
+                min-width: 104px;
+                padding: 12px 16px;
+            }
+        }
+    }
+}
+
+.is-storefront .fd-popover__popper {
+    border-radius: 0;
+}

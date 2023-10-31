@@ -1,0 +1,27 @@
+<div *ngIf="ready">
+    <div *ngIf="isTypeSupported">
+        <div class="se-restriction-management-edit__header">
+            <div>{{ restriction.name }}</div>
+            <div>{{ restriction.typeCode }}</div>
+        </div>
+        <div>
+            <se-item-manager
+                [item]="restriction"
+                [mode]="itemManagementMode"
+                [structureApi]="structureApi"
+                [contentApi]="contentApi"
+                [uriContext]="uriContext"
+                [componentType]="restriction.itemtype"
+                [(submitFunction)]="submitInternal"
+                [(isDirty)]="isDirtyInternal"
+            ></se-item-manager>
+        </div>
+    </div>
+    <div *ngIf="!isTypeSupported">
+        <div class="se-restrictions-list__item-content">
+            <div translate="se.cms.restriction.management.select.type.not.supported.warning"></div>
+            <p class="se-restriction__item-name">{{ restriction.name }}</p>
+            <div class="se-restriction__item-description">{{ restriction.description }}</div>
+        </div>
+    </div>
+</div>

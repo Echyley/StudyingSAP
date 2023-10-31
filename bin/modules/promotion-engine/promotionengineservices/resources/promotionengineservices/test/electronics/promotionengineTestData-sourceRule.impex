@@ -1,0 +1,160 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2022 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$lang=en
+$defaultPromoGrp=testPromoGrp
+
+############################# CONDITIONS ##########################
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang];priority;icon(code)
+;general;General;100;
+
+INSERT_UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];priority;breadcrumb[lang=$lang];allowsChildren;translatorId;translatorParameters;categories(id)
+;y_group;Group;200;{operator};true;ruleGroupConditionTranslator;;general
+;y_container;Container;100;{id};true;ruleContainerConditionTranslator;;general
+
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=AbstractRule][unique=true]
+;y_group;
+;y_container;
+
+INSERT_UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=$lang];description[lang=$lang];type;value;required[default=true]
+;y_group;operator;100;Group operator;Combine the conditions in the group using OR/AND;Enum(de.hybris.platform.ruleengineservices.definitions.conditions.RuleGroupOperator);"""AND""";
+;y_container;id;100;Container ID;Enter ID of the container to be referred in actions;java.lang.String;;
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang];priority
+;cart;Cart;1300
+;customer;Customer;1200
+
+INSERT_UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];priority;breadcrumb[lang=$lang];allowsChildren;translatorId;translatorParameters;categories(id)
+;y_cart_total;Cart total;300;Cart total {operator} {value};false;ruleCartTotalConditionTranslator;;cart
+;y_qualifying_products;Qualifying products;200;Cart contains {products_operator} products {products};false;ruleQualifyingProductsConditionTranslator;;cart
+;y_qualifying_categories;Qualifying categories;100;Cart contains products from {categories_operator} categories {categories};false;qualifyingCategoriesConditionTranslator;;cart
+;y_target_customers;Target customers;100;Target {customer_groups_operator} customer groups {customer_groups} or customers {customers};false;ruleTargetCustomersConditionTranslator;;customer
+;y_product_price;Product price threshold;900;Product price {operator} {value};false;ruleProductPriceConditionTranslator;;cart
+;y_qualifying_group_types;Qualifying Group Types;800;Cart entry group {operator} {groupTypes};false;ruleEntryGroupTypeConditionTranslator;;cart
+;y_order_threshold_perfect_partner;Order Threshold Perfect Partner;700;Test;false;ruleOrderThresholdPerfectPartnerConditionTranslator;;cart;
+
+INSERT_UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=$lang];description[lang=$lang];type;value;required[default=true]
+;y_cart_total;operator;200;Operator;Operator to compare the cart total value;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";
+;y_cart_total;value;100;Cart total value;Map of currency and value of the cart total to be used;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_qualifying_products;operator;400;Operator;Operator to compare the quantity required for qualifying products;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";
+;y_qualifying_products;quantity;300;Quantity;Quantity of qualifying products required;java.lang.Integer;1;
+;y_qualifying_products;products_operator;200;Product selection operator;Select ANY product or select ALL products from list of qualifying products;Enum(de.hybris.platform.ruledefinitions.CollectionOperator);"""CONTAINS_ANY""";
+;y_qualifying_products;products;100;Products;List of qualifying products;List(ItemType(Product));;false
+;y_qualifying_categories;operator;600;Operator;Operator to compare the quantity required for products in qualifying categories;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";
+;y_qualifying_categories;quantity;500;Quantity;Quantity of products required from qualifying categories;java.lang.Integer;1;
+;y_qualifying_categories;categories_operator;400;Category selection operator;Select ANY category or select ALL categories from list of qualifying categories;Enum(de.hybris.platform.ruledefinitions.CollectionOperator);"""CONTAINS_ANY""";
+;y_qualifying_categories;categories;300;Categories;List of qualifying categories;List(ItemType(Category));;false
+;y_qualifying_categories;excluded_categories;200;Excluded categories;List of sub-categories to be excluded from qualifying categories;List(ItemType(Category));;false
+;y_qualifying_categories;excluded_products;100;Excluded products;List of products from qualifying categories to be excluded;List(ItemType(Product));;false
+;y_target_customers;customer_groups_operator;500;Customer group selection operator;Customer should be part of ANY or ALL customer groups;Enum(de.hybris.platform.ruledefinitions.CollectionOperator);"""CONTAINS_ANY""";
+;y_target_customers;customer_groups;400;Customer groups;List of qualifying customer groups;List(ItemType(UserGroup));;false
+;y_target_customers;customers;300;Customers;List of qualifying customers;List(ItemType(Customer));;false
+;y_target_customers;excluded_customer_groups;200;Excluded customer groups;List of sub-groups that should be excluded from qualifying customer groups;List(ItemType(UserGroup));;false
+;y_target_customers;excluded_customers;100;Excluded customers;List of customers that should be excluded from qualifying customer groups;List(ItemType(Customer));;false
+;y_product_price;operator;1100;Operator;Operator to compare the product value;Enum(de.hybris.platform.ruledefinitions.AmountOperator);"""GREATER_THAN_OR_EQUAL""";;
+;y_product_price;value;1000;Price threshold;Map of currency and threshold value of the products to be used to qualify for this promotion;Map(ItemType(Currency),java.math.BigDecimal);;;
+;y_qualifying_group_types;operator;1100;Operator;Group type seletion operator;Enum(de.hybris.platform.ruledefinitions.MembershipOperator);"""NOT_IN""";;
+;y_qualifying_group_types;groupTypes;1000;Group types;List of qualifying group types;List(ItemType(GroupType));;;
+;y_order_threshold_perfect_partner;product;1200;Partner Product;Partner Product;ItemType(Product);;;
+;y_order_threshold_perfect_partner;cart_threshold;1100;Cart Threshold;Cart Threshold;Map(ItemType(Currency),java.math.BigDecimal);;;
+;y_order_threshold_perfect_partner;is_discounted_price_included;1000;Is Discounted Proce Included;Is discounted price included;java.lang.Boolean;;;
+
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=PromotionSourceRule][unique=true]
+;y_cart_total;
+;y_qualifying_products;
+;y_qualifying_categories;
+;y_target_customers;
+;y_product_price;
+;y_qualifying_group_types;
+;y_order_threshold_perfect_partner;
+
+############################# ACTIONS ##########################
+
+INSERT_UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang];priority;icon(code)
+;general;General;100
+
+INSERT_UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang];priority
+;cart_discounts;Cart discounts;500
+;product_discounts;Product discounts;400
+;partner_product_discounts;Partner product discounts;300
+;shipping;Shipping;200
+
+INSERT_UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];priority;breadcrumb[lang=$lang];translatorId;translatorParameters;categories(id)
+;y_order_percentage_discount;Percentage discount on cart;200;Apply {value}% discount on the cart total;ruleExecutableActionTranslator;actionId->ruleOrderPercentageDiscountAction;cart_discounts
+;y_order_fixed_discount;Fixed discount on cart;100;Apply {value} discount on the cart total;ruleExecutableActionTranslator;actionId->ruleOrderFixedDiscountAction;cart_discounts
+;y_order_entry_percentage_discount;Percentage discount on products;500;Apply {value}% discount on the qualifying products;ruleExecutableActionTranslator;actionId->ruleOrderEntryPercentageDiscountAction;product_discounts
+;y_order_entry_fixed_discount;Fixed discount on products;400;Apply {value} discount on the qualifying products;ruleExecutableActionTranslator;actionId->ruleOrderEntryFixedDiscountAction;product_discounts
+;y_order_entry_fixed_price;Target fixed price on products;300;Apply target price {value} on the qualifying products;ruleExecutableActionTranslator;actionId->ruleOrderEntryFixedPriceAction;product_discounts
+;y_target_bundle_price;Target bundle price;200;Apply target price {value} to the bundle;ruleExecutableActionTranslator;actionId->ruleTargetBundlePriceAction;product_discounts
+;y_free_gift;Free gift;100;Give {quantity} {product} product(s) for free;ruleExecutableActionTranslator;actionId->ruleFreeGiftAction;product_discounts
+;y_partner_order_entry_percentage_discount;Percentage discount on partner products;300;Apply {value}% discount on the partner products;ruleExecutableActionTranslator;actionId->rulePartnerOrderEntryPercentageDiscountAction;partner_product_discounts
+;y_partner_order_entry_fixed_discount;Fixed discount on partner products;200;Apply {value} discount on the partner products;ruleExecutableActionTranslator;actionId->rulePartnerOrderEntryFixedDiscountAction;partner_product_discounts
+;y_partner_order_entry_fixed_price;Target fixed price on partner products;100;Apply target price {value} on the partner products;ruleExecutableActionTranslator;actionId->rulePartnerOrderEntryFixedPriceAction;partner_product_discounts
+;y_change_delivery_mode;Change delivery mode;100;Change delivery mode to {delivery_mode};ruleExecutableActionTranslator;actionId->ruleChangeDeliveryModeAction;shipping
+;y_trigger_message;Trigger rule message;100;Display message for the rule;ruleExecutableActionTranslator;actionId->ruleTriggerMessageAction;general
+;y_halt;Halt rule execution;1000;Halt execution of any following rules;ruleExecutableActionTranslator;actionId->ruleHaltAction;general
+
+INSERT_UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];priority;name[lang=$lang];description[lang=$lang];type;value;required[default=true]
+;y_order_percentage_discount;value;100;Percentage discount value;Percentage discount that will be applied on the cart total;java.math.BigDecimal;;
+;y_order_fixed_discount;value;100;Absolute discount value;Map of currency and absolute discount value that will be applied on the cart total;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_order_entry_percentage_discount;value;100;Percentage discount value;Percentage discount that will be applied on the qualifying products;java.math.BigDecimal;;
+;y_order_entry_fixed_discount;value;100;Absolute discount value;Map of currency and absolute discount value that will be applied on the qualifying products;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_order_entry_fixed_price;value;100;Target fixed price;Map of currency and target price value that will be applied on the qualifying products;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_target_bundle_price;value;300;Target bundle price;Map of currency and target price value that will be applied on the bundle;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_target_bundle_price;selection_strategy;200;Selection strategy;The strategy to be used to select products when multiple items in the cart qualify for the bundle;Enum(de.hybris.platform.ruleengineservices.enums.OrderEntrySelectionStrategy);"""CHEAPEST""";
+;y_target_bundle_price;qualifying_containers;100;Bundle product quantities;Map of Container IDs and respective quantities that make up the required bundle;Map(java.lang.String,java.lang.Integer);;
+;y_free_gift;product;200;Free product;The product that should be added to cart automatically and given away for free;ItemType(Product);;
+;y_free_gift;quantity;100;Quantity;The quantity of items to be given away for free;java.lang.Integer;1;
+;y_free_gift;qualifying_containers;300;Qualifying product containers;Map of Container IDs and respective quantities that make up the qualifying products;Map(java.lang.String,java.lang.Integer);;false
+;y_partner_order_entry_percentage_discount;value;400;Percentage discount value;Percentage discount that will be applied on the partner products;java.math.BigDecimal;;
+;y_partner_order_entry_percentage_discount;selection_strategy;300;Selection strategy;The strategy to be used to select products when multiple items in the cart qualify for the action;Enum(de.hybris.platform.ruleengineservices.enums.OrderEntrySelectionStrategy);"""CHEAPEST""";
+;y_partner_order_entry_percentage_discount;qualifying_containers;200;Qualifying product containers;Map of Container IDs and respective quantities that make up the qualifying products;Map(java.lang.String,java.lang.Integer);;
+;y_partner_order_entry_percentage_discount;target_containers;100;Target product containers;Map of Container IDs and respective quantities that make up the target partner products;Map(java.lang.String,java.lang.Integer);;
+;y_partner_order_entry_fixed_discount;value;400;Absolute discount value;Map of currency and target price value that will be applied on the partner products;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_partner_order_entry_fixed_discount;selection_strategy;300;Selection strategy;The strategy to be used to select products when multiple items in the cart qualify for the action;Enum(de.hybris.platform.ruleengineservices.enums.OrderEntrySelectionStrategy);"""CHEAPEST""";
+;y_partner_order_entry_fixed_discount;qualifying_containers;200;Qualifying product containers;Map of Container IDs and respective quantities that make up the qualifying products;Map(java.lang.String,java.lang.Integer);;
+;y_partner_order_entry_fixed_discount;target_containers;100;Target product containers;Map of Container IDs and respective quantities that make up the target partner products;Map(java.lang.String,java.lang.Integer);;
+;y_partner_order_entry_fixed_price;value;500;Target fixed price;Map of currency and target price value that will be applied on the partner products;Map(ItemType(Currency),java.math.BigDecimal);;
+;y_partner_order_entry_fixed_price;selection_strategy;400;Selection strategy;The strategy to be used to select products when multiple items in the cart qualify for the action;Enum(de.hybris.platform.ruleengineservices.enums.OrderEntrySelectionStrategy);"""CHEAPEST""";;
+;y_partner_order_entry_fixed_price;qualifying_containers;300;Qualifying product containers;Map of Container IDs and respective quantities that make up the qualifying products;Map(java.lang.String,java.lang.Integer);;false
+;y_partner_order_entry_fixed_price;target_containers;200;Target product containers;Map of Container IDs and respective quantities that make up the target partner products;Map(java.lang.String,java.lang.Integer);;
+;y_change_delivery_mode;delivery_mode;100;Delivery mode;The delivery mode to be applied on the cart as a result of the action;ItemType(DeliveryMode);;
+
+INSERT_UPDATE RuleActionDefinitionRuleTypeMapping;definition(id)[unique=true];ruleType(code)[default=PromotionSourceRule][unique=true]
+;y_order_percentage_discount;
+;y_order_fixed_discount;
+;y_order_entry_percentage_discount;
+;y_order_entry_fixed_discount;
+;y_order_entry_fixed_price;
+;y_target_bundle_price;
+;y_free_gift;
+;y_partner_order_entry_percentage_discount;
+;y_partner_order_entry_fixed_discount;
+;y_partner_order_entry_fixed_price;
+;y_change_delivery_mode;
+;y_trigger_message;
+;y_halt;
+
+############################# RULE GROUPS ##########################
+
+INSERT_UPDATE RuleGroup;code[unique=true];exclusive[default=false]
+;orderPromotionRuleGroup
+;productPromotionRuleGroup
+;customerPromotionRuleGroup
+;bundleFixedPriceRuleGroup
+;orderPromotionRuleGroupExclusive;true
+
+############################# RULES ##########################
+
+
+INSERT_UPDATE RuleToEngineRuleTypeMapping;ruleType(code)[unique=true];engineRuleType(code)[default=PROMOTION]
+;PromotionSourceRule;

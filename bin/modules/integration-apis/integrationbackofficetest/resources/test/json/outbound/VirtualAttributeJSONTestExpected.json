@@ -1,0 +1,15 @@
+{
+  "creationtime": "/Date(1577836800000)/",
+  "code": "Test_code",
+  "catalogVersion": {
+    "version": "Test_version",
+    "catalog": {
+      "id": "Test_id",
+      "integrationKey": "TEST_KEY"
+    },
+    "integrationKey": "TEST_KEY"
+  },
+  "modifiedtime": "/Date(1577836800000)/",
+  "testVa": "Test_testVa",
+  "integrationKey": "TEST_KEY"
+}

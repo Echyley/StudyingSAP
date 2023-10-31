@@ -1,0 +1,16 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# Add Document type
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("zh")
+
+INSERT_UPDATE B2BDocumentType;code[unique=true];name[lang=zh];includeInOpenBalance;displayInAllList
+;PURCHASE_ORDER;订单;true;true
+;INVOICE;收据;true;true
+;CREDIT_NOTE;信用说明;true;true
+;DEBIT_NOTE;欠款说明;true;true
+;STATEMENT;明细单;false;false
+
+#% endif:
+

@@ -1,0 +1,16 @@
+#################################################################################
+# SAP Configuration
+#################################################################################
+INSERT_UPDATE sapconfiguration;core_name[unique=true];sapcommon_salesOrganization;sapcommon_distributionChannel;sapcommon_division;sapproductconfig_enable_pricing;sapproductconfig_show_baseprice_and_options;sapproductconfig_show_deltaprices;sapordermgmt_enabled
+;RR5910;1010;10;00;true;true;true;false
+
+INSERT_UPDATE BaseStore;uid[unique=true];sapconfiguration(core_name)
+;wsTest;RR5910
+
+INSERT_UPDATE Currency;isocode[unique=true];sapCode;
+;EUR;EUR
+;USD;USD
+
+INSERT_UPDATE Unit;code[unique=true];sapcode
+;PCE;PC
+;EA;EA

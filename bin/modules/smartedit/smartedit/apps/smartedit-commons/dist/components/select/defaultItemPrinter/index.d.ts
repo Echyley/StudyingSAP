@@ -1,0 +1,1 @@
+export { DefaultItemPrinterComponent } from './DefaultItemPrinterComponent';

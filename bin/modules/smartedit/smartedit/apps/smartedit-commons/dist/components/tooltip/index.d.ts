@@ -1,0 +1,1 @@
+export { TooltipModule } from './TooltipModule';

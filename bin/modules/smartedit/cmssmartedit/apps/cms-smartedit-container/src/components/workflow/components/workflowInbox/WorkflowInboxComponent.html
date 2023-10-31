@@ -1,0 +1,81 @@
+<fd-popover
+    class="toolbar-action se-workflow-inbox-container dropdown"
+    [class.open]="actionItem.isOpen"
+    [(isOpen)]="actionItem.isOpen"
+    (isOpenChange)="onDropdownToggle(isOpen)"
+    [closeOnOutsideClick]="true"
+    [triggers]="['click']"
+    [noArrow]="false"
+>
+    <fd-popover-control class="se-workflow-inbox-toggle-control">
+        <button
+            fd-button
+            type="button"
+            class="se-workflow-inbox-toggle toolbar-action--button--compact"
+            attr.aria-label="{{ 'se.cms.workflow.toolbar.inbox' | translate}}"
+            [attr.aria-expanded]="actionItem.isOpen"
+            title="{{ 'se.cms.workflow.toolbar.inbox' | translate}}"
+        >
+            <span class="se-toolbar-actions__icon sap-icon--inbox"></span>
+            <se-workflow-inbox-badge></se-workflow-inbox-badge>
+        </button>
+    </fd-popover-control>
+
+    <fd-popover-body>
+        <div
+            [ngClass]="{
+                'se-toolbar__dropdown--right': actionItem.dropdownPosition === 'right',
+                'se-toolbar__dropdown--center': actionItem.dropdownPosition === 'center',
+                'se-toolbar__dropdown--left': actionItem.dropdownPosition === 'left'
+            }"
+            class="toolbar-action--include--compact"
+        >
+            <div *ngIf="actionItem.isOpen" class="se-workflow-inbox">
+                <div class="se-workflow-inbox">
+                    <div class="se-workflow-inbox-header">
+                        <div
+                            class="se-workflow-inbox-header__title"
+                            [translate]="'se.cms.workflow.toolbar.inbox'"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="se-workflow-inbox-tasks se-cms-dev-workflow-inbox-tasks fd-panel__body"
+                    >
+                        <div
+                            *ngIf="!tasksNotReady && totalNumberOfTasks === 0"
+                            class="se-workflow-inbox-tasks__no-tasks"
+                        >
+                            <img src="static-resources/images/Inbox.svg" alt="empty-inbox" />
+                            <span
+                                class="se-workflow-inbox__empty-inbox-message"
+                                [translate]="'se.cms.workflow.toolbar.inbox.emptyinbox.message'"
+                            ></span>
+                            <span
+                                class="se-workflow-inbox__empty-inbox-message-alt"
+                                [translate]="'se.cms.workflow.toolbar.inbox.emptyinbox.message.alt'"
+                            ></span>
+                        </div>
+                        <se-infinite-scrolling
+                            class="se-version-panel__infinite-scroll se-infinite-scrolling--narrowed"
+                            [pageSize]="pageSize"
+                            [fetchPage]="fetchPageOfInboxTasks"
+                            (itemsChange)="onInboxTasksLoaded($event)"
+                        >
+                            <div
+                                *ngFor="let task of workflowTasks; let i = index; let last = last; trackBy: trackByIndex"
+                                class="se-workflow-inbox-task se-cms-dev-workflow-inbox-task"
+                            >
+                                <se-workflow-inbox-task
+                                    id="workflow-inbox-task-{{i}}"
+                                    [class.se-workflow-inbox-task-last]="last"
+                                    [task]="task"
+                                ></se-workflow-inbox-task>
+                            </div>
+                        </se-infinite-scrolling>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fd-popover-body>
+</fd-popover>

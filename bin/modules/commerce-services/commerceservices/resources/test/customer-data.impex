@@ -1,0 +1,45 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+INSERT BaseSite; uid          ; dataIsolationEnabled
+               ; isolatedSite ; true
+
+INSERT Customer; uid           ; originalUid      ; undecoratedUid
+               ; test1@sap.com ; test1@sap.com    ; test1@sap.com
+               ; test2@sap.com ; Test2@SAP.com    ; Test2@SAP.com
+               ; test3@sap.com ; testDiff@sap.com ; testDiff@sap.com
+               ; test4@sap.com ;
+               ; test5@sap.com ; Test5@SAP.com
+               ; test6@sap.com ;                  ; TestDiff@SAP.com
+               ; Test7@SAP.com ;
+
+INSERT Customer; uid            ; originalUid      ; undecoratedUid   ; site(uid)
+               ; test11@sap.com ; test11@sap.com   ; test11@sap.com   ; isolatedSite
+               ; test12@sap.com ; Test12@SAP.com   ; Test12@SAP.com   ; isolatedSite
+               ; test13@sap.com ; testDiff@sap.com ; testDiff@sap.com ; isolatedSite
+               ; test14@sap.com ;                  ;                  ; isolatedSite
+               ; test15@sap.com ; Test15@sap.com   ;                  ; isolatedSite
+               ; test16@sap.com ;                  ; TestDiff@sap.com ; isolatedSite
+               ; Test17@SAP.com ;                  ; TestDiff@sap.com ; isolatedSite
+
+INSERT Customer; uid            ; originalUid    ; site(uid)
+               ; test21@sap.com ; test21@sap.com ;
+               ; test22@sap.com ; Test22@SAP.com ;
+               ; test23@sap.com ; test23@sap.com ;
+               ; test24@sap.com ; Test24@sap.com ;
+               ; test31@sap.com ; test31@sap.com ; isolatedSite
+               ; test32@sap.com ; Test32@sap.com ; isolatedSite
+               ; test33@sap.com ; test33@sap.com ; isolatedSite
+               ; test34@sap.com ; Test34@sap.com ; isolatedSite
+
+UPDATE Customer; uid[unique = true]          ; originalUid
+               ; test21@sap.com              ; Test21@SAP.com
+               ; test22@sap.com              ; TestDiff@sap.com
+               ; test31@sap.com|isolatedSite ; Test31@SAP.com
+               ; test32@sap.com|isolatedSite ; TestDiff@sap.com
+
+UPDATE Customer; uid[unique = true]          ; undecoratedUid;
+               ; test23@sap.com              ; Test23@sap.com
+               ; test24@sap.com              ; testDiff@sap.com
+               ; test33@sap.com|isolatedSite ; Test33@sap.com
+               ; test34@sap.com|isolatedSite ; TestDiff@sap.com

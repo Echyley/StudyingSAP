@@ -1,0 +1,25 @@
+<div class="form-group se-multi-product-catalog-version-selector__label">
+    {{'se.product.catalogs.multiple.list.header' | translate}}
+</div>
+
+<div
+    class="se-multi-product-catalog-version-selector__catalog form-group"
+    *ngFor="let productCatalog of productCatalogs"
+>
+    <label
+        class="se-control-label se-multi-product-catalog-version-selector__catalog-name"
+        id="{{ productCatalog.catalogId }}-label"
+    >
+        {{ productCatalog.name | seL10n | async }}
+    </label>
+
+    <div class="se-multi-product-catalog-version-selector__catalog-version">
+        <se-select
+            [id]="productCatalog.catalogId"
+            [(model)]="productCatalog.selectedItem"
+            [onChange]="updateModel()"
+            [fetchStrategy]="productCatalog.fetchStrategy"
+        >
+        </se-select>
+    </div>
+</div>

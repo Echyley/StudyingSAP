@@ -1,0 +1,13 @@
+.se-category-node {
+    padding: 0 se-space('s');
+    display: grid;
+    grid-column-gap: se-space('xs');
+    align-items: center;
+
+    &--no-drag {
+        grid-template-columns: 6fr 6fr 8fr;
+    }
+    &--drag {
+        grid-template-columns: 6fr 6fr 7fr 1fr;
+    }
+}

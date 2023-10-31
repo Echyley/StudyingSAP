@@ -1,0 +1,21 @@
+<span
+    data-ng-if="clonePageWizardCtrl.isRestrictionsActive()"
+    class="se-clone-page-restriction-step"
+>
+    <div data-ng-if="clonePageWizardCtrl.getPageRestrictions().length > 1">
+        <se-page-restrictions-info-message></se-page-restrictions-info-message>
+    </div>
+
+    <se-restrictions-editor
+        [editable]="true"
+        [(reset-fn)]="clonePageWizardCtrl.restrictionsEditorFunctionBindings.reset"
+        [(cancel-fn)]="clonePageWizardCtrl.restrictionsEditorFunctionBindings.cancel"
+        [(is-dirty-fn)]="clonePageWizardCtrl.restrictionsEditorFunctionBindings.isDirty"
+        (on-restrictions-change)="clonePageWizardCtrl.restrictionsResult($event)"
+        [get-restriction-types]="clonePageWizardCtrl.getRestrictionTypes"
+        [get-supported-restriction-types]="clonePageWizardCtrl.getSupportedRestrictionTypes"
+        [item]="clonePageWizardCtrl.getBasePageInfo()"
+        [restrictionUuids]="clonePageWizardCtrl.model.restrictions"
+    >
+    </se-restrictions-editor>
+</span>

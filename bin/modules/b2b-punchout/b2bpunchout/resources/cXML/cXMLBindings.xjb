@@ -1,0 +1,14 @@
+<xml-java-binding-schema xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    <element name="ReturnData" type="class">
+        <attribute name="name" property="nameAttribute"/>
+    </element>
+    <element name="ShippingPaymentMethod" type="class">
+        <attribute name="value" property="valueAttribute"/>
+    </element>
+    <element name="TermsOfDeliveryCode" type="class">
+        <attribute name="value" property="valueAttribute"/>
+    </element>
+    <element name="TransportTerms" type="class">
+        <attribute name="value" property="valueAttribute"/>
+    </element>
+</xml-java-binding-schema>

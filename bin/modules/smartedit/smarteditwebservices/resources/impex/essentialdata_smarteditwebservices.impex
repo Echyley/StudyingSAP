@@ -1,0 +1,12 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE SmartEditConfiguration;key[unique=true];value
+;defaultToolingLanguage;"""en"""
+
+
+INSERT_UPDATE Theme;code[unique=true];activeForSmartedit;
+;sap_fiori_3;true;
+;sap_fiori_3_dark;true;
+;sap_horizon;true;

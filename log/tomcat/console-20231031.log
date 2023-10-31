@@ -1,0 +1,597 @@
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.318 | --> Wrapper Started as Daemon
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.318 | Java Service Wrapper Professional Edition 64-bit 3.5.46
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.318 |   Copyright (C) 1999-2021 Tanuki Software, Ltd. All Rights Reserved.
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.318 |     http://wrapper.tanukisoftware.com
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.318 |   Licensed to SAP SE for hybris Platform
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.318 | 
+STATUS | wrapper  | main    | 2023/10/31 09:44:20.566 | Launching a JVM...
+INFO   | jvm 1    | main    | 2023/10/31 09:44:20.767 | WrapperManager: Initializing...
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | out 31, 2023 9:44:21 AM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | INFO: Initializing ProtocolHandler ["http-nio-9001"]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | out 31, 2023 9:44:21 AM org.apache.catalina.core.StandardService initInternal
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | SEVERE: Failed to initialize connector [Connector[HTTP/1.1-9001]]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | org.apache.catalina.LifecycleException: Protocol handler initialization failed
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1075)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:857)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Catalina.load(Catalina.java:646)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Catalina.load(Catalina.java:669)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:307)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:477)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/java.lang.Thread.run(Thread.java:833)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | Caused by: java.net.BindException: Address already in use
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/sun.nio.ch.Net.bind0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/sun.nio.ch.Net.bind(Net.java:555)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:337)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:294)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:89)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:226)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:202)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1296)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1309)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.tomcat.util.net.AbstractJsseEndpoint.init(AbstractJsseEndpoint.java:231)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:693)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:76)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1073)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	... 19 more
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | out 31, 2023 9:44:21 AM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | INFO: Initializing ProtocolHandler ["https-jsse-nio-9002"]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | out 31, 2023 9:44:21 AM org.apache.catalina.core.StandardService initInternal
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | SEVERE: Failed to initialize connector [Connector[HTTP/1.1-9002]]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | org.apache.catalina.LifecycleException: Protocol handler initialization failed
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1075)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:857)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Catalina.load(Catalina.java:646)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Catalina.load(Catalina.java:669)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:307)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:477)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.271 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/java.lang.Thread.run(Thread.java:833)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | Caused by: java.net.BindException: Address already in use
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.Net.bind0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.Net.bind(Net.java:555)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:337)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:294)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:89)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:226)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:202)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1296)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1309)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.AbstractJsseEndpoint.init(AbstractJsseEndpoint.java:231)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:693)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:76)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1073)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	... 19 more
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | out 31, 2023 9:44:21 AM org.apache.coyote.AbstractProtocol init
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | INFO: Initializing ProtocolHandler ["ajp-nio-127.0.0.1-8009"]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | out 31, 2023 9:44:21 AM org.apache.catalina.core.StandardService initInternal
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | SEVERE: Failed to initialize connector [Connector[AJP/1.3-8009]]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | org.apache.catalina.LifecycleException: Protocol handler initialization failed
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1075)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:559)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:857)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.startup.Catalina.load(Catalina.java:646)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.startup.Catalina.load(Catalina.java:669)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:307)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:477)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:349)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/java.lang.Thread.run(Thread.java:833)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | Caused by: java.net.BindException: Address already in use
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.Net.bind0(Native Method)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.Net.bind(Net.java:555)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:337)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:294)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:89)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:226)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:202)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1296)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1309)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.tomcat.util.net.AbstractJsseEndpoint.init(AbstractJsseEndpoint.java:231)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:693)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1073)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 	... 19 more
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | out 31, 2023 9:44:21 AM org.apache.catalina.startup.Catalina load
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | INFO: Initialization processed in 323 ms
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | out 31, 2023 9:44:21 AM org.apache.catalina.core.StandardService startInternal
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.272 | INFO: Starting service [Catalina]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.373 | out 31, 2023 9:44:21 AM de.hybris.tomcat.ConfigurableRfc6265CookieProcessor$JuliLogHandler info
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.373 | INFO: No Same Site cookie config file found at tomcat\bin\sameSiteCookies.properties
+INFO   | jvm 1    | main    | 2023/10/31 09:44:21.873 | Loading additional classes from: [file:/Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/resources/libpatches/velocity-engine-patch-2.3-1.jar]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:22.375 | INFO  [localhost-startStop-3] [PlatformInPlaceClassLoader] log4j2 is now correctly initialized
+INFO   | jvm 1    | main    | 2023/10/31 09:44:22.375 | INFO  [localhost-startStop-3] [Log4JUtils] Log4j initialisation has been finished
+INFO   | jvm 1    | main    | 2023/10/31 09:44:22.976 | INFO  [localhost-startStop-1] [TenantStartupNotifier] Using default implementation of TenantStartupNotifier for tenant <<master>>
+INFO   | jvm 1    | main    | 2023/10/31 09:44:22.976 | INFO  [localhost-startStop-1] [TenantStartupNotifier] Instantiating de.hybris.platform.core.BlockingTenantStartupNotifier for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:22.976 | >>> No SAP licenses found in the system. Trying fallback to hybris license.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.076 | INFO  [localhost-startStop-1] [Registry] Using additional Trust Store set in the hybris properties.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.076 | INFO  [localhost-startStop-1] [JerseyClientDefaultSslContextProvider] Jersey client will use jvm default SSLContext
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.076 | INFO  [localhost-startStop-1] [Registry] Additional Trust Store has been merged with the default SSLContext.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.176 | INFO  [localhost-startStop-2] [ConnectionErrorCheckingJDBCConnectionPool] JDBC Connect Retries set to 3.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.577 | INFO  [localhost-startStop-2] [AbstractTenant] Created master data source DataSourceImpl<<master/master>>
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.577 | INFO  [localhost-startStop-2] [DefaultClusterNodeManagementService] Automatic cluster ID discovery disabled. Configured ID: 0
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.577 | INFO  [localhost-startStop-2] [DefaultBroadcastService] Started message broadcast service:
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.577 | clustering (enabled:false)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.577 | sending synchronously - no queue
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.577 | methods [<loopback>::de.hybris.platform.cluster.LoopBackBroadcastMethod@798ad876]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Starting up hybris server
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Configuration:
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Cluster:     disabled
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Tenant:      master
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Mode:        development
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] OS:          Linux 6.2.0-35-generic, amd64
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Database:    Pool: hybris - hsqldb, table prefix: 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver]              SA - jdbc:hsqldb:file:/Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/data/hsqldb/mydb;shutdown=true;hsqldb.tx=MVCC;hsqldb.log_size=256
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Platform:    2211.FP1
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver] Java:        Private Build
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.677 | INFO  [localhost-startStop-2] [hybrisserver]              OpenJDK Runtime Environment, 17.0.8.1+1-Ubuntu-0ubuntu122.04
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver]              /usr/lib/jvm/java-17-openjdk-amd64
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] VM Locale:   language=en,country=US,region=null
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] Cache:       RegionCache is not yet initialized. [de.hybris.platform.cache.impl.RegionCacheAdapter]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] Server type: tomcat
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] *****************************************************************
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] --- Extensions in dependency order ( options: 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] ---  @deprecated: is deprecated, p: platform extension,*: auto-required 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] ---  ?: lazy-loaded, i: got items.xml, b: got beans.xml, c: got core module 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] ---  w: got web module ) 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] core 2211.FP1 [p*cib]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] commons 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] deliveryzone 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] maintenanceweb 2211.FP1 [p*w]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] mediaweb 2211.FP1 [p*cw]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] paymentstandard 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] scripting 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] processing->(scripting,commons) 2211.FP1 [p*cibw]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] impex->processing 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] testweb 2211.FP1 [p*w]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] validation->impex 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] catalog->validation 2211.FP1 [p*cib]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] advancedsavedquery->catalog 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] europe1->catalog 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] platformservices->(paymentstandard,deliveryzone,europe1) 2211.FP1 [p*cb]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] hac->platformservices 2211.FP1 [p*cw]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] oauth2->platformservices 2211.FP1 [p*cibw]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] workflow->(catalog,platformservices) 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] comments->workflow 2211.FP1 [p*ci]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.678 | INFO  [localhost-startStop-2] [hybrisserver] ---------------------------------------------------------------
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.778 | INFO  [localhost-startStop-2] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.778 | INFO  [localhost-startStop-2] [Licence] This Hybris licence is only for demo or develop usage and is valid for 30 days.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.778 | INFO  [localhost-startStop-2] [Licence] After this time you have to reinitialize database to continue your work.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.778 | INFO  [localhost-startStop-2] [Licence] Remaining days ====> 30
+INFO   | jvm 1    | main    | 2023/10/31 09:44:23.778 | INFO  [localhost-startStop-2] [Licence] ##########################################################################
+INFO   | jvm 1    | main    | 2023/10/31 09:44:24.979 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<global>> spring config from extension (core) located in (global-core-spring.xml,core-cache.xml,global-servicelayer-spring.xml,global-core-jmx-spring.xml,global-statistics-spring.xml) took: (146.1 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.180 | INFO  [localhost-startStop-2] [HybrisContextFactory] - Refreshing SpringContext (Global context) took: (211.1 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.180 | INFO  [localhost-startStop-2] [HybrisContextFactory] Initializing <<global>> Spring ApplicationContext took: (389.9 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.280 | INFO  [localhost-startStop-2] [EHCacheRegion] EHCacheRegion entityCacheRegion, eviction policy FIFO, size 100000
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.280 | INFO  [localhost-startStop-2] [EHCacheRegion] EHCacheRegion queryCacheRegion, eviction policy FIFO, size 20000
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.280 | INFO  [localhost-startStop-2] [EHCacheRegion] EHCacheRegion sessionCacheRegion, eviction policy LRU, size 50000
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Regioncache initialized with region count 7
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: typesystemCacheRegion, size: 0, types: [81, 82, 83, 84, 87], statistics: true, class: class de.hybris.platform.regioncache.region.impl.UnlimitedCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: entityCacheRegion, size: 100000, types: [__ALL_TYPES__, __NO_QUERY__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: queryCacheRegion, size: 20000, types: [__QUERY_CACHE__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: mediaCacheRegion, size: 0, types: [__MEDIA__cache], statistics: true, class: class de.hybris.platform.media.storage.impl.MediaCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: scriptsCacheRegion, size: 0, types: [__SCRIPT__], statistics: true, class: class de.hybris.platform.scripting.engine.internal.cache.impl.ScriptsCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: sessionCacheRegion, size: 50000, types: [__SESSION__], exclusive computation: false, statistics: true, class: class de.hybris.platform.regioncache.region.impl.EHCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Cache region: Name: relationCacheRegion, size: 0, types: [Relation], statistics: true, class: class de.hybris.platform.cache.relation.RelationCacheRegion
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.380 | INFO  [localhost-startStop-2] [DefaultCacheController] Registered Listener RegionCacheAdapter(31) - <<master>> on cache controller. Currently registered 1
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.580 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (core) located in (core-spring.xml,persistence-spring.xml,core-media-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml) took: (168.4 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.580 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (commons) located in (commons-spring.xml) took: (6.020 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.580 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (scripting) located in (scripting-spring.xml) took: (6.812 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.681 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml,processing-distributed-spring.xml) took: (47.34 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.681 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (impex) located in (impex-spring.xml) took: (9.599 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.681 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (validation) located in (validation-spring.xml) took: (12.53 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.681 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (europe1) located in (europe1-spring.xml) took: (6.665 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.781 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml,audit-spring.xml) took: (61.94 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.781 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (hac) located in (hac-spring.xml) took: (6.953 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.781 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (oauth2) located in (oauth2-spring.xml) took: (9.055 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.781 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (workflow) located in (workflow-spring.xml) took: (7.205 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:25.781 | INFO  [localhost-startStop-2] [HybrisContextFactory] Loading <<application>> spring config <master> from extension (comments) located in (comments-spring.xml) took: (9.337 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:26.281 | INFO  [localhost-startStop-2] [LazyInitOverrideBeanFactoryPostProcessor] Setting lazy-init='false' for configuration beans
+INFO   | jvm 1    | main    | 2023/10/31 09:44:27.182 | INFO  [localhost-startStop-2] [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@412cf169 on cache controller. Currently registered 2
+INFO   | jvm 1    | main    | 2023/10/31 09:44:27.583 | INFO  [localhost-startStop-2] [HybrisSpringSessionFilter] Hybris Spring Session filter disabled
+INFO   | jvm 1    | main    | 2023/10/31 09:44:27.583 | INFO  [localhost-startStop-2] [Reflections] Reflections took 56 ms to scan 1 urls, producing 10 keys and 23 values 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:27.683 | INFO  [localhost-startStop-2] [Reflections] Reflections took 0 ms to scan 1 urls, producing 2 keys and 5 values 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.385 | INFO  [localhost-startStop-2] [ListMergeDirectiveBeanPostProcessor] Post Processing ListMergeDirective [priceProcessorsMergeDirective] on Bean [defaultPriceProcessors]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.485 | INFO  [localhost-startStop-2] [ListMergeDirectiveBeanPostProcessor] Post Processing ListMergeDirective [discountProcessorsMergeDirective] on Bean [defaultDiscountProcessors]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.485 | INFO  [localhost-startStop-2] [ListMergeDirectiveBeanPostProcessor] Post Processing ListMergeDirective [taxProcessorsMergeDirective] on Bean [defaultTaxProcessors]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.485 | INFO  [localhost-startStop-2] [PricingCustomizationDetector] PDT smart calculation mode is enabled (pdt.calculation.mode=smart). This setting is not recommended for production environment.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart memoryChart
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart threadsChart
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart osChart
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart sessionsChart
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart taskQueueSizeChart_master
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart taskQueuePoolingSizeChart_master
+INFO   | jvm 1    | main    | 2023/10/31 09:44:28.685 | INFO  [localhost-startStop-2] [StatisticsService] adding chart dbConnectionsInUseChart_master
+INFO   | jvm 1    | main    | 2023/10/31 09:44:29.587 | INFO  [localhost-startStop-2] [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - master) took: (3.756 s)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:29.587 | INFO  [localhost-startStop-2] [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant master  took: (4.115 s)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.093 | INFO  [localhost-startStop-2] [BlockingTenantStartupNotifier] Scheduling 15 tenant startup listeners to be notified for tenant <<master>>
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.093 | INFO  [localhost-startStop-1] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.093 | INFO  [localhost-startStop-1] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [AfterSaveEventPublisher-master] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [AfterSaveEventPublisher-master] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-2] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-2] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-4] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-4] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Starting notifing listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Executing startup listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.core.JMXBeanLoader@17b8b8e2 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.core.JMXBeanLoader@17b8b8e2 has finished successfully in 41.33 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.cluster.DefaultBroadcastService$1$1@1252a54 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [DefaultBroadcastService] updating cluster island ID -1->15486885088317632
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.cluster.DefaultBroadcastService$1$1@1252a54 has finished successfully in 4.360 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.094 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.cronjob.jalo.CronJobManager$CronJobTenantListener@39a755d4 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [DefaultTaskService] Task engine starting up (min:10 max:10 idle:20s interval:10s)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [Task-master-poll] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [Task-master-poll] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.cronjob.jalo.CronJobManager$CronJobTenantListener@39a755d4 has finished successfully in 31.72 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.spring.HybrisRequestScope$1@14df6869 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.spring.HybrisRequestScope$1@14df6869 has finished successfully in 14.89 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.internal.model.impl.ModelContextProxy$2@4544f636 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.internal.model.impl.ModelContextProxy$2@4544f636 has finished successfully in 33.60 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.jalo.user.UserManager$1@4d97241e for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.jalo.user.UserManager$1@4d97241e has finished successfully in 38.67 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.directpersistence.selfhealing.impl.DefaultSelfHealingService$2@2ffa3861 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.directpersistence.selfhealing.impl.DefaultSelfHealingService$2@2ffa3861 has finished successfully in 4.887 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [BatchSelfHealingItemsRunner] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [BatchSelfHealingItemsRunner] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.regioncache.region.impl.DefaultCleanUpQueryCacheRegionService$1@69efc577 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.regioncache.region.impl.DefaultCleanUpQueryCacheRegionService$1@69efc577 has finished successfully in 1.117 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.masterserver.impl.StatisticsPublisher$1@4e0b5f30 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [CleanUpQueryCacheRegionScheduledRunner] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [CleanUpQueryCacheRegionScheduledRunner] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.masterserver.impl.StatisticsPublisher$1@4e0b5f30 has finished successfully in 798.1 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.web.session.persister.AsyncSessionPersister$1@6560b2d5 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [AsyncSessionPersister] No need to start async session persister since asynchronous session persistence is not configured.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.194 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.web.session.persister.AsyncSessionPersister$1@6560b2d5 has finished successfully in 893.2 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.util.config.RuntimeConfigUpdateListener@63c825a0 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [RuntimeConfigRefreshRunner (master)] [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [RuntimeConfigRefreshRunner (master)] [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.util.config.RuntimeConfigUpdateListener@63c825a0 has finished successfully in 1.545 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.interceptor.impl.UniqueAttributesInterceptor$1@6fe6af7d for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.interceptor.impl.UniqueAttributesInterceptor$1@6fe6af7d has finished successfully in 43.09 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.order.strategies.calculation.impl.internal.PricingCustomizationDetector$PricingCustomizationDetectorListener@29fa5c81 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.order.strategies.calculation.impl.internal.PricingCustomizationDetector$PricingCustomizationDetectorListener@29fa5c81 has finished successfully in 141.7 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.jalo.JaloSession$1@7323fde7 for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.jalo.JaloSession$1@7323fde7 has finished successfully in 41.03 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Notifying de.hybris.platform.cache.relation.RelationCacheUnit$1@30d2c17e for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] de.hybris.platform.cache.relation.RelationCacheUnit$1@30d2c17e has finished successfully in 15.62 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] All listeners for tenant <<master>> have been notified in 93.37 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-3] [BlockingTenantStartupNotifier] Finished notifing listeners for tenant <<master>>.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-1] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 94.33 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-2] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 94.17 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [AfterSaveEventPublisher-master] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 94.27 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 94.40 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [Task-master-poll] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 20.04 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [Task-master-poll] [DefaultTaskService] Polling thread started.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [BatchSelfHealingItemsRunner] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 8.730 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [CleanUpQueryCacheRegionScheduledRunner] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 8.271 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [RuntimeConfigRefreshRunner (master)] [BlockingTenantStartupNotifier] Finished waiting for tenant <<master>> in 9.349 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] loading model converters: 
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [Task-master-poll] [DefaultModelConverterRegistry] 	pre-fetch mode:default
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Using default implementation of TenantStartupNotifier for tenant <<junit>>[1220275348]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Instantiating de.hybris.platform.core.BlockingTenantStartupNotifier for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Using default implementation of TenantStartupNotifier for tenant <<t1>>[1638658355]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Instantiating de.hybris.platform.core.BlockingTenantStartupNotifier for tenant <<t1>>[1638658355].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Using default implementation of TenantStartupNotifier for tenant <<t2>>[1517289858]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Instantiating de.hybris.platform.core.BlockingTenantStartupNotifier for tenant <<t2>>[1517289858].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Using default implementation of TenantStartupNotifier for tenant <<foo>>[-1284944557]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.195 | INFO  [localhost-startStop-4] [TenantStartupNotifier] Instantiating de.hybris.platform.core.BlockingTenantStartupNotifier for tenant <<foo>>[-1284944557].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created master data source DataSourceImpl<<junit/master>>
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "alt1"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "alt2"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "a"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "b"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "c"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "d"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "e"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.295 | INFO  [localhost-startStop-4] (junit) [AbstractTenant] Created alternative data source "f"
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.596 | INFO  [localhost-startStop-3] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.696 | INFO  [localhost-startStop-3] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/processing'
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.896 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.896 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (core) located in (core-spring.xml,core-media-spring.xml,persistence-spring.xml,core-profiling-spring.xml,core-jmx-spring.xml,core-filter-spring.xml,servicelayer-spring.xml,user-spring.xml,security-spring.xml,media-spring.xml,i18n-spring.xml,interceptor-spring.xml,event-spring.xml,test/test-core-spring.xml,test/test-impex-spring.xml) took: (289.7 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.896 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.996 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (commons) located in (commons-spring.xml) took: (6.561 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.996 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (scripting) located in (scripting-spring.xml) took: (15.15 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.996 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Replaced Spring default SessionFixationProtectionStrategy with HybrisSessionFixationProtectionStrategy
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.996 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:35.996 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (processing) located in (processing-spring.xml,cronjob-spring.xml,task-spring.xml,processengine-spring.xml,processing-jmx-spring.xml,processing-distributed-spring.xml,test/test-processing-spring.xml) took: (67.38 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.097 | INFO  [localhost-startStop-3] [Version] HV000001: Hibernate Validator 6.1.5.Final
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.097 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (impex) located in (impex-spring.xml) took: (21.41 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.097 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (validation) located in (validation-spring.xml) took: (20.49 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.097 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (europe1) located in (europe1-spring.xml) took: (14.76 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.197 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (platformservices) located in (catalog-spring.xml,order-spring.xml,product-spring.xml,category-spring.xml,classification-spring.xml,jobs-spring.xml,converters-spring.xml,audit-spring.xml) took: (102.5 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.197 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (hac) located in (hac-spring.xml) took: (6.768 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.197 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (oauth2) located in (oauth2-spring.xml) took: (11.51 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.197 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (workflow) located in (workflow-spring.xml) took: (8.350 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.197 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Loading <<application>> spring config <junit> from extension (comments) located in (comments-spring.xml) took: (6.384 ms)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.497 | INFO  [Task-master-poll] [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.798 | INFO  [Task-master-poll] [ConfigurableTasksProvider] no tasks provider defined - default tasks provider (de.hybris.platform.task.impl.BufferedAuxTablesTasksProvider) will be used
+INFO   | jvm 1    | main    | 2023/10/31 09:44:36.898 | INFO  [localhost-startStop-4] (junit) [LazyInitOverrideBeanFactoryPostProcessor] Setting lazy-init='false' for configuration beans
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.198 | INFO  [localhost-startStop-4] (junit) [DefaultCacheController] Registered Listener de.hybris.platform.media.storage.impl.DefaultLocalMediaFileCacheService$MediaCacheLifecycleCallback@663d15ec on cache controller. Currently registered 3
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.198 | INFO  [localhost-startStop-2] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Replaced Spring default SessionFixationProtectionStrategy with HybrisSessionFixationProtectionStrategy
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.198 | INFO  [localhost-startStop-1] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.298 | INFO  [localhost-startStop-2] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.298 | INFO  [localhost-startStop-4] (junit) [HybrisSpringSessionFilter] Hybris Spring Session filter disabled
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.298 | INFO  [localhost-startStop-2] [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.399 | INFO  [localhost-startStop-2] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/authorizationserver'
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.399 | INFO  [localhost-startStop-2] [SessionInvalidateFilter] invalidate session for uri:.*/oauth/token
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.502 | INFO  [localhost-startStop-4] (junit) [ListMergeDirectiveBeanPostProcessor] Post Processing ListMergeDirective [priceProcessorsMergeDirective] on Bean [defaultPriceProcessors]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.502 | INFO  [localhost-startStop-4] (junit) [ListMergeDirectiveBeanPostProcessor] Post Processing ListMergeDirective [discountProcessorsMergeDirective] on Bean [defaultDiscountProcessors]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.502 | INFO  [localhost-startStop-4] (junit) [ListMergeDirectiveBeanPostProcessor] Post Processing ListMergeDirective [taxProcessorsMergeDirective] on Bean [defaultTaxProcessors]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.502 | INFO  [localhost-startStop-4] (junit) [PricingCustomizationDetector] PDT smart calculation mode is enabled (pdt.calculation.mode=smart). This setting is not recommended for production environment.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.602 | INFO  [localhost-startStop-4] (junit) [StatisticsService] adding chart taskQueueSizeChart_junit
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.602 | INFO  [localhost-startStop-4] (junit) [StatisticsService] adding chart taskQueuePoolingSizeChart_junit
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.602 | INFO  [localhost-startStop-4] (junit) [StatisticsService] adding chart dbConnectionsInUseChart_junit
+INFO   | jvm 1    | main    | 2023/10/31 09:44:37.702 | INFO  [localhost-startStop-1] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/'
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] - Refreshing SpringContext (hybris Application context - junit) took: (1.856 s)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [HybrisContextFactory] Initializing application Spring ApplicationContext for tenant junit  took: (2.433 s)
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Scheduling 24 tenant startup listeners to be notified for tenant <<junit>>[1220275348]
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Starting notifing listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-2] (junit) [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Executing startup listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-3] (junit) [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.core.JMXBeanLoader@17b8b8e2 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-3] (junit) [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [AfterSaveEventPublisher-junit] (junit) [BlockingTenantStartupNotifier] Other thread is already notifying listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [AfterSaveEventPublisher-junit] (junit) [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-2] (junit) [BlockingTenantStartupNotifier] Waiting for other thread to finish notifying listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.core.JMXBeanLoader@17b8b8e2 has finished successfully in 46.91 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.cluster.DefaultBroadcastService$1$1@1252a54 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.cluster.DefaultBroadcastService$1$1@1252a54 has finished successfully in 41.47 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.103 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.cronjob.jalo.CronJobManager$CronJobTenantListener@39a755d4 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [DefaultTaskService] System not initialized or connection to DB cannot be establish.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [DefaultTaskService] System not initialized or connection to DB cannot be establish.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [DefaultTaskService] Not starting task module
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.cronjob.jalo.CronJobManager$CronJobTenantListener@39a755d4 has finished successfully in 7.624 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.spring.HybrisRequestScope$1@14df6869 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.spring.HybrisRequestScope$1@14df6869 has finished successfully in 14.75 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.internal.model.impl.ModelContextProxy$2@4544f636 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.internal.model.impl.ModelContextProxy$2@4544f636 has finished successfully in 14.76 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.jalo.user.UserManager$1@4d97241e for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.jalo.user.UserManager$1@4d97241e has finished successfully in 14.80 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.203 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.directpersistence.selfhealing.impl.DefaultSelfHealingService$2@2ffa3861 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.directpersistence.selfhealing.impl.DefaultSelfHealingService$2@2ffa3861 has finished successfully in 15.09 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.regioncache.region.impl.DefaultCleanUpQueryCacheRegionService$1@69efc577 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.regioncache.region.impl.DefaultCleanUpQueryCacheRegionService$1@69efc577 has finished successfully in 21.68 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.masterserver.impl.StatisticsPublisher$1@4e0b5f30 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.masterserver.impl.StatisticsPublisher$1@4e0b5f30 has finished successfully in 13.45 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.web.session.persister.AsyncSessionPersister$1@6560b2d5 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.web.session.persister.AsyncSessionPersister$1@6560b2d5 has finished successfully in 11.77 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.util.config.RuntimeConfigUpdateListener@63c825a0 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.util.config.RuntimeConfigUpdateListener@63c825a0 has finished successfully in 11.73 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.interceptor.impl.UniqueAttributesInterceptor$1@6fe6af7d for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.interceptor.impl.UniqueAttributesInterceptor$1@6fe6af7d has finished successfully in 12.54 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.order.strategies.calculation.impl.internal.PricingCustomizationDetector$PricingCustomizationDetectorListener@29fa5c81 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.order.strategies.calculation.impl.internal.PricingCustomizationDetector$PricingCustomizationDetectorListener@29fa5c81 has finished successfully in 11.73 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.jalo.JaloSession$1@7323fde7 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.jalo.JaloSession$1@7323fde7 has finished successfully in 13.33 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.cache.relation.RelationCacheUnit$1@30d2c17e for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.cache.relation.RelationCacheUnit$1@30d2c17e has finished successfully in 16.53 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.internal.model.impl.ModelContextProxy$2@1e28f13b for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.internal.model.impl.ModelContextProxy$2@1e28f13b has finished successfully in 11.86 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.jalo.user.UserManager$1@6028f768 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.jalo.user.UserManager$1@6028f768 has finished successfully in 14.26 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.directpersistence.selfhealing.impl.DefaultSelfHealingService$2@48d8fd3a for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.directpersistence.selfhealing.impl.DefaultSelfHealingService$2@48d8fd3a has finished successfully in 407.8 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.regioncache.region.impl.DefaultCleanUpQueryCacheRegionService$1@71a0448e for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.regioncache.region.impl.DefaultCleanUpQueryCacheRegionService$1@71a0448e has finished successfully in 287.6 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.masterserver.impl.StatisticsPublisher$1@2858c2a8 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.masterserver.impl.StatisticsPublisher$1@2858c2a8 has finished successfully in 218.0 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.web.session.persister.AsyncSessionPersister$1@fece37c for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [AsyncSessionPersister] System not initialized. Not starting async session persister.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.web.session.persister.AsyncSessionPersister$1@fece37c has finished successfully in 223.1 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.util.config.RuntimeConfigUpdateListener@d2fe96 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.util.config.RuntimeConfigUpdateListener@d2fe96 has finished successfully in 149.5 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.204 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.servicelayer.interceptor.impl.UniqueAttributesInterceptor$1@73254e36 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.servicelayer.interceptor.impl.UniqueAttributesInterceptor$1@73254e36 has finished successfully in 12.20 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Notifying de.hybris.platform.order.strategies.calculation.impl.internal.PricingCustomizationDetector$PricingCustomizationDetectorListener@1d868f78 for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] de.hybris.platform.order.strategies.calculation.impl.internal.PricingCustomizationDetector$PricingCustomizationDetectorListener@1d868f78 has finished successfully in 56.89 μs.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] All listeners for tenant <<junit>>[1220275348] have been notified in 80.47 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-4] (junit) [BlockingTenantStartupNotifier] Finished notifing listeners for tenant <<junit>>[1220275348].
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-3] (junit) [BlockingTenantStartupNotifier] Finished waiting for tenant <<junit>>[1220275348] in 80.61 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [AfterSaveEventPublisher-junit] (junit) [BlockingTenantStartupNotifier] Finished waiting for tenant <<junit>>[1220275348] in 84.19 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.205 | INFO  [localhost-startStop-2] (junit) [BlockingTenantStartupNotifier] Finished waiting for tenant <<junit>>[1220275348] in 84.52 ms.
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.305 | INFO  [localhost-startStop-2] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/test'
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.405 | INFO  [localhost-startStop-4] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.405 | INFO  [localhost-startStop-4] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.505 | INFO  [localhost-startStop-3] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Replaced Spring default SessionFixationProtectionStrategy with HybrisSessionFixationProtectionStrategy
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.505 | INFO  [localhost-startStop-4] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Replaced Spring default SessionFixationProtectionStrategy with HybrisSessionFixationProtectionStrategy
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.505 | INFO  [localhost-startStop-4] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.505 | INFO  [localhost-startStop-3] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.505 | INFO  [localhost-startStop-3] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.505 | INFO  [localhost-startStop-3] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/authorizationserver_junit'
+INFO   | jvm 1    | main    | 2023/10/31 09:44:38.606 | INFO  [localhost-startStop-3] [SessionInvalidateFilter] invalidate session for uri:.*/oauth/token
+INFO   | jvm 1    | main    | 2023/10/31 09:44:39.006 | INFO  [localhost-startStop-4] (junit) [RemoveDefaultSessionFixationStrategyBeanPostProcessor] Removed Spring default SessionFixationProtectionStrategy, since HybrisSessionFixationProtectionStrategy is already defined
+INFO   | jvm 1    | main    | 2023/10/31 09:44:39.207 | INFO  [localhost-startStop-4] [HybrisContextLoaderListener] Registered HttpSession timeout listener for '/hac_junit'
+INFO   | jvm 1    | main    | 2023/10/31 09:44:39.808 | Oct 31, 2023 9:44:39 AM org.apache.catalina.startup.Catalina start
+INFO   | jvm 1    | main    | 2023/10/31 09:44:39.808 | INFO: Server startup in 18482 ms
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.550 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.550 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.551 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.551 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] Starting CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.551 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] Starting CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.551 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] Starting CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.751 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.851 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.851 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.851 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.851 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.851 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.851 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-148-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-148-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-150-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-150-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-149-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-149-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-149-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-150-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-150-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-148-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.951 | INFO  [TaskExecutor-master-149-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [TaskExecutor-master-149-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [TaskExecutor-master-150-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [TaskExecutor-master-148-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [TaskExecutor-master-148-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:17.952 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] Finishing CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] Finishing CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] Finishing CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.052 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.153 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.153 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.153 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.153 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.153 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:45:18.153 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] Starting CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-160-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-160-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] Starting CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] session user changed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-158-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-158-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-160-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] Starting CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-160-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-158-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-160-TriggerTask [8796093121462]] [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-159-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-159-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-158-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-158-TriggerTask [8796093088694]] [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.766 | INFO  [TaskExecutor-master-159-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.767 | INFO  [TaskExecutor-master-159-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.767 | INFO  [TaskExecutor-master-159-TriggerTask [8796093154230]] [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] Finishing CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] Finishing CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.867 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] Finishing CronJob
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.868 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.868 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.868 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.868 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.868 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.868 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthAuthorizationCodeCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAuthorizationCodeCronJob) [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthAccessTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthAccessTokenCronJob) [Slf4jAuditableActionHandler] session closed
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] DB_AUDIT
+INFO   | jvm 1    | main    | 2023/10/31 09:50:07.968 | INFO  [cleanOAuthRefreshTokenCronJob::de.hybris.platform.servicelayer.internal.jalo.MaintenanceCleanupJob] (cleanOAuthRefreshTokenCronJob) [Slf4jAuditableActionHandler] session closed

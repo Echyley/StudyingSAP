@@ -1,0 +1,55 @@
+$lang=cs
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Konfigurovatelný produkt
+;productconfig_customer_category;Zákazník
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Produkt se zadanou konfigurací v košíku;Košík obsahuje produkt {product}. Charakteristika {cstic} {value_operator} – hodnota {cstic_value}.
+;y_configurable_product;Produkt, který aktuálně konfigurujete;Produkt, který aktuálně konfigurujete, je {product}. Charakteristika {cstic} {value_operator} – hodnota {cstic_value}.
+;y_configurable_product_customer;Zákazníci;Zákazník {customers_operator} z následujícího seznamu\: {customers}
+;y_configurable_product_customer_group;Skupiny zákazníků;Zákazník {customer_groups_operator} z následujících skupin\: {customer_groups}
+;y_configurable_product_customer_support_mode;Zákaznická podpora;Relace s asistenční službou je aktivní\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Produkt;Produkt v košíku;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Charakteristika;Název charakteristiky
+;y_configurable_product_in_cart;value_operator;Operátor;Operátor mezi charakteristikou a hodnotou
+;y_configurable_product_in_cart;cstic_value;Hodnota;Název hodnoty charakteristiky;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Produkt;Produkt, který aktuálně konfigurujete
+;y_configurable_product;cstic;Charakteristika;Název charakteristiky
+;y_configurable_product;value_operator;Operátor;Operátor mezi charakteristikou a hodnotou
+;y_configurable_product;cstic_value;Hodnota;Název hodnoty charakteristiky
+;y_configurable_product_customer;customers_operator;Operátor výběru zákazníka;Definuje, zda je zákazník obsažen v seznamu či nikoli
+;y_configurable_product_customer;customers;Zákazníci;Seznam zákazníků
+;y_configurable_product_customer_group;customer_groups_operator;Operátor výběru skupin zákazníků;Definuje, zda je zákazník obsažen v NĚKTERÝCH nebo VŠECH skupinách zákazníků
+;y_configurable_product_customer_group;customer_groups;Skupiny zákazníků;Seznam skupin zákazníků
+;y_configurable_product_customer_support_mode;value;Relace s asistenční službou je aktivní;Pracovník zákaznické podpory je přihlášen jménem zákazníka
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Konfigurovatelný produkt
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Nastavte hodnotu charakteristiky pro konfigurovatelný produkt;Nastavit hodnotu {cstic_value} pro charakteristiku {cstic}
+;y_configurable_product_remove_assignable_value;Skrýt přiřaditelné hodnoty pro konfigurovatelný produkt;Skrýt hodnotu {cstic_value} pro charakteristiku {cstic}
+;y_configurable_product_hide_cstic;Skrýt charakteristiku pro konfigurovatelný produkt;Skrýt charakteristiku {cstic}
+;y_configurable_product_display_cstic_readonly;Zobrazit charakteristiku pro konfigurovatelný produkt jen pro čtení;Zobrazit charakteristiku {cstic} jen pro čtení
+;y_configurable_product_display_message;Zobrazit zprávu;Zobrazit zprávu
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Charakteristika;Charakteristika, pro kterou se hodnota nastavuje
+;y_configurable_product_set_cstic_value;cstic_value;Hodnota;Hodnota charakteristiky, která se má nastavit
+;y_configurable_product_remove_assignable_value;cstic;Charakteristika;Charakteristika, pro kterou se má odebrat přiřaditelná hodnota
+;y_configurable_product_remove_assignable_value;cstic_value;Hodnota;Hodnota, která se má odebrat ze seznamu přiřaditelných hodnot
+;y_configurable_product_hide_cstic;cstic;Charakteristika;Charakteristika, která se má skrýt
+;y_configurable_product_display_cstic_readonly;cstic;Charakteristika;Charakteristika, která se má zobrazit jen pro čtení
+;y_configurable_product_display_message;message;Zpráva;Text zprávy
+;y_configurable_product_display_message;message_severity;Závažnost;Závažnost zprávy
+;y_configurable_product_display_message;cstic;Charakteristika;Charakteristika, pro kterou se tato zpráva zobrazí
+;y_configurable_product_display_message;cstic_value;Hodnota charakteristiky;Hodnota charakteristiky, pro kterou se tato zpráva zobrazí
+
+#% endif:

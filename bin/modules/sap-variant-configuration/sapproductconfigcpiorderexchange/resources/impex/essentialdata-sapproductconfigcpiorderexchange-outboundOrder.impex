@@ -1,0 +1,91 @@
+#**********************************************************************************************
+#************* Product Configuration related integration objects for outbound order ***********
+#**********************************************************************************************
+
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code)
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemConfigHeader    ; SAPCpiOutboundOrderItemConfigHeader
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemConfigInstance  ; SAPCpiOutboundOrderItemConfigInstance
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemConfigHierarchy ; SAPCpiOutboundOrderItemConfigHierarchy
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemConfigValue     ; SAPCpiOutboundOrderItemConfigValue
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemConfigCondition ; SAPCpiOutboundOrderItemConfigCondition
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                     ; productConfigHeaders       ; SAPCpiOutboundOrder:productConfigHeaders                    ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader      ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; externalItemId             ; SAPCpiOutboundOrderItemConfigHeader:externalItemId          ;                                                                   ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; configurationId            ; SAPCpiOutboundOrderItemConfigHeader:configurationId         ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; rootInstanceId             ; SAPCpiOutboundOrderItemConfigHeader:rootInstanceId          ;                                                                   ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; commerceLeading            ; SAPCpiOutboundOrderItemConfigHeader:commerceLeading         ;                                                                   ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; complete                   ; SAPCpiOutboundOrderItemConfigHeader:complete                ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; consistent                 ; SAPCpiOutboundOrderItemConfigHeader:consistent              ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; kbName                     ; SAPCpiOutboundOrderItemConfigHeader:kbName                  ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; kbVersion                  ; SAPCpiOutboundOrderItemConfigHeader:kbVersion               ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHeader     ; kbProfile                  ; SAPCpiOutboundOrderItemConfigHeader:kbProfile               ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                     ; productConfigInstances     ; SAPCpiOutboundOrder:productConfigInstances                  ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance    ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                     ; productConfigHierarchies   ; SAPCpiOutboundOrder:productConfigHierarchies                ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy   ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                     ; productConfigValues        ; SAPCpiOutboundOrder:productConfigValues                     ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue       ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                     ; productConfigConditions    ; SAPCpiOutboundOrder:productConfigConditions                 ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigCondition   ;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; configurationId            ; SAPCpiOutboundOrderItemConfigInstance:configurationId       ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; instanceId                 ; SAPCpiOutboundOrderItemConfigInstance:instanceId            ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; objectType                 ; SAPCpiOutboundOrderItemConfigInstance:objectType            ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; classType                  ; SAPCpiOutboundOrderItemConfigInstance:classType             ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; objectKey                  ; SAPCpiOutboundOrderItemConfigInstance:objectKey             ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; quantity                   ; SAPCpiOutboundOrderItemConfigInstance:quantity              ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; quantityUnit               ; SAPCpiOutboundOrderItemConfigInstance:quantityUnit          ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; author                     ; SAPCpiOutboundOrderItemConfigInstance:author                ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; complete                   ; SAPCpiOutboundOrderItemConfigInstance:complete              ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigInstance   ; consistent                 ; SAPCpiOutboundOrderItemConfigInstance:consistent            ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; configurationId            ; SAPCpiOutboundOrderItemConfigHierarchy:configurationId      ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; instanceId                 ; SAPCpiOutboundOrderItemConfigHierarchy:instanceId           ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; parentId                   ; SAPCpiOutboundOrderItemConfigHierarchy:parentId             ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; bomNumber                  ; SAPCpiOutboundOrderItemConfigHierarchy:bomNumber            ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; objectType                 ; SAPCpiOutboundOrderItemConfigHierarchy:objectType           ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; classType                  ; SAPCpiOutboundOrderItemConfigHierarchy:classType            ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; objectKey                  ; SAPCpiOutboundOrderItemConfigHierarchy:objectKey            ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; author                     ; SAPCpiOutboundOrderItemConfigHierarchy:author               ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigHierarchy  ; salesRelevant              ; SAPCpiOutboundOrderItemConfigHierarchy:salesRelevant        ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; configurationId            ; SAPCpiOutboundOrderItemConfigValue:configurationId          ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; instanceId                 ; SAPCpiOutboundOrderItemConfigValue:instanceId               ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; characteristicId           ; SAPCpiOutboundOrderItemConfigValue:characteristicId         ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; characteristicText         ; SAPCpiOutboundOrderItemConfigValue:characteristicText       ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; valueId                    ; SAPCpiOutboundOrderItemConfigValue:valueId                  ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; valueText                  ; SAPCpiOutboundOrderItemConfigValue:valueText                ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; valueCode                  ; SAPCpiOutboundOrderItemConfigValue:valueCode                ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigValue      ; author                     ; SAPCpiOutboundOrderItemConfigValue:author                   ;                                                                   ; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigCondition  ; configurationId            ; SAPCpiOutboundOrderItemConfigCondition:configurationId      ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigCondition  ; instanceId                 ; SAPCpiOutboundOrderItemConfigCondition:instanceId           ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigCondition  ; conditionKey               ; SAPCpiOutboundOrderItemConfigCondition:conditionKey         ;                                                                   ; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemConfigCondition  ; conditionFactor            ; SAPCpiOutboundOrderItemConfigCondition:conditionFactor      ;                                                                   ; 
+
+#**********************************************************************************************
+#************* Product Configuration S4HC related integration objects for outbound order ******
+#**********************************************************************************************
+
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]	; code[unique = true]; type(code)
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemS4hcConfigHeader     	; SAPCpiOutboundOrderS4hcConfigHeader
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemS4hcConfigValuation  	; SAPCpiOutboundOrderS4hcConfigValuation
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItemS4hcConfigStructureNode; SAPCpiOutboundOrderS4hcConfigStructureNode
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem                    		; productConfigS4hcHeader     	; SAPCpiOutboundOrderItem:s4hcConfigHeader                       			; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigHeader    		;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigHeader    		; productConfigS4hcValuations 	; SAPCpiOutboundOrderS4hcConfigHeader:sapCpiS4hcConfigValuations 			; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigHeader		   ; productConfigS4hcStructureNodes; SAPCpiOutboundOrderS4hcConfigHeader:sapCpiS4hcConfigStructureNodes 	; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode 	;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode  ; productConfigS4hcValuations 	; SAPCpiOutboundOrderS4hcConfigStructureNode:sapCpiS4hcConfigValuations ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigHeader    		; orderId                     	; SAPCpiOutboundOrderS4hcConfigHeader:orderId                    			;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigHeader    		; entryNumber                 	; SAPCpiOutboundOrderS4hcConfigHeader:entryNumber             				;                                                                    	 	; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigHeader    		; status                      	; SAPCpiOutboundOrderS4hcConfigHeader:status                     			;                                                                     		; 
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		; orderId                     	; SAPCpiOutboundOrderS4hcConfigValuation:orderId                 			;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		; entryNumber                 	; SAPCpiOutboundOrderS4hcConfigValuation:entryNumber             			;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		; nodeId			                 	; SAPCpiOutboundOrderS4hcConfigValuation:nodeId		            			;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		; characteristic              	; SAPCpiOutboundOrderS4hcConfigValuation:characteristic          			;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		; value                       	; SAPCpiOutboundOrderS4hcConfigValuation:value                   			;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigValuation 		; author                      	; SAPCpiOutboundOrderS4hcConfigValuation:author                  			;                                                                     		;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode 	; nodeId                      	; SAPCpiOutboundOrderS4hcConfigStructureNode:nodeId                  	;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode 	; parentNodeId                   ; SAPCpiOutboundOrderS4hcConfigStructureNode:parentNodeId            	;                                                                     		;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode 	; bomPositionIdentifier          ; SAPCpiOutboundOrderS4hcConfigStructureNode:bomPositionIdentifier   	;                                                                     		;
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode 	; orderId				         	; SAPCpiOutboundOrderS4hcConfigStructureNode:orderId					   	;                                                                     		; true
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItemS4hcConfigStructureNode 	; entryNumber				         ; SAPCpiOutboundOrderS4hcConfigStructureNode:entryNumber				   	;                                                                     		; true
+ 

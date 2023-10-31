@@ -1,0 +1,36 @@
+<div class="se-product-row">
+    <div
+        class="se-product-node"
+        [ngClass]="{
+            'se-product-node--no-drag' : !parent.dragEnabled,
+            'se-product-node--drag': parent.dragEnabled 
+        }"
+    >
+        <img
+            class="se-product-row__img"
+            [src]="node.thumbnail.url || '/cmssmartedit/images/product_thumbnail_default.png'"
+            alt="product image"
+        />
+        <div
+            class="se-product-row__product se-nowrap-ellipsis"
+            [title]="node.name | seL10n  | async"
+        >
+            {{ node.name | seL10n | async }}
+        </div>
+        <div class="se-product-row__product se-nowrap-ellipsis" [title]="node.code">
+            {{ node.code }}
+        </div>
+        <div
+            class="se-product-row__catalog se-nowrap-ellipsis"
+            title="{{ node.catalogId }} - {{ node.catalogVersion }}"
+        >
+            {{ node.catalogId }} - {{ node.catalogVersion }}
+        </div>
+        <se-dropdown-menu
+            *ngIf="parent.dragEnabled"
+            [dropdownItems]="dropdownItems"
+            [selectedItem]="node"
+            class="pull-right se-tree-node__actions--more-menu"
+        ></se-dropdown-menu>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+$sessionLanguage=en
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;
+;cmsVersionGCJob;cmsVersionGCPerformable;
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isoCode)[default = $sessionLanguage]
+;cmsVersionGCCronJob;cmsVersionGCJob;
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+;cmsVersionGCCronJob;0 0 0 * * ?

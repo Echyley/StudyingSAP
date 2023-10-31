@@ -1,0 +1,20 @@
+<se-message *ngIf="catalogVersionContainsPageWithSameTypeCode" type="warning">
+    <span
+        se-message-description
+        translate="se.cms.clonepagewizard.pageinfo.targetcatalogversion.pagetype.exists.message"
+        [translateParams]="{ typeCode: pageTypeCode }"
+    >
+    </span>
+</se-message>
+
+<se-generic-editor
+    [id]="genericEditorId"
+    [structure]="structure"
+    [content]="content"
+    [(submit)]="submitInternal"
+    [(reset)]="resetInternal"
+    [(isDirty)]="isDirtyInternal"
+    [(isValid)]="isValidInternal"
+    (getApi)="setGenericEditorApi($event)"
+>
+</se-generic-editor>

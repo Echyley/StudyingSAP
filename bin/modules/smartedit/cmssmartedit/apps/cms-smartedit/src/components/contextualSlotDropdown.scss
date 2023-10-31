@@ -1,0 +1,165 @@
+#smarteditoverlay,
+.cdk-overlay-container {
+    .se-slot-ctx-menu__divider::after {
+        content: '';
+        background-color: var(--sapBaseColor);
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 16px;
+        top: 8px;
+        left: -2px;
+        opacity: 0.6;
+    }
+    .se-slot-ctx-menu__dropdown-toggle-wrapper {
+        margin-right: 3px;
+        position: relative;
+    }
+    .se-slot-ctx-menu__dropdown-toggle {
+        @include se-flex-row(center);
+        @include se-type('2');
+        background-color: transparent;
+        color: var(--sapContent_ContrastTextColor);
+        width: 55px;
+        height: 32px;
+        border: none;
+        &:hover:not(.se-slot-ctx-menu__dropdown-toggle--open) {
+            opacity: 0.6;
+        }
+        &--open {
+            background-color: var(--sapBaseColor);
+            & [class*='sap-icon'].se-slot-ctx-menu__dropdown-toggle-icon {
+                color: var(--sapIndicationColor_5);
+            }
+            &.se-slot-ctx-menu__dropdown-toggle-icon[class*='sap-icon'] {
+                color: var(--sapIndicationColor_5);
+            }
+            .se-slot-ctx-menu__dropdown-toggle-add-on {
+                color: var(--sapIndicationColor_5);
+            }
+        }
+        &-icon {
+            @include se-type('2');
+            color: var(--sapContent_ContrastTextColor);
+        }
+        &-icon--disabled {
+            cursor: not-allowed;
+        }
+        &-add-on {
+            margin-left: se-space('base');
+            @include se-type('0');
+            color: var(--sapBaseColor);
+        }
+    }
+    .se-slot-ctx-menu__popover-ancor {
+        position: absolute;
+        display: block;
+        cursor: not-allowed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    // Dropdown Menus
+    .se-slot-contextual-menu__header {
+        @include se-container-section('header');
+    }
+    .se-slot__dropdown-menu {
+        border: none;
+        border-radius: var(--sapElement_BorderCornerRadius);
+        transform: translateY(-2px);
+        min-width: 265px;
+        max-height: 300px;
+        overflow-y: auto;
+        background: var(--sapBaseColor);
+        left: auto;
+        right: 0;
+    }
+
+    // Slot Sync
+    .se-sync-panel__info-checkbox input {
+        margin: 0;
+    }
+    .se-sync-panel__sync-btn {
+        color: var(--sapBaseColor);
+    }
+
+    .se-slot-visibility-wrapper {
+        @include se-flex-row;
+        align-items: flex-start;
+    }
+    .se-slot-visibility__icon-wrapper {
+        position: relative;
+    }
+    .se-slot-visibility__icon {
+        @include se-flex-row(center);
+        @include se-type('4');
+        height: 48px;
+        width: 48px;
+        border-radius: se-space('base');
+        background-color: var(--sapLink_Active_Color);
+        color: var(--sapBaseColor);
+        margin-right: se-space('s');
+
+        &--shared {
+            color: se-type('text', 5);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    .se-slot-visibility__icon--shared {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 14px;
+        border-color: var(--sapShellColor) transparent transparent var(--sapShellColor);
+        border-radius: se-space('base') 0px 0px 0px;
+
+        &::before {
+            @include se-type('1');
+            position: absolute;
+            left: -12px;
+            top: -15px;
+            color: var(--sapBaseColor);
+        }
+    }
+
+    // Slot Shared
+    .se-shared-slot__body {
+        padding: 16px 20px;
+        width: 350px;
+        font-size: 14px;
+        white-space: normal;
+    }
+    .se-shared-slot__sub-header {
+        margin-bottom: se-space('xs');
+    }
+    .se-shared-slot__option {
+        color: var(--sapInformativeColor);
+        margin-bottom: se-space('xxs');
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .se-shared-slot__description {
+        margin-bottom: se-space('s');
+    }
+    .se-shared-slot__link {
+        cursor: pointer;
+        color: var(--sapInformativeColor);
+        text-decoration: none;
+        text-transform: capitalize;
+        &:hover {
+            text-decoration: none;
+            color: se-color-state('hover', 'action');
+        }
+    }
+    .se-shared-slot-replace__div {
+        margin-bottom: 8px;
+    }
+}

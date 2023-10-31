@@ -1,0 +1,81 @@
+.se-navigation-editor-tree {
+    &__header {
+        height: 55px;
+        width: 100%;
+        border-radius: var(--sapElement_BorderCornerRadius) var(--sapElement_BorderCornerRadius) 0 0;
+        background-color: var(--sapBaseColor);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 1rem;
+    }
+    &__name {
+        padding-left: 45px;
+
+        &.col-md-offset-1 {
+            margin-left: 0;
+        }
+    }
+
+    &__title {
+        padding-left: 60px;
+    }
+
+    &__action {
+        max-width: 20%;
+        float: right;
+        padding-right: 15px;
+    }
+}
+
+.tablehead.se-navigation-editor-tree__head {
+    border-top: 1px solid var(--sapNeutralBackground);
+    background-color: var(--sapList_FooterBackground);
+    @include se-type();
+    font-family: $font-sap;
+    color: var(--sapNeutralColor);
+    height: 40px;
+    padding: 10px 0;
+}
+
+.fd-dialog__body {
+    .se-navigation-editor-tree {
+        &__title {
+            width: 17%;
+            padding-left: 4px;
+        }
+
+        &__entry {
+            width: 155px;
+            padding-left: 20px;
+        }
+
+        &__name {
+            width: 50%;
+            padding-left: 55px;
+        }
+
+        &__head {
+            margin: 0 -20px 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+}
+
+.se-navigation-editor-tree__btn {
+    margin-right: 1rem;
+}
+
+.se-navigation-editor-tree-header {
+    flex: auto;
+    padding: 20px 45px;
+    font-family: $font-sap;
+
+    &__title {
+        @include se-type('2');
+        color: var(--sapTextColor);
+        margin: 0;
+        padding: 0;
+    }
+}

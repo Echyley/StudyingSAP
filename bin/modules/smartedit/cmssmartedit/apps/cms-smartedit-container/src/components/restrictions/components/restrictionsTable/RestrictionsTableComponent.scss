@@ -1,0 +1,52 @@
+.se-restrictions-list .se-restriction__item {
+    position: static;
+    @include se-flex-row(space-between);
+    cursor: default;
+    &:last-child {
+        margin-bottom: 42px; // To display the dropdown properly without scrolling
+    }
+    border-top-color: var(--sapList_GroupHeaderBorderColor) !important;
+    border-top: solid;
+    border-radius: unset;
+    padding: 20px;
+    &:first-child {
+        border-top-width: 0;
+    }
+}
+
+.se-restriction__item-name {
+    @include se-weight('bold');
+    color: var(--sapTextColor);
+    margin: 0;
+}
+
+.se-restriction__item-type-and-id {
+    color: var(--sapNeutralColor);
+    margin-top: 0;
+}
+
+.se-restriction__item-description {
+    text-overflow: ellipsis;
+    white-space: initial;
+    overflow: hidden;
+    word-break: break-all;
+    @include se-text-ellipsis;
+    color: var(--sapNeutralColor);
+    width: 90%;
+}
+
+.se-restrictions-list--empty__message {
+    color: var(--sapNeutralColor);
+}
+
+.se-restrictions-list__item-content {
+    width: 95%;
+}
+
+.error-input {
+    &.se-restriction__item-description,
+    &.se-restriction__item-name,
+    &.se-restriction__item-type-and-id {
+        color: var(--sapErrorColor);
+    }
+}

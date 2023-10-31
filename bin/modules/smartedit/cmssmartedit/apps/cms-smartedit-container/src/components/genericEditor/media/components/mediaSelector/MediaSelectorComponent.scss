@@ -1,0 +1,9 @@
+se-media-selector {
+    .se-select {
+        [has-selected-option] {
+            .toggle-button {
+                min-height: 100px;
+            }
+        }
+    }
+}

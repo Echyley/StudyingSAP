@@ -1,0 +1,8 @@
+@import "cockpitng-globals.scss";
+
+$profile-setting-padding: 16px 40px; //20px
+$profile-setting-title-size: $font-size__h4;
+$profile-setting-label-color: var(--bo-content-label-color);
+$profile-setting-avatar-width: 112px;
+$profile-setting-avatar-height: 112px;
+$profile-setting-avatar-upload-btn-content: _getIconGlyphContentValue('edit');

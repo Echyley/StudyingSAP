@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<context merge-by="module" parent="auto" type="SAPConfiguration" component="editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab position="6" xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.co">
+				<section name="hmc.section.co">
+					<attribute qualifier="sapco_active" />
+					<attribute qualifier="sapco_sourceSystemId"/>
+				</section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+</config>

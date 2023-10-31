@@ -1,0 +1,40 @@
+.integrationbackoffice-legend-container {
+    width: 100%;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    background-color: var(--bo-base-color);
+}
+
+.integrationbackoffice-legend-item {
+    color: var(--bo-success-color);
+    padding: 5px 10px;
+    display: flex;
+}
+
+.integrationbackoffice-legend-item--denied {
+    color: var(--bo-error-color);
+    padding: 5px 10px;
+    display: flex;
+}
+
+.integrationbackoffice-legend-item--inherited {
+    color: var(--bo-neutral-color);
+}
+
+.integrationbackoffice-legend-icon {
+    height: 17px;
+    width: 17px;
+    font-size: $font-size__small;
+}
+
+.integrationbackoffice-legend-icon::before {
+    content: "\f00c";
+    font: normal normal normal 16px FontAwesome, sans-serif;
+    position: absolute;
+    width: 100%;
+}
+
+.integrationbackoffice-legend-icon--denied::before {
+    content: "\f00d";
+}

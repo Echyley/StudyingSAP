@@ -1,0 +1,34 @@
+{
+    "name": "webappinjector",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Web Application Injector Library",
+    "scripts": {
+        "build": "webpack --config=webpack.conf.js",
+        "lint": "npm run lint:base -- 'src/**/*.ts'",
+        "lint:base": "eslint"
+    },
+    "devDependencies": {
+        "@types/scriptjs": "0.0.2",
+        "ts-loader": "9.3.1",
+        "eslint": "8.28.0",
+        "@typescript-eslint/eslint-plugin": "5.45.0",
+        "@typescript-eslint/parser": "5.45.0",
+        "eslint-config-prettier": "8.5.0",
+        "eslint-plugin-import": "2.26.0",
+        "eslint-plugin-jsdoc": "39.6.4",
+        "eslint-plugin-prefer-arrow": "1.2.3",
+        "eslint-plugin-deprecation": "1.3.3",
+        "eslint-plugin-ban": "1.6.0",
+        "eslint-plugin-prettier": "4.2.1",
+        "typescript": "4.1.5",
+        "webpack": "5.79.0",
+        "webpack-cli": "5.0.1",
+        "smartedit-build": "0.0.1"
+    },
+    "dependencies": {
+        "scriptjs": "2.5.9",
+        "smarteditcontainer": "0.0.1",
+        "smartedit": "0.0.1"
+    }
+}

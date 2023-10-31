@@ -1,0 +1,54 @@
+#################################################################################
+# Product Pictures and other Media
+#################################################################################
+$catalog-id=testConfigureCatalog
+$catalog-version=Online
+$catalogVersion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+$siteResource=jar:de.hybris.platform.cpq.productconfig.facades.impl.DefaultAccessControlFacade&/cpqproductconfigfacades/test/images
+ 
+$picture=picture(code, $catalogVersion) 
+$detail=detail(code, $catalogVersion)
+$thumbnail=thumbnail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+
+INSERT_UPDATE MediaFormat;qualifier[unique=true] 
+;30Wx30H
+;65Wx65H
+;96Wx96H
+;192Wx96H
+;300Wx300H
+;365Wx246H
+;515Wx515H
+;1200Wx1200H
+ 
+ 
+
+#################################################################################
+# Create Media folder
+#################################################################################
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+
+#################################################################################
+# Insert media
+#################################################################################
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];$catalogVersion;folder(qualifier)[default=images]
+;515Wx515H      ;ImageLaptop_515.jpg                                  ;$siteResource/ImageLaptop.jpg
+;300Wx300H      ;ImageLaptop_300.jpg                                  ;$siteResource/ImageLaptop.jpg
+;96Wx96H        ;ImageLaptop_96.jpg                                   ;$siteResource/ImageLaptop.jpg
+
+#################################################################################
+# Insert media containers
+#################################################################################
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+;Laptop                                            ;ImageLaptop_515.jpg,ImageLaptop_300.jpg,ImageLaptop_96.jpg;
+
+
+#################################################################################
+# Attach media to products
+#################################################################################
+INSERT_UPDATE Product;code[unique=true];$picture               ;$detail              ;$normal               ;$thumbnail         ;$catalogVersion
+                     ;CONF_LAPTOP      ;ImageLaptop_300.jpg    ;ImageLaptop_515.jpg  ;ImageLaptop_300.jpg   ;ImageLaptop_96.jpg ;

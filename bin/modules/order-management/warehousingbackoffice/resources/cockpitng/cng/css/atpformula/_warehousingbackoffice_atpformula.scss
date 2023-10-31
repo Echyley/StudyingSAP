@@ -1,0 +1,119 @@
+@import "cockpitng-globals.scss";
+
+$oms-widget-atpformula-table--border: 1px solid var(--bo-list-border-color);
+
+$oms-widget-atpformula-gutter: 2*$container-spacing-default__third;
+$oms-widget-atpformula--font-size: $font-size__large;
+$oms-widget-atpformula--row-height: 30px;
+$oms-widget-atpformulas-variables__cancel--height: 40px;
+$oms-widget-atpformulas-row-3rd-child--padding-left: 22px; 
+$oms-widget-atpformulas-header-actions--width: 85px;
+$oms-widget-atpformulas-variables--width: 100%;
+$oms-widget-atpformulas-variables--margin-side: 2px;
+$oms-widget-atpformulas-btn-image--width: 30px;
+$oms-widget-atpformulas-btn-image--height: 40px;
+
+.oms-widget-atpformula-table{
+    padding-right: $oms-widget-atpformula-gutter;
+}
+
+.atpformulas-header {
+    margin-bottom: .25*$oms-widget-atpformula-gutter;
+    display: flex;
+    justify-content: space-between;
+}
+
+.atpformulas-row > div:nth-child(3) {
+   padding-left: $oms-widget-atpformulas-row-3rd-child--padding-left;
+}
+
+.oms-widget-atpformula-table .z-vlayout-inner:nth-child(2) .atpformulas-row{
+    border-top: $oms-widget-atpformula-table--border;
+}
+
+.yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-ed .atpformulas-row {
+    border-bottom: $oms-widget-atpformula-table--border;
+
+    div {
+        &.addvariableatpformula,
+        &.subvariableatpformula { 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+        }
+    }
+  
+    div {
+        &.addvariableatpformula {
+            text-align: center;
+            &:before {
+                position: relative;
+                top: 10px;
+                font-family: $font-family__icon;
+                content: _getIconGlyphContentValue("add");
+                color: var(--bo-button-accept-text-color);
+                font-size: $font-size__base;
+            }
+            width: $oms-widget-atpformulas-btn-image--width;
+            height: $oms-widget-atpformulas-btn-image--height;
+        }
+    
+        &.subvariableatpformula {
+            text-align: center;
+            &:before {
+                position: relative;
+                top: 10px;
+                font-family: $font-family__icon;
+                content: _getIconGlyphContentValue("less");
+                color: var(--bo-button-reject-text-color);
+                font-size: $font-size__base;
+            }
+            width: $oms-widget-atpformulas-btn-image--width;
+            height: $oms-widget-atpformulas-btn-image--height;
+       }
+    }
+
+    .atpformulas-variables, .atpformulas-variables__cancel {
+        height: $oms-widget-atpformulas-variables__cancel--height;
+        display: flex;
+        align-items: center;
+        width: $oms-widget-atpformulas-variables--width;
+        margin-bottom: 0;
+    }
+    
+    > div {
+        &:first-child, &:nth-child(2), &:nth-child(3) {
+            float: left;
+        }
+        &:last-child {
+            float: right;
+        }
+        &:first-child, &:nth-child(2), &:last-child {
+            margin-top: $oms-widget-atpformulas-variables--margin-side;
+            margin-bottom: $oms-widget-atpformulas-variables--margin-side;
+        }
+    }
+}
+
+
+.atpformulas-row .ye-default-reference-editor-remove-button.ye-default_remove_formula {
+    position: initial;
+    display: inline-block;
+    margin-top: 0px;
+}
+
+.atpformulas-availability{
+    display: none;
+}
+
+.atpformulas-availability--bold{
+    font-weight: bold;
+}
+
+.atpformulas-variables .z-hlayout-inner .z-label{
+    margin-bottom: 0;
+}
+
+.atpformulas-variables .z-hlayout-inner .atpformulas-availability--description{
+    color:var(--bo-field-border-color);
+}

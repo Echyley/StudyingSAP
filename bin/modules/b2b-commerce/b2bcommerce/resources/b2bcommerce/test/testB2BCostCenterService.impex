@@ -1,0 +1,28 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$defaultLanguage = en
+
+INSERT_UPDATE B2BUnit; uid[unique = true]; locname[lang = $defaultLanguage]; groups(uid);
+                     ; Rustic Sales Root ; Rustic Sales Root               ;
+                     ; Rustic Support    ; Rustic Support                  ; Rustic Sales Root
+                     ; Rustic Sales      ; Rustic Sales                    ; Rustic Support
+                     ; Rustic Sales2     ; Rustic Sales2                   ; Rustic Sales
+                     ; Rustic Support2   ; Rustic Support2                 ; Rustic Sales Root
+                     ; Rustic Sales3     ; Rustic Sales3                   ; Rustic Support2
+
+
+INSERT_UPDATE B2BCustomer; description; uid[unique = true]        ; customerID                           ; originalUid               ; email                     ; name        ; groups(uid)                     ; sessionCurrency(isocode)[default = 'USD'];
+                         ; Customer F ; frank.test@rustic-hw.com  ; 2c701a94-d344-4a35-a22f-199e635c769u ; frank.test@rustic-hw.com  ; frank.test@rustic-hw.com  ; frank test  ; Rustic Sales Root,b2badmingroup ;                                          ;
+                         ; Customer G ; frank.test2@rustic-hw.com ; 2c701a94-d344-4a35-a22f-199e637u920z ; frank.test2@rustic-hw.com ; frank.test2@rustic-hw.com ; frank test2 ; Rustic Support,b2badmingroup    ;                                          ;
+                         ; Customer H ; frank.test3@rustic-hw.com ; 2c701a94-d344-4a35-a22f-199e637u987z ; frank.test3@rustic-hw.com ; frank.test3@rustic-hw.com ; frank test3 ; Rustic Support2,b2badmingroup   ;                                          ;
+
+INSERT_UPDATE Currency; isocode[unique = true]; name[lang = en]; active; base  ; conversion; digits; symbol
+                      ; IE                    ; IE Dollar      ; true  ; false ; 1,38      ; 2     ; $
+                      ; AD                    ; IE Dollar      ; true  ; false ; 1,38      ; 2     ; $
+
+INSERT_UPDATE B2BCostCenter; code[unique = true]        ; name[lang = en]             ; Unit(uid)         ; active[default = true]; currency(isocode)[default = 'USD']
+                           ; CostCenter_RusticSalesRoot ; CostCenterC RusticSalesRoot ; Rustic Sales Root ;                       ; IE
+                           ; CostCenterD_RusticSales2   ; CostCenterC RusticSales2    ; Rustic Sales2     ;                       ; AD
+
+

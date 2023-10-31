@@ -1,0 +1,25 @@
+<se-popup-overlay
+    class="se-version-item-menu__popup-anchor"
+    [ngClass]="{ 'se-version-item-menu__popup-anchor--open': isMenuOpen }"
+    [popupOverlay]="popupConfig"
+    [popupOverlayTrigger]="isMenuOpen"
+    (popupOverlayOnHide)="hideMenu()"
+>
+    <div
+        *ngIf="menuItems.length > 0"
+        (click)="onButtonClick($event)"
+        class="sap-icon--overflow se-version-item-menu__toggle"
+    ></div>
+
+    <div se-popup-overlay-body class="se-version-item-menu">
+        <div
+            class="se-version-item-menu__item fd-menu__item"
+            *ngFor="let item of menuItems"
+            (click)="executeItemCallback(item)"
+        >
+            <span class="se-version-item-menu__item-link fd-menu__link">
+                {{ item.i18nKey | translate }}
+            </span>
+        </div>
+    </div>
+</se-popup-overlay>

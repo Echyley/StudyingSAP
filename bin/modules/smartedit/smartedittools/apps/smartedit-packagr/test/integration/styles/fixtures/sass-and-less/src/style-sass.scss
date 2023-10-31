@@ -1,0 +1,8 @@
+@import './src/other-sass.scss';
+
+$favorite-text-color: lime;
+
+.main-content {
+    color: $favorite-text-color;
+    font-family: $main-font;
+}

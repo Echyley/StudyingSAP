@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  --><widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="integrationTypeCodeRouter"
+                      widgetDefinitionId="com.hybris.cockpitng.widgets.common.multiplexer"
+                      slotId="cockpitWidgetChildrenInvisible">
+        <setting key="webhook_expression" type="String">#root eq 'WebhookConfiguration'</setting>
+        <virtual-sockets>
+            <output id="webhook" type="java.lang.String"/>
+        </virtual-sockets>
+    </widget-extension>
+
+    <widget-extension widgetId="backofficePerspectiveChooser">
+        <widget id="createWebhookConfigurationModal"
+                widgetDefinitionId="de.hybris.platform.webhookbackoffice.widgets.CreateWebhookConfigurationModal"
+                slotId="cockpitWidgetChildrenInvisible" template="true"
+                title="Create WebhookConfiguration">
+            <widget id="wizardNotificationWidget2" widgetDefinitionId="com.hybris.backoffice.notificationarea" slotId="wizardNotificationarea2" template="false">
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="debugLog" type="Boolean">false</setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="stackSize" type="Integer">3</setting>
+                <setting key="useDynamicNotificationId" type="Boolean">true</setting>
+                <virtual-sockets/>
+            </widget>
+            <instance-settings socketEventRoutingMode="LAST_USED">
+                <create onInit="false" reuseExisting="false">
+                    <all-incoming-events/>
+                </create>
+                <close>
+                    <all-outgoing-events/>
+                </close>
+                <select onInit="false">
+                    <all-incoming-events/>
+                </select>
+            </instance-settings>
+            <virtual-sockets/>
+        </widget>
+        <widget id="webhookBackofficeMetadataViewerModal"
+                widgetDefinitionId="de.hybris.platform.webhookbackoffice.widgets.PingWebhookConfigModal"
+                slotId="cockpitWidgetChildrenInvisible" template="true"
+                title="Try out Webhook Configuration">
+            <instance-settings socketEventRoutingMode="LAST_USED">
+                <create onInit="false" reuseExisting="true">
+                    <all-incoming-events/>
+                </create>
+                <close/>
+                <select onInit="false">
+                    <all-incoming-events/>
+                </select>
+            </instance-settings>
+        </widget>
+    </widget-extension>
+
+    <widget-extension widgetId="integrationBackofficeViewSwitcher">
+        <widget id="webhookContainer"
+                widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer"
+                slotId="views" template="false" title="Webhooks"
+                access="backofficeintegrationadministrator">
+            <widget id="webhookSearchCondition" widgetDefinitionId="com.hybris.cockpitng.advancedsearch"
+                    slotId="center" template="false">
+
+                <widget id="webhookHeaderTitle"
+                        widgetDefinitionId="com.hybris.backoffice.widgets.title"
+                        slotId="pageTitle" template="false">
+                </widget>
+
+                <widget id="webhookSearchEngine"
+                        widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine"
+                        slotId="cockpitWidgetChildrenInvisible" template="false">
+                    <virtual-sockets/>
+                </widget>
+
+                <widget id="webhookSearchResult"
+                        widgetDefinitionId="de.hybris.platform.webhookbackoffice.widgets.WebhookConfigCollectionBrowser"
+                        slotId="nestedWidget" template="false">
+                    <setting key="socketDataType_$T" type="String">de.hybris.platform.webhookservices.model.WebhookConfigurationModel</setting>
+                </widget>
+
+                <setting key="disableSubtypesCheckbox" type="Boolean">true</setting>
+                <setting key="disableAdvancedSearchToolbar" type="Boolean">true</setting>
+                <setting key="enableNestedWidgetView" type="Boolean">true</setting>
+                <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+                <virtual-sockets/>
+            </widget>
+            <widget id="webhookDetails"
+                    widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea"
+                    slotId="bottom" template="false">
+                <setting key="socketDataType_$T" type="String">de.hybris.platform.webhookservices.model.WebhookConfigurationModel</setting>
+                <setting key="toolbarDisabled" type="Boolean">false</setting>
+            </widget>
+
+            <widget id="webhookSpaceManagement"
+                    widgetDefinitionId="com.hybris.backoffice.spaceManagement"
+                    slotId="cockpitWidgetChildrenInvisible" template="false">
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+
+            <setting key="topPanelCollapsed">true</setting>
+            <setting key="topHeight" type="String">33%</setting>
+            <setting key="centerHeight" type="String">50%</setting>
+            <setting key="thirdSectionDisabled" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String">yw-collapsibleContainer-caption-large-font-size</setting>
+            <setting key="topPanelCollapsed" type="Boolean">true</setting>
+            <setting key="centerPanelInitiallyLocked" type="Boolean">true</setting>
+        </widget>
+
+        <setting key="selectWebhook_eval" type="String" value="'webhookContainer'"/>
+        <virtual-sockets>
+            <input id="selectWebhook" type="java.lang.Object"/>
+        </virtual-sockets>
+    </widget-extension>
+
+    <!-- Webhook Configuration -->
+    <widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="webhook"
+                       targetWidgetId="integrationBackofficeViewSwitcher" inputId="selectWebhook"/>
+    <widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="webhook"
+                       targetWidgetId="webhookSearchCondition" inputId="type"/>
+    <widget-connection sourceWidgetId="webhookSearchCondition" outputId="searchData"
+                       targetWidgetId="webhookSearchEngine" inputId="searchData"/>
+    <widget-connection sourceWidgetId="webhookSearchEngine" outputId="pageable"
+                       targetWidgetId="webhookSearchResult" inputId="pageable"/>
+    <widget-connection sourceWidgetId="webhookSearchResult" outputId="selectedItem"
+                       targetWidgetId="webhookDetails" inputId="inputObject"/>
+
+    <!--Show Warning message if event export disabled-->
+    <widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="webhook"
+                       targetWidgetId="webhookSearchResult" inputId="eventExportFlagCheck"/>
+
+    <!--Create WebhookConfig-->
+    <widget-connection sourceWidgetId="STUB_webhookbackoffice.actions.createWebhookConfigurationAction"
+                       outputId="createWebhookConfiguration"
+                       targetWidgetId="createWebhookConfigurationModal" inputId="createWebhookConfiguration"/>
+
+    <!--Send test payload of webhookConfig-->
+    <widget-connection sourceWidgetId="STUB_webhookbackoffice.actions.PingWebhookConfigAction"
+                       outputId="templateWebhookConfiguration"
+                       targetWidgetId="webhookBackofficeMetadataViewerModal" inputId="templateWebhookConfiguration"/>
+
+
+    <!-- Sockets related to webhook consumed destination reference editor -->
+    <!--To the search consumed destination view-->
+    <widget-connection sourceWidgetId="STUB_webhookbackoffice.editors.webhookConsumedDestinationEditor"
+                       outputId="referenceSearchCtx" targetWidgetId="referenceadvancedsearchgroup"
+                       inputId="referenceSearchCtx"/>
+
+    <!--From the search consumed destination view-->
+    <widget-connection sourceWidgetId="referenceadvancedsearchgroup" outputId="selectedReferencesOutput"
+                       targetWidgetId="STUB_webhookbackoffice.editors.webhookConsumedDestinationEditor"
+                       inputId="referenceEditorInput"/>
+
+    <!--To the created consumed destination wizard-->
+    <widget-connection sourceWidgetId="STUB_webhookbackoffice.editors.webhookConsumedDestinationEditor"
+                       outputId="referenceEditorOutput"
+                       targetWidgetId="configurableFlow" inputId="context"/>
+
+    <!--From the created consumed destination wizard-->
+    <widget-connection sourceWidgetId="configurableFlow" outputId="wizardResult"
+                       targetWidgetId="STUB_webhookbackoffice.editors.webhookConsumedDestinationEditor"
+                       inputId="referenceEditorInput"/>
+
+
+    <!-- Sockets related to webhook consumed destination's destination target reference editor -->
+    <!--To the search widget for destination targets-->
+    <widget-connection sourceWidgetId="STUB_webhookbackoffice.editors.webhookDestinationTargetEditor"
+                       outputId="referenceSearchCtx"
+                       targetWidgetId="referenceadvancedsearchgroup"
+                       inputId="referenceSearchCtx"/>
+
+    <!--From the search widget for destination targets-->
+    <widget-connection sourceWidgetId="referenceadvancedsearchgroup"
+                       outputId="selectedReferencesOutput"
+                       targetWidgetId="STUB_webhookbackoffice.editors.webhookDestinationTargetEditor"
+                       inputId="referenceEditorInput"/>
+
+    <!--To the wizard widget for destination targets-->
+    <widget-connection sourceWidgetId="STUB_webhookbackoffice.editors.webhookDestinationTargetEditor"
+                       outputId="referenceEditorOutput"
+                       targetWidgetId="configurableFlow"
+                       inputId="context"/>
+
+    <!--From the wizard widget for destination targets-->
+    <widget-connection sourceWidgetId="configurableFlow"
+                       outputId="wizardResult"
+                       targetWidgetId="STUB_webhookbackoffice.editors.webhookDestinationTargetEditor"
+                       inputId="referenceEditorInput"/>
+
+    <!--CXEC-15187 Fiori Next Adoption. Adding pageTitle and SpaceManagement to optimize-->
+    <widget-connection sourceWidgetId="integrationBackofficeExplorerTree" outputId="nodeSelected"
+                       targetWidgetId="webhookHeaderTitle" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="webhookContainer" outputId="centerPanelLocked"
+                       targetWidgetId="webhookSearchCondition" inputId="centerPanelLocked"/>
+    <widget-connection sourceWidgetId="integrationBackofficeExplorerTree" outputId="dataSelected" targetWidgetId="webhookSpaceManagement" inputId="navigationTreeSelectedObject"/>
+    <widget-connection sourceWidgetId="webhookSpaceManagement" outputId="collapseState" targetWidgetId="webhookContainer" inputId="collapseState"/>
+    <widget-connection sourceWidgetId="webhookSearchCondition" outputId="searchData" targetWidgetId="webhookSpaceManagement" inputId="searchData"/>
+    <widget-connection sourceWidgetId="webhookSearchResult" outputId="focusedItem" targetWidgetId="webhookSpaceManagement" inputId="listSelectedObject"/>
+    <widget-connection sourceWidgetId="webhookDetails" outputId="com.hybris.cockpitng.action.delete.success" targetWidgetId="webhookSpaceManagement" inputId="navigationTreeSelectedObject"/>
+    <widget-connection sourceWidgetId="integrationTypeCodeRouter" outputId="editorArea" targetWidgetId="webhookSpaceManagement" inputId="listSelectedObject"/>
+</widgets>

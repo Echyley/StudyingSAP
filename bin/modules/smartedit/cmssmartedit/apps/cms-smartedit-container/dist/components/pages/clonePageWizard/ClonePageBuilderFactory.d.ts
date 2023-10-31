@@ -1,0 +1,50 @@
+import { GenericEditorStructure, ICatalogService, ICatalogVersion, IPageInfoService, IUriContext, CmsitemsRestService, IPageService, ICMSPage, CMSPageTypes } from 'smarteditcommons';
+import { TypeStructureRestService } from '../../../dao/TypeStructureRestService';
+import { IRestrictionsStepHandler } from '../../../interfaces';
+import { ContextAwarePageStructureService } from '../../../services';
+export declare class ClonePageBuilder {
+    private restrictionsStepHandler;
+    private basePageUUID;
+    private uriContext;
+    private contextAwarePageStructureService;
+    private typeStructureRestService;
+    private cmsitemsRestService;
+    private catalogService;
+    private pageInfoService;
+    private basePage;
+    private pageData;
+    private pageInfoStructure;
+    private targetCatalogVersion;
+    private componentCloneOption;
+    private basePageInfoAvailable;
+    constructor(restrictionsStepHandler: IRestrictionsStepHandler, basePageUUID: string, uriContext: IUriContext, contextAwarePageStructureService: ContextAwarePageStructureService, typeStructureRestService: TypeStructureRestService, cmsitemsRestService: CmsitemsRestService, catalogService: ICatalogService, pageInfoService: IPageInfoService);
+    getPageTypeCode(): CMSPageTypes;
+    getPageTemplate(): string;
+    getPageLabel(): string;
+    getBasePageUuid(): string;
+    getPageInfo(): ICMSPage;
+    getBasePageInfo(): ICMSPage;
+    getPageProperties(): Partial<ICMSPage>;
+    getPageInfoStructure(): GenericEditorStructure;
+    getPageRestrictions(): string[];
+    getComponentCloneOption(): string;
+    displayConditionSelected(displayConditionResult: ICMSPage): Promise<void>;
+    onTargetCatalogVersionSelected(targetCatalogVersion: ICatalogVersion): void;
+    componentCloneOptionSelected(cloneOptionResult: string): void;
+    restrictionsSelected(onlyOneRestrictionMustApply: boolean, restrictions: string[]): void;
+    getTargetCatalogVersion(): ICatalogVersion;
+    isBasePageInfoAvailable(): boolean;
+    init(): Promise<void>;
+    private getPageUUID;
+    private updatePageInfoFields;
+}
+export declare class ClonePageBuilderFactory {
+    private contextAwarePageStructureService;
+    private typeStructureRestService;
+    private cmsitemsRestService;
+    private catalogService;
+    private pageInfoService;
+    private pageService;
+    constructor(contextAwarePageStructureService: ContextAwarePageStructureService, typeStructureRestService: TypeStructureRestService, cmsitemsRestService: CmsitemsRestService, catalogService: ICatalogService, pageInfoService: IPageInfoService, pageService: IPageService);
+    createClonePageBuilder(restrictionsStepHandler: IRestrictionsStepHandler, basePageUUID: string, uriContext: IUriContext): ClonePageBuilder;
+}

@@ -1,0 +1,19 @@
+<div class="se-user-account-dropdown">
+    <div class="se-user-account-dropdown__role">
+        {{ 'se.toolbar.useraccount.role' | translate }}
+    </div>
+    <div class="user-account-dropdown__name">{{username}}</div>
+    <div class="divider"></div>
+    <a class="se-theme-switch__link fd-menu__item" (click)="themeSwitch()">
+        <fd-icon role="presentation" class="sap-icon--palette ng-star-inserted"></fd-icon>
+        <span fd-menu-title="" class="fd-menu__title">
+            {{'se.modal.administration.theme.switch.title' | translate}}
+        </span>
+    </a>
+    <a class="se-sign-out__link fd-menu__item" (click)="signOut()">
+        <fd-icon role="presentation" class="sap-icon--log ng-star-inserted"></fd-icon>
+        <span fd-menu-title="" class="fd-menu__title">
+            {{'se.toolbar.useraccount.signout' | translate}}
+        </span>
+    </a>
+</div>

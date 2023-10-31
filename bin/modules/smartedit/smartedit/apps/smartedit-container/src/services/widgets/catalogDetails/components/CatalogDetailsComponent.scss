@@ -1,0 +1,38 @@
+.se-catalog-details {
+    font-size: 16px;
+    background-color: var(--sapBaseColor);
+    border-radius: var(--sapElement_BorderCornerRadius);
+}
+
+.se-catalog-header {
+    padding: 10px 20px;
+    border-bottom: 1px var(--sapBackgroundColor) solid;
+}
+
+.se-catalog-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.se-catalog-details__header {
+    font-size: 18px;
+}
+
+.se-catalog-details__content {
+    padding: 20px;
+}
+
+se-catalog-version-details {
+    display: block;
+    & + & {
+        border-top: var(--sapBackgroundColor) 1px solid;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+}
+
+se-catalog-versions-thumbnail-carousel {
+    display: block;
+    margin-right: 20px;
+}

@@ -1,0 +1,109 @@
+<div class="pe-component-info">
+    <div class="pe-component-info__info-layout">
+        <div *ngIf="!isPageBlocked">
+            <!-- when personalization is not allowed in workflow -->
+            <div *ngIf="!isPersonalizationAllowedInWorkflow">
+                <div
+                    class="pe-component-info__title"
+                    translate="personalization.modal.showcomponentinfolist.help.noactionsinworkflow.title"
+                ></div>
+                <div
+                    class="perso__page-level-help-message"
+                    translate="personalization.modal.showcomponentinfolist.help.noactionsinworkflow"
+                ></div>
+            </div>
+            <!-- when contextual menu info is enabled -->
+            <div *ngIf="isContextualMenuInfoEnabled">
+                <div
+                    class="pe-component-info__title"
+                    translate="personalization.modal.showcomponentinfolist.title"
+                ></div>
+                <!-- when personalization is not allowed in workflow -->
+                <div
+                    class="perso__page-level-help-message"
+                    *ngIf="!isPersonalizationAllowedInWorkflow"
+                    translate="personalization.modal.showcomponentinfolist.help.noactionsinworkflow.componentinfo"
+                ></div>
+                <!-- when there are actions and personalization is not allowed in workflow -->
+                <div
+                    class="perso__page-level-help-message"
+                    *ngIf="pagination.totalCount > 0 && isPersonalizationAllowedInWorkflow"
+                    translate="personalization.modal.showcomponentinfolist.help.label"
+                ></div>
+                <!-- when there are no actions and personalization is allowed in workflow -->
+                <div
+                    class="perso__page-level-help-message"
+                    *ngIf="pagination.totalCount === 0 && isPersonalizationAllowedInWorkflow"
+                    translate="personalization.modal.showcomponentinfolist.help.nocustomizations"
+                ></div>
+            </div>
+        </div>
+
+        <div *ngIf="isPageBlocked">
+            <div
+                class="pe-component-info__title"
+                translate="personalization.modal.showcomponentinfolist.blocked.title"
+            ></div>
+            <div
+                class="perso__page-level-help-message"
+                translate="personalization.modal.showcomponentinfolist.blocked.label"
+            ></div>
+        </div>
+    </div>
+
+    <!-- total count message -->
+    <div
+        class="perso__page-level-help-message pe-component-info__info-layout"
+        *ngIf="pagination.totalCount > 0 && isContextualMenuInfoEnabled"
+    >
+        <span
+            translate="personalization.modal.showcomponentinfolist.help.numberofenabledcustomizations"
+        ></span>
+        <span>{{ pagination.totalCount }}</span>
+    </div>
+
+    <!-- actions list -->
+    <div [hidden]="pagination.totalCount === 0 || !isContextualMenuInfoEnabled">
+        <personalization-infinite-scrolling
+            [fetchPage]="fetchActionsPage"
+            [dropDownContainerClass]="'pe-component-info__wrapper'"
+        >
+            <personalization-prevent-parent-scroll>
+                <div
+                    [ngClass]="isCustomizationVisible ? 'pe-component-info__list-item' : '' "
+                    *ngFor="let action of actions"
+                >
+                    <div class="pe-component-info__names-layout">
+                        <div class="perso-wrap-ellipsis" [title]="action.customizationName">
+                            {{ action.customizationName }}
+                        </div>
+                        <div
+                            class="perso-wrap-ellipsis perso-tree__primary-data"
+                            [title]="action.variationName"
+                        >
+                            {{ action.variationName }}
+                        </div>
+                    </div>
+                    <div [ngClass]="isCustomizationVisible ? 'pe-component-info__icon' : '' ">
+                        <se-tooltip
+                            *ngIf="!action.customization.isFromCurrentCatalog"
+                            [triggers]="['mouseenter', 'mouseleave']"
+                        >
+                            <span
+                                se-tooltip-trigger
+                                [ngClass]="isCustomizationVisible ? 'perso__globe-icon sap-icon--globe' : '' "
+                            >
+                            </span>
+                            <span se-tooltip-body>
+                                {{ action.customization.catalogVersionNameL10N | seL10n | async }}
+                            </span>
+                        </se-tooltip>
+                    </div>
+                </div>
+                <div class="pe-spinner--inner" *ngIf="moreCustomizationsRequestProcessing">
+                    <div class="spinner-md spinner-light"></div>
+                </div>
+            </personalization-prevent-parent-scroll>
+        </personalization-infinite-scrolling>
+    </div>
+</div>

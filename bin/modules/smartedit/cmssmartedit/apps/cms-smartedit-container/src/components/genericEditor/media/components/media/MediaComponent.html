@@ -1,0 +1,33 @@
+<div class="se-media">
+    <se-media-selector
+        *ngIf="!image"
+        [id]="mediaSelectorId"
+        [isDisabled]="isFieldDisabled"
+        [mediaId]="mediaIdByLang[lang]"
+        [mimeType]="field.allowMediaType"
+        (mediaIdChange)="onMediaIdChange($event)"
+    >
+    </se-media-selector>
+    <se-media-file-selector
+        *ngIf="canShowFileSelector()"
+        [labelI18nKey]="'se.upload.image.to.library'"
+        [acceptedFileTypes]="acceptedFileTypes"
+        [selectionMode]="'upload'"
+        [disabled]="isFieldDisabled"
+        (onFileSelect)="onFileSelect($event)"
+    ></se-media-file-selector>
+    <se-media-upload-form
+        *ngIf="image"
+        class="se-media-upload-form-wrapper"
+        [image]="image"
+        [allowMediaType]="field.allowMediaType"
+        [maxUploadFileSize]="maxUploadFileSize"
+        (onCancel)="resetImage()"
+        (onSelect)="onFileSelect($event)"
+        (onUploadSuccess)="onMediaUploaded($event)"
+    ></se-media-upload-form>
+    <se-message *ngIf="previewMessage" [type]="'warning'">
+        <ng-container se-message-description>{{ 'se.upload.video.cant.preview' | translate }}</ng-container>
+    </se-message>
+    <se-media-errors *ngIf="fileErrors.length > 0" [errors]="fileErrors" [maxUploadFileSize]="maxUploadFileSize"></se-media-errors>
+</div>

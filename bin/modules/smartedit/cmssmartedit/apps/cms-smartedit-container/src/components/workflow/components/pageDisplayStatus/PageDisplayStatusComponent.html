@@ -1,0 +1,19 @@
+<ng-container *ngIf="showLastSyncTime; else pageStatus">
+    <se-tooltip [triggers]="['click']" [placement]="'left'" [isChevronVisible]="true">
+        <ng-container se-tooltip-trigger *ngTemplateOutlet="pageStatus"></ng-container>
+
+        <div se-tooltip-body class="popover-tooltip">
+            <ng-container *ngIf="hasBeenSynchedBefore(); else notPublished">
+                <span [translate]="'se.cms.page.displaystatus.lastpublished.date'"></span>
+                <span>&ngsp;{{ lastSynchedDate | date: 'M/d/yy h:mm a' }}</span>
+            </ng-container>
+            <ng-template #notPublished>
+                <span [translate]="'se.cms.page.displaystatus.not.published'"></span>
+            </ng-template>
+        </div>
+    </se-tooltip>
+</ng-container>
+
+<ng-template #pageStatus>
+    <se-page-status [uuid]="page?.uuid" [displayStatus]="page?.displayStatus"></se-page-status>
+</ng-template>

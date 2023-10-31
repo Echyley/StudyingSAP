@@ -1,0 +1,15 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+# ImpEx for Importing Products Stock Levels into wsTest Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default=$productCatalog:Online]
+$vendor=wsTestVendor
+
+INSERT_UPDATE StockLevel;available; warehouse(code)[unique=true]; inStockStatus(code); maxPreOrder; maxStockLevelHistoryCount; overSelling; preOrder; productCode[unique=true]; reserved
+                        ;450      ; ws_warehouse_n              ; forceInStock       ;           1;                        -1;           0; 0       ; 1225694                 ; 0
+
+UPDATE Product; code[unique=true];$catalogVersion; stockLevels(productCode,warehouse(code)); vendors(code)
+              ; 1225694          ;               ; 1225694:ws_warehouse_n                  ; $vendor

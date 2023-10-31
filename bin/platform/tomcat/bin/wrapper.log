@@ -1,0 +1,9 @@
+FATAL  | wrapper  | 2023/10/31 09:37:50 | Unable to open configuration file: /Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/tomcat/conf/wrapper.conf (No such file or directory)
+FATAL  | wrapper  | 2023/10/31 09:37:50 |   Current working directory: /Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/tomcat/bin
+STATUS | wrapper  | 2023/10/31 09:37:50 |   The Wrapper will stop.
+FATAL  | wrapper  | 2023/10/31 09:39:37 | Unable to open configuration file: /Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/tomcat/conf/wrapper.conf (No such file or directory)
+FATAL  | wrapper  | 2023/10/31 09:39:37 |   Current working directory: /Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/tomcat/bin
+STATUS | wrapper  | 2023/10/31 09:39:37 |   The Wrapper will stop.
+FATAL  | wrapper  | 2023/10/31 09:41:46 | Unable to open configuration file: /Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/tomcat/conf/wrapper.conf (No such file or directory)
+FATAL  | wrapper  | 2023/10/31 09:41:46 |   Current working directory: /Desktop/hybris-test-project/CXCOMIEP221100P_6-70007891/hybris/bin/platform/tomcat/bin
+STATUS | wrapper  | 2023/10/31 09:41:46 |   The Wrapper will stop.

@@ -1,0 +1,33 @@
+.se-sync-panel-header {
+    padding: 0 20px 20px;
+    border-bottom: se-border();
+    min-width: 400px;
+
+    &__sub-header {
+        padding-top: se-space('base');
+        color: var(--sapNeutralColor);
+        white-space: break-spaces;
+    }
+
+    &__timestamp {
+        @include se-type('-1');
+        color: var(--sapNeutralColor);
+        position: absolute;
+        left: 20px;
+        bottom: 0;
+        width: 150px;
+    }
+}
+
+.se-sync-panel-new-page {
+    padding: 20px;
+
+    &__header {
+        @include se-weight('bold');
+        padding-bottom: se-space('base');
+    }
+
+    &__message {
+        white-space: normal;
+    }
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype generate="true" code="ProductConfigurationMock" autocreate="true">
+			<description>ProductConfigurationMock stores the state of a runtime configuration created by ProductConfig Mock Configurator,
+			which is only suitable for demo or test purpose, but not for production use.</description>
+			<deployment table="ProductConfigurationMock" typecode="9902" />
+			<attributes>
+				<attribute qualifier="configId" type="java.lang.String">
+					<description>Id of the persisted mock configuration</description>
+					<modifiers unique="true" initial="true" optional="false" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="currentConfigState" type="java.lang.Object">
+					<description>mock configuration content</description>
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="externalConfigState" type="java.lang.Object">
+					<description>mock configuration content of an external Configuration</description>
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

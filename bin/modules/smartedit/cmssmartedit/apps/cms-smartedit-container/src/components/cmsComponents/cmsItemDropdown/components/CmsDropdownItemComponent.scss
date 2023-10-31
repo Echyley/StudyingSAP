@@ -1,0 +1,47 @@
+.cms-nested-component {
+    &__item {
+        @include se-flex-row(flex-start);
+        color: var(--sapIndicationColor_5);
+    }
+
+    &__item-icon {
+        @include se-flex-row(center);
+        background-color: var(--sapIndicationColor_5);
+        height: 28px;
+        flex: 0 0 28px;
+        border-radius: se-space('base');
+        margin-right: se-space('s');
+    }
+
+    &__item-data {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 0 16px;
+    }
+
+    &__item-name,
+    &__item-type {
+        @include se-text-ellipsis;
+        margin-bottom: 0;
+    }
+
+    &__result-item {
+        @include se-grid-columns(2, 0 se-space('s'));
+    }
+
+    &__result-code,
+    &__result-name {
+        @include se-text-ellipsis;
+    }
+}
+
+.cms-nested-component__item[draggable='true'],
+.ui-select-match-item[draggable='true'] {
+    cursor: move;
+}
+
+// Workaround before parent component gets migrated
+.y-select-item-printer {
+    width: 100%;
+}

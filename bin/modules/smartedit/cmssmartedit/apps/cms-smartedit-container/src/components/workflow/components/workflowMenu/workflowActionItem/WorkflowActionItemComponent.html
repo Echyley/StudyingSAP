@@ -1,0 +1,113 @@
+<div class="se-workflow-action-item" [ngClass]="getWorkflowActionStatusClass()">
+    <se-collapsible-container
+        class="se-catalog-details__collapse se-collapsible-container--noshadow fd-panel"
+        [id]="workflowAction.code"
+        (getApi)="setCollapsibleContainerApi($event)"
+    >
+        <se-collapsible-container-header>
+            <div class="fd-panel__header">
+                <div class="fd-panel__head">
+                    <h1 class="fd-panel__title">{{ workflowAction.name | seL10n | async }}</h1>
+                    <p class="fd-panel__description">
+                        {{ getReadableStatus() | translate }} {{ getActiveSince() }}
+                    </p>
+                </div>
+            </div>
+            <div class="fd-panel__body">
+                {{ workflowAction.description | seL10n | async }}
+
+                <!-- Decision Button(s) -->
+                <div
+                    *ngIf="canShowDecisionButtons()"
+                    class="se-workflow-action-item__decision-buttons fd-dropdown"
+                >
+                    <div class="fd-popover">
+                        <div class="fd-popover__control">
+                            <div
+                                [ngClass]="{ 'fd-button-split': workflowAction.decisions.length > 1 }"
+                            >
+                                <button
+                                    fd-button
+                                    [compact]="true"
+                                    class="se-workflow-action-item__decision-button"
+                                    [id]="workflowAction.code + '-decision-button'"
+                                    (click)="onMainButtonClick($event, workflowAction.decisions[0])"
+                                >
+                                    {{ workflowAction.decisions[0].name | seL10n | async }}
+                                </button>
+                                <!-- More actions button (chevron) with Popover that contains Multiple decisions -->
+                                <se-popup-overlay
+                                    [popupOverlay]="{
+                                        halign: 'right',
+                                        valign: 'bottom'
+                                    }"
+                                    [popupOverlayTrigger]="isMenuOpen"
+                                    (popupOverlayOnHide)="onMenuHide()"
+                                >
+                                    <button
+                                        fd-button
+                                        [fdMenu]="true"
+                                        [compact]="true"
+                                        *ngIf="workflowAction.decisions.length > 1"
+                                        [id]="workflowAction.code + '-decision-split-button'"
+                                        class="menu-button"
+                                        (click)="onSplitButtonClick($event)"
+                                    ></button>
+
+                                    <div
+                                        se-popup-overlay-body
+                                        class="fd-popover__body fd-popover__body--right fd-popover__body--no-arrow se-workflow-action-item__decision-list"
+                                    >
+                                        <nav class="fd-menu">
+                                            <ul class="fd-list">
+                                                <li
+                                                    *ngFor="let decision of workflowAction.decisions"
+                                                >
+                                                    <a
+                                                        class="fd-list__item se-workflow-action-item__decision"
+                                                        (click)="onMainButtonClick($event, decision)"
+                                                    >
+                                                        {{ decision.name | seL10n | async }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </se-popup-overlay>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </se-collapsible-container-header>
+        <se-collapsible-container-content>
+            <div class="se-workflow-action-item__content" *ngIf="canShowComments()">
+                <span
+                    *ngIf="!hasComments"
+                    class="se-workflow-action-item__comment-list fd-has-font-style-italic fd-has-color-text-4"
+                    [translate]="'se.cms.actionitem.page.workflow.action.no.comments.available'"
+                ></span>
+                <se-infinite-scrolling
+                    [pageSize]="pageSize"
+                    [fetchPage]="fetchPageOfComments"
+                    (itemsChange)="onCommentsLoaded($event)"
+                >
+                    <div
+                        *ngFor="let actionComment of workflowActionComments; trackBy: trackByIndex"
+                    >
+                        <se-workflow-action-comment
+                            [workflowAction]="workflowAction"
+                            [actionComment]="actionComment"
+                        >
+                        </se-workflow-action-comment>
+                    </div>
+                </se-infinite-scrolling>
+            </div>
+        </se-collapsible-container-content>
+    </se-collapsible-container>
+    <fd-popover [isOpen]="showApprovalInfo" [closeOnOutsideClick]="false">
+        <fd-popover-body>
+            <div class="se-workflow-approval-info">{{ approvalInfo }}</div>
+        </fd-popover-body>
+    </fd-popover>
+</div>

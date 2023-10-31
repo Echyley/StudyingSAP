@@ -1,0 +1,5 @@
+$lang=ja
+
+UPDATE DynamicConstraint;id[unique=true,allownull=true] ;message[lang=$lang]
+                        ;oppsClientInterfaceVersionConstraint                       ;"クライアントインタフェースのメジャーバージョン" フィールドに必要なバージョンを選択します。"
+

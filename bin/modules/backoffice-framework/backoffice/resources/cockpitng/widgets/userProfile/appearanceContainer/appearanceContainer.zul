@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul" sclass="defaultTabWidget">
+	<style src="${wr}/appearanceContainer.css"/>
+	<div class="userProfileAppearanceContainer-title">
+		${labels.title}
+	</div>
+	<widgetchildren id="tabContainer" type="${widget.settings.type}" height="100%" slotID="children"/>
+</widget>

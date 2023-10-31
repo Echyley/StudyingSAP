@@ -1,0 +1,10 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$lang=en
+
+INSERT_UPDATE AsPromotedItem ; searchConfiguration(uid,catalogVersion(catalog(id),version))[unique=true] ; item(Product.code,Product.catalogVersion(catalog(id),version))[unique=true] ; catalogVersion(catalog(id),version)
+                             ; searchConfiguration:hwcatalog:Staged                                      ; doc2:hwcatalog:Staged                                                       ; hwcatalog:Staged                            
+
+INSERT_UPDATE AsExcludedItem ; searchConfiguration(uid,catalogVersion(catalog(id),version))[unique=true] ; item(Product.code,Product.catalogVersion(catalog(id),version))[unique=true] ; catalogVersion(catalog(id),version)
+                             ; searchConfiguration:hwcatalog:Staged                                      ; doc3:hwcatalog:Staged                                                       ; hwcatalog:Staged                             

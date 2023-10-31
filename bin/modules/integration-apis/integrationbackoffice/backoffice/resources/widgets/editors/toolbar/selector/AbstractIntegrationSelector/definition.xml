@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="de.hybris.platform.integrationbackoffice.widgets.AbstractIntegrationSelector">
+    <name>Abstract Integration Selector</name>
+    <description>Combobox with actions. Needs implementation to function.</description>
+    <defaultTitle>Abstract Integration Selector</defaultTitle>
+    <author>Hybris</author>
+    <version>1.0</version>
+    <keywords>
+        <keyword>AbstractIntegrationSelector</keyword>
+    </keywords>
+
+    <view src="AbstractIntegrationSelector.zul"/>
+
+    <controller
+            class="de.hybris.platform.integrationbackoffice.widgets.common.controllers.AbstractIntegrationSelectorController"/>
+
+    <settings>
+        <setting key="actions" type="java.lang.String"/>
+    </settings>
+
+    <sockets>
+        <input type="java.lang.String" id="refreshCombobox"/>
+        <output type="java.lang.Object" id="comboBoxOnChange"/>
+    </sockets>
+</widget-definition>

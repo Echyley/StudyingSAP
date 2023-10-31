@@ -1,0 +1,52 @@
+<div *ngIf="selectedItemListIsEmpty()">
+    <!--
+        It's important to add the type=button. Otherwise HTML 5 will default it to type=submit, causing the generic
+        editor to submit the form whenever the panel opens.
+    -->
+    <button
+        fd-button
+        type="button"
+        id="catalog-aware-selector-add-item"
+        class="fd-button--compact se-catalog-aware-selector__add-item-btn"
+        *ngIf="editable"
+        (click)="openItemSelectorPanel()"
+    >
+        <span
+            translate="se.cms.catalogaware.newbutton.title"
+            [translateParams]="{ catalogItemType: catalogItemTypeI18nKey | translate }"
+            class="se-catalog-aware-selector__add-item-btn-text"
+        ></span>
+    </button>
+</div>
+
+<div *ngIf="!selectedItemListIsEmpty()" class="se-catalog-aware-selector__content">
+    <div class="se-catalog-aware-selector__add-more-btn-wrapper" *ngIf="editable">
+        <button
+            fd-button
+            type="button"
+            class="fd-button--transparent"
+            label="{{ 'se.cms.catalogaware.list.addmore' | translate}}"
+            (click)="openItemSelectorPanel()"
+        ></button>
+    </div>
+
+    <se-editable-list
+        [id]="editableListId"
+        [itemComponent]="nodeComponent"
+        [(items)]="itemList"
+        [onChange]="onListChange"
+        [editable]="editable"
+        [(refresh)]="refreshItemListWidget"
+        class="se-catalog-aware-selector__list"
+    >
+    </se-editable-list>
+</div>
+
+<se-item-selector-panel
+    [itemComponent]="itemComponent"
+    [getCatalogs]="getCatalogs"
+    [itemsFetchStrategy]="itemsFetchStrategy"
+    [catalogItemTypeI18nKey]="catalogItemTypeI18nKey"
+    (onSaveChanges)="onItemSelectorPanelSaveChanges($event)"
+>
+</se-item-selector-panel>

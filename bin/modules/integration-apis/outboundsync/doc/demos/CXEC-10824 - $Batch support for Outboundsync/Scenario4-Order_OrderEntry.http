@@ -1,0 +1,50 @@
+### Create Order with Entries
+POST {{fullURL}}/{{order_batch_test_io}}/Orders
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "code": "order3",
+  "user": {
+    "uid": "admin"
+  },
+  "date": "2022-09-02T00:00:00",
+  "currency": {
+    "isocode": "EUR"
+  },
+  "entries": [
+    {
+      "entryNumber": 1234,
+      "product": {
+        "code": "iPad Air",
+        "catalogVersion": {
+          "catalog": {
+            "id": "Default"
+          },
+          "version": "Staged"
+        }
+      },
+      "unit": {
+        "code": "pieces"
+      },
+      "quantity": "1"
+    },
+    {
+      "entryNumber": 5678,
+      "product": {
+        "code": "Mac Book Pro",
+        "catalogVersion": {
+          "catalog": {
+            "id": "Default"
+          },
+          "version": "Staged"
+        }
+      },
+      "unit": {
+        "code": "pieces"
+      },
+      "quantity": "1"
+    }
+  ]
+}

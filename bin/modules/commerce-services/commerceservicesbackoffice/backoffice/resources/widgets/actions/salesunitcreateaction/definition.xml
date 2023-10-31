@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="de.hybris.platform.commerceservices.organization.backoffice.actions.salesunitcreateaction"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+   
+   <name>Organization Create Action</name>
+   <description>Action providing Sales Unit implementation of create operation.</description>
+   <author>hybris</author>
+   <version>1.0</version>
+   <actionClassName>com.hybris.cockpitng.actions.create.CreateAction</actionClassName>
+
+   <sockets>
+      <input id="createdObject" type="java.lang.Object"/>
+      <output id="createContext" type="com.hybris.cockpitng.actions.create.CreateContext" />
+      <output id="createdObject" type="java.lang.Object" />
+   </sockets>
+
+   <inputType>java.lang.Object</inputType>
+   <outputType>java.lang.Object</outputType>
+   <iconUri>add</iconUri>
+   
+   <settings>
+		<setting key="viewMode" default-value="iconOnly"/>
+	</settings>
+</action-definition>

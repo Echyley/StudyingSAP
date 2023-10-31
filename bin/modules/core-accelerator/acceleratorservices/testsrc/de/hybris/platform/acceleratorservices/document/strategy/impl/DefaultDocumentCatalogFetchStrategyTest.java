@@ -1,0 +1,74 @@
+/*
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+package de.hybris.platform.acceleratorservices.document.strategy.impl;
+
+import de.hybris.bootstrap.annotations.UnitTest;
+import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.cms2.model.contents.ContentCatalogModel;
+import de.hybris.platform.cms2.model.site.CMSSiteModel;
+import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.ordersplitting.model.ConsignmentModel;
+import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
+import de.hybris.platform.returns.model.ReturnProcessModel;
+import de.hybris.platform.returns.model.ReturnRequestModel;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Collections;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+
+@RunWith(MockitoJUnitRunner.class)
+@UnitTest
+public class DefaultDocumentCatalogFetchStrategyTest
+{
+	@InjectMocks
+	private DefaultDocumentCatalogFetchStrategy documentCatalogFetchStrategy;
+
+	@Mock
+	private OrderProcessModel orderProcessModel;
+	@Mock
+	private ConsignmentProcessModel consignmentProcessModel;
+	@Mock
+	private ReturnProcessModel returnProcessModel;
+	@Mock
+	private OrderModel orderModel;
+	@Mock
+	private ConsignmentModel consignmentModel;
+	@Mock
+	private ReturnRequestModel returnRequestModel;
+	@Mock
+	private CMSSiteModel cmsSiteModel;
+	@Mock
+	private ContentCatalogModel contentCatalogModel;
+	@Mock
+	private CatalogVersionModel catalogVersionModel;
+
+	@Before
+	public void setUp()
+	{
+		when(orderProcessModel.getOrder()).thenReturn(orderModel);
+		when(orderModel.getSite()).thenReturn(cmsSiteModel);
+		when(cmsSiteModel.getContentCatalogs()).thenReturn(Collections.singletonList(contentCatalogModel));
+		when(contentCatalogModel.getActiveCatalogVersion()).thenReturn(catalogVersionModel);
+	}
+
+	@Test
+	public void testFetchWithOrderProcess()
+	{
+		//When
+		final CatalogVersionModel fetch = documentCatalogFetchStrategy.fetch(orderProcessModel);
+
+		//Then
+		assertEquals(catalogVersionModel,fetch);
+	}
+
+}

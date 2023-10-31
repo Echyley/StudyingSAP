@@ -1,0 +1,32 @@
+import { ChangeDetectorRef, EventEmitter, OnInit, Type } from '@angular/core';
+import { EditableListNodeItemDTO, LogService } from 'smarteditcommons';
+import { CatalogFetchStrategy, ProductCatalog } from '../../services';
+import { ItemSelectorPanelComponent } from '../itemSelectorPanel';
+export declare class CatalogAwareSelectorComponent implements OnInit {
+    private logService;
+    private cdr;
+    id: string;
+    selectedItemIds: string[];
+    getCatalogs: () => Promise<ProductCatalog[]>;
+    itemsFetchStrategy: CatalogFetchStrategy<EditableListNodeItemDTO>;
+    itemComponent: Type<any>;
+    nodeComponent: Type<any>;
+    catalogItemTypeI18nKey: string;
+    editable: boolean;
+    selectedItemIdsChange: EventEmitter<string[]>;
+    itemSelectorPanel: ItemSelectorPanelComponent;
+    itemList: EditableListNodeItemDTO[];
+    onListChange: () => void;
+    refreshItemListWidget: () => void;
+    editableListId: string;
+    constructor(logService: LogService, cdr: ChangeDetectorRef);
+    ngOnInit(): Promise<void>;
+    selectedItemListIsEmpty(): boolean;
+    openItemSelectorPanel(): void;
+    onItemSelectorPanelSaveChanges(selectedItemIds: string[]): Promise<void>;
+    private selectItemsFromItemList;
+    private syncFromSelectedItemsToItemsList;
+    private updatePosition;
+    private selectItemIdsFromItemList;
+    private fetchItems;
+}

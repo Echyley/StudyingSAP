@@ -1,0 +1,61 @@
+<!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.044/cXML.dtd">
+<cXML xml:lang="en-US" payloadID="933694607118.1869318421@jleb"
+timestamp="2019-01-15T08:36:47-07:00">
+    <Header>
+        <!-- Originator (buying organization) -->
+        <From>
+            <Credential domain="DUNS">
+                <Identity>123456789</Identity>
+            </Credential>
+        </From>
+        <!-- Destination (supplier) -->
+        <To>
+            <Credential domain="DUNS">
+                <Identity>83528721</Identity>
+            </Credential>
+        </To>
+        <!-- Previous relaying entity (network hub in this case) -->
+        <Sender>
+            <Credential domain="NetworkID">
+               <Identity>AN01000002779-T</Identity>
+                <SharedSecret>VerySecret1234</SharedSecret>
+            </Credential>
+            <UserAgent>Procurement System 2.0</UserAgent>
+        </Sender>
+    </Header>
+    <Request>
+        <!-- type of request -->
+        <PunchOutSetupRequest operation="create">
+            <BuyerCookie>1CX3L4843PPZD</BuyerCookie>
+            <Extrinsic name="UserEmail">punchout.customer@punchoutorg.com1</Extrinsic>
+            <Extrinsic name="UniqueName">punchout.customer@punchoutorg.com</Extrinsic>
+            <Extrinsic name="CostCenter">610</Extrinsic>
+            <!-- destination for final PunchOutOrderMessage -->
+            <BrowserFormPost>
+                <URL>https://bigbuyer.com:2600/punchout?client=NAwl4Jo</URL>
+            </BrowserFormPost>
+            <SupplierSetup>
+                <URL>http://www.workchairs.com/punchout.asp</URL>
+            </SupplierSetup>
+            <!--<ShipTo>
+                <Address addressID="1000467">
+                    <Name xml:lang="en">1000467</Name>
+                    <PostalAddress>
+                        <DeliverTo>John Smith</DeliverTo>
+                        <Street>123 Main Street</Street>
+                        <City>Sunnyvale</City>
+                        <State>CA</State>
+                        <PostalCode>94089</PostalCode>
+                        <Country isoCountryCode="US">United States</Country>
+                    </PostalAddress>
+                </Address>
+            </ShipTo>-->
+            <!-- item selected by user -->
+            <SelectedItem>
+                <ItemID>
+                    <SupplierPartID>TW1210-9342</SupplierPartID>
+                </ItemID>
+            </SelectedItem>
+        </PunchOutSetupRequest>
+    </Request>
+</cXML>

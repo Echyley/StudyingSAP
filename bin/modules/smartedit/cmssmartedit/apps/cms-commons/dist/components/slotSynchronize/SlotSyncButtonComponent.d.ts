@@ -1,0 +1,33 @@
+import { OnInit, OnDestroy, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { CrossFrameEventService, PopupOverlayConfig, IPageInfoService, ContextualMenuItemData, PopupOverlayComponent } from 'smarteditcommons';
+import { SlotSynchronizationService } from '../../services/SlotSynchronizationService';
+export declare class SlotSyncButtonComponent implements OnInit, OnDestroy, DoCheck {
+    private contextualMenuItem;
+    private slotSynchronizationService;
+    private pageInfoService;
+    private crossFrameEventService;
+    private readonly cdr;
+    popupOverlay: PopupOverlayComponent;
+    isPopupOpened: boolean;
+    isReady: boolean;
+    isSlotInSync: boolean;
+    newSlotIsNotSynchronized: boolean;
+    popupConfig: PopupOverlayConfig;
+    slotIsShared: boolean;
+    private buttonName;
+    private isPopupOpenedPreviousValue;
+    private unregisterOuterFrameClicked;
+    private unregisterSyncPolling;
+    private unregisterInnerFrameClicked;
+    constructor(contextualMenuItem: ContextualMenuItemData, slotSynchronizationService: SlotSynchronizationService, pageInfoService: IPageInfoService, crossFrameEventService: CrossFrameEventService, cdr: ChangeDetectorRef);
+    ngOnInit(): Promise<void>;
+    ngOnDestroy(): void;
+    ngDoCheck(): void;
+    get slotId(): string;
+    dropdownToggle(): void;
+    onPopupHide(): void;
+    updatePosition(): void;
+    private getSyncStatus;
+    private statusIsInSync;
+    private slotHasBeenSynchronizedAtLeastOnce;
+}

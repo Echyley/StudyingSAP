@@ -1,0 +1,21 @@
+/*
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+@import url("../AbstractIntegrationButtonPanel/AbstractIntegrationButtonPanel.css");
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationButtonPanel {
+    padding-top: 0 !important;
+}
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationButtonPanel .yw-integrationbackoffice-filter-btn {
+    display: none;
+}
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationButtonPanel .z-hlayout > .z-hlayout-inner:nth-child(2) {
+    padding-right: 0 !important;
+}
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationButtonPanel .z-hlayout > .z-hlayout-inner:last-child {
+    display: none;
+}

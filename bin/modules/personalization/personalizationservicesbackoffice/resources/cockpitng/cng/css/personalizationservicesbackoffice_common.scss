@@ -1,0 +1,10 @@
+@import "cockpitng-globals.scss";
+
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("cxnode", "customize");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("cxnode", "customize");
+}

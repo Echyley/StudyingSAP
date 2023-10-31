@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+# ImpEx for Importing Products Stock Levels into wsTest Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default=$productCatalog:Online]
+$vendor=wsTestVendor
+
+INSERT_UPDATE StockLevel;available; warehouse(code)[unique=true]; inStockStatus(code); maxPreOrder; maxStockLevelHistoryCount; overSelling; preOrder; productCode[unique=true]; reserved
+                        ;450      ; ws_warehouse_n              ; forceInStock       ;           1;                        -1;           0; 0       ; 1225694                 ; 0
+                        ;50       ; ws_warehouse_n              ; forceInStock       ;           0;                        -1;           0; 0       ; 2225694                 ; 0
+                        ;20       ; ws_warehouse_n              ; forceInStock       ;           1;                        -1;           0; 0       ; HW1210-3422             ; 0
+                        ;20       ; ws_warehouse_n              ; forceInStock       ;           1;                        -1;           0; 0       ; HW1210-9345             ; 0
+                        ;20       ; ws_warehouse_n              ; forceInStock       ;           1;                        -1;           0; 0       ; HW1210-9342             ; 0
+                        ;10       ; ws_warehouse_n              ; forceInStock       ;           1;                        -1;           0; 0       ; 3225694                 ; 0
+
+UPDATE Product;code[unique=true];$catalogVersion; stockLevels(productCode,warehouse(code)); vendors(code)
+              ;1225694          ;               ; 1225694:ws_warehouse_n                  ; $vendor
+              ;2225694          ;               ; 2225694:ws_warehouse_n                  ; $vendor
+              ;HW1210-3422      ;               ; HW1210-3422:ws_warehouse_n              ; $vendor
+              ;HW1210-9345      ;               ; HW1210-9345:ws_warehouse_n              ; $vendor
+              ;HW1210-9342      ;               ; HW1210-9342:ws_warehouse_n              ; $vendor
+              ;3225694          ;               ; 3225694:ws_warehouse_n                  ; $vendor

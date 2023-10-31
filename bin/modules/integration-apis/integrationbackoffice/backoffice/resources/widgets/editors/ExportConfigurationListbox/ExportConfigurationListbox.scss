@@ -1,0 +1,13 @@
+@import "../../../cng/css/integrationbackoffice_common.scss";
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationListbox .z-listbox-emptybody-content {
+    visibility: visible;
+}
+
+.integrationbackoffice-exportconfiguration-listbox .z-listcell-content {
+    padding-left: 22px !important;
+}
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_ExportConfigurationEditorContainer .integrationbackoffice-abstractEditorContainer {
+    height: calc(100% - $editorBottomMargin); // action bar height is 50px by default. Set height so the editorContainer's bottom is aligned with window's bottom.
+}

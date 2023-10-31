@@ -1,0 +1,5 @@
+$lang=cs
+
+UPDATE DynamicConstraint;id[unique=true,allownull=true] ;message[lang=$lang]
+                        ;oppsClientInterfaceVersionConstraint                       ;"Vyberte pro pole Hlavní verze klientského rozhraní požadovanou verzi."
+

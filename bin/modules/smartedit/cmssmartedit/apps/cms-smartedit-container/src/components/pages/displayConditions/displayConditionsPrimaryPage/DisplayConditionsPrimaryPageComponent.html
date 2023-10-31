@@ -1,0 +1,27 @@
+<div class="form-group form-group__inline">
+    <label
+        class="se-control-label control-label__margin"
+        translate="se.cms.display.conditions.primary.page.label"
+    >
+    </label>
+    <div
+        *ngIf="readOnly"
+        class="dc-associated-primary-page form-readonly-text form-readonly-text__tight"
+    >
+        {{ associatedPrimaryPage?.name }}
+    </div>
+    <div *ngIf="!readOnly">
+        <se-select
+            id="display-conditions-primary-association-selector"
+            [model]="associatedPrimaryPageUid"
+            (modelChange)="associatedPrimaryPageUidOnChange($event)"
+            [fetchStrategy]="fetchStrategy"
+        >
+        </se-select>
+        <span *ngIf="associatedPrimaryPage?.name" class="se-form-help-message">
+            <span>
+                {{ 'se.cms.page.label.label' | translate }}: {{ associatedPrimaryPage.label }}
+            </span>
+        </span>
+    </div>
+</div>

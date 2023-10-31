@@ -1,0 +1,20 @@
+/**
+* Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+*/
+[data-base-theme^="sap_fiori_3"] {
+  .yw-sideNavigation {
+    &-widget {
+        .cng-action-icon {
+            &:hover {
+              background-image: linear-gradient(to right, var(--bo-list-hover-background) 0.25rem, var(--bo-list-hover-background) 0.25rem) !important;
+            }
+        }
+        .cng-action-group .ya-toggle:hover {
+          background-color: var(--bo-list-hover-background) !important;
+        }
+        .z-hbox{
+          margin: auto;
+      }
+    }
+  }
+}

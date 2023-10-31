@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+@import "cockpitng-globals.scss";
+
+.webhookbackofficeTooltips {
+  border: 0px;
+  height: 28px;
+  width: 28px;
+  line-height: inherit;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 2px;
+  background-color: var(--bo-base-color);
+}
+
+// set icon for the first levels of Integration UI Tools
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("webhookbackoffice_explorer_typenode_webhookconfiguration", "webhooks");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("webhookbackoffice_explorer_typenode_webhookconfiguration", "webhooks");
+}

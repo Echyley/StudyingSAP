@@ -1,0 +1,9 @@
+.test1 {
+  /* Something relative to the node_module project. Does not mean anything to us. */
+  background: url("assets/img2.png");
+}
+
+.test2 {
+  /* Some other asset. Might not even be in the library. */
+  background: url("assets/img1.png");
+}

@@ -1,0 +1,27 @@
+@import '../../media.scss';
+
+.se-media-advanced-info {
+    @include se-flex-row;
+    display: inline-flex;
+    height: 32px;
+    outline: none;
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.se-media-advanced-info-body {
+    padding: 11px;
+}
+.se-media-advanced-info-row {
+    &:not(:last-child) {
+        margin-bottom: se-space('s');
+    }
+    &__description {
+        color: var(--sapTextColor);
+        word-break: break-all;
+        max-width: 95%;
+    }
+}

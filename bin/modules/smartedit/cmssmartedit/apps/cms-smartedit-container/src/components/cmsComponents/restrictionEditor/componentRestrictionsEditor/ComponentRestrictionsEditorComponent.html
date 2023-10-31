@@ -1,0 +1,9 @@
+<se-restrictions-editor
+    [editable]="isEditable"
+    [getRestrictionTypes]="getRestrictionTypes"
+    [getSupportedRestrictionTypes]="getSupportedRestrictionTypes"
+    [item]="model"
+    [restrictionUuids]="model.restrictions"
+    (onRestrictionsChange)="onRestrictionsChange($event)"
+>
+</se-restrictions-editor>

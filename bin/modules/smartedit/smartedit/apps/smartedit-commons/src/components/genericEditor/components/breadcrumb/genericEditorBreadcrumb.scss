@@ -1,0 +1,23 @@
+.se-ge-breadcrumb {
+    @include se-flex-row;
+}
+.se-ge-breadcrumb__data {
+    @include se-flex-column;
+    margin-bottom: se-space('s');
+}
+.se-ge-breadcrumb__item {
+    @include se-flex-row;
+    margin-bottom: se-space('s');
+    margin-left: se-space('s');
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+.se-ge-breadcrumb__divider {
+    margin-left: se-space('s');
+    color: var(--sapNeutralColor);
+}
+.se-ge-breadcrumb__title {
+    @include se-weight('bold');
+}

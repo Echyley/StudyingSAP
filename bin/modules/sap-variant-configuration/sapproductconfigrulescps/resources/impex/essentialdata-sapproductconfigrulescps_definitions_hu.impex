@@ -1,0 +1,29 @@
+$lang=hu
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;Konfigurálható termék promóciója
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;Opciós árra vonatkozó százalékos engedmény promóciós üzenettel;{discount_value,number,percent*1} engedmény alkalmazása {cstic} / {cstic_value} opcióra
+;y_configurable_product_display_promo_message;Promóciós üzenet megjelenítése (a promóció már érvényes);Promóciós üzenet megjelenítése
+;y_configurable_product_display_promo_opportunity_message;Promóciós lehetőséggel kapcsolatos üzenet megjelenítése (a promóció még nem érvényes);Promóciós lehetőséggel kapcsolatos üzenet megjelenítése
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;Jellemző;Az a jellemző, amelyre ez a kedvezmény vonatkozik, és amelyre vonatkozóan ez az üzenet megjelenik
+;y_configurable_product_percentage_discount_for_option;cstic_value;Jellemzőérték;Az a jellemzőérték, amelyre ez a kedvezmény vonatkozik, és amelyre vonatkozóan ez az üzenet megjelenik
+;y_configurable_product_percentage_discount_for_option;discount_value;Százalékos engedmény értéke;Az opciós árra vonatkozó százalékos engedmény. Százalékjel nélkül adja meg az értéket.
+;y_configurable_product_percentage_discount_for_option;message;Üzenet;Üzenet szövege
+;y_configurable_product_percentage_discount_for_option;extended_message;Bővített üzenet;Bővített üzenet szövege
+;y_configurable_product_display_promo_message;cstic;Jellemző;Jellemző, amelyre ez az üzenet megjelenik
+;y_configurable_product_display_promo_message;cstic_value;Jellemzőérték;Jellemzőérték, amelyre ez az üzenet megjelenik
+;y_configurable_product_display_promo_message;message;Üzenet;Üzenet szövege
+;y_configurable_product_display_promo_message;extended_message;Bővített üzenet;Bővített üzenet szövege
+;y_configurable_product_display_promo_opportunity_message;cstic;Jellemző;Jellemző, amelyre ez az üzenet megjelenik
+;y_configurable_product_display_promo_opportunity_message;cstic_value;Jellemzőérték;Jellemzőérték, amelyre ez az üzenet megjelenik
+;y_configurable_product_display_promo_opportunity_message;message;Üzenet;Üzenet szövege
+;y_configurable_product_display_promo_opportunity_message;extended_message;Bővített üzenet;Bővített üzenet szövege
+
+#% endif:

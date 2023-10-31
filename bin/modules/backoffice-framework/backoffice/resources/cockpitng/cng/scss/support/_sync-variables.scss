@@ -1,0 +1,46 @@
+@import "cockpitng-globals.scss";
+
+$_sync-editorarea__bp-xs: 500px;
+
+// $sync-editorarea__editlink--font: $font-family__text;
+$sync-editorarea__editlink--font-size: $font-size__base;
+// $sync-editorarea__editlink--color: $blue__default;
+// $sync-editorarea__editlink--padding-left: $container-spacing-default__half;
+// $sync-editorarea__editlink--bg-image: url("../images/workflow/icon-workflow-edit.svg");
+$_sync-editorarea__editlink-icon--content: _getIconGlyphContentValue("edit");
+$_sync-editorarea__editlink-icon--font-family: $font-family__icon;
+$_sync-editorarea__editlink-icon--font-size: $font-size__large;
+$_sync-editorarea__editlink-icon--width: $toolbar__button-small--size;
+$_sync-editorarea__editlink-icon--margin-right: $_container-spacing-default__tiny;
+$_sync-editorarea__editlink-icon--top: ($_sync-editorarea__editlink-icon--font-size - $sync-editorarea__editlink--font-size);
+
+$sync-editorarea__column--border-width: $boxes--border__thin;
+$sync-editorarea__column--border: $sync-editorarea__column--border-width solid $_default__splitter--color;
+$_sync-editorarea__column--border-radius: $editor-defaults__input-box--border-radius;
+
+$sync-editorarea__box-default--margin-right: $container-spacing-default__third * 2;
+$_sync-editorarea__box-default--margin-bottom: $_container-spacing-default__tiny;
+$sync-editorarea__column-default--padding: $container-spacing-default__third * 2;
+$sync-editorarea__column-default--min-height: 110px;
+$sync-editorarea__column-default--width: 190px;
+
+$sync-editorarea__cnt-box--width: 50%;
+$sync-editorarea__cnt-box--margin-right: 0;
+$sync-editorarea__cnt-box--padding: 0 $_container-spacing-default__tiny 0 0;
+$sync-editorarea__cnt-column--width: 50%;
+$sync-editorarea__cnt-column--padding: ($_container-spacing-default__small - $sync-editorarea__column--border-width) $_container-spacing-default__small;
+
+$_sync-editorarea__cnt-avg-box--width: 100%;
+
+$sync-editorarea__cnt-min-box--width: 100%;
+$sync-editorarea__cnt-min-box--margin-right: 0;
+$sync-editorarea__cnt-min-column--width: 50%; //100%;
+$_sync-editorarea__cnt-min-column-bp-xs--width: 100%;
+// $_sync-editorarea__cnt-min-column-bp-xs--border-radius: 0 0 4px 4px;
+
+
+$sync-editorarea__head-label--margin-bottom: 0;
+$_sync-editorarea__head-label--padding-bottom: $_container-spacing-default__tiny;
+$sync-editorarea__head-label--font-weight: $font-weight-bold;
+$sync-editorarea__head-label--color: $_default__header--color;
+$sync-editorarea__label--margin-top: ($_container-spacing-default__core + $boxes--border__medium);

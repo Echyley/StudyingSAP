@@ -1,0 +1,154 @@
+/*================================
+    Generic Charts
+================================*/
+// Defined Styling for Generic Charts
+
+
+
+@import "scss/support/_genericChart-variables.scss";
+
+.yw-generic-chart{
+   height: 100%;
+   width: 100%;
+   box-shadow: $genericchart__highcharts--box-shadow;
+   border-radius: $genericchart__highcharts--border-radius;
+   background-color: $genericchart__highcharts-graph--bg-color;
+   &-container {
+      width: 100%;
+      height: 100%;
+      display: table;
+      background-color: $genericchart__highcharts-graph--bg-color;
+      border-radius: $genericchart__highcharts--border-radius;
+      table-layout: fixed;
+
+      .highcharts-container{         
+         .highcharts-background {
+            background-color: $genericchart__highcharts-container--bg-color;
+            fill: $genericchart__highcharts-container--bg-color;
+         }
+
+         .highcharts-title {
+            font-family: $genericchart__highcharts--font-family;
+            font-size: $genericchart__highcharts-title--font-size;
+            color: $genericchart__highcharts-title--color;
+            fill: $genericchart__highcharts-title--color; 
+         }
+         &:first-child {
+            border-top-right-radius: $genericchart__highcharts--border-radius;
+            border-top-left-radius: $genericchart__highcharts--border-radius;
+         }
+
+         .highcharts-axis-title {
+            font-family: $genericchart__highcharts--font-family;
+            font-size: $font-size__base;
+            color: $genericchart__highcharts--axis-title-color;
+            fill: $genericchart__highcharts--axis-title-color;
+         }
+
+         .highcharts-axis-labels text {
+            font-family: $genericchart__highcharts--font-family;
+            font-size: $font-size__base !important;
+            color: $genericchart__highcharts--axis-label-text-color;
+            fill: $genericchart__highcharts--axis-label-text-color;
+         }
+
+         .highcharts-grid.highcharts-yaxis-grid path {
+            stroke: $genericchart__highcharts--axis-line-color;
+         }
+
+         .highcharts-axis.highcharts-xaxis path {
+            stroke: $genericchart__highcharts--axis-line-color;
+         }
+
+         .highcharts-button.highcharts-reset-zoom {
+            > rect {
+               fill: var(--bo-button-transparent-background);
+               stroke: var(--bo-button-transparent-border-color);
+               stroke-width: var(--bo-button-border-width);
+               line-height: $genericchart__highcharts-button--size;
+               height: $genericchart__highcharts-button--size;
+               min-width: $genericchart__highcharts-button--size;
+               rx: var(--bo-button-border-radius);
+               ry: var(--bo-button-border-radius);
+            }
+            > text {
+               fill: var(--bo-button-transparent-text-color) !important;
+               font-family: var(--bo-font-family);
+               font-size: var(--bo-font-size);
+            }
+            &.highcharts-button-hover {
+               > rect {
+                  fill: var(--bo-button-transparent-hover-background);
+                  stroke: var(--bo-button-transparent-hover-border-color);
+               }
+               > text {
+                  fill: var(--bo-button-transparent-hover-text-color) !important;
+               }
+            }
+         }
+
+         &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: auto;
+            margin-top: $_genericchart__highcharts-title-delimiter--top;
+            height: $_genericchart__content-delimiter--border-width;
+            border-top: $_genericchart__content-delimiter--border-width solid $_genericchart__content-delimiter--border-color;
+         }
+      }
+   }
+
+   &-infoContainer{
+      width: $_genericchart__highcharts-info-container--width;
+      min-height: $_genericchart__highcharts-info-container--min-height;
+      display: table;
+      padding: $_genericchart__highcharts-info-container--padding;
+      text-align: center;
+      border-top-color: $_genericchart__content-delimiter--border-color;
+      position: relative;
+      
+      &:before {
+         border-top: $_genericchart__content-delimiter--border-width solid;
+         height: $_genericchart__content-delimiter--border-width;
+         top: $_genericchart__highcharts-info-content-delimiter--top;
+         content: "";
+         border-top-color: inherit;
+         position: absolute;
+         left: 0;
+         right: 0;
+         display: block;
+      }
+
+      &:last-child {
+         border-bottom-right-radius: $genericchart__highcharts--border-radius;
+         border-bottom-left-radius: $genericchart__highcharts--border-radius;
+      }
+      
+      &-wrapper {
+         display: table-row;
+      } 
+   }
+
+   &-info{
+      &-wrapper {
+         display: table-cell;
+      }
+
+      &-value {
+         display: block;
+         font-size: $genericchart__info-value--font-size;
+         font-weight: $genericchart__info-value--font-weight;
+         color: $genericchart__info-value--color;
+         line-height: $_genericchart__info-value--line-height;
+         padding-top: 10px;
+      }
+
+      &-label {
+         font-size: $genericchart__info-label--font-size;
+         color: $genericchart__info-label--color;
+         line-height: $_genericchart__info-label--line-height;
+      }
+   }
+}

@@ -1,0 +1,6 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+export const ON_EDIT_NESTED_COMPONENT_EVENT = 'ON_EDIT_NESTED_COMPONENT';
+export const CREATE_COMPONENT_BUTTON_PRESSED_EVENT_ID =
+    'CREATE_NESTED_COMPONENT_BUTTON_PRESSED_EVENT';

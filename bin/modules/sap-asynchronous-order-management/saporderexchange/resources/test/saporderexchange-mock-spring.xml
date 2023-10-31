@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="systemMillisNumberGenerator" class="com.sap.hybris.sapdataexchange.testutil.SystemMillisNumberGenerator" />
+	<alias name="systemMillisNumberGenerator" alias="sapIDocNumberSeriesGenerator" />
+
+	<bean id="mockConsignmentService" class="de.hybris.platform.sap.orderexchange.mocks.MockConsignmentService"></bean>
+	<alias name="mockConsignmentService" alias="consignmentService"></alias>
+
+	<bean id="mockFlexibleSearchService" class="de.hybris.platform.sap.orderexchange.mocks.MockFlexibleSearchService"></bean>
+	<alias name="mockFlexibleSearchService" alias="flexibleSearchService"></alias>
+
+	<alias name="mockOrderCancelService" alias="orderCancelService"></alias>
+	<bean id="mockOrderCancelService" class="de.hybris.platform.sap.orderexchange.mocks.MockOrderCancelService" parent="defaultOrderCancelService"/>
+
+</beans>

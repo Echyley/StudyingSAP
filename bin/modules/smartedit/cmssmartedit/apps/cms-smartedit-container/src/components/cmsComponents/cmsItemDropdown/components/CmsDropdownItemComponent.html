@@ -1,0 +1,17 @@
+<div class="cms-nested-component" *ngIf="item" [attr.data-component-id]="item.uid">
+    <span class="cms-nested-component__item" *ngIf="isSelected" (click)="onClick($event);">
+        <span class="sap-icon--card cms-nested-component__item-icon"></span>
+        <div class="cms-nested-component__item-data">
+            <p class="cms-nested-component__item-name" [title]="item.name">{{ item.name }}</p>
+            <p class="cms-nested-component__item-type" [title]="item.typeCode">
+                {{ item.typeCode }}
+            </p>
+        </div>
+    </span>
+    <div class="cms-nested-component__result-item" *ngIf="!isSelected">
+        <span class="cms-nested-component__result-name" [title]="item.name">{{ item.name }}</span>
+        <span class="cms-nested-component__result-code" [title]="item.typeCode"
+            >{{ item.typeCode }}</span
+        >
+    </div>
+</div>

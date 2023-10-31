@@ -1,0 +1,22 @@
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+INSERT_UPDATE BasicCredential; id[unique = true]          ; username                          ; password
+                             ; credential.cpq             ; $config-credential.cpq.username   ; $config-credential.cpq.password
+
+
+
+#************  Endpoints **************************************************************************************************#
+INSERT_UPDATE Endpoint; id[unique = true]    ; version[unique = true]; name           ; specUrl
+                      ; CPQEndpoint          ; n.a                   ; CPQ            ; "n.a"
+
+
+#************************************************************************************************************#
+INSERT_UPDATE DestinationTarget; id[unique=true]
+; cpqWebCom
+
+
+INSERT_UPDATE ConsumedDestination; id[unique = true]           ; url                                ; endpoint(id, version)        ; credential(id)             ;additionalProperties(key,value)[map-delimiter=|]        ;destinationTarget(id)[default=cpqWebCom]
+                                 ; cpqDestination              ; $config-cpqDestination.url         ; CPQEndpoint:n.a              ; credential.cpq             ;$config-cpqDestination.additionalProperties             ;
+                                 ; cpqDestinationElectronics   ; $config-cpqDestination.url         ; CPQEndpoint:n.a              ; credential.cpq             ;$config-cpqDestinationElectronics.additionalProperties  ;
+                                 
+

@@ -1,0 +1,2 @@
+INSERT_UPDATE sapconfiguration;core_name[unique=true];sapordermgmt_enabled
+;RR5910;FALSE

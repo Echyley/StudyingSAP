@@ -1,0 +1,138 @@
+.se-select {
+    &:not(.se-select--paged) {
+        .se-select-list-container {
+            @include se-scrolling-container();
+            width: auto;
+        }
+    }
+
+    @mixin se-select-state() {
+        .selected-container,
+        .fd-select-button-custom,
+        .fd-select-button-custom:hover {
+            @content;
+        }
+    }
+
+    .select-container {
+        &.has-warning {
+            @include se-select-state() {
+                border-color: var(--sapWarningColor);
+            }
+        }
+        &.has-error {
+            @include se-select-state() {
+                border-color: var(--sapErrorColor);
+            }
+        }
+    }
+
+    .se-item-printer {
+        width: 100%;
+    }
+
+    &--single {
+        .selected-item {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            z-index: 1;
+        }
+    }
+
+    @include se-fd-disabled() {
+        fd-popover {
+            pointer-events: none;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.65;
+        }
+
+        .selected-item__remove-button {
+            color: var(--sapNeutralColor);
+        }
+    }
+
+    .fd-popover-custom {
+        display: block;
+        position: relative;
+        width: 100%;
+
+        .fd-select-button-custom {
+            // override fundamental-styles default styles
+            text-align: unset;
+            width: 100%;
+            color: var(--sapUiFieldTextColor);
+            &:hover {
+                border-color: inherit;
+            }
+            &:focus {
+                box-shadow: none;
+            }
+
+            &.toggle-button {
+                .fd-button.fd-select__button {
+                    position: absolute;
+                    right: 0;
+                    border: none;
+                    height: 100%;
+                    border-top-right-radius: 0.25rem;
+                }
+            }
+        }
+    }
+
+    .fd-list {
+        padding: 0;
+        max-width: unset;
+    }
+
+    .sap-icon--search {
+        align-self: center;
+        margin-right: 5px;
+    }
+
+    .sap-icon--sys-cancel {
+        display: flex;
+        justify-content: flex-end;
+        color: var(--sapContent_IconColor);
+        padding-right: 30px;
+        line-height: 1.875rem;
+        z-index: 1000;
+    }
+
+    .se-multi-select {
+        .selected-container {
+            border-radius: 0.125rem;
+            border: 1px solid var(--sapUiFieldBorderColor, #89919a);
+            &.se-selected-list {
+                border-bottom: none;
+            }
+        }
+
+        .selected-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border-bottom: 1px solid var(--sapUiFieldBorderColor, #89919a);
+
+            &__item {
+                display: grid;
+                grid-template-columns: 16fr 1fr;
+                padding: 8px 16px;
+                align-items: center;
+                min-height: 36px;
+            }
+
+            &__placeholder {
+                opacity: 0;
+            }
+        }
+
+        .selected-item-remove {
+            cursor: pointer;
+        }
+    }
+}

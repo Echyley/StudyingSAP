@@ -1,0 +1,22 @@
+<div class="se-version-item" [ngClass]="{ 'se-version-item--selected': isSelectedVersion() }">
+    <div class="se-version-item__header" [title]="pageVersion.label">
+        <button class="se-version-item__label se-button--text" (click)="selectVersion()">
+            {{ pageVersion.label }}
+        </button>
+        <se-version-item-menu
+            *ngIf="isVersionMenuEnabled()"
+            [item]="pageVersion"
+        ></se-version-item-menu>
+    </div>
+    <div class="se-version-item__date">{{ pageVersion.creationtime | date: 'M/d/yy h:mm a' }}</div>
+    <div class="se-version-item__description" *ngIf="pageVersion.description">
+        <se-more-text
+            class="se-version-item__description-text"
+            [text]="pageVersion.description"
+            [limit]="32"
+            [ellipsis]="'...'"
+            [capitalizeLabel]="true"
+        >
+        </se-more-text>
+    </div>
+</div>

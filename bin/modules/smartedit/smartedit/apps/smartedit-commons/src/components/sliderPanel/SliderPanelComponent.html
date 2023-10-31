@@ -1,0 +1,46 @@
+<div class="se-slider-panel-wrapper" *ngIf="isShown">
+    <div class="se-slider-panel-container slide-in">
+        <div class="se-slider-panel__header" *ngIf="sliderPanelConfiguration.modal">
+            <span class="se-slider-panel__title" *ngIf="sliderPanelConfiguration.modal.title">
+                {{ sliderPanelConfiguration.modal.title | translate }}</span
+            >
+            <button
+                type="button"
+                class="se-slider-panel__close-btn fd-button fd-button--transparent fd-dialog__close"
+                aria-label="close"
+                *ngIf="sliderPanelConfiguration.modal.showDismissButton"
+                (click)="sliderPanelDismissAction()"
+                title="{{ 'se.btn.close.title' | translate }}"
+            >
+                <span class="sap-icon--decline"></span>
+            </button>
+        </div>
+
+        <div class="se-slider-panel__body">
+            <ng-content></ng-content>
+        </div>
+
+        <div
+            class="se-slider-panel__footer"
+            *ngIf="sliderPanelConfiguration.modal && (sliderPanelConfiguration.modal.cancel || sliderPanelConfiguration.modal.save)"
+        >
+            <button
+                type="button"
+                class="fd-button fd-button--emphasized se-slider-panel__footer-btn se-slider-panel__footer-btn--save"
+                *ngIf="sliderPanelConfiguration.modal.save"
+                (click)="sliderPanelConfiguration.modal.save.onClick()"
+                [disabled]="isSaveDisabled()"
+            >
+                {{ sliderPanelConfiguration.modal.save.label | translate }}
+            </button>
+            <button
+                type="button"
+                class="fd-button fd-button--transparent se-slider-panel__footer-btn se-slider-panel__footer-btn--cancel"
+                *ngIf="sliderPanelConfiguration.modal.cancel"
+                (click)="sliderPanelConfiguration.modal.cancel.onClick()"
+            >
+                {{ sliderPanelConfiguration.modal.cancel.label | translate }}
+            </button>
+        </div>
+    </div>
+</div>

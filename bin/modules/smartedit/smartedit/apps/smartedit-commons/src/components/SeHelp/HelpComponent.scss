@@ -1,0 +1,12 @@
+.se-y-help-wrapper {
+    cursor: pointer;
+}
+.se-y-help-icon {
+    color: var(--sapLinkColor);
+    display: block;
+    margin: 1px; // Fixes flickering of tooltip
+}
+
+.se-help .se-popover {
+    width: 200px;
+}

@@ -1,0 +1,21 @@
+/* Common */
+.integrationbackoffice-stack-container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding: 5px;
+  background-color: var(--bo-list-table-header-background);
+  height: 100%;
+  width: 100%;
+}
+
+.integrationbackoffice-widget-slot {
+  background-color: var(--bo-list-table-header-background);
+
+  .widget_body {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+

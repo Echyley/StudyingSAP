@@ -1,0 +1,15 @@
+#set ($unique="unique=true")
+#set( $ucontentCV=$esc.java('$contentCV[unique=true]') )
+#set( $langContentCV=$esc.java('$contentCV[lang=')+$lang+$esc.java(']') )
+$lang
+\$contentCV
+\$contentCV[$unique]
+\$contentCV\[$unique\]
+$esc.java('$contentCV[unique=true]')
+$esc.html('$contentCV[unique=true]')
+$esc.propertyKey('$contentCV[unique=true]')
+$esc.propertyValue('$contentCV[unique=true]')
+
+
+INSERT_UPDATE Media;$ucontentCV;
+INSERT_UPDATE Media;$langContentCV;

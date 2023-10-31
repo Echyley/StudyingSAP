@@ -1,0 +1,16 @@
+{
+  "files": {
+    "smartedit/apps/smartedit-loader/.eslintrc.js": "4e48b6019663312b651e581a007d0eb6beab50e0",
+    "smartedit/apps/smartedit-loader/README.md": "01f14fc6f60faae5f13c238b2c61498a803be3a4",
+    "smartedit/apps/smartedit-loader/package.json": "d27146e559fffca68d195d3de24c57af43c4280f",
+    "smartedit/apps/smartedit-loader/smartedit.json": "fbf2c5d10862a30dfa05462f1ece39bb448a1d5e",
+    "smartedit/apps/smartedit-loader/src/SmarteditloaderComponent.ts": "fe28efa11c46ae8a6b1399f7cbf79491e24604ee",
+    "smartedit/apps/smartedit-loader/src/index.ts": "87e97a81af7f714cd5fa1734ee28e36138184d68",
+    "smartedit/apps/smartedit-loader/src/smarteditloader.ts": "c80a2a0fef5b3736617566413da27ba0f5b190ec",
+    "smartedit/apps/smartedit-loader/styling/sass/styling.scss": "fba72635d4f600176b631870a9ea0e80e7067fa2",
+    "smartedit/apps/smartedit-loader/tsconfig.build.json": "2f5bfbb60b5345b6b697031e235b77f88c67d5ae",
+    "smartedit/apps/smartedit-loader/tsconfig.json": "9396129eb09d5e9b140450638b12108a74b02838",
+    "smartedit/apps/smartedit-loader/.rush/temp/shrinkwrap-deps.json": "c85b51d0f451aa75381dbfede30fbd0d4cd9f86f"
+  },
+  "arguments": "se-packagr "
+}

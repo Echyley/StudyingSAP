@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+   	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/util
+	   http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- Prototype DTOs and object factories -->
+	<alias name="defaultContentSlotForPageRelationData" alias="cmsContentSlotForPageRelationData" />
+	<bean id="defaultContentSlotForPageRelationData" class="de.hybris.platform.cms2.version.converter.customattribute.data.ContentSlotForPageRelationData" scope="prototype"/>
+	<bean id="contentSlotForPageRelationDataFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean" >
+		<property name="targetBeanName" value="cmsContentSlotForPageRelationData" />
+	</bean>
+
+	<!-- generators -->
+	<bean id="versionUidGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" init-method="init">
+		<property name="key" value="${keygen.version.uid.key}" />
+		<property name="digits" value="${keygen.version.uid.digits}" />
+		<property name="start" value="${keygen.version.uid.start}" />
+		<property name="type" value="${keygen.version.uid.type}" />
+	</bean>
+
+	<bean id="transactionIdGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" init-method="init">
+		<property name="key" value="${keygen.version.transaction.id.key}" />
+		<property name="digits" value="${keygen.version.transaction.id.digits}" />
+		<property name="start" value="${keygen.version.transaction.id.start}" />
+		<property name="type" value="${keygen.version.transaction.id.type}" />
+	</bean>
+
+	<!-- In Many to Many relation, to avoid version a value in relation attribute that does not belong to the current page.
+	 	Example pageA -> slotA -> sharedcomponent, pageB -> slotB -> sharedcomponent, when user version pageA, for sharedcomponent,
+	 	it should not version the relation attribute "slots" otherwise slotB that is not part of pageA will be versioned -->
+	<alias name="attributesNotVersion" alias="cmsAttributesNotVersion"/>
+	<util:map id="attributesNotVersion" key-type="de.hybris.platform.cms2.common.predicates.GenericTypePredicate">
+		<entry key-ref="cmsComponentPredicate">
+			<util:list value-type="java.lang.String">
+				<value>slots</value>
+			</util:list>
+		</entry>
+		<entry key-ref="cmsRestrictionPredicate">
+			<util:list value-type="java.lang.String">
+				<value>components</value>
+				<value>pages</value>
+			</util:list>
+		</entry>
+	</util:map>
+
+	<!-- In Many to Many relation, for some attributes are not versioned, special apply attribute service is required for model rollback.
+		For example, the "slots" of Component are not versioned. For rollbacking the slot and component many to many relation, when apply "cmsComponents"
+	 	attribute of a slot, it must add slot into component's "slots".
+	 	It will get the first one cmsVersionApplyAttributesValuesToModelService which constraint by ItemType in list -->
+	<alias name="versionApplyAttributesValuesToModelServiceList" alias="cmsVersionApplyAttributesValuesToModelServiceList" />
+	<util:list id="versionApplyAttributesValuesToModelServiceList">
+		<ref bean="cmsVersionApplyAttributeValuesToComponentItemModel" />
+		<ref bean="cmsVersionApplyAttributeValuesToSlotItemModel" />
+		<ref bean="cmsVersionApplyAttributeValuesToPageItemModel" />
+		<ref bean="cmsVersionApplyAttributeValuesToItemModel" />
+	</util:list>
+
+	<alias name="defaultCmsVersionHelper" alias="cmsVersionHelper" />
+	<bean name="defaultCmsVersionHelper" class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionHelper">
+		<property name="typeService" ref="typeService" />
+		<property name="cmsAttributesNotVersion" ref="cmsAttributesNotVersion" />
+	</bean>
+
+	<alias name="defaultCMSVersionApplyAttributeValuesToItemModel" alias="cmsVersionApplyAttributeValuesToItemModel" />
+	<bean name="defaultCMSVersionApplyAttributeValuesToItemModel"
+		  class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionApplyAttributeValuesToItemModel">
+		<property name="modelPredicate" ref="cmsDefaultItemTypePredicate" />
+		<property name="modelService" ref="modelService" />
+		<property name="cmsVersionHelper" ref="cmsVersionHelper" />
+	</bean>
+
+	<alias name="defaultCMSVersionApplyAttributeValuesToComponentItemModel" alias="cmsVersionApplyAttributeValuesToComponentItemModel" />
+	<bean name="defaultCMSVersionApplyAttributeValuesToComponentItemModel"
+		  class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionApplyAttributeValuesToComponentItemModel"
+		  parent="cmsVersionApplyAttributeValuesToItemModel">
+		<property name="modelPredicate" ref="cmsComponentPredicate" />
+	</bean>
+
+	<alias name="defaultCMSVersionApplyAttributeValuesToPageItemModel" alias="cmsVersionApplyAttributeValuesToPageItemModel" />
+	<bean name="defaultCMSVersionApplyAttributeValuesToPageItemModel"
+		  class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionApplyAttributeValuesToPageItemModel"
+		  parent="cmsVersionApplyAttributeValuesToItemModel">
+		<property name="modelPredicate" ref="abstractPageTypePredicate" />
+	</bean>
+
+	<alias name="defaultCMSVersionApplyAttributeValuesToSlotItemModel" alias="cmsVersionApplyAttributeValuesToSlotItemModel" />
+	<bean name="defaultCMSVersionApplyAttributeValuesToSlotItemModel"
+		  class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionApplyAttributeValuesToSlotItemModel"
+		  parent="cmsVersionApplyAttributeValuesToItemModel">
+		<property name="modelPredicate" ref="cmsContentSlotPredicate" />
+	</bean>
+
+	<alias name="defaultCmsVersionSessionContextProvider" alias="cmsVersionSessionContextProvider" />
+	<bean name="defaultCmsVersionSessionContextProvider" class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionSessionContextProvider">
+		<property name="sessionCachedContextProvider" ref="cmsSessionCachedContextProvider" />
+		<property name="cmsItemDataFactory" ref="cmsItemDataFactory" />
+	</bean>
+
+	<!-- Services -->
+	<alias name="defaultCmsVersionService" alias="cmsVersionService" />
+	<bean id="defaultCmsVersionService" class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionService">
+		<property name="versionUidGenerator" ref="versionUidGenerator" />
+		<property name="transactionIdGenerator" ref="transactionIdGenerator" />
+		<property name="sessionService" ref="sessionService"/>
+		<property name="cmsAdminContentSlotService" ref="cmsAdminContentSlotService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="cmsAdminItemService" ref="cmsAdminItemService" />
+		<property name="cmsVersionDao" ref="cmsVersionDao" />
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService" />
+		<property name="cmsVersionToDataConverter" ref="cmsVersionToDataConverter" />
+		<property name="cmsVersionToModelPreviewConverter" ref="cmsVersionToItemModelPreviewConverter" />
+		<property name="cmsVersionToModelRollbackConverter" ref="cmsVersionToItemModelRollbackConverter" />
+		<property name="cmsVersionSessionContextProvider" ref="cmsVersionSessionContextProvider" />
+		<property name="cmsSessionSearchRestrictionsDisabler" ref="cmsSessionSearchRestrictionsDisabler" />
+		<property name="permissionCRUDService" ref="cmsPermissionCachedCRUDService"/>
+		<property name="pageTypePredicate" ref="abstractPageTypePredicate"/>
+		<property name="contentPageTypePredicate" ref="cmsContentPageTypePredicate" />
+    </bean>
+
+	<alias name="defaultCmsVersionSearchService" alias="cmsVersionSearchService" />
+	<bean id="defaultCmsVersionSearchService" class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionSearchService">
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="namedQueryService" ref="flexibleSearchNamedQueryService" />
+		<property name="searchHelper" ref="cmsSearchHelper" />
+		<property name="permissionCRUDService" ref="cmsPermissionCachedCRUDService" />
+	</bean>
+
+	<alias name="defaultCmsVersionGCService" alias="cmsVersionGCService" />
+	<bean id="defaultCmsVersionGCService" class="de.hybris.platform.cms2.version.service.impl.DefaultCMSVersionGCService">
+		<property name="timeService" ref="timeService"/>
+		<property name="cmsVersionGCDao" ref="cmsVersionGCDao"/>
+	</bean>
+
+	<!-- DAOs -->
+	<alias name="defaultCmsVersionDao" alias="cmsVersionDao" />
+	<bean id="defaultCmsVersionDao" class="de.hybris.platform.cms2.servicelayer.daos.impl.DefaultCMSVersionDao" parent="abstractItemDao"/>
+
+	<alias name="defaultCmsVersionGCDao" alias="cmsVersionGCDao" />
+	<bean id="defaultCmsVersionGCDao" class="de.hybris.platform.cms2.servicelayer.daos.impl.DefaultCMSVersionGCDao" parent="abstractCMSItemDao"/>
+
+</beans>

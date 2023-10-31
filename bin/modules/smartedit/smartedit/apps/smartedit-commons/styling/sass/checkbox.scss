@@ -1,0 +1,13 @@
+//fix the css issue in safari
+.fd-checkbox:checked,
+.fd-radio:checked,
+input[type='checkbox']:checked,
+input[type='radio']:checked {
+    background-color: var(--sapActiveColor);
+}
+
+.fd-checkbox:checked:before,
+input[type='checkbox']:checked:before {
+    --se-forms-border-color: var(----sapBaseColor);
+    border-color: var(--se-forms-border-color);
+}

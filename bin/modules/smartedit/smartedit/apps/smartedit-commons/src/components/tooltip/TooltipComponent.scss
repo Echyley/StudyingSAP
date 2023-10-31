@@ -1,0 +1,31 @@
+.se-tooltip > div > .fd-popover-container-custom > .fd-popover__arrow,
+body > .fd-popover-container-custom .fd-popover__arrow {
+    z-index: 9999;
+}
+
+.se-tooltip {
+    @mixin se-tooltip-stretched {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .se-popover {
+        cursor: default;
+    }
+
+    &--stretched {
+        @include se-tooltip-stretched;
+        top: 0;
+
+        .fd-popover__control {
+            @include se-tooltip-stretched;
+        }
+    }
+}
+
+.se-tooltip-container {
+    &.fd-popover-container-custom {
+        z-index: 2000;
+    }
+}

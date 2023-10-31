@@ -1,0 +1,8 @@
+<ul class="se-sub-type__selector">
+    <li
+        class="cms-sub-type__selector-link fd-menu__item"
+        *ngFor="let subType of subTypes"
+        (click)="select(subType)"
+        [translate]="subType.label"
+    ></li>
+</ul>

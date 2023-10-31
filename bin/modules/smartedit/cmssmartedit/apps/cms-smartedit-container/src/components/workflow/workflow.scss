@@ -1,0 +1,15 @@
+// Use Split Button in WorkflowActionItemComponent after it has been migrated to Angular.
+// https://sap.github.io/fundamental-ngx/#/core/splitButton
+@import '~fundamental-styles/dist/button-split';
+
+// component level vars
+$workflow-background-color: var(--sapBaseColor); //white
+$workflow-border-color: var(--sapNeutralColor); //netural grey
+$workflow-text-color: var(--sapTextColor); //netural grey
+$workflow-action-color: var(--sapIndicationColor_5); //(blue) Ready to Sync
+$workflow-status-color-1: var(--sapIndicationColor_4); //(green) Synched / Completed
+$workflow-status-color-2: var(--sapIndicationColor_3); //(orange) Started / In Progress
+
+@function se-workflow-status-border($color) {
+    @return 6px solid $color;
+}

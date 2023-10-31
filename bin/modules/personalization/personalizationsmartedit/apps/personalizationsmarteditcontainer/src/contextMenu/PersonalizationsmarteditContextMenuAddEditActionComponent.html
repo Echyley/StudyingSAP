@@ -1,0 +1,116 @@
+<div class="perso-customize-component">
+    <div class="perso-customize-component__title-layout">
+        <div
+            *ngIf="letterIndicatorForElement"
+            class="perso-customize-component__title-layout__letter-block"
+        >
+            <span [ngClass]="colorIndicatorForElement"> {{letterIndicatorForElement}} </span>
+        </div>
+        <div
+            class="perso-customize-component__title-layout__cust-name perso-wrap-ellipsis"
+            title="{{selectedCustomization.name}}"
+        >
+            {{selectedCustomization.name}}
+        </div>
+        <div
+            class="perso-customize-component__title-layout__target-group-name perso-wrap-ellipsis"
+            title="{{selectedVariation.name}}"
+        >
+            {{'> '+ selectedVariation.name}}
+        </div>
+    </div>
+
+    <dl class="perso-customize-component__data-list">
+        <label fd-form-label for="perso-customize-component-type-desc">
+            {{ "personalization.modal.addeditaction.selected.mastercomponent.title" | translate }}
+        </label>
+        <dd id="perso-customize-component-type-desc">{{componentType}}</dd>
+    </dl>
+    <label
+        fd-form-label
+        class="se-control-label"
+        [required]="true"
+        for="perso-customize-component-action-select"
+    >
+        {{ "personalization.modal.addeditaction.selected.actions.title" | translate }}
+    </label>
+    <se-tooltip
+        [placement]="'top-start'"
+        [triggers]="['mouseenter', 'mouseleave']"
+        [isChevronVisible]="true"
+    >
+        <span
+            class="sap-icon--question-mark sap-icon"
+            style="margin-left: 10px; padding-top: 1px"
+            se-tooltip-trigger
+        ></span>
+        <div
+            se-tooltip-body
+            [translate]="'personalization.modal.addeditaction.selected.actions.help.label'"
+        ></div>
+    </se-tooltip>
+    <se-select
+        id="perso-customize-component-action-select"
+        class="perso-customize-component__select2-container"
+        [placeholder]="'personalization.modal.addeditaction.dropdown.placeholder'"
+        [(model)]="actionSelected"
+        [searchEnabled]="false"
+        [showRemoveButton]="false"
+        [fetchStrategy]="actionFetchStrategy"
+    >
+    </se-select>
+
+    <div class="perso-customize-component__select-group-label-layout">
+        <div *ngIf="actionSelected == 'use'">
+            <label
+                fd-form-label
+                class="se-control-label"
+                [required]="true"
+                for="perso-customize-component-saved-component-select"
+            >
+                {{ "personalization.modal.addeditaction.selected.component.title" | translate }}
+            </label>
+        </div>
+        <has-multicatalog *ngIf="actionSelected == 'use'">
+            <div class="perso-customize-component__filter-layout">
+                <label
+                    fd-form-label
+                    class="perso-customize-component__filter-label"
+                    for="perso-customize-component-catalog-version-filter-dropdown"
+                >
+                    {{ 'personalization.commons.filter.label' | translate }}
+                </label>
+                <catalog-version-filter-dropdown
+                    id="perso-customize-component-catalog-version-filter-dropdown"
+                    class="pe-customize-component__catalog-version-filter-dropdown"
+                    (onSelectCallback)="catalogVersionFilterChange($event)"
+                ></catalog-version-filter-dropdown>
+            </div>
+        </has-multicatalog>
+    </div>
+
+    <se-select
+        id="perso-customize-component-saved-component-select"
+        class="perso-customize-component__select2-container"
+        *ngIf="actionSelected == 'use'"
+        [placeholder]="'personalization.modal.addeditaction.dropdown.componentlist.placeholder'"
+        [(model)]="idComponentSelected"
+        [onSelect]="componentSelectedEvent"
+        [searchEnabled]="true"
+        [showRemoveButton]="false"
+        [fetchStrategy]="componentsFetchStrategy"
+        [itemComponent]="itemComponent"
+    >
+    </se-select>
+
+    <se-select
+        class="perso-customize-component__select2-container"
+        *ngIf="actionSelected == 'create'"
+        [placeholder]="'personalization.modal.addeditaction.dropdown.componenttype.placeholder'"
+        [(model)]="newComponentSelected"
+        [onSelect]="newComponentTypeSelectedEvent"
+        [searchEnabled]="false"
+        [fetchStrategy]="componentTypesFetchStrategy"
+    >
+    </se-select>
+</div>

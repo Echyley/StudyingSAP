@@ -1,0 +1,69 @@
+<div [ngClass]="!component.isHidden && 'se-page-tree-drop-area'">
+    <div
+        class="se-page-tree-node"
+        [ngClass]="{
+        'se-page-tree-node-expand': component.isExpanded,
+        'se-page-tree-component-node': draggable
+        }"
+        [attr.node-smartedit-element-uuid]="!component.isHidden ?
+                     component.elementUuid :
+                     'hidden-component-has-no-uuid'"
+        [attr.smartedit-slot-id]="slotId"
+        [attr.smartedit-slot-uuid]="slotUuid"
+        [attr.smartedit-slot-catalog-version-uuid]="slotCatalogVersionUuid"
+        [attr.smartedit-component-id]="component.uid"
+        [attr.smartedit-component-uuid]="component.uuid"
+        [attr.smartedit-component-type]="component.componentTypeFromPage"
+        [attr.smartedit-container-id]="component.containerId"
+        [attr.smartedit-container-type]="component.containerType"
+    >
+        <div
+            [ngStyle]="draggable && {'cursor': 'grab'}"
+            class="se-page-tree-component-node--content"
+            (click)="onClickComponentNode($event)"
+        >
+            <span
+                *ngIf="component.children && component.children.length > 0"
+                [ngClass]="component.isExpanded ?
+                                'sap-icon--navigation-down-arrow' :
+                                'sap-icon--navigation-right-arrow'"
+                class="se-page-tree-node--icon"
+                title="{{ getComponentNavigationIconTitle() | translate }}"
+            ></span>
+            <span
+                *ngIf="!component.children || component.children.length === 0"
+                class="se-page-tree-node--icon"
+            ></span>
+            <span class="se-page-tree-node--icon sap-icon--background"></span>
+
+            <div class="se-page-tree-component-node--name">
+                <span class="se-page-tree-component-node--name--up" title="{{component.name}}"
+                    >{{component.name}}</span
+                >
+                <span class="se-page-tree-component-node--name--down" title="{{component.typeCode}}"
+                    >{{component.typeCode}}</span
+                >
+            </div>
+        </div>
+        <se-page-tree-component-menu
+            [component]="component"
+            [slotId]="slotId"
+            [slotUuid]="slotUuid"
+            class="se-page-tree-menu"
+        ></se-page-tree-component-menu>
+        <div class="se-page-tree-component-drop-area">
+            <div class="se-page-tree-component-drop-area-circle"></div>
+            <div class="se-page-tree-component-drop-area-line"></div>
+        </div>
+    </div>
+</div>
+<div *ngIf="component.isExpanded && component.componentNodes">
+    <div *ngFor="let child of component.componentNodes">
+        <se-page-tree-child-component
+            [component]="child"
+            [parentMenuConfiguration]="menuConfiguration"
+            [slotId]="slotId"
+            [slotUuid]="slotUuid"
+        ></se-page-tree-child-component>
+    </div>
+</div>

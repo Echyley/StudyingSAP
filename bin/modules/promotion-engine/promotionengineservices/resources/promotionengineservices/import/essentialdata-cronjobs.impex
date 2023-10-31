@@ -1,0 +1,13 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company.  All rights reserved.
+# -----------------------------------------------------------------------
+
+$lang=en
+
+INSERT_UPDATE RuleEngineJob;code[unique=true];springId;
+;rules -> Compilation and Publishing for [promotions-module];ruleEngineCompilePublishJobPerformable;
+;rules -> Undeploy for [promotions-module];ruleEngineUndeployJobPerformable;
+;rules -> Modules Sync from [promotions-module] to [promotions-preview-module];ruleEngineModuleSyncJobPerformable;
+;rules -> Module Init for [promotions-module];ruleEngineModuleInitJobPerformable;
+;rules -> All Modules Init;ruleEngineAllModulesInitJobPerformable;
+

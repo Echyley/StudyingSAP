@@ -1,0 +1,6 @@
+@import "../../../../cng/css/integrationbackoffice_common.scss";
+@import "../AbstractIntegrationEditorContainer/AbstractIntegrationEditorContainer";
+
+.yw-de_hybris_platform_integrationbackoffice_widgets_IntegrationAccessRightsEditorContainer .integrationbackoffice-abstractEditorContainer {
+  height: calc(100% - $editorBottomMargin - $actionBarHeight); // action bar height is 50px by default. Set height so the editorContainer's bottom is aligned with window's bottom.
+}

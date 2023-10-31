@@ -1,0 +1,6 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+INSERT_UPDATE Language ; isocode[unique=true] ; fallbackLanguages(isocode) ; active
+                       ; en                   ;                            ; true  
+                       ; de                   ; en                         ; true  

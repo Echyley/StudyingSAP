@@ -1,0 +1,65 @@
+.se-page-approval-selector {
+    &__toggle-btn {
+        color: var(--sapLinkColor);
+        background-color: unset;
+        &::before {
+            @include se-type('0');
+        }
+
+        &:focus,
+        &:active {
+            box-shadow: none;
+        }
+
+        &:active,
+        &:hover {
+            outline: 0;
+            border-color: var(--sapButton_Hover_BorderColor);
+            background-color: var(--sapBaseColor);
+            border: 0.0625rem solid;
+        }
+    }
+
+    &__icon {
+        &--draft,
+        &--ready-to-sync {
+            @include status-icon();
+            margin-right: 10px;
+        }
+        &--draft {
+            background-color: var(--sapNeutralColor);
+        }
+        &--ready-to-sync {
+            background-color: var(--sapInformativeColor);
+        }
+    }
+
+    &-list {
+        margin: 0;
+        min-width: 190px;
+        border-radius: 4px;
+        padding: 0;
+    }
+
+    // override DropdownMenuItem
+    .se-dropdown-item {
+        display: flex;
+        align-items: center;
+        &:hover {
+            background-color: var(--sapBackgroundColor, #f7f7f7);
+        }
+    }
+
+    // override Popover styles
+    .fd-popover-container-custom {
+        box-shadow: var(--sapContent_Shadow0);
+    }
+    .fd-menu {
+        padding: 0;
+    }
+}
+.se-page-approval-info {
+    width: 320px;
+    white-space: normal;
+    padding: 16px;
+}

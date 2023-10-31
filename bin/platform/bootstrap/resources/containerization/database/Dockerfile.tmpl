@@ -1,0 +1,15 @@
+FROM ${baseImage}
+
+RUN groupadd --gid 1000 builder && useradd --uid 1000 --gid builder --create-home builder
+RUN mkdir -p ${hsqldb_dir}
+COPY ./*.jar ${hsqldb_dir}
+COPY server.properties ${hsqldb_dir}
+COPY start.sh ${hsqldb_dir}
+RUN chmod +x ${hsqldb_dir}/start.sh \
+    && chown -R builder:builder ${hsqldb_dir}
+
+USER builder
+WORKDIR /home/builder
+
+EXPOSE $port
+ENTRYPOINT ["${hsqldb_dir}/start.sh"]

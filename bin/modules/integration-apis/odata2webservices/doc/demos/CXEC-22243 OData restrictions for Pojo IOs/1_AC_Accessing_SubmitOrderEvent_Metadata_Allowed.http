@@ -1,0 +1,20 @@
+###  AC 1.1: $metadata can be retrieved for a POJO IO
+GET {{fullURL}}/OrderSubmission/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+
+> {%
+client.test("POJO IO metadata retrieved", function() {
+  client.assert(response.status === 200, "Response status is not 200 OK");
+});
+%}
+
+###  AC 1.1: $metadata can be retrieved for a type in a POJO IO
+GET {{fullURL}}/OrderSubmission/$metadata?User
+Authorization: Basic {{admin_user}} {{admin_pass}}
+
+> {%
+client.test("POJO IO type metadata retrieved", function() {
+  client.assert(response.status === 200, "Response status is not 200 OK");
+});
+%}
+

@@ -1,0 +1,73 @@
+<div class="pe-combinedview-config__form">
+    <div class="form-group">
+        <label for="PageFilterDropdownField001"
+               class="fd-form-label"
+               translate="personalization.commons.filter.label"></label>
+
+        <div class="pe-combinedview-config__filter-layout">
+            <page-filter-dropdown id="PageFilterDropdownField001"
+                                  (onSelectCallback)="pageFilterChange($event)"
+                                  class="fd-has-margin-right-small"></page-filter-dropdown>
+            <has-multicatalog class="perso-filter__wrapper perso-filter__wrapper--catalog">
+                <catalog-filter-dropdown (onSelectCallback)="catalogFilterChange($event)"></catalog-filter-dropdown>
+            </has-multicatalog>
+        </div>
+
+        <div class="pe-combinedview-config__select-group-layout">
+            <div class="pe-combinedview-config__select-group-label-layout">
+                <label for="CombinedViewSearchField1"
+                       class="fd-form-label se-control-label required pe-combinedview-config__label"
+                       translate="personalization.modal.combinedview.search.label"></label>
+            </div>
+            <se-select id="CombinedViewSearchField1"
+                       class="fd-form__control"
+                       [(model)]="selectedCombinedViewItemId"
+                       [placeholder]="'personalization.modal.combinedview.search.placeholder'"
+                       [fetchStrategy]="combinedViewItemsFetchStrategy"
+                       [onSelect]="selectElement"
+                       [itemComponent]="combinedViewItemPrinter"
+                       [disableChoiceFn]="isItemInSelectDisabled"
+                       [(reset)]="resetSelectedItems"
+                       [additionalBodyClass]="'se-select--paged'"
+                       [resetSearchInput]="false"></se-select>
+        </div>
+    </div>
+    <div class="form-group">
+        <p *ngIf="selectedCombinedViewItems.length === 0"
+           translate="personalization.toolbar.combinedview.openconfigure.empty"></p>
+        <div id="CombinedViewSelectedField1"
+             class="pe-combinedview-config__list-layout"
+             *ngFor="let item of selectedCombinedViewItems; index as i; first as isFirst"
+             [ngClass]="isFirst ? 'pe-combinedview-config__divider' : ''">
+            <div class="pe-combinedview-config__letter-layout">
+                <div [ngClass]="getClassForElement(i)"
+                     [textContent]="getLetterForElement(i)"></div>
+            </div>
+            <div class="pe-combinedview-config__names-layout">
+                <div class="perso-wrap-ellipsis pe-combinedview-config__cname"
+                     [textContent]="item.customization.name"
+                     [title]="item.customization.name"></div>
+                <span> ></span>
+                <div class="perso-wrap-ellipsis pe-combinedview-config__vname"
+                     [textContent]="item.variation.name"
+                     [title]="item.variation.name"></div>
+            </div>
+            <div class="pe-combinedview-config__hyicon-globe">
+                <se-tooltip *ngIf="!isItemFromCurrentCatalog(item.variation)"
+                            [placement]="'top-end'"
+                            [triggers]="['mouseenter', 'mouseleave']"
+                            [isChevronVisible]="true"
+                            [appendTo]="'body'">
+                    <span class="perso__globe-icon sap-icon--globe"
+                          se-tooltip-trigger></span>
+                    <div se-tooltip-body [translate]="item.variation.catalogVersionNameL10N"></div>
+                </se-tooltip>
+            </div>
+            <div class="pe-combinedview-config__hyicon-remove">
+                    <span class="sap-icon--decline"
+                          (click)="removeSelectedItem(item)"
+                          [title]="'personalization.modal.combinedview.icon.remove.title' | translate"></span>
+            </div>
+        </div>
+    </div>
+</div>

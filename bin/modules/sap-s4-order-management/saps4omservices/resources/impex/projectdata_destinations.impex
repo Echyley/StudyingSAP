@@ -1,0 +1,124 @@
+#****************************************************************#
+#*********************  Sales Order Creation   ******************#
+#****************************************************************#
+
+
+$s4OrderCreationUrl=https://tester.hana.ondemand.com/sap/opu/odata/SAP/API_SALES_ORDER_SRV/
+$s4OrderCreationCsrfUrl=https://tester.hana.ondemand.com//sap/opu/odata/SAP/API_SALES_ORDER_SRV/$metadata
+$orderEntity=A_SalesOrder
+$sap-client=
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+
+INSERT_UPDATE Endpoint ; id[unique = true]              ; name                           ; version[unique = true] ; specUrl
+                       ; s4omOrderEndpoint       ; s4omOrderEndpoint       ; unknown                ; $s4OrderCreationUrl
+                  
+INSERT_UPDATE DestinationTarget ; id[unique=true]
+                                ; s4omOrderDestinationTarget
+
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]                 ; url                                                                       ; endpoint(id,version)                   ; additionalProperties(key, value)[map-delimiter = |]     ; credential(id)              ; destinationTarget(id)[forceWrite=true]
+                                  ; s4omOrderDestination       ; $s4OrderCreationUrl      ; s4omOrderEndpoint:unknown       ; "csrfURL->$s4OrderCreationCsrfUrl|entity->$orderEntity|sap-client->$sap-client"       ; s4omOrderCredentials ; s4omOrderDestinationTarget
+
+#**********************************************#
+#*************  Basic Credentials  ************#
+#**********************************************#
+INSERT_UPDATE BasicCredential ;id[unique=true]             ;password ;username
+                              ;s4omOrderCredentials ;password ;username
+                              
+
+#****************************************************************#
+#*********************  Sales Order Simulation ******************#
+#****************************************************************#
+
+
+$s4omSalesOrderSimulationUrl=https://s4url/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/
+$s4omSalesOrderSimulationCsrfUrl=https://s4url/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/$metadata
+$s4omSalesOrderSimulationEntity=A_SalesOrderSimulation
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+
+INSERT_UPDATE Endpoint ; id[unique = true]        ; name                     ; version[unique = true] ; specUrl                   
+                       ; s4omOrderSimulateEndpoint ; s4omOrderSimulateEndpoint ; unknown                ; "$s4omSalesOrderSimulationUrl"
+
+INSERT_UPDATE DestinationTarget ; id[unique=true]                    
+                                ; s4omOrderSimulateDestinationTarget
+
+#**********************************************#
+#*************  Basic Credentials  ************#
+#**********************************************#
+INSERT_UPDATE BasicCredential ; id[unique=true]            ; username ; password   
+                              ; s4omOrderSimulateBasicCreds ; user   ; password
+                                  
+
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]           ; url                        ; endpoint(id,version)             ; credential(id)             ;destinationTarget(id)[default = s4omOrderSimulateDestinationTarget]; additionalProperties(key, value)[map-delimiter = |] 
+                                  ; s4omOrderSimulateDestination ; "$s4omSalesOrderSimulationUrl" ; s4omOrderSimulateEndpoint:unknown ; s4omOrderSimulateBasicCreds ; ;"csrfURL->$s4omSalesOrderSimulationCsrfUrl|entity->$s4omSalesOrderSimulationEntity|sap-client->$sap-client"
+
+
+#****************************************************************#
+#*********************  Billing Invoice ******************#
+#****************************************************************#
+
+$s4BillingUrl=https://tester.hana.ondemand.com/sap/opu/odata/SAP/API_BILLING_DOCUMENT_SRV/
+$s4BillingCsrfUrl=https://tester.hana.ondemand.com/sap/opu/odata/SAP/API_BILLING_DOCUMENT_SRV/$metadata
+$billingEntity=A_BillingDocumentItem
+$sap-client=
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+
+INSERT_UPDATE Endpoint ; id[unique = true]         ; name                      ; version[unique = true] ; specUrl
+                       ; s4omBillingEndpoint       ; s4omBillingEndpoint       ; unknown                ; $s4OrderCreationUrl
+                  
+INSERT_UPDATE DestinationTarget ; id[unique=true]
+                                ; billingDestinationTarget
+
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]     ; url               ; endpoint(id,version)             ; additionalProperties(key, value)[map-delimiter = |]                               ; credential(id)              ; destinationTarget(id)[forceWrite=true]
+                                  ; billingDestination    ; $s4BillingUrl     ; s4omBillingEndpoint:unknown      ; "csrfURL->$s4BillingCsrfUrl|entity->$billingEntity|sap-client->$sap-client"       ; s4omOrderCredentials        ; billingDestinationTarget
+
+
+#****************************************************************#
+#*********************  Billing PDF ******************#
+#****************************************************************#
+
+$s4BillingUrl=https://tester.hana.ondemand.com/sap/opu/odata/SAP/API_BILLING_DOCUMENT_SRV/
+$s4BillingCsrfUrl=https://tester.hana.ondemand.com/sap/opu/odata/SAP/API_BILLING_DOCUMENT_SRV/$metadata
+$billingPDFEntity=GetPDF
+$sap-client=
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+
+INSERT_UPDATE Endpoint ; id[unique = true]         ; name                      ; version[unique = true] ; specUrl
+                       ; s4omBillingPDFEndpoint    ; s4omBillingPDFEndpoint    ; unknown                ; $s4OrderCreationUrl
+                  
+INSERT_UPDATE DestinationTarget ; id[unique=true]
+                                ; billingPDFDestinationTarget
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]       ; url               ; endpoint(id,version)             ; additionalProperties(key, value)[map-delimiter = |]                               ; credential(id)              ; destinationTarget(id)[forceWrite=true]
+                                  ; billingPDFDestination   ; $s4BillingUrl     ; s4omBillingPDFEndpoint:unknown   ; "csrfURL->$s4BillingCsrfUrl|entity->$billingPDFEntity|sap-client->$sap-client"    ; s4omOrderCredentials        ; billingPDFDestinationTarget
+

@@ -1,0 +1,117 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+@import "cockpitng-globals.scss";
+
+/* Styles shared with multiple widgets are placed in this file. */
+
+$actionBarHeight: 50px;
+$editorBottomMargin: 40px;
+
+.integrationbackoffice-modal-body {
+  border-bottom: 1px solid var(--bo-slider-border-color);
+  padding: 15px 20px 35px 20px;
+}
+
+// shared with multiple detailsModal
+.integrationbackoffice-modal-body-no-button {
+  border-top: 1px solid var(--bo-field-border-color);
+  padding: 15px 20px 20px 20px;
+}
+
+// to style labels in modals
+.integrationbackoffice-modal-label {
+  color: var(--bo-content-label-color);
+  font-size: $font-size__base;
+  font-weight: normal;
+  line-height: 14px;
+}
+
+.integrationbackoffice-modal-required-label {
+  &:after {
+    content: "*";
+    color: var(--bo-input-required-color);
+    font-size: $font-size__base;
+    position: relative;
+    top: -2px;
+    font-weight: 700;
+  }
+}
+
+// to style buttons in modals like 'create', 'confirm', 'download', etc.
+.integrationbackoffice-modal-button {
+  float: right;
+  margin: 10px;
+}
+
+// set styles for splitter of left-right layout
+.integrationbackoffice-editor-splitlayout {
+  background: var(--bo-container-background);
+
+  .z-splitlayout-splitter {
+    width: 0;
+    border: 0 solid var(--bo-base-background);
+    border-right-width: 4px;
+  }
+}
+
+/* Toolbar */
+.integrationbackoffice-toolbar {
+  background-color: var(--bo-page-header-background) !important;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top-width: 0;
+  border-bottom-width: 0;
+
+  // for filter, refresh and save button
+  .yw-toolbar-after {
+    float: right;
+  }
+}
+
+// for AddClassificationAttributesModal only
+.use-full-qualifier-container {
+  margin: -10px -20px 10px;
+  padding: 0 20px;
+}
+
+/* Listbox */
+.integrationbackoffice-generic-listbox {
+  border: none;
+
+  .z-listbox-header {
+    border-bottom: 1px solid var(--bo-container-background);
+  }
+
+  .z-listheader {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+  }
+
+}
+
+.integrationbackofficeTooltips {
+  border: 0px;
+  height: 28px;
+  width: 28px;
+  line-height: inherit;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 2px;
+  background-color: var(--bo-base-color);
+}
+
+// set icon for the first levels of Integration UI Tools
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("integrationbackoffice_explorer_treenode_maintenance", "integration");
+  @include setTreeIconGlyph("integrationbackoffice_explorer_treenode_integrationApis", "integrateapi");
+  @include setTreeIconGlyph("integrationbackoffice_explorer_typenode_exportconfig", "exportconfig");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("integrationbackoffice_explorer_treenode_maintenance", "integration");
+  @include setSideNavigationIconGlyph("integrationbackoffice_explorer_treenode_integrationApis", "integrateapi");
+  @include setSideNavigationIconGlyph("integrationbackoffice_explorer_typenode_exportconfig", "exportconfig");
+}

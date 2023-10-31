@@ -1,0 +1,5 @@
+$lang=ko
+
+UPDATE DynamicConstraint;id[unique=true,allownull=true] ;message[lang=$lang]
+                        ;oppsClientInterfaceVersionConstraint                       ;"클라이언트 인터페이스 주 버전 필드에서 필요한 버전을 선택하십시오."
+

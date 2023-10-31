@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<alias alias="sapPPSConfigService"
+		name="sapDefaultPPSConfigService" />
+	<bean id="sapDefaultPPSConfigService"
+		class="com.sap.retail.sapppspricing.impl.DefaultPPSConfigService">
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<alias alias="calculationService"
+		name="sapDefaultPPSCalculationService" />
+	<bean id="sapDefaultPPSCalculationService"
+		class="com.sap.retail.sapppspricing.impl.DefaultPPSCalculationService"
+		parent="defaultCalculationService">
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="pricingBackend" ref="sapPPSPricingBackend" />
+		<property name="configService" ref="sapPPSConfigService" />
+		<property name="findPriceStrategy" ref="findPriceStrategy" />
+		<property name="findPPSDiscountsStrategies" ref="discountStrategiesFinderList" />
+		<property name="findTaxesStrategies" ref="taxesStrategiesFinderList" />
+		<property name="findDeliveryCostStrategy" ref="findDeliveryRelatedCostStrategy" />
+		<property name="findPaymentCostStrategy" ref="findPaymentRelatedCostStrategy" />
+		<property name="orderRequiresCalculationStrategy" ref="orderRequiresCalculationStrategy" />
+		<property name="taxFreeEntrySupport" value="${abstractorder.taxFreeEntrySupport}" />
+	</bean>
+
+
+	<alias alias="promotionsService" name="sapPPSPromotionsService" />
+	<bean id="sapPPSPromotionsService" parent="promotionEngineService"
+		class="com.sap.retail.sapppspricing.impl.DefaultPPSPromotionsService">
+		<property name="configService" ref="sapPPSConfigService" />
+		<property name="commerceRuleEngineService" ref="commerceRuleEngineService" />
+		<property name="calculationService" ref="calculationService" />
+		<property name="engineRuleDao" ref="engineRuleDao" />
+		<property name="ruleEngineContextDao" ref="ruleEngineContextDao" />
+		<property name="ruleActionService" ref="ruleActionService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="strategies" ref="actionStrategies" />
+		<property name="promotionDao" ref="promotionDao" />
+		<property name="factContextFactory" ref="factContextFactory" />
+		<property name="defaultPromotionsService" ref="defaultPromotionsService" />
+		<property name="promotionSourceRuleDao" ref="promotionSourceRuleDao" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="ruleEngineContextForCatalogVersionsFinderStrategy" ref="ruleEngineContextForCatalogVersionsFinderStrategy" />
+		<property name="ruleEngineContextFinderStrategy" ref="ruleEngineContextFinderStrategy" />
+		<property name="ruleBasedPromotionsContextValidator" ref="ruleBasedPromotionsContextValidator" />
+		<property name="modelService" ref="modelService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="timeService" ref="timeService" />
+		<property name="productUtils" ref="productUtils" /> 
+	</bean>
+
+
+	<alias alias="priceService"
+		name="sapDefaultPPSPricingCatalogService" />
+	<bean id="sapDefaultPPSPricingCatalogService"
+		class="com.sap.retail.sapppspricing.impl.DefaultPPSPricingCatalogService"
+		parent="netPriceService">
+		<property name="pricingBackend" ref="sapPPSPricingBackend" />
+		<property name="configService" ref="sapPPSConfigService" />
+	</bean>
+
+
+	<alias name="sapDefaultPPSPricingBackend"
+		alias="sapPPSPricingBackend" />
+	<bean id="sapDefaultPPSPricingBackend"
+		class="com.sap.retail.sapppspricing.impl.PricingBackendPPS">
+		<property name="configService" ref="sapPPSConfigService" />
+		<property name="ppsClient" ref="sapPPSClient" />
+		<property name="requestCreator" ref="sapPPSRequestCreator" />
+		<property name="accessor" ref="sapPPSClientBeanAccessor" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="highPrice"
+			value="${sapppspricing.catalogerrorprice}" />
+		<property name="useHighPrice"
+			value="${sapppspricing.catalogerrorprice.use}" />
+		<property name="resultToOrderMappers">
+			<list>
+				<ref bean="sapPriceCalculateToOrderMapper" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="sapDefaultPPSRequestCreator"
+		alias="sapPPSRequestCreator" />
+	<bean id="sapDefaultPPSRequestCreator"
+		class="com.sap.retail.sapppspricing.impl.DefaultPPSRequestCreator">
+		<property name="accessor" ref="sapPPSClientBeanAccessor" />
+		<property name="configService" ref="sapPPSConfigService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="lineItemPopulators">
+			<list>
+				<ref bean="sapMerchHierLineItemPopulator" />
+			</list>
+		</property>
+		<property name="discountableFlag"
+			value="${sapppspricing.usediscountableflag}" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="sapDefaultPriceCalculateToOrderMapper"
+		alias="sapPriceCalculateToOrderMapper" />
+	<bean id="sapDefaultPriceCalculateToOrderMapper"
+		class="com.sap.retail.sapppspricing.impl.DefaultPriceCalculateToOrderMapper">
+		<property name="modelService" ref="modelService" />
+		<property name="accessorHelper" ref="ppsAccessorHelper"></property>
+	</bean>
+
+	<alias name="sapDefaultPPSClient" alias="sapPPSClient" />
+	<bean id="sapDefaultPPSClient"
+		class="com.sap.retail.sapppspricing.impl.DefaultPPSClient">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="destinationService" ref="destinationService"/>
+	</bean>
+
+
+	<alias name="sapDefaultMerchHierLineItemPopulator"
+		alias="sapMerchHierLineItemPopulator" />
+	<bean id="sapDefaultMerchHierLineItemPopulator"
+		class="com.sap.retail.sapppspricing.impl.MerchandiseHierarchyLineItemPopulator" parent="sapPPSClientBeanAccessor">
+		<property name="merchGroupCatalogId"
+			value="${sappspricing.merchcatclassificationcatalogid}" />
+	</bean>
+
+
+	<alias name="defaultOPPSPromotionResultPopulator" alias="promotionResultPopulator"/>
+    <bean id="defaultOPPSPromotionResultPopulator" parent="defaultPromotionResultPopulator"
+          class="com.sap.retail.sapppspricing.populator.OPPSPromotionResultPopulator">
+          <property name="promotionResultService"
+			ref="promotionResultService" />
+		<property name="promotionsConverter"
+			ref="promotionsConverter" />
+		<property name="promotionOrderEntryConsumedConverter"
+			ref="promotionOrderEntryConsumedConverter" />
+		<property name="couponDataFacade" ref="couponDataFacade" />
+    </bean>
+
+    <bean id="sapRequestHelper" class="com.sap.retail.sapppspricing.impl.RequestHelperImpl">
+          <property name="objectFactory" ref="sapClientApiDtoFactory"></property>
+    </bean>
+
+    <alias name="SapObjectFactory" alias="sapClientApiDtoFactory" />
+    <bean id="SapObjectFactory" class="com.sap.retail.sapppspricing.opps.ObjectFactory"/>
+
+
+    <bean id="sapPPSClientBeanAccessor" class="com.sap.retail.sapppspricing.opps.PPSClientBeanAccessorImpl">
+    		<property name="objectFactory" ref="sapClientApiDtoFactory"></property>
+    		<property name="helper" ref="sapRequestHelper"/>
+    </bean>
+    
+    <alias name="defaultOPPSCartPopulator" alias="cartPopulator" />
+	<bean id="defaultOPPSCartPopulator"
+		class="com.sap.retail.sapppspricing.populator.OPPSCartPopulator"
+		parent="defaultCartPopulator">
+		<property name="configService" ref="sapPPSConfigService" />
+
+	</bean>
+	
+	<bean id="ppsAccessorHelper" class="com.sap.retail.sapppspricing.impl.PPSAccessorHelper">
+		<property name="objectFactory" ref="SapObjectFactory"></property>
+		<property name="helper" ref="sapRequestHelper"></property>
+	</bean>
+
+    <bean id="oppsExtendedCartPopulator"
+          class="com.sap.retail.sapppspricing.populator.OPPSExtendedCartPopulator"
+          parent="defaultCartPopulator">
+        <property name="configService" ref="sapPPSConfigService" /> 
+    </bean>
+          
+    <bean parent="modifyPopulatorList">
+		<property name="list" ref="extendedCartConverter"/>
+		<property name="add" ref="oppsExtendedCartPopulator"/>
+	</bean>
+</beans>

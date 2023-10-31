@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="sapProductConfigSimplePricingProviderMock" alias="sapProductConfigPricingProvider" />
+	<bean id="sapProductConfigSimplePricingProviderMock" class="de.hybris.platform.sap.productconfig.runtime.mock.provider.impl.SimplePricingProviderMockImpl">
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+		<property name="active" value="true" />
+		<property name="configurationMockPersistenceService" ref="sapProductConfigConfigurationMockPersistenceService" />		
+	</bean>
+
+	<alias name="sapProductConfigSimplePricingParameters" alias="sapProductConfigPricingParameters" />
+	<bean id="sapProductConfigSimplePricingParameters" class="de.hybris.platform.sap.productconfig.runtime.mock.impl.SimplePricingConfigurationParameter">
+		<property name="productDeltaPriceDecision" ref="sapProductConfigProductDeltaPriceDecision" />	
+	</bean>
+
+	<util:map id="sapProductConfigProductDeltaPriceDecision" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.Boolean">
+		<entry key="CPQ_HOME_THEATER" value="false" />
+		<entry key="CPQ_LAPTOP" value="false" />
+		<entry key="CONF_BANDSAW_ML" value="false" />
+		<entry key="CONF_SCREWDRIVER_S" value="false" />
+		<entry key="CONF_CAMERA_SL" value="true" />
+		<entry key="CONF_HOME_THEATER_ML" value="false" />
+	</util:map>
+
+	<alias name="sapProductConfigDefaultMockProviderFactory" alias="sapProductConfigProviderFactory" />
+	<alias name="sapProductConfigDefaultMockProviderFactory" alias="sapProductConfigMockProviderFactory" />
+	<bean id="sapProductConfigDefaultMockProviderFactory" class="de.hybris.platform.sap.productconfig.runtime.interf.impl.DefaultRuntimeProviderFactoryImpl">
+		<property name="configurationProvider" ref="sapProductConfigConfigurationProviderMock" />
+		<property name="pricingProvider" ref="sapProductConfigSimplePricingProviderMock" />
+		<property name="analyticsProvider" ref="sapProductConfigDefaultAnalyticsProvider" />
+		<property name="productCsticAndValueParameterProvider" ref="sapProductConfigDefaultProductCsticAndValueParameterProviderMock" />
+		<property name="pricingParameter" ref="sapProductConfigSimplePricingParameters" />
+	</bean>
+
+	<bean id="sapProductConfigRegisteredProviderFactoriesMockListMergeDirective" depends-on="sapProductConfigRegisteredProviderFactories" parent="listMergeDirective">
+		<property name="add" value="sapProductConfigMockProviderFactory" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultRunTimeConfigMockFactory" alias="sapProductConfigRunTimeConfigMockFactory" />
+	<bean id="sapProductConfigDefaultRunTimeConfigMockFactory" class="de.hybris.platform.sap.productconfig.runtime.mock.impl.RunTimeConfigMockFactory">
+		<property name="i18NService" ref="commonI18NService" />
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+	</bean>
+
+	<!-- uncomment if you want the mock implementation to be default -->
+	<!-- <alias name="sapProductConfigConfigurationProviderMock" alias="sapProductConfigConfigurationProvider" /> -->
+	<bean id="sapProductConfigConfigurationProviderMock" class="de.hybris.platform.sap.productconfig.runtime.mock.provider.impl.ConfigurationProviderMockImpl">
+		<property name="configurationMockPersistenceService" ref="sapProductConfigConfigurationMockPersistenceService" />
+		<property name="mockIdGenerator" ref="sapProductConfigConfigurationMockIdGenarator" />
+		<property name="configMockFactory" ref="sapProductConfigRunTimeConfigMockFactory" />
+		<property name="removePricesFromConfiguration" value="true" />
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultConfigurationMockPersistenceService" alias="sapProductConfigConfigurationMockPersistenceService" />
+	<bean id="sapProductConfigDefaultConfigurationMockPersistenceService" class="de.hybris.platform.sap.productconfig.runtime.mock.persistence.impl.DefaultConfigurationMockPersistenceService">
+		<constructor-arg name="modelService" ref="modelService" />
+		<constructor-arg name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<alias name="sapProductConfigDefaultConfigurationMockIdGenarator" alias="sapProductConfigConfigurationMockIdGenarator" />
+	<bean id="sapProductConfigDefaultConfigurationMockIdGenarator" class="de.hybris.platform.sap.productconfig.runtime.mock.util.impl.DefaultConfigurationMockIdGenarator">
+	</bean>
+
+	<!-- uncomment if you want the mock implementation to be default -->
+	<!-- <alias alias="sapProductConfigProductCsticAndValueParameterProvider" name="sapProductConfigDefaultProductCsticAndValueParameterProviderMock" 
+		/> -->
+	<bean id="sapProductConfigDefaultProductCsticAndValueParameterProviderMock" class="de.hybris.platform.sap.productconfig.runtime.mock.provider.impl.ProductCsticAndValueParameterProviderMockImpl">
+		<property name="configMockFactory" ref="sapProductConfigRunTimeConfigMockFactory" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultChangeableVariantBaseProducts" alias="sapProductConfigChangeableVariantBaseProducts" />
+	<util:set id="sapProductConfigDefaultChangeableVariantBaseProducts">
+		<value type="java.lang.String">CONF_M_PIPE</value>
+	</util:set>
+
+
+</beans>

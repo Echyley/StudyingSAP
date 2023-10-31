@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="DestinationChannel" autocreate="false" generate="false">
+			<value code="CDS"/>
+		</enumtype>
+	</enumtypes>
+
+	<itemtypes>
+		<itemtype code="AbstractOrder"
+				  autocreate="false"
+				  generate="false">
+
+			<attributes>
+				<attribute qualifier="consentReference" type="java.lang.String">
+					<persistence type="property"/>
+					<description>Holds the identifier of the user consent to enable tracking user activities.</description>
+				</attribute>
+				<attribute qualifier="cartIdReference" type="java.lang.String">
+					<persistence type="property"/>
+					<description>Holds the id of the cart.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="User"
+				  autocreate="false"
+				  generate="false">
+			<attributes>
+				<attribute qualifier="profileTagDebug" type="java.lang.Boolean">
+					<persistence type="property"/>
+					<description>Holds the debug flag that controls application logging for debugging purposes.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Consent"
+				  autocreate="false"
+				  generate="false">
+			<attributes>
+				<attribute qualifier="consentReference" type="java.lang.String">
+					<persistence type="property"/>
+					<description>Holds the identifier of the user consent to enable tracking user activities.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ProfileTagScriptComponent" jaloclass="com.hybris.yprofile.profiletagaddon.jalo.ProfileTagScriptComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"/>
+	</itemtypes>
+</items>

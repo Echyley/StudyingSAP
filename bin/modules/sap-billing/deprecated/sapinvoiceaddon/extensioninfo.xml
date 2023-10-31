@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    	
+    <extension abstractclassprefix="Generated" classprefix="Sapinvoiceaddon" description="sapinvoiceaddon extension" managername="SapinvoiceaddonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapinvoiceaddon">
+        		
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                 
+		
+        <requires-extension name="addonsupport"/>
+        		
+        <requires-extension name="commercefacades"/>
+        	    
+        <requires-extension name="sapinvoicefacades"/>
+        	    
+        <requires-extension name="accountsummaryaddon"/>
+        	    
+        <requires-extension name="acceleratorstorefrontcommons"/>
+        	    
+        <requires-extension name="b2bacceleratorservices"/>
+        	    
+        <requires-extension name="integrationservices"/>
+           
+        
+        <requires-extension name="outboundservices"/>
+         
+        
+        <requires-extension name="inboundservices"/>
+            
+ 		
+        <requires-extension name="sapcpiadapter"/>
+         
+		
+        <coremodule generated="true" manager="de.hybris.platform.sap.sapinvoiceaddon.jalo.SapinvoiceaddonManager" packageroot="de.hybris.platform.sap.sapinvoiceaddon"/>
+                
+        <meta key="deprecated" value="true"/>
+        	
+
+	
+    </extension>
+    
+</extensioninfo>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.sap.hybris.sapserviceorderocc.controllers"/>
+    
+    
+    <bean parent="fieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="DEFAULT"
+				       value="productTypes"/>
+				<entry key="FULL"
+				       value="productTypes"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean parent="fieldSetLevelMapping" >
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.basestore.BaseStoreWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="DEFAULT"
+                       value="serviceOrderConfiguration(DEFAULT)"/>
+                <entry key="FULL"
+                       value="serviceOrderConfiguration(FULL)"/>
+            </map>
+        </property>
+    </bean>
+    
+    
+    <bean parent="fieldSetLevelMapping" >
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.CartWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="DEFAULT"
+                       value="servicedAt"/>
+                <entry key="FULL"
+                       value="servicedAt"/>
+            </map>
+        </property>
+    </bean>
+    
+    
+    <bean parent="fieldSetLevelMapping" >
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="DEFAULT"
+                       value="servicedAt,serviceCancellable,serviceReschedulable"/>
+                <entry key="FULL"
+                       value="servicedAt,serviceCancellable,serviceReschedulable"/>
+            </map>
+        </property>
+    </bean>
+    
+    
+<!--     	Field Mappings : BaseStoreWsDTO -->
+
+	<bean id="sapServiceOrderBaseStoreFieldMapping" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.basestore.data.BaseStoreData"/>
+		<property name="destClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.basestore.BaseStoreWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="sapServiceOrderConfig" value="serviceOrderConfiguration"/>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="sapServiceOrderConfigFieldMapping" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.basestore.SAPConfiguration.data.SAPConfigurationData"/>
+		<property name="destClass"
+				  value="com.sap.hybris.sapserviceorderocc.dto.ServiceOrderConfigWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="leadDays" value="leadDays"/>
+				<entry key="serviceScheduleTimes" value="serviceScheduleTimes"/>
+			</map>
+		</property>
+	</bean>
+    
+    <bean id="sapServiceOrderProductFieldMapping" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="destClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="sapProductTypes" value="productTypes"/>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="sapServiceCartFieldMapping" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.order.data.CartData"/>
+		<property name="destClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.order.AbstractOrderWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="requestedServiceStartDate" value="servicedAt"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="sapServiceOrderFieldMapping" parent="fieldMapper">
+		<property name="sourceClass"
+				  value="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="destClass"
+				  value="de.hybris.platform.commercewebservicescommons.dto.order.AbstractOrderWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="requestedServiceStartDate" value="servicedAt"/>
+			</map>
+		</property>
+	</bean>
+    
+    <alias name="defaultCancelServiceEntryInputListWsDTOValidator" alias="cancelServiceEntryInputListWsDTOValidator"/>
+	<bean id="defaultCancelServiceEntryInputListWsDTOValidator" class="com.sap.hybris.sapserviceorderocc.validators.CancelServiceEntryInputListWsDTOValidator"/>
+
+	<alias name="defaultRescheduleServiceOrderScheduleDetailsWsDTOValidator" alias="rescheduleServiceOrderScheduleDetailsWsDTOValidator"/>
+	<bean id="defaultRescheduleServiceOrderScheduleDetailsWsDTOValidator" class="com.sap.hybris.sapserviceorderocc.validators.RescheduleServiceOrderScheduleDetailsWsDTOValidator"/>
+	
+	
+		<alias name="defaultServiceScheduleSlotValidator" alias="serviceScheduleSlotValidator"/>
+	<bean id="defaultServiceScheduleSlotValidator" class="com.sap.hybris.sapserviceorderocc.validators.ServiceScheduleSlotValidator"/>
+</beans>

@@ -1,0 +1,29 @@
+$lang=hi
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;कॉन्फ़िगरयोग्य उत्पाद प्रोमो
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;प्रोमो संदेश के साथ विकल्प मूल्य पर प्रतिशत छूट;लागू करें {cstic} / {cstic_value} विकल्प हेतु {discount_value,number,percent*1} छूट दें
+;y_configurable_product_display_promo_message;प्रोमो संदेश प्रदर्शित करें (प्रोमो लागू करता है);प्रोमों संदेश प्रदर्शित करें
+;y_configurable_product_display_promo_opportunity_message;प्रोमो अवसर संदेश प्रदर्शित करें (प्रोमों अभी तक लागू नहीं);प्रोमों अवसर संदेश प्रदर्शित करें
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;विशिष्टता;वह विशिष्टता जिसके लिए यह छूट लागू होती है और जिसके लिए यह संदेश दिखाई देती है
+;y_configurable_product_percentage_discount_for_option;cstic_value;विशिष्टता मान;वह विशिष्टता मान जिसके लिए यह छूट लागू होती है और जिसके लिए यह संदेश दिखाई देती है
+;y_configurable_product_percentage_discount_for_option;discount_value;प्रतिशत छूट मान;प्रतिशत छूट जो विकल्प मूल्य के लिए लागू होता है. प्रतिशत हस्ताक्षर के बीना मूल्य दर्ज करें
+;y_configurable_product_percentage_discount_for_option;message;संदेश;संदेश टेक्स्ट
+;y_configurable_product_percentage_discount_for_option;extended_message;विस्तारित संदेश;विस्तारित संदेश टेक्स्ट
+;y_configurable_product_display_promo_message;cstic;विशिष्टता;जिसके लिए यह संदेश दिखाई देने वाला है उसके लिए विशिष्टता
+;y_configurable_product_display_promo_message;cstic_value;विशिष्टता मान;जिसके लिए यह संदेश दिखाई देने वाला है उसके लिए विशिष्टता मान
+;y_configurable_product_display_promo_message;message;संदेश;संदेश टेक्स्ट
+;y_configurable_product_display_promo_message;extended_message;विस्तारित संदेश;विस्तारित संदेश टेक्स्ट
+;y_configurable_product_display_promo_opportunity_message;cstic;विशिष्टता;जिसके लिए यह संदेश दिखाई देने वाला है उसके लिए विशिष्टता
+;y_configurable_product_display_promo_opportunity_message;cstic_value;विशिष्टता मान;जिसके लिए यह संदेश दिखाई देने वाला है उसके लिए विशिष्टता मान
+;y_configurable_product_display_promo_opportunity_message;message;संदेश;संदेश टेक्स्ट
+;y_configurable_product_display_promo_opportunity_message;extended_message;विस्तारित संदेश;विस्तारित संदेश टेक्स्ट
+
+#% endif:

@@ -1,0 +1,13 @@
+<ng-container *ngIf="config">
+    <se-message *ngIf="config.message" [type]="config.message.type" [messageId]="config.message.id">
+        <ng-container se-message-description>
+            <span [translate]="config.message.text"></span>
+        </ng-container>
+    </se-message>
+    <div
+        id="confirmationModalDescription"
+        [ngClass]="{ 'fd-has-margin-top-small' : config.message }"
+        [translate]="config.description"
+        [translateParams]="config.descriptionPlaceholders"
+    ></div>
+</ng-container>

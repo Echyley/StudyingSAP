@@ -1,0 +1,36 @@
+<!-- CUTION: This is entry point of customer override example for component 'mediaSelector' -->
+<!-- If anything needs to be changed, you MUST test trail 'Trail: Creating a Customized SmartEdit Extension' also works correctly  -->
+<div class="se-file-selector" [ngClass]="customClass">
+    <label
+        *ngIf="!disabled"
+        class="se-button se-button--text"
+        [ngClass]="{ 'se-button--disabled': disabled, 
+                     'se-file-selector__custombtn': customComponent, 
+                     'se-file-selector__btn': !customComponent }"
+    >
+        <!-- custom component -->
+        <ng-container *ngIf="customComponent">
+            <ng-container
+                *ngComponentOutlet="customComponent.component; injector: customComponent.injector"
+            >
+            </ng-container>
+        </ng-container>
+        <!-- "Upload file to library" / "Replace" Button -->
+        <span
+            class="sap-icon--share se-media__action-icon"
+            [ngClass]="{
+        'sap-icon--share': isReplaceMode(),
+        'sap-icon--upload': !isReplaceMode()
+    }"
+        ></span>
+        <span class="se-file-selector__label">{{ labelI18nKey | translate }}</span>
+        <ng-container *ngIf="!customComponent">
+            <input
+                type="file"
+                class="hide se-file-selector__input"
+                [accept]="buildAcceptedFileTypesList()"
+                (change)="onSelect($event.target.files)"
+            />
+        </ng-container>
+    </label>
+</div>

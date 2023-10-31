@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.b2bacceleratorservices.document.data.B2BDragAndDropData">
+		<property name="amount" type="java.math.BigDecimal" />
+		<property name="useNumber" type="java.lang.String" />
+		<property name="payNumber" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.b2bacceleratorservices.document.criteria.FilterByCriteriaData">
+		<property name="startRange" type="java.lang.String"/>
+		<property name="endRange" type="java.lang.String"/>
+		<property name="documentTypeCode" type="java.lang.String"/>
+		<property name="documentStatus" type="java.lang.String"/>
+		<property name="filterByValue" type="java.lang.String"/>
+	</bean>
+
+</beans>

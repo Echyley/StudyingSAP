@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<project name="b2bpunchoutbackoffice_buildcallbacks">
+
+	<property name="b2bpunchoutbackofficeWebFragmentSrc" value="${ext.b2bpunchoutbackoffice.path}/resources/web-fragment.xml"/>
+	<property name="b2bpunchoutbackofficeWebFragmentDestJar" value="${ext.backoffice.path}/web/webroot/WEB-INF/lib/webfragmentExt_b2bpunchoutbackoffice.jar"/>
+
+	<macrodef name="b2bpunchoutbackoffice_clean_classpath_file">
+		<sequential>
+			<copy file="${ext.b2bpunchoutbackoffice.path}/.classpath" tofile="${ext.b2bpunchoutbackoffice.path}/.classpath.edit"
+				  overwrite="true"
+				  failonerror="true">
+				<filterchain>
+					<linecontainsregexp negate="true">
+						<regexp pattern="^(\t\t\t\t|)$" />  <!-- added by script -->
+					</linecontainsregexp>
+				</filterchain>
+			</copy>
+			<move file="${ext.b2bpunchoutbackoffice.path}/.classpath.edit" tofile="${ext.b2bpunchoutbackoffice.path}/.classpath"
+				  overwrite="true"
+				  failonerror="true" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="b2bpunchoutbackoffice_after_clean">
+		<sequential>
+			<b2bpunchoutbackoffice_remove_web_fragment/>
+			<echo level="info" message="Generating .classpath file for b2bpunchoutbackoffice" />
+			<create_extension_classpath_file extname="b2bpunchoutbackoffice" />
+			<b2bpunchoutbackoffice_clean_classpath_file />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="b2bpunchoutbackoffice_after_build">
+		<sequential>
+			<b2bpunchoutbackoffice_remove_web_fragment/>
+			<b2bpunchoutbackoffice_create_web_fragment/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="b2bpunchoutbackoffice_remove_web_fragment">
+		<sequential>
+			<if>
+				<available file="${b2bpunchoutbackofficeWebFragmentDestJar}"/>
+				<then>
+					<delete file="${b2bpunchoutbackofficeWebFragmentDestJar}"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="b2bpunchoutbackoffice_create_web_fragment">
+		<sequential>
+			<if>
+				<available file="${b2bpunchoutbackofficeWebFragmentSrc}"/>
+				<then>
+					<sequential>
+						<jar destfile="${b2bpunchoutbackofficeWebFragmentDestJar}">
+							<metainf file="${b2bpunchoutbackofficeWebFragmentSrc}"/>
+						</jar>
+					</sequential>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<patternset id="b2bpunchoutbackoffice.localization.pattern">
+		<!-- core and hmc  -->
+		<include name="**/*locales*_en.properties"/>
+		<exclude name="**/hmc/web/webroot/WEB-INF/classes/**/*"/>
+		<exclude name="**/unittest/**/*"/>
+		<!-- cockpit (ng) -->
+		<include name="**/i3-label_en.properties"/>
+		<include name="**/labels_en.properties"/>
+		<!-- messages -->
+		<include name="**/*messages_en.properties"/>
+		<include name="**/*messages.properties"/>
+		<!-- frontend properties files in WEB-INF/messages folder -->
+		<include name="**/WEB-INF/messages/*_en.properties"/>
+		<!-- csv and impex -->
+		<include name="**/*_en.csv"/>
+		<include name="**/*_en.impex"/>
+		<include name="**/lang-en.properties"/>
+		<!-- email localizations from yacceleratorcore -->
+		<include name="resources/**/messages/*_en.properties"/>
+		<!-- include validation messages -->
+		<include name="resources/**/ValidationMessages.properties"/>
+	</patternset>
+
+	<macrodef name="b2bpunchoutbackoffice_before_build">
+		<sequential>
+			<register_sass_extension extensionname="b2bpunchoutbackoffice"/>
+			<register_sass_extension extensionname="b2bpunchoutbackoffice" resources="resources" destination=""/>
+		</sequential>
+	</macrodef>
+
+
+</project>

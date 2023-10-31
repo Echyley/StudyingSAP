@@ -1,0 +1,289 @@
+@import "cockpitng-globals.scss";
+@import "../support/_rulebuilderbackoffice_common-variables.scss";
+
+.yrb-condition,
+.yrb-action {
+	&s{
+		width: 100%;
+		background: var(--bo-container-background);
+		padding: $rulebuilder__ca-container--padding;
+	
+		&-editor {
+			width: 100%;
+
+			.z-center {
+				&-header {
+					border: 0;
+					padding-left: 0;
+					padding-bottom: $rulebuilder__header-main--padding-bottom;
+					font-size: $rulebuilder__header--font-size;
+				}
+			}
+		}
+		&-title>.z-label {
+			font-size: $rulebuilder__title--font-size;
+			font-weight: $rulebuilder__title--font-weight;
+		}
+		&-drop-placeholder {
+			background: none;
+			padding: $rulebuilder__ca-placeholder--padding;
+			cursor: default;
+			@if $rulebuilder__ca-placeholder--border-width {
+				border: $rulebuilder__ca-container--border;
+				border-width:  $rulebuilder__ca-placeholder--border-width;
+			}
+            &:hover {
+                .z-label {
+                    background: var(--bo-list-hover-background);
+                }
+            }
+			&.z-drag-over {
+            	.z-label {
+            		background: var(--bo-list-hover-background);
+            	}
+				cursor: pointer;
+				cursor: grab;
+			}
+
+			&:hover, &.z-drag-over{
+				.z-label {
+					color: var(--bo-highlight-color);
+					border-color: var(--bo-highlight-color);
+				}
+			}
+
+			.z-label {
+				height: $rulebuilder__ca-placeholder-inner--height;
+				border: $rulebuilder__ca-placeholder-inner--border;
+				font-size: $rulebuilder__ca-placeholder-inner--font-size;
+				font-weight: $rulebuilder__ca-placeholder-inner--font-weight;
+				line-height: $rulebuilder__ca-placeholder-inner--line-height;
+				display: block;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
+				background: var(--bo-list-background);
+				
+				@if $rulebuilder__ca-placeholder-inner-icon-image-right--bg-image {
+					&:after {
+						margin-top: $rulebuilder__ca-placeholder-inner-icon-image-right--margin-top;
+						background: url($rulebuilder__ca-placeholder-inner-icon-image-right--bg-image) no-repeat 0px 100%;
+						width: $rulebuilder__ca-placeholder-inner-icon-image-right--size;
+						height: $rulebuilder__ca-placeholder-inner-icon-image-right--size;
+						right: $rulebuilder__ca-placeholder-inner-icon-image-right--right;
+						top: 50%;
+						content: '';
+						position: absolute;
+					}
+				}
+			}
+		}
+	}
+}
+.yrb-condition,
+.yrb-action {
+	position: relative;
+	display: table;
+	background: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	min-width: $rulebuilder__ca-element--min-width;
+	border: $rulebuilder__ca-element-default--border;
+	border-width: $rulebuilder__ca-element--border-width;
+	overflow: visible;
+	@include _add-cursor-witth-fallback(grab);	
+	
+	&:first-child {
+		border-top-width: 0;
+	}
+// .yrb-conditions, yrb-actions
+	&s > & {
+		border: $rulebuilder__ca-container--border;
+		border-width: $rulebuilder__ca-element-default--border-width $rulebuilder__ca-element-default--border-width 0;
+		&:first-child {
+			border-top-width: $rulebuilder__ca-element-default--border-width;
+		}
+	}
+	&s > &s-drop-placeholder {
+		@if $rulebuilder__ca-placeholder-root--border-width {
+			border: $rulebuilder__ca-container--border;
+			border-width: $rulebuilder__ca-placeholder-root--border-width;
+		}@else {
+			border: none;
+		}
+		padding-bottom: 0;
+	}
+	&s &-children > &:before {
+		margin-left: $rulebuilder__ca-element-default--border-width;
+	}
+	&-children &-caption-content {
+		padding-left: $rulebuilder__ca-children-container-element-caption--padding-left;//$rulebuilder__ca-handle-node-title--padding-h
+		.yrb-node,
+		.yrb-expandable-node {
+			left: $rulebuilder__ca-children-container-element-node-icon--left;
+		}
+	}
+
+	&-breadcrumbs {
+		padding: $rulebuilder__breadcrumb--padding;
+		font-size: $rulebuilder__breadcrumb--font-size;
+		line-height: $rulebuilder__breadcrumb--line-height;
+		width: 100%;
+
+		.rule-parameter {
+		    color: var(--bo-list-text-color);
+			font-weight: $rulebuilder__breadcrumb-parameter--font-weight;
+			font-size: $rulebuilder__breadcrumb-parameter--font-size;
+			letter-spacing: $rulebuilder__breadcrumb-parameter--letter-spacing;
+		}
+		.rule-separator {
+			font-weight: $rulebuilder__breadcrumb-separator--font-weight;
+		}
+		@if $rulebuilder__breadcrumb-empty--content {
+			span.z-html:empty {
+				display: inline-block;
+				position: relative;
+				
+				&:before {
+					content: $rulebuilder__breadcrumb-empty--content;
+					display: inline-block;
+				}
+			}
+		}
+	}
+	&.z-drag-ghost {
+		width: $rulebuilder__ca-element-dragged--width;
+		border: $rulebuilder__ca-element-dragged--border;
+		@include _add-cursor-witth-fallback(grabbing);
+	}
+	&-content {
+	    background: var(--bo-container-background);
+		overflow: auto;
+
+		>.z-groupbox, 
+		>.z-groupbox {
+			border: 0;
+			padding: 0;
+
+			>.z-groupbox-header {
+				font-weight: normal;
+				background: none;
+			}
+			>.z-groupbox-content,
+			>.z-groupbox-header {
+				padding: 0;
+				border: 0;
+				margin: 0;
+			}
+		}
+	}
+	&-caption {
+		box-sizing: border-box;
+		position: relative;
+		width: 100%;
+		background: none;
+
+		&-content {
+			box-sizing: border-box;
+			display: table;
+			padding: $rulebuilder__ca-element-caption--padding;
+			line-height: normal;
+			vertical-align: middle;
+
+			.yrb-node,
+			.yrb-expandable-node {
+				position: absolute;
+				top: 50%;
+				left: $rulebuilder__ca-handle-node-title--padding-h;
+				margin-top: -($rulebuilder__ca-container-node--size/2);
+				width: $rulebuilder__ca-container-node--size;
+				height: $rulebuilder__ca-container-node--size;
+				@include _add-node-circle-before (0, 0);
+			}
+
+			>.z-label, 
+			>i {
+				display: table-cell;
+				margin: 0;
+				border: 0;
+				padding: $rulebuilder__ca-element-caption-label--padding;
+				line-height: $editor-defaults__inline-box--height;
+				font-size: $font-size__base;
+				color: var(--bo-list-text-color);
+				vertical-align: middle;
+			}
+			>.yrb-expandable-node>.yrb-toggle-children-btn {
+				display: block;
+				border: 0;
+				padding: 0;
+				background: none;
+
+				>i {
+					cursor: pointer;
+					font-size: 1$rulebuilder__ca-element-label-node-icon--font-size;
+					line-height: $rulebuilder__ca-element-label-node-icon--line-height;
+					width: $rulebuilder__ca-element-label-node-icon--size;
+					margin-left: $rulebuilder__ca-element-label-node-icon--margin-left;
+					color: var(--bo-list-active-text-color);
+					text-align: center;
+				}
+			}
+			.yrb-delete-btn {
+				right: $rulebuilder__ca-delete-btn--right;
+				margin-top: $rulebuilder__ca-delete-btn--margin-top;
+				padding: $rulebuilder__ca-delete-btn--padding;				
+				width: $rulebuilder__ca-delete-btn--size;
+				height: $rulebuilder__ca-delete-btn--size;
+				position: absolute;
+				top: 50%;
+				background: none;
+				border: 0;
+				cursor: pointer;
+				color: var(--bo-content-icon-color);
+
+				i {
+					display: none;
+				}
+			}
+		}
+	}
+
+	&-children {
+		border: $rulebuilder__ca-element-default--border;
+		border-width: $rulebuilder__ca-children-container--border-width;
+	}
+}
+
+.yrb-condition-handle, 
+.yrb-action>.yrb-action-handle {
+	display: none;
+}
+
+.yrb-condition-handle, 
+.yrb-action > .yrb-action-handle, 
+.yrb-conditions > .yrb-condition > .yrb-condition-handle {
+	display: none;
+	width: $rulebuilder__ca-handle-string--width;
+	left: $rulebuilder__ca-handle-string--left;
+	position: absolute;
+	height: $rulebuilder__ca-handle-string--height;
+	top: $rulebuilder__ca-handle-string--top;
+	background: var(--bo-list-background);
+}
+
+.yrb-action {
+	.yrb-node {
+		margin-left: $rulebuilder__action-element-caption--indent-left-addition;
+	}
+	&-caption-content {
+		padding-left: $rulebuilder__action-element-caption--padding-left;
+		> i {
+			margin-right: $rulebuilder__ca-handle-node-title--padding-h;
+			margin-left: $rulebuilder__ca-handle-node-title--padding-h;
+			display: inline-block;
+		}
+	}
+}

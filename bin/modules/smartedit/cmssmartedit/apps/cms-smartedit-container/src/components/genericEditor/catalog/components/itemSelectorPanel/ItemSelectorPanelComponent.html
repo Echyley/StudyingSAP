@@ -1,0 +1,60 @@
+<se-slider-panel
+    [sliderPanelConfiguration]="panelConfig"
+    [(sliderPanelHide)]="hidePanel"
+    [(sliderPanelShow)]="showPanel"
+    class="se-item-selector-panel"
+>
+    <div *ngIf="catalogs.length > 0">
+        <!-- Catalog Selector.
+             Show the dropdown only if there's more than one catalogs to choose from (when Multi Content Catalog is enabled)
+        -->
+        <div *ngIf="catalogs.length > 1" class="se-item-selector-panel__selector">
+            <label
+                class="se-control-label"
+                translate="se.cms.catalogaware.panel.catalogs.label"
+            ></label>
+            <se-select
+                id="se-catalog-selector-dropdown"
+                [(model)]="catalogInfo.catalogId"
+                [fetchStrategy]="catalogSelectorFetchStrategy"
+                [onChange]="onCatalogSelectorChange"
+            >
+            </se-select>
+            <label>{{ catalogInfo.name | seL10n | async }}</label>
+        </div>
+
+        <!-- Catalog Version Selector -->
+        <div class="se-item-selector-panel__selector">
+            <label
+                class="se-control-label"
+                translate="se.cms.catalogaware.panel.catalogsversion.label"
+            ></label>
+            <se-select
+                id="se-catalog-version-selector-dropdown"
+                [(model)]="catalogInfo.catalogVersion"
+                [fetchStrategy]="catalogVersionSelectorFetchStrategy"
+                [onChange]="onCatalogVersionSelectorChange"
+                [searchEnabled]="false"
+                [(reset)]="resetCatalogVersionSelector"
+            >
+            </se-select>
+        </div>
+
+        <!-- Items Multi Selector. Displayed when Catalog Version is selected. -->
+        <div class="se-item-selector-panel__selector" *ngIf="catalogInfo.catalogVersion">
+            <label class="se-control-label" [translate]="catalogItemTypeI18nKey"></label>
+            <se-select
+                id="se-items-selector-dropdown"
+                [multiSelect]="true"
+                [controls]="true"
+                [(model)]="internalItemsSelected"
+                [onChange]="onItemsSelectorChange"
+                [fetchStrategy]="itemsSelectorFetchStrategy"
+                [(reset)]="resetItemsListSelector"
+                [itemComponent]="itemComponent"
+                [isReadOnly]="!isItemSelectorEnabled()"
+            >
+            </se-select>
+        </div>
+    </div>
+</se-slider-panel>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">	
+		   
+
+	<alias name="defaultSapServiceOrderCheckoutFacade" alias="sapServiceOrderCheckoutFacade"/>
+	<bean id="defaultSapServiceOrderCheckoutFacade" class="de.hybris.platform.sap.sapserviceorderfacades.facades.impl.DefaultSapServiceOrderCheckoutFacade">
+	      <property name="baseStoreService" ref="baseStoreService"/>
+		  <property name="cartService" ref="cartService"/>
+		  <property name="modelService" ref="modelService" />
+		  <property name="customerAccountService" ref="customerAccountService"/>
+		  <property name="userService" ref="userService"/>
+		  <property name="sapCpiServiceOrderUpdateOutboundBuilderService" ref="sapCpiServiceOrderUpdateOutboundBuilderService"/>
+		  <property name="sapCpiServiceOrderOutboundService" ref="sapCpiServiceOrderOutboundService"/>
+	</bean>
+	
+	<alias name="defaultSapServicePopulator" alias="sapServiceOrderPopulator" />
+	<bean id="defaultSapServicePopulator"
+		class="de.hybris.platform.sap.sapserviceorderfacades.populators.DefaultSapServiceOrderPopulator">
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter" />
+		<property name="add" ref="sapServiceOrderPopulator" />
+	</bean>
+	
+	<alias name="defaultSapServiceProductPopulator" alias="sapServiceProductPopulator" />
+	<bean id="defaultSapServiceProductPopulator"
+		class="de.hybris.platform.sap.sapserviceorderfacades.populators.DefaultSapServiceProductPopulator">
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="sapServiceProductPopulator"/>
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="baseStoreConverter" />
+		<property name="add"
+			ref="sapServiceOrderConfigurePopulator" />
+	</bean>
+	
+	<alias name="defaultSapServiceOrderConfigurePopulator"
+		alias="sapServiceOrderConfigurePopulator" />
+	<bean id="defaultSapServiceOrderConfigurePopulator"
+		class="de.hybris.platform.sap.sapserviceorderfacades.populators.DefaultSapServiceOrderConfigurePopulator">
+
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="cartConverter" />
+		<property name="add"
+			ref="sapServiceOrderCartPopulator" />
+	</bean>
+	
+	<alias name="defaultServiceOrderCartPopulator"
+		alias="sapServiceOrderCartPopulator" />
+	<bean id="defaultServiceOrderCartPopulator"
+		class="de.hybris.platform.sap.sapserviceorderfacades.populators.DefaultSapServiceOrderCartPopulator">
+
+	</bean>
+	
+	<!--  Strategy implementation for service order billing invoice   -->
+	<alias name="defaultServiceOrderBillingInvoiceStrategyImpl"
+		alias="defaultBillingInvoiceServiceOrderStrategy" />
+	<bean name="defaultServiceOrderBillingInvoiceStrategyImpl"
+		class="de.hybris.platform.sap.sapserviceorderfacades.billinginvoice.strategy.impl.SapBillingInvoiceServiceStrategyImpl">
+		<property name="sapServiceOrderBillingInvoiceService" ref="sapServiceOrderBillingInvoiceService" />
+		<property name="sapPlantLogSysOrgService" ref="sapPlantLogSysOrgService" />
+		<property name="externalSystemBillingDocumentConverter" ref="externalSystemBillingDocumentConverter" />
+		<property name="sapBillingInvoiceUtils" ref="billingInvoiceUtils" />
+		<property name="priceFactory" ref="priceDataFactory" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<!-- Adding service order billing invoice strategy to strategy handlers  -->
+	<bean depends-on="sapBillingStrategyHandlers" parent="mapMergeDirective">
+        <property name="key" value="#{T(de.hybris.platform.sap.sapserviceorderfacades.constants.SapserviceorderfacadesConstants).SERVICE_ORDER}"/>
+        <property name="value" ref="defaultBillingInvoiceServiceOrderStrategy"/>
+    </bean>
+	
+</beans>

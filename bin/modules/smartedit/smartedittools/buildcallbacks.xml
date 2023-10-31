@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="smartedittools_buildcallbacks">
+    <patternset id="extension.smartedittools.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="apps/smartedit-build/node_modules/"/>
+        <exclude name="apps/smartedit-e2e-utils/node_modules/"/>
+        <exclude name="apps/smartedit-packagr/node_modules/"/>
+        <exclude name="apps/smartedit-scripts/node_modules/"/>
+        <exclude name="apps/storefront-generator/node_modules/"/>
+        <exclude name="apps/test-server/node_modules/"/>
+        <exclude name="common/temp/"/>
+        <exclude name="common/git-hooks/"/>
+        <exclude name="rush.json"/>
+    </patternset>
+
+    <patternset id="extension.smartedittools.source.filter">
+        <patternset refid="extension.source.filter"/>
+        <!-- We have to define below filter since smartedit-packagr contains test data with node_modules folder -->
+        <exclude name="apps/smartedit-build/node_modules/"/>
+        <exclude name="apps/smartedit-e2e-utils/node_modules/"/>
+        <exclude name="apps/smartedit-packagr/node_modules/"/>
+        <exclude name="apps/smartedit-scripts/node_modules/"/>
+        <exclude name="apps/storefront-generator/node_modules/"/>
+        <exclude name="apps/test-server/node_modules/"/>
+        <exclude name="common/temp/"/>
+        <exclude name="common/git-hooks/"/>
+        <exclude name="rush.json"/>
+    </patternset>
+
+    <patternset id="extension.smartedittools.production.filter">
+        <patternset refid="extension.production.filter" />
+        <exclude name="apps/smartedit-build/node_modules/"/>
+        <exclude name="apps/smartedit-e2e-utils/node_modules/"/>
+        <exclude name="apps/smartedit-packagr/node_modules/"/>
+        <exclude name="apps/smartedit-scripts/node_modules/"/>
+        <exclude name="apps/storefront-generator/node_modules/"/>
+        <exclude name="apps/test-server/node_modules/"/>
+        <exclude name="common/temp/"/>
+        <exclude name="common/git-hooks/"/>
+        <exclude name="rush.json"/>
+    </patternset>
+
+    <macrodef name="smartedittools_before_clean">
+        <sequential>
+            <if>
+                <and>
+                    <available file="${ext.smartedittools.path}${file.separator}rush.json" />
+                    <available file="${ext.smartedittools.path}${file.separator}common${file.separator}temp${file.separator}install-run" type="dir"/>
+                </and>
+                <then>
+                    <repairnpm />
+                    <unlinkSmarteditProjects />
+                    <invokeRush arguments="purge" path="${ext.smartedittools.path}" failonerror="false" />
+                    <safeUnLink targetPath="${ext.smartedittools.path}${file.separator}common${file.separator}config${file.separator}smartedit-extensions.json"/>
+                    <copy file="${ext.smartedittools.path}${file.separator}common${file.separator}config${file.separator}rush.tpl.json" tofile="${ext.smartedittools.path}${file.separator}rush.json" overwrite="true"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="linkSmarteditProjects">
+        <linkSmarteditProjects />
+    </target>
+
+    <macrodef name="linkSmarteditProjects">
+        <sequential>
+            <getLinkedExtensionsPaths />
+            <if>
+                <isset property="extensionsEnabled" />
+                <then>
+                    <invokeNode arguments="${ext.smartedittools.path}${file.separator}apps${file.separator}smartedit-scripts${file.separator}scripts${file.separator}link-smartedit-project.js ${extensionsPaths} ${ext.smartedittools.path} true"/>
+                </then>
+                <else>
+                    <echo message="Skipping link - Make no sense to link projects without Smartedit" />
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="unlinkSmarteditProjects">
+        <unlinkSmarteditProjects />
+    </target>
+
+    <macrodef name="unlinkSmarteditProjects">
+        <sequential>
+            <invokeNode arguments="${ext.smartedittools.path}${file.separator}apps${file.separator}smartedit-scripts${file.separator}scripts${file.separator}unlink-smartedit-project.js ${ext.smartedittools.path} true"/>
+        </sequential>
+    </macrodef>
+
+    <!-- ant migrateSmarteditExtension -DextPath=path/to/personalizationsmartedit -DextName=personalization -DgitBranch=migration/test1 -->
+    <target name="migrateSmarteditExtension">
+        <property name="extName" value="" />
+        <property name="extPath" value="" />
+        <property name="gitBranch" value="" />
+        <migrateSmarteditExtension extName="${extName}" extPath="${extPath}" gitBranch="${gitBranch}" />
+    </target>
+
+    <macrodef name="migrateSmarteditExtension">
+        <attribute name="extName"/>
+        <attribute name="extPath"/>
+        <attribute name="gitBranch"/>
+        <sequential>
+            <invokeNode arguments="${ext.smartedittools.path}${file.separator}apps${file.separator}smartedit-scripts${file.separator}scripts${file.separator}migrate-smartedit.js -extName=@{extName} -extPath=@{extPath} -gitBranch=@{gitBranch}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="getLinkedExtensionsPaths">
+        <sequential>
+            <property name="extensions.list.temp.config" value="${ext.smartedittools.path}${file.separator}extensions-list-temp.config"/>
+            <echoproperties regex=".*.smartedittools.config" destFile="${extensions.list.temp.config}"/>
+
+            <loadfile property="extensionsEnabled" srcfile="${extensions.list.temp.config}">
+                <!-- filtering out disabled extensions -->
+                <filterchain>
+                    <linecontainsregexp>
+                        <regexp pattern="=\s*(true|yes|on)\s*$" />
+                    </linecontainsregexp>
+                </filterchain>
+            </loadfile>
+            <echo message="extensionsEnabled: ${extensionsEnabled}" />
+
+            <!-- extract the keys -->
+            <loadresource property="extensionsPaths">
+                <string>${extensionsEnabled}</string>
+                <filterchain>
+                    <!-- remove value -->
+                    <replaceregex pattern="=\s*(true|yes|on)\s*$" replace="" />
+                    <!-- strip down to get the extension name -->
+                    <replaceregex pattern="\.smartedittools\.config\s*$" replace="" />
+                    <!-- replace extension name by it's path -->
+                    <tokenfilter>
+                        <stringtokenizer/>
+                        <replaceregex pattern="(.+)" replace="${ext.\1.path}"/>
+                    </tokenfilter>
+                    <!-- convert to csv -->
+                    <tokenfilter delimoutput=",">
+                        <linetokenizer/>
+                    </tokenfilter>
+                </filterchain>
+            </loadresource>
+            <echo message="extensionsPaths: ${extensionsPaths}" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="smartedittools_before_build">
+        <sequential>
+            <if>
+                <and>
+                    <istrue value="${smartedittools.only.build.once}" />
+                    <available file="${ext.smartedit.path}${file.separator}apps${file.separator}smartedit-master${file.separator}dist${file.separator}smartedit${file.separator}smartedit.js" />
+                    <available file="${ext.smartedit.path}${file.separator}apps${file.separator}smartedit-master${file.separator}dist${file.separator}smartedit-container${file.separator}smarteditcontainer.js" />
+                </and>
+                <then>
+                    <echo message="Skipping all Smartedit extensions build due to smartedittools.only.build.once=true" />
+                    <var name="isGlobalSmartEditBuild" value="true"/>
+                </then>
+                <else>
+                    <repairnpm />
+                    <linkSmarteditProjects />
+                    <if>
+                        <isset property="extensionsEnabled" />
+                        <then>
+                            <!-- Run rush update without full in regular build -->
+                            <rushupdate path="${ext.smartedittools.path}" tryOffline="true" full="false"/>
+                            <var name="isGlobalSmartEditBuild" value="true"/>
+                            <rushbuild path="${ext.smartedittools.path}"/>
+                        </then>
+                        <else>
+                            <echo message="Skipping build - Make no sense to build without Smartedit" />
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="build_smartedit_extension">
+        <attribute name="extensionName" />
+        <attribute name="appNames" />
+        <sequential>
+            <fail message="You must provide the name of the extension where the app exists and the names of the apps in the extension to build.">
+                <condition>
+                    <or>
+                        <equals arg1="@{extensionName}" arg2="" />
+                        <equals arg1="@{appNames}" arg2="" />
+                    </or>
+                </condition>
+            </fail>
+            <if>
+                <equals arg1="${isGlobalSmartEditBuild}" arg2="true" />
+                <then>
+                    <echo message="Skipping @{extensionName}. It was already built as part of a global build." />
+                </then>
+                <elseif>
+                    <not>
+                        <equals arg1="@{extensionName}" arg2="ysmarteditmodule" />
+                    </not>
+                    <then>
+                        <for list="@{appNames}" param="appName">
+                            <sequential>
+                                <if>
+                                    <available file="${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}${file.separator}node_modules" type="dir" />
+                                    <then>
+                                        <echo message="Building SmartEdit extension [@{extensionName} - @{appName}]" />
+                                        <invokeNpm arguments="run build --prefix=${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}" />
+                                    </then>
+                                </if>
+                            </sequential>
+                        </for>
+                    </then>
+                </elseif>
+                <else>
+                    <echo message="Skipping build - Nothing to build in ysmarteditmodule" />
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test_smartedit_extension">
+        <attribute name="extensionName" />
+        <attribute name="appNames" />
+        <sequential>
+            <fail message="You must provide the name of the extension where the app exists and the names of the apps in the extension to test.">
+                <condition>
+                    <or>
+                        <equals arg1="@{extensionName}" arg2="" />
+                        <equals arg1="@{appNames}" arg2="" />
+                    </or>
+                </condition>
+            </fail>
+            <for list="@{appNames}" param="appName">
+                <sequential>
+                    <if>
+                        <available file="${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}${file.separator}node_modules" type="dir" />
+                        <then>
+                            <echo message="Testing SmartEdit extension [@{extensionName} - @{appName}]" />
+                            <invokeNpm arguments="run test --prefix=${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}" failonerror="true" />
+                        </then>
+                    </if>
+                </sequential>
+            </for>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="lint_smartedit_extension">
+        <attribute name="extensionName" />
+        <attribute name="appNames" />
+        <sequential>
+            <fail message="You must provide the name of the extension where the app exists and the names of the apps in the extension to test.">
+                <condition>
+                    <or>
+                        <equals arg1="@{extensionName}" arg2="" />
+                        <equals arg1="@{appNames}" arg2="" />
+                    </or>
+                </condition>
+            </fail>
+            <for list="@{appNames}" param="appName">
+                <sequential>
+                    <if>
+                        <available file="${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}${file.separator}node_modules" type="dir" />
+                        <then>
+                            <echo message="Linting SmartEdit extension [@{extensionName} - @{appName}]" />
+                            <invokeNpm arguments="run lint --prefix=${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName} -- --quiet" failonerror="false" />
+                        </then>
+                    </if>
+                </sequential>
+            </for>
+        </sequential>
+    </macrodef>
+
+    <target name="rushrebuilddev">
+        <property name="path" value="NOT SET"/>
+        <invokeRush arguments="rebuild --to-except smarteditmaster" path="${path}"/>
+        <invokeNpm path="${ext.smartedit.path}${file.separator}apps${file.separator}smartedit-master" arguments="run-script build:dev"/>
+    </target>
+
+
+    <macrodef name="generate_smartedit_extension_docs">
+        <attribute name="extensionName" />
+        <attribute name="appNames" />
+        <sequential>
+            <fail message="You must provide the name of the extension where the app exists and the names of the apps in the extension to generate docs.">
+                <condition>
+                    <or>
+                        <equals arg1="@{extensionName}" arg2="" />
+                        <equals arg1="@{appNames}" arg2="" />
+                    </or>
+                </condition>
+            </fail>
+            <if>
+                <available file="${ext.@{extensionName}.path}${file.separator}documentation" type="dir"/>
+                <then>
+                    <delete dir="${ext.@{extensionName}.path}${file.separator}documentation" failonerror="false"/>
+                </then>
+            </if>
+            <for list="@{appNames}" param="appName">
+                <sequential>
+                    <!--  loop each app to generate doc -->
+                    <echo message="Generating SmartEdit extension doc for [@{extensionName} - @{appName}]" />
+                    <invokeNpm arguments="run docs --prefix=${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}" />
+                    <if>
+                        <available file="${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}${file.separator}documentation" type="dir"/>
+                        <then>
+                            <!--  relocate doc to root level -->
+                            <move preservelastmodified="true" todir="${ext.@{extensionName}.path}${file.separator}documentation${file.separator}compodoc${file.separator}@{appName}">
+                                <fileset dir="${ext.@{extensionName}.path}${file.separator}apps${file.separator}@{appName}${file.separator}documentation"/>
+                            </move>
+                        </then>
+                    </if>
+                </sequential>
+            </for>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="smartedittools_before_yunit">
+        <!-- 'includeAngularUT' flag will be set as true in team pipeline.
+        It will be removed after ECPP install Chrome -->
+        <attribute name="includeAngularUT" default="false"/>
+        <sequential>
+            <if>
+                <and>
+                    <istrue value="${testclasses.web}"/>
+                    <istrue value="${includeAngularUT}"/>
+                </and>
+                <then>
+                    <test_smartedit_extension extensionName="smartedittools" appNames="smartedit-packagr"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="test_smartedittools">
+        <test_smartedit_extension extensionName="smartedittools" appNames="smartedit-packagr"/>
+    </target>
+
+</project>

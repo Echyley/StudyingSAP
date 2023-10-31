@@ -1,0 +1,65 @@
+@import "cockpitng-globals.scss";
+@import "_processes-variables.scss";
+
+@mixin _indentedBorder ($border-style: $processes__settings-popup-delimiter--border, $border-type: bottom, $height: 0, $border-color-inherit: false) {
+	position: relative;
+
+    &:before {
+	    right: $processes__settings-popup-container--padding-x;
+		left: $processes__settings-popup-container--padding-x;
+		border-#{$border-type}: $border-style;
+		height: $height;
+		@if $border-color-inherit {
+			border-#{$border-type}-color: inherit;
+		}
+		top: 0;
+		content: "";
+		position: absolute;
+		display: block;
+	}
+}
+
+@mixin _statusColoring ($color, $border-color, $bg-color) {
+	
+	&.yw-processes-list-item-icon {
+		color: var(--bo-text-color);
+	}
+
+	&.yw-processes-list-item-content-status.z-label {
+		color: $color;
+		border: 1px solid $border-color;
+		background-color: $bg-color;
+		padding: $processes__item-status-label-padding;
+		border-radius: $processes__item-status-label-border-radius;
+		font-weight: $processes__item-status-label-font-weight;
+	}
+}
+
+@mixin _addSidebarBreakpoint ($max-width, $sidebar-width) {
+	@media screen and ( max-width: $max-width ){
+		max-width: $sidebar-width;
+		
+		.yw-processes-list {
+			min-width: $sidebar-width;
+		}
+	}
+}
+
+@mixin _addIndicatorDot ($background-indicator-color:false, $background-mask-color:false, $top-pos: $processes__header-process-icon-unseen--top, $right-pos: $processes__header-process-icon-unseen--right, $indicator-size: $processes__header-process-icon-unseen--size, $mask-space: $processes__header-process-icon-spinner-before--space){
+    &:after {
+		content: '';
+        position: absolute;
+        display: block;
+        border-radius: 50%;
+    	top: $top-pos;
+        right: $right-pos;
+        width: $indicator-size;
+        height: $indicator-size;
+        
+        @if $background-indicator-color {
+			background-color: $background-indicator-color;
+        }@else {
+        	background: transparent;
+        }
+    }
+}

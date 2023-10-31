@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<project name="sapppspricing_buildcallbacks">
+
+	<!--
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+
+	     ${ear.path}: 			path to ear
+	 -->
+
+	<macrodef name="sapppspricing_before_ear">
+
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+
+	</macrodef>
+	<macrodef name="sapppspricing_before_build">
+		<!--<attribute name="extname"/>-->
+		<!--<attribute name="destdir"/>-->
+
+		<!-- Due to vulnerability swagger-codegen-cli generated sources are checked in to package com.sap.retail.sapppspricing.swagger.businessobject directly -->
+		<sequential>
+			<!-- <party_compile_swagger_custom_class/>
+	            <party_generate_swagger_dtos/> -->
+		</sequential>
+	</macrodef>
+
+	<macrodef name="party_compile_swagger_custom_class">
+		<attribute name="baseDir" default="${ext.sapppspricing.path}"/>
+		<sequential>
+			<if>
+				<not>
+					<available file="@{baseDir}/lib/swagger-custom-codegen.jar"/>
+				</not>
+				<then>
+					<if>
+						<not>
+							<available file="@{baseDir}/lib/swagger"/>
+						</not>
+						<then>
+							<mkdir dir="@{baseDir}/lib/swagger"/>
+						</then>
+					</if>
+					<javacompile destdir="@{baseDir}/lib/swagger">
+						<additionalclasspath>
+							<path>
+								<fileset dir="@{baseDir}/lib">
+									<include name="swagger-codegen-cli-*.jar"/>
+								</fileset>
+							</path>
+						</additionalclasspath>
+						<source>
+							<pathelement path="@{baseDir}/src/com/sap/retail/sapppspricing/swagger/"/>
+						</source>
+					</javacompile>
+
+					<path id="build.classpath">
+						<fileset dir="@{baseDir}/lib">
+							<include name="swagger-codegen-cli-*.jar"/>
+						</fileset>
+					</path>
+
+					<pathconvert property="manifest.classpath" pathsep=" ">
+						<path refid="build.classpath"/>
+						<mapper>
+							<chainedmapper>
+								<flattenmapper/>
+							</chainedmapper>
+						</mapper>
+					</pathconvert>
+
+					<jar destfile="@{baseDir}/lib/swagger-custom-codegen.jar">
+						<fileset dir="@{baseDir}/lib/swagger" includes="**/*.class"/>
+						<manifest>
+							<attribute name="Main-Class" value="io.swagger.codegen.v3.cli.SwaggerCodegen"/>
+							<attribute name="Class-Path" value="${manifest.classpath}"/>
+						</manifest>
+					</jar>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<target name="party_generate_swagger" description="Generates swagger dtos">
+		<party_generate_swagger_dtos forced="true"/>
+	</target>
+
+	<macrodef name="party_generate_swagger_dtos">
+		<attribute name="baseDir" default="${ext.sapppspricing.path}"/>
+		<attribute name="templateDir" default="${ext.sapppspricing.path}/resources/dtos"/>
+		<attribute name="forced" default="true"/>
+		<sequential>
+			<if>
+				<or>
+					<equals arg1="@{forced}" arg2="true"/>
+					<not>
+						<available file="@{baseDir}/gensrc/.swagger-codegen/VERSION"/>
+					</not>
+				</or>
+				<then>
+					<dirset id="partyVersions" dir="@{templateDir}" includes="*"/>
+					<property name="partyVersions" refid="partyVersions"/>
+					<for param="dtoVersion" list="${partyVersions}" delimiter=";">
+						<sequential>
+							<fileset id="swaggerFiles" dir="@{templateDir}/@{dtoVersion}" includes="*.yaml"/>
+							<property name="swaggerFiles" refid="swaggerFiles"/>
+							<for param="file" list="${swaggerFiles}" delimiter=";">
+								<sequential>
+									<party_generate_api templateDir="@{templateDir}" version="@{dtoVersion}"
+	                                                                    file="@{file}"/>
+								</sequential>
+							</for>
+						</sequential>
+					</for>
+				</then>
+				<else>
+					<echo message="Skipping swagger apis generation"/>
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="party_generate_api">
+		<attribute name="file"/>
+		<attribute name="templateDir"/>
+		<attribute name="version"/>
+		<attribute name="defaultPackage" default="com.sap.retail.opps"/>
+		<attribute name="baseDir" default="${ext.sapppspricing.path}"/>
+		<sequential>
+			<path id="sapppspricing_custom">
+				<fileset dir="@{baseDir}/lib" includes="*"/>
+			</path>
+			<property name="classpath" refid="sapppspricing_custom"/>
+			<java jar="@{baseDir}/lib/swagger-custom-codegen.jar" fork="true" failonerror="true">
+				<sysproperty key="logback.configurationFile" value="${ext.sapppspricing.path}/resources/swaggerconfig/v1/logback.xml"/>
+				<arg line="generate"/>
+				<arg line="-l java --library resttemplate"/>
+				<arg line="-i @{templateDir}/@{version}/@{file}"/>
+				<arg line="-o @{baseDir}/gensrc/"/>
+				<arg line="-c @{baseDir}/resources/swaggerconfig/@{version}/swagger-generator-config.json"/>
+				<arg line="--model-package @{defaultPackage}.@{version}.dto"/>
+				<arg line="--api-package @{defaultPackage}.@{version}.api"/>
+			</java>
+			<move file="@{baseDir}/gensrc/src/main/java" tofile="@{baseDir}/gensrc" overwrite="true" failonerror="true"/>
+			<delete includeEmptyDirs="true">
+				<fileset dir="@{baseDir}/gensrc/src"/>
+			</delete>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sapppspricing_after_build">
+		<sequential>
+			<echo message="sapppspricing_after_build"/>
+			<containsExact string="${extension.names}" substring="addonsupport" separator=";">
+				<do>
+					<foreachext>
+						<do>
+							<for list="${addon.folder}" param="addOnFile" delimiter=";">
+								<sequential>
+									<if>
+										<available file="${ext.@{extname}.path}/acceleratoraddon/@{addOnFile}"/>
+										<then>
+											<echo message="Found addon:  @{extname}"/>
+											<echo message="addOnFile test:  @{addOnFile}"/>
+											<copyAddOnToExtension addonextension="@{extname}" addonresource="@{addOnFile}"
+	                                                                  target="sapppspricing"/>
+										</then>
+									</if>
+								</sequential>
+							</for>
+						</do>
+					</foreachext>
+				</do>
+			</containsExact>
+			<impexGenerate extname="sapppspricing"/>
+		</sequential>
+	</macrodef>
+	<macrodef name="sapppspricing_after_clean">
+		<sequential>
+			<delete file="${ext.sapppspricing.path}/resources-lang/touch_impexgen" failonerror="false"/>
+		</sequential>
+	</macrodef>
+
+	<patternset id="extension.sapppspricing.production.filter">
+		<patternset refid="extension.production.filter"/>
+		<exclude name="web/addonsrc/**"/>
+	</patternset>
+
+	<patternset id="sapppspricing.localization.pattern">
+		<patternset refid="localization.defaultpattern" />
+		<exclude name="**/*.impex"/>
+	</patternset>
+
+</project>

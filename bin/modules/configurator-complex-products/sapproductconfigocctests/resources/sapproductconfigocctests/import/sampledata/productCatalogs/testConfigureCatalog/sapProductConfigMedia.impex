@@ -1,0 +1,89 @@
+$defaultCurrency=EUR
+$lang=en
+$catalog-id=testConfigureCatalog
+$catalog-version=Online
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+
+$storeClassification=cpqTestClassification
+$systemVersion=1.0
+$classCatalogVersion=catalogversion(catalog(id[default='$storeClassification']),version[default='1.0'])[unique=true,default='$storeClassification:1.0'];
+$classSystemVersion=systemVersion(catalog(id[default='$storeClassification']),version[default='1.0'])[unique=true,default='$storeClassification:1.0'];
+$unit=unit(code,$classSystemVersion);
+$attributevalues=attributeValues(code,$classSystemVersion)[unique=true];
+$thumbnail=thumbnail(code, $catalogversion)
+$picture=picture(code, $catalogversion)
+$thumbnails=thumbnails(code, $catalogversion)
+$detail=detail(code, $catalogversion)
+$normal=normal(code, $catalogversion)
+$others=others(code, $catalogversion)
+$data_sheet=data_sheet(code, $catalogversion)
+$medias=medias(code, $catalogversion)
+$galleryImages=galleryImages(qualifier, $catalogversion)
+
+
+#################################################################################
+# Medias
+#################################################################################
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];name[lang=$lang];description[lang=$lang];
+;;CPQ_HT_TEST;CPQ_HT_TEST;Classification class for the list of images for CPQ_HOME_THEATER;
+
+$siteResource=jar:de.hybris.platform.sap.productconfig.testdata.occ.constants.SapproductconfigtestdataoccConstants&/sapproductconfigocctests/import/images
+
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;30Wx30H
+;65Wx65H
+;96Wx96H
+;192Wx96H
+;300Wx300H
+;365Wx246H
+;515Wx515H
+;1200Wx1200H
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$catalogversion;
+;MediaContainer_INCLUDE_TV;;
+;MediaContainer_ATV;;
+;MediaContainer_AFT;;
+;MediaContainer_GGC;;
+;MediaContainer_PS4;;
+;MediaContainer_XB1;;
+;MediaContainer_NTW;;
+;MediaContainer_CAM;;
+
+INSERT_UPDATE Media;mediaFormat(qualifier);mediaContainer(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];$catalogversion;folder(qualifier)[default=images]
+;96Wx96H      ;MediaContainer_AFT;           amazon_fire_tv_96.jpg                        ;$siteResource/amazon_fire_tv_96.jpg;
+;96Wx96H      ;MediaContainer_ATV;           apple_tv_96.jpg                              ;$siteResource/apple_tv_96.jpg;
+;96Wx96H      ;MediaContainer_XB1;           microsoft_xbox_one_96.jpg                    ;$siteResource/microsoft_xbox_one_96.jpg;
+;96Wx96H      ;MediaContainer_NTW;           nintendo_wii_u_96.jpg                        ;$siteResource/nintendo_wii_u_96.jpg;
+;96Wx96H      ;MediaContainer_PS4;           sony_playstation_96.jpg                      ;$siteResource/sony_playstation_96.jpg;
+;96Wx96H      ;MediaContainer_GGC;           google_chromecast_96.jpg                     ;$siteResource/google_chromecast_96.jpg;
+;192Wx96H     ;MediaContainer_INCLUDE_TV;    include_tv_192.jpg                           ;$siteResource/include_tv_192.jpg;
+;65Wx65H      ;MediaContainer_CAM;           CCPB_65x65                                   ;$siteResource/CONF_CAMERA_SL-PROF-BLACK_65x65.jpg;
+
+INSERT_UPDATE Product;code[unique=true]; $picture  ; $thumbnail; $detail    ;$others    ; $normal    ; $galleryImages     ;$catalogversion
+;CONF_CAMERA_SL-PROF-BLACK             ; CCPB_65x65; CCPB_65x65; CCPB_65x65 ;CCPB_65x65 ; CCPB_65x65 ; MediaContainer_CAM ;
+
+$cpqMedia=cpqMedia(qualifier, $catalogversion)
+
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true];name[lang=$lang];$cpqMedia;
+;;CPQ_HT_INCLUDE_TV;Include TV;MediaContainer_INCLUDE_TV;
+;;CPQ_HT_VIDEO_SOURCES;Video sources;;
+
+INSERT_UPDATE ClassificationAttributeValue;code[unique=true];name[lang=$lang];$cpqMedia;$classSystemVersion;
+;CPQ_HT_VIDEO_SOURCES_ATV      ;ATV     ;MediaContainer_ATV;;  
+;CPQ_HT_VIDEO_SOURCES_AFT      ;AFT     ;MediaContainer_AFT;;
+;CPQ_HT_VIDEO_SOURCES_GGC      ;GGC     ;MediaContainer_GGC;;
+;CPQ_HT_VIDEO_SOURCES_PS4      ;PS4     ;MediaContainer_PS4;;
+;CPQ_HT_VIDEO_SOURCES_XB1      ;XB1     ;MediaContainer_XB1;;
+;CPQ_HT_VIDEO_SOURCES_NTW      ;NTW     ;MediaContainer_NTW;;
+
+INSERT_UPDATE ClassAttributeAssignment;classificationClass($classCatalogVersion,code)[unique=true,allownull=true];classificationAttribute(code,$classSystemVersion)[unique=true,forceWrite=true,allownull=true];position[unique=true];$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=true];$classSystemVersion[unique=true,forceWrite=true];
+;CPQ_HT_TEST;CPQ_HT_INCLUDE_TV;0;;enum;false;false;true;;
+;CPQ_HT_TEST;CPQ_HT_VIDEO_SOURCES;1;;enum;false;false;true;;
+
+$categoriesForAssignment=source(code, $classCatalogVersion)[unique=true]
+$productsForAssignment=target(code, $catalogversion)[unique=true]
+INSERT_UPDATE CategoryProductRelation;$productsForAssignment;$categoriesForAssignment;
+;CPQ_HOME_THEATER;CPQ_HT_TEST;

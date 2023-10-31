@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<bean id="marketplacestoreSystemSetup"
+		class="de.hybris.platform.marketplacestore.setup.MarketplacestoreSystemSetup"
+		parent="abstractCoreSystemSetup">
+		<property name="coreDataImportService" ref="marketplaceCoreDataImportService" />
+		<property name="sampleDataImportService" ref="marketplaceSampleDataImportService" />
+	</bean>
+
+	<bean id="marketplaceSampleDataImportService"
+		class="de.hybris.platform.marketplacestore.service.dataimport.impl.MarketplaceSampleDataImportService"
+		parent="sampleDataImportService" />
+
+	<bean id="marketplaceCoreDataImportService"
+		class="de.hybris.platform.marketplacestore.service.dataimport.impl.MarketplaceCoreDataImportService"
+		parent="coreDataImportService" />
+
+	<bean id="marketplaceExtenedCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="1"/>
+		<!-- '1' is the root icecat category -->
+	</bean>
+	<bean id="marketplaceBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands"/>
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+
+	<bean id="marketplaceAbstractCategoryCodeValueProvider" abstract="true"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	<bean id="marketplaceAbstractCategoryNameValueProvider" abstract="true"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider"
+		parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	<bean id="marketplaceCategoryCodeValueProvider" parent="marketplaceAbstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="marketplaceExtenedCategorySource"/>
+	</bean>
+	<bean id="marketplaceBrandCategoryCodeValueProvider" parent="marketplaceAbstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="marketplaceBrandCategorySource"/>
+	</bean>
+	<bean id="marketplaceCategoryNameValueProvider" parent="marketplaceAbstractCategoryNameValueProvider">
+		<property name="categorySource" ref="marketplaceExtenedCategorySource"/>
+	</bean>
+	<bean id="marketplaceBrandCategoryNameValueProvider" parent="marketplaceAbstractCategoryNameValueProvider">
+		<property name="categorySource" ref="marketplaceBrandCategorySource"/>
+	</bean>
+
+	<!-- redefine xxxProviders to avoid error: can't not find bean 'promotionImageValueProvider' 
+		Just copy the definition from /yacceleratorcore-spring.xml
+	 -->
+	<alias name="marketplacePromotionImageValueProvider" alias="promotionImageValueProvider"/>
+	<bean id="marketplacePromotionImageValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PrimaryPromotionImageValueProvider"
+		parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
+	<alias name="marketplacePromotionCodeValueProvider" alias="promotionCodeValueProvider"/>
+	<bean id="marketplacePromotionCodeValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PromotionCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
+	<alias name="marketplaceImage515ValueProvider" alias="image515ValueProvider"/>
+	<bean id="marketplaceImage515ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="515Wx515H"/>
+	</bean>
+
+	<alias name="marketplaceImage300ValueProvider" alias="image300ValueProvider"/>
+	<bean id="marketplaceImage300ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="300Wx300H"/>
+	</bean>
+
+	<alias name="marketplaceImage96ValueProvider" alias="image96ValueProvider"/>
+	<bean id="marketplaceImage96ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="96Wx96H"/>
+	</bean>
+
+	<alias name="marketplaceImage65ValueProvider" alias="image65ValueProvider"/>
+	<bean id="marketplaceImage65ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="65Wx65H"/>
+	</bean>
+
+	<alias name="marketplaceImage30ValueProvider" alias="image30ValueProvider"/>
+	<bean id="marketplaceImage30ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="30Wx30H"/>
+	</bean>
+
+	<alias name="marketplaceProductUrlValueProvider" alias="productUrlValueProvider"/>
+	<bean id="marketplaceProductUrlValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlValueProvider"
+		parent="abstractPropertyFieldValueProvider" >
+		<property name="urlResolver" ref="productModelUrlResolver"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="i18nService" ref="i18nService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	<!-- redefine ends -->
+</beans>

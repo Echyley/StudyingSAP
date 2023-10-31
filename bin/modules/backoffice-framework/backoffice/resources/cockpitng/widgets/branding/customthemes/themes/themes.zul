@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul" xmlns:c="http://www.zkoss.org/2005/zk/client" sclass="yw-brand-setting">
+	<style src="${wr}/themes.css"/>
+
+	<script type="text/javascript">
+        function saveTheme(uuid) {
+			const cw = 206, ch = 200;
+			const node = document.querySelector(".yw-theme-preview-container");
+			zAu.cmd0.showBusy();
+			htmlToImage.toPng(node, {canvasWidth:cw, canvasHeight:ch}).then(function (dataUrl) {
+				CockpitNG.sendEvent(uuid, 'onSaveTheme', dataUrl.replace("data:image/png;base64,", ''));
+			}).catch(function (err) {
+				console.error('failed to capture image!', err);
+				CockpitNG.sendEvent(uuid, 'onSaveTheme', '');
+			});
+        }
+    </script>
+
+	<div class="brand-setting-header">
+		<button id="backButton" sclass="header-back-btn y-btn-transparent cng-font-icon" tooltiptext="${labels.header.back.button.tooltip}"/>
+		<label id="titleLabel" sclass="brand-setting-header-title"/>
+		<div class="brand-setting-header-buttons">
+			<button id="saveButton" sclass="y-btn-primary" label="${labels.custom.themes.button.save}" c:onClick="saveTheme(this.uuid)"/>
+			<button id="cancelButton" label="${labels.custom.themes.button.cancel}"/>
+			<button id="createButton" sclass="y-btn-primary" label="${labels.custom.themes.button.create}"/>
+		</div>
+	</div>
+
+	<div id="themeDisplayView" sclass="theme-display-view">
+		<div id="emptyListView" sclass="empty-list-view">
+			<image src="${wr}/images/empty_list.png"/>
+			<label value="${labels.theme.list.no.data.info.title}" sclass="empty-list-view-title"/>
+			<label value="${labels.theme.list.no.data.info.subtitle}" sclass="empty-list-view-subtitle"/>
+		</div>
+		<listbox id="themeListBox">
+			<template name="model">
+				<listitem value="${each}" onClick='$composer.onThemeEdit(self.getValue())'>
+					<listcell>
+						<if test="${not empty each.getThumbnail()}">
+							<image src="${each.getThumbnail().getURL()}"/>
+						</if>
+						<if test="${empty each.getThumbnail()}">
+							<image src="${wr}/../../images/default_theme_thumbnail.png"/>
+						</if>
+						<div class="themeLabel">${empty each.getName() ? each.getCode() : each.getName()}</div>
+						<div class="theme-list-item-btns">
+							<button class="theme-edit-btn y-btn-transparent" tooltiptext="${labels.theme.list.edit.button.tooltip}" 
+								onClick='$composer.onThemeEdit(self.getAttribute("themeModel"))'>
+								<custom-attributes themeModel="${each}" />
+							</button>
+							<button class="theme-delete-btn y-btn-transparent" tooltiptext="${labels.theme.list.delete.button.tooltip}"
+								onClick='$composer.onThemeDelete(self.getAttribute("themeModel"))'>
+								<custom-attributes themeModel="${each}" />
+							</button>
+						</div>
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+	</div>
+	<div id="themeEditView" class="theme-edit-view">
+		<div id="customizeThemeContainer" sclass="yw-customizeTheme-container">
+			<label sclass="theme-edit-view-section-title" value="${labels.custom.themes.section.title.general}"/>
+			<div id="codeContainer" sclass="yw-customTheme-attribute">
+				<label value="${labels.custom.themes.field.label.code}" sclass="yw-label-mandatory"/>
+			</div>
+			<div sclass="yw-customTheme-attribute" id="nameEditorContainer"/>
+			<label sclass="theme-edit-view-section-title" value="${labels.custom.themes.section.title.appearance}"/>
+			<div sclass="yw-customTheme-attribute">
+				<label value="${labels.custom.themes.field.label.base.theme}" sclass="yw-label-mandatory"/>
+				<combobox id="baseThemeCombox" width="100%" onSelect='$composer.onBaseThemeSelect()'>
+                    <template name="model">
+                        <comboitem label="${empty each.getName() ? each.getCode() : each.getName()}"/>
+                    </template>
+                </combobox>
+			</div>
+		</div>
+		<div sclass="yw-customizeTheme-preview">
+			<label sclass="theme-edit-view-section-title" value="${labels.custom.themes.section.title.preview}"/>
+			<div sclass="yw-customizeTheme-preview-content" width="100%">
+				<widgetslot slotID="customizeThemePreview" height="100%" width="100%"/>
+			</div>
+		</div>	
+	</div>
+	
+</widget>

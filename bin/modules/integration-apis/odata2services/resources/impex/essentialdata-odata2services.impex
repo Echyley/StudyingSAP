@@ -1,0 +1,57 @@
+#
+# Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+#
+
+## PLEASE, check whether more cleaning is needed in Odata2ServicesEssentialData class
+## whenever the content of this impex changes
+
+INSERT_UPDATE UserGroup; UID[unique = true]     ; locname[lang = en]       ; description                                 ; groups(uid)          ;
+                       ; integrationusergroup   ; Integration User Group   ; Common Group for all the Integration Groups ;                      ;
+                       ; integrationadmingroup  ; Integration Admin Group  ; Integration Admin Group                     ; integrationusergroup ;
+                       ; integrationcreategroup ; Integration Create Group ; Integration Create Group                    ; integrationusergroup ;
+                       ; integrationviewgroup   ; Integration View Group   ; Integration View Group                      ; integrationusergroup ;
+                       ; integrationdeletegroup ; Integration Delete Group ; Integration Delete Group                    ; integrationusergroup ;
+
+INSERT_UPDATE UserGroup; UID[unique = true]; groups(uid)[mode = append]
+                       ; admingroup        ; integrationadmingroup
+
+
+$START_USERRIGHTS
+Type      ; UID                   ; MemberOfGroups ; Password ; Target                                       ; read ; change ; create ; remove
+UserGroup ; integrationadmingroup ;                ;          ;                                              ;      ;        ;        ;
+
+# Access Rights for IntegrationAdministrator Users
+          ;                       ;                ;          ; AttributeDescriptor                          ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; AuthenticationType                           ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; BasicCredential                              ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ClassAttributeAssignment                     ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ClassificationAttribute                      ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ClassificationClass                          ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ClassificationSystem                         ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ClassificationSystemVersion                  ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ComposedType                                 ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ConsumedDestination                          ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ConsumedOAuthCredential                      ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; DestinationTarget                            ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; Endpoint                                     ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; InboundChannelConfiguration                  ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObject                            ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectItem                        ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectItemAttribute               ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectClass                       ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectClassAttribute              ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectItemClassificationAttribute ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectItemVirtualAttribute        ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationObjectVirtualAttributeDescriptor  ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; IntegrationType                              ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ItemTypeMatchEnum                            ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; OutboundChannelConfiguration                 ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; OutboundSyncCronJob                          ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; OutboundSyncJob                              ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; OutboundSyncStreamConfiguration              ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; OutboundSyncStreamConfigurationContainer     ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; Script                                       ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; ScriptType                                   ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; Trigger                                      ; +    ; +      ; +      ; +
+          ;                       ;                ;          ; Type                                         ; +    ; +      ; +      ; +
+$END_USERRIGHTS

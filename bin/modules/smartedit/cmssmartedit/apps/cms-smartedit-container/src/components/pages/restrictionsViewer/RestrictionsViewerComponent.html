@@ -1,0 +1,8 @@
+<div *ngIf="restrictions?.length > 0; else noRestrictions">
+    <a href="" class="fd-link show-restrictions-btn" (click)="showRestrictions($event)"
+        >{{restrictions.length}}</a
+    >
+</div>
+<ng-template #noRestrictions>
+    <div>-</div>
+</ng-template>

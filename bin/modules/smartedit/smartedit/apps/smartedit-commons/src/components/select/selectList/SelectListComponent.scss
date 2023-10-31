@@ -1,0 +1,42 @@
+.se-select-list {
+    .fd-menu {
+        &__list {
+            position: relative;
+            outline: none;
+
+            &--basic {
+                max-height: 200px;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+        }
+    }
+
+    &__item {
+        cursor: pointer;
+        &.fd-list__item {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &.is-selected {
+            color: var(--sapSelectedColor);
+        }
+
+        &.is-disabled {
+            .menu-option {
+                cursor: not-allowed;
+                opacity: 0.65;
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+
+        .menu-option.fd-list__title {
+            color: inherit;
+            background: inherit;
+            padding: 0.5rem 1.5rem;
+        }
+    }
+}

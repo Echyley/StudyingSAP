@@ -1,0 +1,11 @@
+@import "cockpitng-globals.scss";
+
+$masterDetail__window-container--width: 1021px;
+$masterDetail__footer--height: 44px;
+$masterDetail__content--height: calc(100% - #{$masterDetail__footer--height});
+$masterDetail__footer-button--height: 36px;
+$masterDetail__footer-button--margin-right: 7px;
+$masterDetail__sidebar-title--color: var(--bo-title-color);
+$masterDetail__sidebar-subtitle--color: var(--bo-content-label-color);
+$masterDetail__sidebar-icon--color: var(--bo-content-label-color);
+$masterDetail__sidebar-icon--font-size: $font-size__h3;

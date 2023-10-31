@@ -1,0 +1,81 @@
+<!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.044/cXML.dtd">
+<cXML payloadID="1548693618792.1549@STOM33991391A" timestamp="2019-01-28T17:40:18+01:00" xml:lang="en-US">
+   <Header>
+        <!-- Originator (buying organization) -->
+        <From>
+            <Credential domain="DUNS">
+                <Identity>123456789</Identity>
+            </Credential>
+        </From>
+        <!-- Destination (supplier) -->
+        <To>
+            <Credential domain="DUNS">
+                <Identity>83528721</Identity>
+            </Credential>
+        </To>
+        <!-- Previous relaying entity (network hub in this case) -->
+        <Sender>
+            <Credential domain="NetworkID">
+               <Identity>AN01000002779-T</Identity>
+                <SharedSecret>VerySecret1234</SharedSecret>
+            </Credential>
+            <UserAgent>Procurement System 2.0</UserAgent>
+        </Sender>
+    </Header>
+    <Request>
+        <OrderRequest>
+            <OrderRequestHeader type="new" orderID="testing1" orderDate="2021-08-29T14:10:12+12:00">
+                <Tax>
+                    <TaxDetail category="txCode">
+                       <TaxAmount>
+                          <Money currency="USD">21.00</Money>
+                       </TaxAmount>
+                    </TaxDetail>
+                </Tax>
+                <Total>
+                    <Money currency="USD">600</Money>
+                </Total>
+                <Shipping>
+                    <Money currency="USD">20.0</Money>
+                </Shipping>
+                <ShipTo>
+                    <Address addressID="3000">
+                      <Name xml:lang="en">New York</Name>
+                      <PostalAddress>
+                        <DeliverTo>Joe Smith</DeliverTo>        
+                        <Street>999 South Wacker Drive</Street>
+                        <City>Chicago</City>
+                        <State>NY</State>
+                        <PostalCode>60606</PostalCode>
+                        <Country isoCountryCode="US">United States</Country>
+                      </PostalAddress>
+                      <Phone><TelephoneNumber><CountryCode>44</CountryCode><AreaOrCityCode>070</AreaOrCityCode><Number>476543</Number><Extension></Extension></TelephoneNumber></Phone>
+                      <Email>punchout.customer@punchoutorg.com</Email>
+                    </Address>
+                  </ShipTo>
+                  <BillTo>
+                    <Address addressID="US006">
+                      <Name xml:lang="en">New York</Name>
+                      <PostalAddress>
+                        <Street>999 South Wacker Drive</Street>
+                        <City>Chicago</City>
+                        <State>NY</State>
+                        <PostalCode>60606</PostalCode>
+                        <Country isoCountryCode="US">United States</Country>
+                      </PostalAddress>
+                    </Address>
+                  </BillTo>
+            </OrderRequestHeader>
+            <ItemOut quantity="1">
+                <ItemID>
+                    <SupplierPartID>TW1210-9342</SupplierPartID>
+                </ItemID>
+                <ItemDetail>
+                    <UnitPrice>
+                        <Money currency="USD">7.5</Money>
+                    </UnitPrice>
+                </ItemDetail>
+            </ItemOut>
+        </OrderRequest>
+    </Request>
+</cXML>

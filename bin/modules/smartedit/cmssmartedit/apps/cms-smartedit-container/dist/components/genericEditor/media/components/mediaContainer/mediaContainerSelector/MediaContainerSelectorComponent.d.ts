@@ -1,0 +1,43 @@
+import { ChangeDetectorRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { ActionableSearchItem, GenericEditorField, SelectReset, SystemEventService } from 'smarteditcommons';
+import { MediaContainer } from '../MediaContainerComponent';
+import { MediaContainerSelectorItemComponent } from '../mediaContainerSelectorItem';
+declare const FieldQualifier = "mediaContainer";
+export declare class MediaContainerSelectorComponent implements OnInit, OnDestroy {
+    private readonly cdr;
+    private readonly systemEventService;
+    eventNameAffix: string;
+    isAdvancedCloning: boolean;
+    name: string;
+    initialName: string;
+    isEditable: boolean;
+    nameChange: EventEmitter<string>;
+    onCreate: EventEmitter<string>;
+    onRemove: EventEmitter<void>;
+    onSelect: EventEmitter<MediaContainer>;
+    onCreationInProgressChange: EventEmitter<boolean>;
+    id: string;
+    field: GenericEditorField;
+    mediaContainerNameModel: {
+        [FieldQualifier]: string;
+    };
+    reset: SelectReset;
+    actionableSearchItem: ActionableSearchItem;
+    itemComponent: typeof MediaContainerSelectorItemComponent;
+    creationInProgress: boolean;
+    private unRegSelectMediaContainer;
+    private unRegClearSelectMediaContainer;
+    private unRegCreateMediaContainer;
+    constructor(cdr: ChangeDetectorRef, systemEventService: SystemEventService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    onNameChange(name: string): void;
+    isNameReadOnly(): boolean;
+    isSelected(): boolean;
+    private onSelectItem;
+    private onCreateMediaContainer;
+    private setCreationInProgressAndEmit;
+    private clearSelectOption;
+    private resetSelector;
+}
+export {};

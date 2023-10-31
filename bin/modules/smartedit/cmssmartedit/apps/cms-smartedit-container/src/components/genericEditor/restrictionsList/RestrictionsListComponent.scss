@@ -1,0 +1,25 @@
+.restrictions-list {
+    .restrictions-lists {
+        .restrictions-list__items {
+            position: static;
+            @include se-flex-row(space-between);
+            border-top-color: var(--sapList_GroupHeaderBorderColor) !important;
+            border-top: solid;
+            border-radius: unset;
+            padding: 20px;
+            &:first-child {
+                border-top-width: 0;
+            }
+            .restrictions-list__item-name {
+                font-weight: 700;
+                color: var(--sapTextColor);
+                margin: 0;
+            }
+        }
+    }
+    .restrictions-list__info {
+        label {
+            font-weight: 700;
+        }
+    }
+}

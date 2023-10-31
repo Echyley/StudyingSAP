@@ -1,0 +1,17 @@
+{
+    "name": "hac",
+    "version": "6.6.0.0",
+    "dependencies": {
+        "jquery.flot": "0.8.3",
+        "jquery.flot.tooltip": "0.9.0",
+        "javascript-debug": "https://github.com/maruilian11/javascript-debug/tree/patch-1",
+        "codemirror": "5.65.8",
+        "jquery": "3.5.1",
+        "jquery-ui-dist": "1.13.2",
+        "datatables.net": "1.12.1",
+        "html5shiv": "3.7.3",
+        "@ztree/ztree_v3": "3.5.48",
+        "jquery-validation": "1.19.5",
+        "chart.js": "2.9.4"
+    }
+}

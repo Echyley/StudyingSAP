@@ -1,0 +1,179 @@
+<!-- 
+    This component is using "fd-popover" component with the styles of "fd-select".
+    Render <fd-select> so that the styles for "fd-select-custom" class will be loaded into <style>.
+    Those styles are embedded in Fundamental SelectComponent with ViewEncapsulation set to None, so
+    here I reuse them.
+-->
+<fd-select [style.display]="'none'"></fd-select>
+
+<div
+    [attr.id]="id + '-selector'"
+    class="select-container"
+    [ngClass]="{
+        'has-warning': hasWarning(),
+        'has-error': hasError()
+    }">
+    <ng-container *ngIf="multiSelect; then multi; else singleSelect"></ng-container>
+
+    <!-- Single Select -->
+    <ng-template #singleSelect>
+        <fd-popover
+            [triggers]="['click']"
+            [(isOpen)]="isOpen"
+            [placement]="'bottom'"
+            (isOpenChange)="onSingleSelectIsOpenChange($event)"
+            fillControlMode="equal"
+            [focusTrapped]="true"
+            [focusAutoCapture]="true"
+            [additionalBodyClass]="fullAdditionalBodyClass">
+            <!-- Select Button which toggles the dropdown -->
+            <fd-popover-control>
+                <div
+                    class="selected-container fd-select-custom"
+                    [attr.has-selected-option]="!!selected || null">
+                    <button
+                        fd-button
+                        class="fd-select-button-custom toggle-button"
+                        [disabled]="isReadOnly"
+                        [fdMenu]="!isReadOnly">
+                        <!-- Placeholder -->
+                        <span
+                            *ngIf="!selected; else selectedItem"
+                            class="selected-placeholder selected-item">
+                            {{ placeholder | translate }}
+                        </span>
+
+                        <ng-template #selectedItem>
+                            <div class="selected-item">
+                                <!-- Maginifier Icon -->
+                                <span *ngIf="controls" class="sap-icon--search">
+                                    {{ placeholder | translate }}</span
+                                >
+                                <!-- Selected Option -->
+                                <se-item-printer
+                                    *ngIf="selected"
+                                    [attr.id]="id + '-selected'"
+                                    [item]="selected"
+                                    [component]="itemComponent"
+                                    [selectComponentCtx]="this"></se-item-printer>
+                                <!-- Remove Icon -->
+                                <span
+                                    *ngIf="controls || showRemoveButton"
+                                    class="sap-icon--sys-cancel selected-item__remove-button"
+                                    (click)="removeSelectedOption($event, selected)"></span>
+                            </div>
+                        </ng-template>
+                    </button>
+                </div>
+            </fd-popover-control>
+            <fd-popover-body>
+                <ul fd-list class="se-select-list-container">
+                    <ng-container *ngIf="searchEnabled && isOpen">
+                        <ng-container *ngTemplateOutlet="searchInputTemplate"></ng-container>
+                    </ng-container>
+                    <ng-container *ngTemplateOutlet="resultsHeader"></ng-container>
+                    <!--
+                    <fd-popover> initializes each component inside <fd-menu/> (even if "isOpen" is set to false)
+                    and then reuses the same instance of initialized component each time dropdown is opened.
+                    Since <se-infinite-scrolling/> fetches some data on initialize, setting the "isOpen", will add or remove the component to the DOM ensuring proper data loading.
+                -->
+                    <ng-container *ngIf="isOpen">
+                        <!-- Select List -->
+                        <ng-container *ngTemplateOutlet="selectListTemplate"></ng-container>
+                    </ng-container>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </ng-template>
+
+    <!-- Multi Select -->
+    <ng-template #multi>
+        <div [ngClass]="{'se-multi-select': selected && selected.length > 0}">
+            <div class="selected-container se-selected-list">
+                <!-- Selected Options -->
+                <ng-container *ngIf="selected && selected.length > 0">
+                    <div class="selected-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+                        <div
+                            *ngFor="let item of selected; trackBy: itemTrackBy"
+                            class="selected-list__item selected-item">
+                            <div cdkDrag>
+                                <se-item-printer
+                                    [item]="item"
+                                    [component]="itemComponent"
+                                    [selectComponentCtx]="this">
+                                </se-item-printer>
+                                <div class="selected-list__placeholder" *cdkDragPlaceholder></div>
+                            </div>
+                            <span
+                                class="sap-icon--sys-cancel selected-item__remove-button selected-item-remove"
+                                (click)="removeSelectedOption($event, item)"></span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <fd-popover
+            class="se-multi-select"
+            [triggers]="[]"
+            [closeOnOutsideClick]="false"
+            [isOpen]="isOpen"
+            [placement]="'bottom'"
+            fillControlMode="equal"
+            [focusTrapped]="true"
+            [focusAutoCapture]="true"
+            [additionalBodyClass]="fullAdditionalBodyClass">
+            <fd-popover-control>
+                <ng-container *ngTemplateOutlet="searchInputTemplate"></ng-container>
+            </fd-popover-control>
+            <fd-popover-body>
+                <ul fd-list class="se-select-list-container">
+                    <ng-container *ngTemplateOutlet="resultsHeader"></ng-container>
+                    <ng-container *ngIf="isOpen">
+                        <ng-container *ngTemplateOutlet="selectListTemplate"></ng-container>
+                    </ng-container>
+                </ul>
+            </fd-popover-body>
+        </fd-popover>
+    </ng-template>
+
+    <!-- Common templates  -->
+    <ng-template #resultsHeader>
+        <se-select-results-header
+            [search]="search"
+            [resultsHeaderComponent]="resultsHeaderComponent"
+            [resultsHeaderLabel]="resultsHeaderLabel"
+            [displayResultsHeaderLabel]="showResultsHeaderLabel()"
+            [actionableSearchItem]="actionableSearchItem"
+            (actionButtonClick)="closeAndReset()">
+        </se-select-results-header>
+    </ng-template>
+
+    <ng-template #searchInputTemplate>
+        <se-select-search-input
+            [isDisabled]="isReadOnly"
+            [isReadOnly]="multiSelect && !searchEnabled"
+            [isTypeAheadEnabled]="!multiSelect"
+            [placeholder]="showPlaceholder() ? (placeholder | translate) : ''"
+            [search]="search"
+            (searchKeyup)="onSearchInputKeyup($event.event, $event.value)"
+            (searchChange)="onSearchInputChange($event)">
+        </se-select-search-input>
+    </ng-template>
+
+    <ng-template #selectListTemplate>
+        <se-select-list
+            [id]="id"
+            [isPagedDropdown]="isPagedDropdown()"
+            [fetchPage]="fetchStrategy.fetchPage"
+            [search]="search"
+            [items]="items"
+            [selected]="selected"
+            [excludeSelected]="multiSelect"
+            [disableChoiceFn]="disableChoiceFn"
+            [itemComponent]="itemComponent"
+            [selectComponentCtx]="this"
+            (optionClick)="onOptionClick($event)"
+            (infiniteScrollItemsChange)="onInfiniteScrollItemsChange()">
+        </se-select-list>
+    </ng-template>
+</div>

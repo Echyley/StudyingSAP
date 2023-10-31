@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widget-definition id="com.hybris.backoffice.widgets.masterdetail.userprofilesettings">
+	<name>User Profile Setting Widget</name>
+	<description>User Profile Setting Widget</description>
+	<version>1.0</version>
+	<view src="../masterDetail.zul"/>
+	<controller class="com.hybris.backoffice.widgets.masterdetail.UserProfileSettingsController"/>
+	<sockets>
+		<input id="openProfileSettings" type="java.lang.Object"/>
+		<input id="viewSwitched" type="com.hybris.backoffice.widgets.viewswitcher.ViewsSwitchedData"/>
+		<output id="close" type="java.lang.Object"/>
+		<output id="selectView" type="java.lang.Object"/>
+	</sockets>
+	<keywords>
+		<keyword>Profile</keyword>
+	</keywords>
+</widget-definition>

@@ -1,0 +1,32 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$catalog-id = Default
+$catalog-version = Online
+$catalog-id-test = testCatalog
+
+$catalogversion = catalogversion(catalog(id), version)[unique=true, default=$catalog-id:$catalog-version]
+
+INSERT_UPDATE Catalog; id[unique = true]; name[lang = de] ; name[lang = en] ; defaultCatalog;
+                     ; $catalog-id      ; $catalog-id     ; $catalog-id     ; false         ;
+                     ; $catalog-id-test ; $catalog-id-test; $catalog-id-test; false         ;
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique = true]; version[unique = true]; active; defaultCurrency(isocode);
+                            ; $catalog-id               ; $catalog-version      ; true  ; EUR                     ;
+                            ; $catalog-id-test          ; $catalog-version      ; true  ; EUR                     ;
+
+INSERT_UPDATE MediaFolder;  qualifier[unique=true]    ; path[unique=true]
+                         ;  customersupportattachments; customersupportattachments
+
+INSERT_UPDATE CsAgentGroup; uid[unique=true]         ; ticketstores(uid); defaultAssignee(uid)
+                          ; csagentmanagergroup      ;                  ;
+                          ; testTicketGroup1         ;                  ;
+                          ; customersupportagentrole ;                  ;

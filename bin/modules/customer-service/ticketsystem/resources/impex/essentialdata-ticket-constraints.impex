@@ -1,0 +1,15 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$active = active[allownull = true, default = true]
+INSERT_UPDATE SizeConstraint; id[unique = true, allownull = true]; severity(code, itemtype(code)); $active; target[allownull = true]                                    ; type(code)      ; qualifier; descriptor(enclosingType(code), qualifier); max[allownull = true]; min[allownull = true]
+                            ; TicketEventTextMaxSize5000         ; ERROR:Severity                ;        ; de.hybris.platform.ticket.events.model.CsCustomerEventModel ; CsCustomerEvent ; text     ; CsCustomerEvent:text                      ; 5000                 ; 1
+                            ; TicketSubjectMaxSize255            ; ERROR:Severity                ;        ; de.hybris.platform.ticket.model.CsTicketModel               ; CsTicket        ; headline ; CsTicket:headline                         ; 255                  ; 1

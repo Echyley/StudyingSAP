@@ -1,0 +1,73 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+#
+# Import the CMS content for account summary page
+# the user of this addon should change the value of "$contentCatalog" accordingly
+#
+
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])
+$jarResourceCmsImages=jar:de.hybris.platform.accountsummaryaddon.constants.AccountsummaryaddonConstants&/accountsummaryaddon/import/cockpits/cmscockpit
+$siteResource=jar:de.hybris.platform.accountsummaryaddon.constants.AccountsummaryaddonConstants&/accountsummaryaddon/import
+$narrowContent=ProductFeatureComponent,CategoryFeatureComponent,CMSImageComponent,SimpleBannerComponent,BannerComponent,ImageMapComponent,RotatingImagesComponent,ProductCarouselComponent,CMSParagraphComponent
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CompanyPageTemplate'];validComponentTypes(code)
+;BodyContent;;$narrowContent,AccountSummaryUnitTreeComponent
+;BodyContent;;$narrowContent,AccountSummaryAccountStatusComponent
+
+
+# CMS Link Components - My Company
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
+
+# CMS Cockpit Preview Image for AccountStatusPage
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;accountStatusPagePreview;text/png;AccountStatusPage.png;$jarResourceCmsImages/preview-images/powertools/AccountStatusPage.png
+
+# CMS Cockpit Preview Image for AccountSummaryPage
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;accountSummaryPagePreview;text/png;AccountSummaryPage.png;$jarResourceCmsImages/preview-images/powertools/AccountSummaryPage.png
+
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;AccountSummaryLink;Account Summary Link;/my-company/organization-management/accountsummary-unit;AccountSummaryLink
+
+# CMS Navigation nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef
+# children for MyCompanyNavNode
+;AccountSummaryNavNode;;Account Summary Nav Node;MyCompanyNavNode;AccountSummaryNavNode
+
+# CMS Navigation Entry
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef)
+;AccountSummaryNavNodeEntry;;Account Summary Nav Node Entry;AccountSummaryNavNode;AccountSummaryLink
+
+# CMS User Group Restriction
+INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&linkRef)
+;;AccountSummaryUserGroupRestriction;Account Summary User Group Restriction;b2badmingroup;true;AccountSummaryLink
+
+# Jsp Include Components
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountSummaryUnitTreeComponent;Account Summary Unit Tree Component;/WEB-INF/views/addons/accountsummaryaddon/responsive/pages/company/accountSummaryUnitTree.jsp;;AccountSummaryUnitTreeComponent
+;;AccountSummaryUnitDetailsHeadlineComponent;Account Summary Unit Details Headline Component;/WEB-INF/views/addons/accountsummaryaddon/responsive/pages/company/accountSummaryUnitDetailsHeadline.jsp;;AccountSummaryUnitDetailsHeadlineComponent
+;;AccountSummaryUnitDetailsOverviewComponent;Account Summary Unit Details Overview Component;/WEB-INF/views/addons/accountsummaryaddon/responsive/pages/company/accountSummaryUnitDetailsOverview.jsp;;AccountSummaryUnitDetailsOverviewComponent
+;;AccountSummaryUnitDetailsListComponent;Account Summary Unit Details List Component;/WEB-INF/views/addons/accountsummaryaddon/responsive/pages/company/accountSummaryUnitDetailsList.jsp;;AccountSummaryUnitDetailsListComponent
+;;AccountSummaryUnitDetailsActionsComponent;Account Summary Unit Details Actions Component;/WEB-INF/views/addons/accountsummaryaddon/responsive/pages/company/accountSummaryUnitDetailsActions.jsp;;AccountSummaryUnitDetailsActionsComponent
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;accountsummaryunittree;Account Summary Unit Tree Page;CompanyPageTemplate;accountsummaryunittree
+;;accountsummaryunitdetailslist;Account Summary Unit Details List Page;CompanyPageTemplate;accountsummaryunitdetailslist
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;BodyContent-accountsummaryunittree;Body Content Slot for Account Summary Unit Tree Page;true;AccountSummaryUnitTreeComponent
+;;BodyContent-accountsummaryunitdetailslist;Body Content Slot for Account Summary Unit Details List Page;true;AccountSummaryUnitDetailsHeadlineComponent,AccountSummaryUnitDetailsOverviewComponent,AccountSummaryUnitDetailsListComponent,AccountSummaryUnitDetailsActionsComponent
+
+# ContentSlotForPage - accountsummaryunittree
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='accountsummaryunittree'];contentSlot(uid,$contentCV)[unique=true]
+;;BodyContent-accountsummaryunittree;BodyContent;;BodyContent-accountsummaryunittree
+
+# ContentSlotForPage - accountsummaryunitdetailslist
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='accountsummaryunitdetailslist'];contentSlot(uid,$contentCV)[unique=true]
+;;BodyContent-accountsummaryunitdetailslist;BodyContent;;BodyContent-accountsummaryunitdetailslist

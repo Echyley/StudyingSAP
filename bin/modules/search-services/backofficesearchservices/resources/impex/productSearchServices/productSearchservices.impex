@@ -1,0 +1,116 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$languages=en,de
+$currencies=EUR,USD
+$snIndexConfiguration=backoffice
+$snIndexType=backoffice-product
+$ItemType = Product
+
+# Currencies
+INSERT_UPDATE Currency ; isocode[unique = true] ; symbol
+                       ; EUR                    ; €
+                       ; USD                    ; $
+#base configuration    
+INSERT_UPDATE SnIndexConfiguration ; id[unique=true]       ; name       ; user(uid) ; languages(isocode) ; currencies(isocode) ;
+                                   ; $snIndexConfiguration ; Backoffice ; admin     ; $languages         ; $currencies         ;
+
+INSERT_UPDATE SnIndexType ; indexConfiguration(id) ; id[unique=true] ; name               ; itemComposedType(code) ; identityProvider
+                          ; $snIndexConfiguration  ; $snIndexType    ; Backoffice Product ; Product                ; snIdentityProvider
+
+#references               
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true]  ; fieldType(code) ; valueProvider                        ; valueProviderParameters                                 ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default=false] ; multiValued[default=false] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; catalogPk        ; STRING          ; modelAttributeSnIndexerValueProvider ; expression->catalogVersion.catalog.pk.longValueAsString ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 1
+                      ; $snIndexType               ; catalogVersionPk ; STRING          ; modelAttributeSnIndexerValueProvider ; expression->catalogVersion.pk.longValueAsString         ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 2
+                      ; $snIndexType               ; uncategorized    ; BOOLEAN         ; booleanSnIndexerValueProvider        ; expression->supercategories                             ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 3
+
+#multivalue references (collections)
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true]                ; fieldType(code) ; valueProvider                              ; valueProviderParameters[map-delimiter=|]                                                         ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default=false] ; multiValued[default=true] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; classificationCatalogsVersions ; STRING          ; classificationSnIndexerValueProvider       ; expression->classificationClasses.catalogVersion.pk.longValueAsString                            ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 4
+                      ; $snIndexType               ; classificationCatalogs         ; STRING          ; classificationSnIndexerValueProvider       ; expression->classificationClasses.catalogVersion.catalog.pk.longValueAsString                    ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 5
+                      ; $snIndexType               ; comments                       ; STRING          ; modelAttributeSnIndexerValueProvider       ; expression->comments.pk.longValueAsString                                                        ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 6
+                      ; $snIndexType               ; keywords                       ; STRING          ; modelAttributeSnIndexerValueProvider       ; expression->keywords.pk.longValueAsString                                                        ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 7
+                      ; $snIndexType               ; supercategories                ; STRING          ; modelAttributeSnIndexerValueProvider       ; expression->supercategories.pk.longValueAsString                                                 ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 8
+                      ; $snIndexType               ; categoryPk                     ; STRING          ; variantAwareCategorySnIndexerValueProvider ; expression->pk.longValueAsString|productSelector->CURRENT_PARENT|categorySelector->categories    ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 9
+                      ; $snIndexType               ; allSupercategories             ; STRING          ; variantAwareCategorySnIndexerValueProvider ; expression->pk.longValueAsString|productSelector->CURRENT_PARENT|categorySelector->allCategories ;                 ;                            ;                           ;                          ;                           ;                                 ;                                    ; 10
+
+#enums                
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true] ; fieldType(code) ; valueProvider                        ; valueProviderParameters         ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default=false] ; multiValued[default=false] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; approvalStatus  ; STRING          ; modelAttributeSnIndexerValueProvider ; expression->approvalStatus.code ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 11
+
+#simple fields        
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true]  ; fieldType(code) ; valueProvider                        ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default=false] ; multiValued[default=false] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; itemtype         ; STRING          ; modelAttributeSnIndexerValueProvider ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 12
+                      ; $snIndexType               ; description      ; TEXT            ; modelAttributeSnIndexerValueProvider ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 13
+                      ; $snIndexType               ; ean              ; TEXT            ; modelAttributeSnIndexerValueProvider ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 14
+                      ; $snIndexType               ; manufacturerName ; TEXT            ; modelAttributeSnIndexerValueProvider ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 15
+                      ; $snIndexType               ; remarks          ; TEXT            ; modelAttributeSnIndexerValueProvider ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 16
+
+
+#free text search fields
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true] ; fieldType(code) ; valueProvider                        ; qualifierTypeId ; retrievable[default=false] ; searchable[default=true] ; localized[default=true] ; multiValued[default=false] ; useForSuggesting[default=true] ; useForSpellchecking[default=true] ; indexTypePOS
+                      ; $snIndexType               ; backofficeLabel ; TEXT            ; itemModelLabelSnIndexerValueProvider ;                 ;                            ;                          ;                         ;                            ;                                ;                                   ; 17
+                      ; $snIndexType               ; code            ; TEXT            ; modelAttributeSnIndexerValueProvider ;                 ;                            ;                          ; false                   ;                            ;                                ;                                   ; 18
+                      ; $snIndexType               ; name            ; TEXT            ; itemModelLabelSnIndexerValueProvider ;                 ;                            ;                          ;                         ;                            ;                                ;                                   ; 19
+
+#Date                 
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true] ; fieldType(code) ; valueProvider              ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default=false] ; multiValued[default=false] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; creationtime    ; DATE_TIME       ; dateSnIndexerValueProvider ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 20
+                      ; $snIndexType               ; modifiedtime    ; DATE_TIME       ; dateSnIndexerValueProvider ;                 ;                            ;                           ;                          ;                            ;                                 ;                                    ; 21
+
+
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true] ; fieldType(code) ; valueProvider                        ; valueProviderParameters          ; qualifierTypeId ; retrievable ; searchable ; localized ; multiValued ; useForSuggesting ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; pk              ; STRING          ; modelAttributeSnIndexerValueProvider ; expression->pk.longValueAsString ;                 ; false       ; false      ; false     ; false       ; false            ; false                              ; 22
+
+#facets               
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true]      ; fieldType(code) ; valueProvider                                               ; valueProviderParameters[map-delimiter=|]                                      ; qualifierTypeId ; retrievable[default=false] ; searchable[default=false] ; localized[default=false] ; multiValued[default=false] ; useForSuggesting[default=false] ; useForSpellchecking[default=false] ; indexTypePOS
+                      ; $snIndexType               ; facet_catalogVersion ; STRING          ; itemModelLabelSnIndexerValueProvider                        ; expression->catalogVersion                                                    ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 23
+                      ; $snIndexType               ; catalogVersion       ; TEXT            ; itemModelLabelSnIndexerValueProvider                        ; expression->catalogVersion                                                    ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 24
+                      ; $snIndexType               ; facet_catalog        ; STRING          ; itemModelLabelSnIndexerValueProvider                        ; expression->catalogVersion.catalog                                            ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 25
+                      ; $snIndexType               ; catalog              ; TEXT            ; itemModelLabelSnIndexerValueProvider                        ; expression->catalogVersion.catalog                                            ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 26
+                      ; $snIndexType               ; category             ; TEXT            ; variantAwareCategorySnIndexerValueProvider                  ; expression->code|productSelector->CURRENT_PARENT|categorySelector->categories ;                 ;                            ;                           ;                          ; true                       ;                                 ;                                    ; 27
+                      ; $snIndexType               ; categoryLabel        ; STRING          ; categoryCodeWithCatalogVersionMappingSnIndexerValueProvider ; productSelector->CURRENT_PARENT|categorySelector->categories                  ;                 ;                            ;                           ;                          ; true                       ;                                 ;                                    ; 28
+                      ; $snIndexType               ; facet_itemtype       ; STRING          ; itemtypeLabelSnIndexerValueProvider                         ;                                                                               ;                 ;                            ;                           ; true                     ;                            ;                                 ;                                    ; 29
+
+
+
+# Run the full indexer cron job at 3:00 AM every day
+INSERT FlexibleSearchSnIndexerItemSource ; &indexerItemSourceID ; query
+                                         ; $snIndexType-full    ; "SELECT {pk} FROM {Product}"
+
+INSERT_UPDATE FullSnIndexerCronJob ; code[unique=true]         ; job(code)        ; sessionLanguage(isocode) ; indexType(id) ; indexerItemSource(&indexerItemSourceID) ; active
+                                   ; indexer-$snIndexType-full ; fullSnIndexerJob ; en                       ; $snIndexType  ; $snIndexType-full                       ; false
+
+INSERT_UPDATE Trigger ; cronJob(code)[unique=true] ; second ; minute ; hour ; day ; month ; year ; relative ; active ; maxAcceptableDelay
+                      ; indexer-$snIndexType-full  ; 0      ; 0      ; 3    ; -1  ; -1    ; -1   ; false    ; false  ; -1
+
+# Run the update indexer cron job every 5 seconds
+INSERT FlexibleSearchSnIndexerItemSource ; &indexerItemSourceID       ; query
+                                         ; $snIndexType-create-update ; "SELECT {pk} FROM {Product} WHERE {modifiedtime} > ?startTime"
+
+INSERT_UPDATE SnIndexerItemSourceOperation ; &indexerItemSourceOperationID ; documentOperationType(code) ; indexerItemSource(&indexerItemSourceID)[unique=true]
+                                           ; $snIndexType-create-update    ; CREATE_UPDATE               ; $snIndexType-create-update
+
+INSERT_UPDATE IncrementalSnIndexerCronJob ; code[unique=true]           ; job(code)               ; sessionLanguage(isocode) ; indexType(id) ; indexerItemSourceOperations(&indexerItemSourceOperationID) ; active
+                                          ; indexer-$snIndexType-update ; incrementalSnIndexerJob ; en                       ; $snIndexType  ; $snIndexType-create-update                                 ; false
+
+INSERT_UPDATE Trigger ; cronJob(code)[unique=true]  ; active ; cronExpression
+                      ; indexer-$snIndexType-update ; true   ; 0/5 * * * * ?
+
+# Create delete indexer cron job
+INSERT FlexibleSearchSnIndexerItemSource ; &indexerItemSourceID ; query
+                                         ; $snIndexType-delete  ; "SELECT {pk} FROM {Product}"
+
+INSERT_UPDATE SnIndexerItemSourceOperation ; &indexerItemSourceOperationID ; documentOperationType(code) ; indexerItemSource(&indexerItemSourceID)[unique=true]
+                                           ; $snIndexType-delete           ; DELETE                      ; $snIndexType-delete
+
+INSERT_UPDATE IncrementalSnIndexerCronJob ; code[unique=true]           ; job(code)               ; sessionLanguage(isocode) ; indexType(id) ; indexerItemSourceOperations(&indexerItemSourceOperationID) ; active
+                                          ; indexer-$snIndexType-delete ; incrementalSnIndexerJob ; en                       ; $snIndexType  ; $snIndexType-delete                                        ; false
+
+
+#Mapping for backoffice search services, include: itemType, IndexType and IndexConfiguration
+INSERT_UPDATE BackofficeIndexedTypeToSearchservicesIndexConfig ; indexedType(code)[unique = true] ; snIndexConfiguration(id) ; snIndexType(id) ; active ;
+                                                               ; $ItemType                        ; $snIndexConfiguration    ; $snIndexType    ; false  ;

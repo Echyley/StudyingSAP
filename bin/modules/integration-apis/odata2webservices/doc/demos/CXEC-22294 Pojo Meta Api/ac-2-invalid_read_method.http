@@ -1,0 +1,330 @@
+###
+# AC 2:
+
+###
+# Scenario 1: Read method does not exist
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-IO-2-a",
+    "classes": [
+      {
+        "root": true,
+        "code": "TestItem",
+        "type": "de.hybris.platform.core.model.test.TestItemModel",
+        "attributes": [
+          {
+            "attributeName": "integerCustomAttributeName",
+            "unique": true,
+            "readMethod": "readMethodThatDoesNotExist"
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_read_method';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message readMethod [readMethodThatDoesNotExist] for class [de.hybris.platform.core.model.test.TestItemModel] of IntegrationObject [POJO-IO-2-a] does not exist.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}
+
+###
+# Scenario 2: Read method return type is void
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-IO-2-b",
+    "classes": [
+      {
+        "root": true,
+        "code": "io",
+        "type": "de.hybris.platform.integrationservices.TestPojo",
+        "attributes": [
+          {
+            "attributeName": "does-not-matter",
+            "unique": true,
+            "readMethod": "doVoid"
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_read_method';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message readMethod [doVoid] for class [de.hybris.platform.integrationservices.TestPojo] of IntegrationObject [POJO-IO-2-b] is VOID.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}
+
+###
+# Scenario 3: Read method return type is void
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-IO-2-c",
+    "classes": [
+      {
+        "root": true,
+        "code": "io",
+        "type": "de.hybris.platform.integrationservices.TestPojo",
+        "attributes": [
+          {
+            "attributeName": "does-not-matter",
+            "unique": true,
+            "readMethod": "getParameterized"
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_read_method';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message readMethod [getParameterized] for class [de.hybris.platform.integrationservices.TestPojo] of IntegrationObject [POJO-IO-2-c] has non-empty parameters.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}
+
+###
+# Scenario 4: Specify returnClass when primitive attribute
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-4-a",
+    "classes": [
+      {
+        "root": true,
+        "code": "TestItem",
+        "type": "de.hybris.platform.core.model.test.TestItemModel",
+        "attributes": [
+          {
+            "attributeName": "double",
+            "unique": true,
+            "readMethod": "getDouble",
+            "integrationObjectClass": {
+              "code": "TestItem"
+            },
+            "returnIntegrationObjectClass": {
+              "code": "TestItem"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_read_method';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message readMethod [getDouble] return type for class [de.hybris.platform.core.model.test.TestItemModel] of IntegrationObject [POJO-4-a] does not match the returnIntegrationObjectClass type.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}
+
+###
+# Scenario 5: Missing return type for non primitive
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-4-b",
+    "classes": [
+      {
+        "root": true,
+        "code": "Product",
+        "type": "de.hybris.platform.core.model.product.ProductModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          },
+          {
+            "attributeName": "unit",
+            "unique": true,
+            "readMethod": "getUnit"
+          }
+        ]
+      },
+      {
+        "root": false,
+        "code": "Unit",
+        "type": "de.hybris.platform.core.model.product.UnitModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_read_method';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message readMethod [getUnit] return type for class [de.hybris.platform.core.model.product.ProductModel] of IntegrationObject [POJO-4-b] does not match the returnIntegrationObjectClass type.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}
+
+###
+# Scenario 6: Wrong return type for non primitive
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-4-d",
+    "classes": [
+      {
+        "root": false,
+        "code": "Unit",
+        "type": "de.hybris.platform.core.model.product.UnitModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          }
+        ]
+      },
+      {
+        "root": true,
+        "code": "Product",
+        "type": "de.hybris.platform.core.model.product.ProductModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          },
+          {
+            "attributeName": "unit",
+            "unique": true,
+            "readMethod": "getUnit",
+            "integrationObjectClass": {
+              "code": "Product"
+            },
+            "returnIntegrationObjectClass": {
+              "code": "Product"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_read_method';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message readMethod [getUnit] return type for class [de.hybris.platform.core.model.product.ProductModel] of IntegrationObject [POJO-4-d] does not match the returnIntegrationObjectClass type.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}

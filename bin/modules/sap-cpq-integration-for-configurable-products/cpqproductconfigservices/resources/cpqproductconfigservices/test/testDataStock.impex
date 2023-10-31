@@ -1,0 +1,26 @@
+#################################################################################
+# Availability
+#################################################################################
+# Vendor
+INSERT_UPDATE Vendor;code[unique=true];name
+;default;Default Vendor
+
+# Warehouse
+INSERT_UPDATE Warehouse;code[unique=true];name;baseStores(uid);vendor(code)[default=default];default[default=true]
+;default;Default Warehouse;testConfigureStore;
+;pw_warehouse_s;;testConfigureStore;
+
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;CONF_LAPTOP;pw_warehouse_s;222;forceInStock;
+;CONF_POWER_SUPPLY;pw_warehouse_s;222;forceInStock;
+;CONF_COFFEEMACHINE_3000;pw_warehouse_s;222;forceInStock;
+;CONF_TECH_PRODUCT;pw_warehouse_s;333;forceInStock;
+;CONF_COMPUTER_BUNDLE;pw_warehouse_s;222;forceInStock;
+
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;CONF_CAMERA_BUNDLE;pw_warehouse_s;222;forceInStock;
+;NIKON_D850;pw_warehouse_s;222;forceInStock;
+;NIKON_D7500;pw_warehouse_s;222;forceInStock;
+;CANON_EOS_80D;pw_warehouse_s;222;forceInStock;
+;CANON_EOS_6D_MARK_II;pw_warehouse_s;222;forceInStock;
+;SANDISK_EXTREME_PRO_128GB_SDXC;pw_warehouse_s;222;forceInStock;

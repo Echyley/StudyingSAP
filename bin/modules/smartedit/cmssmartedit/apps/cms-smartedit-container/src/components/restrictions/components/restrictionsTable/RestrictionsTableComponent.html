@@ -1,0 +1,50 @@
+<div class="se-restriction-table-wrapper se-restriction-table-left" [ngClass]="customClass">
+    <div class="se-restrictions-list fd-menu__list--separated" *ngIf="restrictions.length > 0">
+        <div
+            id="restriction-{{ index + 1 }}"
+            *ngFor="let restriction of restrictions; let index = index"
+            class="se-restriction__item fd-menu__item"
+        >
+            <div class="se-restrictions-list__item-content">
+                <p
+                    class="se-restriction__item-name"
+                    [ngClass]="{ 'error-input': isInError(index) }"
+                >
+                    {{ restriction.name }}
+                </p>
+                <div
+                    class="se-restriction__item-type-and-id"
+                    [ngClass]="{ 'error-input': isInError(index) }"
+                >
+                    {{ restriction.typeCode }}
+                </div>
+                <div
+                    class="se-restriction__item-description"
+                    [ngClass]="{ 'error-input': isInError(index) }"
+                    [title]="restriction.description"
+                >
+                    {{ restriction.description }}
+                </div>
+
+                <div
+                    id="restrictionPartOfWorkflow"
+                    *ngIf="restriction.canBeEdited!==undefined && !restriction.canBeEdited"
+                    translate="se.cms.restrictions.editor.part.of.workflow"
+                ></div>
+            </div>
+            <div *ngIf="editable">
+                <se-dropdown-menu
+                    [dropdownItems]="restriction.actions || defaultActions"
+                    [selectedItem]="restriction"
+                    [placement]="'bottom-start'"
+                ></se-dropdown-menu>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="restrictions.length === 0" class="se-restrictions-list--empty">
+        <span
+            class="se-restrictions-list--empty__message"
+            translate="se.cms.restrictions.emptylist.message"
+        ></span>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+Invoking: se-packagr 
+Starting build for smarteditbootstrap
+Configuration read smarteditbootstrap
+Loading plugins smarteditbootstrap
+Generating bundle smarteditbootstrap
+(1): src/index.ts
+(2): src/BootstrapService.ts
+Bundle created smarteditbootstrap
+- Generated 4 files
+- Output folder ./dist

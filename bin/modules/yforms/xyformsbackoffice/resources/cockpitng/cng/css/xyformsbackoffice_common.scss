@@ -1,0 +1,14 @@
+@import "cockpitng-globals.scss";
+
+div.yw-explorerTree .y-tree-icon {
+	@include setTreeIconGlyph("hmc.yforms", "form");
+}
+div.yw-sideNavigation .yw-treeCellInner {
+	@include setSideNavigationIconGlyph("hmc.yforms", "form");
+}
+
+.yforms-button--toggle {
+    color: var(--bo-button-active-color) !important;
+    border-color: var(--bo-button-active-border-color) !important;
+    background-color: var(--bo-button-active-background) !important;
+}

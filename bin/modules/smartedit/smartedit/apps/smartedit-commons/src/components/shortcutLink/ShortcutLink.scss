@@ -1,0 +1,30 @@
+.se-shortcut-link {
+    display: inline-block;
+    margin-right: 38px;
+
+    &__item {
+        color: var(--sapTextColor);
+        position: relative;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: none;
+        }
+        &--active {
+            color: var(--sapLink_Active_Color);
+            &:hover {
+                color: var(--sapLink_Active_Color);
+                text-decoration: none;
+            }
+            &::after {
+                @include se-active-link;
+                content: ' ';
+                position: absolute;
+                left: 0;
+                top: 29px;
+                width: 100%;
+            }
+        }
+    }
+}

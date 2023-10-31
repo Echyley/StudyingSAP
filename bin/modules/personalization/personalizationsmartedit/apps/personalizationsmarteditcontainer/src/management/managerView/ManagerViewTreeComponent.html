@@ -1,0 +1,149 @@
+<!--Old angularJS version supports two layouts: desktop & mobile, discussed with PO, migration only supports desktop-->
+<div cdkDropList [cdkDropListData]="customizations" [id]="treeRoot" [cdkDropListConnectedTo]="dragDroppedTargetIds"
+  (cdkDropListDropped)="dragDropped($event)" [cdkDropListSortingDisabled]="true">
+  <div *ngFor="let customization of customizations" cdkDrag [cdkDragData]="customization.code"
+    (cdkDragMoved)="dragMoved($event)">
+    <div class="node-item" [attr.data-id]="customization.code" [attr.type]="'CUSTOMIZATION'"
+      [attr.id]=" 'node-' + customization.code">
+      <div class="y-tree-row" [ngClass]="allCustomizationsCollapsed()? 'active-level' : 'inactive-level'">
+        <div
+          class="cdk-drag-row-layout desktop-layout hidden-sm hidden-xs customization-rank-{{customization.rank}}-row">
+          <div (click)="customizationCollapseAction(customization)" class="expand-arrow">
+            <a
+              fd-link
+              title="{{(customization.collapsed ? 'personalization.commons.icon.title.expand' : 'personalization.commons.icon.title.collapse') | translate}}">
+              <span
+                [ngClass]="customization.collapsed ? 'sap-icon--navigation-right-arrow' : 'sap-icon--navigation-down-arrow'"
+                class="perso__toggle-icon"></span>
+            </a>
+          </div>
+          <div class="y-tree-row__angular-ui-tree-handle">
+            <div class="y-tree__col--lg">
+              <div class="perso-wrap-ellipsis perso-tree__primary-data" title="{{customization.name}}"
+                [textContent]="customization.name"></div>
+            </div>
+            <div class="y-tree__col--xs" [textContent]="getStatusNotDeleted(customization) || 0"></div>
+            <div class="y-tree__col--xs"></div>
+            <div class="y-tree__col--md perso-tree__status" [ngClass]="getActivityStateForCustomization(customization)">
+              <span [textContent]="getEnablementTextForCustomization(customization)"></span>
+            </div>
+            <div class="y-tree__col--sm">
+              <div [hidden]="isNotEnabled(customization)" class="perso-tree__dates-layout">
+                <span [textContent]="getFormattedDate(customization.enabledStartDate)"
+                  class="perso-library__status-layout"></span>
+              </div>
+            </div>
+            <div class="y-tree__col--sm">
+              <div [hidden]="isNotEnabled(customization)" class="perso-tree__dates-layout">
+                <span [textContent]="getFormattedDate(customization.enabledEndDate)"></span>
+              </div>
+            </div>
+          </div>
+          <fd-popover [isOpen]="customization.subMenu" [closeOnOutsideClick]="true" [triggers]="[]">
+            <fd-popover-control>
+              <button 
+                type="button" 
+                class="fd-button--light fd-button" 
+                (click)="updateSubMenuAction(customization)" 
+                title="{{'personalization.modal.manager.customization.moremenu' | translate}}">
+                <span class="perso__more-icon sap-icon--overflow"></span>
+              </button>
+            </fd-popover-control>
+            <fd-popover-body>
+              <div *ngIf="customization.subMenu" class="
+                                    toolbar-action--include
+                                    pe-manager-view-tree-more-list__dropdown
+                                ">
+                <div class="pe-manager-view-tree-more-list__item"
+                  (click)="clearAllCustomizationSubMenuAndEditCustomizationAction(customization)">
+                  <span class="pe-manager-view-tree-more-list__item-active"
+                    translate="personalization.modal.manager.customization.options.edit"></span>
+                </div>
+                <div class="pe-manager-view-tree-more-list__item"
+                  (click)="deleteCustomizationAction(customization)">
+                  <span class="pe-manager-view-tree-more-list__item-deletion"
+                    translate="personalization.modal.manager.customization.options.delete"></span>
+                </div>
+              </div>
+            </fd-popover-body>
+          </fd-popover>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!customization.collapsed" cdkDropList [cdkDropListData]="customization.variations"
+      [id]="customization.code" [cdkDropListConnectedTo]="dropTargetIds" (cdkDropListDropped)="dragDropped($event)"
+      [cdkDropListSortingDisabled]="true">
+      <div *ngFor="let variation of customization.variations" cdkDrag [cdkDragData]="variation.code"
+        (cdkDragMoved)="dragMoved($event)" class="y-tree-row child-row active-level">
+        <div class="node-item" [attr.data-id]="variation.code" [attr.type]="'VARIATION'"
+          [attr.id]=" 'node-' + variation.code">
+          <div *ngIf="statusNotDeleted(variation)"
+            class="cdk-drag-row-layout desktop-layout variation-rank-{{variation.rank}}-row hidden-sm hidden-xs">
+            <div class="y-tree-row__angular-ui-tree-handle">
+              <div class="y-tree__col--xl perso-wrap-ellipsis" title="{{variation.name}}">
+                <div>
+                  <se-tooltip 
+                  *ngIf="hasCommerceActions(variation)"
+                  [triggers]="['mouseenter','mouseleave']">
+                    <span class="perso__cc-icon sap-icon--tag perso__cc-icon-padding"
+                    [ngClass]="{'perso__cc-icon--hidden': !hasCommerceActions(variation)}"
+                    se-tooltip-trigger></span>
+                    <span se-tooltip-body [textContent] = "getCommerceCustomizationTooltip(variation)">
+                  </span>
+                  </se-tooltip>
+                </div>
+                <span [textContent]="variation.name"></span>
+              </div>
+              <div class="y-tree__col--xs" [textContent]="variation.numberOfComponents"></div>
+              <div class="y-tree__col--md perso-tree__status"
+                [ngClass]="getActivityStateForVariation(customization,variation)">
+                <span [textContent]="getEnablementTextForVariation(variation)"
+                  class="perso-library__status-layout"></span>
+              </div>
+              <div class="y-tree__col--lg"></div>
+            </div>
+            <fd-popover [isOpen]="variation.subMenu" [closeOnOutsideClick]="true" [triggers]="[]">
+              <fd-popover-control>
+                <button 
+                  type="button" 
+                  class="fd-button--light fd-button" 
+                  (click)="updateSubMenuAction(variation)" 
+                  title="{{'personalization.modal.manager.customization.moremenu' | translate}}">
+                  <span class="perso__more-icon sap-icon--overflow"></span>
+                </button>
+              </fd-popover-control>
+              <fd-popover-body>
+                <div *ngIf="variation.subMenu" class="
+                                        toolbar-action--include
+                                        pe-manager-view-tree-more-list__dropdown
+                                    ">
+                  <div class="pe-manager-view-tree-more-list__item"
+                    (click)="clearAllVariationSubMenuAndEditVariationAction(customization, variation)">
+                    <span class="pe-manager-view-tree-more-list__item-active"
+                      translate="personalization.modal.manager.variation.options.edit"></span>
+                  </div>
+                  <div class="pe-manager-view-tree-more-list__item"
+                    (click)="toogleVariationActive(customization,variation)">
+                    <span class="pe-manager-view-tree-more-list__item-active"
+                      [textContent]="getEnablementActionTextForVariation(variation)"></span>
+                  </div>
+                  <div [hidden]="!variation.isCommerceCustomizationEnabled" class="pe-manager-view-tree-more-list__item"
+                    (click)="clearAllVariationSubMenuAndmanageCommerceCustomization(customization, variation)">
+                    <span class="pe-manager-view-tree-more-list__item-active"
+                      translate="personalization.modal.manager.variation.options.commercecustomization"></span>
+                  </div>
+                  <div class="pe-manager-view-tree-more-list__item"
+                    (click)="deleteVariationAction(customization, variation, $event)">
+                    <span
+                      [ngClass]="isDeleteVariationEnabled(customization) ? 'pe-manager-view-tree-more-list__item-deletion' : 'pe-manager-view-tree-more-list__item-inactive' "
+                      translate="personalization.modal.manager.variation.options.delete"></span>
+                  </div>
+                </div>
+              </fd-popover-body>
+            </fd-popover>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<se-tooltip *ngIf="isVisible()" [isChevronVisible]="true" [triggers]="['mouseenter', 'mouseleave']">
+    <span
+        se-tooltip-trigger
+        class="sap-icon--home se-homepage-icon"
+        [ngClass]="getIconClass()"
+    ></span>
+    <span se-tooltip-body [translate]="getTooltipMessage()"></span>
+</se-tooltip>

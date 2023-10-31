@@ -1,0 +1,82 @@
+[
+  {
+    "id": "shellBarBgColor",
+    "labelKey": "customthemes.shellbar.background",
+    "variables": ["--bo-shell-background"]
+  },
+  {
+    "id": "shellBarIconColor",
+    "labelKey": "customthemes.shellbar.icon.color",
+    "variables": ["--bo-shell-interactive-color"]
+  },
+  {
+    "id": "shellBarTextColor",
+    "labelKey": "customthemes.shellbar.text.color",
+    "variables": ["--bo-shell-text-color"]
+  },
+  {
+    "id": "brandColor",
+    "labelKey": "customthemes.brand.color",
+    "variables": [
+      "--primary2",
+      "--bo-brand-color",
+      "--bo-highlight-color",
+      "--bo-selected-color",
+      "--bo-active-color",
+      "--bo-content-selected-background",
+      "--bo-list-active-background",
+      "--bo-list-selected-border-color",
+      "--bo-button-border-color",
+      "--bo-button-text-color",
+      "--bo-button-icon-color",
+      "--bo-button-hover-border-color",
+      "--bo-button-selected-background",
+      "--bo-button-selected-border-color",
+      "--bo-button-primary-background",
+      "--bo-button-primary-border-color",
+      "--bo-button-track-selected-background",
+      "--bo-button-active-background",
+      "--bo-button-active-border-color",
+      "--bo-button-primary-active-background",
+      "--bo-button-primary-active-border-color",
+      "--bo-button-hover-color",
+      "--bo-content-icon-color"
+    ]
+  },
+  {
+    "id": "selectedHoverColor",
+    "labelKey": "customthemes.selected.hover.color",
+    "variables": [
+      "--bo-content-selected-hover-background",
+      "--bo-button-selected-hover-background",
+      "--bo-button-selected-hover-border-color",
+      "--bo-button-primary-hover-background",
+      "--bo-button-primary-hover-border-color"
+    ]
+  },
+  {
+    "id": "selectedListBackground",
+    "labelKey": "customthemes.selected.list.background",
+    "variables": [
+      "--bo-button-hover-background",
+      "--bo-list-selected-background"
+    ]
+  },
+  {
+    "id": "activeTextColor",
+    "labelKey": "customthemes.active.text.color",
+    "variables": [
+      "--bo-list-active-text-color",
+      "--bo-button-selected-color",
+      "--bo-button-active-color",
+      "--bo-button-primary-text-color",
+      "--bo-button-primary-active-text-color",
+      "--bo-button-primary-hover-text-color"
+    ]
+  },
+  {
+    "id": "pageBgColor",
+    "labelKey": "customthemes.page.background",
+    "variables": ["--bo-base-background"]
+  }
+]

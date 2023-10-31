@@ -1,0 +1,22 @@
+<div *ngIf="isReady">
+    <div *ngIf="isEditMode">
+        <se-restriction-management-edit
+            [restriction]="config?.restriction"
+            [getSupportedRestrictionTypes]="config?.getSupportedRestrictionTypesFn"
+            [uriContext]="uriContext"
+            [(isDirtyFn)]="isDirtyInternal"
+            [(submitFn)]="submitInternal"
+        >
+        </se-restriction-management-edit>
+    </div>
+    <div *ngIf="!isEditMode">
+        <se-restriction-management-select
+            [existingRestrictions]="config?.existingRestrictions"
+            [fetchRestrictionTypes]="config?.getRestrictionTypesFn"
+            [getSupportedRestrictionTypes]="config?.getSupportedRestrictionTypesFn"
+            [uriContext]="uriContext"
+            [(isDirtyFn)]="isDirtyInternal"
+            [(submitFn)]="submitInternal"
+        ></se-restriction-management-select>
+    </div>
+</div>

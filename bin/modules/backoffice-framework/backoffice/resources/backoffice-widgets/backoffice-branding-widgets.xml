@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+	<import resource="backoffice-theme-preview-widgets.xml" />
+	<widget-extension widgetId="explorerTreeSelectionProxy">
+		<setting key="themeSetting_expression" type="String">#root?.id EQ 'theme_setting'</setting>
+		<setting key="logoSetting_expression" type="String">#root?.id EQ 'logo_setting'</setting>
+		<setting key="customThemes_expression" type="String">#root?.id EQ 'custom_themes'</setting>
+		<virtual-sockets>
+			<output id="themeSetting" type="com.hybris.backoffice.navigation.NavigationNode" />
+			<output id="logoSetting" type="com.hybris.backoffice.navigation.NavigationNode" />
+			<output id="customThemes" type="com.hybris.backoffice.navigation.NavigationNode" />
+		</virtual-sockets>
+	</widget-extension>
+
+	<widget-extension widgetId="backoffice_content_container">
+		<widget id="theme_setting" widgetDefinitionId="com.hybris.backoffice.widgets.branding.themesetting" slotId="perspectives" template="false"/>
+		<widget id="logo_setting" widgetDefinitionId="com.hybris.backoffice.widgets.branding.logosetting" slotId="perspectives" template="false"/>
+		<widget id="custom_themes" widgetDefinitionId="com.hybris.backoffice.widgets.customthemes.themes" slotId="perspectives" template="false"/>
+	</widget-extension>
+
+	<widget-connection sourceWidgetId="explorerTreeSelectionProxy" outputId="themeSetting"
+					   targetWidgetId="backoffice_content_container" inputId="selectPerspective"/>
+	<widget-connection sourceWidgetId="explorerTreeSelectionProxy" outputId="logoSetting"
+					   targetWidgetId="backoffice_content_container" inputId="selectPerspective"/>
+	<widget-connection sourceWidgetId="explorerTreeSelectionProxy" outputId="customThemes"	
+						targetWidgetId="backoffice_content_container" inputId="selectPerspective"/>
+	<widget-connection sourceWidgetId="logo_setting" outputId="logoChanged"
+						 targetWidgetId="systemBar" inputId="logoChanged"/>
+	<widget-connection sourceWidgetId="custom_themes" outputId="customThemeChanged"
+					   targetWidgetId="theme_setting" inputId="customThemeChanged"/>
+</widgets>

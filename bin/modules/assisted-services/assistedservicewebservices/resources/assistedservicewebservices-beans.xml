@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.CustomerSearchPageWsDTO">
+        <property name="sorts" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.search.pagedata.SortWsDTO>"/>
+        <property name="pagination" type="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PaginationWsDTO"/>
+        <property name="entries" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO>"/>
+    </bean>
+
+     <!-- adding extra parameters populated in assistedservice facade -->
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO">
+        <property name="lastCartId" type="java.lang.String">
+            <description>The latest cart operated by customer</description>
+            <hints>
+                <hint name="example">000000001</hint>
+            </hints>
+        </property>
+        <property name="hasOrder" type="java.lang.Boolean">
+            <description>Indicates whether customer has order. Default value is false.</description>
+            <hints>
+                <hint name="example">false</hint>
+                <hint name="defaultValue">false</hint>
+            </hints>
+        </property>
+        <property name="userAvatar" type="de.hybris.platform.assistedservicewebservices.dto.image.UserAvatarWsDTO"/>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.image.UserAvatarWsDTO">
+        <description>Representation of a profile picture.</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">UserAvatar</hint>
+        </hints>
+        <property name="url" type="java.lang.String">
+            <description>URL of customer profile image in media server. It's optional.</description>
+            <hints>
+                <hint name="example">/medias/?context=bWFzdGVyfHJvb3R8NTMyMDB8aW1hZ2UvanBlZ3xhRGM1TDJneFl5ODROemszTlRNd016a3dOVFU0TG1wd1p3fDViODZlNmFiZTkyNzFjZDFmM2I5ZWU3OGJhZWEzMjViZDBiZTQ2NjM3YzIyMTg</hint>
+            </hints>
+        </property>
+        <property name="format" type="java.lang.String">
+            <description>Image format. It's optional.</description>
+            <hints>
+                <hint name="example">jpg</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.CustomerListWsDTO">
+        <property name="uid" type="java.lang.String"/>
+        <property name="name" type="java.lang.String"/>
+        <property name="additionalColumnsKeys" type="java.util.List&lt;java.lang.String>"/>
+        <property name="searchBoxEnabled" type="boolean"/>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.CustomerSuggestionWsDTO" >
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">CustomerSuggestion</hint>
+        </hints>
+        <property name="email" type="String" />
+        <property name="fullName" type="String" />
+        <property name="date" type="String" />
+        <property name="card" type="String" />
+        <property name="carts" type="java.util.List&lt;String&gt;" />
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.ASMPointOfServiceListWsDTO">
+        <description>Representation of a Point of Service List</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">ASMPointOfServiceList</hint>
+        </hints>
+        <property name="pointOfServices"
+                  type="java.util.List&lt;de.hybris.platform.assistedservicewebservices.dto.ASMPointOfServiceWsDTO>">
+            <description>List of points of service</description>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.ASMPointOfServiceWsDTO">
+        <description>Representation of a Point of service</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">ASMPointOfService</hint>
+        </hints>
+        <property name="name" type="String">
+            <description>Display name of the point of service</description>
+            <hints>
+                <hint name="example">Nakano</hint>
+            </hints>
+        </property>
+        <property name="id" type="String">
+            <description>The identifier of the point of service</description>
+            <hints>
+                <hint name="example">NAKANO</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.Customer360QueryWsDTO">
+        <description>Representation of a Customer 360 query.</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">Customer360Query</hint>
+        </hints>
+        <property name="type" type="String">
+            <description>Type of the returned Customer360 data. The allowed values are: 'c360StoreLocation', 'c360ReviewList', 'c360CustomerProductInterestList',
+                'c360CouponList', 'c360PromotionList', 'c360CustomerCouponList', 'c360Cart', 'c360SavedCart', 'c360Overview', 'c360CustomerProfile', 'c360ActivityList', 'c360TicketList'.</description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="additionalRequestParameters" type="java.util.Map&lt;String, String&gt;">
+            <description>Additional properties that are included in the request for the data, such as timeout.</description>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.Customer360QueryListWsDTO">
+        <description>Representation of a list of Customer 360 data queries</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">Customer360QueryList</hint>
+        </hints>
+        <property name="customer360Queries" type="java.util.List&lt;de.hybris.platform.assistedservicewebservices.dto.Customer360QueryWsDTO&gt;">
+            <description>List of the Customer 360 data being queried.</description>
+            <hints>
+                <hint name="required">true</hint>
+                <hint name="example">[{\"type\": \"c360StoreLocation\"}, {\"type\": \"c360ReviewList\", \"additionalRequestParameters\": {\"listSize\" : \"10\"}}, {\"type\": \"c360CouponList\"}, {\"type\": \"c360PromotionList\"}, {\"type\": \"c360CustomerCouponList\", \"additionalRequestParameters\":{\"searchQuery\" : \"Camera\", \"assignable\" : \"true\"}}, {\"type\": \"c360CustomerProductInterestList\", \"additionalRequestParameters\": {\"listSize\" : \"3\"}}, {\"type\": \"c360Cart\"}, {\"type\": \"c360SavedCart\", \"additionalRequestParameters\": {\"listSize\" : \"6\"}}, {\"type\": \"c360Overview\"}, {\"type\": \"c360CustomerProfile\"}, {\"type\": \"c360ActivityList\", \"additionalRequestParameters\": {\"listSize\" : \"30\"}}, {\"type\": \"c360TicketList\", \"additionalRequestParameters\": {\"listSize\" : \"10\"}}]</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.CustomerRegistrationFormWsDTO">
+        <description>Representation of a CustomerRegistrationForm. Consists of fields required to register a new customer and is only used for ASM service.</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">CustomerRegistrationForm</hint>
+        </hints>
+        <property name="firstName" type="java.lang.String">
+            <description>First name of the customer</description>
+            <hints>
+                <hint name="required">true</hint>
+                <hint name="example">Brande</hint>
+            </hints>
+        </property>
+        <property name="lastName" type="java.lang.String">
+            <description>Last name of the customer</description>
+            <hints>
+                <hint name="required">true</hint>
+                <hint name="example">Smith</hint>
+            </hints>
+        </property>
+        <property name="emailAddress" type="java.lang.String">
+            <description>An email address required to create a new customer</description>
+            <hints>
+                <hint name="required">true</hint>
+                <hint name="example">brande.smith@sap.com</hint>
+            </hints>
+        </property>
+    </bean>
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360CustomerCouponWsDTO">
+        <description>Representation of customer coupon</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360CustomerCoupon</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Customer coupon code</description>
+            <hints>
+                <hint name="example">A480_20_OFF</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Name of the customer coupon</description>
+            <hints>
+                <hint name="example">Buy PowerShot A480 and get $20 off</hint>
+            </hints>
+        </property>
+        <property name="description" type="String">
+            <description>Description of the customer coupon</description>
+            <hints>
+                <hint name="example">Buy a PowerShot A480 camera today and get $20 off coupon for your next shopping tour.</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360CouponWsDTO">
+        <description>Representation of coupon</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360Coupon</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Coupon code</description>
+            <hints>
+                <hint name="example">CSA_COUPON_FREE_10_CAMERA</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Name of the coupon</description>
+            <hints>
+                <hint name="example">Free 10 shot camera coupon that can be applied to the cart during this session.</hint>
+            </hints>
+        </property>
+        <property name="applied" type="boolean">
+            <description>Whether the coupon is applied to the current cart.</description>
+            <hints>
+                <hint name="example">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360PromoWsDTO">
+        <description>Representation of promotion</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360Promotion</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Promotion code</description>
+            <hints>
+                <hint name="example">CSA_DISCOUNT_CART_ABOVE_1000_10_DISCOUNT</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Name of promotion</description>
+            <hints>
+                <hint name="example">Activated 10% Discount for Cart Over $1,000.00</hint>
+            </hints>
+        </property>
+        <property name="message" type="String">
+            <description>Message of promotion</description>
+            <hints>
+                <hint name="example">The cart total is over $1,000.00 therefore a 10% discount has been applied.</hint>
+            </hints>
+        </property>
+        <property name="applied" type="boolean">
+            <description>Whether the promotion is applied to cart</description>
+            <hints>
+                <hint name="example">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360ActivityWsDTO">
+        <description>Representation of an activity</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360Activity</hint>
+        </hints>
+        <property name="type" type="de.hybris.platform.assistedservicewebservices.dto.C360ActivityTypeWsDTO"/>
+        <property name="associatedTypeId" type="java.lang.String">
+            <description>Id of the associated activity</description>
+            <hints>
+                <hint name="required">true</hint>
+                <hint name="example">00000001</hint>
+            </hints>
+        </property>
+        <property name="description" type="java.lang.String">
+            <description>Description of the activity</description>
+            <hints>
+                <hint name="example">Order items: 1/ Total Amount: $19.99</hint>
+            </hints>
+        </property>
+        <property name="status" type="de.hybris.platform.assistedservicewebservices.dto.C360ActivityStatusWsDTO"/>
+        <property name="createdAt" type="java.util.Date">
+            <description>Date of activity creation</description>
+            <hints>
+                <hint name="example">yyyy-MM-ddTHH:mm:ss+0000</hint>
+            </hints>
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <description>Date of activity update</description>
+            <hints>
+                <hint name="example">yyyy-MM-ddTHH:mm:ss+0000</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360ActivityTypeWsDTO">
+        <description>Type of the activity</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360ActivityType</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Type code of the activity, e.g. ORDER, TICKET, CART, ...</description>
+            <hints>
+                <hint name="example">ORDER</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Type name of the activity, e.g. Order, Ticket, Cart, ...</description>
+            <hints>
+                <hint name="example">Order</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360ActivityStatusWsDTO">
+        <description>Status of the activity</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360ActivityStatus</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Status code of the activity, e.g. READY, OPEN, CLOSED, ...</description>
+            <hints>
+                <hint name="example">READY</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Status name of the activity, e.g. Ready, Open, Closed, ...</description>
+            <hints>
+                <hint name="example">Ready</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360ProductWsDTO">
+        <description>Representation of a Product</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360Product</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Code of the product</description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360CustomerProductInterestWsDTO">
+        <description>Customer interest in product</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360CustomerProductInterest</hint>
+        </hints>
+        <property name="product" type="de.hybris.platform.assistedservicewebservices.dto.C360ProductWsDTO">
+            <description>Representation of a C360 Product.</description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360AddressWsDTO">
+        <description>Customer360 profile address</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360Address</hint>
+        </hints>
+        <property name="id" type="String">
+            <description>Unique id value of the address which is optional while creating new address. While performing other address operations this value is the key</description>
+            <hints>
+                <hint name="example">8796098854935</hint>
+            </hints>
+        </property>
+        <property name="line1" type="String">
+            <description>First line of the address</description>
+            <hints>
+                <hint name="example">Aizumicho</hint>
+            </hints>
+        </property>
+        <property name="line2" type="String">
+            <description>Second line of the address</description>
+            <hints>
+                <hint name="example">1-4-6</hint>
+            </hints>
+        </property>
+        <property name="town" type="String">
+            <description>Town field</description>
+            <hints>
+                <hint name="example">Sunnyvale</hint>
+            </hints>
+        </property>
+        <property name="region" type="de.hybris.platform.commercewebservicescommons.dto.user.RegionWsDTO">
+            <description>Region where address belongs to</description>
+        </property>
+        <property name="country" type="de.hybris.platform.commercewebservicescommons.dto.user.CountryWsDTO">
+            <description>Country where address is located</description>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360PaymentDetailWsDTO">
+        <description>Representation of a Payment Detail</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360PaymentDetail</hint>
+        </hints>
+        <property name="id" type="String">
+            <description>Unique identifier of payment detail</description>
+            <hints>
+                <hint name="example">8796125822999</hint>
+            </hints>
+        </property>
+        <property name="cardType" type="de.hybris.platform.commercewebservicescommons.dto.order.CardTypeWsDTO">
+            <description>Payment card type</description>
+        </property>
+        <property name="cardNumber" type="String">
+            <description>Payment card number</description>
+            <hints>
+                <hint name="example">************6182</hint>
+            </hints>
+        </property>
+        <property name="expiryMonth" type="String">
+            <description>Month of expiration of payment</description>
+            <hints>
+                <hint name="example">02</hint>
+            </hints>
+        </property>
+        <property name="expiryYear" type="String">
+            <description>Year of expiration of payment</description>
+            <hints>
+                <hint name="example">2999</hint>
+            </hints>
+        </property>
+        <property name="defaultPayment" type="boolean">
+            <description>Whether the payment information is the default one</description>
+            <hints>
+                <hint name="example">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360CartEntryWsDTO">
+        <description>Representation of a Cart Entry</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360CartEntry</hint>
+        </hints>
+        <property name="quantity" type="Long">
+            <description>Number of items in the cart entry</description>
+            <hints>
+                <hint name="example">1</hint>
+            </hints>
+        </property>
+        <property name="basePrice" type="String">
+            <description>Base price of the cart entry</description>
+            <hints>
+                <hint name="example">$10.00</hint>
+            </hints>
+        </property>
+        <property name="totalPrice" type="String">
+            <description>Total price of the cart entry</description>
+            <hints>
+                <hint name="example">$10.00</hint>
+            </hints>
+        </property>
+        <property name="productCode" type="String">
+            <description>Product code of the cart entry</description>
+            <hints>
+                <hint name="example">23355</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360CustomerProfileDataWsDTO">
+        <description>Representation of a Customer Profile Data</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360CustomerProfileData</hint>
+        </hints>
+        <property name="billingAddress" type="de.hybris.platform.assistedservicewebservices.dto.C360AddressWsDTO">
+            <description>The billing address of customer</description>
+        </property>
+        <property name="deliveryAddress" type="de.hybris.platform.assistedservicewebservices.dto.C360AddressWsDTO">
+            <description>The delivery address of customer</description>
+        </property>
+        <property name="phone1" type="String">
+            <description>The phone1 of customer</description>
+            <hints>
+                <hint name="example">090 0987 432</hint>
+            </hints>
+        </property>
+        <property name="phone2" type="String">
+            <description>The phone2 of customer</description>
+            <hints>
+                <hint name="example">090 0987 653</hint>
+            </hints>
+        </property>
+        <property name="paymentDetails" type="java.util.List&lt;de.hybris.platform.assistedservicewebservices.dto.C360PaymentDetailWsDTO&gt;">
+            <description>The payment detail information list, returns up to 3 payment details</description>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360CartDataWsDTO">
+        <description>Representation of a Cart Data</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360CartData</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Cart code for a given customer</description>
+            <hints>
+                <hint name="example">00000001</hint>
+            </hints>
+        </property>
+        <property name="totalPrice" type="String">
+            <description>Total price of the cart</description>
+            <hints>
+                <hint name="example">$100.00</hint>
+            </hints>
+        </property>
+        <property name="totalItemCount" type="Integer">
+            <description>Total number of items in the cart</description>
+            <hints>
+                <hint name="example">1</hint>
+            </hints>
+        </property>
+        <property name="entries" type="java.util.List&lt;de.hybris.platform.assistedservicewebservices.dto.C360CartEntryWsDTO&gt;">
+            <description>List of entries in the cart</description>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360OverviewDataWsDTO">
+        <description>Representation of a overview Data</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360OverviewData</hint>
+        </hints>
+        <property name="name" type="String">
+            <description>Name of the customer</description>
+            <hints>
+                <hint name="example">John Doe</hint>
+            </hints>
+        </property>
+        <property name="cartSize" type="Integer">
+            <description>Size of the current cart for a given customer</description>
+            <hints>
+                <hint name="example">5</hint>
+            </hints>
+        </property>
+        <property name="cartCode" type="String">
+            <description>Code of the current cart for a given customer</description>
+            <hints>
+                <hint name="example">00001185</hint>
+            </hints>
+        </property>
+        <property name="latestOrderTotal" type="String">
+            <description>Total of the most recent order for a given customer</description>
+            <hints>
+                <hint name="example">$12.34</hint>
+            </hints>
+        </property>
+        <property name="latestOrderCode" type="String">
+            <description>Code of the most recent order for a given customer</description>
+            <hints>
+                <hint name="example">00001185</hint>
+            </hints>
+        </property>
+        <property name="latestOrderTime" type="java.util.Date">
+            <description>Date of the most recent order for a given customer</description>
+            <hints>
+                <hint name="example">2022-09-12T12:56:57.624Z</hint>
+            </hints>
+        </property>
+        <property name="latestOpenedTicketId" type="String">
+            <description>ID of the most recent ticket for a given customer</description>
+            <hints>
+                <hint name="example">00000001</hint>
+            </hints>
+        </property>
+        <property name="latestOpenedTicketCreatedAt" type="java.util.Date">
+            <description>Creation date of the most recent ticket for a given customer</description>
+            <hints>
+                <hint name="example">2022-09-12T12:56:57.624Z</hint>
+            </hints>
+        </property>
+        <property name="email" type="String">
+            <description>Email address of the customer</description>
+            <hints>
+                <hint name="example">johndoe@example.com</hint>
+            </hints>
+        </property>
+        <property name="signedUpAt" type="java.util.Date">
+            <description>Date that the customer signed up</description>
+            <hints>
+                <hint name="example">2022-09-12T12:56:57.624Z</hint>
+            </hints>
+        </property>
+        <property name="address" type="de.hybris.platform.commercewebservicescommons.dto.user.AddressWsDTO">
+            <description>Address of the customer</description>
+        </property>
+        <property name="userAvatar" type="de.hybris.platform.assistedservicewebservices.dto.image.UserAvatarWsDTO">
+            <description>User avatar of the customer</description>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360TicketWsDTO">
+        <description>Representation of a ticket</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360Ticket</hint>
+        </hints>
+        <property name="id" type="java.lang.String">
+            <description>Id of the ticket</description>
+            <hints>
+                <hint name="required">true</hint>
+                <hint name="example">00000000</hint>
+            </hints>
+        </property>
+        <property name="subject" type="java.lang.String">
+            <description>Subject of the ticket</description>
+            <hints>
+                <hint name="example">Ticket Subject 00000001</hint>
+            </hints>
+        </property>
+        <property name="category" type="de.hybris.platform.assistedservicewebservices.dto.C360TicketCategoryWsDTO">
+            <description>Category of the ticket</description>
+        </property>
+        <property name="status" type="de.hybris.platform.assistedservicewebservices.dto.C360TicketStatusWsDTO">
+            <description>Status of the ticket</description>
+        </property>
+        <property name="createdAt" type="java.util.Date">
+            <description>Date of ticket creation</description>
+            <hints>
+                <hint name="example">yyyy-MM-ddTHH:mm:ss+0000</hint>
+            </hints>
+        </property>
+        <property name="updatedAt" type="java.util.Date">
+            <description>Date of ticket update</description>
+            <hints>
+                <hint name="example">yyyy-MM-ddTHH:mm:ss+0000</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360TicketStatusWsDTO">
+        <description>Status of the ticket</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360TicketStatus</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Status code of the ticket, for example, New, Open, Closed.</description>
+            <hints>
+                <hint name="example">Open</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Localized status name of the ticket, for example, New, Open, Closed.</description>
+            <hints>
+                <hint name="example">Open</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.assistedservicewebservices.dto.C360TicketCategoryWsDTO">
+        <description>Category of the ticket</description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">C360TicketCategory</hint>
+        </hints>
+        <property name="code" type="String">
+            <description>Category code of the ticket, for example, Problem, Complaint, Enquiry.</description>
+            <hints>
+                <hint name="example">Enquiry</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="name" type="String">
+            <description>Localized category name of the ticket, for example, Problem, Complaint, Enquiry.</description>
+            <hints>
+                <hint name="example">Enquiry</hint>
+            </hints>
+        </property>
+    </bean>
+</beans>

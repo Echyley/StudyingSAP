@@ -1,0 +1,50 @@
+#
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+#
+
+$solrIndexedType1 = solrIndexedType1
+$solrIndexedType2 = solrIndexedType2
+
+$snIndexConf1 = snIndexConf1
+$snIndexType1 = snIndexedType1
+
+INSERT_UPDATE BaseSite; uid[unique = true];
+                      ; apparel-uk        ;
+                      ; electronics       ;
+                      ; apparel-de        ;
+
+
+# Languages
+INSERT_UPDATE Language; isocode[unique = true]; fallbackLanguages(isocode); active[default = true]
+                      ; en                    ;                           ; ;
+                      ; de                    ; en                        ; ;
+
+# Currencies
+INSERT_UPDATE Currency; isocode[unique = true]; conversion; digits; symbol
+                      ; GBP                   ; 1         ; 2     ; £
+                      ; EUR                   ; 1         ; 2     ; €
+
+INSERT_UPDATE SolrIndexedType; identifier[unique = true]; type(code); indexName
+                             ; $solrIndexedType1        ; Product   ; $solrIndexedType1
+                             ; $solrIndexedType2        ; Product   ; $solrIndexedType2
+
+
+INSERT_UPDATE MerchProductDirectoryConfig; indexedType(identifier)[unique = true]; rollUpStrategy(code)[unique = false]; rollUpStrategyField; baseSites(uid); displayName ; enabled[default = false]; defaultLanguage(isocode); currency(isocode)
+                                         ; $solrIndexedType1                     ; No Rollup                           ; code_string        ; electronics   ; Electronics ; true                    ; en                      ; GBP
+                                         ; $solrIndexedType2                     ; No Rollup                           ; code_string        ; apparel-uk    ; Apparel UK  ; false                   ; de                      ; EUR
+
+
+INSERT_UPDATE MerchSynchronization; operationId[unique = true]; config(indexedType(identifier)); type ; status    ; startTime[dateformat = yyyy-MM-dd HH:mm:ss]; endTime[dateformat = yyyy-MM-dd HH:mm:ss]; numberOfProducts; details
+                                  ; operationId1              ; $solrIndexedType1              ; FULL ; COMPLETED ; 2022-03-18 13:00:00                        ; 2022-03-18 13:15:00                      ; 200             ; Merch synchronization completed successfully
+                                  ; operationId2              ; $solrIndexedType1              ; FULL ; FAILED    ; 2022-03-21 13:20:00                        ; 2022-03-21 13:25:00                      ; 0               ; Error during merch sync process
+
+
+INSERT_UPDATE SnIndexConfiguration; id[unique = true]; name       ; user(uid) ; languages(isocode); currencies(isocode)
+                                  ; $snIndexConf1    ; apparel-de ; anonymous ; de                ; EUR
+
+INSERT_UPDATE SnIndexType; indexConfiguration(id); id[unique = true]; name               ; itemComposedType(code);
+                         ; $snIndexConf1         ; $snIndexType1    ; Apparel DE Product ; Product               ;
+
+
+INSERT_UPDATE MerchSnConfig; snIndexType(id)[unique = true]; rollUpStrategy(code)   ; rollUpStrategyField; baseSite(uid); displayName; enabled[default = false]; defaultLanguage(isocode); currency(isocode)
+                           ; $snIndexType1                 ; Rollup to Base Product ; baseProductCode    ; apparel-de   ; Apparel DE ; false                   ; de                      ; EUR

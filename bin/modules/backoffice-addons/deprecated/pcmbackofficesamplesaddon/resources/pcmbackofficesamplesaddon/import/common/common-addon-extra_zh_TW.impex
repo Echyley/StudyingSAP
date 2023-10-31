@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=zh_TW
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;屬性「識別碼」應包含所有語言的值。;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;屬性「價格」必須包含至少 1 個元素。;
+;ProductSupercategoriesSizeConstraint;;;屬性「超級種類」必須包含至少 1 個元素。;
+;ProductGalleryImagesSizeConstraint;;;屬性「圖庫圖像」必須包含至少 1 個元素。;
+;ProductReferencesSizeConstraint;;;屬性「產品參考」必須包含至少 1 個元素。;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;屬性「商品編號」不得為空。;
+;ProductDescriptionNotEmptyConstraint;;;屬性「說明」不得為空。;
+;ProductEanNotEmptyConstraint;;;屬性「EAN」不得為空。;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;「核准」的屬性值應為「已核准」。;

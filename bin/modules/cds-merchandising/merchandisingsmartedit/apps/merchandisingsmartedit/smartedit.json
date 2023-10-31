@@ -1,0 +1,26 @@
+{
+  "name": "merchandisingsmartedit",
+  "typescript": {
+    "entry": "./src/index.ts",
+    "dist": "./dist/index.js"
+  },
+  "style": {
+    "global": "node_modules/smartedit-build/styles/se-variables.scss"
+  },
+  "legacy": {
+    "js": [
+      "./src/**/*.js"
+    ],
+    "ngTemplates": {
+      "moduleName": "merchandisingsmarteditTemplates",
+      "includePathInName": false,
+      "files": [
+        "./src/**/*.html"
+      ]
+    }
+  },
+  "extension": {
+    "type": "inner",
+    "angularApp": "merchandisingsmartedit"
+  }
+}

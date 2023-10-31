@@ -1,0 +1,26 @@
+.yw-modal-eventExport{
+    height: 250px !important;
+}
+
+.yrb-modal-content {
+    max-height: 175px;
+    margin: auto;
+    padding-top: 5px;
+}
+
+.description {
+    color: #8B929D;
+}
+
+.yw-apiregistrybackoffice-event-state-container {
+    margin: 10px;
+}
+
+.yw-apiregistrybackoffice-event-state-title{
+    font-size: 16px;
+}
+
+.yw-apiregistrybackoffice-state-value {
+    font-size: 16px;
+    font-weight: bolder;
+}

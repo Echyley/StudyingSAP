@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+    <bean class="de.hybris.platform.b2bpunchoutocc.dto.PunchOutSessionInfoWsDTO">
+        <description>PunchOutSessionInfo contains the user ID, cart ID, token, PunchOut level, PunchOut operation and
+            selected item.
+        </description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">PunchOutSessionInfo</hint>
+        </hints>
+        <property name="customerId" type="String">
+            <description>CustomerID of the user</description>
+            <hints>
+                <hint name="example">punchout.customer@punchoutorg.com</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="cartId" type="String">
+            <description>ID of the cart</description>
+            <hints>
+                <hint name="example">00002159</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="punchOutLevel" type="de.hybris.platform.b2b.punchout.enums.PunchOutLevel">
+            <description>The punchoutLevel is an attribute that allows suppliers to specify how procurement applications
+                should present the PunchOut item to users.
+            </description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="punchOutOperation" type="de.hybris.platform.b2b.punchout.constants.PunchOutSetupOperation" >
+            <description>Supported PunchOut operations</description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="selectedItem" type="String">
+            <description>The selected item specify PunchOut for an entire store or any subset of product offerings
+            </description>
+            <hints>
+                <hint name="example">300000029</hint>
+            </hints>
+        </property>
+        <property name="token" type="PunchOutTokenWsDTO">
+            <description>Holds the token info for the user</description>
+            <hints>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.b2bpunchoutocc.dto.PunchOutTokenWsDTO">
+        <description></description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">PunchOutToken</hint>
+        </hints>
+        <property name="accessToken" type="String">
+            <description>The access token issued by the authorization server</description>
+            <hints>
+                <hint name="example">1uEhL4lj58n1zX9R0aICC7-ng2c</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="tokenType" type="String">
+            <description>The access token type provides the client with the information
+                required to successfully utilize the access token to make a protected
+                resource request (along with type-specific attributes). The client
+                MUST NOT use an access token if it does not understand or does not
+                trust the token type.
+            </description>
+            <hints>
+                <hint name="example">bearer</hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
+
+    <bean class="de.hybris.platform.b2bpunchoutocc.dto.RequisitionFormDataWsDTO">
+        <description>Representation transaction info of an order, containing the target url to submit cXML order message
+            and base64 encode order info.
+        </description>
+        <hints>
+            <hint name="wsRelated"/>
+            <hint name="alias">RequisitionFormData</hint>
+        </hints>
+        <property name="browseFormPostUrl" type="String">
+            <description>The url used to submit order into procurement system</description>
+            <hints>
+                <hint name="example">
+                    https://s1.ariba.com/Buyer/punchout?client=HTML.D6040B280216D0CAD6AF0F349AB37943.Node2app823snv&amp;responseid=k&amp;locale=en_US
+                </hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+        <property name="orderAsCXML" type="String">
+            <description>Order info in base64 encoded cXML format, to submit this to procurement system, you must name
+                this field with name cxml-base64 or cxml-urlencoded.
+            </description>
+            <hints>
+                <hint name="example">
+                    PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgY1hNTCBTWVNURU0gImh0dHA6Ly94bWwuY1hNTC5vcmcvc2NoZW1hcy9jWE1MLzEuMi4wNTEvY1hNTC5kdGQiPjxjWE1MIHBheWxvYWRJRD0iMTY1NzE4MDA2NjgxOC4xNDc3QEZZRDRNTjdIMFEiIHRpbWVzdGFtcD0iMjAyMi0wNy0wN1QxNTo0Nzo0NiswODowMCIgeG1sOmxhbmc9ImVuLVVTIj48SGVhZGVyPjxGcm9tPjxDcmVkZW50aWFsIGRvbWFpbj0iYnV5ZXJzeXN0ZW1pZCI+PElkZW50aXR5PnAycF9waXR0PC9JZGVudGl0eT48L0NyZWRlbnRpYWw+PENyZWRlbnRpYWwgZG9tYWluPSJpbnRlcm5hbHN1cHBsaWVyaWQiPjxJZGVudGl0eT5wMnBfcGl0dDwvSWRlbnRpdHk+PC9DcmVkZW50aWFsPjxDcmVkZW50aWFsIGRvbWFpbj0iZHVucyI+PElkZW50aXR5PjI0MjQyNDI0dC10PC9JZGVudGl0eT48L0NyZWRlbnRpYWw+PENyZWRlbnRpYWwgZG9tYWluPSJtYXhpbW8iPjxJZGVudGl0eT4zMDc2OTIwPC9JZGVudGl0eT48L0NyZWRlbnRpYWw+PENyZWRlbnRpYWwgZG9tYWluPSJuZXR3b3JraWQiPjxJZGVudGl0eT5hbjAxNjY1NjMyMDU0LXQ8L0lkZW50aXR5PjwvQ3JlZGVudGlhbD48Q3JlZGVudGlhbCBkb21haW49InRyYW5zYWN0aW9ubmV0d29ya2lkIj48SWRlbnRpdHk+YW4wMTY2NTYzMjA1NC10PC9JZGVudGl0eT48L0NyZWRlbnRpYWw+PC9Gcm9tPjxUbz48Q3JlZGVudGlhbCBkb21haW49IkRVTlMiPjxJZGVudGl0eT4xMjM0NTY3ODk8L0lkZW50aXR5PjwvQ3JlZGVudGlhbD48L1RvPjxTZW5kZXI+PENyZWRlbnRpYWwgZG9tYWluPSJBcmliYU5ldHdvcmtVc2VySWQiPjxJZGVudGl0eT5zeXNhZG1pbkBhcmliYS5jb208L0lkZW50aXR5PjwvQ3JlZGVudGlhbD48VXNlckFnZW50PkJ1eWVyIDE0czI8L1VzZXJBZ2VudD48L1NlbmRlcj48L0hlYWRlcj48TWVzc2FnZT48UHVuY2hPdXRPcmRlck1lc3NhZ2U+PEJ1eWVyQ29va2llPkx3VDZuZkZRbk92ZWpFS25EWnlkS3REbkczZnE1ZmVzMC4yNDUwODQyMDU0NDIxMzg4MjMyPC9CdXllckNvb2tpZT48UHVuY2hPdXRPcmRlck1lc3NhZ2VIZWFkZXIgb3BlcmF0aW9uQWxsb3dlZD0iZWRpdCI+PFRvdGFsPjxNb25leSBjdXJyZW5jeT0iVVNEIj40OC4wPC9Nb25leT48L1RvdGFsPjwvUHVuY2hPdXRPcmRlck1lc3NhZ2VIZWFkZXI+PEl0ZW1JbiBxdWFudGl0eT0iMSI+PEl0ZW1JRD48U3VwcGxpZXJQYXJ0SUQ+Mzc1NTIxOTwvU3VwcGxpZXJQYXJ0SUQ+PC9JdGVtSUQ+PEl0ZW1EZXRhaWw+PFVuaXRQcmljZT48TW9uZXkgY3VycmVuY3k9IlVTRCI+NDguMDwvTW9uZXk+PC9Vbml0UHJpY2U+PERlc2NyaXB0aW9uIHhtbDpsYW5nPSJlbiI+Jmx0O2ImZ3Q7Q29tcGFjdCBhbmQgcG93ZXJmdWwgZm9yIGFsbCBzY3Jld2RyaXZpbmcgd29yayDigJMgd2l0aCBkcmlsbCBzZXR0aW5nJmx0Oy9iJmd0OyZsdDtici8mZ3Q7Jmx0O2JyLyZndDsgICAgKiBQb3dlcmZ1bCA5LjYgViBtb3RvciB3aXRoIHBsYW5ldGFyeSBnZWFycy4mbHQ7YnIvJmd0OyAgICAqIFRvcnF1ZSBwcmUtc2VsZWN0aW9uIHdpdGggNSB0b3JxdWUgc2V0dGluZ3MgcGx1cyBhIGRyaWxsIHNldHRpbmcg4oCTIG9wdGltdW0gcG93ZXIgZm9yIGV2ZXJ5IGFwcGxpY2F0aW9uLiZsdDtici8mZ3Q7ICAgICogVHdpbi1zbGVldmUga2V5bGVzcyBjaHVjayDigJMgZWFzeSwgdG9vbC1mcmVlIGJpdCBjaGFuZ2VzLiZsdDtici8mZ3Q7ICAgICogQm9zY2ggRWxlY3Ryb25pYyBzcGVlZCBjb250cm9sOiAiYWNjZWxlcmF0ZSIgZnJvbSAwIOKAkyBtYXguIHVzaW5nIHRoZSB0cmlnZ2VyIHN3aXRjaC4mbHQ7YnIvJmd0OyAgICAqIFNvZnRncmlwIGZvciBhIGJldHRlciBhbmQgbW9yZSBjb21mb3J0YWJsZSBob2xkLiZsdDtici8mZ3Q7ICAgICogUnVuLW91dCBicmFrZSBhbmQgc3dpdGNoLW9uIGxvY2suJmx0O2JyLyZndDsgICAgKiBRdWljay1jaGFuZ2UgYmF0dGVyeSBwYWNrLiZsdDtici8mZ3Q7ICAgICogQml0IHN0b3JhZ2UgY29tcGFydG1lbnQgb24gdGhlIGhvdXNpbmcuPC9EZXNjcmlwdGlvbj48VW5pdE9mTWVhc3VyZT5DNjI8L1VuaXRPZk1lYXN1cmU+PENsYXNzaWZpY2F0aW9uIGRvbWFpbj0iVU5TUFNDIj4yMzI5MTUwMDwvQ2xhc3NpZmljYXRpb24+PC9JdGVtRGV0YWlsPjwvSXRlbUluPjwvUHVuY2hPdXRPcmRlck1lc3NhZ2U+PC9NZXNzYWdlPjwvY1hNTD4=
+                </hint>
+                <hint name="required">true</hint>
+            </hints>
+        </property>
+    </bean>
+</beans>

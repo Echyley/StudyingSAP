@@ -1,0 +1,16 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$approved=approvalstatus(code)[default='approved']
+
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];manufacturerName;manufacturerAID;unit(code);ean;serviceCode;$catalogVersion;$approved
+;1225696;Canon;1901B020AA;pieces;;SRV_01
+;HW1210-3422;;;pieces;;SRV_02
+;HW1210-9342;;;pieces;;SRV_03
+;HW1210-9345;;;pieces;;SRV_04

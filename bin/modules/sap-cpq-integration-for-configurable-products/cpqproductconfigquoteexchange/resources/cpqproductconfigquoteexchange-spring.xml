@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Quote Entry Outbound Mapper -->
+	<alias alias="cpqProductConfigCpqCpiQuoteEntryMapperService" name="cpqProductConfigDefaultCpqCpiQuoteEntryMapperService" />
+	<bean id="cpqProductConfigDefaultCpqCpiQuoteEntryMapperService"
+		class="de.hybris.platform.cpq.productconfig.quoteexchange.service.outbound.impl.DefaultCpqProductConfigCpqCpiQuoteEntryMapperService" />
+	
+	<!-- Add Quote Entry Mapper -->
+	<bean id="cpqProductConfigCpqCpiQuoteEntryMapperServiceListMergeDirective"
+		depends-on="sapCpqCpiQuoteEntryMappers" parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigCpqCpiQuoteEntryMapperService" />
+	</bean>
+	
+	<!-- Quote Inbound Helper -->
+	<alias alias="cpqProductConfigCpqInboundQuoteHelper" name="cpqProductConfigDefaultCpqInboundQuoteHelper" />
+	<bean id="cpqProductConfigDefaultCpqInboundQuoteHelper"
+		class="de.hybris.platform.cpq.productconfig.quoteexchange.service.inbound.impl.DefaultCpqProductConfigCpqInboundQuoteHelper">
+		<constructor-arg ref="cpqProductConfigAbstractOrderIntegrationService" />
+		<constructor-arg ref="cpqProductConfigConfigurationService" />
+		<constructor-arg ref="cpqProductConfigConfigurableChecker" />
+		<constructor-arg ref="baseSiteService" />
+	</bean>
+	
+	<!-- Add Inbound Quote Helper -->
+	<bean id="cpqProductConfigCpqInboundQuoteHelperListMergeDirective"
+		depends-on="sapCpqInboundQuoteHelpers" parent="listMergeDirective">
+		<property name="add" ref="cpqProductConfigCpqInboundQuoteHelper" />
+	</bean>
+	
+</beans>

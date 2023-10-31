@@ -1,0 +1,12 @@
+slot-sync-button {
+    .se-slot-ctx-menu__tooltip-area {
+        position: absolute;
+
+        &,
+        & > div,
+        .fd-popover__control {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

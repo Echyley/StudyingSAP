@@ -1,0 +1,210 @@
+[
+	{
+		"testId": 1,
+		"description": "'exists' query with true matches with field_string expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_string"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 2,
+		"description": "'exists' query with true matches with field_string_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_string_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 3,
+		"description": "'exists' query with true matches with field_text expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_text"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 4,
+		"description": "'exists' query with true matches with field_text_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_text_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 5,
+		"description": "'exists' query with true matches with field_boolean expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_boolean"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 6,
+		"description": "'exists' query with true matches with field_boolean_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_boolean_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 7,
+		"description": "'exists' query with true matches with field_integer expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_integer"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 8,
+		"description": "'exists' query with true matches with field_integer_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_integer_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 9,
+		"description": "'exists' query with true matches with field_long expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_long"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 10,
+		"description": "'exists' query with true matches with field_long_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_long_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 11,
+		"description": "'exists' query with true matches with field_float expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_float"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 12,
+		"description": "'exists' query with true matches with field_float_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_float_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 13,
+		"description": "'exists' query with true matches with field_double expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_double"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 14,
+		"description": "'exists' query with true matches with field_double_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_double_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 15,
+		"description": "'exists' query with true matches with field_date_time expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_date_time"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 16,
+		"description": "'exists' query with true matches with field_date_time_mv expression",
+		"data": {
+			"type": "exists",
+			"expression": "field_date_time_mv"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2",
+			"doc3"
+		]
+	}
+]

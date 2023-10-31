@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+--><!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="orbeonweb_before_clean"/>
+		 <macrodef name="orbeonweb_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="orbeonweb_before_build"/>
+		 <macrodef name="orbeonweb_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="orbeonweb_before_compile_core">
+		 <macrodef name="orbeonweb_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="orbeonweb_before_compile_web" />
+		 <macrodef name="orbeonweb_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="orbeonweb_before_compile_hmc" />
+		 <macrodef name="orbeonweb_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="orbeonweb_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="orbeonweb_before_ear"/>
+		 <macrodef name="orbeonweb_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="orbeonweb_before_production" />
+		 <macrodef name="orbeonweb_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="orbeonweb_before_yunitinit" />
+		 <macrodef name="orbeonweb_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="orbeonweb_before_yunit" />
+		 <macrodef name="orbeonweb_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="orbeonweb_after_dist"/>
+		 <macrodef name="orbeonweb_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="orbeonweb_before_dist_copy"/>
+		 <macrodef name="orbeonweb_after_dist_copy"/>
+		  
+ 	 With these filters you can override the default extension filters defined in platform/resources/ant/dist/filtersets.xml
+ 	  	 <patternset id="extension.orbeonweb.binary.filter">
+ 	  	  	 <patternset refid="extension.filter" />
+ 	  	  	 <exclude name="**/*-source.jar" />
+ 	  	 </patternset>
+ 	  	 <patternset id="extension.orbeonweb.source.filter">
+ 	  	  	 <exclude name="**/bin/**" />
+ 	  	 </patternset>
+     With this filter you can decide what should be excluded from development zip.
+ 	  	 <patternset id="extension.orbeonweb.devzip.filter">
+ 	  	 Include all files from extension.source.filter.
+ 	  	     <patternset refid="extension.source.filter" />
+         Exclude unwanted files.
+ 	  	  	 <exclude name="lib/exclude-me.jar" />
+ 	  	 </patternset>
+ 
+--><project name="orbeonweb_buildcallbacks">
+
+	<!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+-->
+	<macrodef name="orbeonweb_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="orbeonweb_after_build">
+		<sequential>
+			<!-- generates a new proxy-key and vaule at first time -->
+			<orbeonweb_patch_hybris_proxy_key_value/>
+			<!-- copy patch files to orbeonweb -->
+			<orbeonweb_copy_orbeon_patch_config/>
+			<!-- copy orbeon config files into ${HYBRIS_CONFIG_DIR}/orbeon, only if directory orbeon config does not exist -->
+			<orbeonweb_copy_exts_orbeon_config/>
+			<!-- update orbeon property oxf.http.forward-headers -->
+			<orbeonweb_patch_orbeon_properties/>
+		</sequential>
+	</macrodef>
+
+	<target name="upgradeOrbeonweb" description="upgrade orbeon web">
+		<sequential>
+			<!-- update orbeon web only if ${ext.orbeonweb.path}/../orbeon/WEB-INF/web.xml exist -->
+			<orbeonweb_upgrade/>
+		</sequential>
+	</target>
+
+
+	<macrodef name="orbeonweb_copy_exts_orbeon_config">
+		<sequential>
+			<if>
+				<available file="${HYBRIS_CONFIG_DIR}/orbeon/config" />
+				<then>
+					<echo level="info" message="Orbeon config folder already exists"/>
+				</then>
+				<else>
+					<foreachext>
+						<do>
+							<if>
+								<equals arg1="${@{extname}.orbeon.config}" arg2="$${@{extname}.orbeon.config}"/>
+								<then>
+									<echo message="Not found orbeon config for extension:  @{extname}" />
+								</then>
+								<else>
+									<if>
+										<available file="${HYBRIS_CONFIG_DIR}/local.properties" />
+										<then>
+											<echo message="Found orbeon config for extension:  @{extname}" />
+											<orbeonweb_copy_orbeon_config extname="@{extname}" />
+										</then>
+									</if>
+								</else>
+							</if>
+						</do>
+					</foreachext>
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+	
+	<macrodef name="orbeonweb_copy_orbeon_config">
+		<attribute name="extname"/>
+		<sequential>
+			<echo level="info" message="copy orbeon config from @{extname} to hybris config dir..."/>
+			<copy todir="${HYBRIS_CONFIG_DIR}/orbeon" overwrite="true" verbose="true" filtering="false">
+				<fileset dir="${ext.@{extname}.path}/${@{extname}.orbeon.config}">
+					<include name="**/**.*"/>
+					<exclude name="**/properties-*.xml"/>
+					<exclude name="**/dummy.txt"/>
+				</fileset>
+			</copy>
+			<pathconvert targetos="unix" property="platformhome.unix">
+				<path>
+					<pathelement path="${platformhome}"/>
+				</path>
+			</pathconvert>
+			<copy todir="${HYBRIS_CONFIG_DIR}/orbeon" overwrite="true" verbose="true" filtering="true">
+				<filterset begintoken="${" endtoken="}" recurse="true">
+					<filter token="platformhome" value="${platformhome.unix}"/>
+					<filtersfile file="${ext.@{extname}.path}/project.properties"/>
+					<filtersfile file="${ext.orbeonweb.path}/project.properties"/>
+					<filtersfile file="project.properties"/>
+					<filtersfile file="${HYBRIS_CONFIG_DIR}/local.properties"/>
+				</filterset>
+				<fileset dir="${ext.@{extname}.path}/${@{extname}.orbeon.config}">
+					<include name="**/properties-*.xml"/>
+				</fileset>
+			</copy>
+		</sequential>
+	</macrodef>
+
+	<scriptdef name="generateguid" language="javascript" classpath="${ant.javascript.engine.classpath}">
+		<attribute name="property"/>
+		<![CDATA[
+	 	    project.setProperty( attributes.get( "property" ), java.util.UUID.randomUUID() );
+		]]>
+	</scriptdef>
+
+	<macrodef name="orbeonweb_patch_hybris_proxy_key_value">
+		<sequential>
+			<generateguid property="proxy_name_generated_key"/>
+			<generateguid property="proxy_value_generated_key"/>
+			<propertyfile file="${ext.orbeonweb.path}/project.properties">
+				<entry key="orbeonweb.orbeon.hybris-proxy-header" operation="="
+					   value="hybris-Proxy-${proxy_name_generated_key}"/>
+				<entry key="orbeonweb.orbeon.hybris-proxy-value" operation="="
+					   value="${proxy_value_generated_key}"/>
+			</propertyfile>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="orbeonweb_patch_orbeon_properties">
+		<sequential>
+			<if>
+				<available file="${HYBRIS_CONFIG_DIR}/orbeon/config/properties-common.xml" />
+				<then>
+					<echo level="info" message="patching property oxf.http.forward-headers of ${HYBRIS_CONFIG_DIR}/orbeon/config/properties-common.xml"/>
+					<mkdir dir="${HYBRIS_TEMP_DIR}/orbeonwebTemp"/>
+					<xmltask source="${HYBRIS_CONFIG_DIR}/orbeon/config/properties-common.xml"
+							 dest="${HYBRIS_TEMP_DIR}/orbeonwebTemp/properties-common.xml">
+						<replace path="properties/property[@name='oxf.http.forward-headers']">
+							<![CDATA[
+								<property as="xs:string" name="oxf.http.forward-headers" value="Authorization hybris-Proxy-${proxy_name_generated_key}"/>
+							]]>
+						</replace>
+					</xmltask>
+					<copy file="${HYBRIS_TEMP_DIR}/orbeonwebTemp/properties-common.xml"
+						  tofile="${HYBRIS_CONFIG_DIR}/orbeon/config/properties-common.xml" overwrite="true" verbose="true"/>
+					<delete  dir="${HYBRIS_TEMP_DIR}/orbeonwebTemp"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="orbeonweb_copy_orbeon_patch_config">
+		<sequential>
+			<if>
+				<available file="${HYBRIS_CONFIG_DIR}/local.properties"/>
+				<then>
+					<echo level="info" message="patch urlrewrite.xml..."/>
+					<copy todir="${ext.orbeonweb.path}/web/webroot/WEB-INF" overwrite="true" verbose="true" filtering="true">
+						<filterset begintoken="${" endtoken="}" recurse="true">
+							<filtersfile file="${ext.orbeonweb.path}/project.properties"/>
+							<filtersfile file="project.properties"/>
+							<filtersfile file="${HYBRIS_CONFIG_DIR}/local.properties"/>
+						</filterset>
+						<!-- We patch the urlrewrite.xml -->
+						<fileset dir="${ext.orbeonweb.path}/orbeon/patch/">
+							<include name="**/urlrewrite.xml"/>
+						</fileset>
+					</copy>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="orbeonweb_upgrade">
+		<sequential>
+			<echo level="info" message="update orbeon web if ${ext.orbeonweb.path}/../orbeon/WEB-INF/web.xml exist"/>
+			<if>
+				<available file="${ext.orbeonweb.path}/../orbeon/WEB-INF/web.xml"/>
+				<then>
+					<sequential>
+						<echo level="info" message="start update orbeon web"/>
+						<orbeon_set_config/>
+						<orbeonweb_patch_web_xml/>
+						<orbeon_remove_unneeded_dir/>
+						<orbeon_replace/>
+					</sequential>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="orbeon_set_config">
+		<sequential>
+			<copy file="${ext.orbeonweb.path}/web/webroot/WEB-INF/resources/config/license.xml"
+				  tofile="${ext.orbeonweb.path}/../orbeon/WEB-INF/resources/config/license.xml" overwrite="none"
+				  verbose="true"/>
+
+			<copy file="${ext.orbeonweb.path}/web/webroot/WEB-INF/orbeonweb-web-spring.xml"
+				  tofile="${ext.orbeonweb.path}/../orbeon/WEB-INF/orbeonweb-web-spring.xml" overwrite="none"
+				  verbose="true"/>
+
+			<copy file="${ext.orbeonweb.path}/web/webroot/WEB-INF/external-dependencies.xml"
+				  tofile="${ext.orbeonweb.path}/../orbeon/WEB-INF/external-dependencies.xml" overwrite="none"
+				  verbose="true"/>
+
+			<copy file="${ext.orbeonweb.path}/web/webroot/WEB-INF/genClasspath.sh"
+				  tofile="${ext.orbeonweb.path}/../orbeon/WEB-INF/genClasspath.sh" overwrite="none"
+				  verbose="true"/>
+		</sequential>
+	</macrodef>
+
+
+	<macrodef name="orbeonweb_patch_web_xml">
+		<sequential>
+			<echo level="info" message="patching orbeonweb's web.xml"/>
+			<mkdir dir="${ext.orbeonweb.path}/../orbeon/WEB-INF/temp"/>
+			<xmltask source="${ext.orbeonweb.path}/../orbeon/WEB-INF/web.xml"
+					 dest="${ext.orbeonweb.path}/../orbeon/WEB-INF/temp/web.xml">
+				<remove path="//*[name()='filter'][contains(.//*[name()='filter-name'], 'orbeon-exist-filter')]"/>
+				<remove path="//*[name()='filter-mapping'][contains(.//*[name()='filter-name'], 'orbeon-exist-filter')]"/>
+				<remove path="//*[name()='servlet'][contains(.//*[name()='servlet-name'], 'exist-rest-servlet')]"/>
+				<remove path="//*[name()='servlet-mapping'][contains(.//*[name()='servlet-name'], 'exist-rest-servlet')]"/>
+				<insert path="//*[name()='description'][last()]" position="after">
+					<![CDATA[
+						<absolute-ordering xmlns="http://xmlns.jcp.org/xml/ns/javaee"/>
+					]]>
+				</insert>
+				<replace path="//*[name()='context-param'][contains(.//*[name()='param-name'], 'oxf.initialize-logging')]">
+					<![CDATA[
+						<context-param xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<param-name>oxf.initialize-logging</param-name>
+							<param-value>false</param-value>
+						</context-param>
+					]]>
+				</replace>
+				<insert path="//*[name()='filter'][1]" position="before">
+					<![CDATA[
+						<filter xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<filter-name>orbeonwebPlatformFilterChain</filter-name>
+							<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+						</filter>
+						<filter-mapping xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<filter-name>orbeonwebPlatformFilterChain</filter-name>
+							<url-pattern>/*</url-pattern>
+							<dispatcher>REQUEST</dispatcher>
+							<dispatcher>FORWARD</dispatcher>
+						</filter-mapping>
+					]]>
+				</insert>
+				<insert path="//*[name()='filter'][last()]" position="after">
+					<![CDATA[
+						<filter xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<filter-name>UrlRewriteFilter</filter-name>
+							<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+							<init-param>
+								<param-name>logLevel</param-name>
+								<param-value>LOG4J</param-value>
+							</init-param>
+							<init-param>
+								<param-name>confReloadCheckInterval</param-name>
+								<param-value>-1</param-value>
+							</init-param>
+						</filter>
+						<filter-mapping xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<filter-name>UrlRewriteFilter</filter-name>
+							<url-pattern>/*</url-pattern>
+							<dispatcher>REQUEST</dispatcher>
+							<dispatcher>FORWARD</dispatcher>
+						</filter-mapping>
+					]]>
+				</insert>
+				<insert path="//*[name()='filter'][last()]" position="after">
+					<![CDATA[
+							<filter xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+								<filter-name>XSSFilter</filter-name>
+								<filter-class>de.hybris.platform.servicelayer.web.XSSFilter</filter-class>
+							</filter>
+							<filter-mapping xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+								<filter-name>XSSFilter</filter-name>
+								<url-pattern>/*</url-pattern>
+							</filter-mapping>
+					]]>
+				</insert>
+				<insert path="//*[name()='listener'][1]" position="before">
+					<![CDATA[
+						<listener xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<listener-class>de.hybris.platform.spring.HybrisContextLoaderListener</listener-class>
+						</listener>
+						<listener xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+						</listener>
+					]]>
+				</insert>
+				<insert path="//*[name()='context-param'][last()]" position="after" expandProperties="false">
+					<![CDATA[
+						<context-param xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<param-name>oxf.resources.priority.0</param-name>
+							<param-value>org.orbeon.oxf.resources.FilesystemResourceManagerFactory</param-value>
+						</context-param>
+						<context-param xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<param-name>oxf.resources.priority.0.oxf.resources.filesystem.sandbox-directory</param-name>
+							<param-value>${HYBRIS_CONFIG_DIR}/orbeon/</param-value>
+						</context-param>
+						<context-param xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+							<param-name>contextConfigLocation</param-name>
+							<param-value>WEB-INF/orbeonweb-web-spring.xml</param-value>
+						</context-param>
+					]]>
+				</insert>
+			</xmltask>
+			<copy file="${ext.orbeonweb.path}/../orbeon/WEB-INF/temp/web.xml"
+				  tofile="${ext.orbeonweb.path}/../orbeon/WEB-INF/web.xml" overwrite="true" verbose="true"/>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon/WEB-INF/temp"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="orbeon_remove_unneeded_dir">
+		<sequential>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon/xforms-jsp"/>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon/WEB-INF/resources/apps"/>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon/WEB-INF/resources/forms/orbeon/controls"/>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon/WEB-INF/resources/forms/orbeon/dmv-14"/>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon/WEB-INF/exist-data"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="orbeon_replace">
+		<sequential>
+			<echo level="info" message="start delete ${ext.orbeonweb.path}/web/webroot/WEB-INF"/>
+			<delete dir="${ext.orbeonweb.path}/web/webroot/WEB-INF"/>
+			<copy todir="${ext.orbeonweb.path}/web/webroot/WEB-INF" overwrite="true" verbose="true" filtering="true">
+				<fileset dir="${ext.orbeonweb.path}/../orbeon/WEB-INF">
+					<exclude name="**/lib/itext-bcmail-jdk14-138.jar"/>
+					<exclude name="**/lib/itext-bcprov-jdk14-138.jar"/>
+					<exclude name="**/lib/itext-bcprov-jdk14-138.jar"/>
+					<exclude name="**/lib/slf4j-api-*.jar"/>
+					<exclude name="**/lib/log4j-*.jar"/>
+					<exclude name="**/lib/orbeon-cli.jar"/>
+					<exclude name="**/lib/commons-cli-1_0.jar"/>
+					<exclude name="**/lib/exist-*.jar"/>
+					<exclude name="**/resources/config/log4j2.xml"/>
+				</fileset>
+			</copy>
+			<delete  dir="${ext.orbeonweb.path}/../orbeon"/>
+		</sequential>
+	</macrodef>
+</project>

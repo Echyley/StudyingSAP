@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+ @import "cockpitng-globals.scss";
+
+div.yw-explorerTree .y-tree-icon {
+    @include setTreeIconGlyph("hmc_group_sapintegration_name", "sap-logo-shape");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+    @include setSideNavigationIconGlyph("hmc.group.sapintegration.name", "sap-logo-shape");
+}

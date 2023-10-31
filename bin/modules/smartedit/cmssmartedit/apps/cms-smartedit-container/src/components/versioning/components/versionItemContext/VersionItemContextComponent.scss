@@ -1,0 +1,41 @@
+.se-version-item-context {
+    @include se-flex-row();
+    height: 40px;
+    border-right: se-border();
+
+    .sap-icon--navigation-right-arrow {
+        padding-right: se-space('xs');
+        color: var(--sapNeutralColor);
+    }
+
+    &__info {
+        @include se-flex-column();
+    }
+    &__info-label {
+        @include se-weight('bold');
+        @include se-type('-1');
+        @include se-text-ellipsis;
+        max-width: 90px;
+    }
+    &__info-date {
+        color: var(--sapNeutralColor);
+        @include se-type('-1');
+    }
+    &__remove-btn {
+        padding: 0;
+        margin: se-space('xxs');
+        min-width: 20px;
+        height: 20px;
+        color: var(--sapTextColor);
+        background: transparent;
+        border: transparent;
+        line-height: 1;
+        &::before {
+            margin: 0 !important;
+        }
+    }
+
+    &__description-wrapper {
+        word-wrap: break-word;
+    }
+}

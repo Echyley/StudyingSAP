@@ -1,0 +1,8 @@
+<div class="se-decorator-wrap">
+    <slot-disabled-component
+        [active]="active"
+        [componentAttributes]="componentAttributes"
+    ></slot-disabled-component>
+    <!-- The slotContextualMenu decorator will be put in ng-content, but the external-slot-disabled-decorator should not display any slotContextualMenu. -->
+    <!--  <div><ng-content></ng-content></div> -->
+</div>

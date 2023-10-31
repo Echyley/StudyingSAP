@@ -1,0 +1,9 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+
+$emailPackageName=de.hybris.platform.chineseprofilefacades.process.email.context
+
+UPDATE RendererTemplate;code[unique=true];contextClass
+;electronics_Email_Product_Back_In_Stock_Body;$emailPackageName.BackInStockNotificationEmailContext
+;electronics_Email_Product_Back_In_Stock_Subject;$emailPackageName.BackInStockNotificationEmailContext

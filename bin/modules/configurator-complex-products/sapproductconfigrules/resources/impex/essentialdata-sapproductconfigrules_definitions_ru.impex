@@ -1,0 +1,55 @@
+$lang=ru
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Конфигурируемый продукт
+;productconfig_customer_category;Клиент
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Продукт с заданной конфигурацией в корзине;Корзина содержит продукт {product}. Признак {cstic} {value_operator} значение {cstic_value}.
+;y_configurable_product;Конфигурируемый в настоящий момент продукт;Конфигурируемый в настоящий момент продукт: {product}. Признак {cstic} {value_operator} значение {cstic_value}.
+;y_configurable_product_customer;Клиенты;Клиент {customers_operator} в следующем списке\: {customers}
+;y_configurable_product_customer_group;Группы клиентов;Клиент {customer_groups_operator} из следующих групп\: {customer_groups}
+;y_configurable_product_customer_support_mode;Поддержка клиентов;Сеанс службы поддержки активен\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Продукт;Продукт в корзине;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Признак;Имя признака
+;y_configurable_product_in_cart;value_operator;Оператор;Оператор между признаком и значением
+;y_configurable_product_in_cart;cstic_value;Значение;Имя значения признака;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Продукт;Конфигурируемый в настоящий момент продукт
+;y_configurable_product;cstic;Признак;Имя признака
+;y_configurable_product;value_operator;Оператор;Оператор между признаком и значением
+;y_configurable_product;cstic_value;Значение;Имя значения признака
+;y_configurable_product_customer;customers_operator;Оператор выбора клиента;Определяет, содержится ли клиент в списке
+;y_configurable_product_customer;customers;Клиенты;Список клиентов
+;y_configurable_product_customer_group;customer_groups_operator;Оператор выбора группы клиентов;Определяет, содержится ли клиент в ЛЮБОЙ или ВСЕХ группах клиентов
+;y_configurable_product_customer_group;customer_groups;Группы клиентов;Список групп клиентов
+;y_configurable_product_customer_support_mode;value;Сеанс службы поддержки активен;Агент поддержки клиентов выполнил вход от имени клиента
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Конфигурируемый продукт
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Установить значение признака для конфигурируемого продукта;Установить значение {cstic_value} для признака {cstic}
+;y_configurable_product_remove_assignable_value;Скрыть присваиваемое значение для конфигурируемого продукта;Скрыть значение {cstic_value} для признака {cstic}
+;y_configurable_product_hide_cstic;Скрыть признак для конфигурируемого продукта;Скрыть признак {cstic}
+;y_configurable_product_display_cstic_readonly;Отобразить признак для конфигурируемого продукта только для чтения;Отобразить признак {cstic} только для чтения
+;y_configurable_product_display_message;Просмотреть сообщение;Просмотреть сообщение
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Признак;Признак, для которого установлено значение
+;y_configurable_product_set_cstic_value;cstic_value;Значение;Устанавливаемое значение признака
+;y_configurable_product_remove_assignable_value;cstic;Признак;Признак, для которого нужно удалить присваиваемое значение
+;y_configurable_product_remove_assignable_value;cstic_value;Значение;Значение, которое нужно удалить из списка присваиваемых значений
+;y_configurable_product_hide_cstic;cstic;Признак;Признак для скрытия
+;y_configurable_product_display_cstic_readonly;cstic;Признак;Признак, отображаемый только для чтения
+;y_configurable_product_display_message;message;Сообщение;Текст сообщения
+;y_configurable_product_display_message;message_severity;Серьезность;Серьезность сообщения
+;y_configurable_product_display_message;cstic;Признак;Признак, для которого появляется сообщение
+;y_configurable_product_display_message;cstic_value;Значение признака;Значение признака, для которого появляется сообщение
+
+#% endif:

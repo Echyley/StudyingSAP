@@ -1,0 +1,11 @@
+@import "cockpitng-globals.scss";
+
+.yw-title {
+	> .z-label {
+		font-family: var(--bo-font-family);
+		font-size: $font-size__h3 !important;
+		color: var(--bo-page-header-text-color) !important;
+		line-height: 40px;
+		margin-right: $_container-spacing-default__tiny;
+	}	
+}

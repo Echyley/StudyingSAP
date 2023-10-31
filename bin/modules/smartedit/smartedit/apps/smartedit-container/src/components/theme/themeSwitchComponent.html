@@ -1,0 +1,19 @@
+<fd-grid-list
+    [layoutPattern]="layoutPattern"
+    selectionMode="singleSelect"
+    (selectionChange)="onSelectionChange($event)"
+>
+    <fd-grid-list-item
+        *ngFor="let item of list"
+        [value]="item.id"
+        [noPadding]="true"
+        (press)="press($event)"
+        [selected]="item.selected"
+    >
+        <fd-grid-list-item-toolbar *ngIf="item.toolbarText"
+            >{{ item.toolbarText }}</fd-grid-list-item-toolbar
+        >
+
+        <img [id]="item.id" [src]="item.url" [alt]="item.toolbarText" />
+    </fd-grid-list-item>
+</fd-grid-list>

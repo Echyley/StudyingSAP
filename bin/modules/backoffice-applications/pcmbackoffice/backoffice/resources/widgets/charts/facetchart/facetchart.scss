@@ -1,0 +1,513 @@
+@import "scss/support/facetchart-variables.scss";
+
+.yw-solrfacetchart {
+	position: relative;
+	display: -webkit-box; 
+	display: -ms-flexbox;
+	display: -webkit-flex; 
+	display: flex;
+    flex-wrap: wrap;
+
+    &.widget_body {
+    	background: $solrfacetchart__charts--bg-color;
+    	height: 100%;
+    }
+
+	&-toppanel {
+		padding: $solrfacetchart__toppanel--padding;
+		height: $solrfacetchart__toppanel--height;
+		border-bottom: $_solrfacetchart__toppanel--border-bottom;
+		position: absolute;
+		overflow: hidden;
+		width: 100%;
+	  	z-index: 1;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1 1 100%;
+		-moz-box-flex: 1;
+		-ms-flex: 1 1 100%;
+		flex: 1 1 100%;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		-moz-box-pack: justify;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+		-webkit-box-align: center;
+    	-ms-flex-align: center;
+        align-items: center;
+
+	  	.yw-solrfacetchart-chart-title {
+	  		font-size: $solrfacetchart__toppanel-title--font-size;
+	  		line-height: $_solrfacetchart__toppanel-title--line-height;
+	  		@if $solrfacetchart__toppanel-title--top {
+	  			top: $solrfacetchart__toppanel-title--top;
+	  			position: relative;
+	  		}
+	  		-webkit-box-flex: 1;
+			-webkit-flex: 1 1 auto;
+			-moz-box-flex: 1;
+			-ms-flex: 1 1 auto;
+			flex: 1 1 auto;
+	  	}
+
+		&-facetchooser {
+    		padding-left: $solrfacetchart__toppanel-elements--padding-left;
+
+			.z-label {
+				display: none;
+			}
+		}
+		&-filter-button.z-button {
+			position: static;
+			display: block;
+			@if $_solrfacetchart__toppanel-filterbutto--transition {
+				transition: background-color .05s, border-color .05s;
+			}
+			min-height: auto;
+
+			&:before {
+				content: $_solrfacetchart__toppanel-filterbutton-icon--content;
+				font-size: $_solrfacetchart__toppanel-filterbutton-icon--font-size;
+				font-family: $_solrfacetchart__toppanel-filterbutton-icon--font-family;
+				position: static;
+				display: inline;
+			}
+		}
+		&-filters-container {
+			padding-left: $solrfacetchart__toppanel-elements--padding-left;
+			display: block;
+			position: relative;
+			-webkit-box-flex: 0;
+			-webkit-flex: 0 0 auto;
+			-moz-box-flex: 0;
+			-ms-flex: 0 0 auto;
+			flex: 0 0 auto;
+		}
+		&-filters {
+			@if $_solrfacetchart__toppanel-filters-popup-delimiter--border {
+				padding-bottom: $solrfacetchart__toppanel-filters--padding;
+			} @else {
+				padding: $solrfacetchart__toppanel-filters--padding;
+			}
+
+			&-popup & {
+				display: block;
+				width: 100%;
+			}
+			.z-label {
+				margin-bottom: $solrfacetchart__toppanel-filters-label--margin-bottom;
+				color: $solrfacetchart__toppanel-filters-label--color;
+			}
+
+			> .z-div {
+				position: relative;
+				@if $_solrfacetchart__toppanel-filters-popup-delimiter--border {
+					padding-top: $solrfacetchart__toppanel-filters--padding;
+					padding-left: $solrfacetchart__toppanel-filters--padding;
+					padding-right: $solrfacetchart__toppanel-filters--padding;
+					border-top: $_solrfacetchart__toppanel-filters-popup-delimiter--border;
+					&:first-child {
+						border-top-color: transparent;
+					}
+				}
+
+				> .z-div {
+					display: block;
+					width: 100%;
+				}
+				> .z-label {
+					width: calc(100% - #{$solrfacetchart__toppanel-filters-delet-btn--width});
+					display: block;
+					line-height: $_solrfacetchart__toppanel-filters-label--line-height;
+					margin-bottom: $solrfacetchart__toppanel-filters-label--margin-bottom;
+					font-weight: $_solrfacetchart__toppanel-filters-label--font-weight;
+				}
+				> .ye-delete-btn {
+					@if $_solrfacetchart__toppanel-filters-popup-delimiter--border {
+						right: $solrfacetchart__toppanel-filters--padding;
+						top: $solrfacetchart__toppanel-filters--padding;
+					}@else {
+						right: 0;
+						top: 0;
+					}
+					@if $_solrfacetchart__toppanel-filters-delete-btn--margin-top != 0 {
+						margin-top: $_solrfacetchart__toppanel-filters-delete-btn--margin-top;
+					}
+					position: absolute;
+				}
+			}
+
+			&-popup {
+				width: $solrfacetchart__toppanel-filters-popup--width;
+				border: $_solrfacetchart__toppanel-filters-popup--border;
+				margin-top: $_solrfacetchart__toppanel-filters-popup--margin-top;
+				overflow: visible;
+				box-shadow: none;
+
+				&:before,
+				&:after {
+					content: '';
+					position: absolute;
+					top: $_solrfacetchart__toppanel-filters-popup-arrow--top;
+					right: $_solrfacetchart__toppanel-filters-popup-arrow--right;
+					border-bottom: $_solrfacetchart__toppanel-filters-popup-arrow--border-bottom;
+					border-left: $_solrfacetchart__toppanel-filters-popup-arrow--border-left;
+					border-right: $_solrfacetchart__toppanel-filters-popup-arrow--border-right;
+				}
+				&:before {
+					border-bottom-color: $_solrfacetchart__toppanel-filters-popup--border-color;
+					top: $_solrfacetchart__toppanel-filters-popup-arrow--top - 1;
+				}
+
+				.ye-delete-btn {
+					width: $solrfacetchart__toppanel-filters-delet-btn--width;
+
+					&.z-button{
+						height: $_solrfacetchart__toppanel-filters-delet-btn--height;
+
+						&:hover {
+							text-decoration: none;
+						}
+					}
+					.ye-remove-enabled > & {
+						display: none;
+					}
+				}
+				.z-label {
+					max-width: $solrfacetchart__toppanel-filters-label--max-width;
+					display: inline-block;
+					margin-bottom: 0;
+				}
+				.z-chosenbox,
+				.z-combobox,
+				.yw-solrfacetchart-toppanel-filters > .z-div,
+				.yw-solrfacetchart-filters > .z-div {
+					margin-top: $solrfacetchart__toppanel-filters-editor--margin-top;
+					margin-bottom: $solrfacetchart__toppanel-filters-editor--margin-bottom;
+					width: 100%;
+					display: block;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+				.yw-solrfacetchart-toppanel-filters > .z-div {
+					&:first-child {
+						margin-top: 0;
+					}
+				}
+			}
+
+			.z-combobox {
+				margin-bottom: $solrfacetchart__toppanel-filters-combobox--margin-bottom;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+		  	&-counter {
+				min-width: $solrfacetchart__toppanel-filters-counter--min-width;
+				height: $solrfacetchart__toppanel-filters-counter--height;
+				font-size: $solrfacetchart__toppanel-filters-counter--font-size;
+				font-weight: $solrfacetchart__toppanel-filters-counter--font-weight;
+				line-height: $solrfacetchart__toppanel-filters-counter--line-height;
+				color: $solrfacetchart__toppanel-filters-counter--color;
+				background: $solrfacetchart__toppanel-filters-counter--bg-color;
+				border-radius: $solrfacetchart__toppanel-filters-counter--border-radius;
+				padding: $solrfacetchart__toppanel-filters-counter--padding;
+			  	right: $solrfacetchart__toppanel-filters-counter--right;
+			  	top: $solrfacetchart__toppanel-filters-counter--top;
+			  	z-index: $solrfacetchart__toppanel-filters-counter--z-index;
+			  	transform: $solrfacetchart__toppanel-filters-counter--transform;
+			  	text-align: center;
+			  	position: absolute;
+
+				&:empty {
+				  display: none;
+				}
+			}
+		}
+	}
+
+	&-charts {
+		flex: 2 1 70%;
+		overflow: hidden;
+
+		.z-charts[data-highcharts-chart="3"] .highcharts-root { //Positioning of the pie-chart. ONLY TEMPORARY SOLUTION
+			position: relative;
+			left: 50%;
+			-webkit-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			transform: translateX(-50%);
+			margin: $_solrfacetchart__chart-type-pie-hightchart--margin;
+			max-width: 110%;
+		}
+
+		.highcharts {
+			&-container {
+				width: 100% !important;
+				height: $solrfacetchart__chart-container--height !important;
+				min-height: $solrfacetchart__chart-container--height !important;
+				margin-top: $solrfacetchart__chart-container--margin-top;
+				margin-bottom: $solrfacetchart__chart-container--margin-bottom;
+
+				.highcharts-axis-labels text {
+                    color: $solrfacetchart__highcharts--axis-label-text-color;
+                    fill: $solrfacetchart__highcharts--axis-label-text-color;
+                }
+			}
+			&-root {
+				width: auto !important;
+				height: 100% !important;
+				min-height: $solrfacetchart__chart-container--height !important;
+				display: block;
+				margin: $_solrfacetchart__chart-hightchart--margin;
+
+				.yw-dashboard-slot-ghost & {
+					position: relative;
+					left: 50%;
+					-webkit-transform: translateX(-50%);
+					-ms-transform: translateX(-50%);
+					transform: translateX(-50%);
+					max-width: 100%;
+				}
+			}
+
+			&-background {
+				height: 100%;
+				width: 100%;
+				fill: $solrfacetchart__content-container--bg-color;
+			}
+
+			&-axis {
+				text {
+					color: $solrfacetchart__tile-title--color;
+    				fill: $solrfacetchart__tile-title--color;
+				}
+			}
+
+			&-xaxis path {
+				stroke: $solrfacetchart__axis-line-color;
+			}
+
+			&-grid.highcharts-yaxis-grid path {
+				stroke: $solrfacetchart__axis-line-color;
+			}
+
+			&-title {
+				display: none;
+			}
+
+			&-series > rect {
+    			stroke-width: 0; // removing border and shadow under bars;
+			}
+
+			&-tick {
+				display: none;
+			}
+
+			&-text-outline {
+			  display: none;
+			}
+
+			&-no-data,
+			&-label text {
+				color: $solrfacetchart__tile-title--color;
+    			fill: $solrfacetchart__tile-title--color;
+			}
+
+			&-label.highcharts-tooltip text > tspan:nth-child(3) {
+			  display: none !important;
+			}
+		}
+	}
+
+	&-rightpanel {
+		flex: 1 1 30%;
+
+		&:empty {
+			display: none;
+		}
+
+		&-container {
+			padding: $solrfacetchart__rightpanel-container--padding;
+			height: 100%;
+			display: -webkit-box; 
+			display: -ms-flexbox;
+			display: -webkit-flex; 
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-webkit-flex-direction: column;
+			-moz-box-orient: vertical;
+			-moz-box-direction: normal;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			-webkit-box-pack: center;
+			-webkit-justify-content: center;
+			-moz-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-moz-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			text-align: center;
+			width: 100%;
+
+			&-buttons {
+				display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+			}
+		}
+
+		&-total-product-count {
+			font-size: $solrfacetchart__rightpanel-total-count--font-size;
+    		font-weight: $_solrfacetchart__rightpanel-total-count--font-weight;
+    		color: $_solrfacetchart__rightpanel-label--color;
+    		display: inline-block;
+    		text-align: center;
+
+    		&-label {
+    			color: $_solrfacetchart__rightpanel-label--color;
+    			flex: 0 1 auto;
+    			width: 100%;
+    			padding-bottom: $_solrfacetchart__rightpanel-label--padding-bottom;
+    		}
+		}
+
+		&-go-to-all-products-button,
+		&-add-new-product-button {
+			color: $solrfacetchart__rightpanel-button--color;
+			margin-bottom: $solrfacetchart__rightpanel-button--margin-bottom;
+			font-size: $solrfacetchart__rightpanel-button--font-size;
+			@if ($solrfacetchart__rightpanel-button-icon--display != inline-block) {
+				margin-left: $solrfacetchart__rightpanel-button--margin-left;
+			}
+			text-decoration: none;
+			position: relative;
+			display: flex;
+			padding: $_solrfacetchart__rightpanel-button--padding;
+			border-radius: $_solrfacetchart__rightpanel-button--border-radius;
+			background-color: transparent;
+			
+			&:hover {
+			    text-decoration: none;
+				background-color: $_solrfacetchart__rightpanel-button-hover--bg-color;
+			}
+
+			&:focus,
+			&:active {
+			    text-decoration: none;
+				background-color: $_solrfacetchart__rightpanel-button-active--bg-color;
+			}
+
+			&:before {
+				@if ($solrfacetchart__rightpanel-button-icon--display != inline-block) {
+					position: absolute;
+					top: 50%;
+					left: $solrfacetchart__rightpanel-button-icon--left;
+					width: $solrfacetchart__rightpanel-button-icon--size;
+					height: $solrfacetchart__rightpanel-button-icon--size;
+					margin-top: $solrfacetchart__rightpanel-button-icon--margin-top;
+					text-align: inherit;
+				}@else{
+					position: relative;
+					display: $solrfacetchart__rightpanel-button-icon--display;
+					margin-right: $solrfacetchart__rightpanel-button-icon--margin-right;
+				}
+				@if $_solrfacetchart__rightpanel-button-icon--font-family {
+					font-family: $_solrfacetchart__rightpanel-button-icon--font-family;
+					font-size: $_solrfacetchart__rightpanel-button-icon--font-size;
+					content: $_solrfacetchart__rightpanel-button-icon-all--content;
+				}@else{
+					content: '';
+					padding: ($solrfacetchart__rightpanel-button-icon--size/2);
+					background: $solrfacetchart__rightpanel-button-all--bg-image center no-repeat;
+					background-size: $solrfacetchart__rightpanel-button-icon--size auto;
+				}
+			}
+		}
+		&-add-new-product-button {
+			&:before {
+				@if $_solrfacetchart__rightpanel-button-icon-add--content {
+					content: $_solrfacetchart__rightpanel-button-icon-add--content;
+				}@else{
+					content: '';
+					background-image: $solrfacetchart__rightpanel-button-add--bg-image;
+				}
+				
+			}
+		}
+	}
+
+	&-bottompanel {
+		width: 100%;
+		display: -webkit-box; 
+		display: -ms-flexbox;
+		display: -webkit-flex; 
+		display: flex;
+		text-align: center;
+		min-height: $solrfacetchart__bottompanel-stats--min-height;
+		@if $_solrfacetchart__bottompanel-stats--border-top {
+			border-top: $_solrfacetchart__bottompanel-stats--border-top;
+		}
+		
+		&-onepoint {
+			padding: $solrfacetchart__bottompanel-stats--padding;
+			background-color: $solrfacetchart__bottompanel-stats--bg-color;
+			cursor: pointer;
+			-webkit-box-flex: 1;
+			-webkit-flex: 1;
+			-ms-flex: 1;
+			flex: 1;
+
+
+			&:hover {
+				background-color: $solrfacetchart__bottompanel-stats-hover--bg-color;
+			}
+
+			&-value {
+				display: block;
+			  	font-size: $solrfacetchart__bottompanel-stats-value--font-size;
+				@if $_solrfacetchart__bottompanel-stats-value-label--color {
+					color: $_solrfacetchart__bottompanel-stats-value-label--color;
+				}
+			}
+
+			&-label {
+				font-size: $solrfacetchart__bottompanel-stats-label--font-size;
+				line-height: $solrfacetchart__bottompanel-stats-label--line-height;
+				font-weight: $solrfacetchart__bottompanel-stats-label--font-weight;
+				@if $_solrfacetchart__bottompanel-stats-label--color {
+					color: $_solrfacetchart__bottompanel-stats-label--color;
+				}
+				@if $_solrfacetchart__rightpanel-stats-label--padding {
+					padding: $_solrfacetchart__rightpanel-stats-label--padding;
+				}
+				display: block;
+			}
+
+		    &-color-label {
+			  	width: $solrfacetchart__bottompanel-stats-color-label--width;
+			  	height: $solrfacetchart__bottompanel-stats-color-label--height;
+				border-radius: $solrfacetchart__bottompanel-stats-color-label--border-radius;
+				text-align: center;
+				display: inline-block;
+				
+				&:before {
+					content: $_solrfacetchart__bottompanel-stats-color-label--content;
+					font-family: $_solrfacetchart__bottompanel-stats-color-label--font-family;
+					font-size: $_solrfacetchart__bottompanel-stats-color-label--font-size;
+				}
+			}
+		}
+	}
+}

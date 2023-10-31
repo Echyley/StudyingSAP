@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "./support/ybackofficewidget-variables.scss";
+
+.yw-labelstyle
+{
+	color: $ybackoffice-label-text-color;
+}
+
+.ybackoffice-container {
+	background: $ybackoffice-container-background;
+	font-family: $ybackoffice-container-font-family;
+	font-size: $ybackoffice-container-font-size;
+}

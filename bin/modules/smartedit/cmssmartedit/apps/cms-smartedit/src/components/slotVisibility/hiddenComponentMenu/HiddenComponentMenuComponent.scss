@@ -1,0 +1,19 @@
+.se-hidden-component-menu {
+    @include se-dropdown-menu('right', 'no-arrow');
+
+    &__toggle {
+        cursor: pointer;
+        color: var(--sapIndicationColor_5);
+    }
+
+    &__item {
+        @include se-flex-row;
+        display: block;
+        padding: 10px 24px;
+    }
+
+    &__item-icon {
+        @include se-type('-1');
+        margin-right: se-space('xxs');
+    }
+}

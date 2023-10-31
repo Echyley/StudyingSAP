@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=ja
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;"""Identifier"" 属性には、すべての言語の値が必要です。";
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;"""Prices"" 属性には少なくとも 1 つの要素が必要です。";
+;ProductSupercategoriesSizeConstraint;;;"""Supercategories"" 属性には少なくとも 1 つの要素が必要です。";
+;ProductGalleryImagesSizeConstraint;;;"""Gallery Images"" 属性には少なくとも 1 つの要素が必要です。";
+;ProductReferencesSizeConstraint;;;"""Product References"" 属性には少なくとも 1 つの要素が必要です。";
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;"""Article Number"" 属性は空にできません。";
+;ProductDescriptionNotEmptyConstraint;;;"""Description"" 属性は空にできません。";
+;ProductEanNotEmptyConstraint;;;"""EAN"" 属性は空にできません。";
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;"""承認"" の属性値は ""承認済"" にしてください。";

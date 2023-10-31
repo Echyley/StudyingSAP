@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+		   http://www.springframework.org/schema/aop
+		   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<import resource="b2bpunchoutocc-spring-security-config.xml"/>
+
+	<context:component-scan base-package="de.hybris.platform.b2bpunchoutocc"/>
+
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="punchOutCredentialVerificationPointCut"
+					  expression="@annotation(de.hybris.platform.b2b.punchout.aop.annotation.PunchOutAuthentication)" />
+		<aop:aspect ref="punchOutAuthenticationAspect">
+			<aop:before pointcut-ref="punchOutCredentialVerificationPointCut" method="authenticate" />
+		</aop:aspect>
+	</aop:config>
+
+	<alias name="defaultPunchOutCXMLCustomXmlHttpMessageConverter" alias="punchOutCXMLCustomXmlHttpMessageConverter"/>
+	<bean id="defaultPunchOutCXMLCustomXmlHttpMessageConverter"
+		  class="de.hybris.platform.b2bpunchoutocc.converter.PunchOutCXMLJaxb2HttpMessageConverter">
+		<property name="supportDtd" value="true"/>
+	</bean>
+
+	<bean id="commerceWebServicesMessageConvertersV2ListMergeDirective" depends-on="messageConvertersV2"
+		  parent="listMergeDirective">
+		<property name="add" ref="punchOutCXMLCustomXmlHttpMessageConverter"/>
+		<property name="beforeBeanNames">
+			<list>
+				<value>customXmlHttpMessageConverter</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="b2bpunchoutOccSupportedTransactionURLPaths" alias="occSupportedTransactionURLPaths"/>
+	<util:map id="b2bpunchoutOccSupportedTransactionURLPaths">
+		<entry key="PunchOutSetUpRequest" value="#{configurationService.configuration.getProperty('b2bpunchoutocc.mapping.punchout.setup.request')}"/>
+		<entry key="OrderRequest" value="#{configurationService.configuration.getProperty('b2bpunchoutocc.mapping.punchout.order.request')}"/>
+	</util:map>
+
+	<bean id="punchOutRequestMatchingFilter" class="de.hybris.platform.b2bpunchoutocc.filter.PunchOutRequestMatchingFilter"/>
+
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="defaultCommerceWebServicesFilterChainListV2"/>
+		<property name="targetMethod" value="addAll"/>
+		<property name="arguments">
+			<list>
+				<ref bean="punchOutRequestMatchingFilter" />
+			</list>
+		</property>
+	</bean>
+
+	<util:list id="b2bPunchOutAllowedUrlList">
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/basesites" />
+			<!--path: just check path， DATA: check cartId-->
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/languages"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/currencies"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/titles"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/cardtypes"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="PUT,POST,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/orgUsers/{userId}/carts/{cartId}/entries"/>
+			<entry key="isolationLevel" value="DATA" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/categories/{categoryId}/products"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/orgProducts/{productCode}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/orgUsers/{userId}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/basestores/{baseStoreUid}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,DELETE,POST,PATCH,PUT,HEAD,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/carts/{cartId}/entries*/**"/>
+			<entry key="isolationLevel" value="DATA" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,DELETE,POST,PATCH,PUT,HEAD,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/carts/{cartId}/entrygroups/{entryGroupNumber}"/>
+			<entry key="isolationLevel" value="DATA" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/carts/{cartId}"/>
+			<entry key="isolationLevel" value="DATA" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/catalogs/**"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/cities/{cityId}/districts"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/regions/{regionId}/cities"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,DELETE,POST,PATCH,PUT,HEAD,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/cms/components*/**"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/countries"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/countries/{countyIsoCode}/regions"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/futureStocks"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/futureStocks/{productCode}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/cms/pages"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/cms/pages/{pageId}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/cms/sitepages"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,HEAD" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/products/**"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/promotions"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/promotions/{code}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,DELETE,POST,PATCH,PUT,HEAD,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/punchout/**"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,HEAD" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/stores/**"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/customercoupons"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="POST,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/customercoupons/{couponCode}/claim"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+		<util:map>
+			<entry key="methods" value="GET,DELETE,POST,OPTIONS" value-type="java.lang.String[]"/>
+			<entry key="url" value="/{baseSiteId}/users/{userId}/carts/{cartId}/promotions/**"/>
+			<entry key="isolationLevel" value="PATH" />
+		</util:map>
+	</util:list>
+</beans>

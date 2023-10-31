@@ -1,0 +1,23 @@
+@import "cockpitng-globals.scss";
+@import "../../../systemBarWidget/scss/support/_systembar-variables.scss";
+
+$user-profile-locale-default--spacing: $container-spacing-default_two-thirds; //20px
+$user-profile-locale-tabpanel--spacing: $container-spacing-default__third; //10px
+$user-profile-locale-title-color: var(--bo-title-color);
+$user-profile-locale-title-size: $font-size__h4;
+$user-profile-locale-title-height: 26px;
+$user-profile-locale-text-color: var(--bo-text-color);
+$user-profile-locale-selected-color: var(--bo-button-primary-text-color);
+$user-profile-locale-selected-bg-color: var(--bo-button-primary-background);
+$user-profile-locale-selected-border-color: var(--bo-button-primary-border-color);
+$user-profile-locale-color: var(--bo-button-icon-color);
+$user-profile-locale-bg-color: var(--bo-button-background);
+$user-profile-locale-border-color: var(--bo-button-border-color);
+$user-profile-locale-icon-border-color: var(--bo-input-border-color);
+$user-profile-locale-icon-color: var(--bo-selected-color);
+$user-profile-locale-icon-hover-color: var(--bo-input-hover-border-color);
+$user-profile-locale-icon-border-color: var(--bo-field-border-color);
+$user-profile-tab-panels-padding: $systembar-popup__tabpanel--padding $systembar-popup__tabpanel--padding 0 $systembar-popup__tabpanel--padding;
+$user-profile-tab-panels--border-width: $systembar-popup__tabpanel--border-width;
+$user-profile-tab-width: 60px;
+$segmented-button-default-height: 36px;

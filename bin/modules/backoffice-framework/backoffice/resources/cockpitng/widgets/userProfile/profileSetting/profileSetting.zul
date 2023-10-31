@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul" sclass="yw-profile-setting">
+	<style src="${wr}/profileSetting.css"/>
+	<div>
+		<label class="profile-setting-title" value="${labels.profile.setting.title}"></label>
+	</div>
+	<div class="profile-setting-content">
+		<vlayout>
+			<label value="${labels.profile.setting.avatar.label}"></label>
+			<div class="profile-setting-avatar-container">
+				<button id="uploadBtn" class="profile-setting-avatar-upload-btn y-btn-primary" upload="true" tooltiptext="${labels.profile.setting.upload.btn.tooltip}"></button>
+				<image id="avatarImage" class="profile-setting-avatar"/>
+			</div>
+			<label value="${labels.profile.setting.avatar.limit.info}"></label>
+		</vlayout>
+		<vlayout>
+			<label value="${labels.profile.setting.username.label}"></label>
+			<label class="profile-setting-field-values" id="userNameLabel"></label>
+		</vlayout>
+	</div>
+</widget>

@@ -1,0 +1,267 @@
+{
+  "extensions": [
+    {
+      "name": "@smart/utils",
+      "version": "1.1.52",
+      "projectFolder": "../smartedit/apps/smart-utils",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smart-utils",
+      "dependencies": []
+    },
+    {
+      "name": "smarteditcommons",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/smartedit-commons",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smartedit-commons",
+      "dependencies": [
+        "@smart/utils"
+      ]
+    },
+    {
+      "name": "personalizationcommons",
+      "version": "0.0.1",
+      "projectFolder": "../../personalization-module/personalizationsmartedit/apps/personalizationcommons",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalization-module/personalizationsmartedit/apps/personalizationcommons",
+      "dependencies": [
+        "smarteditcommons"
+      ]
+    },
+    {
+      "name": "smartedit",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/smartedit",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smartedit",
+      "dependencies": [
+        "smarteditcommons"
+      ],
+      "type": "inner"
+    },
+    {
+      "name": "personalizationsmartedit",
+      "version": "0.0.1",
+      "projectFolder": "../../personalization-module/personalizationsmartedit/apps/personalizationsmartedit",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalization-module/personalizationsmartedit/apps/personalizationsmartedit",
+      "dependencies": [
+        "smarteditcommons",
+        "smartedit",
+        "personalizationcommons"
+      ],
+      "type": "inner",
+      "angularApp": "personalizationsmartedit"
+    },
+    {
+      "name": "smarteditcontainer",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/smartedit-container",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smartedit-container",
+      "dependencies": [
+        "smarteditcommons"
+      ],
+      "type": "container"
+    },
+    {
+      "name": "personalizationsmarteditcontainer",
+      "version": "0.0.1",
+      "projectFolder": "../../personalization-module/personalizationsmartedit/apps/personalizationsmarteditcontainer",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalization-module/personalizationsmartedit/apps/personalizationsmarteditcontainer",
+      "dependencies": [
+        "smarteditcommons",
+        "smarteditcontainer",
+        "personalizationcommons"
+      ],
+      "type": "container",
+      "angularApp": "personalizationsmarteditContainer"
+    },
+    {
+      "name": "merchandisingsmarteditcommons",
+      "version": "0.0.1",
+      "projectFolder": "../../merchandising-module/merchandisingsmartedit/apps/merchandisingsmarteditcommons",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/merchandising-module/merchandisingsmartedit/apps/merchandisingsmarteditcommons",
+      "dependencies": [
+        "smarteditcommons"
+      ]
+    },
+    {
+      "name": "merchandisingsmartedit",
+      "version": "0.0.1",
+      "projectFolder": "../../merchandising-module/merchandisingsmartedit/apps/merchandisingsmartedit",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/merchandising-module/merchandisingsmartedit/apps/merchandisingsmartedit",
+      "dependencies": [
+        "smarteditcommons",
+        "smartedit",
+        "merchandisingsmarteditcommons"
+      ],
+      "type": "inner",
+      "angularApp": "merchandisingsmartedit"
+    },
+    {
+      "name": "merchandisingsmarteditcontainer",
+      "version": "0.0.1",
+      "projectFolder": "../../merchandising-module/merchandisingsmartedit/apps/merchandisingsmarteditContainer",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/merchandising-module/merchandisingsmartedit/apps/merchandisingsmarteditContainer",
+      "dependencies": [
+        "smarteditcommons",
+        "smarteditcontainer",
+        "merchandisingsmarteditcommons"
+      ],
+      "type": "container",
+      "angularApp": "merchandisingsmarteditContainer"
+    },
+    {
+      "name": "smarteditbootstrap",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/smartedit-bootstrap",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smartedit-bootstrap",
+      "dependencies": [
+        "smarteditcommons"
+      ],
+      "type": "inner"
+    },
+    {
+      "name": "smarteditloader",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/smartedit-loader",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smartedit-loader",
+      "dependencies": [
+        "smarteditcommons",
+        "smarteditcontainer"
+      ],
+      "type": "container"
+    },
+    {
+      "name": "webappinjector",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/web-app-injector",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/web-app-injector",
+      "dependencies": [
+        "smarteditcontainer",
+        "smartedit"
+      ]
+    },
+    {
+      "name": "personalizationsearchsmartedit",
+      "version": "0.0.1",
+      "projectFolder": "../../personalizationsearch-module/personalizationsearchsmartedit/apps/personalizationsearchsmartedit",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalizationsearch-module/personalizationsearchsmartedit/apps/personalizationsearchsmartedit",
+      "dependencies": [
+        "smarteditcommons",
+        "smartedit"
+      ],
+      "type": "inner",
+      "angularApp": "personalizationsearchsmartedit"
+    },
+    {
+      "name": "personalizationsearchsmarteditcontainer",
+      "version": "0.0.1",
+      "projectFolder": "../../personalizationsearch-module/personalizationsearchsmartedit/apps/personalizationsearchsmarteditContainer",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalizationsearch-module/personalizationsearchsmartedit/apps/personalizationsearchsmarteditContainer",
+      "dependencies": [
+        "smarteditcommons",
+        "smarteditcontainer",
+        "personalizationcommons"
+      ],
+      "type": "container",
+      "angularApp": "personalizationsearchsmarteditContainer"
+    },
+    {
+      "name": "personalizationpromotionssmartedit",
+      "version": "0.0.1",
+      "projectFolder": "../../personalization-module/personalizationpromotionssmartedit/apps/personalizationpromotionssmartedit",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalization-module/personalizationpromotionssmartedit/apps/personalizationpromotionssmartedit",
+      "dependencies": [
+        "smarteditcommons",
+        "smartedit"
+      ],
+      "type": "inner",
+      "angularApp": "personalizationpromotionssmartedit"
+    },
+    {
+      "name": "personalizationpromotionssmarteditcommons",
+      "version": "0.0.1",
+      "projectFolder": "../../personalization-module/personalizationpromotionssmartedit/apps/personalizationpromotionssmarteditcommons",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalization-module/personalizationpromotionssmartedit/apps/personalizationpromotionssmarteditcommons",
+      "dependencies": [
+        "smarteditcommons",
+        "personalizationcommons"
+      ]
+    },
+    {
+      "name": "personalizationpromotionssmarteditcontainer",
+      "version": "0.0.1",
+      "projectFolder": "../../personalization-module/personalizationpromotionssmartedit/apps/personalizationpromotionssmarteditContainer",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/personalization-module/personalizationpromotionssmartedit/apps/personalizationpromotionssmarteditContainer",
+      "dependencies": [
+        "smarteditcommons",
+        "smarteditcontainer",
+        "personalizationcommons",
+        "personalizationpromotionssmarteditcommons"
+      ],
+      "type": "container",
+      "angularApp": "personalizationpromotionssmarteditContainer"
+    },
+    {
+      "name": "cmscommons",
+      "version": "0.0.1",
+      "projectFolder": "../cmssmartedit/apps/cms-commons",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/cmssmartedit/apps/cms-commons",
+      "dependencies": [
+        "smarteditcommons"
+      ]
+    },
+    {
+      "name": "cmssmartedit",
+      "version": "0.0.1",
+      "projectFolder": "../cmssmartedit/apps/cms-smartedit",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/cmssmartedit/apps/cms-smartedit",
+      "dependencies": [
+        "smarteditcommons",
+        "cmscommons",
+        "smartedit"
+      ],
+      "type": "inner",
+      "angularApp": "cmssmartedit"
+    },
+    {
+      "name": "cmssmarteditcontainer",
+      "version": "0.0.1",
+      "projectFolder": "../cmssmartedit/apps/cms-smartedit-container",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/cmssmartedit/apps/cms-smartedit-container",
+      "dependencies": [
+        "smarteditcommons",
+        "smarteditcontainer",
+        "cmscommons"
+      ],
+      "type": "container",
+      "angularApp": "cmssmarteditContainer"
+    },
+    {
+      "name": "smarteditmaster",
+      "version": "0.0.1",
+      "projectFolder": "../smartedit/apps/smartedit-master",
+      "appDir": "/var/lib/jenkins/workspace/generic-build-product/sources/modules/smartedit-module/smartedit/apps/smartedit-master",
+      "dependencies": [
+        "personalizationcommons",
+        "personalizationsmartedit",
+        "personalizationsmarteditcontainer",
+        "merchandisingsmartedit",
+        "merchandisingsmarteditcontainer",
+        "merchandisingsmarteditcommons",
+        "@smart/utils",
+        "smartedit",
+        "smarteditbootstrap",
+        "smarteditcommons",
+        "smarteditcontainer",
+        "smarteditloader",
+        "webappinjector",
+        "personalizationsearchsmartedit",
+        "personalizationsearchsmarteditcontainer",
+        "personalizationpromotionssmartedit",
+        "personalizationpromotionssmarteditcontainer",
+        "personalizationpromotionssmarteditcommons",
+        "cmscommons",
+        "cmssmartedit",
+        "cmssmarteditcontainer"
+      ],
+      "type": "master"
+    }
+  ]
+}

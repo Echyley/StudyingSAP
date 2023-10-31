@@ -1,0 +1,57 @@
+<div class="se-media-format" [ngClass]="mediaFormat">
+    <div *ngIf="mediaLabel" class="se-media-format__screen-type" [translate]="mediaFormatI18nKey"></div>
+
+    <!-- When the image is already uploaded -->
+    <se-media-format-uploaded
+        *ngIf="isMediaPreviewEnabled()"
+        [media]="media"
+        [replaceLabelI18nKey]="mediaSelectorI18nKeys.REPLACE"
+        [acceptedFileTypes]="acceptedFileTypes"
+        [isFieldDisabled]="isFieldDisabled"
+        (onFileSelect)="onFileSelectorFileSelect($event)"
+        (onDelete)="onRemoveButtonClick()"
+    ></se-media-format-uploaded>
+
+    <!-- A placeholder, when there is no image for a given screen type. -->
+    <div class="se-media--absent" *ngIf="isMediaAbsent()">
+        <!-- When the file selector is enabled -->
+        <se-media-file-selector
+            *ngIf="isEditable"
+            [selectionMode]="'upload'"
+            [labelI18nKey]="mediaSelectorI18nKeys.UPLOAD"
+            [acceptedFileTypes]="acceptedFileTypes"
+            [customClass]="isFieldDisabled ? 'file-selector-disabled' : ''"
+            [disabled]="isFieldDisabled"
+            (onFileSelect)="onFileSelectorFileSelect($event)"
+        ></se-media-file-selector>
+        <!-- When the file selector is disabled -->
+        <se-media-file-selector
+            *ngIf="!isEditable"
+            [selectionMode]="'upload'"
+            [labelI18nKey]="mediaSelectorI18nKeys.UPLOAD"
+            [acceptedFileTypes]="acceptedFileTypes"
+            [customClass]="!isEditable ? 'file-selector-disabled' : ''"
+            [disabled]="!isEditable"
+            (onFileSelect)="onFileSelectorFileSelect($event)"
+        ></se-media-file-selector>
+    </div>
+
+    <!-- When the Image has been selected but is not yet uploaded -->
+    <div *ngIf="isUnderEdit" class="se-media--edit-wrapper">
+        <se-media-file-selector
+            class="se-media--edit"
+            [labelI18nKey]="mediaSelectorI18nKeys.UPLOAD"
+            [acceptedFileTypes]="acceptedFileTypes"
+            [customClass]="'file-selector-disabled'"
+            [disabled]="true"
+            (onFileSelect)="onFileSelectorFileSelect($event)"
+        ></se-media-file-selector>
+        <span class="se-media-preview--edit" [translate]="mediaSelectorI18nKeys.UNDER_EDIT"></span>
+    </div>
+
+    <ng-container *ngIf="!isUnderEdit && hasCurrentLangError()">
+        <div class="error-input se-media-format__error" *ngFor="let error of getErrors()">
+            <span>{{ error }}</span>
+        </div>
+    </ng-container>
+</div>

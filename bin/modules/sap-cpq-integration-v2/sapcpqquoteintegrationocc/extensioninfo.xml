@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+            	
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Sapcpqquoteintegrationocc" description="sapcpqquoteintegrationocc extension" jaloLogicFree="true" managername="SapcpqquoteintegrationoccManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapcpqquoteintegrationocc">
+                        		
+        
+        
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                        		
+        
+        
+        <requires-extension name="commercewebservices"/>
+                
+                		
+        
+        
+        <coremodule generated="true" manager="com.sap.hybris.sapcpqquoteintegrationocc.jalo.SapcpqquoteintegrationoccManager" packageroot="com.sap.hybris.sapcpqquoteintegrationocc"/>
+                        		
+        
+        	
+    
+    
+    </extension>
+            
+
+
+</extensioninfo>

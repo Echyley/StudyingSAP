@@ -1,0 +1,1 @@
+export { ResultsHeaderComponent } from './ResultsHeaderComponent';

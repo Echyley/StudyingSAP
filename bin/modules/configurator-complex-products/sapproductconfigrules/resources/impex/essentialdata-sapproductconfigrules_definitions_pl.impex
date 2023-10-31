@@ -1,0 +1,55 @@
+$lang=pl
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Produkt konfigurowalny
+;productconfig_customer_category;Klient
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Produkt z określoną konfiguracją w koszyku zakupów;Koszyk zawiera produkt {produkt}. Cecha {cstic} {value_operator} wartość {cstic_value}.
+;y_configurable_product;Obecnie konfigurowany produkt;Obecnie konfigurowany produkt to {product}. Cecha {cstic} {value_operator} wartość {cstic_value}.
+;y_configurable_product_customer;Klienci;Klient {customers_operator} z następującej listy\: {customers}
+;y_configurable_product_customer_group;Grupy klientów;Klient {customer_groups_operator} z następujących grup\: {customer_groups}
+;y_configurable_product_customer_support_mode;Wsparcie klienta;Sesja ASM jest aktywna\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Produkt;Produkt w koszyku zakupów;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Cecha;Nazwa cechy
+;y_configurable_product_in_cart;value_operator;Operator;Operator pomiędzy cechą i wartością
+;y_configurable_product_in_cart;cstic_value;Wartość;Nazwa wartości cechy;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Produkt;Obecnie konfigurowany produkt
+;y_configurable_product;cstic;Cecha;Nazwa cechy
+;y_configurable_product;value_operator;Operator;Operator pomiędzy cechą i wartością
+;y_configurable_product;cstic_value;Wartość;Nazwa wartości cechy
+;y_configurable_product_customer;customers_operator;Operator wyboru klienta;Definiuje, czy klient jest uwzględniony na liście
+;y_configurable_product_customer;customers;Klienci;Lista klientów
+;y_configurable_product_customer_group;customer_groups_operator;Operator wyboru grupy klientów;Definiuje, czy klient jest uwzględniony w DOWOLNEJ grupie klientów czy we WSZYSTKICH
+;y_configurable_product_customer_group;customer_groups;Grupy klientów;Lista grup klientów
+;y_configurable_product_customer_support_mode;value;Sesja ASM aktywna;Członek zespołu wsparcia klienta jest zalogowany w imieniu klienta
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Produkt konfigurowalny
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Ustaw wartość cechy dla produktu konfigurowalnego;Ustaw wartość {cstic_value} dla cechy {cstic}
+;y_configurable_product_remove_assignable_value;Ukryj wartość możliwą do przypisania dla produktu konfigurowalnego;Ukryj wartość {cstic_value} dla cechy {cstic}
+;y_configurable_product_hide_cstic;Ukryj cechę dla produktu konfigurowalnego;Ukryj cechę {cstic}
+;y_configurable_product_display_cstic_readonly;Wyświetl cechę dla produktu konfigurowalnego jako wartość tylko do odczytu;Wyświetl cechę {cstic} jako tylko do odczytu
+;y_configurable_product_display_message;Wyświetl komunikat;Wyświetl komunikat
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Cecha;Cecha, dla której jest ustawiona wartość
+;y_configurable_product_set_cstic_value;cstic_value;Wartość;Wartość cechy do ustawienia
+;y_configurable_product_remove_assignable_value;cstic;Cecha;Cecha, dla której wartość możliwa do przypisania ma zostać usunięta
+;y_configurable_product_remove_assignable_value;cstic_value;Wartość;Wartość do usunięcia z listy wartości możliwych do przypisania
+;y_configurable_product_hide_cstic;cstic;Cecha;Cecha do ukrycia
+;y_configurable_product_display_cstic_readonly;cstic;Cecha;Cecha do wyświetlenia jako tylko do odczytu
+;y_configurable_product_display_message;message;Komunikat;Tekst komunikatu
+;y_configurable_product_display_message;message_severity;Waga;Waga komunikatu
+;y_configurable_product_display_message;cstic;Cecha;Cecha, dla której pojawia się ten komunikat
+;y_configurable_product_display_message;cstic_value;Wartość cechy;Wartość cechy, dla której pojawia się ten komunikat
+
+#% endif:

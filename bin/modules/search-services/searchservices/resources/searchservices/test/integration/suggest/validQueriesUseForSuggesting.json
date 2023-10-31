@@ -1,0 +1,568 @@
+[
+	{
+		"testId": 1,
+		"description": "query without suggest field, no suggest hit returned",
+		"data": {
+			"query": "Re"
+		},
+		"expectedData": {
+			"size": 0,
+			"suggestHits": []
+		}
+	},
+	{
+		"testId": 2,
+		"description": "query with STRING suggest field 1, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "field_string",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "Re"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "red m"
+				}
+			]
+		}
+	},
+	{
+		"testId": 3,
+		"description": "query with multi-valued STRING suggest field, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "field_string_mv",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "Re"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "red shirt"
+				}
+			]
+		}
+	},
+	{
+		"testId": 4,
+		"description": "query with TEXT suggest field, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "field_text",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "Re"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "red shirt size m"
+				}
+			]
+		}
+	},
+	{
+		"testId": 5,
+		"description": "query with multi-valued TEXT suggest field, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "field_text_mv",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "Re"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "red shirt"
+				}
+			]
+		}
+	},
+	{
+		"testId": 6,
+		"description": "query with suggest field, ignore case 1, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "color",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "GreE"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "green"
+				}
+			]
+		}
+	},
+	{
+		"testId": 7,
+		"description": "query with suggest field, ignore case 2, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "color",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "gREe"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "green"
+				}
+			]
+		}
+	},
+	{
+		"testId": 8,
+		"description": "query with suggest field, language in request, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "color",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "gree"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "green"
+				}
+			]
+		}
+	},
+	{
+		"testId": 9,
+		"description": "query with localized suggest field, no language in request, no suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"data": {
+			"query": "shir"
+		},
+		"expectedData": {
+			"size": 0,
+			"suggestHits": []
+		}
+	},
+	{
+		"testId": 10,
+		"description": "query with localized suggest field, 'en' language in request, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "shir"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "shirt red m"
+				}
+			]
+		}
+	},
+	{
+		"testId": 11,
+		"description": "query with localized suggest field, 'de' language in request, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"languages": [
+			"de"
+		],
+		"data": {
+			"query": "Hem"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "hemd rot m"
+				}
+			]
+		}
+	},
+	{
+		"testId": 12,
+		"description": "query with localized multi-valued suggest field, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "Jacket"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "jackets"
+				}
+			]
+		}
+	},
+	{
+		"testId": 13,
+		"description": "query with multiple suggest fields 1, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "keywords",
+					"data": {
+						"useForSuggesting": true
+					}
+				},
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "Gree"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "green"
+				}
+			]
+		}
+	},
+	{
+		"testId": 14,
+		"description": "query with multiple suggest fields 2, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "keywords",
+					"data": {
+						"useForSuggesting": true
+					}
+				},
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "Appare"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "apparel"
+				}
+			]
+		}
+	},
+	{
+		"testId": 15,
+		"description": "query after document update, not updated field values are preserved, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				},
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"documentSetup": {
+			"updates": [
+				{
+					"documentId": "doc1",
+					"data": {
+						"fields": {
+							"name": {
+								"en": "updated value"
+							},
+							"categoryNames": {
+								"en": [
+									"Apparel",
+									"Jackets"
+								]
+							}
+						}
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "Appare"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "apparel"
+				}
+			]
+		}
+	},
+	{
+		"testId": 16,
+		"description": "query after document update, new field values are visible, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				},
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"documentSetup": {
+			"updates": [
+				{
+					"documentId": "doc1",
+					"data": {
+						"fields": {
+							"name": {
+								"en": "updated value"
+							},
+							"categoryNames": {
+								"en": [
+									"Apparel",
+									"Jackets"
+								]
+							}
+						}
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "update"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "updated value"
+				}
+			]
+		}
+	},
+	{
+		"testId": 17,
+		"description": "query after document patch, not updated field values are preserved, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				},
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"documentSetup": {
+			"patches": [
+				{
+					"documentId": "doc1",
+					"data": {
+						"fields": {
+							"name": {
+								"en": "updated value"
+							}
+						}
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "Appare"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "apparel"
+				}
+			]
+		}
+	},
+	{
+		"testId": 18,
+		"description": "query after document patch, new field values are visible, suggest hit returned",
+		"fieldSetup": {
+			"patches": [
+				{
+					"fieldId": "name",
+					"data": {
+						"useForSuggesting": true
+					}
+				},
+				{
+					"fieldId": "categoryNames",
+					"data": {
+						"useForSuggesting": true
+					}
+				}
+			]
+		},
+		"documentSetup": {
+			"patches": [
+				{
+					"documentId": "doc1",
+					"data": {
+						"fields": {
+							"name": {
+								"en": "updated value"
+							}
+						}
+					}
+				}
+			]
+		},
+		"languages": [
+			"en"
+		],
+		"data": {
+			"query": "update"
+		},
+		"expectedData": {
+			"size": 1,
+			"suggestHits": [
+				{
+					"query": "updated value"
+				}
+			]
+		}
+	}
+]

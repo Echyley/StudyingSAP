@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean
+	class="com.sap.hybris.sapentitlementsocc.dto.EntitlementInstanceWsDTO">
+		<description>Representation of an Entitlement Instance</description>
+		<hints>
+			<hint name="wsRelated"/>
+			<hint name="alias">EntitlementInstance</hint>
+		</hints>
+		<property name="number" type="Integer">
+			<description>Number associated with an Entitlement Instance</description>
+            <hints>
+                <hint name="example">3081</hint>
+            </hints>
+		</property>
+		<property name="id" type="String" >
+			<description>Guid for Entitlement Instance</description>
+            <hints>
+                <hint name="example">5f04326a558f4a1991ee7c73986dfdb7</hint>
+            </hints>
+		</property>
+		<property name="productCode" type="String">
+			<description>Product ID</description>
+            <hints>
+                <hint name="example">E2E16_TG005</hint>
+            </hints>
+		</property>
+		<property name="name" type="String">
+			<description>Entitlement Instance Model Name</description>
+            <hints>
+                <hint name="example">E2E16 Support</hint>
+            </hints>
+		</property>
+		<property name="status" type="String">
+			<description>Status Name</description>
+            <hints>
+                <hint name="example">Allocated</hint>
+            </hints>
+		</property>
+		<property name="quantity" type="Integer">
+			<description>Quantity of an Entitlement Instance</description>
+			<hints>
+				<hint name="example">3</hint>
+			</hints>
+		</property>
+		<property name="validFrom" type="java.util.Date">
+			<description>Valid from date of an Entitlement Instance</description>
+			<hints>
+				<hint name="example">2020-11-31T09:00:00+0000</hint>
+			</hints>
+		</property>
+		<property name="validTo" type="java.util.Date">
+			<description>Valid to date of an Entitlement Instance</description>
+			<hints>
+				<hint name="example">2020-11-31T09:00:00+0000</hint>
+			</hints>
+		</property>
+		<property name="orderNumber" type="String">
+			<description>Order Reference Number</description>
+			<hints>
+				<hint name="example">S4HCLNT500</hint>
+			</hints>
+		</property>
+		<property name="type" type="String">
+			<description>Entitlement Instance type name</description>
+			<hints>
+				<hint name="example">Support</hint>
+			</hints>
+		</property>
+		<property name="right" type="String">
+			<description>The Right the entitlement instance gives the users</description>
+			<hints>
+				<hint name="example">To Access</hint>
+			</hints>
+		</property>
+		<property name="region" type="String">
+			<description>The region of the Entitlement Instance</description>
+			<hints>
+				<hint name="example">Europe</hint>
+			</hints>
+		</property>
+	</bean>
+	
+	<bean
+	class="com.sap.hybris.sapentitlementsocc.dto.EntitlementInstanceListWsDTO">
+		<description></description>
+		<hints>
+			<hint name="wsRelated"/>
+			<hint name="alias">EntitlementInstanceList</hint>
+		</hints>
+		<property name="entitlements" type="java.util.List&lt;com.sap.hybris.sapentitlementsocc.dto.EntitlementInstanceWsDTO>">
+			<description>Entitlement Instance</description>
+		</property>
+		<property name="sorts"
+                  type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.search.pagedata.SortWsDTO>">
+	        <description>Sorting method applied to the return results</description>
+        </property>
+        <property name="pagination"
+                  type="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PaginationWsDTO">
+        	<description>The number of results returned per page</description>
+        </property>
+	</bean>
+	
+</beans>

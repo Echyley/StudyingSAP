@@ -1,0 +1,91 @@
+.se-tabset {
+    margin-bottom: se-space('s') !important;
+    .se-tabset__select {
+        .fd-popover__popper {
+            width: 200px !important;
+        }
+
+        li {
+            margin-bottom: -1px;
+        }
+
+        li > a {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            line-height: 1.42857143;
+            border-radius: 3px 3px 0 0;
+        }
+
+        li.active > a {
+            color: var(--fdTabs_Selected_Color);
+            cursor: default;
+            border: 1px solid var(--fdTabs_Selected_Color);
+            border-bottom-color: transparent;
+        }
+    }
+}
+
+.sm-tab-error {
+    color: var(--sapErrorColor);
+}
+
+.se-tabset .se-tabset__link {
+    padding: 0 0 se-space('xs');
+    margin-right: 30px;
+    cursor: pointer;
+    text-transform: capitalize;
+    color: var(--sapTextColor);
+    text-decoration: none;
+    border: none !important;
+}
+.se-tabset__tab.active .se-tabset__link,
+.se-tabset__tab.sm-tab-error .se-tabset__link {
+    color: var(--fdTabs_Selected_Color);
+    &::after {
+        @include se-active-link;
+        content: '';
+        position: absolute;
+        top: 90%;
+        height: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+.se-tabset__tab.sm-tab-error .se-tabset__link {
+    color: var(--sapErrorColor);
+    &::after {
+        border-bottom-color: var(--sapErrorBorderColor);
+    }
+}
+
+.multi-tabs-editor .se-tabset.nav-tabs {
+    padding-bottom: 2px;
+    margin-bottom: se-space('base');
+
+    .se-tabset__link {
+        display: flex;
+        justify-content: center;
+        padding: 0 4px;
+        margin-right: 0;
+        min-width: 30px;
+        box-sizing: border-box;
+    }
+    .se-tabset__tab:last-child .se-tabset__link {
+        margin-right: 0;
+    }
+}
+
+nav {
+    &.fd-tabs {
+        .se-tabset__select {
+            margin-bottom: se-space('s');
+            li {
+                & > a {
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+<div class="toolbar-action" *ngIf="isReady" [attr.data-item-key]="toolbarItem.key">
+    <!--    When button is enabled, se-tooltip controller is not needed. -->
+    <button
+        *ngIf="!isDeletePageDisabled"
+        type="button"
+        se-tooltip-trigger
+        class="btn fd-button toolbar-action--button"
+        title="{{ 'se.cms.actionitem.page.trash' | translate }}"
+        [ngClass]="{ 'toolbar-action__disabled' : isDeletePageDisabled }"
+        (click)="deletePage()"
+    >
+        <span class="sap-icon--delete se-toolbar-menu-ddlb--button__icon"></span>
+        <div class="toolbar-action-button__txt" translate="se.cms.actionitem.page.trash"></div>
+    </button>
+
+    <!--    when there is a button needing for tooltip, we need nest the button in se-tooltip-->
+    <se-tooltip
+        *ngIf="isDeletePageDisabled"
+        [isChevronVisible]="true"
+        [placement]="'bottom'"
+        [triggers]="['mouseenter', 'mouseleave']"
+    >
+        <button
+            fd-button
+            type="button"
+            se-tooltip-trigger
+            class="btn toolbar-action--button"
+            [disabled]="isDeletePageDisabled"
+            [ngClass]="{ 'toolbar-action__disabled' : isDeletePageDisabled }"
+            (click)="deletePage()"
+        >
+            <span class="sap-icon--delete se-toolbar-menu-ddlb--button__icon"></span>
+            <div class="toolbar-action-button__txt" translate="se.cms.actionitem.page.trash"></div>
+        </button>
+        <div se-tooltip-body>
+            <span [translate]="tooltipMessage"></span>
+        </div>
+    </se-tooltip>
+</div>

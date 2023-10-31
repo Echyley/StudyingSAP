@@ -1,0 +1,29 @@
+$lang=cs
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;Konfigurovatelná akce na produkt
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;Procentuální sleva z ceny možnosti se zprávou o akci;Uplatnit slevu {discount_value,number,percent*1} na možnost {cstic} / {cstic_value}
+;y_configurable_product_display_promo_message;Zobrazit zprávu o akci (akce se uplatní);Zobrazit zprávu o akci
+;y_configurable_product_display_promo_opportunity_message;Zobrazit zprávu o akční příležitosti (akce se zatím neuplatní);Zobrazit zprávu o akční příležitosti
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;Charakteristika;Charakteristika, na kterou se uplatní sleva a za kterou se zobrazí tato zpráva.
+;y_configurable_product_percentage_discount_for_option;cstic_value;Hodnota charakteristiky;Hodnota charakteristiky, na kterou se uplatní sleva a za kterou se zobrazí tato zpráva.
+;y_configurable_product_percentage_discount_for_option;discount_value;Hodnota procentuální slevy;Procentuální sleva, která se uplatní na cenu možnosti. Zadejte hodnotu bez znaku procenta.
+;y_configurable_product_percentage_discount_for_option;message;Zpráva;Text zprávy
+;y_configurable_product_percentage_discount_for_option;extended_message;Rozšířená zpráva;Text rozšířené zprávy
+;y_configurable_product_display_promo_message;cstic;Charakteristika;Charakteristika, pro kterou se tato zpráva zobrazí
+;y_configurable_product_display_promo_message;cstic_value;Hodnota charakteristiky;Hodnota charakteristiky, pro kterou se tato zpráva zobrazí
+;y_configurable_product_display_promo_message;message;Zpráva;Text zprávy
+;y_configurable_product_display_promo_message;extended_message;Rozšířená zpráva;Text rozšířené zprávy
+;y_configurable_product_display_promo_opportunity_message;cstic;Charakteristika;Charakteristika, pro kterou se tato zpráva zobrazí
+;y_configurable_product_display_promo_opportunity_message;cstic_value;Hodnota charakteristiky;Hodnota charakteristiky, pro kterou se tato zpráva zobrazí
+;y_configurable_product_display_promo_opportunity_message;message;Zpráva;Text zprávy
+;y_configurable_product_display_promo_opportunity_message;extended_message;Rozšířená zpráva;Text rozšířené zprávy
+
+#% endif:

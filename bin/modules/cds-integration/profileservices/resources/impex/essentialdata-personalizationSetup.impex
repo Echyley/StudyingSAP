@@ -1,0 +1,146 @@
+INSERT_UPDATE UserGroup; UID[unique = true]    ; description                     ; name
+                       ; personalizationSetupGroup ; Personalization Setup Group ; Personalization Setup Group
+
+$START_USERRIGHTS; ; ; ; ; ; ; ; ;
+Type      ; UID                       ; MemberOfGroups ; Target                                      ; read ; change ; create ; remove ; change_perm
+UserGroup ; personalizationSetupGroup ;                ;                                             ;      ;        ;        ;        ;
+          ;                           ;                ; BaseSite                                    ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; Catalog                                     ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; CatalogVersion                              ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; Currency                                    ; +    ; +      ; -      ; -      ; - ;
+          ;                           ;                ; Language                                    ; +    ; +      ; -      ; -      ; - ;
+          ;                           ;                ; SolrIndexedType                             ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; AbstractCMSComponent                        ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; AbstractRestriction                         ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; CMSFlexComponent                            ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; CMSParagraphComponent                       ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; CMSSite                                     ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; ConsentTemplate                             ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; ConsumedDestination                         ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; ConsumedOAuthCredential                     ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; ContentSlot                                 ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; DestinationChannel                          ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; DestinationTarget                           ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; Endpoint                                    ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; MerchProductDirectoryConfig                 ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; MerchProperty                               ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; SmarteditConfiguration                      ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; SolrIndexedProperty                         ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; AuthenticationType                          ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; AttributeDescriptor                         ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; ComposedType                                ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; InboundChannelConfiguration                 ; +    ; -      ; +      ; -      ; - ;
+          ;                           ;                ; IntegrationObject                           ; +    ; -      ; +      ; -      ; - ;
+          ;                           ;                ; IntegrationObjectItem                       ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; IntegrationObjectItemAttribute              ; +    ; -      ; +      ; -      ; - ;
+          ;                           ;                ; IntegrationObjectItemVirtualAttribute       ; +    ; -      ; +      ; -      ; - ;
+          ;                           ;                ; IntegrationObjectVirtualAttributeDescriptor ; +    ; -      ; +      ; -      ; - ;
+          ;                           ;                ; IntegrationType                             ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; Script                                      ; +    ; +      ; +      ; -      ; - ;
+          ;                           ;                ; ScriptType                                  ; +    ; -      ; -      ; -      ; - ;
+          ;                           ;                ; Type                                        ; +    ; -      ; -      ; -      ; - ;
+$END_USERRIGHTS; ; ; ; ; ; ; ; ;
+
+# !!! we use an INSERT instead of an INSERT_UPDATE here to make sure that any further executions of this impex do not reset the client !!!
+INSERT IntegrationClientCredentialsDetails; clientId[unique = true]; resourceIds; authorities                ; clientSecret; registeredRedirectUri                           ; user(uid)        ; disabled ;
+                                                 ; personalizationSetupClient     ; hybris     ; ROLE_INTEGRATIONADMINGROUP ;; https://localhost:9002/oauth2_implicit_callback ; personalizationSetupEmployee ; true ;
+
+INSERT_UPDATE Employee; name             ; UID[unique = true]; groups(uid)                             ; password; loginDisabled;
+                      ; personalizationSetupEmployee ; personalizationSetupEmployee  ; personalizationSetupGroup ;; true       ; 
+
+
+INSERT_UPDATE IntegrationObject; code[unique = true]; integrationType(code) 
+; personalizationSetupScriptService; INBOUND 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]; type(code); root[default = false]; itemTypeMatch(code) 
+; personalizationSetupScriptService ; Script        ; Script        ; true  ;   ;  
+; personalizationSetupScriptService ; ScriptType    ; ScriptType    ;   ;   ;  
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]; autoCreate[default = false] 
+; personalizationSetupScriptService:Script      ; code          ; Script:code           ;                           ; true  ;  
+; personalizationSetupScriptService:Script      ; content       ; Script:content        ;                           ;   ;  
+; personalizationSetupScriptService:Script      ; description   ; Script:description    ;                           ;   ;  
+; personalizationSetupScriptService:Script      ; scriptType    ; Script:scriptType     ; personalizationSetupScriptService:ScriptType  ;   ;  
+; personalizationSetupScriptService:Script      ; autodisabling ; Script:autodisabling  ;                           ;   ;  
+; personalizationSetupScriptService:Script      ; disabled      ; Script:disabled       ;                           ;   ;  
+; personalizationSetupScriptService:ScriptType  ; code          ; ScriptType:code       ;                           ; true  ;  
+
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code);
+                                         ; personalizationSetupScriptService     ; OAUTH                   ;
+
+
+INSERT_UPDATE IntegrationObject; code[unique = true]; integrationType(code) 
+; personalizationSetupIntegrationService; INBOUND 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]; type(code); root[default = false]; itemTypeMatch(code) 
+; personalizationSetupIntegrationService    ; InboundChannelConfiguration                   ; InboundChannelConfiguration                   ; true  ;   ;  
+; personalizationSetupIntegrationService    ; AuthenticationType                            ; AuthenticationType                            ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationObject                             ; IntegrationObject                             ;   ;   ;  
+; personalizationSetupIntegrationService    ; ItemTypeMatchEnum                             ; ItemTypeMatchEnum                             ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationObjectItem                         ; IntegrationObjectItem                         ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationObjectItemAttribute                ; IntegrationObjectItemAttribute                ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationObjectItemClassificationAttribute  ; IntegrationObjectItemClassificationAttribute  ;   ;   ;  
+; personalizationSetupIntegrationService    ; ClassificationSystem                          ; ClassificationSystem                          ;   ;   ;  
+; personalizationSetupIntegrationService    ; ClassificationSystemVersion                   ; ClassificationSystemVersion                   ;   ;   ;  
+; personalizationSetupIntegrationService    ; ClassAttributeAssignment                      ; ClassAttributeAssignment                      ;   ;   ;  
+; personalizationSetupIntegrationService    ; ClassificationClass                           ; ClassificationClass                           ;   ;   ;  
+; personalizationSetupIntegrationService    ; ClassificationAttribute                       ; ClassificationAttribute                       ;   ;   ;  
+; personalizationSetupIntegrationService    ; AttributeDescriptor                           ; AttributeDescriptor                           ;   ;   ;  
+; personalizationSetupIntegrationService    ; ComposedType                                  ; ComposedType                                  ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationObjectVirtualAttributeDescriptor   ; IntegrationObjectVirtualAttributeDescriptor   ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationObjectItemVirtualAttribute         ; IntegrationObjectItemVirtualAttribute         ;   ;   ;  
+; personalizationSetupIntegrationService    ; Type                                          ; Type                                          ;   ;   ;  
+; personalizationSetupIntegrationService    ; IntegrationType                               ; IntegrationType                               ;   ;   ;  
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]; autoCreate[default = false] 
+; personalizationSetupIntegrationService:InboundChannelConfiguration                    ; integrationObject             ; InboundChannelConfiguration:integrationObject                             ; personalizationSetupIntegrationService:IntegrationObject                              ; true  ; true 
+; personalizationSetupIntegrationService:InboundChannelConfiguration                    ; authenticationType            ; InboundChannelConfiguration:authenticationType                            ; personalizationSetupIntegrationService:AuthenticationType                             ;   ;  
+; personalizationSetupIntegrationService:AuthenticationType                             ; code                          ; AuthenticationType:code                                                   ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObject                              ; code                          ; IntegrationObject:code                                                    ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObject                              ; items                         ; IntegrationObject:items                                                   ; personalizationSetupIntegrationService:IntegrationObjectItem                          ;   ;  
+; personalizationSetupIntegrationService:IntegrationObject                              ; integrationType               ; IntegrationObject:integrationType                                         ; personalizationSetupIntegrationService:IntegrationType                                ;   ;  
+; personalizationSetupIntegrationService:ItemTypeMatchEnum                              ; code                          ; ItemTypeMatchEnum:code                                                    ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; code                          ; IntegrationObjectItem:code                                                ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; type                          ; IntegrationObjectItem:type                                                ; personalizationSetupIntegrationService:ComposedType                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; itemTypeMatch                 ; IntegrationObjectItem:itemTypeMatch                                       ; personalizationSetupIntegrationService:ItemTypeMatchEnum                              ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; integrationObject             ; IntegrationObjectItem:integrationObject                                   ; personalizationSetupIntegrationService:IntegrationObject                              ; true  ; true 
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; root                          ; IntegrationObjectItem:root                                                ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; attributes                    ; IntegrationObjectItem:attributes                                          ; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; classificationAttributes      ; IntegrationObjectItem:classificationAttributes                            ; personalizationSetupIntegrationService:IntegrationObjectItemClassificationAttribute   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItem                          ; virtualAttributes             ; IntegrationObjectItem:virtualAttributes                                   ; personalizationSetupIntegrationService:IntegrationObjectItemVirtualAttribute          ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ; attributeName                 ; IntegrationObjectItemAttribute:attributeName                              ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ; returnIntegrationObjectItem   ; IntegrationObjectItemAttribute:returnIntegrationObjectItem                ; personalizationSetupIntegrationService:IntegrationObjectItem                          ;   ; true 
+; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ; attributeDescriptor           ; IntegrationObjectItemAttribute:attributeDescriptor                        ; personalizationSetupIntegrationService:AttributeDescriptor                            ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ; unique                        ; IntegrationObjectItemAttribute:unique                                     ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ; autoCreate                    ; IntegrationObjectItemAttribute:autoCreate                                 ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemAttribute                 ; integrationObjectItem         ; IntegrationObjectItemAttribute:integrationObjectItem                      ; personalizationSetupIntegrationService:IntegrationObjectItem                          ; true  ; true 
+; personalizationSetupIntegrationService:IntegrationObjectItemClassificationAttribute   ; attributeName                 ; IntegrationObjectItemClassificationAttribute:attributeName                ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemClassificationAttribute   ; classAttributeAssignment      ; IntegrationObjectItemClassificationAttribute:classAttributeAssignment     ; personalizationSetupIntegrationService:ClassAttributeAssignment                       ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemClassificationAttribute   ; integrationObjectItem         ; IntegrationObjectItemClassificationAttribute:integrationObjectItem        ; personalizationSetupIntegrationService:IntegrationObjectItem                          ; true  ; true 
+; personalizationSetupIntegrationService:IntegrationObjectItemClassificationAttribute   ; returnIntegrationObjectItem   ; IntegrationObjectItemClassificationAttribute:returnIntegrationObjectItem  ; personalizationSetupIntegrationService:IntegrationObjectItem                          ;   ; true 
+; personalizationSetupIntegrationService:ClassificationSystem                           ; id                            ; ClassificationSystem:id                                                   ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:ClassificationSystemVersion                    ; catalog                       ; ClassificationSystemVersion:catalog                                       ; personalizationSetupIntegrationService:ClassificationSystem                           ; true  ;  
+; personalizationSetupIntegrationService:ClassificationSystemVersion                    ; version                       ; ClassificationSystemVersion:version                                       ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:ClassAttributeAssignment                       ; classificationClass           ; ClassAttributeAssignment:classificationClass                              ; personalizationSetupIntegrationService:ClassificationClass                            ; true  ;  
+; personalizationSetupIntegrationService:ClassAttributeAssignment                       ; classificationAttribute       ; ClassAttributeAssignment:classificationAttribute                          ; personalizationSetupIntegrationService:ClassificationAttribute                        ; true  ;  
+; personalizationSetupIntegrationService:ClassificationClass                            ; code                          ; ClassificationClass:code                                                  ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:ClassificationClass                            ; catalogVersion                ; ClassificationClass:catalogVersion                                        ; personalizationSetupIntegrationService:ClassificationSystemVersion                    ; true  ;  
+; personalizationSetupIntegrationService:ClassificationAttribute                        ; code                          ; ClassificationAttribute:code                                              ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:ClassificationAttribute                        ; systemVersion                 ; ClassificationAttribute:systemVersion                                     ; personalizationSetupIntegrationService:ClassificationSystemVersion                    ; true  ;  
+; personalizationSetupIntegrationService:AttributeDescriptor                            ; qualifier                     ; AttributeDescriptor:qualifier                                             ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:AttributeDescriptor                            ; enclosingType                 ; AttributeDescriptor:enclosingType                                         ; personalizationSetupIntegrationService:ComposedType                                   ; true  ;  
+; personalizationSetupIntegrationService:ComposedType                                   ; code                          ; ComposedType:code                                                         ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectVirtualAttributeDescriptor    ; code                          ; IntegrationObjectVirtualAttributeDescriptor:code                          ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectVirtualAttributeDescriptor    ; logicLocation                 ; IntegrationObjectVirtualAttributeDescriptor:logicLocation                 ;                                                                   ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectVirtualAttributeDescriptor    ; type                          ; IntegrationObjectVirtualAttributeDescriptor:type                          ; personalizationSetupIntegrationService:Type                                           ;   ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemVirtualAttribute          ; integrationObjectItem         ; IntegrationObjectItemVirtualAttribute:integrationObjectItem               ; personalizationSetupIntegrationService:IntegrationObjectItem                          ; true  ; true 
+; personalizationSetupIntegrationService:IntegrationObjectItemVirtualAttribute          ; attributeName                 ; IntegrationObjectItemVirtualAttribute:attributeName                       ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationObjectItemVirtualAttribute          ; retrievalDescriptor           ; IntegrationObjectItemVirtualAttribute:retrievalDescriptor                 ; personalizationSetupIntegrationService:IntegrationObjectVirtualAttributeDescriptor    ;   ; true 
+; personalizationSetupIntegrationService:Type                                           ; code                          ; Type:code                                                                 ;                                                                   ; true  ;  
+; personalizationSetupIntegrationService:IntegrationType                                ; code                          ; IntegrationType:code                                                      ;                                                                   ;   ;  
+
+
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code);
+                                         ; personalizationSetupIntegrationService; OAUTH                   ;

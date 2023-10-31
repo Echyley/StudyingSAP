@@ -1,0 +1,49 @@
+.yw-modal-itemTypeMatchIOIModal {
+    width: 600px;
+    min-height: 440px;
+}
+
+.yw-modal-itemTypeMatchIOIModal .integrationbackoffice-itemTypeMatchLayout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* itemTypeMatch area gets weight 4*/
+.yw-modal-itemTypeMatchIOIModal .z-vlayout .z-vlayout-inner:nth-child(1) {
+    flex: 4 !important;
+}
+/* save btn area gets weight 1*/
+.yw-modal-itemTypeMatchIOIModal .z-vlayout .z-vlayout-inner:nth-child(2) {
+    flex: 1 !important;
+}
+
+.yw-modal-itemTypeMatchIOIModal .integrationbackoffice-itemTypeMatcherListBox .z-listbox-header {
+    width: 100% !important;
+}
+
+.yw-modal-itemTypeMatchIOIModal .integrationbackoffice-itemTypeMatcherListBox .z-listbox-body {
+    height: 250px !important;
+    width: 100% !important;
+}
+
+.yw-modal-itemTypeMatchIOIModal .z-listheader-sorticon {
+    position: static;
+    float: right;
+    margin-left: 3px;
+}
+
+.integrationbackoffice-itemTypeMatchIOIModal-body {
+    border-bottom: 1px solid var(--bo-slider-border-color);
+    padding: 15px 20px 15px 20px;
+    height: 100%;
+}
+
+.integrationbackoffice-itemTypeMatchIOIModal-body .z-listheader {
+    height: 52px
+}
+
+.yw-modal-itemTypeMatchIOIModal .itemTypeMatchDescriptionTooltip-container {
+    display: inline-block;
+}

@@ -1,0 +1,67 @@
+
+
+div.promo-detailedDescription
+{
+	color:var(--bo-list-text-color);
+}
+
+/*============================================================================
+    Messages help tables
+============================================================================ */
+
+table.promo-messageParams
+{
+	padding-bottom: 30px;
+}
+
+table.promo-messageParams th, table.promo-messageParams td
+{
+	border-bottom: 1px solid var(--bo-list-table-header-border-color);
+	padding: 3px 5px 3px;
+	text-align: left;
+	color: var(--bo-list-table-header-color);
+	background: var(--bo-list-table-header-background);
+}
+
+table.promo-messageParams th
+{
+	background: var(--bo-list-table-header-background);
+	border-bottom: 1px solid var(--bo-list-table-header-border-color);
+	color:var(--bo-list-table-header-color);
+}
+
+/*============================================================================
+    Promotions Tab
+============================================================================ */
+.potentialproductpromotions dl.promo-productInfo
+{
+	border-right: 1px solid var(--bo-list-border-color);
+	float:left;
+	padding: 4px 6px 4px;
+	width: 100%;
+}
+
+.potentialproductpromotions dl.promo-productInfo dt
+{
+	float: left;
+	width: 50%;
+	clear: left
+}
+
+.potentialproductpromotions dl.promo-productInfo dd
+{
+	float: left;
+	font-weight: bold;
+	width: 49%;
+   margin-left: 0;
+}
+
+.promo-productInfo-cell
+{
+	width:20%;
+}
+
+.potentialproductpromotions-listbox
+{
+	margin-top:2px
+}

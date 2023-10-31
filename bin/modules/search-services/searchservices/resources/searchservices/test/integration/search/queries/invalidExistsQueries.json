@@ -1,0 +1,33 @@
+[
+	{
+		"testId": 1,
+		"description": "'exists' query without expression",
+		"data": {
+			"type": "exists"
+		}
+	},
+	{
+		"testId": 2,
+		"description": "'exists' query with empty expression",
+		"data": {
+			"type": "exists",
+			"expression": ""
+		}
+	},
+	{
+		"testId": 3,
+		"description": "'exists' query with with invalid expression",
+		"data": {
+			"type": "exists",
+			"expression": "-$!-"
+		}
+	},
+	{
+		"testId": 4,
+		"description": "'exists' query with not existing expression",
+		"data": {
+			"type": "exists",
+			"expression": "notExisting"
+		}
+	}
+]

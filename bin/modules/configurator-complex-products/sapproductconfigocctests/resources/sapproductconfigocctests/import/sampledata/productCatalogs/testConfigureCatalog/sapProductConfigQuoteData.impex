@@ -1,0 +1,16 @@
+ #################################################################################
+ # Quote for testing, including an entry with configuration attached
+ #################################################################################
+  
+$storeUid=wsTest  
+$catalog-id=testConfigureCatalog
+$catalog-version=Online 
+
+INSERT_UPDATE ProductConfiguration;configurationId[unique=true];kbName;version;product(code,catalogVersion(catalog(id),version))[unique=true];user(uid)
+ ;34e5224f-00c9-43f5-8513-4bbaae393794@CONF_HOME_THEATER_ML@;CONF_HOME_THEATER_ML;2;CONF_HOME_THEATER_ML:$catalog-id:$catalog-version;cpq02@sap.com
+
+INSERT_UPDATE Quote;code[unique=true];version[unique=true];currency(isocode);user(uid);date[dateformat=dd.MM.yyyy HH:mm:ss];state(code);net;calculated;site(uid);store(uid);
+ ;7777777776;1;EUR;cpq02@sap.com;26.04.2021 00:00:00;BUYER_SUBMITTED;false;false;;$storeUid;
+
+INSERT_UPDATE QuoteEntry;order(code);productConfiguration(configurationId);creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;unit(code);entryNumber[unique=true];;;;
+ ;7777777776;34e5224f-00c9-43f5-8513-4bbaae393794@CONF_HOME_THEATER_ML@;27.04.2021 00:00:00;CONF_HOME_THEATER_ML:$catalog-id:$catalog-version;2;PCE;0;;;;

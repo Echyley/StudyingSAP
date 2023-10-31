@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="assistedJaxbContextFactory" parent="jaxbContextFactory">
+		<property name="metadataSourceFactory" ref="assistedMetadataSourceFactory" />
+		<property name="typeAdapters">
+			<list>
+				<value>de.hybris.platform.webservicescommons.jaxb.adapters.XSSStringAdapter</value>
+				<value>de.hybris.platform.assistedservicewebservices.jaxb.adapters.StringMapAdapter</value>
+				<value>de.hybris.platform.webservicescommons.jaxb.adapters.DateAdapter</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="assistedMetadataSourceFactory" parent="metadataSourceFactory">
+		<property name="nameProvider" ref="assistedMetadataNameProvider" />
+	</bean>
+
+	<bean id="assistedMetadataNameProvider" parent="metadataNameProvider"></bean>
+
+	<bean id="assistedJsonHttpMessageConverter" class="de.hybris.platform.webservicescommons.jaxb.Jaxb2HttpMessageConverter"
+		  parent="defaultJsonHttpMessageConverter">
+		<property name="jaxbContextFactory" ref="assistedJaxbContextFactory" />
+	</bean>
+
+</beans>

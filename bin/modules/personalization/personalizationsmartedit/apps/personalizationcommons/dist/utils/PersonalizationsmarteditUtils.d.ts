@@ -1,0 +1,32 @@
+import { TranslateService } from '@ngx-translate/core';
+import { ICatalogService, L10nPipe } from 'smarteditcommons';
+import { CustomizationVariation, CustomizationStatus } from '../types';
+export declare class PersonalizationsmarteditUtils {
+    private translateService;
+    private l10nPipe;
+    private catalogService;
+    constructor(translateService: TranslateService, l10nPipe: L10nPipe, catalogService: ICatalogService);
+    pushToArrayIfValueExists(array: any, sKey: string, sValue: string): void;
+    getVariationCodes(variations: any): any;
+    getVariationKey(customizationId: string, variations: any): any;
+    getSegmentTriggerForVariation(variation: any): any;
+    isPersonalizationItemEnabled(item: any): any;
+    getEnablementTextForCustomization(customization: any, keyPrefix: string): string;
+    getEnablementTextForVariation(variation: any, keyPrefix: string): string;
+    getEnablementActionTextForVariation(variation: any, keyPrefix: string): string;
+    getActivityStateForCustomization(customization: any): string;
+    getActivityStateForVariation(customization: any, variation: any): string;
+    isItemVisible(item: any): boolean;
+    getVisibleItems(items: any): any;
+    getValidRank(items: CustomizationVariation[], item: CustomizationVariation, increaseValue: number): number;
+    getStatusesMapping(): CustomizationStatus[];
+    getClassForElement(index: any): string;
+    getLetterForElement(index: any): string;
+    getCommerceCustomizationTooltip(variation: any, prefix: string, suffix: string): string;
+    getCommerceCustomizationTooltipHTML(variation: any): string;
+    isItemFromCurrentCatalog(item: any, seData: any): boolean;
+    hasCommerceActions(variation: any): boolean;
+    getCatalogVersionNameByUuid(catalogVersionUuid: string): Promise<string>;
+    getAndSetCatalogVersionNameL10N(customization: any): Promise<void>;
+    uniqueArray(array1: any[], array2: any[], fieldName?: string): any[];
+}

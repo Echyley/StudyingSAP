@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype code="SmarteditConfiguration" autocreate="true" generate="true" jaloclass="de.hybris.platform.smarteditwebservices.jalo.GeneratedSmarteditConfiguration">
+			<deployment table="smarteditConfiguration" typecode="3501" />
+
+			<attributes>
+				<attribute qualifier="key" type="java.lang.String">
+					<persistence type="property" />
+					<description>name of the property</description>
+					<modifiers read="true" write="true"	optional="false" unique="true"/>
+				</attribute>
+				<attribute qualifier="value" type="java.lang.String">
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+					<description>value of the property</description>
+					<modifiers read="true" write="true"	optional="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Theme" autocreate="false" generate="false">
+			<description>Extends Theme for Smartedit</description>
+			<attributes>
+				<attribute qualifier="activeForSmartedit" type="java.lang.Boolean">
+					<description>the flag that whether active theme for smartedit</description>
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="User" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="themeForSmartedit" type="Theme">
+					<description>the property to set smartedit theme for user </description>
+					<modifiers read="true" write="true" search="false" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

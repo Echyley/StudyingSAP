@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <style src="${wr}/PingWebhookConfigModal.css"/>
+
+    <vlayout sclass="webhookbackoffice-ping-modal-body">
+        <div id="webhookbackofficeJsonTextboxTooltip-container" sclass="webhookbackofficeJsonTextboxTooltip-container">
+            <button id="webhookbackofficeJsonTextboxTooltip"
+                    sclass="selectEventTypeTooltip webhookbackofficeTooltips icon-default-class cng-action-icon cng-font-icon font-icon--sys-help"
+                    popup="webhookbackofficeJsonTextboxPopup"/>
+        </div>
+        <popup id="webhookbackofficeJsonTextboxPopup" sclass="yw-desc-tooltip">
+            ${labels.webhookbackoffice.pingWebhookConfig.jsonTooltip}
+        </popup>
+        <tabbox id="webhookbackofficeMetadataTabbox">
+            <tabs id="webhookbackofficeMetadataTabs" sclass="webhookbackoffice-metadata-tabs">
+                <tab id="webhookbackofficeJsonTab" label="${labels.webhookbackoffice.pingWebhookConfig.tabs.jsonView}"/>
+                <tab id="webhookbackofficeIntegrationObjectInstanceTab"
+                     label="${labels.webhookbackoffice.pingWebhookConfig.tabs.instanceView}"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel sclass="webhookbackoffice-metadata-tabpanel">
+                 <vlayout spacing="15px">
+                    <textbox id="webhookbackofficeJsonTextBox"
+                             sclass="webhookbackoffice-metadata-textbox webhookbackoffice-metadata-textbox-small"
+                             multiline="true" readonly="false"/>
+                      <span sclass="yw-webhookbackoffice-modal-label">
+                            ${labels.webhookbackoffice.pingWebhookConfig.tabs.destinationPath}
+                     </span>
+                     <textbox id="webhookbackofficeJsonTextDestinationPathBox" sclass="webhookbackoffice-metadata-url-content" readonly="true"/>
+                  </vlayout>
+                </tabpanel>
+                <tabpanel sclass="webhookbackoffice-metadata-tabpanel">
+                    <vlayout spacing="15px">
+                        <span sclass="yw-webhookbackoffice-modal-label">
+                            ${labels.webhookbackoffice.pingWebhookConfig.integrationObject.instance}
+                        </span>
+                        <editor id="itemModelInstanceEditor">
+                            <custom-attributes pageSize="5"/>
+                        </editor>
+                        <span sclass="yw-webhookbackoffice-modal-label">
+                              ${labels.webhookbackoffice.pingWebhookConfig.tabs.destinationPath}
+                        </span>
+                        <textbox id="webhookbackofficeIODestinationPathBox" sclass="webhookbackoffice-metadata-url-content" readonly="true"/>
+                    </vlayout>
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+    </vlayout>
+    <button id="webhookbackofficeMockedJsonSendButton"
+            label="${labels.webhookbackoffice.pingWebhookConfig.sendButton}"
+            sclass="y-btn-primary webhookbackoffice-pingWebhookConfigModal-button"/>
+</widget>

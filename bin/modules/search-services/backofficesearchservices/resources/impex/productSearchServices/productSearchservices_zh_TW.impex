@@ -1,0 +1,13 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$lang=zh_TW
+
+
+#Currencies
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=$lang];
+;EUR;歐元;
+;USD;美金;

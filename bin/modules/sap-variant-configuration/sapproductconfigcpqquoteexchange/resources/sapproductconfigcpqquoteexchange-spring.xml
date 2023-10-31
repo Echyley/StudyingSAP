@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	
+	<!-- Quote Entry Outbound Mapper -->
+	<alias alias="sapProductConfigCpqCpiQuoteEntryMapperService" name="sapProductConfigDefaultCpqCpiQuoteEntryMapperService" />
+	<bean id="sapProductConfigDefaultCpqCpiQuoteEntryMapperService"
+		class="de.hybris.platform.sap.productconfig.cpqquoteexchange.service.outbound.DefaultProductConfigCpqCpiQuoteEntryMapperService" />
+	
+	<!-- Add Quote Entry Mapper -->
+	<bean id="sapProductConfigCpqCpiQuoteEntryMapperServiceListMergeDirective"
+		depends-on="sapCpqCpiQuoteEntryMappers" parent="listMergeDirective">
+		<property name="add" ref="sapProductConfigCpqCpiQuoteEntryMapperService" />
+	</bean>
+	
+	<!-- Quote Inbound Helper -->
+	<alias alias="sapProductConfigCpqInboundQuoteHelper" name="sapProductConfigDefaultCpqInboundQuoteHelper" />
+	<bean id="sapProductConfigDefaultCpqInboundQuoteHelper"
+		class="de.hybris.platform.sap.productconfig.cpqquoteexchange.service.inbound.DefaultProductConfigCpqInboundQuoteHelper">
+		<constructor-arg ref="sapProductConfigConfigurationDeepCopyHandler" />
+		<constructor-arg ref="baseSiteService" />
+		<constructor-arg ref="modelService" />
+		<constructor-arg ref="sapProductConfigProductConfigurationPersistenceService" />
+	</bean>
+	
+	<!-- Add Inbound Quote Helper -->
+	<bean id="sapProductConfigCpqInboundQuoteHelperListMergeDirective"
+		depends-on="sapCpqInboundQuoteHelpers" parent="listMergeDirective">
+		<property name="add" ref="sapProductConfigCpqInboundQuoteHelper" />
+	</bean>
+			
+</beans>

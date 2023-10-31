@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.cpq.productconfig.occ.ConfigurationEngineAccessWsDTO">
+		<description>Access data for configuration engine</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">CPQConfigurationEngineAccess</hint>
+		</hints>
+		<property name="endpoint" type="String">
+			<description>Configuration engine endpoint url</description>
+			<hints>
+				<hint name="example">https://configuration.engine.endpoint/</hint>
+			</hints>
+		</property>
+		<property name="accessToken" type="String">
+			<description>Configuration engine access token</description>
+			<hints>
+				<hint name="example">https://configuration.engine.endpoint/</hint>
+			</hints>
+		</property>
+		<property name="accessTokenExpirationTime" type="long">
+			<description>Configuration engine access token expiration time in milliseconds since 1970-01-01</description>
+			<hints>
+				<hint name="example">1490731713000</hint>
+			</hints>
+		</property>
+	</bean>
+
+	<bean class="de.hybris.platform.cpq.productconfig.occ.ProductConfigOrderEntryWsDTO"
+		extends="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO">
+		<description>Representation of an order entry with product configuration attached</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">CPQOrderEntry</hint>
+		</hints>
+		<property name="configId" type="String">
+			<description>Configuration Identifier. A randomly generated UUID owned by the product configurator</description>
+			<hints>
+				<hint name="example">ea520005-3d9a-4521-abc8-b72383c8ce4e</hint>
+			</hints>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cpq.productconfig.occ.ProductConfigWsDTO">
+		<description>Representation of a Product Configuration</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">CPQProductConfiguration</hint>
+		</hints>
+		<property name="configId" type="String">
+			<description>Configuration Identifier. A randomly generated UUID owned by the product configurator</description>
+			<hints>
+				<hint name="example">ea520005-3d9a-4521-abc8-b72383c8ce4e</hint>
+			</hints>
+		</property>
+	</bean>
+
+</beans>

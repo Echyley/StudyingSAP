@@ -1,0 +1,32 @@
+.se-sync-panel {
+    &__sync-info {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    &__row {
+        @include se-flex-row(space-between);
+        padding: 0 20px;
+        height: 40px;
+        border-bottom: se-border();
+
+        &:first-child {
+            height: 50px;
+        }
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__footer {
+        padding: 20px;
+        border-top: se-border();
+        @include se-flex-row(flex-end);
+    }
+
+    &__sync-btn {
+        text-transform: capitalize;
+        padding: 0 20px;
+        margin-left: se-space('xxs');
+    }
+}

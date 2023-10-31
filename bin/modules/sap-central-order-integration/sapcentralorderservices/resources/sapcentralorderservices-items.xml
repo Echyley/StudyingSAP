@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+	<relations>
+		<relation
+			code="SAPCentralOrderConfiguration2WarehouseRelation"
+			autocreate="true" generate="true" localized="false">
+			<sourceElement type="SAPCentralOrderConfiguration"
+				qualifier="sapCentralOrderConfigs" cardinality="one" />
+			<targetElement type="Warehouse" qualifier="warehouses"
+				cardinality="many" >
+				<modifiers optional="false"/>
+				</targetElement>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="sapco_active"
+					type="java.lang.Boolean" generate="true">
+					<persistence type="property" />
+					<description>Central Order active</description>
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="sapco_sourceSystemId"
+					type="java.lang.String">
+					<description>Unique ID for Commerce System</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="AbstractOrder" autocreate="false"
+			generate="true">
+			<attributes>
+				<attribute qualifier="originalOrderNumber" type="java.lang.String">
+					<persistence type="property" />
+					<description>Original Order Number</description>
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="centralOrderId" type="java.lang.String">
+					<modifiers unique="true" />
+					<persistence type="property" />
+					<description>Central Order generated Order Id</description>
+				</attribute>
+				<attribute qualifier="centralOrderNumber" type="java.lang.String">
+					<persistence type="property" />
+					<description>Central Order generated Order Number</description>
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="SAPCentralOrderConfiguration"
+			extends="GenericItem" autocreate="true" generate="true"
+			jaloclass="com.sap.sapcentralorderservices.jalo.SAPCentralOrderConfiguration">
+			<deployment table="SAPCentralOrderConfigs" typecode="9375" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<description>Central Order Configuration unique Id</description>
+					<persistence type="property" />
+					<modifiers optional="false" unique="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="SAPCpiOutboundConfig" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="centralOrderSourceSystemId"
+					type="java.lang.String" generate="true">
+					<persistence type="property" />
+					<description>Source system Id for Central Order</description>
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPOrder" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="centralOrderId" type="java.lang.String">
+					<modifiers unique="true" />
+					<persistence type="property" />
+					<description>Central Order generated Order Id</description>
+				</attribute>
+				<attribute qualifier="centralOrderNumber" type="java.lang.String">
+					<persistence type="property" />
+					<description>Central Order generated Order Number</description>
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPCpiOutboundOrder" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="centralOrderId" type="java.lang.String">
+					<modifiers unique="true" />
+					<persistence type="property" />
+					<description>Central Order generated Order Id</description>
+				</attribute>
+				<attribute qualifier="centralOrderNumber" type="java.lang.String">
+					<persistence type="property" />
+					<description>Central Order generated Order Number</description>
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

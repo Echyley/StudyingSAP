@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<alias name="defaultGigyaB2BLoginFacade" alias="gigyaLoginFacade" />
+	<bean id="defaultGigyaB2BLoginFacade"
+		class="de.hybris.platform.gigya.gigyab2bfacades.login.impl.DefaultGigyaB2BLoginFacade"
+		parent="defaultGigyaLoginFacade">
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="gigyaAuthService" ref="gigyaAuthService" />
+		<property name="gigyaAssetsAuthService" ref="gigyaAssetsAuthService" />
+		<property name="sapB2BModelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultGigyaB2BWebhookFacade"
+		alias="gigyaB2BWebhookFacade" />
+	<bean id="defaultGigyaB2BWebhookFacade"
+		class="de.hybris.platform.gigya.gigyab2bfacades.webhook.impl.DefaultGigyaB2BWebhookFacade">
+		<property name="gigyaLoginService" ref="gigyaLoginService" />
+		<property name="modelService" ref="modelService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="taskService" ref="taskService" />
+		<property name="gigyaWebHookEventsTaskRunnerBean"
+			value="gigyaWebHookEventsTaskRunner" />
+	</bean>
+
+	<alias name="defaultGigyaWebHookEventsTaskRunner"
+		alias="gigyaWebHookEventsTaskRunner" />
+	<bean id="defaultGigyaWebHookEventsTaskRunner"
+		class="de.hybris.platform.gigya.gigyab2bfacades.task.runner.GigyaWebHookEventsTaskRunner">
+		<property name="gigyaLoginFacade" ref="gigyaLoginFacade" />
+		<property name="gigyaLoginService" ref="gigyaLoginService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+</beans>

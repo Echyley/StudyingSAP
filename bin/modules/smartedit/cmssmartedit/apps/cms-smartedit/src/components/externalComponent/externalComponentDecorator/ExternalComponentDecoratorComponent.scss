@@ -1,0 +1,9 @@
+.cms-external-component-decorator {
+    border: 1px solid $smartedit-grey2;
+    height: 100%;
+}
+
+.cms-external-component-decorator > .se-ctx-menu__overlay {
+    left: 1px !important; // using important here because it gets overriden by #smarteditoverlay .se-ctx-menu__overlay
+    top: 1px !important;
+}

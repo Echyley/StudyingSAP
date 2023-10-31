@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.zkoss.org/2005/zul">
+	<style src="${wr}/appearanceSetting.css"/>
+	<div sclass="yw-userProfileAppearance">
+		<div class="userProfileAppearance-title">
+			${labels.userprofile.appearancesetting.title}
+		</div>
+		<div class="userProfileAppearance-notice">
+			${labels.subtitle}
+		</div>
+		<div class="userProfileAppearance-list">
+			<listbox id="themeList" model="${$composer.availableUserThemes}">
+				<template name="model">
+					<listitem value="${each}"
+							  selected="${$composer.isSelectedTheme(each.code)}"
+							  onClick='$composer.onThemeClick(self)'>
+						<listcell>
+							<if test="${not empty each.getThumbnail()}">
+								<image src="${each.getThumbnail().getURL()}"/>
+							</if>
+							<if test="${empty each.getThumbnail()}">
+								<image src="${wr}/images/default_theme_thumbnail.png"/>
+							</if>
+							<div class="themeLabel">${empty each.getName() ? each.getCode() : each.getName()}</div>
+							<button class="cng-font-icon font-icon--sys-enter-2 selected-icon" tooltiptext="${labels.appearancesetting.selected.theme.tooltip}"/>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</div>
+	</div>
+</widget>

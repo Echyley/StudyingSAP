@@ -1,0 +1,33 @@
+@charset "UTF-8";
+@import "cockpitng-globals.scss";
+
+.catalog-diff-container {
+    .sync-job-container {
+        padding: $_container-spacing-default__tiny;
+
+        table td {
+            padding-right: $_container-spacing-default__tiny;
+        }
+    }
+
+    .diff-results-table {
+        border-top: 1px solid var(--bo-list-group-header-border);
+
+        &-headers {
+            background: var(--bo-list-table-header-background);
+        }
+
+        .z-row-content,
+        .z-column-content {
+            font-weight: normal;
+            font-size: var(--bo-font-size);
+            font-family: var(--bo-font-family);
+            color: var(--bo-text-color);
+            padding: 0 $_container-spacing-default__tiny;
+        }
+
+        .z-grid-header-border {
+            border-bottom: 1px solid var(--bo-list-group-header-border);
+        }
+    }
+}

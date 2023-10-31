@@ -1,0 +1,55 @@
+$lang=id
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Produk yang Dapat Dikonfigurasi
+;productconfig_customer_category;Pelanggan
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Produk dengan konfigurasi yang ditentukan dalam keranjang;Keranjang berisi produk {product}. Karakteristik {cstic} {value_operator} nilai {cstic_value}.
+;y_configurable_product;Produk yang saat ini sedang Anda konfigurasi;Produk yang saat ini sedang Anda konfigurasi adalah {product}. Karakteristik {cstic} {value_operator} nilai {cstic_value}.
+;y_configurable_product_customer;Pelanggan;Pelanggan {customers_operator} daftar berikut\: {customers}
+;y_configurable_product_customer_group;Grup pelanggan;Pelanggan {customer_groups_operator} dari grup berikut\: {customer_groups}
+;y_configurable_product_customer_support_mode;Dukungan Pelanggan;Sesi layanan berbantu aktif\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Produk;Produk dalam Keranjang;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Karakteristik;Nama Karakteristik
+;y_configurable_product_in_cart;value_operator;Operator;Operator antara karakteristik dan nilai
+;y_configurable_product_in_cart;cstic_value;Nilai;Nama nilai karakteristik;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Produk;Produk yang saat ini sedang Anda konfigurasi
+;y_configurable_product;cstic;Karakteristik;Nama Karakteristik
+;y_configurable_product;value_operator;Operator;Operator antara karakteristik dan nilai
+;y_configurable_product;cstic_value;Nilai;Nama Nilai Karakteristik
+;y_configurable_product_customer;customers_operator;Operator Pilihan Pelanggan;Jelaskan, apakah pelanggan tercantum dalam daftar atau tidak
+;y_configurable_product_customer;customers;Para Pelanggan;Daftar pelanggan
+;y_configurable_product_customer_group;customer_groups_operator;Operator Pilihan Grup Pelanggan;Jelaskan, apakah pelanggan tercantum dalam SALAH SATU atau SEMUA grup pelanggan atau tidak
+;y_configurable_product_customer_group;customer_groups;Grup Pelanggan;Daftar grup pelanggan
+;y_configurable_product_customer_support_mode;value;Sesi layanan berbantu aktif;Agen dukungan pelanggan sedang log in atas nama pelanggan
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Produk yang Dapat Dikonfigurasi
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Atur nilai karakteristik untuk produk yang dapat dikonfigurasi;Atur nilai {cstic_value} untuk karakteristik {cstic}
+;y_configurable_product_remove_assignable_value;Sembunyikan nilai yang dapat ditetapkan untuk produk yang dapat dikonfigurasi;Sembunyikan nilai {cstic_value} untuk karakteristik {cstic}
+;y_configurable_product_hide_cstic;Sembunyikan karakteristik untuk produk yang dapat dikonfigurasi;Sembunyikan karakteristik {cstic}
+;y_configurable_product_display_cstic_readonly;Tampilkan karakteristik untuk produk yang dapat dikonfigurasi sebagai hanya untuk dibaca;Tampilkan karakteristik {cstic} sebagai hanya-baca (read-only)
+;y_configurable_product_display_message;Tampilkan pesan;Tampilkan pesan
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Karakteristik;Karakteristik yang untuknya nilai ditetapkan
+;y_configurable_product_set_cstic_value;cstic_value;Nilai;Nilai karakteristik yang akan diatur
+;y_configurable_product_remove_assignable_value;cstic;Karakteristik;Karakteristik yang untuknya nilai yang dapat ditetapkan akan dihapus
+;y_configurable_product_remove_assignable_value;cstic_value;Nilai;Nilai yang akan dihapus dari daftar nilai yang dapat ditetapkan
+;y_configurable_product_hide_cstic;cstic;Karakteristik;Karakteristik untuk disembunyikan
+;y_configurable_product_display_cstic_readonly;cstic;Karakteristik;Karakteristik untuk ditampilkan sebagai hanya-baca (read-only)
+;y_configurable_product_display_message;message;Pesan;Teks Pesan
+;y_configurable_product_display_message;message_severity;Permasalahan;Permasalahan Pesan
+;y_configurable_product_display_message;cstic;Karakteristik;Karakteristik di mana pesan ini muncul
+;y_configurable_product_display_message;cstic_value;Nilai Karakteristik;Nilai karakteristik di mana pesan ini muncul
+
+#% endif:

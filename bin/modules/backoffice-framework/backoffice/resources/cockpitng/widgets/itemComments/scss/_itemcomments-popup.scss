@@ -1,0 +1,106 @@
+@import '_itemcomments-variables.scss';
+
+.yw-commentslist {
+
+    &-popup {
+        width: $item-comments__popup--width;
+        background: $item-comments__popup--background;
+
+        .yw-add-comment-section-button-ok {
+            text-transform: uppercase;
+        }
+
+    }
+    &-addcomment-button {
+        margin: $item-comments__default-button--margin;
+        width: $item-comments__default-button--width;
+    }
+    &-bottom-bar-popup {
+        bottom: $item-comments__bar-bottom-popup--bottom;
+        top: auto !important;
+    }
+    &-list {
+        overflow: auto;
+        max-height: $item-comments__comment-list--max-height;
+        border-bottom: $item-comments__comment-list--border;
+    }
+    &-one-comment {
+        border-top: $item-comments__comment-list--border;
+        padding: $item-comments__one-comment--padding;
+
+        &:first-child {
+            border-top-width: 0;
+        }
+    }
+    &-comment-header {
+        color: $item-comments__comment-header--color;
+        margin: $item-comments__comment-header--margin-bottom;
+        vertical-align: top;
+        line-height: $item-comments__comment-header--line-height;
+
+        > .z-label {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+    &-comment-author-label {
+        padding-right: $item-comments__comment-author--padding-right;
+        max-width: $item-comments__comment-author--max-width;
+        font-size: $item-comments__comment-author--font-size;
+        color: $item-comments__comment-author--color;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    &-comment-date-label {
+        color: $item-comments__comment-date--color;
+        font-size: $item-comments__comment-date--font-size;
+        font-weight: 300;
+        text-align: right;
+        float:right;
+    }
+    &-comment-content {
+        color: $item-comments__comment-content--color;
+    }
+    &-comment-empty {
+        padding: $item-comments__comment-empty--padding;
+        color: $item-comments__comment-empty--color;
+    }
+}
+
+.yw-add-comment-section {
+    padding: $item-comments__add-comment-section--padding;
+    width: 100%;
+    display: inline-block;
+    
+    &-textbox {
+        background: $item-comments__add-comment-section-textbox--background;
+        border-color: $item-comments__add-comment-section-textbox--border-color;
+        color: $item-comments__add-comment-section-textbox--color;
+        height: $item-comments__add-comment-section-textbox--height;
+        width: 100%;
+        resize: none;
+        margin-bottom: $item-comments__add-comment-section-textbox--margin-bottom;
+        display: block;
+        clear: both;
+
+        &:focus {
+            outline-offset: $item-comments__add-comment-section-textbox--outline-offset;
+            z-index: 5;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline-width: $item-comments__add-comment-section-textbox--outline-width;
+            outline-color: $item-comments__add-comment-section-textbox--outline-color;
+            outline-style: $item-comments__add-comment-section-textbox--outline-style;
+        }
+    }
+    .z-button {
+        display: inline-block;
+    }
+    &-button-ok {
+        float: right;
+    }
+    &-button-cancel {
+        float: left;
+    }
+}

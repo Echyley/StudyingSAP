@@ -1,0 +1,7 @@
+#**********************************************************************************************
+#********************* CPQ related integration objects for outbound order *********************
+#**********************************************************************************************
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute    ;integrationObjectItem(integrationObject(code), code)[unique = true]    ; attributeName[unique = true]  ; attributeDescriptor(enclosingType(code), qualifier)    ; returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+                                                ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem                      ; higherLevelEntryNumber        ; SAPCpiOutboundOrderItem:higherLevelEntryNumber         ;                                                           ;                                                      ;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+        
+    <extension abstractclassprefix="Generated" classprefix="Customerticketingocc" description="customerticketingocc extension" jaloLogicFree="true" managername="CustomerticketingoccManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="customerticketingocc">
+                
+        <requires-extension name="commercewebservices"/>
+                
+        <requires-extension name="customerticketingfacades"/>
+                
+        <coremodule generated="true" manager="de.hybris.platform.customerticketingocc.jalo.CustomerticketingoccManager" packageroot="de.hybris.platform.customerticketingocc"/>
+            
+    </extension>
+    
+</extensioninfo>

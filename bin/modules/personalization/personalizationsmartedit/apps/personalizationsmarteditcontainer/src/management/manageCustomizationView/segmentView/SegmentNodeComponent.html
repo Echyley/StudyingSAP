@@ -1,0 +1,124 @@
+<div
+    cdkDropList
+    [id]="node.uid"
+    [cdkDropListData]="node"
+    [cdkDropListConnectedTo]="connectedDropListsIds"
+    (cdkDropListDropped)="onDragDrop($event)"
+    [cdkDropListSortingDisabled]="false"
+    [cdkDropListEnterPredicate]="canBeDropped"
+    [ngClass]="{'perso-segments-tree__layout': isContainer(node), 'perso-segments-tree__empty-container': isEmptyContainer(node), 'perso-segments-tree__collapsed-container': collapsed }"
+>
+    <div>
+        <div
+            class="perso-segments-tree"
+            [ngClass]="{'perso-segments-tree__node': isItem(node), 'perso-segments-tree__container': isContainer(node)}"
+        >
+            <div *ngIf="isContainer(node)">
+                <div
+                    class="perso-segments-tree__toggle"
+                    (click)="toggle()"
+                    title="{{collapsed ? 'personalization.commons.icon.title.expand' : 'personalization.commons.icon.title.collapse' | translate}}"
+                    [ngClass]="collapsed ? 'sap-icon--navigation-right-arrow' : 'sap-icon--navigation-down-arrow'"
+                ></div>
+                <div class="perso-segments-tree__dropdown">
+                    <label
+                        class="fd-form-label perso-segments-tree__creategroupselect__label"
+                        translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments.select.label"
+                    ></label>
+                    <se-select
+                        class="se-select-creategroup"
+                        [model]="node.operation.id"
+                        (modelChange)="operationChange($event)"
+                        [fetchStrategy]="fetchStrategy"
+                        [resetSearchInput]="false"
+                        [searchEnabled]="false"
+                    >
+                    </se-select>
+                </div>
+            </div>
+            <div *ngIf="isItem(node)" class="perso-segments-tree__node-content">
+                {{ node.selectedSegment.code }}
+            </div>
+
+            <div
+                *ngIf="isContainer(node)"
+                class="perso-segments-tree__angular-ui-tree-handle--empty"
+            ></div>
+
+            <!-- Actions -->
+            <div>
+                <span class="perso-segments-tree__pull-right">
+                    <a
+                        *ngIf="isItem(node)"
+                        class="fd-link perso-segments-tree__actions perso-segments-tree__node-icon"
+                        (click)="duplicateItem(node)"
+                        title="{{'personalization.commons.icon.title.duplicate' | translate}}"
+                    >
+                        <span class="sap-icon--duplicate"></span>
+                    </a>
+                    <a
+                        *ngIf="!isTopContainer()"
+                        class="fd-link perso-segments-tree__actions"
+                        (click)="removeItem(node?.uid)"
+                    >
+                        <div
+                            *ngIf="isContainer(node)"
+                            class="
+                                btn btn-link
+                                perso-segments-tree__container-btn-icon
+                                fd-has-margin-left-tiny
+                            "
+                            title="{{'personalization.commons.icon.title.remove' | translate}}"
+                        >
+                            <span class="btn sap-icon--decline"></span>
+                        </div>
+                        <div
+                            *ngIf="isItem(node)"
+                            class="perso-segments-tree__node-icon"
+                            title="{{'personalization.commons.icon.title.remove' | translate}}"
+                        >
+                            <span class="sap-icon--decline"></span>
+                        </div>
+                    </a>
+                </span>
+                <button
+                    *ngIf="isContainer(node)"
+                    class="fd-button fd-button--light perso-segments-tree__btn"
+                    (click)="newSubItem('container')"
+                >
+                    <span
+                        translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments.group.button"
+                    ></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropzone placeholder -->
+        <div *ngIf="isEmptyContainer(node) && !collapsed" class="perso-segments-tree__empty-container-node">
+            <div
+                class="perso-segments-tree__empty-container-node-text"
+                translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments.dropzone"
+            ></div>
+        </div>
+
+        <ol *ngIf="!collapsed">
+            <li cdkDrag
+                [id]="innerNode.uid"
+                [cdkDragData]="innerNode"
+                (cdkDragStarted)="onDragStarted($event)"
+                (cdkDragMoved)="onDragMoved($event)"
+                (cdkDragReleased)="onDragReleased()"
+                *ngFor="let innerNode of node.nodes"
+            >
+                <segment-node
+                    [node]="innerNode"
+                    [expression]="expression"
+                    [connectedDropListsIds]="connectedDropListsIds"
+                    (expressionChange)="handleUpdate($event)"
+                    (onDrop)="onDragDrop($event)"
+                    (onDragStart)="onDragStarted($event)"
+                ></segment-node>
+            </li>
+        </ol>
+    </div>
+</div>

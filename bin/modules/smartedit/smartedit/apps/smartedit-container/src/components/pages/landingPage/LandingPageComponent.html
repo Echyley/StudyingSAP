@@ -1,0 +1,42 @@
+<div class="se-toolbar-group">
+    <se-toolbar
+        cssClass="se-toolbar--shell"
+        imageRoot="imageRoot"
+        toolbarName="smartEditHeaderToolbar"
+    ></se-toolbar>
+</div>
+<div class="se-landing-page">
+    <div class="se-landing-page-actions">
+        <div class="se-landing-page-container">
+            <h1 class="se-landing-page-title">{{ 'se.landingpage.title' | translate }}</h1>
+            <div class="se-landing-page-site-selection" *ngIf="model">
+                <se-generic-editor-dropdown
+                    [field]="field"
+                    [qualifier]="qualifier"
+                    [model]="model"
+                    [id]="sitesId"
+                ></se-generic-editor-dropdown>
+            </div>
+
+            <p class="se-landing-page-label">{{ 'se.landingpage.label' | translate }}</p>
+        </div>
+    </div>
+
+    <p class="se-landing-page-container se-landing-page-sub-header">Content Catalogs</p>
+
+    <div class="se-landing-page-container se-landing-page-catalogs">
+        <div class="se-landing-page-catalog" *ngFor="let catalog of catalogs; let isLast = last">
+            <se-catalog-details
+                [catalog]="catalog"
+                [siteId]="model.site"
+                [isCatalogForCurrentSite]="isLast"
+            ></se-catalog-details>
+        </div>
+    </div>
+
+    <img
+        src="static-resources/images/best-run-sap-logo.svg"
+        class="se-landing-page-footer-logo"
+        title="{{ 'se.logo.title' | translate }}"
+    />
+</div>

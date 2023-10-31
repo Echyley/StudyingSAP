@@ -1,0 +1,24 @@
+@import "cockpitng-globals.scss";
+@import "../support/_adaptivesearchbackoffice_variables.scss";
+
+
+/* Popups */
+.yas-actions-popup.z-menupopup {
+    border: $adaptiveSearchBackoffice__actions-popup--border;
+
+    .yas-action {
+
+        a.z-menuitem-content {
+
+            img {
+                top: $adaptiveSearchBackoffice__actions-popup-img--top;
+                display: none;
+            }
+        }
+    }
+}
+
+.yas-search-configuration-description {
+    border: $adaptiveSearchBackoffice__search-configuration-description--border;
+    padding: $adaptiveSearchBackoffice__search-configuration-description--padding;
+}

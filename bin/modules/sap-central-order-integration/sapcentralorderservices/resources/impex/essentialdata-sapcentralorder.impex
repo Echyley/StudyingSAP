@@ -1,0 +1,6 @@
+#************* Added Central Order related attributes to Order Integration Object***********
+INSERT_UPDATE IntegrationObjectItemAttribute ; integrationObjectItem(integrationObject(code), code)[unique = true] ; attributeName[unique = true] ; attributeDescriptor(enclosingType(code), qualifier) ; returnIntegrationObjectItem(integrationObject(code), code) ; unique[default = false]
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundConfig                       ; centralOrderSourceSystemId   ; SAPCpiOutboundConfig:centralOrderSourceSystemId     ;                                                            ; true                   
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                        ; centralOrderId               ; SAPCpiOutboundOrder:centralOrderId                  ;                                                            ; true                   
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                        ; centralOrderNumber           ; SAPCpiOutboundOrder:centralOrderNumber              ;                                                            ; true                   
+                                             

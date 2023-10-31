@@ -1,0 +1,88 @@
+<div class="pe-customization-modal" *ngIf="(customization$ | async) as customization">
+    <form>
+        <div fd-form-item>
+            <label
+                fd-form-label
+                [required]="true"
+                for="customization-name"
+                class="se-control-label"
+            >
+                {{ 'personalization.modal.customizationvariationmanagement.basicinformationtab.name' | translate }}
+            </label>
+            <input
+                fd-form-control
+                type="text"
+                [placeholder]="'personalization.modal.customizationvariationmanagement.basicinformationtab.name.placeholder' | translate"
+                [name]="customization.name + '_key'"
+                [ngModel]="customization.name"
+                (ngModelChange)="changeName($event)"
+                id="customization-name"
+            />
+        </div>
+        <div fd-form-item>
+            <label
+                fd-form-label
+                for="customization-description"
+                class="se-control-label"
+            >
+                {{ 'personalization.modal.customizationvariationmanagement.basicinformationtab.details' | translate }}
+            </label>
+            <textarea
+                fd-form-control
+                rows="2"
+                class="fd-form__control pe-customization-modal__textarea"
+                [placeholder]="'personalization.modal.customizationvariationmanagement.basicinformationtab.details.placeholder' | translate"
+                [name]="customization.description + '_key'"
+                [ngModel]="customization.description"
+                (ngModelChange)="changeDescription($event)"
+                id="customization-description"
+            ></textarea>
+        </div>
+        <div fd-form-item class="fd-has-padding-bottom-tiny">
+            <label
+                fd-form-label
+                for="customization-status"
+                class="se-control-label"
+            >
+                {{ 'personalization.modal.customizationvariationmanagement.basicinformationtab.status' | translate }}
+            </label>
+            <fd-switch 
+                [compact]="true" 
+                [ngModel]="customization.statusBoolean" 
+                id="test-checkbox" 
+                (ngModelChange)="toggleCustomizationStatus($event)"
+            ></fd-switch>
+        </div>
+        <div fd-form-item>
+            <div>
+                <button
+                    *ngIf="!datetimeConfigurationEnabled"
+                    class="se-button--text se-button--link fd-link"
+                    (click)="toggleDatetimeConfiguration()"
+                    type="button"
+                    translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.showdateconfigdata"
+                ></button>
+                <button
+                    *ngIf="datetimeConfigurationEnabled"
+                    class="se-button--text se-button--link fd-link"
+                    (click)="toggleDatetimeConfiguration(true)"
+                    type="button"
+                    translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.hidedateconfigdata"
+                ></button>
+            </div>
+            <div
+                translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.statusfortimeframe.description"
+                class="fd-has-padding-top-tiny"
+            ></div>
+        </div>
+        <div fd-form-item>
+            <datetime-picker-range *ngIf="datetimeConfigurationEnabled"
+                [dateFrom]="customization.enabledStartDate"
+                [dateTo]="customization.enabledEndDate"
+                [isEditable]="true"
+                (dateFromChange)="onEnabledStartDateChange($event)"
+                (dateToChange)="onEnabledEndDateChange($event)"
+            ></datetime-picker-range>
+        </div>
+    </form>
+</div>

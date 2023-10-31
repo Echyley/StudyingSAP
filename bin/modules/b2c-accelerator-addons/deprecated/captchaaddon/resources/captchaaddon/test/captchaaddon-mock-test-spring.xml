@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+  ~
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<alias name="mockReCaptchaAspect" alias="reCaptchaAspect"/>
+	<bean id="mockReCaptchaAspect" class="org.mockito.Mockito" factory-method="mock" depends-on="defaultReCaptchaAspect">
+		<constructor-arg value="de.hybris.platform.security.captcha.ReCaptchaAspect" />
+	</bean>
+
+	<bean id="siteConfigService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.acceleratorservices.config.SiteConfigService" />
+	</bean>
+
+	<bean id="baseStoreService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="de.hybris.platform.store.services.BaseStoreService" />
+	</bean>
+
+</beans>

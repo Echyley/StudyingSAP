@@ -1,0 +1,11 @@
+backoffice-core-2211.FP1-RC11.jar
+backoffice-widgets-2211.FP1-RC11.jar
+cockpitadmin-2211.FP1-RC11.jar
+cockpitcore-2211.FP1-RC11.jar
+cockpit-data-integration-2211.FP1-RC11.jar
+cockpit-demo-widgets-2211.FP1-RC11.jar
+cockpitframework-2211.FP1-RC11.jar
+cockpit-module-aggregator-2211.FP1-RC11.jar
+cockpit-standard-editors-2211.FP1-RC11.jar
+cockpittesting-2211.FP1-RC11.jar
+cockpitwidgets-2211.FP1-RC11.jar

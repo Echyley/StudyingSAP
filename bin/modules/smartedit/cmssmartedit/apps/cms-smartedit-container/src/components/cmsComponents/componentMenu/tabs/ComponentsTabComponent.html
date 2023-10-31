@@ -1,0 +1,61 @@
+<div class="se-component-menu__tabs-header">
+    <div class="se-component-menu__tabs-header--upper" *ngIf="hasMultipleContentCatalogs()">
+        <se-select
+            id="se-components-tab-catalog-versions"
+            class="se-component-menu__select"
+            [(model)]="selectedCatalogVersionId"
+            (modelChange)="onCatalogVersionChange()"
+            [fetchStrategy]="catalogVersionsFetchStrategy"
+            [searchEnabled]="false"
+            [itemComponent]="itemComponent"
+        >
+        </se-select>
+    </div>
+    <div class="se-component-menu__tabs-header--lower">
+        <se-component-search
+            (onChange)="onSearchTermChanged($event)"
+            [placeholderI18nKey]="'se.cms.componentmenu.search.placeholder'"
+            class="se-component-menu__tabs-search"
+        ></se-component-search>
+
+        <fieldset class="fd-form__set">
+            <div class="fd-form__item fd-form__item--check se-component-menu__clone-on-drop">
+                <input
+                    type="checkbox"
+                    class="fd-form__control se-component-menu__clone-check-box"
+                    id="component-clone-checkbox"
+                    name="clone-on-drop"
+                    [(ngModel)]="cloneOnDrop"
+                    (ngModelChange)="onComponentCloneOnDropChange($event)"
+                />
+                <label
+                    class="fd-form__label se-component-menu__clone-label"
+                    for="component-clone-checkbox"
+                    translate="se.cms.component.clone.on.drop.label"
+                >
+                </label>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="se-component-menu__result-container" *ngIf="forceRecompile">
+    <se-infinite-scrolling
+        *ngIf="isActive()"
+        class="se-component-menu__infinite-scroll"
+        [ngClass]="{'se-component-menu__infinite-scroll--short': hasMultipleContentCatalogs() }"
+        [pageSize]="10"
+        [mask]="searchTerm"
+        [fetchPage]="loadComponentItems"
+        [context]="componentsContext"
+    >
+        <div class="se-component-menu__result" *ngIf="componentsContext.items.length">
+            <se-component-item
+                class="se-component-menu__item-wrap"
+                *ngFor="let item of componentsContext.items; trackBy: trackById"
+                [componentInfo]="item"
+                [cloneOnDrop]="cloneOnDrop"
+            ></se-component-item>
+        </div>
+    </se-infinite-scrolling>
+</div>

@@ -1,0 +1,14 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+$lang=cs
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+INSERT_UPDATE Theme;code[unique=true];name[lang=$lang]
+;sap_fiori_3;SAP Quartz světlý
+;sap_fiori_3_dark;SAP Quartz tmavý
+;sap_horizon;SAP Ranní horizont
+
+#% endif:

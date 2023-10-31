@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <enumtypes>
+        <enumtype generate="true" code="BackofficeSpecialCollectionType"
+                  autocreate="true">
+            <value code="quicklist"/>
+            <value code="blockedlist"/>
+        </enumtype>
+    </enumtypes>
+
+    <relations>
+
+        <relation generate="true" localized="false" code="User2BackofficeObjectCollectionRelation" autocreate="true">
+            <sourceElement type="User" qualifier="user" cardinality="one">
+                <modifiers read="true" write="true" initial="true" optional="false"/>
+            </sourceElement>
+            <targetElement type="BackofficeObjectSpecialCollection" qualifier="collectionPks" cardinality="many">
+                <modifiers read="true" write="true" partof="true" optional="true"/>
+            </targetElement>
+        </relation>
+
+        <relation generate="true" localized="false" code="BackofficeCollection2ElementRelation" autocreate="true">
+            <sourceElement type="BackofficeObjectSpecialCollection" qualifier="collectionPk" cardinality="one">
+                <modifiers read="true" write="true" initial="true" optional="false"/>
+            </sourceElement>
+            <targetElement type="BackofficeObjectCollectionItemReference" qualifier="elements" collectiontype="list"
+                           cardinality="many">
+                <modifiers read="true" write="true" initial="false" optional="true" partof="true"/>
+            </targetElement>
+        </relation>
+
+    </relations>
+
+    <itemtypes>
+        <itemtype code="BackofficeRole" extends="UserGroup" jaloclass="com.hybris.backoffice.jalo.user.BackofficeRole">
+            <attributes>
+                <attribute type="StringCollection" qualifier="authorities">
+                    <modifiers read="true" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Principal" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="backOfficeLoginDisabled" type="java.lang.Boolean">
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ExcelImportCronJob" extends="CronJob">
+            <attributes>
+                <attribute qualifier="excelFile" type="Media">
+                    <modifiers read="true" write="true" optional="false"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="referencedContent" type="Media">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ExcelImportJob" extends="ServicelayerJob"/>
+
+        <itemtype code="AbstractWorkflowAction" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="visualisationX" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="visualisationY" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="AbstractWorkflowDecision" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="visualisationX" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="visualisationY" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="WorkflowActionTemplateLinkTemplateRelation" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="visualisationX" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="visualisationY" type="java.lang.Integer">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="BackofficeObjectSpecialCollection"
+                  autocreate="true"
+                  generate="true"
+                  extends="GenericItem"
+                  jaloclass="com.hybris.backoffice.jalo.BackofficeObjectSpecialCollection">
+            <deployment table="BackofficeCollections" typecode="13219"/>
+            <attributes>
+                <attribute type="BackofficeSpecialCollectionType" qualifier="collectionType">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" optional="false"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+        <itemtype code="BackofficeObjectCollectionItemReference"
+                  extends="GenericItem"
+                  autocreate="true"
+                  generate="true"
+                  jaloclass="com.hybris.backoffice.jalo.BackofficeObjectCollectionItemReference">
+            <deployment table="BackofficeCollItemRefs" typecode="13218"/>
+            <attributes>
+                <attribute type="Product" qualifier="product">
+                    <persistence type="property"/>
+                    <modifiers initial="true" optional="false"/>
+                </attribute>
+            </attributes>
+            <indexes>
+                <index name="itemIDX" unique="false">
+                    <key attribute="product"/>
+                </index>
+            </indexes>
+        </itemtype>
+
+        <itemtype code="Theme" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="style" type="Media">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="false" optional="true" partof="true"/>
+                </attribute>
+                <attribute qualifier="styleVersion" type="java.lang.Integer">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="thumbnail" type="Media">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="false" optional="true" partof="true"/>
+                </attribute>
+            </attributes>
+        </itemtype> 
+
+        <itemtype code="CustomTheme" extends="Theme" abstract="false"
+                  jaloclass="com.hybris.backoffice.jalo.CustomTheme">
+             <attributes>
+                <attribute qualifier="base" type="Theme">
+                    <modifiers read="true" write="true" search="false" optional="false"/>
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="BackofficeThemeConfig" extends="AbstractDynamicContent" abstract="false"
+                  jaloclass="de.hybris.platform.processengine.jalo.DynamicProcessDefinition">
+        </itemtype>
+
+        <itemtype code="User" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="themeForBackoffice" type="Theme">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="avatar" type="Media">
+                    <modifiers read="true" write="true" search="false" optional="true" partof="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="widgetsConfigForBackoffice" type="Media">
+                    <modifiers read="true" write="true" search="false" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+    </itemtypes>
+
+
+</items>

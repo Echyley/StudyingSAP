@@ -1,0 +1,203 @@
+@import "scss/_variables.scss";
+
+.yw-theme-preview {
+	width: 100%;
+	height: 100%;
+
+	&-container {
+		display: flex;
+        flex-flow: column;
+        width: 100%;
+        height: 100%;
+	}
+
+	&-shellbar {
+		flex: 0 0 $custom-theme-preview--shellbar-height;
+
+		&-action {
+			color: var(--bo-shell-interactive-color);
+
+			&.menu {
+                margin-left: -40px;
+                margin-right: 8px;
+			}
+		}
+
+		a {
+			text-decoration: none;
+
+			&:hover, &:focus, &:active {
+				text-decoration: none;
+			}
+		}
+    }
+
+    &-main {
+        flex: 1 1 0;
+        display: flex;
+        flex-flow: row;
+    }
+
+    &-navbar {
+    	background-color: var(--bo-container-background);
+    	flex: 0 1 $custom-theme-preview--navbar-width;
+    	box-shadow: 0 0 1px var(--bo-container-border-color);
+
+    	.yw-toolbar-vertical .ya-toggle-active {
+            background-color: var(--bo-list-selected-background);
+            border-bottom: var(--bo-list-border-width) solid var(--bo-list-selected-border-color);
+        }
+
+        .yw-toolbar-vertical .ya-toggle:hover:not(.ya-toggle-active) {
+            background-color: var(--bo-list-hover-background);
+        }
+
+        .ya-toggle {
+        	width: $custom-theme-preview--navbar-width;
+					height: $custom-theme-preview--navbar-height;
+					padding: 8px 0 0 8px;
+        }
+
+		.ya-toggle .cng-action-icon {
+		    width: $toolbar__button-default--size;
+				height: $toolbar__button-default--size;
+				border: none;
+				background: none;
+				outline: none;
+				box-shadow: none;
+				&:after {
+						color: var(--bo-button-icon-color);
+				}
+		}
+
+	}
+
+	&-content {
+		flex: 1 1 auto;
+
+		&-header {
+			background: var(--bo-base-color);
+			height: 74px;
+			padding: 18px 24px;
+			display: flex;
+            flex-flow: row;
+
+			&-title {
+				color: var(--bo-text-color);
+				flex: 0 0 auto;
+				white-space: nowrap;
+
+				.z-label {
+					font-size: var(--bo-font-size-h3);
+				}
+			}
+
+			&-buttons {
+				flex: 1 1 auto;
+				display: flex;
+				flex-flow: row-reverse;
+                align-items: start;
+
+                .y-btn-primary {
+                	margin-right: 16px;
+                }
+			}
+		}
+
+		&-tabs {
+			background: var(--bo-base-color);
+            color: var(--bo-text-color);
+          	height: 48px;
+          	padding: 16px 0 0 24px;
+          	display: flex;
+
+          	span {
+                height: 100%;
+
+                &.active {
+                	margin-right: 24px;
+                	border-bottom: 3px solid var(--bo-selected-color);
+									border-radius: 3px;
+									color: var(--bo-selected-color);
+                }
+          	}
+
+        }
+
+		&-details {
+			background: var(--bo-base-background);
+			padding: 20px 24px;
+
+			.title {
+				color: var(--bo-text-color);
+
+				.z-label {
+                	font-size: var(--bo-font-size-h5);
+                }
+			}
+
+			.panel {
+				background: var(--bo-base-color);
+				padding: 19px 22px;
+				margin-top: 24px;
+				color: var(--bo-text-color);
+
+				.z-label {
+                    font-size: var(--bo-font-size);
+                }
+				.description {
+					color: var(--bo-content-label-color);
+					margin-bottom: 20px;
+				}
+
+				div {
+					margin-bottom: 10px;
+				}
+
+				.section1 {
+					margin-bottom: 0;
+                    display: flex;
+                    flex-flow: row;
+
+                    label {
+                        flex: 1 0 auto;
+                        cursor: pointer;
+                    }
+
+                    span {
+                    	flex: 0 0 auto;
+                    }
+				}
+			}
+
+			.tableHeader {
+			 	display: flex;
+                flex-flow: row;
+                margin-top: 32px;
+                margin-bottom: 8px;
+
+                .title {
+                	flex: 0 0 auto;
+                	line-height: 28px;
+                }
+                .mode {
+                	flex: 1 1 auto;
+                    display: flex;
+                    flex-flow: row-reverse;
+                    align-items: start;
+                }
+			}
+
+			.tableBody {
+
+				.positive {
+					//color: var(--bo-positive-color);
+					.z-label {
+                        color: var(--bo-positive-color);
+                    }
+				}
+            }
+		}
+    }
+
+}

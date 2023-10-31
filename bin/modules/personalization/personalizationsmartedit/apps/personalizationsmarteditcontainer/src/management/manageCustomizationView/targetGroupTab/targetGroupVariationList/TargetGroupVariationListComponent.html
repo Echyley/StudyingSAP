@@ -1,0 +1,40 @@
+<ul class="pe-customization-modal__list-group">
+    <li class="pe-customization-modal__list-group__item" *ngFor="let variation of variationsForView">
+        <div class="pe-customization-modal__list-group__item-col1">
+            <a
+                class="pe-customization-modal__list-group__item-link perso-wrap-ellipsis"
+                (click)="editVariation(variation)"
+                >{{ variation.name }}</a
+            >
+            <!-- Enabled / Disabled text -->
+            <span [ngClass]="variation.activityState">{{ variation.enablementText }}</span>
+            <div *ngIf="variation.isDefault">
+                <span
+                    class="pe-customization-modal__title-label-segments"
+                    translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments.colon"
+                ></span>
+                <span
+                    translate="personalization.modal.customizationvariationmanagement.targetgrouptab.variation.default"
+                ></span>
+            </div>
+            <div *ngIf="!variation.isDefault">
+                <div>
+                    <span
+                        class="pe-customization-modal__title-label-segments"
+                        translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments.colon"
+                    ></span>
+                    <segment-expression-as-html
+                        [segmentExpression]="variation.triggers"
+                    ></segment-expression-as-html>
+                </div>
+            </div>
+        </div>
+        <div>
+            <se-dropdown-menu
+                [dropdownItems]="dropdownItems"
+                [selectedItem]="{ variation: variation }"
+                class="pull-right"
+            ></se-dropdown-menu>
+        </div>
+    </li>
+</ul>

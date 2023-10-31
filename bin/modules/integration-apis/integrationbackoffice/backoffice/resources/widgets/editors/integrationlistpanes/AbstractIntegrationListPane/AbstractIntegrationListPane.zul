@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%"
+        width="100%">
+
+    <div style="background: #dce6ee;" height="100%">
+            <div sclass="integrationbackoffice-editor-white-background" vflex="1" hflex="1">
+                <listbox id="listPaneListbox"
+                         sclass="integrationbackoffice-generic-listbox"
+                         vflex="1">
+                    <listhead id="listPaneListhead" sizable="true">
+                        <listheader id="listPaneListheader" sort="auto"  sortDirection="ascending"/>
+                    </listhead>
+                </listbox>
+            </div>
+    </div>
+
+</widget>

@@ -1,0 +1,87 @@
+### Create Customer 111
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_111",
+  "name": "name_111"
+}
+
+### Create Customer 222
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_222",
+  "name": "name_222"
+}
+
+### Create Customer 333
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_333",
+  "name": "name_333"
+}
+
+### Create Customer 444
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_444",
+  "name": "name_444"
+}
+
+### Create Customer 555
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_555",
+  "name": "name_555"
+}
+
+### Create Customer 666
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_666",
+  "name": "name_666"
+}
+
+### Create Customer 777
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_777",
+  "name": "name_777"
+}
+
+### Create Customer 888
+POST {{fullURL}}/TestCustomerIO/Customers
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uid": "customer_888",
+  "name": "name_888"
+}

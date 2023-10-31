@@ -1,0 +1,31 @@
+<se-tooltip
+    [placement]="'bottom'"
+    [triggers]="['mouseenter', 'mouseleave']"
+    [isChevronVisible]="true"
+    class="se-products-catalog-select-multiple__tooltip"
+>
+    <div
+        id="multi-product-catalog-versions-selector"
+        se-tooltip-trigger
+        (click)="onClickSelector()"
+        class="se-products-catalog-select-multiple"
+    >
+        <input
+            type="text"
+            [value]="multiProductCatalogVersionsSelectedOptions$ | async"
+            class="fd-input se-products-catalog-select-multiple__catalogs se-nowrap-ellipsis"
+            [name]="'productCatalogVersions'"
+            readonly
+        />
+        <span class="hyicon hyicon-optionssm se-products-catalog-select-multiple__icon"></span>
+    </div>
+
+    <div class="se-product-catalogs-tooltip" se-tooltip-body>
+        <div class="se-product-catalogs-tooltip__h">
+            {{ ('se.product.catalogs.selector.headline.tooltip' || '') | translate }}
+        </div>
+        <div class="se-product-catalog-info" *ngFor="let productCatalog of productCatalogs">
+            {{ getCatalogNameCatalogVersionLabel(productCatalog.catalogId) | async }}
+        </div>
+    </div>
+</se-tooltip>

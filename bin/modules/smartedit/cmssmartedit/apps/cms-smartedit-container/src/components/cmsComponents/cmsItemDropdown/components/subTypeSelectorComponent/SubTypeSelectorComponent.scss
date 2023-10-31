@@ -1,0 +1,10 @@
+.cms-sub-type__selector-link {
+    @include se-flex-row;
+    color: var(--sapLinkColor);
+    height: 46px;
+    &.fd-menu__item {
+        &:hover {
+            border-radius: unset;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+
+@import "cockpitng-globals.scss";
+/*Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon {
+@include setTreeIconGlyph("ruleengine", "split");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+ @include setSideNavigationIconGlyph("ruleengine", "split");
+}
+
+.yw-listview-cell-rule-status-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.rule-status-icon-green-color {
+    color: var(--bo-positive-color);
+}
+
+.rule-status-icon-yellow-color {
+    color: var(--bo-critical-color);
+}
+
+.rule-status-icon-red-color {
+    color: var(--bo-negative-color);
+}
+.yzul-rule-background {
+	background: var(--bo-container-background);
+}

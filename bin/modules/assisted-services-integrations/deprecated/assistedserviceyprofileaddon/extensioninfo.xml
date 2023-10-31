@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+    	
+    <extension abstractclassprefix="Generated" classprefix="Assistedserviceyprofileaddon" description="assistedserviceyprofileaddon extension" managername="AssistedserviceyprofileaddonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="assistedserviceyprofileaddon">
+        		
+        <requires-extension name="assistedserviceyprofilefacades"/>
+        		
+        <requires-extension name="addonsupport"/>
+        		
+        <coremodule generated="true" manager="de.hybris.platform.assistedserviceyprofileaddon.jalo.AssistedserviceyprofileaddonManager" packageroot="de.hybris.platform.assistedserviceyprofileaddon"/>
+        		
+		
+        <meta key="classpathgen" value="false"/>
+        		
+        <meta key="deprecated" value="true"/>
+        	
+    </extension>
+    
+</extensioninfo>

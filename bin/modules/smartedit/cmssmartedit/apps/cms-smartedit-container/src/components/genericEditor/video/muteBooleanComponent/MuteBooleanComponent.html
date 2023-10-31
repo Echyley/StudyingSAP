@@ -1,0 +1,30 @@
+<div class="se-boolean fd-form__item fd-form__item--check">
+    <span class="fd-toggle fd-toggle--xs fd-form__control">
+        <label
+            class="fd-form__label fd-switch fd-switch--compact"
+            for="{{widget.qualifier}}-checkbox"
+        >
+            <input
+                type="checkbox"
+                id="{{widget.qualifier}}-checkbox"
+                class="se-boolean__input fd-switch__input"
+                [placeholder]="(widget.field.tooltip || '') | translate"
+                [attr.name]="widget.qualifier"
+                [disabled]="!widget.field.editable"
+                [(ngModel)]="widget.model[widget.qualifier]"
+            />
+            <div class="fd-switch__slider">
+                <div class="fd-switch__track">
+                    <span
+                        class="fd-switch__handle"
+                        role="presentation"
+                        style="border-style: solid; border-width: 1px"
+                    ></span>
+                </div>
+            </div>
+        </label>
+    </span>
+    <p *ngIf="widget.field.labelText && !widget.model[widget.qualifier]" class="se-boolean__text">
+        {{widget.field.labelText| translate}}
+    </p>
+</div>

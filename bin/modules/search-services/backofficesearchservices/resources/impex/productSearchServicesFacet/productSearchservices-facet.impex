@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$snIndexType = backoffice-product
+$backofficeSearchProfileCode = backoffice-product-default
+$backofficeSearchProfileName = Backoffice Product Default
+$backofficeSearchCfgId = 42d46b84-3b85-42ad-a057-382fcbae294b
+### ADAPTIVESEARCH CONFIGURATION ###
+#Refer this link to define Facet information:
+#https://github.tools.sap/cx-commerce/commercesmartsearch/blob/develop/commercesmartsearchsamplesaddon/resources/commercesmartsearchsamplesaddon/import/stores/apparel-de/store.impex
+#https://github.tools.sap/cx-commerce/commercesmartsearch/tree/develop/commercesmartsearchservices/src/de/hybris/platform/commercesmartsearchservices/product/impl
+
+INSERT_UPDATE AsSearchProfileActivationSet; indexType[unique = true];
+                                          ; $snIndexType            ;
+
+INSERT_UPDATE AsSimpleSearchProfile; code[unique = true]          ; name[lang = en]              ; indexType    ; activationSet(indexType);
+"#% beforeEach:
+import de.hybris.platform.core.Registry;   
+String asSimpleSearchProfileCode = line.get(Integer.valueOf(1));                              
+Object asSimpleSearchProfile;
+try
+{
+     asSimpleSearchProfile = Registry.getApplicationContext().getBean(""asSearchProfileService"").getSearchProfileForCode(null, asSimpleSearchProfileCode).get();
+}
+catch (Exception e)
+{
+    asSimpleSearchProfile = null;
+}
+if (asSimpleSearchProfile != null)
+{
+    line.clear();
+}"
+                                   ; $backofficeSearchProfileCode ; $backofficeSearchProfileName ; $snIndexType ; $snIndexType            ;
+
+INSERT_UPDATE AsSimpleSearchConfiguration; searchProfile(code)[unique = true]; uid[unique = true]     ; uniqueIdx[unique = true];
+                                         ; $backofficeSearchProfileCode      ; $backofficeSearchCfgId ; $backofficeSearchCfgId  ;
+
+INSERT_UPDATE AsFacet; searchConfiguration(uid); uid[unique = true]                   ; indexProperty        ; facetType(code); priority; ranged[default = false]; searchConfigurationPOS;
+                     ; $backofficeSearchCfgId  ; ba01fe6d-c2ca-4cff-a699-438e4a6aaebb ; approvalStatus       ; MULTISELECT    ; 100     ; false                  ; 0                     ;
+                     ; $backofficeSearchCfgId  ; 5fcbd84d-5ad3-4b8c-8bcb-2982eb58f87a ; facet_catalogVersion ; MULTISELECT    ; 100     ; false                  ; 1                     ;
+                     ; $backofficeSearchCfgId  ; 86a8220b-3fc0-400e-8798-3afe09dcc973 ; facet_catalog        ; MULTISELECT    ; 100     ; false                  ; 2                     ;
+                     ; $backofficeSearchCfgId  ; 3bf25fa8-d97a-42f7-8a4d-75b11dbb869d ; categoryLabel        ; MULTISELECT    ; 100     ; false                  ; 3                     ;
+                     ; $backofficeSearchCfgId  ; 138c9eb7-d359-46a8-87a7-a4d2ac1c5839 ; facet_itemtype       ; MULTISELECT    ; 100     ; false                  ; 4                     ;

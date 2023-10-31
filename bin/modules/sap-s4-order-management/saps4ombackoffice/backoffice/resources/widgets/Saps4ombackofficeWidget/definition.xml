@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+	id="de.hybris.platform.sap.saps4ombackoffice.widgets.saps4ombackofficewidget">
+	<name>saps4ombackoffice Sample Widget</name>
+	<description>saps4ombackoffice Sample Widget</description>
+	<defaultTitle>saps4ombackoffice Sample Widget</defaultTitle>
+	<author>Extgen</author>
+	<version>1.0</version>
+	<view src="saps4ombackofficewidget.zul" />
+	<keywords>
+		<keyword>saps4ombackoffice</keyword>
+	</keywords>
+	<controller class="de.hybris.platform.sap.saps4ombackoffice.widgets.Saps4ombackofficeController" />
+</widget-definition>

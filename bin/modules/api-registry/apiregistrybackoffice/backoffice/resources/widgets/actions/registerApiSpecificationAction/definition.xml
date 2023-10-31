@@ -1,0 +1,21 @@
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="de.hybris.platform.apiregistrybackoffice.actions.RegisterExposedDestinationAction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+    <name>Register Exposed Destination</name>
+    <description>Register Exposed Destination</description>
+    <author>hybris</author>
+    <version>0.1</version>
+
+    <actionClassName>de.hybris.platform.apiregistrybackoffice.actions.RegisterExposedDestinationAction</actionClassName>
+
+    <inputType>de.hybris.platform.apiregistryservices.model.ExposedDestinationModel</inputType>
+    <outputType>java.lang.String</outputType>
+
+    <iconUri>connected</iconUri>
+
+</action-definition>
+
+

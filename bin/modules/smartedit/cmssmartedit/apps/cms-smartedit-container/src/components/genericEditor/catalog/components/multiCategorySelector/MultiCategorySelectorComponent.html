@@ -1,0 +1,11 @@
+<se-catalog-aware-selector
+    [id]="id"
+    [selectedItemIds]="selectedItemIds"
+    (selectedItemIdsChange)="onSelectedItemIdsChange($event)"
+    [getCatalogs]="getCatalogs"
+    [itemComponent]="categorySelectorItemComponent"
+    [nodeComponent]="categoryNodeComponent"
+    [itemsFetchStrategy]="itemsFetchStrategy"
+    [catalogItemTypeI18nKey]="'se.cms.catalogaware.catalogitemtype.category'"
+    [editable]="editable"
+></se-catalog-aware-selector>

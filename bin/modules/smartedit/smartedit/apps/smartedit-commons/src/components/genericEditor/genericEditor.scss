@@ -1,0 +1,205 @@
+@import '~fundamental-styles/dist/button';
+
+.se-generic-editor .se-generic-editor__form {
+    padding: 0;
+}
+.se-generic-editor__header,
+.se-generic-editor__body,
+.se-generic-editor__footer {
+    padding: 20px;
+}
+.se-generic-editor__warning {
+    color: var(--sapWarningColor) !important;
+}
+.se-generic-editor__error {
+    color: var(--sapErrorColor) !important;
+}
+.se-generic-editor__row {
+    margin-bottom: se-space('small');
+    white-space: initial;
+}
+.dialog-footer.se-generic-editor__footer {
+    @include se-container-section('footer');
+}
+.se-control-label {
+    @include se-flex-row;
+    display: inline-flex;
+    position: relative;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+
+    &,
+    > span:first-child {
+        color: var(--sapTextColor);
+        margin-right: se-space('base');
+    }
+
+    &.required::after {
+        @include se-weight('bold');
+        content: '*';
+        display: block;
+        padding-left: 2px;
+    }
+}
+
+.se-exists-label-warning {
+    margin-top: 5px;
+    display: block;
+    color: var(--sapField_WarningColor);
+}
+.se-help-tooltip {
+    margin-left: 4px;
+}
+.se-form-control-row {
+    @include se-flex-row();
+    margin-bottom: se-space('xxs');
+
+    &--action {
+        cursor: pointer;
+    }
+    > * {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        &:first-child {
+            margin-right: se-space('base');
+        }
+    }
+    label {
+        color: var(--sapNeutralColor);
+    }
+}
+
+.fd-form__label {
+    outline: none;
+}
+.se-form-help-message {
+    color: var(--sapNeutralColor);
+    display: block;
+    padding: se-space('xxs') 0;
+}
+.fd-form__message {
+    font-style: italic;
+}
+
+// Custom Styled GE Rows
+.se-generic-editor__row + .se-generic-editor__row--restrictions {
+    border-top: se-border();
+    padding-top: se-space('s');
+}
+
+// Time Picker Row, to be removed once date picker is replaced by Fundamental NGX
+.se-date-field.input-group {
+    @include se-flex-row();
+}
+.se-date-field--input.fd-form-control {
+    box-shadow: none !important;
+    border-radius: se-space('base') 0 0 se-space('base');
+    height: se-space('l');
+}
+.se-date-field--button.input-group-addon {
+    @include se-flex-row(center);
+    cursor: pointer;
+    border-radius: 0 se-space('base') se-space('base') 0;
+    border: se-border(2);
+    border-left: none;
+    box-shadow: none !important;
+    outline: none;
+    height: se-space('l');
+    background-color: var(--sapLegend_WorkingBackground);
+    width: se-space('l');
+    color: var(--sapInformativeColor);
+    &:focus {
+        border: se-border(var(--sapAccentColor6), 2px);
+    }
+}
+.bootstrap-datetimepicker-widget {
+    &.dropdown-menu {
+        &.dropdown-menu {
+            &.pull-right {
+                top: 34px !important;
+                border-radius: se-space('base');
+                padding: se-space('xs');
+                &::before,
+                &::after {
+                    display: none;
+                }
+                background-color: var(--sapList_Background, #fff);
+                .list-unstyled {
+                    @include se-flex-column();
+                }
+                a.btn:hover {
+                    color: var(--sapLinkColor);
+                }
+                .picker-switch.accordion-toggle {
+                    order: 2;
+                    width: 252px;
+                    tr {
+                        @include se-flex-row(space-between);
+                    }
+                    td,
+                    a {
+                        @include se-flex-row(center);
+                        width: 72px;
+                        height: se-space('l');
+                        padding: 0;
+                        text-decoration: none;
+                    }
+                    td {
+                        color: var(--sapButton_TextColor, #0854a0);
+                        span {
+                            color: var(--sapButton_TextColor, #0854a0);
+                            &:hover {
+                                background-color: unset;
+                            }
+                        }
+                    }
+                }
+                .btn-primary {
+                    font-family: $font-sap;
+                    box-shadow: none;
+                    @extend .fd-button;
+                    @extend .fd-button--emphasized;
+                }
+                table {
+                    td {
+                        &:hover {
+                            background-color: var(--sapList_Hover_Background, #f5f5f5);
+                        }
+                        &.day {
+                            line-height: 26px;
+                            width: se-space('l');
+                        }
+                    }
+                    th {
+                        &:hover {
+                            background-color: var(--sapButton_Hover_Background, #ebf5fe);
+                        }
+                    }
+                }
+                .datepicker-months,
+                .datepicker-years,
+                .datepicker-decades,
+                .timepicker-picker {
+                    table {
+                        td {
+                            &:hover {
+                                background-color: unset;
+                            }
+                            span {
+                                &:hover {
+                                    background-color: var(--sapList_Hover_Background, #f5f5f5);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+select.cke_dialog_ui_input_select {
+    background-image: none;
+    -webkit-appearance: searchfield;
+    -moz-appearance: menulist;
+}

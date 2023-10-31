@@ -1,0 +1,66 @@
+###
+# AC 4: Cannot mix items and classes in same IO
+#
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-6",
+    "classes": [
+      {
+        "root": true,
+        "code": "Product",
+        "type": "de.hybris.platform.core.model.product.ProductModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          }
+        ]
+      },
+      {
+        "root": true,
+        "code": "Unit",
+        "type": "de.hybris.platform.core.model.product.UnitModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "code": "Customer",
+        "type": {
+          "code": "Customer"
+        }
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in BAD REQUEST", function() {
+  client.assert(response.status === 400, "Response status is not 400 BAD REQUEST");
+});
+
+client.test("correct error reported", function() {
+  const expectedCode = 'invalid_pojo_item_modeling';
+  const expectedMsg = 'An error occurred while attempting to save entries for entityType: InboundChannelConfiguration, with error message Integration object [POJO-6] has integration object item(s) [Customer] assigned. Mixing IntegrationObjectClass and IntegrationObjectItem models in an Integration Object is not allowed.';
+
+  var errorCode = response.body.error.code;
+  var errorMsg = response.body.error.message.value;
+  client.assert(errorCode === expectedCode, 'Expected error code: "' + expectedCode + '"; actual: "' + errorCode + '"');
+  client.assert(errorMsg === expectedMsg, 'Expected error message: "' + expectedMsg + '"; actual: "' + errorMsg + '"');
+});
+%}

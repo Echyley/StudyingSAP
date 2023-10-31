@@ -1,0 +1,9 @@
+{
+    "extends": "./node_modules/smartedit-build/config/tsconfig.base.json",
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "fullTemplateTypeCheck": true
+    },
+    "include": ["src/**/*.ts"]
+}

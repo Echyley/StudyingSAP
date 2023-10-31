@@ -1,0 +1,14 @@
+<se-component-clone-info-form
+    data-ng-if="clonePageWizardCtrl.isPageInfoActive()"
+    [structure]="clonePageWizardCtrl.getPageInfoStructure()"
+    [content]="clonePageWizardCtrl.getPageInfo()"
+    [(submit)]="clonePageWizardCtrl.callbacks.savePageInfo"
+    [(reset)]="clonePageWizardCtrl.callbacks.resetPageInfo"
+    [(is-dirty)]="clonePageWizardCtrl.callbacks.isDirtyPageInfo"
+    [(is-valid)]="clonePageWizardCtrl.callbacks.isValidPageInfo"
+    [page-template]="clonePageWizardCtrl.getPageTemplate()"
+    [page-type-code]="clonePageWizardCtrl.getPageTypeCode()"
+    [uri-context]="clonePageWizardCtrl.uriContext"
+    [target-catalog-version]="clonePageWizardCtrl.getTargetCatalogVersion()"
+>
+</se-component-clone-info-form>

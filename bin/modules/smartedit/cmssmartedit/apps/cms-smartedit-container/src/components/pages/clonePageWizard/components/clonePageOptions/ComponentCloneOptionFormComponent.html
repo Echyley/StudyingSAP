@@ -1,0 +1,32 @@
+<label for="components-cloned-selector-id" class="se-control-label">
+    <span translate="se.cms.clonepagewizard.options.title"></span>
+    <se-help>
+        <span translate="se.cms.clonepagewizard.options.tooltip"></span>
+    </se-help>
+</label>
+<div id="components-cloned-selector-id">
+    <div class="se-form-control-row">
+        <input
+            class="components-cloned-option-id fd-form__control"
+            type="radio"
+            name="componentsclone"
+            id="reference-cloning"
+            [(ngModel)]="componentInSlotOption"
+            (click)="updateComponentInSlotOption(CLONE_COMPONENTS_IN_CONTENT_SLOTS_OPTION.REFERENCE_EXISTING)"
+            [value]="CLONE_COMPONENTS_IN_CONTENT_SLOTS_OPTION.REFERENCE_EXISTING"
+        />
+        <label for="reference-cloning" translate="se.cms.clonepagewizard.options.existing"></label>
+    </div>
+    <div class="se-form-control-row">
+        <input
+            class="components-cloned-option-id fd-form__control"
+            type="radio"
+            id="deep-cloning"
+            name="componentsclone"
+            [(ngModel)]="componentInSlotOption"
+            (click)="updateComponentInSlotOption(CLONE_COMPONENTS_IN_CONTENT_SLOTS_OPTION.CLONE)"
+            [value]="CLONE_COMPONENTS_IN_CONTENT_SLOTS_OPTION.CLONE"
+        />
+        <label for="deep-cloning" translate="se.cms.clonepagewizard.options.copies"></label>
+    </div>
+</div>

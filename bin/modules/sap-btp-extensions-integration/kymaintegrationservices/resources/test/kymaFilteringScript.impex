@@ -1,0 +1,5 @@
+INSERT_UPDATE Script; code[unique = true]              ; scriptType(code); content;
+                    ; KymaFilterScript_ReturnsTrue     ; GROOVY          ; true
+                    ; KymaFilterScript_ReturnsFalse    ; GROOVY          ; false
+                    ; KymaFilterScript_ThrowsException ; GROOVY          ; throw new Exception("Kyma filtering script exception!")
+

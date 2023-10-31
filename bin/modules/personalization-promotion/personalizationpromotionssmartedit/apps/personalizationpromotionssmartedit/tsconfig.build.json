@@ -1,0 +1,20 @@
+{
+  "extends": "./node_modules/smartedit-build/config/tsconfig.base.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "personalizationpromotionssmartedit/*": [
+        "src/*"
+      ],
+      "personalizationpromotionssmartedit": [
+        "src"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}

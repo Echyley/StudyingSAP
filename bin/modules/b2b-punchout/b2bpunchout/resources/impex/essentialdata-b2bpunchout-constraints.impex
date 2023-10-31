@@ -1,0 +1,11 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+
+INSERT_UPDATE PatternConstraint; active[allownull = true]; descriptor(enclosingType(code), qualifier); id[unique = true, allownull = true]; qualifier    ; severity(code, itemtype(code)); target                                                        ; type(code)         ; regexp                                                                                         ; flags(code)
+                               ; true                    ; PunchOutCredential:sharedsecret           ; PunchoutSecretPatternConstraint    ; sharedsecret ; ERROR:Severity                ; de.hybris.platform.b2b.punchout.model.PunchOutCredentialModel ; PunchOutCredential ; "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~!@#$""%^'&*()`_+{}\\[\\]\\|:;,.<>/?-]).{8,100}$" ; UNICODE_CASE ;
+
+
+INSERT_UPDATE AttributeConstraint; id[unique = true]                ; annotation[allownull = true]                                     ; descriptor(enclosingType(code), qualifier); qualifier    ; severity(code, itemtype(code)); target                                                        ; type(code)
+                                 ; PunchoutSecretDenyListConstraint ; de.hybris.platform.b2b.punchout.constraints.SharedSecretDenyList ; PunchOutCredential:sharedsecret           ; sharedsecret ; ERROR:Severity                ; de.hybris.platform.b2b.punchout.model.PunchOutCredentialModel ; PunchOutCredential

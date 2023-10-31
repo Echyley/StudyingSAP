@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+               
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Gigyab2bwebservices" jaloLogicFree="true" managername="Gigyab2bwebservicesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="gigyab2bwebservices" usemaven="false">
+                                       
+      
+        
+        
+        <requires-extension name="webservicescommons"/>
+                                 
+       
+        
+        <requires-extension name="gigyab2bfacades"/>
+                
+        
+        
+        <coremodule generated="true" manager="de.hybris.platform.gigya.gigyab2bwebservices.jalo.Gigyab2bwebservicesManager" packageroot="de.hybris.platform.gigya.gigyab2bwebservices"/>
+                              
+        
+        
+        <webmodule jspcompile="false" webroot="/gigyab2bwebservices"/>
+                        					
+		
+        
+        	
+
+   
+    
+    
+    </extension>
+                  
+
+
+
+</extensioninfo>

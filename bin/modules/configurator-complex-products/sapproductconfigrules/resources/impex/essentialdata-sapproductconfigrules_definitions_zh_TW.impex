@@ -1,0 +1,55 @@
+$lang=zh_TW
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;可選配產品
+;productconfig_customer_category;客戶
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;購物車中含指定組態的產品;圖表包含產品 {product}，特性 {cstic} {value_operator} 值 {cstic_value}。
+;y_configurable_product;您目前正在組態的產品;您目前正在組態的產品為 {product}，特性 {cstic} {value_operator} 值 {cstic_value}。
+;y_configurable_product_customer;客戶;客戶 {customers_operator} 下列清單：{customers}
+;y_configurable_product_customer_group;客戶群組;客戶 {customer_groups_operator} 下列群組：{customer_groups}
+;y_configurable_product_customer_support_mode;客戶支援;援助服務工作階段啟用中：{value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;產品;購物車中的產品;Item Type (Product)
+;y_configurable_product_in_cart;cstic;特性;特性名稱
+;y_configurable_product_in_cart;value_operator;運算子;特性和值之間的運算子
+;y_configurable_product_in_cart;cstic_value;值;特性值名稱;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;產品;您目前正在組態的產品
+;y_configurable_product;cstic;特性;特性名稱
+;y_configurable_product;value_operator;運算子;特性和值之間的運算子
+;y_configurable_product;cstic_value;值;特性值名稱
+;y_configurable_product_customer;customers_operator;客戶選擇運算子;定義客戶是否包含於清單中
+;y_configurable_product_customer;customers;客戶;客戶清單
+;y_configurable_product_customer_group;customer_groups_operator;客戶群組選擇運算子;定義客戶是否包含於任意或所有客戶群組中
+;y_configurable_product_customer_group;customer_groups;客戶群組;客戶群組清單
+;y_configurable_product_customer_support_mode;value;援助服務工作階段啟用中;客戶支援代理人已代表客戶登入
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;可選配產品
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;設定可選配產品特性值;設定特性 {cstic} 的值 {cstic_value}
+;y_configurable_product_remove_assignable_value;隱藏可選配產品可指派值;隱藏特性 {cstic} 的值 {cstic_value}
+;y_configurable_product_hide_cstic;隱藏可選配產品特性;隱藏特性 {cstic}
+;y_configurable_product_display_cstic_readonly;將可選配產品的特性顯示為唯讀;將特性 {cstic} 顯示為唯讀
+;y_configurable_product_display_message;顯示訊息;顯示訊息
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;特性;已設定值的特性
+;y_configurable_product_set_cstic_value;cstic_value;值;待設定值的特性
+;y_configurable_product_remove_assignable_value;cstic;特性;待移除可指派值的特性
+;y_configurable_product_remove_assignable_value;cstic_value;值;待自可指派值清單移除的值
+;y_configurable_product_hide_cstic;cstic;特性;待隱藏的特性
+;y_configurable_product_display_cstic_readonly;cstic;特性;待顯示為唯讀的特性
+;y_configurable_product_display_message;message;訊息;訊息內文
+;y_configurable_product_display_message;message_severity;嚴重性;訊息嚴重性
+;y_configurable_product_display_message;cstic;特性;此訊息出現的特性
+;y_configurable_product_display_message;cstic_value;特性值;此訊息出現的特性值
+
+#% endif:

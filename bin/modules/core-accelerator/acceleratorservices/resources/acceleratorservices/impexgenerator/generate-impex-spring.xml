@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  ~
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="localeResolver" class="de.hybris.platform.acceleratorservices.velocity.locale.DefaultLocaleResolver" />
+
+	<bean id="impexGeneratorBean"
+		class="de.hybris.platform.acceleratorservices.velocity.eval.GenerateLocalizedImpexesBean" scope="prototype">
+		<property name="localeResolverInstance" ref="localeResolver" />
+		<property name="scriptUrlContextFactory">
+			<bean
+				class="de.hybris.platform.acceleratorservices.velocity.resource.url.DefaultScriptUrlContextFactory" />
+		</property>
+		<property name="velocityContextConfigurer" ref="velocityContextConfigurer"/>
+		<lookup-method name="getVelocityExecutor" bean="velocityExecutor" />
+	</bean>
+
+	<bean id="velocityContextConfigurer" class="de.hybris.platform.acceleratorservices.velocity.core.DefaultVelocityContextConfigurer">
+		<property name="localeResolver" ref="localeResolver"/>
+		<property name="propertyEvaluatorFactory" ref="propertyEvaluator"/>
+		<property name="properties">
+			<map>
+				<entry key="esc">
+						<bean  class="org.apache.velocity.tools.generic.EscapeTool" />
+				</entry>
+				<!-- to do use PropertyPlaceholderConfigurer  -->
+				<entry key="header" value="#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="velocityEngineConfigurer" class="de.hybris.platform.acceleratorservices.velocity.core.DefaultVelocityEngineConfigurer">
+		<property name="properties">
+			<map>
+				<entry key="resource.default_encoding" value="UTF-8" />
+				<entry key="event_handler.invalid_references.class" value="de.hybris.platform.acceleratorservices.velocity.handler.LogMissingAttributeInvalidReferenceEventHandler" />
+
+				<!-- http://velocity.apache.org/engine/2.3/upgrading.html#upgrading-from-velocity-17-to-velocity-20 -->
+				<entry key="runtime.conversion.handler.class" value="none" />
+				<entry key="space.gobbling" value="bc" />
+				<entry key="directive.if.emptycheck" value="false" />
+
+				<!-- http://velocity.apache.org/engine/2.3/upgrading.html#upgrading-from-velocity-20-to-velocity-21 -->
+				<entry key="introspector.conversion_handler.class" value="none" />
+				<entry key="parser.space_gobbling" value="bc" />
+				<entry key="directive.if.empty_check" value="false" />
+				<entry key="parser.allow_hyphen_in_identifiers" value="true" />
+				<entry key="velocimacro.arguments.preserve_literals" value="true" />
+
+				<!-- http://velocity.apache.org/engine/2.3/upgrading.html#upgrading-from-velocity-21-to-velocity-22 -->
+				<entry key="introspector.conversion_handler.class" value="none" />
+				<entry key="parser.space_gobbling" value="bc" />
+				<entry key="directive.if.empty_check" value="false" />
+				<entry key="parser.allow_hyphen_in_identifiers" value="true" />
+				<entry key="velocimacro.enable_bc_mode" value="true" />
+				<entry key="event_handler.invalid_references.quiet" value="true" />
+				<entry key="event_handler.invalid_references.null" value="true" />
+				<entry key="event_handler.invalid_references.tested" value="true" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="propertyEvaluator"
+		class="de.hybris.platform.acceleratorservices.velocity.eval.DefaultPropertyEvaluatorFactory">
+		<property name="propertyFileMissingHandler">
+			<bean
+				class="de.hybris.platform.acceleratorservices.velocity.resource.RemoveTargetFileMissingHandler" />
+		</property>
+
+		<lookup-method name="getRowsEvaluator" bean="rowsEvaluator" />
+	</bean>
+
+	<bean id="velocityExecutor" class="de.hybris.platform.acceleratorservices.velocity.VelocityExecutor" scope="prototype" >
+		<property name="velocityEngineConfigurer" ref="velocityEngineConfigurer"/>
+		<property name="readWriteHandler">
+			<bean id="readWriteHandler" class="de.hybris.platform.acceleratorservices.velocity.resource.store.DefaultScriptReadWriteHandler"/>
+		</property>
+	</bean>
+
+	<bean id="rowsEvaluator"
+		class="de.hybris.platform.acceleratorservices.velocity.eval.DefaultRowsEvaluator" scope="prototype">
+		<property name="rowsComparator">
+			<bean
+				class="de.hybris.platform.acceleratorservices.velocity.eval.key.DefaultKeyComparator" />
+		</property>
+		<property name="keyEvaluator">
+			<bean
+				class="de.hybris.platform.acceleratorservices.velocity.eval.key.CutOffEdgesKeyEvaluator" />
+		</property>
+	</bean>
+
+</beans>

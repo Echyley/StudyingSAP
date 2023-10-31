@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "es2015",
+      "dom",
+      "es5"
+    ],
+    "module": "es2015",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./globals.d.ts",
+      "./test.js",
+      "./node_modules/@types"
+    ],
+    "outDir": "./../jsTarget"
+  },
+  "include": [
+    "./globals.d.ts",
+    "./carouselinitialiser/*"
+  ],
+  "exclude": [
+    "./node_modules",
+    ".rush"
+  ]
+}

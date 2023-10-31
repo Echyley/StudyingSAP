@@ -1,0 +1,9 @@
+
+INSERT_UPDATE MaintenanceCleanupJob;code[unique=true];springId[unique=true];active[default=true]
+;expiredRulesMaintenanceCleanupPerformable;expiredRulesMaintenanceCleanupJob;false
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isoCode)[default=en]
+;expiredRulesMaintenanceCleanupJob;expiredRulesMaintenanceCleanupPerformable
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;expiredRulesMaintenanceCleanupJob;0;0;3;-1;-1;-1;false;false;-1

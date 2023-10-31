@@ -1,0 +1,17 @@
+{
+	"name": "backoffice",
+	"version": "1.0.0",
+	"description": "Security scan configuration for Java Script libraries used in backoffice",
+	"dependencies": {
+		"codemirror": "5.65.7",
+		"jquery-ui": "1.13.2",
+		"jsplumb": "https://github.com/jsplumb/jsplumb/tree/5.8.3",
+		"jquery.mousewheel": "3.1.9",
+		"vis": "4.20.1",
+	    "jcrop": "3.0.1",
+	    "html-to-image": "1.10.4"
+	},
+	"devDependencies": {},
+	"author": "SAP SE",
+	"license": "SAP SE"
+}

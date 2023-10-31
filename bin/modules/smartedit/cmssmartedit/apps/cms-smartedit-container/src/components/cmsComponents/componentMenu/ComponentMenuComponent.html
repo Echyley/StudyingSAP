@@ -1,0 +1,16 @@
+<div
+    class="se-component-menu"
+    [ngClass]="{ 'se-component-menu__localized': hasMultipleContentCatalogs }"
+>
+    <div translate="se.cms.componentmenu.dropdown.header" class="se-component-menu__title"></div>
+    <div class="se-component-menu__tip" translate="se.cms.componentmenu.label.draganddrop"></div>
+
+    <se-tabs
+        *ngIf="toolbarItem.isOpen"
+        class="se-component-menu__tabs"
+        [tabsList]="tabsList"
+        [model]="model"
+        [numTabsDisplayed]="2"
+    >
+    </se-tabs>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/util
+				http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <alias name="defaultCMSItemTypeAttributeFilterConfigDao" alias="cmsItemTypeAttributeFilterConfigDao" />
+    <bean id="defaultCMSItemTypeAttributeFilterConfigDao" class="de.hybris.platform.cmsfacades.daos.impl.DefaultCMSItemTypeAttributeFilterConfigDao" parent="abstractCMSItemDao" />
+
+    <alias name="defaultCMSItemAttributeEnablerService" alias="cmsItemAttributeFilterEnablerService" />
+    <bean id="defaultCMSItemAttributeEnablerService" class="de.hybris.platform.cmsfacades.cmsitems.impl.DefaultCMSItemAttributeFilterEnablerService">
+        <property name="typeService" ref="typeService"/>
+        <property name="cmsItemTypeAttributeFilterConfigDao" ref="cmsItemTypeAttributeFilterConfigDao" />
+        <property name="sessionService" ref="sessionService" />
+        <property name="configurationService" ref="configurationService" />
+    </bean>
+</beans>

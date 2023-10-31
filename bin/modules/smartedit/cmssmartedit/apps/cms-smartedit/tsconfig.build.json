@@ -1,0 +1,12 @@
+{
+    "extends": "./node_modules/smartedit-build/config/tsconfig.base.json",
+    "compilerOptions": {
+        "typeRoots": ["node_modules/@types"],
+        "baseUrl": ".",
+        "paths": {
+            "cmssmartedit/*": ["src/*"],
+            "cmssmartedit": ["src"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/**/*.js"]
+}

@@ -1,0 +1,34 @@
+@import 'components/loading-spinner';
+@import 'components/spinner';
+@import 'components/modal';
+@import 'hyicon';
+
+.hyicon {
+    display: inline-flex;
+}
+body,
+html,
+.wrapper {
+    height: 100%;
+
+    @media (min-width: 0) and (max-width: @screen-sm) {
+        overflow-x: hidden;
+    }
+}
+
+body {
+    overflow: auto;
+    margin: 0;
+}
+
+.wrapper {
+    height: 100% !important;
+    overflow: auto;
+    @media (min-width: 0) and (max-width: @screen-sm) {
+        // Prevent narrow devices from vertical scrollbar
+        // when offcanvas is open
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100%;
+    }
+}

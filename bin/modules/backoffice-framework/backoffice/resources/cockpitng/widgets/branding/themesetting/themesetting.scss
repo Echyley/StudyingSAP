@@ -1,0 +1,109 @@
+@import "scss/_themesetting-variables.scss";
+@import "../scss/_branding-common.scss";
+
+.yw-themeSetting {
+    padding-left: 2 * $container-spacing-default_two-thirds;
+    .themeSetting {
+        &-notice {
+            padding-bottom: $_container-spacing-default__regular;
+            color: $theme-setting-notice-color;
+        }
+        &-sub-notice {
+            padding-left: 2*$container-spacing-default__half;
+            padding-top: 0;
+            padding-bottom: $theme-setting-default--spacing/2;
+        }
+        &-info {
+            padding: $theme-setting-default--spacing/2;
+            margin-left: 2*$container-spacing-default__half;
+            margin-right: $theme-setting-default--spacing;
+            margin-bottom: $theme-setting-default--spacing/2;
+            background: var(--bo-information-background);
+            border: 1px solid var(--bo-informative-color);
+            border-radius: 3px;
+        }
+        &-option {
+            padding: $theme-setting-default--spacing/2 0;
+        }
+        &-content {
+            height: 86%;
+            padding-left: $theme-setting-default--spacing;
+            .themeSetting-list {
+                height: 100%;
+                padding-left: 2*$container-spacing-default__half;
+                padding-bottom: $theme-setting-default--spacing;
+                color: $theme-setting-text-color;
+                .z-listbox {
+                    height: 100%;
+                    overflow: auto;
+                    border: none;
+                    .z-listbox-body {
+                        box-shadow: none;
+                        > table > tbody {
+                            text-align: center;
+                            display: flex;
+                            align-content: flex-start;
+                            flex-flow: row wrap;
+                        }
+                        .z-listitem {
+                            flex: 0 0 30%;
+                            box-shadow: $theme-setting-listitem-shadow;
+                            border-radius: 4px;
+                            margin: 8px;
+                            max-width: 187px;
+                            border: 0;
+                        }
+                        .z-listitem-selected {
+                            border: 1px solid var(--bo-selected-color);
+                            .selected-icon {
+                                display: inline !important;
+                            }
+                        }
+                        .z-listcell {
+                            height: 100%;
+                            border: none;
+                            display: flex;
+                            justify-content: center;
+                            .z-listcell-content {
+                                padding-top: $theme-setting-default--spacing;
+                                padding-bottom: 0px;
+                                height: 154px;
+                                width: 187px;
+                                .themeLabel {
+                                    padding-top: $theme-setting-default--spacing;
+                                    width: 100%;
+                                    height: 40%;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                }
+                                .z-image {
+                                    height: 60%;
+                                    width: 60%;
+                                    border-radius: 8px;
+                                    background-size: 100% 100%;
+                                }
+                                .selected-icon {
+                                    width: 10%;
+                                    display: none;
+                                    position: absolute;
+                                    right: 2px;
+                                    top: 4px;
+                                    background: transparent;
+                                    border: none;
+                                    box-shadow: none;
+                                    outline: none;
+                                    &:after {
+                                        font-size: large;
+                                        color: var(--bo-button-success-background);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

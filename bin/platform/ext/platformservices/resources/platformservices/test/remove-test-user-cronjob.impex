@@ -1,0 +1,25 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+# SCRIPT for removing test user
+INSERT_UPDATE Script; code[unique=true];content
+;removeTestUserScript ;"import de.hybris.platform.servicelayer.search.FlexibleSearchService
+import de.hybris.platform.servicelayer.search.SearchResult
+import de.hybris.platform.core.model.user.UserModel
+import de.hybris.platform.servicelayer.model.ModelService
+def query = 'SELECT {PK} FROM {User} WHERE {name}=\'test\''
+final SearchResult<UserModel> searchResult = flexibleSearchService.search(query)
+if(searchResult.getResult().stream().findFirst().isPresent())
+{
+modelService.remove(searchResult.getResult().stream().findFirst().get())
+}
+"
+
+# JOB
+INSERT_UPDATE ScriptingJob; code[unique=true];scriptURI;
+;removeTestUserJob;model://removeTestUserScript;
+
+# CRON JOB
+INSERT_UPDATE CronJob;code[unique=true];job(code)[default=removeTestUserJob];sessionLanguage(isoCode)[default=en]
+;removeTestUserCronJob

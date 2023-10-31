@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+
+$lang=en
+$primaryKieBase=primary-kie-base
+$defaultPassword=password
+$defaultCurrency=EUR
+$defaultLanguage=en
+$deliveryCountries=US
+$catalog-id=testCatalog
+$catalog-version=Online
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+
+
+INSERT_UPDATE PromotionGroup;identifier[unique=true]
+;website1
+
+INSERT_UPDATE PromotionSourceRule;code[unique=true];name[lang=en];description[lang=en];priority;status(code);website(identifier);startDate[default=01-01-2000,dateformat=dd-MM-yyyy];endDate[default=01-01-2099,dateformat=dd-MM-yyyy];
+;rule1;rule1;description1;1;PUBLISHED;website1
+;rule2;rule2;description2;1;PUBLISHED;website1
+
+INSERT_UPDATE DroolsKIEModule;name[unique=true];mvnGroupId;mvnArtifactId;mvnVersion;ruleType(code);active;version;
+;primary-kie-module;primary-kie-module;primary-kie-module;1.0.0;PROMOTION;true;0;
+
+INSERT_UPDATE DroolsKIEBase;name[unique=true];kieModule(name)[unique=true];equalityBehavior(code);eventProcessingMode(code)
+;$primaryKieBase;primary-kie-module;EQUALITY;STREAM
+
+INSERT_UPDATE DroolsRule;uuid[unique=true];code;sourceRule(code);kieBase(name)[default=$primaryKieBase];ruleType(code)[default=PROMOTION];version[default=0];active[default=true]
+;drools_rule_1;drools_rule_1;rule1
+;drools_rule_2;drools_rule_2;rule2
+
+INSERT_UPDATE RuleBasedPromotion;code[unique=true];rule(uuid)
+;promotion1;drools_rule_1
+;promotion2;drools_rule_2
+
+
+
+INSERT_UPDATE SingleCodeCoupon;couponId(id)[unique=true];maxRedemptionsPerCustomer;maxTotalRedemptions;active[default=true]
+;SUMMER69;1;10;
+;FALL16;1;100;
+
+INSERT_UPDATE CustomerCouponForPromotionSourceRule;customerCouponCode[unique=true];rule(code)[unique=true];promotion(code)
+;SUMMER69;rule1;promotion1
+;FALL16;rule2;promotion2
+

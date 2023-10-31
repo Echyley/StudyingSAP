@@ -1,0 +1,15 @@
+$integrationClass = integrationObjectClass(integrationObject(code), code)
+$returnClass = returnIntegrationObjectClass(integrationObject(code), code)
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; Pojo_IO_S5
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]; type(code)                                        ; root[default = false]
+                                    ; Pojo_IO_S5                            ; Company            ; de.hybris.platform.catalog.model.CompanyModel     ; true
+                                    ; Pojo_IO_S5                            ; Address            ; de.hybris.platform.core.model.user.AddressModel   ;
+
+INSERT_UPDATE IntegrationObjectClassAttribute; $integrationClass[unique = true]; attributeName[unique = true] ; unique[default = false]; readMethod         ; $returnClass
+                                             ; Pojo_IO_S5:Company              ; uid                          ; true                   ; getUid             ;
+                                             ; Pojo_IO_S5:Company              ; addresses                    ;                        ; getAddresses       ; Pojo_IO_S5:Address
+                                             ; Pojo_IO_S5:Address              ; email                        ; true                   ; getEmail           ;
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code)
+                                         ; Pojo_IO_S5                            ; BASIC

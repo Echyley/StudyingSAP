@@ -1,0 +1,84 @@
+###  AC 1.2: GETting root "classes" is not supported
+GET {{fullURL}}/OrderSubmission/SubmitOrderEvents
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/json
+
+> {%
+client.test("POJO IO roots cannot be retrieved", function() {
+  client.assert(response.status === 405, "Response status is not 405 Method Not Allowed");
+});
+client.test("Correct error code is reported for root retrieval", function() {
+  const EXPECTED_ERROR_CODE = 'inaccessible_integration_object';
+
+  var errorCode = response.body.error.code;
+  client.assert(errorCode === EXPECTED_ERROR_CODE, 'Expected error code: "' + EXPECTED_ERROR_CODE + '"; actual: "' + errorCode + '"');
+});
+%}
+
+### AC 1.2: POSTing to a POJO IO is not supported
+POST {{fullURL}}/OrderSubmission/SubmitOrderEvents
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "order": {
+    "code": "order 1",
+    "user": {
+      "id": "anonymous"
+    }
+  }
+}
+
+> {%
+client.test("POST to a POJO IO is not supported", function() {
+  client.assert(response.status === 405, "Response status is not 405 Method Not Allowed");
+});
+client.test("Correct error code is reported for POSTing to a POJO IO", function() {
+  const EXPECTED_ERROR_CODE = 'inaccessible_integration_object';
+
+  var errorCode = response.body.error.code;
+  client.assert(errorCode === EXPECTED_ERROR_CODE, 'Expected error code: "' + EXPECTED_ERROR_CODE + '"; actual: "' + errorCode + '"');
+});
+%}
+
+### AC 1.2: PATCHing a POJO IO is not supported
+PATCH {{fullURL}}/OrderSubmission/Orders('order 1')
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "user": {
+    "id": "anonymous"
+  }
+}
+
+> {%
+client.test("PATCH of a POJO IO is not supported", function() {
+  client.assert(response.status === 405, "Response status is not 405 Method Not Allowed");
+});
+client.test("Correct error code is reported for PATCHing a POJO IO", function() {
+  const EXPECTED_ERROR_CODE = 'inaccessible_integration_object';
+
+  var errorCode = response.body.error.code;
+  client.assert(errorCode === EXPECTED_ERROR_CODE, 'Expected error code: "' + EXPECTED_ERROR_CODE + '"; actual: "' + errorCode + '"');
+});
+%}
+
+### AC 1.2: DELETing a POJO IO is not supported
+DELETE {{fullURL}}/OrderSubmission/Orders('order 1')
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/json
+
+> {%
+client.test("DELETE of a POJO IO is not supported", function() {
+  client.assert(response.status === 405, "Response status is not 405 Method Not Allowed");
+});
+client.test("Correct error code is reported for DELETing a POJO IO", function() {
+  const EXPECTED_ERROR_CODE = 'inaccessible_integration_object';
+
+  var errorCode = response.body.error.code;
+  client.assert(errorCode === EXPECTED_ERROR_CODE, 'Expected error code: "' + EXPECTED_ERROR_CODE + '"; actual: "' + errorCode + '"');
+});
+%}

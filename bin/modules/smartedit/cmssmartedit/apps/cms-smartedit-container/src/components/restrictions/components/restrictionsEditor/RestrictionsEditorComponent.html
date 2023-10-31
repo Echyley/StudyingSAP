@@ -1,0 +1,86 @@
+<div class="se-restrictions-container">
+    <div
+        class="se-restrictions-container__header"
+        [ngClass]="{ 'se-restrictions-container__header--empty': restrictions.length === 0 }"
+    >
+        <label
+            class="se-restrictions__sub-header"
+            translate="se.cms.restrictions.list.title"
+        ></label>
+
+        <div class="se-restrictions-container__header--right">
+            <div *ngIf="restrictions.length > 1">
+                <div *ngIf="editable">
+                    <se-select
+                        id="criteria-type"
+                        [fetchStrategy]="criteriaFetchStrategy"
+                        [itemComponent]="itemComponent"
+                        [placeholder]="'se.cms.restrictions.picker.type.placeholder'"
+                        [model]="criteria.id"
+                        (modelChange)="matchCriteriaChanged($event)"
+                        [searchEnabled]="false"
+                    ></se-select>
+                </div>
+                <div *ngIf="!editable">
+                    {{ 'se.cms.restrictions.criteria' | translate }} {{ criteria.label | translate
+                    }}
+                </div>
+            </div>
+
+            <button
+                fd-button
+                *ngIf="!showRestrictionPicker"
+                type="button"
+                class="se-restrictions__add-restriction-btn fd-button fd-button--cozy"
+                [disabled]="!editable"
+                (click)="onAddRestriction()"
+            >
+                <span translate="se.cms.restrictions.editor.button.add.new"></span>
+            </button>
+            <button
+                fd-button
+                class="cms-clean-btn se-restriction__clear-all__btn fd-button fd-button--transparent"
+                *ngIf="showRemoveAllButton()"
+                (click)="removeAllRestrictions()"
+                label="{{ 'se.cms.restrictions.list.clear.all' | translate}}"
+            ></button>
+        </div>
+    </div>
+
+    <se-slider-panel
+        [sliderPanelConfiguration]="sliderPanelConfiguration"
+        [(sliderPanelHide)]="sliderPanelHide"
+        [(sliderPanelShow)]="sliderPanelShow"
+        (isShownChange)="onSliderVisibilityChange($event)"
+        class="se-add-restriction-panel"
+    >
+        <se-restriction-management
+            *ngIf="isSliderVisible"
+            class="se-se-add-restriction-panel__restriction-management"
+            [config]="restrictionManagement.config"
+            [uriContext]="restrictionManagement.uriContext"
+            [(submitFn)]="restrictionManagement.submitFn"
+            [(isDirtyFn)]="restrictionManagement.isDirtyFn"
+        ></se-restriction-management>
+    </se-slider-panel>
+
+    <div *ngIf="errors.length > 0">
+        <span
+            class="se-help-block--has-error help-block fd-form__message fd-form__message--error"
+            *ngFor="let error of errors"
+            [translate]="error.message"
+        ></span>
+    </div>
+
+    <se-restrictions-table
+        *ngIf="isRestrictionsReady"
+        [editable]="editable"
+        [restrictions]="restrictions"
+        [restrictionCriteria]="criteria"
+        [errors]="errors"
+        [customClass]="'ySERestrictionListLink'"
+        (onEdit)="onEditRestriction($event)"
+        (onRemove)="onRemoveRestriction($event)"
+    >
+    </se-restrictions-table>
+</div>

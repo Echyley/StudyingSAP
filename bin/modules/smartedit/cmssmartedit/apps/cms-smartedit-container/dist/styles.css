@@ -1,0 +1,275 @@
+@import '../node_modules/cmscommons/dist/styles.css';
+.se-component-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 270px;
+  padding: 8px;
+  margin: 4px 8px 0;
+  border: 2px solid transparent;
+  cursor: grab;
+}
+.se-component-item:active, .se-component-item:hover {
+  border: 2px dashed var(--sapGroup_ContentBorderColor);
+  border-radius: 4px;
+}
+.se-component-item:active {
+  cursor: grabbing;
+}
+
+.se-component-item--details-type {
+  color: var(--sapNeutralColor);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.se-component-item--image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem !important;
+  line-height: 1.4;
+  font-weight: 400;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  background: var(--sapField_InformationColor);
+  margin-right: 8px;
+  border-radius: 4px;
+}
+.se-component-item--image [class*=sap-icon] {
+  color: var(--sapBaseColor);
+}
+.se-component-item--image .se-component-item--image-shared[class*=sap-icon] {
+  color: unset;
+  font-weight: 800;
+}
+
+.se-component-item--details,
+.se-component-item--details-type {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  word-break: break-all;
+  width: 200px;
+}
+
+.se-component-item--details-type {
+  color: var(--sapNeutralColor);
+}.se-ctx-menu-btn__msg {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-color: var(--sapBaseColor);
+  border-radius: var(--sapElement_BorderCornerRadius);
+  min-width: 100px;
+  width: fit-content;
+  position: absolute;
+  border: 1px solid var(--sapGroup_ContentBorderColor);
+  z-index: 2000;
+  top: 96%;
+  box-shadow: 0 0 4px 0 var(--sapGroup_ContentBorderColor);
+  font-size: 1rem !important;
+  line-height: 1.25;
+  font-weight: 400;
+  white-space: normal;
+  padding: 20px;
+  width: 250px;
+}
+.se-ctx-menu-btn__msg::before {
+  height: 0;
+  width: 0;
+  border-style: solid;
+  border-width: 0 8px 8px 8px;
+  border-bottom-color: var(--sapGroup_ContentBorderColor);
+  border-bottom-color: var(var(--sapField_BorderColor));
+  border-left-color: transparent;
+  border-right-color: transparent;
+  content: "";
+  position: absolute;
+  top: -8px;
+}
+.se-ctx-menu-btn__msg::after {
+  height: 0;
+  width: 0;
+  border-style: solid;
+  border-width: 0 8px 8px 8px;
+  border-bottom-color: var(--sapBaseColor);
+  border-bottom-color: var(var(--sapButton_Attention_Hover_Background));
+  border-left-color: transparent;
+  border-right-color: transparent;
+  content: "";
+  position: absolute;
+  top: -7px;
+}
+.se-ctx-menu-btn__msg::before, .se-ctx-menu-btn__msg::after {
+  left: 14px;
+}
+
+.se-ctx-menu-btn__msg-title {
+  font-weight: 700;
+  color: var(--sapTitleColor);
+  margin-bottom: 8px;
+}
+
+.se-ctx-menu-btn__msg-description {
+  color: var(--sapTextColor);
+}se-pagetree-slot-menu-item .se-slot-ctx-menu__dropdown-toggle {
+  border: none;
+  background: none;
+  padding: 0 0 0 0;
+  line-height: 16px;
+  font-size: 14px;
+  color: var(--sapLinkColor);
+  margin: 0 0 0 16px;
+}
+se-pagetree-slot-menu-item .se-slot-ctx-menu__dropdown-toggle [class*=sap-icon], se-pagetree-slot-menu-item .se-slot-ctx-menu__dropdown-toggle-icon[class*=sap-icon] {
+  color: var(--sapLinkColor);
+}
+se-pagetree-slot-menu-item .se-slot-ctx-menu__dropdown-toggle .se-slot-sync__btn-status {
+  position: absolute;
+  line-height: 10px;
+  color: var(--sapWarningColor);
+  font-size: 9px;
+  left: 26px;
+  bottom: 2px;
+  font-weight: 400;
+}
+
+.se-slot__dropdown-menu {
+  background: var(--sapBaseColor);
+}
+
+.se-slot-contextual-menu__header {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--sapGroup_ContentBorderColor);
+  height: 53px;
+}
+.se-slot-contextual-menu__header:first-child {
+  font-size: 1rem !important;
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--sapTextColor);
+}
+
+.se-slot-ctx-menu__popover-ancor {
+  position: absolute;
+  display: block;
+  cursor: not-allowed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.se-shared-slot__body {
+  padding: 16px 20px;
+  width: 350px;
+  font-size: 14px;
+  white-space: normal;
+}
+
+.se-shared-slot__sub-header {
+  margin-bottom: fd-space("xs");
+}
+
+.se-shared-slot__option {
+  color: fd-color("action", 1);
+  margin-bottom: fd-space("xxs");
+}
+.se-shared-slot__option:last-child {
+  margin-bottom: 0;
+}
+
+.se-shared-slot__description {
+  margin-bottom: fd-space("s");
+}
+
+.se-shared-slot__link {
+  cursor: pointer;
+  color: fd-color("action", 1);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.se-shared-slot__link:hover {
+  text-decoration: none;
+  color: fd-color-state("hover", "action");
+}
+
+.se-shared-slot-replace__div {
+  margin-bottom: 8px;
+}.se-media-container-field__media-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0 16px;
+}
+
+.se-media-container-cell--mobile {
+  order: 4;
+}
+.se-media-container-cell--desktop {
+  order: 2;
+}
+.se-media-container-cell--tablet {
+  order: 3;
+}
+.se-media-container-cell--widescreen {
+  order: 1;
+}
+
+.se-media__action-icon {
+  color: var(--sapIndicationColor_5);
+  margin-right: 8px;
+  width: 12px;
+}
+.se-media__action-icon--basic {
+  font-size: 1rem !important;
+  line-height: 1.25;
+  font-weight: 400;
+}
+.se-media__action-icon--basic::before {
+  vertical-align: middle;
+}
+.se-media__action-icon--delete {
+  color: var(--sapIndicationColor_2);
+}
+
+.se-media-action-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  text-decoration: none;
+  height: 32px;
+}
+.se-media-action-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.se-media-upload-form-wrapper {
+  display: block;
+}
+.se-media-upload-form-wrapper--spaced {
+  margin-top: 16px;
+}
+
+.se-media-upload-form__header-folder fd-popover-control .selected-container .se-item-printer {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 156px;
+}
+
+.se-media-upload-form__header-folder.is-invalid fd-popover-control .selected-container .fd-button {
+  border-color: #bb0000;
+}

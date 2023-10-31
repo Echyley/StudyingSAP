@@ -1,0 +1,8 @@
+@import "cockpitng-globals.scss";
+
+div.yw-explorerTree .y-tree-icon {
+	@include setTreeIconGlyph("hmc.entitlements", "payment-approval");
+}
+div.yw-sideNavigation .yw-treeCellInner {
+	@include setSideNavigationIconGlyph("hmc.entitlements", "payment-approval");
+}

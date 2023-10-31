@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+       
+    <extension abstractclassprefix="Generated" classprefix="Sapsalesordersimulation" jaloLogicFree="true" managername="SapsalesordersimulationManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapsalesordersimulation" usemaven="false">
+          
+	
+		
+        <requires-extension name="commerceservices"/>
+        		
+        <requires-extension name="apiregistryservices"/>
+        		
+        <requires-extension name="b2bacceleratorfacades"/>
+        		
+        <requires-extension name="b2bacceleratorservices"/>
+        		
+        <requires-extension name="b2bcommerce"/>
+        		
+        <requires-extension name="commercefacades"/>
+        		
+        <requires-extension name="outboundservices"/>
+        		
+        <requires-extension name="promotionengineservices"/>
+        		
+        <requires-extension name="sapcore"/>
+        		
+        <requires-extension name="warehousing"/>
+        		
+        <requires-extension name="platformservices"/>
+        		
+        <requires-extension name="sapmodel"/>
+        		
+        <requires-extension name="basecommerce"/>
+         
+		
+        <requires-extension name="saporderexchangeoms"/>
+         
+		
+        <requires-extension name="saps4omfacades"/>
+         
+		
+      
+        <coremodule generated="true" manager="de.hybris.platform.sap.core.sapsalesordersimulation.jalo.SapsalesordersimulationManager" packageroot="de.hybris.platform.sap.core.sapsalesordersimulation"/>
+              
+        <meta key="deprecated" value="true"/>
+           
+    </extension>
+    
+</extensioninfo>

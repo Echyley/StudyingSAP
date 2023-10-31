@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias alias="sapS4OMSalesOrderCoreCacheRegion" name="sapS4OMSalesOrderCoreDefaultCacheRegion"/>
+	<bean abstract="true" class="de.hybris.platform.sap.core.saps4omservices.cache.service.impl.CacheAccessImpl" id="sapS4OMSalesOrderCoreDefaultCacheRegion">
+		<constructor-arg name="evictionPolicy" value="LRU"/>
+		<constructor-arg name="statsEnabled" value="true"/>
+		<constructor-arg name="exclusiveComputation" value="false"/>
+	</bean>
+    
+	 <!-- ATP Cache-->
+	<bean id="sapS4OMAtpCheckAvailabilityCacheRegion" parent="sapS4OMSalesOrderCoreCacheRegion">
+		<constructor-arg name="name"
+			value="sapS4OMAtpCheckAvailabilityCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+		<constructor-arg name="ttlSeconds" value="240" /> 
+	</bean>
+	
+    <!-- ATP Region-->	
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="cacheRegionsList" />
+		<property name="targetMethod" value="add" />
+		<property name="arguments">
+			<ref bean="sapS4OMAtpCheckAvailabilityCacheRegion" />
+		</property>
+	</bean>
+	
+	<alias alias="sapS4OMSalesPricingCacheRegion" name="defaultSalesOrderSapS4OMPricingCacheRegion" />
+	<bean id="defaultSalesOrderSapS4OMPricingCacheRegion" parent="sapS4OMSalesOrderCoreCacheRegion">
+		<constructor-arg name="name" value="sapS4OMSalesPricingCacheRegion" />
+		<constructor-arg name="maxEntries" value="1000" />
+		<constructor-arg name="evictionPolicy" value="FIFO" />
+		<constructor-arg name="statsEnabled" value="true" />
+		<constructor-arg name="exclusiveComputation" value="false" />
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="cacheRegionsList" />
+		<property name="targetMethod" value="add" />
+		<property name="singleton" value="true"/>
+		<property name="arguments">
+			<ref bean="sapS4OMSalesPricingCacheRegion" />
+		</property>
+	</bean>
+	
+	
+</beans>

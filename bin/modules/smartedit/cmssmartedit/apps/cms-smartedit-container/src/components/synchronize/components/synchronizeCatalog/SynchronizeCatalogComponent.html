@@ -1,0 +1,43 @@
+<div class="se-synchronize-catalog">
+    <div class="se-synchronize-catalog__sync-info">
+        <div *ngIf="isSyncJobFinished()">
+            <label
+                class="se-synchronize-catalog__sync-info__sync-label"
+                *ngIf="catalogVersion.active"
+            >
+                <span translate="se.cms.cataloginfo.lastsyncedfrom"></span>&nbsp;
+                <span>{{ syncJobStatus.source }}</span>
+            </label>
+            <label
+                class="se-synchronize-catalog__sync-info__sync-label"
+                *ngIf="!catalogVersion.active"
+                translate="se.cms.cataloginfo.lastsynced"
+            ></label>
+            <span class="se-synchronize-catalog__sync-info__last-synched"
+                >{{ syncJobStatus.syncEndTime | date: 'M/d/yy h:mm a' }}</span
+            >
+        </div>
+        <span
+            class="se-synchronize-catalog__in-progress"
+            *ngIf="isSyncJobInProgress()"
+            translate="se.sync.status.synced.inprogress"
+        ></span>
+        <span
+            class="label-error se-synchronize-catalog__sync-failed"
+            *ngIf="isSyncJobFailed()"
+            translate="se.sync.status.synced.syncfailed"
+        ></span>
+    </div>
+
+    <ng-container *seHasOperationPermission="syncCatalogPermission">
+        <ng-container *ngIf="!catalogVersion.active">
+            <button
+                fd-button
+                class="se-synchronize-catalog__sync-btn fd-button--emphasized"
+                [disabled]="!isSyncButtonEnabled()"
+                (click)="syncCatalog()"
+                label="{{ 'se.cms.cataloginfo.btn.sync' | translate }}"
+            ></button>
+        </ng-container>
+    </ng-container>
+</div>

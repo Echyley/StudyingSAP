@@ -1,0 +1,23 @@
+{
+    "name": "cmssmartedit",
+    "extension": {
+        "type": "inner",
+        "angularApp": "cmssmartedit"
+    },
+    "typescript": {
+        "entry": "./src/index.ts",
+        "dist": "./dist/index.js"
+    },
+    "style": {
+        "global": "node_modules/smartedit-build/styles/se-variables.scss",
+        "urlsToRewrite": []
+    },
+    "legacy": {
+        "js": ["./src/**/*.js"],
+        "ngTemplates": {
+            "moduleName": "cmssmarteditTemplates",
+            "includePathInName": false,
+            "files": ["./src/**/*.html"]
+        }
+    }
+}

@@ -1,0 +1,126 @@
+@charset "UTF-8";
+@import "cockpitng-globals.scss";
+
+$report__header_column--heght: 44px;
+
+.yw-org_platformbackoffice_widgets_duplicatereport,
+.yw-de_hybris_platform_platformbackoffice_widgets_catalogversionreport {
+    height: 100%;
+    background: var(--bo-base-background) !important;
+    overflow: auto;
+    
+    .report-container {
+        padding: $_container-spacing-default__tiny;
+        background: transparent;
+
+        .z-tab-text {
+            font-weight: normal;
+            font-size: var(--bo-font-size);
+            font-family: var(--bo-font-family);
+            padding: 0;
+            line-height: $report__header_column--heght;
+        }
+
+        .z-row-content,
+        .z-column-content {
+            font-weight: normal;
+            font-size: var(--bo-font-size);
+            font-family: var(--bo-font-family);
+            color: var(--bo-text-color);
+            padding: 0 $_container-spacing-default__tiny;
+        }
+
+        .z-grid-emptybody {
+            display: none;
+        }
+
+        .z-tabpanels {
+            border-top: 0; // overwrite zk styles
+
+            .z-tabpanel {
+                margin-bottom: $_container-spacing-default__tiny;
+                box-shadow: none;
+                font-weight: normal;
+                font-size: var(--bo-font-size);
+                font-family: var(--bo-font-family);
+                color: var(--bo-text-color);
+
+                // panel title
+                .z-tab {
+                    height: $report__header_column--heght;
+                    display: flex;
+                    align-items: center;
+                    border-radius: var(--bo-button-border-radius);
+                    background: var(--bo-page-header-background) var(--bo-input-background-style);
+
+                    &.z-tab-selected {
+                        border-radius: var(--bo-button-border-radius) var(--bo-button-border-radius) 0 0;
+
+                        &:before {
+                            color: var(--bo-highlight-color);
+                        }
+                    }
+
+                    &-content {
+                        height: $report__header_column--heght;
+                    }
+                }
+
+                // panel content
+                .z-tabpanel-content {
+                    background: transparent;
+                    border: none;
+
+                    .z-grid-header {
+                        background: var(--bo-list-table-header-background);
+                    }
+
+                    .z-grid-header-border {
+                        display: none;
+                    }
+
+                    .z-grid-body {
+                        tr {
+                            height: 40px;
+                        }
+                    } 
+
+                    .z-rows tr {
+                        td {
+                            background: var(--bo-container-background);
+                        }
+
+                        &:last-child {
+                            td {
+                                &:first-child {
+                                    border-bottom-left-radius: var(--bo-button-border-radius);
+                                }
+
+                                &:last-child {
+                                    border-bottom-right-radius: var(--bo-button-border-radius);
+                                }
+                            }
+                        }
+                    }
+
+                    .report-empty-row .z-label {
+                        font-style: italic;
+                        text-align: center;
+                    }
+
+                    .z-columns-bar {
+                        display: none;
+                    }
+                }
+
+                .z-grid-paging-bottom {
+                    .z-paging {
+                        border-top: 0;
+                        margin-top: $_container-spacing-default__tiny;
+                        padding: $_container-spacing-default__tiny $_container-spacing-default__tiny 0 $_container-spacing-default__tiny;
+                    }
+                }
+            }
+        }
+    }
+}

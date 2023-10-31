@@ -1,0 +1,47 @@
+.se-breadcrumb {
+    border-bottom: 1px solid var(--sapBaseColor);
+    margin-bottom: 35px;
+
+    &__divider,
+    &__info,
+    &__node {
+        display: inline-block;
+    }
+
+    &__info--last {
+        border-bottom: 3px solid var(--sapInformationBorderColor);
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    &__info--level {
+        display: block;
+        text-transform: uppercase;
+        color: var(--sapNeutralTextColor);
+        font-family: $font-sap;
+        @include se-type('-1');
+        @include se-weight('bold');
+    }
+
+    &__info--name {
+        display: block;
+        color: var(--sapNeutralTextColor);
+        font-family: $font-sap;
+        @include se-type();
+        @include se-weight('normal');
+    }
+
+    &__divider {
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 5px;
+        vertical-align: top;
+    }
+}
+
+.se-breadcrumb__node:last-child .se-breadcrumb__info {
+    &--level,
+    &--name {
+        color: var(--sapInformativeColor);
+    }
+}

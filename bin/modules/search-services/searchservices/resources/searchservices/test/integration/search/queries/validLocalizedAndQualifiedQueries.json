@@ -1,0 +1,258 @@
+[
+	{
+		"testId": 1,
+		"description": "query with localized expression for 'en' language",
+		"languages": [
+			"en"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_group",
+			"value": "enGroup1"
+		},
+		"matchingDocuments": [
+			"doc1"
+		]
+	},
+	{
+		"testId": 2,
+		"description": "query with localized expression for 'de' language",
+		"languages": [
+			"de"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_group",
+			"value": "deGroup3"
+		},
+		"matchingDocuments": [
+			"doc3"
+		]
+	},
+	{
+		"testId": 3,
+		"description": "query with  multi-valued localized expression for 'en' language",
+		"languages": [
+			"en"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_groups",
+			"value": "enGroup2"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2"
+		]
+	},
+	{
+		"testId": 4,
+		"description": "query with  multi-valued localized expression for 'de' language",
+		"languages": [
+			"de"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_groups",
+			"value": "deGroup3"
+		},
+		"matchingDocuments": [
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 5,
+		"description": "query with qualified expression for 'EUR' currency",
+		"qualifiers": {
+			"currency": "EUR"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_group",
+			"value": "eurGroup1"
+		},
+		"matchingDocuments": [
+			"doc1"
+		]
+	},
+	{
+		"testId": 6,
+		"description": "query with qualified expression for 'USD' currency",
+		"qualifiers": {
+			"currency": "USD"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_group",
+			"value": "usdGroup3"
+		},
+		"matchingDocuments": [
+			"doc3"
+		]
+	},
+	{
+		"testId": 7,
+		"description": "query with  multi-valued qualified expression for 'EUR' currency",
+		"qualifiers": {
+			"currency": "EUR"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_groups",
+			"value": "eurGroup2"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2"
+		]
+	},
+	{
+		"testId": 8,
+		"description": "query with  multi-valued qualified expression for 'USD' currency",
+		"qualifiers": {
+			"currency": "USD"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_groups",
+			"value": "usdGroup3"
+		},
+		"matchingDocuments": [
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 9,
+		"description": "query with localized expression for 'en' language with languageId",
+		"languages": [
+			"de"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_group",
+			"value": "enGroup1",
+			"languageId": "en"
+		},
+		"matchingDocuments": [
+			"doc1"
+		]
+	},
+	{
+		"testId": 10,
+		"description": "query with localized expression for 'de' language with languageId",
+		"languages": [
+			"en"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_group",
+			"value": "deGroup3",
+			"languageId": "de"
+		},
+		"matchingDocuments": [
+			"doc3"
+		]
+	},
+	{
+		"testId": 11,
+		"description": "query with  multi-valued localized expression for 'en' language with languageId",
+		"languages": [
+			"de"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_groups",
+			"value": "enGroup2",
+			"languageId": "en"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2"
+		]
+	},
+	{
+		"testId": 12,
+		"description": "query with  multi-valued localized expression for 'de' language with languageId",
+		"languages": [
+			"en"
+		],
+		"data": {
+			"type": "matchTerm",
+			"expression": "language_discount_groups",
+			"value": "deGroup3",
+			"languageId": "de"
+		},
+		"matchingDocuments": [
+			"doc2",
+			"doc3"
+		]
+	},
+	{
+		"testId": 13,
+		"description": "query with qualified expression for 'EUR' currency with qualifierId",
+		"qualifiers": {
+			"currency": "USD"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_group",
+			"value": "eurGroup1",
+			"qualifierId": "EUR"
+		},
+		"matchingDocuments": [
+			"doc1"
+		]
+	},
+	{
+		"testId": 14,
+		"description": "query with qualified expression for 'USD' currency with qualifierId",
+		"qualifiers": {
+			"currency": "EUR"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_group",
+			"value": "usdGroup3",
+			"qualifierId": "USD"
+		},
+		"matchingDocuments": [
+			"doc3"
+		]
+	},
+	{
+		"testId": 15,
+		"description": "query with  multi-valued qualified expression for 'EUR' currency with qualifierId",
+		"qualifiers": {
+			"currency": "USD"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_groups",
+			"value": "eurGroup2",
+			"qualifierId": "EUR"
+		},
+		"matchingDocuments": [
+			"doc1",
+			"doc2"
+		]
+	},
+	{
+		"testId": 16,
+		"description": "query with  multi-valued qualified expression for 'USD' currency with qualifierId",
+		"qualifiers": {
+			"currency": "EUR"
+		},
+		"data": {
+			"type": "matchTerm",
+			"expression": "currency_discount_groups",
+			"value": "usdGroup3",
+			"qualifierId": "USD"
+		},
+		"matchingDocuments": [
+			"doc2",
+			"doc3"
+		]
+	}
+]

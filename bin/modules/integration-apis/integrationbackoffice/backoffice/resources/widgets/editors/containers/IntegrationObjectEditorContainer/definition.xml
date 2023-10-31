@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="de.hybris.platform.integrationbackoffice.widgets.IntegrationObjectEditorContainer"
+                   extends="de.hybris.platform.integrationbackoffice.widgets.AbstractIntegrationEditorContainer">
+    <name>Integration Object Editor Container</name>
+    <description>Container that displays integration objects' integration object items in a tree structure with associated attribute list for easy editing.</description>
+    <defaultTitle>Integration Object Editor Container</defaultTitle>
+    <author>Hybris</author>
+    <version>1.0</version>
+    <keywords>
+        <keyword>IntegrationObjectEditorContainer</keyword>
+    </keywords>
+    <controller
+            class="de.hybris.platform.integrationbackoffice.widgets.modeling.controllers.IntegrationObjectEditorContainerController"/>
+    <sockets>
+        <input id="receiveObjectComboBox"
+               type="de.hybris.platform.integrationservices.model.IntegrationObjectModel"/>
+        <input id="saveEvent" type="java.lang.String"/>
+        <input id="createIntegrationObjectEvent"
+               type="de.hybris.platform.integrationbackoffice.widgets.modals.data.CreateIntegrationObjectModalData"/>
+        <input id="receiveDelete" type="java.lang.String"/>
+        <input id="metadataModalEvent" type="java.lang.String"/>
+        <input id="openItemTypeIOIModalEvent" type="java.lang.String"/>
+        <input id="saveButtonItemTypeMatch" type="java.util.Collection"/>
+        <input id="cancelButtonItemTypeMatch" type="java.lang.Object"/>
+        <input id="receiveClone" type="java.lang.String"/>
+        <input id="cloneIntegrationObjectEvent"
+               type="de.hybris.platform.integrationbackoffice.widgets.modals.data.CreateIntegrationObjectModalData"/>
+        <input id="openVirtualAttributeModal"
+               type="java.lang.String"/>
+        <input id="auditReportEvent" type="java.lang.String"/>
+        <input id="addClassificationAttributesEvent" type="java.lang.Object"/>
+        <input id="addVirtualAttributeEvent" type="de.hybris.platform.integrationbackoffice.widgets.modals.data.CreateVirtualAttributeModalData"/>
+
+        <output id="openMetadataViewer" type="de.hybris.platform.integrationservices.model.IntegrationObjectModel"/>
+        <output id="openItemTypeIOIModal" type="de.hybris.platform.integrationservices.model.IntegrationObjectModel"/>
+        <output id="openCloneModal" type="de.hybris.platform.integrationservices.model.IntegrationObjectModel"/>
+        <output id="selectedItem" type="de.hybris.platform.integrationbackoffice.widgets.modeling.data.dto.IntegrationMapKeyDTO"/>
+        <output id="loadIO" type="java.lang.String"/>
+        <output id="createTree" type="de.hybris.platform.integrationbackoffice.widgets.modeling.data.CreateTreeData"/>
+        <output id="createDynamicTreeNode" type="de.hybris.platform.integrationbackoffice.widgets.modeling.data.dto.AbstractListItemDTO"/>
+        <output id="openVirtualAttributeModal" type="java.util.List"/>
+        <output id="clearTree" type="java.lang.Object"/>
+        <output id="clearListBox" type="java.lang.Object"/>
+    </sockets>
+</widget-definition>

@@ -1,0 +1,55 @@
+$lang=en
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Configurable Product
+;productconfig_customer_category;Customer
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Product with specified configuration in the cart;Cart contains the product {product}. Characteristic {cstic} {value_operator} value {cstic_value}.
+;y_configurable_product;Product you are currently configuring;Product you are currently configuring is {product}. Characteristic {cstic} {value_operator} value {cstic_value}.
+;y_configurable_product_customer;Customers;Customer {customers_operator} the following list\: {customers}
+;y_configurable_product_customer_group;Customer groups;Customer {customer_groups_operator} of the following groups\: {customer_groups}
+;y_configurable_product_customer_support_mode;Customer Support;Assisted service session is active\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Product;Product in Cart;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Characteristic;Characteristic Name
+;y_configurable_product_in_cart;value_operator;Operator;Operator between characteristic and value
+;y_configurable_product_in_cart;cstic_value;Value;Characteristic value name; for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Product;Product you are currently configuring
+;y_configurable_product;cstic;Characteristic;Characteristic Name
+;y_configurable_product;value_operator;Operator;Operator between characteristic and value
+;y_configurable_product;cstic_value;Value;Characteristic Value Name
+;y_configurable_product_customer;customers_operator;Customer Selection Operator;Defines, whether or not customer is contained in the list
+;y_configurable_product_customer;customers;Customers;List of customers
+;y_configurable_product_customer_group;customer_groups_operator;Customer Group Selection Operator;Defines, whether or not customer is contained in ANY or ALL customer groups
+;y_configurable_product_customer_group;customer_groups;Customer Groups;List of customer groups
+;y_configurable_product_customer_support_mode;value;Assisted service session active;A customer support agent is logged in on behalf of a customer
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Configurable Product
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Set characteristic value for configurable product;Set value {cstic_value} for characteristic {cstic}
+;y_configurable_product_remove_assignable_value;Hide assignable value for configurable product;Hide value {cstic_value} for characteristic {cstic}
+;y_configurable_product_hide_cstic;Hide characteristic for configurable product;Hide characteristic {cstic}
+;y_configurable_product_display_cstic_readonly;Display characteristic for configurable product as read-only;Display characteristic {cstic} as read-only
+;y_configurable_product_display_message;Display message;Display message
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Characteristic;Characteristic for which value is set
+;y_configurable_product_set_cstic_value;cstic_value;Value;Characteristic value to be set
+;y_configurable_product_remove_assignable_value;cstic;Characteristic;Characteristic for which assignable value is to be removed
+;y_configurable_product_remove_assignable_value;cstic_value;Value;Value to be removed from list of assignable values
+;y_configurable_product_hide_cstic;cstic;Characteristic;Characteristic to be hidden
+;y_configurable_product_display_cstic_readonly;cstic;Characteristic;Characteristic to be displayed as read-only
+;y_configurable_product_display_message;message;Message;Message Text
+;y_configurable_product_display_message;message_severity;Severity;Severity of Message
+;y_configurable_product_display_message;cstic;Characteristic;Characteristic for which this message appears
+;y_configurable_product_display_message;cstic_value;Characteristic Value;Characteristic value for which this message appears
+
+#% endif:

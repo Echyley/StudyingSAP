@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						 xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+						 id="com.hybris.backoffice.widgets.branding.logosetting">
+	<name>Logo Setting</name>
+	<description>Logo Setting</description>
+	<defaultTitle>Logo Setting</defaultTitle>
+	<author>hybris</author>
+	<version>1.0</version>
+	<controller class="com.hybris.backoffice.widgets.branding.logosetting.LogoSettingController"/>
+	<view src="logosetting.zul"/>
+	<sockets>
+		<output id="logoChanged" type="de.hybris.platform.core.model.media.MediaModel"/>
+	</sockets>
+	<keywords>
+		<keyword>Logo</keyword>
+	</keywords>
+</widget-definition>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+	<widget-extension widgetId="custom_themes">
+		<widget id="theme_preview" widgetDefinitionId="com.hybris.backoffice.widgets.customthemes.preview"
+				slotId="customizeThemePreview" template="false" title="Theme Preview">
+			<widget id="mainSlot_ThemePreview" widgetDefinitionId="com.hybris.cockpitng.backoffice.mainLayout"
+					slotId="themePreviewArea" template="false">
+				<widget id="systemBar_ThemePreview" widgetDefinitionId="com.hybris.cockpitng.widgets.common.systembar"
+						slotId="headerArea" template="false">
+					<widget id="systembarActionsRight_ThemePreview"
+							widgetDefinitionId="com.hybris.backoffice.widgets.toolbar" slotId="indicators"
+							template="false">
+						<setting key="toolbarActions" type="String">systembar-actions-right-theme-preview</setting>
+					</widget>
+				</widget>
+				<widget id="hmc2_ThemePreview" widgetDefinitionId="com.hybris.cockpitng.borderlayout" slotId="mainArea"
+						template="false">
+					<widget id="explorerTree_ThemePreview"
+							widgetDefinitionId="com.hybris.cockpitng.widgets.common.explorertree" slotId="leftSlot"
+							template="false">
+						<widget id="explorerTreeSelectionProxy_ThemePreview"
+								widgetDefinitionId="com.hybris.cockpitng.widgets.common.multiplexer"
+								slotId="cockpitWidgetChildrenInvisible" template="false">
+							<widget id="typeNodeNameExtractor_ThemePreview"
+									widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor"
+									slotId="cockpitWidgetChildrenInvisible" template="false">
+								<setting key="expression" type="String">name</setting>
+								<setting key="socketDataType_$T" type="String">java.lang.String</setting>
+								<virtual-sockets/>
+							</widget>
+
+							<setting key="typeNode_expression" type="String">#root instanceof
+								T(com.hybris.cockpitng.tree.node.TypeNode)
+							</setting>
+							<setting key="dashboard_expression" type="String">#root?.id EQ 'backoffice_dashboard'
+							</setting>
+							<virtual-sockets>
+								<output id="typeNode" type="com.hybris.backoffice.navigation.NavigationNode"/>
+								<output id="dashboard" type="com.hybris.backoffice.navigation.NavigationNode"/>
+							</virtual-sockets>
+						</widget>
+						<setting key="explorerTreeConfigCtx" type="String">explorer-tree</setting>
+						<setting key="widgetStyleClass" type="String">yw-explorerTree-sideNavigation</setting>
+						<setting key="allowFilteringEntries" type="Boolean">true</setting>
+					</widget>
+					<widget id="collapsibleContainer_ThemePreview"
+							widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer" slotId="centerSlot"
+							template="false">
+						<widget id="advancedSearch_ThemePreview"
+								widgetDefinitionId="com.hybris.cockpitng.advancedsearch" slotId="center"
+								template="false">
+							<widget id="hmc2list_ThemePreview"
+									widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
+									slotId="nestedWidget" template="false">
+								<setting key="listSubtitle" type="String">emptylist</setting>
+								<setting key="actionSlotComponentId" type="String">listviewactions</setting>
+								<setting key="multiSelect" type="Boolean">true</setting>
+								<setting key="colConfigCtxCode" type="String">listview</setting>
+								<setting key="itemRenderer" type="String">listViewRenderer</setting>
+								<setting key="sortableListHeader" type="Boolean">true</setting>
+								<setting key="sendItemsOnSelect" type="Boolean">true</setting>
+								<setting key="widgetStyleClass" type="String">yw-collection-browser-inset</setting>
+							</widget>
+							<setting key="advancedSearchConfigCtxCode" type="String">advanced-search</setting>
+							<setting key="addRowPosition" type="String">Bottom</setting>
+							<setting key="enableNestedWidgetView" type="Boolean">true</setting>
+							<setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+							<setting key="simpleSearchConfigCtxCode" type="String">simple-search</setting>
+							<virtual-sockets/>
+						</widget>
+						<widget id="editorArea_ThemePreview"
+								widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea" slotId="bottom"
+								template="false">
+							<setting key="initViewMode" type="String">fluid</setting>
+							<setting key="fluidViewCode" type="String">fluid</setting>
+							<setting key="editorAreaConfigCtx" type="String">editor-area</setting>
+							<setting key="bottomToolbar" type="Boolean">false</setting>
+							<setting key="actionSlotComponentId" type="String">editorareaactions</setting>
+						</widget>
+						<widget id="backofficeSpaceManagement_ThemePreview"
+								widgetDefinitionId="com.hybris.backoffice.spaceManagement"
+								slotId="cockpitWidgetChildrenInvisible" template="false">
+						</widget>
+						<setting key="widgetStyleAttribute" type="String"></setting>
+						<setting key="allowLockingCenterPanel" type="Boolean">false</setting>
+						<setting key="bottomPanelCollapsed" type="Boolean">false</setting>
+						<setting key="topHeight" type="String">33%</setting>
+						<setting key="centerCaption" type="String">List</setting>
+						<setting key="bottomPanelInitiallyLocked" type="Boolean">false</setting>
+						<setting key="centerHeight" type="String">50%</setting>
+						<setting key="topPanelInitiallyLocked" type="Boolean">false</setting>
+						<setting key="thirdSectionDisabled" type="Boolean">true</setting>
+						<setting key="allowLockingBottomPanel" type="Boolean">false</setting>
+						<setting key="bottomCaption" type="String">Edit</setting>
+						<setting key="centerPanelCollapsed" type="Boolean">false</setting>
+						<setting key="widgetStyleClass" type="String">yw-collapsibleContainer-caption-large-font-size
+						</setting>
+						<setting key="topCaption" type="String">Search</setting>
+						<setting key="topPanelCollapsed" type="Boolean">true</setting>
+						<setting key="allowLockingTopPanel" type="Boolean">false</setting>
+						<setting key="centerPanelInitiallyLocked" type="Boolean">true</setting>
+						<virtual-sockets/>
+					</widget>
+				</widget>
+				<setting key="northHeight" type="String">52px</setting>
+				<setting key="northBorder" type="String">none</setting>
+				<setting key="broadcastHorizontalResize" type="Boolean">true</setting>
+				<setting key="eastDisabled" type="Boolean">true</setting>
+				<setting key="eastBorder" type="String">none</setting>
+				<setting key="westCollapsible" type="Boolean">true</setting>
+				<setting key="northCollapsible" type="Boolean">true</setting>
+				<setting key="border" type="String">none</setting>
+				<setting key="centerBorder" type="String">none</setting>
+				<setting key="westDisabled" type="Boolean">false</setting>
+				<setting key="southHeight" type="String">52px</setting>
+				<setting key="westBorder" type="String">none</setting>
+				<setting key="southBorder" type="String">none</setting>
+				<setting key="southDisabled" type="Boolean">true</setting>
+				<setting key="eastWidth" type="String">25%</setting>
+				<setting key="northDisabled" type="Boolean">true</setting>
+				<setting key="autoCloseWest" type="Boolean">true</setting>
+				<setting key="southCollapsible" type="Boolean">true</setting>
+				<setting key="westWidth" type="String">300px</setting>
+				<setting key="eastCollapsible" type="Boolean">true</setting>
+				<virtual-sockets/>
+			</widget>
+			<setting key="autoCloseInactive" type="Boolean">false</setting>
+			<setting key="perspectiveContainerConfigCtx" type="String" value="perspective-view-switcher"/>
+			<virtual-sockets/>
+		</widget>
+
+	</widget-extension>
+
+	<widget-connection sourceWidgetId="custom_themes" outputId="themeVariablesChanged"
+					   targetWidgetId="theme_preview" inputId="themeVariablesChanged"/>
+</widgets>

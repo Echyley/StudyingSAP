@@ -1,0 +1,50 @@
+.se-component-item {
+    @include se-flex-row();
+    position: relative;
+    width: 270px;
+    padding: se-space('xxs');
+    margin: se-space('base') se-space('xxs') 0;
+    border: 2px solid transparent;
+    cursor: grab;
+    &:active,
+    &:hover {
+        border: 2px dashed var(--sapGroup_ContentBorderColor);
+        border-radius: se-space('base');
+    }
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.se-component-item--details-type {
+    color: var(--sapNeutralColor);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.se-component-item--image {
+    @include se-flex-row(center);
+    @include se-type('3');
+    height: 36px;
+    width: 36px;
+    position: relative;
+    background: var(--sapField_InformationColor);
+    margin-right: se-space('xxs');
+    border-radius: se-space('base');
+    [class*='sap-icon'] {
+        color: var(--sapBaseColor);
+    }
+    .se-component-item--image-shared[class*='sap-icon'] {
+        color: unset;
+        font-weight: 800;
+    }
+}
+
+.se-component-item--details,
+.se-component-item--details-type {
+    @include se-text-ellipsis();
+    width: 200px;
+}
+
+.se-component-item--details-type {
+    color: var(--sapNeutralColor);
+}

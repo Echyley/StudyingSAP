@@ -1,0 +1,40 @@
+.se-page-tree {
+    background: var(--sapBaseColor);
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 4px;
+    font-family: var(--sapFontFamily);
+
+    &--header {
+        height: 48px;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0px 1px 0px var(--sapLegend_NonWorkingBackground);
+
+        &--icon {
+            width: 16px;
+            height: 18px;
+            line-height: 19px;
+            font-size: 16px;
+            color: var(--sapContent_IconColor);
+            text-align: center;
+        }
+
+        &--title {
+            font-size: 18px;
+            line-height: 21px;
+            margin: 0px 10px;
+            color: var(--sapTextColor);
+        }
+    }
+
+    &-scroll-area {
+        height: calc(100% - 48px);
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

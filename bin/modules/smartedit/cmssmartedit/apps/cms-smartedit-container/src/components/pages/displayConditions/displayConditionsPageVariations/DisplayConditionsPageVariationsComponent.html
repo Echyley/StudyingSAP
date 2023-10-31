@@ -1,0 +1,22 @@
+<div class="form-group dc-page-variations">
+    <label class="se-control-label control-label__margin">
+        <span translate="se.cms.display.conditions.variation.pages.title"></span>
+        <se-help *ngIf="variations.length > 0">
+            <span translate="se.cms.display.conditions.variations.description"></span>
+        </se-help>
+    </label>
+    <div
+        *ngIf="variations.length === 0"
+        class="dc-no-variations form-readonly-text form-readonly-text__tight form-readonly-text__inline"
+        translate="se.cms.display.conditions.no.variations"
+    ></div>
+    <div *ngIf="variations.length > 0">
+        <se-client-paged-list
+            [items]="variations"
+            [keys]="keys"
+            [itemsPerPage]="itemsPerPage"
+            class="dc-page-variations-list"
+        >
+        </se-client-paged-list>
+    </div>
+</div>

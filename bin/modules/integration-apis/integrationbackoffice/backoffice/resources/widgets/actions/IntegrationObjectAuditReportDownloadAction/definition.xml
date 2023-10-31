@@ -1,0 +1,19 @@
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition id="integrationbackoffice.actions.integrationObjectAuditReportDownloadAction"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+
+    <name>Download Audit Report</name>
+    <description>Download the latest audit report of the selected Integration Object</description>
+    <version>1.0</version>
+
+    <actionClassName>de.hybris.platform.integrationbackoffice.widgets.modeling.actions.IntegrationObjectAuditReportDownloadAction</actionClassName>
+
+    <iconUri>audit_download</iconUri>
+
+    <sockets>
+        <output type="de.hybris.platform.integrationservices.model.IntegrationObjectModel" id="requestAuditReport"/>
+    </sockets>
+</action-definition>

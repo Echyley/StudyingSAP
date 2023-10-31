@@ -1,0 +1,40 @@
+@import "../support/_workflowdesigner-variables.scss";
+
+.yw-workflow-designer {
+	&-modal {
+		height: 100%;
+
+		.yw-visjs {
+			&-empty-chart {
+				background: $workflowdesigner__chart-empty--bg-image;
+			}
+		}
+		.yw-button-container {
+			border-top: $workflowdesigner__button-container--border-top;
+			padding: $workflowdesigner__button-container--padding;
+		}
+
+		.yw-notification {
+			top: $workflowdesigner__notification-bar--top;
+			&-message {
+				box-shadow: none;
+			}
+		}
+	}
+	&-add-node-popup {
+		&.z-menupopup {
+			min-width: $workflowdesigner__add-popup--min-width;
+			padding: $_container-spacing-default__core;
+
+			.z-menuitem {
+				&:hover {
+					background: inherit;
+				}
+				&-content {
+					@include _add-button-styles("-transparent");
+					margin: $_container-spacing-default__core;
+				}
+			}
+		}
+	}
+}

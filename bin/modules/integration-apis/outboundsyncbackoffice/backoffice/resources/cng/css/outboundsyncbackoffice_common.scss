@@ -1,0 +1,12 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+@import "cockpitng-globals.scss";
+// set icon for the first levels of Integration UI Tools
+div.yw-explorerTree .y-tree-icon {
+  @include setTreeIconGlyph("outboundsyncbackoffice_explorer_treenode_outboundsync", "outboundsync");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+  @include setSideNavigationIconGlyph("outboundsyncbackoffice_explorer_treenode_outboundsync", "outboundsync");
+}

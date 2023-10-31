@@ -1,0 +1,60 @@
+# Set up the IOs for using QA/Demo scenarios
+
+###  Delete the IOs
+POST {{fullURL}}/IntegrationService/$batch
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: multipart/mixed; boundary=batch
+
+--batch
+Content-Type: multipart/mixed; boundary=changeset
+
+--changeset
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+DELETE InboundChannelConfigurations('OrderSubmission') HTTP/1.1
+
+
+--changeset
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+DELETE IntegrationObjects('OrderSubmission') HTTP/1.1
+
+
+--changeset--
+--batch
+Content-Type: multipart/mixed; boundary=changeset
+
+--changeset
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+DELETE InboundChannelConfigurations('InboundCustomer') HTTP/1.1
+
+
+--changeset
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+DELETE IntegrationObjects('InboundCustomer') HTTP/1.1
+
+
+--changeset--
+--batch--
+
+> {%
+client.test("IOs deleted", function() {
+  client.assert(response.status === 202, "Response status is not 202 Accepted");
+});
+%}
+
+### Delete the persistence IO
+DELETE {{fullURL}}/IntegrationService/IntegrationObjects('Persistence')
+Authorization: Basic {{admin_user}} {{admin_pass}}
+
+> {%
+client.test("Persistence IO is deleted", function() {
+  client.assert(response.status === 200, "Response status is not 200 OK");
+});
+%}

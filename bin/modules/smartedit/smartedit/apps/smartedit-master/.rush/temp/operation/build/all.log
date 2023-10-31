@@ -1,0 +1,90 @@
+Invoking: npm run build:prod 
+assets by info 2.65 MiB [immutable]
+  assets by path *.woff 1.18 MiB 19 assets
+  assets by path *.woff2 814 KiB 19 assets
+  assets by path *.ttf 572 KiB
+    asset eb8fe97a1943a7076417.ttf 323 KiB [emitted] [immutable] [from: ../smartedit-container/dist/assets/sap-icons.ttf] [big] (auxiliary name: smarteditcontainer)
+    + 3 assets
+  asset ec12308917a49959b22a.svg 107 KiB [emitted] [immutable] [from: ../smartedit-container/dist/assets/hyicon.svg] (auxiliary name: smarteditcontainer)
+  asset 9d8618b8ecb10c0742a3.eot 13.9 KiB [emitted] [immutable] [from: ../smartedit-container/dist/assets/hyicon.eot] (auxiliary name: smarteditcontainer)
+  asset 567e1282d5111cec5a68.jpg 4.02 KiB [emitted] [immutable] [from: ../smartedit-container/assets/icon_site_placeholder.jpg] (auxiliary name: smarteditcontainer)
+assets by path *.js 6.19 MiB
+  asset vendors.js 4.25 MiB [emitted] [minimized] [big] (name: vendors) (id hint: vendors) 1 related asset
+  asset smarteditcontainer.js 1.95 MiB [emitted] [minimized] [big] (name: smarteditcontainer) 1 related asset
+asset smarteditcontainer.css 1.42 MiB [emitted] [minimized] [big] (name: smarteditcontainer)
+asset ../index.jsp 4.29 KiB [emitted]
+Entrypoint smarteditcontainer [big] 7.62 MiB (2.65 MiB) = vendors.js 4.25 MiB smarteditcontainer.css 1.42 MiB smarteditcontainer.js 1.95 MiB 45 auxiliary assets
+orphan modules 5.91 MiB (javascript) 2.97 MiB (asset) 7.47 KiB (runtime) [orphan] 277 modules
+runtime modules 3.65 KiB 8 modules
+modules by path ../../../smartedittools/common/temp/node_modules/.pnpm/ 10.2 MiB (javascript) 17 KiB (css/mini-extract) 1005 modules
+modules by path ../../../../ 493 KiB (javascript) 54.7 KiB (css/mini-extract) 15 modules
+modules by path ../../../cmssmartedit/apps/ 1.3 MiB (javascript) 5.95 KiB (css/mini-extract) 5 modules
+modules by path ../smartedit-commons/dist/ 850 KiB (javascript) 73.7 KiB (css/mini-extract) 3 modules
+modules by path ../smartedit-container/dist/ 447 KiB (javascript) 2.51 MiB (css/mini-extract) 3 modules
+modules by path ../smartedit-loader/dist/ 8.47 KiB (javascript) 0 bytes (css/mini-extract) 3 modules
+modules by path ./src/container/ 2.22 KiB
+  ./src/container/master_index.ts 1.97 KiB [built] [code generated]
+  ./src/container/thirdparties.js 252 bytes [built] [code generated]
+../smart-utils/dist/index.js 288 KiB [built] [code generated]
+crypto (ignored) 15 bytes [optional] [built] [code generated]
+
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  eb8fe97a1943a7076417.ttf (323 KiB)
+  smarteditcontainer.css (1.42 MiB)
+  smarteditcontainer.js (1.95 MiB)
+  vendors.js (4.25 MiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  smarteditcontainer (7.62 MiB)
+      vendors.js
+      smarteditcontainer.css
+      smarteditcontainer.js
+
+WARNING in webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+webpack 5.79.0 compiled with 3 warnings in 56900 ms
+Copying generated container sources to webroot
+Copying CKEditor sources to webroot
+asset main.css 5.27 MiB [emitted] [minimized] [big] (name: main)
+asset vendors.js 4.11 MiB [emitted] [minimized] [big] (id hint: defaultVendors) 1 related asset
+asset smartedit.js 880 KiB [emitted] [minimized] [big] (name: main) 1 related asset
+Entrypoint main [big] 10.2 MiB = vendors.js 4.11 MiB main.css 5.27 MiB smartedit.js 880 KiB
+orphan modules 9.87 MiB (javascript) 6.44 KiB (runtime) [orphan] 274 modules
+runtime modules 3.65 KiB 8 modules
+modules by path ../../../smartedittools/common/temp/node_modules/.pnpm/ 9.86 MiB (javascript) 17 KiB (css/mini-extract) 825 modules
+modules by path ../../../../ 139 KiB (javascript) 52.3 KiB (css/mini-extract) 13 modules
+modules by path ../../../cmssmartedit/apps/ 306 KiB (javascript) 6.72 KiB (css/mini-extract) 5 modules
+modules by path ../smartedit/dist/ 183 KiB (javascript) 6.41 MiB (css/mini-extract) 3 modules
+modules by path ../smartedit-bootstrap/dist/ 2.21 KiB (javascript) 0 bytes (css/mini-extract) 3 modules
+modules by path ./src/inner/ 2.15 KiB 2 modules
+modules by path ../smartedit-commons/dist/ 73.7 KiB (css/mini-extract) 850 KiB (javascript) 2 modules
+../../web/webroot/static-resources/thirdparties/blockumd/unblockumd.js 275 bytes [built] [code generated]
+../smart-utils/dist/index.js 288 KiB [built] [code generated]
+crypto (ignored) 15 bytes [optional] [built] [code generated]
+
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  main.css (5.27 MiB)
+  smartedit.js (880 KiB)
+  vendors.js (4.11 MiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  main (10.2 MiB)
+      vendors.js
+      main.css
+      smartedit.js
+
+WARNING in webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+webpack 5.79.0 compiled with 3 warnings in 52836 ms
+Copying generated inner frame sources to webroot
+Copying CKEditor sources to webroot

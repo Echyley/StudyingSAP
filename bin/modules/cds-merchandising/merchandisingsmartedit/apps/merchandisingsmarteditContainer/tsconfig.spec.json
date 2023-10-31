@@ -1,0 +1,37 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/smartedit-build/test/@types"
+    ],
+    "skipLibCheck": true,
+    "paths": {
+      "testhelpers": [
+        "node_modules/smartedit-build/test/unit"
+      ],
+      "testhelpers/*": [
+        "node_modules/smartedit-build/test/unit/*"
+      ],
+      "smarteditcommons/*": [
+        "node_modules/smarteditcommons/dist/*"
+      ],
+      "smarteditcommons": [
+        "node_modules/smarteditcommons/dist"
+      ],
+      "merchandisingsmarteditcontainer/*": [
+        "src/*"
+      ],
+      "merchandisingsmarteditcontainer": [
+        "src"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "node_modules/smartedit-build/test/unit/**/*",
+    "node_modules/smartedit-build/test/@types/**/*",
+    "node_modules/@types/**/*"
+  ]
+}

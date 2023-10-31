@@ -1,0 +1,15 @@
+@import "cockpitng-globals.scss";
+
+$workflowdesigner__chart-empty--bg-image: url('../images/workflowdesigner/empty-workflow-placeholder.png') no-repeat center center;
+
+$workflowdesigner__toolbar--border-top: $boxes--border__thin solid var(--bo-list-border-color);
+$workflowdesigner__toolbar--padding: 7px $container-spacing-default__half;
+$workflowdesigner__toolbar-button--padding: ($container-spacing-default__half / 2) $container-spacing-default__third;
+$workflowdesigner__toolbar-button-label--line-height: $toolbar__button-default--size;
+
+$workflowdesigner__button-container--border-top: $boxes--border__thin solid var(--bo-list-border-color);
+$workflowdesigner__button-container--padding: $container-spacing-default__third ($container-spacing-default__third *2);
+
+$workflowdesigner__notification-bar--top: ($editor-defaults__inline-box--height + ($container-spacing-default__third * 2) + $workflowdesigner__toolbar-button-label--line-height + (nth($workflowdesigner__toolbar--padding, 1) * 2) + (nth($workflowdesigner__toolbar-button--padding, 1) * 2) + (nth($workflowdesigner__toolbar--border-top, 1) * 2)); //115px;
+
+$workflowdesigner__add-popup--min-width: 140px;

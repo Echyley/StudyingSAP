@@ -1,0 +1,7 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$snIndexType=testIndexType
+
+INSERT_UPDATE SnField ; indexType(id)[unique=true] ; id[unique=true] ; name           ; fieldType(code) ; multiValued[default=false] ; localized[default=false] ; valueProvider                        ; valueProviderParameters[map-delimiter=|]
+                      ; $snIndexType               ; allCategories   ; All Categories ; STRING          ; true                       ;                          ; modelAttributeSnIndexerValueProvider ; expression->supercategories.code        

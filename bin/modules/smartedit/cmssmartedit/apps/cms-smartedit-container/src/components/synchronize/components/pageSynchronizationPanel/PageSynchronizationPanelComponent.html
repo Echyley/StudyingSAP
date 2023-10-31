@@ -1,0 +1,27 @@
+<se-page-synchronization-header
+    class="se-sync-panel__sync-status"
+    [syncStatus]="syncStatus"
+    [pageSyncConditions]="pageSyncConditions"
+></se-page-synchronization-header>
+<!-- Pages -->
+<se-synchronization-panel
+    *ngIf="!showFooter"
+    [itemId]="cmsPage.uuid"
+    [showFooter]="false"
+    [getSyncStatus]="getSyncStatus"
+    [performSync]="performSync"
+    (selectedItemsUpdate)="onSelectedItemsUpdate($event)"
+    (syncStatusReady)="onSyncStatusReady($event)"
+    (getApi)="onGetApi($event)"
+>
+</se-synchronization-panel>
+<!-- Storefront -->
+<se-synchronization-panel
+    *ngIf="showFooter"
+    [itemId]="cmsPage.uuid"
+    [getSyncStatus]="getSyncStatus"
+    [performSync]="performSync"
+    (syncStatusReady)="onSyncStatusReady($event)"
+    (getApi)="onGetApi($event)"
+>
+</se-synchronization-panel>

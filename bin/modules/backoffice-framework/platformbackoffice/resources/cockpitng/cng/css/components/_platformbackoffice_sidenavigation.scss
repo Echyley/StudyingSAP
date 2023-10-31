@@ -1,0 +1,52 @@
+/**
+* Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+*/
+@import "_platformbackoffice_sidenavigation-theme-adjust.scss";
+@import "../support/_platformbackoffice_sidenavigation-variables.scss";
+
+.yw-sideNavigation {
+  &-widget {
+    .yw-com_hybris_backoffice_widgets_toolbar {
+      width: 100%;
+    }
+    .yw-toolbar-before {
+      width: $sidenav__toolbar-button--width;
+      border-top: $sidenav__toolbar-separate--border;
+      margin: $sidenav__toolbar-separate--margin;
+    }
+    .cng-action-group {
+      width: 100%;
+      table {
+        width: 100%;
+      }
+    }
+    .cng-action-icon {
+      height: $sidenav__toolbar-button--height;
+      line-height: $sidenav__toolbar-button--height;
+      width: $sidenav__toolbar-button--width;
+      color: $sidenav__toolbar-button--color;
+      border: 0;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      background-color: transparent;
+      &:hover {
+        background-image: $sidenav__toolbar-button_hover--background-image;
+        border: none;
+        box-shadow: none;
+        color: var(--bo-content-icon-color);
+        background-color: transparent;
+      }
+      &:focus {
+        outline: none;
+      }
+      &:after {
+        font-size: $sidenav__toolbar-button--after-font-size;
+      }
+    }
+    .cng-action-group .ya-toggle:hover {
+      background-color: $sidenav__toolbar-action-div--background-color;
+    }
+  }
+}

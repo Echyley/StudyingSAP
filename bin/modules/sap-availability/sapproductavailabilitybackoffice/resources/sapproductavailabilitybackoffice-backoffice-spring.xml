@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sapproductavailabilitybackofficeService" class="de.hybris.platform.sap.sapproductavailabilitybackoffice.services.SapproductavailabilitybackofficeService" />
+
+	<bean id="sapproductavailabilitybackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
+  		<property name="location" value="/sapproductavailabilitybackoffice-backoffice-labels/"/>
+  		<property name="name" value="labels"/>
+  	</bean>
+
+</beans>

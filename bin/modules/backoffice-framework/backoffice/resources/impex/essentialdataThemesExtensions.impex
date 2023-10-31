@@ -1,0 +1,27 @@
+$catalogVersion=catalogVersion(catalog(id[default='_boconfig']),version[default='hidden'])[unique=true]
+$siteImageResource=jar:com.hybris.backoffice.constants.BackofficeConstants&/impex/images
+$siteThemeResource=jar:com.hybris.backoffice.constants.BackofficeConstants&/backoffice/generated/cockpitng/cng/css/themes
+$thumbnail=thumbnail(code, $catalogVersion)
+$style=style(code, $catalogVersion)
+
+# Insert thumbnail
+INSERT_UPDATE Media; code[unique=true]; $catalogVersion; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]; mime[default = 'image/png']; folder(qualifier)[default = backofficethemes]
+                   ;backoffice_theme_quartz_light_thumbnail;;$siteImageResource/sap_quartz_light.png;;
+                   ;backoffice_theme_quartz_dark_thumbnail;;$siteImageResource/sap_quartz_dark.png;;
+                   ;backoffice_theme_morning_horizon_thumbnail;;$siteImageResource/sap_morning_horizon.png;;
+
+# Insert style
+INSERT_UPDATE Media; code[unique=true]; $catalogVersion; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]; mime[default = 'text/css']; folder(qualifier)[default = backofficethemes]
+;backoffice_theme_quartz_light_style;;$siteThemeResource/sap_fiori_3/variables.css;;
+;backoffice_theme_quartz_dark_style;;$siteThemeResource/sap_fiori_3_dark/variables.css;;
+;backoffice_theme_morning_horizon_style;;$siteThemeResource/sap_horizon/variables.css;;
+
+# Set thumbnail and style for theme
+INSERT_UPDATE Theme; code[unique=true]; $style; styleVersion; $thumbnail
+                   ;sap_fiori_3;backoffice_theme_quartz_light_style;1;backoffice_theme_quartz_light_thumbnail
+                   ;sap_fiori_3_dark;backoffice_theme_quartz_dark_style;1;backoffice_theme_quartz_dark_thumbnail
+                   ;sap_horizon;backoffice_theme_morning_horizon_style;1;backoffice_theme_morning_horizon_thumbnail
+
+# Insert constraint
+INSERT_UPDATE NotNullConstraint;id[unique = true];severity(code);active;target;type(code);qualifier;descriptor(enclosingType(code),qualifier);
+;CustomThemeCodeNotNullConstraint;ERROR;true;com.hybris.backoffice.model.CustomThemeModel;CustomTheme;code;CustomTheme:code;

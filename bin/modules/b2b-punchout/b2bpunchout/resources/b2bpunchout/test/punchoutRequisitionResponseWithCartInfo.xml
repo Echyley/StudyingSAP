@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<cXML payloadID="1660819030326.8015@WDQWYFYDLJ" timestamp="2022-08-18T18:37:10+08:00" xml:lang="en-US">
+    <Header>
+        <From>
+            <Credential domain="NetworkID">
+                <Identity>AN01665632054-T</Identity>
+            </Credential>
+        </From>
+        <To>
+            <Credential domain="NetworkID">
+                <Identity>AN01000002779-T</Identity>
+            </Credential>
+        </To>
+        <Sender>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>sysadmin@ariba.com</Identity>
+            </Credential>
+            <UserAgent>CatalogTester</UserAgent>
+        </Sender>
+    </Header>
+    <Message>
+        <PunchOutOrderMessage>
+            <BuyerCookie>y63kbgiXSabx0oKulWoDO6cmzkx4Ezuw0.260012937900605332</BuyerCookie>
+            <PunchOutOrderMessageHeader operationAllowed="edit">
+                <Total>
+                    <Money currency="USD">42.0</Money>
+                </Total>
+            </PunchOutOrderMessageHeader>
+            <ItemIn quantity="1">
+                <ItemID>
+                    <SupplierPartID>3881029</SupplierPartID>
+                    <SupplierPartAuxiliaryID>00017000</SupplierPartAuxiliaryID>
+                </ItemID>
+                <ItemDetail>
+                    <UnitPrice>
+                        <Money currency="USD">42.0</Money>
+                    </UnitPrice>
+                    <Description xml:lang="en">-16-step torque selector.  &lt;br/&gt;-Single-sleeve quality quick chuck (Sanon Jacobs).  &lt;br/&gt;-LED light. &lt;br/&gt;-Automatic spindle lock. &lt;br/&gt;-Quickstop. &lt;br/&gt;-Electronic speed control.  &lt;br/&gt;-Magnetic screw holder. &lt;br/&gt;-Safety loop.  &lt;br/&gt;-Battery capacity in</Description>
+                    <UnitOfMeasure>C62</UnitOfMeasure>
+                    <Classification domain="UNSPSC">23291500</Classification>
+                </ItemDetail>
+            </ItemIn>
+        </PunchOutOrderMessage>
+    </Message>
+</cXML>

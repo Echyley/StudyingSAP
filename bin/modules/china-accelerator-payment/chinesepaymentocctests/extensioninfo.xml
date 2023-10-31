@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+            	
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Chinesepaymentocctests" jaloLogicFree="true" managername="ChinesepaymentocctestsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="chinesepaymentocctests" usemaven="false">
+                        		
+        
+        
+        <requires-extension name="commercewebservicestests"/>
+                
+        <requires-extension name="chinesepaymentocc"/>
+                
+        <requires-extension name="chinesepspalipayservices"/>
+                
+        <requires-extension name="chinesepaymentmock"/>
+                
+        
+        <coremodule generated="true" manager="de.hybris.platform.chinesepaymentocctests.jalo.ChinesepaymentocctestsManager" packageroot="de.hybris.platform.chinesepaymentocctests"/>
+                        		
+        
+        	
+    
+    
+    </extension>
+            
+
+
+</extensioninfo>

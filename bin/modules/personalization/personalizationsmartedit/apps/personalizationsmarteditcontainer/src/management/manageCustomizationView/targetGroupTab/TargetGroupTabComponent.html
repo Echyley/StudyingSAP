@@ -1,0 +1,107 @@
+<div class="pe-customization-modal" *ngIf="customization">
+    <div class="pe-customization-modal__title">
+        <div class="pe-customization-modal__title-header">
+            <div
+                class="pe-customization-modal__title-header-name perso-wrap-ellipsis"
+                [attr.title]="customization.name"
+            >
+                {{ customization.name }}
+            </div>
+            <div>
+                <span
+                    class="pe-customization-modal__title-header-badge badge badge-success"
+                    [ngClass]="[getActivityStateForCustomization(customization)]"
+                >
+                    {{'personalization.modal.customizationvariationmanagement.targetgrouptab.customization.'
+                    + customization.status | lowercase | translate}}
+                </span>
+            </div>
+        </div>
+        <div class="pe-customization-modal__title-subarea">
+            <div
+                *ngIf="isCustomizationEnabled(customization)"
+                class="pe-customization-modal__title-dates"
+            >
+                <span *ngIf="!customization.enabledStartDate && customization.enabledEndDate"
+                    >...</span
+                >
+                <span
+                    [ngClass]="{'perso__datetimepicker--error-text': !persoDateUtils.isDateValidOrEmpty(customization.enabledStartDate)}"
+                    >{{ customization.enabledStartDate }}</span
+                >
+                <span *ngIf="customization.enabledStartDate || customization.enabledEndDate">
+                    -
+                </span>
+                <span
+                    [ngClass]="{'perso__datetimepicker--error-text':!persoDateUtils.isDateValidOrEmpty(customization.enabledEndDate)}"
+                    >{{ customization.enabledEndDate }}</span
+                >
+                <span
+                    *ngIf="persoDateUtils.isDateInThePast(customization.enabledEndDate)"
+                    class="section-help help-inline help-inline--section help-inline--tooltip"
+                >
+                    <span class="pe-datetime__warning-icon"></span>
+                    <span
+                        class="pe-help-block--inline help-block-inline help-block-inline--text"
+                        translate="personalization.modal.customizationvariationmanagement.targetgrouptab.datetooltip"
+                    ></span>
+                </span>
+                <span *ngIf="customization.enabledStartDate && !customization.enabledEndDate"
+                    >...</span
+                >
+            </div>
+        </div>
+    </div>
+    <div class="pe-customization-modal__y-add-btn">
+        <button 
+            fd-button 
+            label="{{ 'personalization.modal.customizationvariationmanagement.targetgrouptab.addtargetgroup.button' | translate }}" 
+            (click)="showAddVariationPanel()"
+        >
+        </button>
+    </div>
+    <perso-target-group-variation-list
+        *ngIf="visibleVariations.length > 0"
+        [customization]="customization"
+        [variations]="visibleVariations"
+    ></perso-target-group-variation-list>
+
+    <se-slider-panel
+        [sliderPanelConfiguration]="sliderPanelConfiguration"
+        [(sliderPanelHide)]="sliderPanelHide"
+        [(sliderPanelShow)]="sliderPanelShow"
+        class="pe-customization-modal__sliderpanel"
+    >
+        <!-- Edit Target Group -->
+        <div *ngIf="isVariationLoaded">
+            <div class="pe-customization-modal__sliderpanel__btn-layout">
+                <perso-modal-full-screen-button></perso-modal-full-screen-button>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label for="targetgroup-name" [required]="true">
+                    {{ 'personalization.modal.customizationvariationmanagement.targetgrouptab.targetgroupname' | translate }}
+                </label>
+                <input
+                    fd-form-control
+                    type="text"
+                    name="variationname_key"
+                    id="targetgroup-name"
+                    class="fd-form__control"
+                    [placeholder]="'personalization.modal.customizationvariationmanagement.targetgrouptab.targetgroupname.placeholder' | translate"
+                    [(ngModel)]="edit.name"
+                />
+            </div>
+            <fd-checkbox 
+                label="{{ 'personalization.modal.customizationvariationmanagement.targetgrouptab.variation.default' | translate }}" 
+                [(ngModel)]="edit.isDefault"
+                (ngModelChange)="showConfirmForDefaultTrigger($event)" 
+                id="targetgroup-isDefault-001"></fd-checkbox>
+            <div *ngIf="edit.showExpression">
+                <segment-view 
+                    [targetGroupState]="edit"
+                    (expressionChange)="onSegmentViewExpressionChange($event)">
+                </segment-view>
+            </div>
+        </div>
+    </se-slider-panel>
+</div>

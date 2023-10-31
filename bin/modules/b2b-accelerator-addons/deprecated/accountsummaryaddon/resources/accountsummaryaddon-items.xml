@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="DocumentSort" autocreate="true" generate="true" dynamic="false">
+			<value code="documentNumber" />
+			<value code="documentType" />
+			<value code="status" />
+			<value code="date" />
+			<value code="dueDate" />
+			<value code="amount" />
+			<value code="openAmount" />
+		</enumtype>
+	</enumtypes>
+
+	<itemtypes>
+
+		<itemtype code="AccountSummaryUnitTreeComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
+				  jaloclass="de.hybris.platform.accountsummaryaddon.jalo.AccountSummaryUnitTreeComponent">
+		</itemtype>
+
+		<itemtype code="AccountSummaryAccountStatusComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
+				  jaloclass="de.hybris.platform.accountsummaryaddon.jalo.AccountSummaryAccountStatusComponent">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="listViewPageSize">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<description>code</description>
+					<persistence type="property" />
+					<defaultvalue>Integer.valueOf(10)</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="gridViewPageSize">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<description>code</description>
+					<persistence type="property" />
+					<defaultvalue>Integer.valueOf(6)</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+
+</items>

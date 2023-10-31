@@ -1,0 +1,176 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+# --------------------------------------------------- Catalog variables ----------------------------------------------------------
+$contentCatalog=MultiCountryTestContentCatalog
+$contentCatalogRegion=$contentCatalog-region
+$contentCatalogLocal=$contentCatalog-local
+
+$contentCVGlobalOnline=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=OnlineVersion])[default=$contentCatalog:OnlineVersion]
+$contentCVGlobalStaged=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=StagedVersion])[default=$contentCatalog:StagedVersion]
+$contentCVRegionStaged=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogRegion]),CatalogVersion.version[default=StagedVersion])[default=$contentCatalogRegion:StagedVersion]
+$contentCVLocalStaged=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogLocal]),CatalogVersion.version[default=StagedVersion])[default=$contentCatalogLocal:StagedVersion]
+
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=OnlineVersion])[default=$productCatalog:OnlineVersion]
+
+# ------------------------------------------------- Users and user groups --------------------------------------------------------
+INSERT_UPDATE UserGroup;uid[unique=true]
+;customergroup
+
+UPDATE Customer;uid[unique=true];groups(uid)
+;anonymous;customergroup
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=en];conversion
+;pieces;pieces;pieces;1
+
+# ---------------------------------------------------- Product catalog -----------------------------------------------------------
+INSERT_UPDATE Catalog;id[unique=true];name[lang=en]
+;$productCatalog;$productCatalogName
+
+# ------------------------------------------------- Hierarchy of catalogs --------------------------------------------------------
+# $contentCatalog <---- $contentCatalogRegion <---- $contentCatalogLocal
+
+INSERT_UPDATE ContentCatalog;id[unique=true];supercatalog(id)
+;$contentCatalog;
+;$contentCatalogRegion;$contentCatalog
+;$contentCatalogLocal;$contentCatalogRegion
+
+# --------------------------------------------------------- Sites ----------------------------------------------------------------
+# Language
+$lang=en
+
+# Create CMS Site
+INSERT_UPDATE CMSSite;uid[unique=true];name[lang=$lang];contentCatalogs(id)
+;GlobalMultiCountryTestSite;"Multicountry global";$contentCatalog
+;RegionMultiCountryTestSite;"Multicountry region";$contentCatalog,$contentCatalogRegion
+;LocalMultiCountryTestSite;"Multicountry local";$contentCatalog,$contentCatalogRegion,$contentCatalogLocal
+
+# -------------------------------------------- Catalog versions for all catalogs -------------------------------------------------
+INSERT_UPDATE CatalogVersion;version[unique=true];catalog(id)[unique=true];active
+;OnlineVersion;$contentCatalog;true
+;OnlineVersion;$contentCatalogRegion;true
+;StagedVersion;$contentCatalog;false
+;StagedVersion;$contentCatalogRegion;false
+;StagedVersion;$contentCatalogLocal;false
+# ------------------------------------------------------- Page types -------------------------------------------------------------
+INSERT_UPDATE CmsPageType;code[unique=true];restrictionTypes(code)
+;CatalogPage;
+;CategoryPage;
+;ContentPage;
+;ProductPage;
+
+# ----------------------------------------------------- Page templates -----------------------------------------------------------
+# Templates for global staged catalog version
+INSERT_UPDATE PageTemplate;$contentCVGlobalOnline[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;CategoryPageTemplate;Category Page Template;;CategoryPage
+;;ProductDetailsPageTemplate;Product Details Page Template;;ProductPage
+;;ProductListPageTemplate;Product List Page Template;;CategoryPage
+;;ProductGridPageTemplate;Product Grid Page Template;;CategoryPage
+;;SearchResultsListPageTemplate;Search Results List Page Template;;ContentPage
+;;SearchResultsGridPageTemplate;Search Results Grid Page Template;;ContentPage
+;;SearchResultsEmptyPageTemplate;Search Results Empty Page Template;;ContentPage
+;;HomePageTemplate;Home Page Template;;ContentPage
+
+# --------------------------------------------------- Content slot names ---------------------------------------------------------
+# Content slot names for CategoryPageTemplate in global staged catalog version
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCVGlobalOnline)[unique=true][default='CategoryPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;
+;HeaderLinks;;;
+;SearchBox;;;
+;MiniCart;;;
+;NavigationBar;;;
+;Section1;;;
+;Section2;;;
+;Section3;;;
+;Section4;;;
+;Footer;;;
+
+# Content slot names for HomePageTemplate in global staged catalog version
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCVGlobalOnline)[unique=true][default='HomePageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;
+;HeaderLinks;;;
+;SearchBox;;;
+;MiniCart;;;
+;NavigationBar;;;
+;Section1;;;
+;Section2;;;
+;Footer;;;
+# ------------------------------------------------------- Components -------------------------------------------------------------
+
+INSERT_UPDATE CMSLinkComponent;catalogVersion(catalog(id),version)[unique=true,allownull=true];uid[unique=true];name;url;linkName;category(code, $productCV);target(code)[default='sameWindow'];;&componentRef
+                              ;$contentCatalog:OnlineVersion;LinkInSlot;LinkInSlotName;https://www.abc.com;abc;;;;cmsLinkInSlotRef
+
+# ------------------------------------------------ Content slot instances --------------------------------------------------------
+# Create content slots for global staged catalog version
+INSERT_UPDATE ContentSlot;$contentCVGlobalOnline[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SiteLogoSlot;Default Site Logo Slot;true;
+;;HomepageNavLinkSlot;Default Homepage Link;true;
+;;MiniCartSlot;Mini Cart;true;
+;;NavigationBarSlot;Navigation Bar;true;
+;;FooterSlot;Footer;true;
+;;HeaderLinksSlot;Header links;true;
+;;SearchBoxSlot;Search Box;true;cmsLinkInSlotRef
+
+# Create content slots for global online catalog version
+#INSERT_UPDATE ContentSlot;$contentCVGlobalOnline[unique=true];uid[unique=true];name;active
+#;;FooterSlot;Footer;true
+#;;SiteLogoSlot;Default Site Logo Slot;true
+#;;HeaderLinksSlot;Header links;true
+
+# Create content slots for regional staged catalog version
+INSERT_UPDATE ContentSlot;$contentCVRegionStaged[unique=true];uid[unique=true];name;active;originalSlot(uid,$contentCVGlobalOnline)[unique=true]
+;;FooterSlot-region;Footer-region;true;FooterSlot
+
+# Create content slots for local staged catalog version
+INSERT_UPDATE ContentSlot;$contentCVLocalStaged[unique=true];uid[unique=true];name;active;originalSlot(uid,$contentCVGlobalOnline)[unique=true]
+;;FooterSlot-local;Footer-local;true;FooterSlot
+;;SiteLogoSlot-local;SiteLogo-local;true;SiteLogoSlot
+;;HeaderLinks-local;HeaderLinks-local;true;HeaderLinksSlot
+
+
+# ----------------------------------------------- Content slots for templates ----------------------------------------------------
+# For CategoryPageTemplate template for global staged catalog version
+INSERT_UPDATE ContentSlotForTemplate;$contentCVGlobalOnline[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCVGlobalOnline)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCVGlobalOnline)[unique=true];allowOverwrite
+;;SiteLogo-CategoryPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-CategoryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;MiniCart-CategoryPage;MiniCart;;MiniCartSlot;true
+;;NavigationBar-CategoryPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-CategoryPage;Footer;;FooterSlot;true
+;;HeaderLinks-CategoryPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-CategoryPage;SearchBox;;SearchBoxSlot;true
+
+# For HomePageTemplate template for global staged catalog version
+INSERT_UPDATE ContentSlotForTemplate;$contentCVGlobalOnline[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCVGlobalOnline)[unique=true][default='HomePageTemplate'];contentSlot(uid,$contentCVGlobalOnline)[unique=true];allowOverwrite
+;;SiteLogo-HomePage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-HomePage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;MiniCart-HomePage;MiniCart;;MiniCartSlot;true
+;;NavigationBar-HomePage;NavigationBar;;NavigationBarSlot;true
+;;Footer-HomePage;Footer;;FooterSlot;true
+;;HeaderLinks-HomePage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-HomePage;SearchBox;;SearchBoxSlot;true
+
+# For HomePageTemplate template for local staged catalog version.
+INSERT_UPDATE ContentSlotForTemplate;$contentCVLocalStaged[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCVGlobalOnline)[unique=true][default='HomePageTemplate'];contentSlot(uid,$contentCVLocalStaged)[unique=true];allowOverwrite
+;;SiteLogo-HomePage-local-shared;SiteLogo;;SiteLogoSlot-local;true
+
+# For HomePageTemplate template for regional staged catalog version.
+INSERT_UPDATE ContentSlotForTemplate;$contentCVRegionStaged[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCVGlobalOnline)[unique=true][default='HomePageTemplate'];contentSlot(uid,$contentCVRegionStaged)[unique=true];allowOverwrite
+;;FooterSlot-region-HomePage-regional-shared;FooterSlot;;FooterSlot-region;true
+
+# --------------------------------------------------------- Pages ----------------------------------------------------------------
+# Pages for regional
+INSERT_UPDATE ContentPage;$contentCVRegionStaged[unique=true];uid[unique=true];label;name;masterTemplate(uid,$contentCVGlobalOnline);defaultPage[default='false'];homepage[default='false'];approvalStatus(code)[default='approved'];previewImage(code, $contentCVGlobalOnline);pageStatus(code)[default='active']
+;;homepage-regional;/homepage-regional;Regional Home Page;HomePageTemplate;true;true;;;;
+
+# Pages for local
+INSERT_UPDATE ContentPage;$contentCVLocalStaged[unique=true];uid[unique=true];label;name;masterTemplate(uid,$contentCVGlobalOnline);defaultPage[default='false'];homepage[default='false'];approvalStatus(code)[default='approved'];previewImage(code, $contentCVGlobalOnline);pageStatus(code)[default='active']
+;;homepage-local;/homepage-local;Local Home Page;HomePageTemplate;true;true;;;;
+;;homepage-local-clone;/homepage-local-clone;Clone of Local Home Page;HomePageTemplate;;;;;;
+
+## ------------------------------------------------- Content slots for pages ------------------------------------------------------
+# Localized Custom Content Slot Relations
+INSERT_UPDATE ContentSlotForPage;$contentCVLocalStaged[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCVLocalStaged)[unique=true];contentSlot(uid,$contentCVLocalStaged)[unique=true]
+;;HeaderLinks-HomePage-local-custom;HeaderLinksSlot;homepage-local;HeaderLinks-local

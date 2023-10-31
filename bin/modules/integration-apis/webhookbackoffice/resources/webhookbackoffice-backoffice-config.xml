@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<config xmlns="http://www.hybris.com/cockpit/config"
+        xmlns:n="http://www.hybris.com/cockpitng/config/explorertree"
+        xmlns:b="http://www.hybris.com/cockpit/config/hybris"
+        xmlns:as="http://www.hybris.com/cockpitng/config/advancedsearch"
+        xmlns:list="http://www.hybris.com/cockpitng/component/listView"
+        xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea"
+        xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+        xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+
+    <context merge-by="module" component="integrationbackoffice-explorer-tree">
+        <n:explorer-tree>
+            <n:type-node id="webhookbackoffice.explorer.typenode.webhookconfiguration"
+                         code="WebhookConfiguration"/>
+        </n:explorer-tree>
+    </context>
+
+    <context component="integrationbackoffice-explorer-tree" merge-by="principal" principal="backofficeintegrationagentrole">
+        <n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+            <n:type-node id="webhookbackoffice.explorer.typenode.webhookconfiguration" code="WebhookConfiguration" merge-mode="remove"/>
+        </n:explorer-tree>
+    </context>
+
+    <context type="ConsumedDestination" component="base">
+        <b:base>
+            <b:labels>
+                <b:label>id</b:label>
+            </b:labels>
+        </b:base>
+    </context>
+
+    <context type="WebhookConfiguration">
+        <context component="base">
+            <b:base>
+                <b:labels>
+                    <b:label>integrationObject.code</b:label>
+                </b:labels>
+            </b:base>
+        </context>
+    </context>
+    <context component="advanced-search" type="WebhookConfiguration">
+        <as:advanced-search connection-operator="AND">
+            <as:field-list>
+                <as:field name="integrationObject" operator="equals" selected="true"/>
+                <as:field name="destination" operator="equals" selected="true"/>
+                <as:field name="eventType" operator="contains" selected="true"/>
+                <as:field name="creationtime" operator="greaterOrEquals"/>
+                <as:field name="creationtime" operator="lessOrEquals"/>
+            </as:field-list>
+            <as:sort-field name="creationtime" asc="false"/>
+        </as:advanced-search>
+    </context>
+    <context component="listview" type="WebhookConfiguration">
+        <list:list-view refresh-after-object-creation="true">
+            <list:column qualifier="integrationObject"/>
+            <list:column qualifier="destination"/>
+            <list:column qualifier="eventType"/>
+            <list:column qualifier="filterLocation"/>
+            <list:column qualifier="creationtime"/>
+        </list:list-view>
+    </context>
+    <context component="editor-area" type="WebhookConfiguration">
+        <ea:editorArea>
+            <ea:tab name="WebhookConfigurationContainer">
+                <ea:section name="webhookbackoffice.webhookconfiguration.details">
+                    <ea:attribute qualifier="integrationObject"
+                                  readonly="true"/>
+                    <ea:attribute qualifier="destination"
+                                  readonly="true"/>
+                    <ea:attribute qualifier="eventType"
+                                  readonly="true"/>
+                    <ea:attribute qualifier="filterLocation"/>
+                    <ea:attribute qualifier="creationtime" readonly="true"/>
+                </ea:section>
+            </ea:tab>
+        </ea:editorArea>
+    </context>
+    <context component="listviewactions" type="WebhookConfiguration" merge-by="type">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:action action-id="com.hybris.cockpitng.action.create" merge-mode="remove"/>
+                <y:action id="com.hybris.cockpitng.action.create"
+                          action-id="webhookbackoffice.actions.createWebhookConfigurationAction"
+                          property="pageable.typeCode" position="10"/>
+            </y:group>
+        </y:actions>
+    </context>
+
+    <context component="listviewactions" type="WebhookConfiguration" merge-by="type">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="audit" show-group-header="false" position="30">
+                <y:action id="createauditreport" merge-mode="append"
+                          action-id="webhookbackoffice.actions.WebhookConfigAuditReportDownloadAction"
+                          property="selectedObjects" position="10"/>
+            </y:group>
+        </y:actions>
+    </context>
+
+    <context type="ConsumedDestination" component="create-wizard-webhook-consumed-destination">
+        <wz:flow id="WebhookConsumedDestinationWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="WebhookConsumedDestinationWizardPrepare">
+                <wz:initialize property="newConsumedDestination" type="ConsumedDestination"/>
+            </wz:prepare>
+            <wz:step id="step1" label="flow.allmanadatory">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newConsumedDestination">
+                        <wz:property qualifier="id" description="field.abstractdestination.id.description"/>
+                        <wz:property qualifier="url" description="field.abstractdestination.url.description"/>
+                        <wz:property qualifier="active" exclude="true"/>
+                        <wz:property qualifier="creationtime" exclude="true"/>
+                        <wz:property qualifier="destinationTarget" type="Reference(DestinationTarget)"
+                                     editor="webhookbackoffice.editors.webhookDestinationTargetEditor"
+                                     description="field.abstractdestination.destinationTarget.description">
+                            <wz:editor-parameter>
+                                <wz:name>isNestedObjectCreationDisabled</wz:name>
+                                <wz:value>false</wz:value>
+                            </wz:editor-parameter>
+                            <wz:editor-parameter>
+                                <wz:name>referenceSearchCondition_destinationChannel</wz:name>
+                                <wz:value>{T(de.hybris.platform.apiregistryservices.enums.DestinationChannel).WEBHOOKSERVICES}</wz:value>
+                            </wz:editor-parameter>
+                            <wz:editor-parameter>
+                                <wz:name>configurableFlowConfigCtx</wz:name>
+                                <wz:value>create-wizard-webhook-destination-target</wz:value>
+                            </wz:editor-parameter>
+                        </wz:property>
+                        <wz:property qualifier="credential" type="Reference(AbstractCredential)"
+                                     editor="com.hybris.cockpitng.editor.defaultreferenceeditor"
+                                     description="field.abstractdestination.credential.description">
+                            <wz:editor-parameter>
+                                <wz:name>isNestedObjectCreationDisabled</wz:name>
+                                <wz:value>false</wz:value>
+                            </wz:editor-parameter>
+                        </wz:property>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:custom label="com.hybris.cockpitng.widgets.configurableflow.flow.done"
+                               handler="webhookProcessConsumedDestinationWizardHandler"
+                               visible="!#empty(newConsumedDestination.id) and !#empty(newConsumedDestination.url)
+                                and newConsumedDestination.destinationTarget != null"/>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <context type="DestinationTarget" component="create-wizard-webhook-destination-target">
+        <wz:flow id="WebhookDestinationTargetWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="WebhookDestinationTargetWizardPrepare">
+                <wz:initialize property="newDestinationTarget" type="DestinationTarget"/>
+                <wz:assign property="newDestinationTarget.destinationChannel"
+                           value="T(de.hybris.platform.apiregistryservices.enums.DestinationChannel).WEBHOOKSERVICES"/>
+            </wz:prepare>
+            <wz:step id="step1" label="flow.allmanadatory">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newDestinationTarget">
+                        <wz:property qualifier="creationtime" exclude="true"/>
+                        <wz:property qualifier="template" exclude="true"/>
+                        <wz:property qualifier="destinationChannel" exclude="true"/>
+                        <wz:property qualifier="id" description="field.destinationtarget.id.description"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:custom label="com.hybris.cockpitng.widgets.configurableflow.flow.done"
+                               handler="webhookProcessDestinationTargetWizardHandler"
+                               visible="!#empty(newDestinationTarget.id)
+                                    and newDestinationTarget.destinationChannel != null"/>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <context component="notification-area" source="wizardNotificationWidget2" merge-by="source">
+        <na:notification-area >
+            <na:notifications eventType="CreateObjectLink" level="SUCCESS">
+                <na:message>user.notification.item.created</na:message>
+            </na:notifications>
+        </na:notification-area>
+    </context>
+
+    <context type="WebhookConfiguration" component="editorareaactions" merge-by="type">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:action action-id="webhookbackoffice.actions.PingWebhookConfigAction" property="currentObject"/>
+            </y:group>
+        </y:actions>
+    </context>
+
+</config>

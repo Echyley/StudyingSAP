@@ -1,0 +1,32 @@
+<div class="se-sync-panel">
+    <se-message *ngIf="message" [type]="message.type">
+        <ng-container se-message-description>{{ message.description }}</ng-container>
+    </se-message>
+
+    <div class="se-sync-panel__sync-info" [style.visibility]="showItemList ? 'visible': 'hidden'">
+        <se-spinner [isSpinning]="isLoading"></se-spinner>
+
+        <se-synchronization-panel-item
+            *ngFor="let item of getAllItems(); let i = index"
+            class="se-sync-panel__row"
+            [index]="i"
+            [item]="item"
+            [rootItem]="getRootItem()"
+            [selectAllLabel]="selectAllLabel"
+            [disableList]="disableList"
+            [disableItem]="api.disableItem"
+            (selectionChange)="selectionChange($event)"
+        >
+        </se-synchronization-panel-item>
+    </div>
+
+    <div class="se-sync-panel__footer" *ngIf="showFooter">
+        <button
+            fd-button
+            class="se-sync-panel__sync-btn fd-button--compact fd-button--emphasized"
+            [disabled]="isSyncButtonDisabled()"
+            (click)="syncItems()"
+            label="{{ 'se.cms.actionitem.page.sync' | translate }}"
+        ></button>
+    </div>
+</div>

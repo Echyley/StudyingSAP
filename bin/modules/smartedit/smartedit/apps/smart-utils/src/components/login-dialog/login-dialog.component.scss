@@ -1,0 +1,70 @@
+/****************************************************
+				login modal
+****************************************************/
+
+.su-login {
+    width: 500px;
+    min-height: 440px;
+    box-shadow: 0 1px 4px 0 rgba(var(--sapBlockLayer_Background) 0.1);
+    background-color: var(--sapBaseColor);
+    border-radius: 4px;
+    border: 1px solid rgba(var(--sapContent_ShadowColor), 0.2);
+    padding: 20px;
+    margin: 120px auto 0 auto;
+
+    &--wrapper {
+        padding: 40px 100px;
+        width: 100%;
+    }
+
+    &--form-group {
+        margin-bottom: 20px;
+    }
+
+    &--form-sso {
+        margin-top: 20px;
+    }
+
+    &--logo-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        &.su-login--logo-wrapper_full {
+            padding-bottom: 45px;
+        }
+    }
+
+    &--logo {
+        height: 44px;
+    }
+
+    &--logo-text {
+        font-family: $font-sap;
+        @include se-type('4');
+        padding-left: 16px;
+        color: var(--sapTextColor);
+        @include se-weight('bold');
+    }
+
+    &--logo__best-run {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+    }
+
+    &--btn {
+        @include se-type();
+        width: 100%;
+    }
+
+    &--auth-message {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        @include se-type();
+    }
+
+    &--alert-error {
+        margin-bottom: 0;
+        box-shadow: none;
+    }
+}

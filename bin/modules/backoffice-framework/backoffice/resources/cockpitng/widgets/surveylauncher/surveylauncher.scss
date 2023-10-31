@@ -1,0 +1,8 @@
+@import "cockpitng-globals.scss";
+.yw-systemBarContainer .yw-qualtrics-survey-launcher-widget {
+    .yw-cx-qtx-survey-button {
+        &:after {
+            content:  _getIconGlyphContentValue('feedback');
+        }
+    }
+}

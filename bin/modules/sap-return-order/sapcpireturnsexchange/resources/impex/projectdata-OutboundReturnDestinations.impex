@@ -1,0 +1,32 @@
+$returnOrderUrl=https://tester.hana.ondemand.com/gw/odata/SAP/REPLICATE-RETURN-ORDERS-FROM-SAP-COMMERCE-CLOUD-TO-SAP-ERP
+$returnOrderVersion=v=1
+#**************************#
+#***  Basic CredentialS ***#
+#**************************#
+$username = sampleUsername
+$password = samplePassword
+
+#**************************#
+#***  Basic Credentials ***#
+#**************************#
+
+INSERT_UPDATE BasicCredential ; id[unique=true] ; password  ; username 
+                              ; ommReturnBasicCredential ; $password ; $username
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+INSERT_UPDATE Endpoint; id[unique = true]; version[unique = true]; specUrl; name
+; SAPCpiOutboundReturnOrdersEndpoint             ; unknown ; "$returnOrderUrl;$salesOrderVersion/";SAPCpiOutboundReturnOrdersEndpoint
+
+
+INSERT_UPDATE DestinationTarget; id[unique=true]
+; scpiOmmReturnOutboundDestination
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]    ; url                                                      ; endpoint(id,version)      ;additionalProperties(key, value)[map-delimiter = |] ;credential(id); destinationTarget(id)[default=scpiOmmReturnOutboundDestination]
+                                  ; scpiReturnOrderDestination ; "$returnOrderUrl;$returnOrderVersion/SAPCpiOutboundReturnOrders" ; SAPCpiOutboundReturnOrdersEndpoint:unknown ; "csrfURL->$returnOrderUrl;$returnOrderVersion/";ommReturnBasicCredential;
+

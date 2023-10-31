@@ -1,0 +1,29 @@
+$lang=zh_TW
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig_promo;可選配產品促銷
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;含促銷訊息選擇權價格的百分比折扣;將 {discount_value,number,percent*1} 折扣套用至 {cstic} / {cstic_value} 選項
+;y_configurable_product_display_promo_message;顯示促銷訊息 (促銷套用);顯示促銷訊息
+;y_configurable_product_display_promo_opportunity_message;顯示促銷商機訊息 (尚未套用促銷);顯示促銷商機訊息
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_percentage_discount_for_option;cstic;特性;此折扣套用及此訊息出現的特性
+;y_configurable_product_percentage_discount_for_option;cstic_value;特性值;此折扣套用及此訊息出現的特性值
+;y_configurable_product_percentage_discount_for_option;discount_value;百分比折扣值;套用至選擇權價格的百分比折扣。輸入不含百分比符號的值。
+;y_configurable_product_percentage_discount_for_option;message;訊息;訊息內文
+;y_configurable_product_percentage_discount_for_option;extended_message;延伸的訊息;延伸的訊息內文
+;y_configurable_product_display_promo_message;cstic;特性;此訊息出現的特性
+;y_configurable_product_display_promo_message;cstic_value;特性值;此訊息出現的特性值
+;y_configurable_product_display_promo_message;message;訊息;訊息內文
+;y_configurable_product_display_promo_message;extended_message;延伸的訊息;延伸的訊息內文
+;y_configurable_product_display_promo_opportunity_message;cstic;特性;此訊息出現的特性
+;y_configurable_product_display_promo_opportunity_message;cstic_value;特性值;此訊息出現的特性值
+;y_configurable_product_display_promo_opportunity_message;message;訊息;訊息內文
+;y_configurable_product_display_promo_opportunity_message;extended_message;延伸的訊息;延伸的訊息內文
+
+#% endif:

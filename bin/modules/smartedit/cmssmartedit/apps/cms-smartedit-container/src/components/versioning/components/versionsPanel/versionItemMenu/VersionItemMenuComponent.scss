@@ -1,0 +1,31 @@
+$container: se-version-item-menu;
+
+.#{$container} {
+    @include se-dropdown-menu('right', 'no-arrow');
+    transform: translate(5px, 8px);
+    right: -11px;
+    top: -8px;
+
+    &__item {
+        &:last-child {
+            .#{$container}__item-link {
+                color: var(--sapIndicationColor_2);
+            }
+        }
+    }
+
+    &__popup-anchor {
+        @include se-flex-row(center);
+        @include se-type('1');
+    }
+
+    &__toggle {
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+    }
+}
+
+.sap-icon--overflow {
+    color: var(--sapLinkColor);
+}

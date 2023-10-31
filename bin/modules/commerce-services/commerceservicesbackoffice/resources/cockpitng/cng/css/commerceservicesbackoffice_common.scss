@@ -1,0 +1,52 @@
+@import "cockpitng-globals.scss";
+/* Icons for explorer tree */
+div.yw-explorerTree .y-tree-icon {
+	@include setTreeIconGlyph("organization.typenode.units.sales", "sales_units");
+}
+
+div.yw-sideNavigation .yw-treeCellInner {
+ @include setSideNavigationIconGlyph("organization.typenode.units.sales", "sales_units");
+}
+
+$occ-collection-browser__modal-window--min-width: 640px;
+$occ-collection-browser__modal-window--min-height: 580px;
+$occ-collection-browser__modal-window--max-width: 990px;
+$occ-collection-browser__modal-window--max-height: 880px;
+
+.yw-modal-occ-coll-container.z-window {
+	min-width: $occ-collection-browser__modal-window--min-width;
+	min-height: $occ-collection-browser__modal-window--min-height;
+	max-width: $occ-collection-browser__modal-window--max-width;
+	max-height: $occ-collection-browser__modal-window--max-height;
+}
+
+
+.yw-editor-area-main-content {
+     .yw-editorarea-tabbox-tabpanels-tabpanel-groupbox.yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-org-section-status {
+        .z-groupbox-content {
+            > table {
+                width: 100% !important;
+            }
+        }
+        .yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-ed-editor {
+            .ye-de_hybris_platform_commerceservices_backoffice_editor_orgunitactivecheckbox {
+                .z-checkbox {
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
+}
+
+.yw-modal-configurableFlow {
+    .yw-com_hybris_cockpitng_widgets_configurableflow {
+        .yw-wizard-property {
+            .ye-default_boolean_editor_radiogroup.ye-de_hybris_platform_commerceservices_backoffice_editor_dataisolationenablededitor {
+                .ye-data_isolation_editor_notice_label {
+                    color: var(--bo-warning-color);
+                    font-size: var(--bo-font-size-small);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+	<!-- Gigya Webhook Beans -->
+	<bean
+		class="de.hybris.platform.gigya.gigyab2bfacades.data.GigyaWebHookRequest">
+		<description>Gigya WebHook Request sent by SAP CDC.</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">GigyaWebHookRequest</hint>
+		</hints>
+		<property name="events"
+			type="java.util.List&lt;de.hybris.platform.gigya.gigyab2bfacades.data.GigyaWebHookEvent>">
+			<description> List of webhook events present in the webhook request. There may be multiple events present in a webhook request.</description>
+		</property>
+		<property name="nonce" type="java.lang.String">
+			<description> Nonce string used by SAP CDC for signing the webhook request.</description>
+			<hints>
+				<hint name="example">a69c7f4e-SAMPLE-4189-97b5-8f314d06066f</hint>
+			</hints>
+		</property>
+		<property name="timestamp" type="java.lang.Long">
+			<description> Timestamp of the webhook request.</description>
+			<hints>
+				<hint name="example">1646020379</hint>
+			</hints>
+		</property>
+		<property name="baseSiteId" type="java.lang.String">
+			<description> Base Site Identifier</description>
+			<hints>
+				<hint name="example">powertoools-cdc</hint>
+			</hints>
+		</property>
+	</bean>
+
+	<bean
+		class="de.hybris.platform.gigya.gigyab2bfacades.data.GigyaWebHookEvent">
+		<description>Gigya Webhook Event. It contains the type of event, version of the SAP CDC webhook and other essential information.</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">GigyaWebHookEvent</hint>
+		</hints>
+		<property name="type" type="java.lang.String">
+			<description>Event type. Supported types are \"accountCreated\", \"accountUpdated\" or \"accountRegistered\". </description>
+			<hints>
+				<hint name="example">accountRegistered</hint>
+			</hints>
+		</property>
+
+		<property name="id" type="java.lang.String">
+			<description>Event identifier</description>
+			<hints>
+				<hint name="example">0a8ba913-EVENT-ID-988d-767c3fe50d5c</hint>
+			</hints>
+		</property>
+		<property name="timestamp" type="java.lang.Long">
+			<description>Event timestamp</description>
+			<hints>
+				<hint name="example">1646020382</hint>
+			</hints>
+		</property>
+		<property name="callId" type="java.lang.String">
+			<description>Event call identifier</description>
+			<hints>
+				<hint name="example">865786b118bd43e9a27e8e1d12CALLID</hint>
+			</hints>
+		</property>
+		<property name="version" type="java.lang.String">
+			<description>CDC Webhook version. Supported version is 2.0</description>
+			<hints>
+				<hint name="example">2.0</hint>
+			</hints>
+		</property>
+		<property name="apiKey" type="java.lang.String">
+			<description>API Key of the site</description>
+			<hints>
+				<hint name="example">3_AB_DUMMY_SITE</hint>
+			</hints>
+		</property>
+		<property name="data"
+			type="de.hybris.platform.gigya.gigyab2bfacades.data.GigyaWebHookEventData">
+			<description>Webhook Event data payload</description>
+		</property>
+
+	</bean>
+
+	<bean
+		class="de.hybris.platform.gigya.gigyab2bfacades.data.GigyaWebHookEventData">
+		<description>Gigya WebHook Event Data Payload. This contains the SAP CDC Unique identifiers for the users</description>
+		<hints>
+			<hint name="wsRelated" />
+			<hint name="alias">GigyaWebHookEventData</hint>
+		</hints>
+		<property name="accountType" type="java.lang.String">
+			<description>CDC Account type, usually \"full\"</description>
+			<hints>
+				<hint name="example">full</hint>
+			</hints>
+		</property>
+		<property name="apiKey" type="java.lang.String">
+			<description>API key of the site</description>
+			<hints>
+				<hint name="example">3_AB_DUMMY_SITE</hint>
+			</hints>
+		</property>
+		<property name="uid" type="java.lang.String">
+			<description>CDC user UID</description>
+			<hints>
+				<hint name="example">0e7896c274c54081a0d3067a21DUMMY</hint>
+			</hints>
+		</property>
+	</bean>
+
+</beans>

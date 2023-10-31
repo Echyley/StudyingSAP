@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%"
+        width="100%">
+       <style src="${wr}/IntegrationBackofficeAccessRightsLegend.css"/>
+
+      <div class="integrationbackoffice-legend-container">
+        <div class="integrationbackoffice-legend-item integrationbackoffice-legend-item--inherited">
+            <span class="integrationbackoffice-legend-icon"></span>
+            <span class="integrationbackoffice-legend-icon integrationbackoffice-legend-icon--denied"></span>
+            <span class="integrationbackoffice-legened-label">${labels.integrationbackoffice.accessRightsLegend.inherited}</span>
+        </div>
+        <div class="integrationbackoffice-legend-item integrationbackoffice-legend-item--denied">
+            <span class="integrationbackoffice-legend-icon integrationbackoffice-legend-icon--denied"></span>
+            <span class="integrationbackoffice-legened-label">${labels.integrationbackoffice.accessRightsLegend.denied}</span>
+        </div>
+        <div class="integrationbackoffice-legend-item">
+            <span class="integrationbackoffice-legend-icon"></span>
+            <span class="integrationbackoffice-legened-label">${labels.integrationbackoffice.accessRightsLegend.granted}</span>
+        </div>
+      </div>
+
+</widget>

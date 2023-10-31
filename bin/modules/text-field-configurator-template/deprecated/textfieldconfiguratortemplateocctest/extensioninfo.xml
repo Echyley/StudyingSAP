@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+        
+    <extension abstractclassprefix="Generated" classprefix="Textfieldconfiguratortemplateocctest" managername="TextfieldconfiguratortemplateocctestManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="textfieldconfiguratortemplateocctest" usemaven="false">
+                
+        <!-- for more information on maven managed libraries please consult https://wiki.hybris.com/x/Nq8sDQ -->
+                
+        <requires-extension name="textfieldconfiguratortemplateoccaddon"/>
+                
+        <requires-extension name="ycommercewebservicestest"/>
+                
+
+        
+        <coremodule generated="true" manager="de.hybris.platform.textfieldconfiguratortemplateocctest.jalo.TextfieldconfiguratortemplateocctestManager" packageroot="de.hybris.platform.textfieldconfiguratortemplateocctest"/>
+        		
+        <meta key="deprecated" value="true"/>
+            
+    </extension>
+    
+</extensioninfo>

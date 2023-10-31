@@ -1,0 +1,57 @@
+@import '../../../workflow.scss';
+
+.se-workflow-action-comment {
+    margin: 20px 15px 10px 45px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $workflow-border-color;
+    border-radius: 3px;
+    position: relative;
+
+    &::before {
+        @include se-triangle(13px 8px, $workflow-border-color, left);
+        content: '';
+        position: absolute;
+        top: 14px;
+        left: -9px;
+    }
+
+    &::after {
+        @include se-triangle(13px 8px, $workflow-background-color, left);
+        content: '';
+        position: absolute;
+        top: 14px;
+        left: -7px;
+    }
+
+    .se-tile-content {
+        padding: 10px 16px 10px 12px;
+    }
+
+    &__header {
+        font-weight: bold;
+        font-size: 13px;
+        margin-bottom: 3px !important;
+
+        &:before {
+            position: absolute;
+            top: -4px;
+            left: -40px;
+            font-size: 18px;
+            background: $workflow-background-color;
+            padding: 8px;
+        }
+
+        &.sap-icon--flip-h::before {
+            transform: scaleX(-1);
+        }
+    }
+
+    &__author {
+        margin-bottom: 25px;
+    }
+}
+
+.se-workflow-action-comment__body {
+    overflow-wrap: anywhere;
+}

@@ -1,0 +1,21 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+captchaaddon.key=value
+
+# Specifies the location of the spring context file putted automatically to the global platform application context.
+captchaaddon.application-context=captchaaddon-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.captchaaddon=classpath:/captchaaddon/web/spring/captchaaddon-web-spring.xml
+yb2bacceleratorstorefront.additionalWebSpringConfigs.captchaaddon=classpath:/captchaaddon/web/spring/captchaaddon-web-spring.xml
+
+captchaaddon.javascript.paths.responsive=/responsive/common/js/captchaaddon.js
+
+# Jar scanning setup for Tomcat
+captchaaddon.tomcat.tld.scan=json-taglib*.jar
+captchaaddon.tomcat.tld.default.scan.enabled=false
+captchaaddon.tomcat.pluggability.scan=json-taglib*.jar
+captchaaddon.tomcat.pluggability.default.scan.enabled=false

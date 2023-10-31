@@ -1,0 +1,105 @@
+/* Listbox */
+.integrationbackoffice-editor-listbox {
+  .z-listheader-checkable {
+    visibility: hidden;
+  }
+
+  .z-listitem-fixed-status {
+    background: var(--bo-base-color) !important;
+  }
+
+  .z-listitem-not-supported-cell.z-listcell .z-listcell-content {
+    color: var(--bo-content-disabled-text-color) !important;
+    cursor: default !important;
+    text-decoration: line-through !important;
+  }
+
+  .z-listitem-fixed-status > .z-listcell > .z-listcell-content {
+    color: var(--bo-content-disabled-text-color)
+  }
+}
+
+tr.z-listitem-selected.integration-object-attribute-name-conflict,
+tr.z-listitem-selected.integration-object-attribute-name-conflict:hover {
+  background-color: var(--bo-button-warning-active-background);
+}
+
+.integrationbackoffice-editor-listbox-attribute-status-badge.z-span .z-label {
+  box-sizing: border-box;
+  padding: 1px 6px;
+  font-size: $font-size__small;
+  background-color: var(--bo-base-background);
+}
+
+.integrationbackoffice-editor-listbox-attribute-status-badge.integrationbackoffice-editor-listbox-attribute-status-badge-blue.z-span .z-label {
+  border: 1px solid var(--bo-button-information-border-color);
+}
+
+.integrationbackoffice-editor-listbox-attribute-status-badge.integrationbackoffice-editor-listbox-attribute-status-badge-grey.z-span .z-label {
+  border: 1px solid var(--bo-object-header-border-color);
+  color: var(--bo-content-disabled-text-color);
+}
+
+/* Runtime */
+.integrationbackoffice-editor-listbox-checkbox-unique {
+  padding-left: 12px !important;
+
+  .z-checkbox input[type=checkbox]:disabled ~ label::before {
+    background-color: var(--bo-object-header-border-color);
+    border: none;
+  }
+}
+
+.integrationbackoffice-editor-listbox-checkbox-autocreate {
+  padding-left: 25px !important;
+
+  .z-checkbox input[type=checkbox]:disabled ~ label::before {
+    background-color: var(--bo-object-header-border-color);
+    border: none;
+  }
+}
+
+.ye-actiondots-integrationbackoffice-btn {
+  background: no-repeat 0 0 !important;
+  height: 24px;
+  width: 36px;
+  display: inline-block;
+  padding: 0;
+  float: right;
+  border: none;
+
+  &:before {
+    font-family: var(--bo-content-icon-font-family);
+    content: _getIconGlyphContentValue("overflow")
+  }
+
+  &:hover {
+    font-family: var(--bo-content-icon-font-family);
+    content: _getIconGlyphContentValue("overflow")
+  }
+}
+
+.ye-actiondots-integrationbackoffice-btn:focus {
+  outline: var(--bo-content-focus-outline-width) var(--bo-content-focus-outline-style) var(--bo-content-focus-outline-color);
+}
+
+tr.z-listitem-selected.integration-object-attribute-name-conflict,
+tr.z-listitem-selected.integration-object-attribute-name-conflict:hover,
+tr.z-listitem.z-listitem-fixed-status.integration-object-attribute-name-conflict *,
+tr.z-listitem.z-listitem-fixed-status.integration-object-attribute-name-conflict:hover * {
+  background-color: var(--bo-button-warning-active-background);
+}
+
+.integrationbackoffice-listbox-header-tooltip-image {
+  cursor: pointer;
+  z-index: 100;
+  position: absolute;
+}
+
+.integrationbackoffice-listbox-header-description .z-listheader-content {
+  padding-right: 15px;
+}
+
+.attributeListbox-tooltip-container-class {
+  display: inherit;
+}

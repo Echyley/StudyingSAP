@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+<bean class="com.sap.hybris.sapcpqquoteintegrationocc.dto.quote.DiscountValueWsDTO">
+		<description>Discount applied to the CPQ quote entry</description>
+		<hints>
+			<hint name="wsRelated"/>
+			<hint name="alias">CpqQuoteEntryDiscount</hint>
+		</hints>
+	<property name="value" type="Double">
+  	    <description>Discount Percentage of the quote</description>
+            <hints>
+                <hint name="example">10.0</hint>
+            </hints>
+     </property>
+	 <property name="appliedValue" type="Double">
+ 		<description>Discount Amount  of the quote</description>
+            <hints>
+                <hint name="example">100.00</hint>
+            </hints>
+     </property>
+     <property name="isoCode" type="String">
+ 		<description>Currency</description>
+            <hints>
+                <hint name="example">USD</hint>
+            </hints>
+     </property>
+</bean>
+
+
+<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO">
+	<property name="cpqDiscounts" 
+			  type="java.util.List&lt;com.sap.hybris.sapcpqquoteintegrationocc.dto.quote.DiscountValueWsDTO>">	  
+  	    <description>Discounts of the quote</description>
+     </property>
+</bean>
+
+</beans>

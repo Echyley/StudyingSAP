@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="de.hybris.platform.apiregistrybackoffice.actions.DeleteExposedDestinationAction"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+    <name>Delete Exposed Destination</name>
+    <description>
+        Delete Exposed Destination Action.
+    </description>
+    <author>hybris</author>
+    <version>1.0</version>
+
+    <iconUri>delete</iconUri>
+
+    <inputType>java.util.Collection</inputType>
+    <outputType>java.util.Collection</outputType>
+    <actionClassName>de.hybris.platform.apiregistrybackoffice.actions.DeleteExposedDestinationAction</actionClassName>
+</action-definition>

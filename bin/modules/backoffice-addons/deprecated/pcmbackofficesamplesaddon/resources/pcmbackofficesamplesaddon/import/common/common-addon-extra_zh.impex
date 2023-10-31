@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=zh
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;“标识符”属性应包含所有语言的值。;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;“价格”属性必须至少包含 1 个元素。;
+;ProductSupercategoriesSizeConstraint;;;“超类别”属性必须至少包含 1 个元素。;
+;ProductGalleryImagesSizeConstraint;;;“图库图像”属性必须至少包含 1 个元素。;
+;ProductReferencesSizeConstraint;;;“产品参考”属性必须至少包含 1 个元素。;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;“货号”属性不能为空。;
+;ProductDescriptionNotEmptyConstraint;;;“描述”属性不应为空。;
+;ProductEanNotEmptyConstraint;;;“EAN”属性不应为空。;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;“审批”的属性值应为“已批准”。;

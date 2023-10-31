@@ -1,0 +1,26 @@
+<div
+    class="se-generic-editor__row ySErow"
+    *ngFor="let field of fields"
+    [ngClass]="'se-generic-editor__row--' + field.qualifier"
+>
+    <label
+        [id]="field.qualifier + '-label'"
+        class="se-control-label"
+        *ngIf="!field.hideFieldWidget && !field.hidePrefixLabel && field.i18nKey"
+        [hidden]="field.hideFieldWidget && field.hidePrefixLabel"
+        [ngClass]="{ required: field.required }"
+        >{{ field.i18nKey | lowercase | translate }}</label
+    >
+        <se-help class="se-help-tooltip" *ngIf="field.tooltip">
+            <span>{{ field.tooltip | translate }}</span>
+        </se-help>
+    <div
+        class="ySEGenericEditorFieldStructure"
+        [hidden]="field.hideFieldWidget"
+        [id]="field.qualifier"
+        [attr.data-cms-field-qualifier]="field.qualifier"
+        [attr.data-cms-structure-type]="field.cmsStructureType"
+    >
+        <ng-template [formRenderer]="getForm(field.qualifier)"></ng-template>
+    </div>
+</div>

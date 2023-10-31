@@ -1,0 +1,27 @@
+<div class="se-component-menu__types-header">
+    <se-component-search
+        (onChange)="onSearchTermChanged($event)"
+        [placeholderI18nKey]="'se.cms.componentmenu.search.type.placeholder'"
+        class="se-component-menu__type-search"
+    ></se-component-search>
+</div>
+
+<div class="se-component-menu__result-container">
+    <se-infinite-scrolling
+        class="se-component-menu__infinite-scroll"
+        *ngIf="isMenuOpen() || isTabActive()"
+        [pageSize]="10"
+        [mask]="searchTerm"
+        [fetchPage]="loadComponentTypes"
+        [context]="componentsContext"
+    >
+        <div class="se-component-menu__result se-component-menu__result--types">
+            <div
+                class="se-component-menu__item-wrap"
+                *ngFor="let componentType of componentsContext.items"
+            >
+                <se-component-type [typeInfo]="componentType"></se-component-type>
+            </div>
+        </div>
+    </se-infinite-scrolling>
+</div>

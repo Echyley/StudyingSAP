@@ -1,0 +1,32 @@
+<div
+    class="se-cth-node-name"
+    [style.padding-left.px]="15 * index"
+    [style.padding-right.px]="15 * index"
+    [class.se-cth-node-name__last]="isLast"
+>
+    <fd-icon glyph="navigation-down-arrow"></fd-icon>
+    {{ (isLast ? catalog.name : catalog.catalogName) | seL10n | async }}&nbsp;
+    <span *ngIf="isLast">({{ 'se.catalog.hierarchy.modal.tree.this.catalog' | translate}})</span>
+</div>
+<div class="se-cth-node-sites">
+    <ng-container>
+        <ng-container *ngIf="hasOneSite; else hasManySites">
+            <a class="se-cth-node-anchor" href="" (click)="onNavigateToSite(catalog.sites[0].uid)">
+                {{ catalog.sites[0].name | seL10n | async }}
+                <fd-icon glyph="navigation-right-arrow"></fd-icon>
+            </a>
+        </ng-container>
+        <ng-template #hasManySites>
+            <se-dropdown-menu
+                [dropdownItems]="dropdownItems"
+                useProjectedAnchor="1"
+                (selectedItemChange)="siteSelect.emit()"
+            >
+                <span class="se-cth-node-anchor">
+                    {{ this.catalog.sites.length }} Sites
+                    <fd-icon glyph="navigation-down-arrow"></fd-icon>
+                </span>
+            </se-dropdown-menu>
+        </ng-template>
+    </ng-container>
+</div>

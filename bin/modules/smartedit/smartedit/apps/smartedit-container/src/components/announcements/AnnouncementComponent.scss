@@ -1,0 +1,40 @@
+se-announcement {
+    display: block;
+    margin-bottom: 10px;
+}
+.se-announcement-content {
+    @include se-box-shadow();
+    cursor: pointer;
+    min-width: 300px;
+    border-radius: se-space('base');
+    transition: opacity (0.5s * 0.6) ease, left 0.5s ease-in, margin 0.5s ease;
+    background-color: var(--sapBaseColor);
+    border-left: 6px solid var(--sapNeutralColor);
+}
+.se-announcement-close {
+    position: absolute;
+    top: se-space('small');
+    right: 20px;
+    color: var(--sapLinkColor);
+    @include se-type('1');
+}
+.se-announcement__title {
+    padding: se-space('small') 20px;
+    color: var(--sapInformationColor);
+    @include se-weight('bold');
+    border-bottom: se-border();
+}
+.se-announcement__message {
+    color: var(--sapNeutralColor);
+    padding: 20px 20px 0;
+}
+.se-announcement__message--multi {
+    color: var(--sapNeutralColor);
+    padding: se-space('small');
+}
+.se-announcement__time-stamp {
+    @include se-type('-1');
+    color: var(--sapNeutralColor);
+    padding: 11px 20px 20px 20px;
+    text-transform: lowercase;
+}

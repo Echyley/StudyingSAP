@@ -1,0 +1,299 @@
+[
+	{
+		"testId": 1,
+		"description": "BASIC - exact match",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true
+			}
+		],
+		"data": {
+			"query": "jacket"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 2,
+		"description": "BASIC - upper case",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true
+			}
+		],
+		"data": {
+			"query": "JACKET"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 3,
+		"description": "BASIC - plural",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true
+			}
+		],
+		"data": {
+			"query": "jackets"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 4,
+		"description": "BASIC - plural and upper case",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true
+			}
+		],
+		"data": {
+			"query": "JACKETS"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 5,
+		"description": "BASIC - no match for 1 edit",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true
+			}
+		],
+		"data": {
+			"query": "jecket"
+		},
+		"expectedData": {
+			"size": 0,
+			"totalSize": 0
+		}
+	},
+	{
+		"testId": 6,
+		"description": "MEDIUM - match with 1 typo (delete - a)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "MEDIUM"
+			}
+		],
+		"data": {
+			"query": "jcket"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 7,
+		"description": "MEDIUM - match with 1 typo (transposition - a <-> c)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "MEDIUM"
+			}
+		],
+		"data": {
+			"query": "jcaket"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 8,
+		"description": "MEDIUM - match with 1 typo (addition - e)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "MEDIUM"
+			}
+		],
+		"data": {
+			"query": "jackeet"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 9,
+		"description": "MEDIUM - match with 1 typo (substitution - a -> e)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "MEDIUM"
+			}
+		],
+		"data": {
+			"query": "jecket"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 10,
+		"description": "MEDIUM - no match with 2 typos",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "MEDIUM"
+			}
+		],
+		"data": {
+			"query": "eecket"
+		},
+		"expectedData": {
+			"size": 0,
+			"totalSize": 0
+		}
+	},
+	{
+		"testId": 11,
+		"description": "RELAXED - match with 1 typo (substitution - a -> e)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "RELAXED"
+			}
+		],
+		"data": {
+			"query": "jecket"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 12,
+		"description": "RELAXED - match with 2 typos (substitution - j -> e, a -> e)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "RELAXED"
+			}
+		],
+		"data": {
+			"query": "eecket"
+		},
+		"expectedData": {
+			"size": 1,
+			"totalSize": 1,
+			"searchHits": [
+				{
+					"id": "doc2"
+				}
+			]
+		}
+	},
+	{
+		"testId": 13,
+		"description": "RELAXED - no match with 3 typos (substitution - j -> e, a -> e, c -> e)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "RELAXED"
+			}
+		],
+		"data": {
+			"query": "eeeket"
+		},
+		"expectedData": {
+			"size": 0,
+			"totalSize": 0
+		}
+	},
+	{
+		"testId": 14,
+		"description": "RELAXED - no match with 4 typos (substitution - j -> e, a -> e, c -> e) (transposition - t <-> e)",
+		"fields": [
+			{
+				"id": "description",
+				"searchable": true,
+				"searchTolerance": "RELAXED"
+			}
+		],
+		"data": {
+			"query": "eeeket"
+		},
+		"expectedData": {
+			"size": 0,
+			"totalSize": 0
+		}
+	}
+]

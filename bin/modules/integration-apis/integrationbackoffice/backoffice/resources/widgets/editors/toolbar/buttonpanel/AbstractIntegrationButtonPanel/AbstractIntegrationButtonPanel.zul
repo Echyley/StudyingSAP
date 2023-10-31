@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <hlayout spacing="8px">
+        <div id="filterButtonDiv" sclass="yw-integrationbackoffice-filterButtonDiv"/>
+        <button id="refreshButton" label="${labels.integrationbackoffice.editMode.button.refresh}" tooltiptext="Refresh"/>
+        <button id="saveDefinitionsButton" label="${labels.integrationbackoffice.editMode.button.save}" tooltiptext="Save"
+                sclass="y-btn-primary"/>
+    </hlayout>
+
+</widget>

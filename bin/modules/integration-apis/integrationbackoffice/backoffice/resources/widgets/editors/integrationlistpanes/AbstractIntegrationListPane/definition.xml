@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="de.hybris.platform.integrationbackoffice.widgets.AbstractIntegrationListPane">
+    <name>Default detailed listbox</name>
+    <description>A generic widget of a listbox that must be implemented</description>
+    <defaultTitle>Default detailed listbox</defaultTitle>
+    <author>Hybris</author>
+    <version>1.0</version>
+    <keywords>
+        <keyword>AbstractIntegrationListPane</keyword>
+    </keywords>
+    <view src="AbstractIntegrationListPane.zul"/>
+    <controller
+            class="de.hybris.platform.integrationbackoffice.widgets.common.controllers.AbstractIntegrationListPaneController"/>
+    <sockets>
+        <input id="receiveComboBox"
+               type="de.hybris.platform.core.model.ItemModel"/>
+        <output id="sendClickedItem" type="de.hybris.platform.core.model.type.ComposedTypeModel"/>
+    </sockets>
+</widget-definition>

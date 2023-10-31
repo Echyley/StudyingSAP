@@ -1,0 +1,33 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { CrossFrameEventService, ICatalogService, IPageInfoService, IUriContext, LogService, SystemEventService, ToolbarItemInternal, IPageService, ICMSPage, ISyncPollingService } from 'smarteditcommons';
+import { PageSyncConditions } from '../../types';
+export declare class PageSyncMenuToolbarItemComponent implements OnInit, OnDestroy {
+    private crossFrameEventService;
+    private systemEventService;
+    private catalogService;
+    private pageService;
+    private pageInfoService;
+    private syncPollingService;
+    private translateService;
+    private logService;
+    toolbarItem: ToolbarItemInternal;
+    isReady: boolean;
+    isNotInSync: boolean;
+    syncPageConditions: PageSyncConditions;
+    helpText: string;
+    cmsPage: ICMSPage;
+    uriContext: IUriContext;
+    private unRegisterPageChange;
+    private unRegisterSyncPageConditions;
+    private unRegisterSyncPolling;
+    constructor(crossFrameEventService: CrossFrameEventService, systemEventService: SystemEventService, catalogService: ICatalogService, pageService: IPageService, pageInfoService: IPageInfoService, syncPollingService: ISyncPollingService, translateService: TranslateService, logService: LogService, toolbarItem: ToolbarItemInternal);
+    ngOnInit(): Promise<void>;
+    ngOnDestroy(): void;
+    private setup;
+    private fetchSynchronizationPanelInfo;
+    private subscribeSyncPolling;
+    private fetchSyncStatusAndSetIsNotInSync;
+    private fetchSyncStatus;
+    private setHelpText;
+}

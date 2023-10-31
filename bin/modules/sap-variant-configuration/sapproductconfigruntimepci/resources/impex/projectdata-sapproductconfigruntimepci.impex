@@ -1,0 +1,28 @@
+######################################################### 
+# Import example data below, only no data exists so far # 
+#########################################################
+
+#% if: de.hybris.platform.core.Registry.getApplicationContext().getBean(de.hybris.platform.servicelayer.search.FlexibleSearchService.class).search("SELECT * FROM {DestinationTarget} where {id}='sapproductconfiguration'").getCount() == 0;
+                                 
+#************  OAuth CredentialS ******************************************************************************************#
+
+INSERT ConsumedOAuthCredential; id[unique = true]; clientId     ; clientSecret ; oAuthUrl
+                                     ; credential.pci   ; clientIdPci  ; secretPci    ; oauthUrlPci
+
+                                    
+
+#************  Endpoints **************************************************************************************************#
+
+INSERT Endpoint; id[unique = true]    ; version[unique = true]; name; specUrl
+                      ; PciEndpoint          ; unknown               ; Pci ; "n.a"
+
+
+#************  Destinations************************************************************************************************#
+
+INSERT DestinationTarget; id[unique=true]
+; sapproductconfiguration
+ 
+INSERT ConsumedDestination; id[unique = true]          ; url                                 ; endpoint(id, version)           ; credential(id)             ;additionalProperties(key,value)[map-delimiter=|]                                                      ;destinationTarget(id)[default=sapproductconfiguration]
+                                 ; pciDestination             ; "https://serverPci/v=1"             ; PciEndpoint:unknown             ; credential.pci             ;clientClassName->PCIClient|oauth.scope->uaa.resource|sapproductconfigruntimepci.charon.timeout->15000 ;                                 
+
+#% endif:  

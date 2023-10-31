@@ -1,0 +1,63 @@
+@import 'cockpitng-globals.scss';
+$workflowsearch__filter-container-box--height: $toolbar__button-default--height;
+
+$workflowsearch__button--background: var(--bo-input-background);
+$workflowsearch__button--hover-background: var(--bo-button-hover-background);
+$workflowsearch__button--size: $workflowsearch__filter-container-box--height; //$toolbar__button-default--height;
+$workflowsearch__button--height: $workflowsearch__button--size;
+$workflowsearch__button--border-color: var(--bo-input-border-color);
+$workflowsearch__button--border-radius: 0 var(--bo-border-radius) var(--bo-border-radius) 0;
+
+$_workflowsearch__button-icon--font-family: $font-family__icon;
+
+$workflowsearch__input-label--line-height: $font-size__small;
+$workflowsearch__input-label--font-size: $font-size__small;
+$workflowsearch__input-label--color: transparent;
+$workflowsearch__input-label--margin-top: 0;
+
+$workflowsearch__range-container--width: 220px;
+$_workflowsearch__range-container--border-radius: var(--bo-border-radius) 0 0 var(--bo-border-radius);
+$_workflowsearch__range-container-hover--border-color: var(--bo-input-hover-border-color);
+$workflowsearch__filter-container--min-width: $workflowsearch__range-container--width + $workflowsearch__button--size;
+
+$workflowsearch__range-start-input-border-radius: $_workflowsearch__range-container--border-radius;
+$workflowsearch__range-start-end-icon--width: 16px;
+$workflowsearch__range-start-end-icon--font: $font-family__icon;
+$workflowsearch__range-start-end-icon--top: 50%;
+$workflowsearch__range-start-end-icon--transform: translateY(-($workflowsearch__range-start-end-icon--top));
+$workflowsearch__range-start-end-icon--font-size: $font-size__small;
+$workflowsearch__range-start-end-icon--color: var(--bo-text-color);
+
+$workflowsearch__date-container--width: floor(($workflowsearch__range-container--width - $workflowsearch__range-start-end-icon--width)/2);
+$workflowsearch__date-end-container--margin-left: $workflowsearch__range-start-end-icon--width + 1;
+
+$workflowsearch__input--padding-left: $container-spacing-default__third;
+$workflowsearch__input--padding: 0 $workflowsearch__input--padding-left;
+
+$workflowsearch__input--line-height: $workflowsearch__filter-container-box--height;
+$workflowsearch__input--border-width: $boxes--border__thin;
+$workflowsearch__input--border: $workflowsearch__input--border-width solid transparent;
+
+$workflowsearch__input-focus--bg-color: var(--bo-input-focus-background);
+$workflowsearch__input-focus--color: var(--bo-highlight-color);
+
+$workflowsearch__input-container--background: var(--bo-input-background);
+$workflowsearch__input-container--margin: $workflowsearch__input--border-width * -1;
+
+
+$workflowsearch__button--margin-left: $boxes--border__thin * -1;
+$workflowsearch__toolbar-filters--border: $workflowsearch__input--border-width var(--bo-input-border-style) var(--bo-input-border-color);
+$workflowsearch__toolbar-filters--padding: 5px;
+
+$workflowsearch__search-button--size: $workflowsearch__filter-container-box--height;
+$_workflowsearch__search-button--border-radius: 0 var(--bo-input-border-radius) var(--bo-input-border-radius) 0;
+$workflowsearch__search-button-icon--size: 16px;
+$workflowsearch__search-button-icon--margin: floor($workflowsearch__search-button-icon--size/2) * -1;
+
+$workflowsearch__search-button-disabled-before--side: $workflowsearch__input--border-width * -1;
+$workflowsearch__search-button-disabled-after--top: $workflowsearch__search-button--size - 2 * $workflowsearch__input--border-width;
+$workflowsearch__button-wrapper--margin: ($container-spacing-default__third * 2);
+
+
+
+

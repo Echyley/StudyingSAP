@@ -1,0 +1,9 @@
+\$lang=$lang
+
+#set ( $currencies = $query.load('products-data', 'currency') )
+
+UPDATE Currency;isocode[unique=true];name[lang=\$lang]
+
+#foreach( $row in $currencies ) 
+ ;$row.key;$row.values.name; 
+#end

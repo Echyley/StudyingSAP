@@ -1,0 +1,90 @@
+//Filter
+.ye-selsync-attribute-config-filter {
+    padding: $selsync__tree-filter--margin;
+    background: $selsync__tree-filter-bg;
+    border-bottom: $selsync__tree-filter-border-bottom;
+
+    &-popup {
+        width: $selsync__filter-popup--width;
+        margin-top: $selsync__filter-popup--margin-top;
+        margin-left: $selsync__filter-popup--margin-left;
+        padding: 0;
+    }
+
+    &-popup-item {
+        border-top: $selsync__filter-popup-item--border-top;
+        padding: $selsync__filter-popup-item--padding;
+
+        &:first-child {
+            border-top-width: 0;
+        }
+
+        > span,
+        > div {
+            margin: $selsync__filter-popup-item-content--margin;
+        }
+
+        .ye-switch-checkbox.z-checkbox {
+            min-height: $selsync__details-checkbox--min-height;
+            line-height: $selsync__details-checkbox--line-height;
+        }
+    }
+
+    &-wrapper {
+        padding: $selsync__filter--padding;
+        max-width: $_selsync__filter--max-width;
+    }
+
+    &-search {
+        width: $selsync__filter-search--width;
+        margin-right: $selsync__filter-search--margin-right;
+        display: inline !important;
+    }
+
+
+    &-button {
+        width: $selsync__filter-popup-button--size;
+        height: $selsync__filter-popup-button--size;
+        text-indent: $selsync__filter-popup-button--text-indent;
+        white-space: $selsync__filter-popup-button--white-space;
+        position: relative;
+        
+        &:before {
+            content: $_selsync__filter-popup-button-icon--content;
+            font-size: $_selsync__filter-popup-button-icon--font-size;
+            font-family: $_selsync__filter-popup-button-icon--font-family;
+            text-indent: 0;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate3d(-50%,-50%,0);
+        }
+        /*
+        background-color: $selsync__filter-popup-button--bg-color;
+        border: $selsync__filter-popup-button--border;
+        background-image: $selsync__filter-popup-button--bg-image;
+        background-size: $selsync__filter-popup-button--bg-size;
+        background-position: $selsync__filter-popup-button--bg-position;
+        background-repeat: no-repeat;
+
+        &:hover,
+        &:active,
+        &:focus{
+            background-color: $selsync__filter-popup-button-hover-focus--bg-color;
+            background-size: $selsync__filter-popup-button-hover-focus--bg-size;
+            background-position: $selsync__filter-popup-button-hover-focus--bg-position;
+            box-shadow: none;
+            background-repeat: no-repeat;
+        }
+        &:hover {
+            border: $selsync__filter-popup-button-hover--border;
+            background-image: $selsync__filter-popup-button-hover--bg-image;
+        }
+        &:active,
+        &:focus {
+            border: $selsync__filter-popup-button-focus--border;
+            background-image: $selsync__filter-popup-button-focus--bg-image;
+        }
+        */
+    }
+}

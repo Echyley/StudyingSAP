@@ -1,0 +1,19 @@
+<se-select
+    *ngIf="dropdown.initialized"
+    [id]="dropdown.qualifier"
+    (click)="dropdown.onClick()"
+    [placeholder]="field.placeholder"
+    [(model)]="model[qualifier]"
+    [onChange]="dropdown.triggerAction"
+    [fetchStrategy]="dropdown.fetchStrategy"
+    [(reset)]="dropdown.reset"
+    [multiSelect]="dropdown.isMultiDropdown"
+    [controls]="dropdown.isMultiDropdown"
+    [showRemoveButton]="showRemoveButton"
+    [isReadOnly]="!field.editable"
+    [itemComponent]="itemComponent"
+    [resultsHeaderComponent]="resultsHeaderComponent"
+    [actionableSearchItem]="actionableSearchItem"
+    (resetChange)="onResetChange($event)"
+>
+</se-select>

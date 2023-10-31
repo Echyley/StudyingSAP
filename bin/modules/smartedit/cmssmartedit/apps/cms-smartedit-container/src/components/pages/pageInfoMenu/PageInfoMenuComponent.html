@@ -1,0 +1,55 @@
+<!-- data-item-key is used for E2E -->
+<div class="toolbar-action" data-item-key="se.cms.pageInfoMenu">
+    <fd-popover
+        [(isOpen)]="toolbarItem.isOpen"
+        (isOpenChange)="onDropdownToggle($event)"
+        [closeOnOutsideClick]="true"
+    >
+        <fd-popover-control>
+            <button
+                fd-button
+                type="button"
+                class="btn toolbar-action--button"
+                title="{{ 'se.cms.pageinfo.menu.btn.tooltip' | translate }}"
+                [attr.aria-pressed]="toolbarItem.isOpen"
+            >
+                <span class="sap-icon--hint se-toolbar-menu-ddlb--button__icon"></span>
+                <div class="se-toolbar-page-info-wrapper">
+                    <span class="toolbar-action-button__txt" [translate]="toolbarItem.name"></span>
+                </div>
+            </button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div class="se-page-info__dropdown-menu toolbar-action--include">
+                <div class="se-page-info-menu" *ngIf="toolbarItem.isOpen">
+                    <se-prevent-vertical-overflow>
+                        <div class="se-page-info-menu__header">
+                            <span
+                                class="se-page-info-menu__header-title"
+                                translate="se.cms.pageinfo.information.title"
+                            ></span>
+                            <div *seHasOperationPermission="editPagePermission">
+                                <button
+                                    fd-button
+                                    class="se-page-info__edit-btn fd-button--compact"
+                                    *ngIf="isReady"
+                                    label="{{ 'se.cms.contextmenu.title.edit' | translate }}"
+                                    (click)="onEditPageClick()"
+                                ></button>
+                            </div>
+                        </div>
+                        <div *ngIf="isReady" class="se-page-info-menu__body">
+                            <se-generic-editor
+                                [smarteditComponentId]="pageInfo.uid"
+                                [smarteditComponentType]="pageInfo.typeCode"
+                                [structure]="pageStructure"
+                                [content]="pageInfo"
+                            >
+                            </se-generic-editor>
+                        </div>
+                    </se-prevent-vertical-overflow>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</div>

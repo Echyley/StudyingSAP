@@ -1,0 +1,33 @@
+.se-toolbar-menu-ddlb--button {
+    &__icon {
+        position: relative;
+    }
+
+    &__caution {
+        position: absolute;
+        color: var(--sapWarningColor);
+        right: -9px;
+        bottom: -4px;
+    }
+}
+
+.se-sync-menu-content {
+    &__header {
+        padding: 15px 20px 0;
+    }
+    &__header-title {
+        text-transform: capitalize;
+        @include se-type('1');
+        color: var(--sapTextColor);
+    }
+
+    &__dropdown {
+        @include se-dropdown-menu('left');
+        max-width: 400px;
+        &.toolbar-action--include {
+            .se-sync-panel-header__timestamp {
+                bottom: 20px;
+            }
+        }
+    }
+}

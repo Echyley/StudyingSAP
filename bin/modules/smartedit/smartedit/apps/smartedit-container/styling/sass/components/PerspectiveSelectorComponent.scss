@@ -1,0 +1,96 @@
+.se-perspective-selector {
+    @include se-flex-row();
+    height: 40px;
+    border-right: se-border();
+
+    .se-tooltip {
+        .fd-popover-container-custom {
+            z-index: 1010;
+        }
+    }
+    .fd-popover-container-custom {
+        left: 30px !important;
+    }
+}
+
+.se-perspective-selector__trigger {
+    display: flex;
+    align-items: center;
+}
+// Selector Button
+.se-perspective-selector__btn {
+    @include se-flex-row();
+    @include se-text-btn();
+    @include se-type('0');
+    @include se-weight('bold');
+    height: 39px;
+    position: relative;
+    text-transform: capitalize;
+    color: var(--sapTextColor);
+    margin-left: se-space('s');
+
+    &:disabled {
+        color: var(--sapField_PlaceholderTextColor);
+        cursor: not-allowed;
+    }
+}
+.se-perspective-selector__btn-arrow {
+    margin: 0 se-space('small') 0 se-space('tiny') !important;
+    color: var(--sapLinkColor) !important;
+
+    .se-perspective-selector__btn:disabled & {
+        color: var(--sapField_PlaceholderTextColor);
+    }
+}
+.se-perspective-selector__hotkey-tooltip--icon {
+    &[class*='sap-icon'] {
+        @include se-type('1');
+        cursor: pointer;
+        color: var(--sapLinkColor);
+    }
+}
+
+// Dropdown Content
+
+.se-perspective__list {
+    @include se-flex-column(flex-start);
+    padding: 0;
+    min-width: 120px;
+    margin-bottom: 0;
+    margin-block-start: 0;
+}
+
+.se-perspective__list-item {
+    width: 100%;
+    cursor: pointer;
+    list-style-type: none;
+    &:first-child {
+        a:hover {
+            border-top-right-radius: var(--sapElement_BorderCornerRadius);
+            border-top-left-radius: var(--sapElement_BorderCornerRadius);
+        }
+    }
+    &:last-child {
+        a:hover {
+            border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+            border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+        }
+    }
+    &:hover .se-perspective__list-item-text,
+    &:hover a {
+        color: var(--sapList_TextColor);
+    }
+    a,
+    .se-perspective__list-item-text {
+        text-decoration: none;
+    }
+}
+.se-perspective__list-item-text {
+    @include se-weight('normal');
+    color: var(--sapTitleColor);
+    padding: se-space('tiny') + 2 se-space('small');
+    white-space: nowrap;
+    width: 100%;
+    text-align: left;
+    text-transform: capitalize;
+}

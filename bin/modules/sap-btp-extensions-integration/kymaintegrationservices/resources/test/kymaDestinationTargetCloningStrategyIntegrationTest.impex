@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+$destination_target=template_kyma
+$end_point=test_endpoint
+$end_point_version = v1
+$url=http://localhost:9002
+$invalid_url=https://t
+$consumed_oauth_credential=test_consumed_oauth_credential
+$consumed_destination=template_consumed_destination
+INSERT_UPDATE DestinationTarget;id[unique=true]    ; destinationChannel(code)[default=KYMA];template
+                               ;$destination_target;                                       ;true
+
+INSERT_UPDATE Endpoint; id[unique = true]; version[unique = true]; description     ; specUrl; name
+                      ; $end_point       ; $end_point_version    ; $end_point      ; $url   ; n1
+INSERT_UPDATE ConsumedOAuthCredential; id[unique = true]         ; clientId; clientSecret
+                                     ; $consumed_oauth_credential; foo     ; bar
+INSERT_UPDATE ConsumedDestination; id[unique = true]     ; url         ; credential(id)            ; endpoint(id, version)        ; destinationTarget(id)[unique = true,default=$destination_target]
+                                 ; $consumed_destination ; $invalid_url; $consumed_oauth_credential; $end_point:$end_point_version;

@@ -1,0 +1,40 @@
+.se-sync-panel-item-checkbox {
+    @include se-flex-row();
+    margin: 0 !important;
+    &__field {
+        margin: 0 !important;
+    }
+
+    input[type='checkbox'] {
+        height: 13px;
+        width: 13px;
+        position: relative;
+    }
+
+    &__label {
+        @include se-text-ellipsis();
+        max-width: 190px;
+        margin: 0 !important;
+        padding-left: se-space('xxs') !important;
+        text-transform: capitalize;
+        &--select-all {
+            font-weight: bold !important;
+        }
+    }
+}
+
+.se-sync-panel-item-info-icon {
+    @include se-type('1');
+
+    &__icon {
+        &[class*='sap-icon'].sap-icon--accept {
+            @include se-type('1');
+            color: var(--sapIndicationColor_4) !important;
+        }
+
+        &.sap-icon--message-warning {
+            @include se-type('1');
+            color: var(--sapIndicationColor_3);
+        }
+    }
+}

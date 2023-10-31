@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+            	
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Sapserviceorderocctests" jaloLogicFree="true" managername="SapserviceorderocctestsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapserviceorderocctests" usemaven="false">
+                       
+        
+        <requires-extension name="sapserviceorderocc"/>
+         		
+        
+        <requires-extension name="b2bocctests"/>
+                
+        <requires-extension name="commercewebservicestests"/>
+                        		
+	
+		
+        
+        
+        <coremodule generated="true" manager="com.sap.hybris.sapserviceorderocctests.jalo.SapserviceorderocctestsManager" packageroot="com.sap.hybris.sapserviceorderocctests"/>
+                        		
+        
+        	
+    
+    
+    </extension>
+            
+
+
+</extensioninfo>

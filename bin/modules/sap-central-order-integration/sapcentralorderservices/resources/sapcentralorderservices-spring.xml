@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+	<util:map id="centralOrderDisplayStatusMap"
+		map-class="java.util.HashMap" key-type="java.lang.String"
+		value-type="java.lang.String">
+		<entry key="RECEIVED" value="created" />
+		<entry key="FULFILLMENT_IN_PROGRESS" value="processing" />
+		<entry key="READY_FOR_TRANSFER" value="processing" />
+		<entry key="TRANSFER_SUCCESSFUL" value="processing" />
+		<entry key="PENDING" value="error" />
+		<entry key="TRANSFER_FAILED" value="error" />
+		<entry key="TRANSFER_PARTIALLY_FAILED" value="error" />
+	</util:map>
+
+	<util:map id="centralOrderListSortMap"
+		map-class="java.util.HashMap" key-type="java.lang.String"
+		value-type="java.lang.String">
+		<entry key="byDate" value="pricingDate" />
+		<entry key="byOrderNumber" value="precedingDocumentNumber" />
+	</util:map>
+
+	<alias alias="centralOrderService"
+		name="defaultCentralOrderCustomerAccountService" />
+	<bean id="defaultCentralOrderCustomerAccountService"
+		class="com.sap.sapcentralorderservices.services.impl.DefaultCentralOrderService">
+		<property name="centralOrderApiClient" ref="centralOrderApiClient" />
+	</bean>
+	
+	<alias alias="centralOrderApiClient"
+		name="defaultCentralOrderApiClient" />
+	<bean id="defaultCentralOrderApiClient"
+		class="com.sap.sapcentralorderservices.clients.impl.DefaultCentralOrderApiClient">
+		<property name="integrationRestTemplateFactory"
+			ref="integrationRestTemplateFactory" />
+		<property name="destinationService" ref="destinationService" />
+	</bean>
+			
+	<!--- ====Configuration service===== -->
+	<alias alias="coConfigurationService"
+		name="defaultCoConfigurationService" />
+	<bean id="defaultCoConfigurationService"
+		class="com.sap.sapcentralorderservices.services.config.impl.DefaultCoConfigurationService">
+		<property name="sapConfigurationService" ref="sapCoreConfigurationService"/>
+	</bean>	
+    
+    <!-- Sourcing Service -->
+	
+	<alias alias="sourcingService" name="defaultCentralOrderSourcingService" />
+	<bean id="defaultCentralOrderSourcingService"
+		class="com.sap.sapcentralorderservices.order.sourcing.services.impl.DefaultCentralOrderSourcingService">
+		<property name="centralOrderConfigurationDao" ref="defaultCentralOrderConfigurationDao" />
+		<property name="sourcingContextFactory" ref="sourcingContextFactory"/>
+        <property name="sourcingFilterProcessor" ref="sourcingFilterProcessor"/>
+        <property name="orderEntryGroupingService" ref="orderEntryGroupingService"/>
+        <property name="orderEntryMatchers" ref="orderEntryMatchers"/>
+        <property name="sourcingStrategyService" ref="sourcingStrategyService"/>
+        <property name="sourcingStrategyMappers" ref="sourcingStrategyMappers"/>
+        <property name="sourcingResultFactory" ref="sourcingResultFactory"/>
+        <property name="configurationService" ref="coConfigurationService" />
+	</bean> 
+	
+	<bean id="defaultCentralOrderConfigurationDao" class="com.sap.sapcentralorderservices.dao.impl.DefaultCentralOrderConfigurationDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean> 
+    
+    <!-- SAP CPI Outbound Service -->
+	<alias name="defaultCOCpiOutboundService" alias="sapCpiOutboundService" />
+	<bean id="defaultCOCpiOutboundService" class="com.sap.sapcentralorderservices.services.impl.DefaultCentralOrderCpiOutboundServiceImpl">
+		<property name="outboundServiceFacade" ref="outboundServiceFacade" />
+	</bean>
+    
+</beans>

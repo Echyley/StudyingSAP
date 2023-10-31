@@ -1,0 +1,11 @@
+<div class="se-page-tree-slot-node-menu">
+    <div *ngIf="node.hiddenComponentCount > 0" style="min-width: 24px">
+        <span
+            class="se-page-tree-slot-node-menu--hide sap-icon--hide"
+            title="{{ 'se.cms.pagetree.component.menu.icon.hide.title'  | translate}}">
+        </span>
+        <span class="se-page-tree-slot-node-menu--hideCount">{{ node.hiddenComponentCount }}</span>
+    </div>
+    <se-pagetree-slot-menu-item [item]="item" *ngFor="let item of items">
+    </se-pagetree-slot-menu-item>
+</div>

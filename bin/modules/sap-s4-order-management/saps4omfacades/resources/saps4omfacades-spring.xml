@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">	
+	
+	<alias alias="sapS4OMScheduleLinePopulator" name="defaultSapS4OMScheduleLinePopulator" />
+	<bean id="defaultSapS4OMScheduleLinePopulator"
+		class="de.hybris.platform.sap.saps4omfacades.populator.DefaultS4OMScheduleLinePopulator">
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryConverter" />
+		<property name="add" ref="sapS4OMScheduleLinePopulator" />
+	</bean>
+	
+	<alias name="defaultSapS4OMOrderHistoryPopulator" alias="sapS4OMOrderHistoryPopulator" />
+		<bean id="defaultSapS4OMOrderHistoryPopulator" class="de.hybris.platform.sap.saps4omfacades.populator.DefaultSapS4OMOrderHistoryPopulator" >
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	</bean>
+	
+	<alias name="defaultSapS4OMOrderStatusPopulator" alias="sapS4OMOrderStatusPopulator" />
+	<bean id="defaultSapS4OMOrderStatusPopulator"
+          class="de.hybris.platform.sap.saps4omfacades.populator.DefaultSapS4OMOrderStatusPopulator">
+          <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+    </bean>
+      <!--  
+      
+      	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderHistoryConverter"/>
+		<property name="add" ref="sapS4OMOrderHistoryPopulator"/>
+	</bean>
+	
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="orderConverter"/>
+        <property name="add" ref="sapS4OMOrderStatusPopulator"/>
+    </bean>
+    
+  Strategy implementation for S4OM sales order billing invoice   -->
+	<alias name="defaultS4OMSalesOrderBillingInvoiceStrategyImpl"
+		alias="s4omBillingInvoiceSalesOrderStrategy" />
+	<bean name="defaultS4OMSalesOrderBillingInvoiceStrategyImpl"
+		class="de.hybris.platform.sap.saps4omfacades.billinginvoice.strategy.impl.SapBillingInvoiceSalesOrderStrategyImpl">
+		<property name="priceFactory" ref="priceDataFactory" />
+		<property name="sapBillingInvoiceUtils" ref="billingInvoiceUtils" />
+		<property name="sapS4OMOutboundService" ref="sapS4OMOutboundService" />
+		<property name="sapS4OMOrderFilterBuilder" ref="sapS4OMOrderFilterBuilder" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+    <!-- Adding S4OM sales order billing invoice strategy to strategy handlers  -->
+	<bean depends-on="sapBillingStrategyHandlers" parent="mapMergeDirective">
+        <property name="key" value="#{T(de.hybris.platform.sap.saps4omfacades.constants.Saps4omfacadesConstants).SALES_SYNCHRONOUS}"/>
+        <property name="value" ref="s4omBillingInvoiceSalesOrderStrategy"/>
+    </bean>
+	
+</beans>

@@ -1,0 +1,55 @@
+$lang=zh
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;可配置产品
+;productconfig_customer_category;客户
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;具有购物车内指定配置的产品;购物车包含产品 {product}。特征 {cstic} {value_operator}值 {cstic_value}。
+;y_configurable_product;当前正在配置的产品;当前正在配置的产品是 {product}。特征 {cstic} {value_operator}值 {cstic_value}。
+;y_configurable_product_customer;客户;客户{customers_operator}下列清单中\：{customers}
+;y_configurable_product_customer_group;客户组;客户{customer_groups_operator}下列组中\：{customer_groups}
+;y_configurable_product_customer_support_mode;客户支持;帮助服务会话已激活\：{value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;产品;购物车中的产品;Item Type (Product)
+;y_configurable_product_in_cart;cstic;特征;特征名称
+;y_configurable_product_in_cart;value_operator;操作符;特征和值之间的操作符
+;y_configurable_product_in_cart;cstic_value;值;特征值名称;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;产品;当前正在配置的产品
+;y_configurable_product;cstic;特征;特征名称
+;y_configurable_product;value_operator;操作符;特征和值之间的操作符
+;y_configurable_product;cstic_value;值;特征值名称
+;y_configurable_product_customer;customers_operator;客户选择操作符;定义客户是否包含在清单中
+;y_configurable_product_customer;customers;客户;客户清单
+;y_configurable_product_customer_group;customer_groups_operator;客户组选择操作符;定义客户是包含于任意还是所有客户组中
+;y_configurable_product_customer_group;customer_groups;客户组;客户组清单
+;y_configurable_product_customer_support_mode;value;帮助服务会话已激活;客户支持代理代表客户登录
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;可配置产品
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;设置可配置产品的特征值;为特征 {cstic} 设置值 {cstic_value}
+;y_configurable_product_remove_assignable_value;隐藏可配置产品的可分配值;隐藏特征 {cstic} 的值 {cstic_value}
+;y_configurable_product_hide_cstic;隐藏可配置产品的特征;隐藏特征 {cstic}
+;y_configurable_product_display_cstic_readonly;将可配置产品的特征显示为只读;将特征 {cstic} 显示为只读
+;y_configurable_product_display_message;显示消息;显示消息
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;特征;已设置值的特征
+;y_configurable_product_set_cstic_value;cstic_value;值;待设置的特征值
+;y_configurable_product_remove_assignable_value;cstic;特征;准备移除可分配值的特征
+;y_configurable_product_remove_assignable_value;cstic_value;值;准备从可分配值清单中移除的值
+;y_configurable_product_hide_cstic;cstic;特征;要隐藏的特征
+;y_configurable_product_display_cstic_readonly;cstic;特征;要显示为只读的特征
+;y_configurable_product_display_message;message;消息;消息文本
+;y_configurable_product_display_message;message_severity;严重性;消息严重性
+;y_configurable_product_display_message;cstic;特征;针对其显示此消息的特征
+;y_configurable_product_display_message;cstic_value;特性值;针对其显示此消息的特征值
+
+#% endif:

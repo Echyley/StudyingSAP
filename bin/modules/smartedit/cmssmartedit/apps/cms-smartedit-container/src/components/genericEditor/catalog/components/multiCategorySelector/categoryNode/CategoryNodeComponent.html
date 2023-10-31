@@ -1,0 +1,28 @@
+<div class="se-product-row">
+    <div
+        class="se-category-node"
+        [ngClass]="{
+          'se-category-node--no-drag': !parent.dragEnabled,
+          'se-category-node--drag': parent.dragEnabled
+        }"
+    >
+        <div class="se-product-row__product" [title]="node.name | seL10n | async">
+            {{ node.name | seL10n | async }}
+        </div>
+        <div class="se-product-row__product" [title]="node.code">{{ node.code }}</div>
+        <div
+            class="se-product-row__catalog"
+            title="{{ node.catalogId }} - {{ node.catalogVersion }}"
+        >
+            {{ node.catalogId }} - {{ node.catalogVersion }}
+        </div>
+        <div>
+            <se-dropdown-menu
+                *ngIf="parent.dragEnabled"
+                [dropdownItems]="dropdownItems"
+                [selectedItem]="node"
+                class="pull-right se-tree-node__actions--more-menu"
+            ></se-dropdown-menu>
+        </div>
+    </div>
+</div>

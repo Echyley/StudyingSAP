@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cng="http://www.hybris.com/cockpitng/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.hybris.com/cockpitng/spring
+           http://www.hybris.com/cockpitng/spring/cng-spring.xsd">
+
+    <bean id="webhookbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator"
+          scope="singleton" init-method="init" lazy-init="false">
+        <property name="location" value="/webhookbackoffice-backoffice-labels/"/>
+        <property name="name" value="labels"/>
+    </bean>
+
+    <alias name="webhookConfigService" alias="webhookConfigBackofficeService"/>
+    <bean id="webhookConfigService"
+          class="de.hybris.platform.webhookbackoffice.services.WebhookConfigBackofficeService">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultWebhookExceptionTranslationExtender" alias="webhookExceptionTranslationExtender"/>
+    <cng:list-extender id="defaultWebhookExceptionTranslationExtender"
+                       property="exceptionHandlers"
+                       bean="exceptionTranslationService" sort="true">
+        <cng:add value-type="com.hybris.cockpitng.service.ExceptionTranslationHandler">
+            <ref bean="webhookExceptionTranslationHandler"/>
+        </cng:add>
+    </cng:list-extender>
+
+    <bean name="webhookExceptionTranslationHandler" class="de.hybris.platform.webhookbackoffice.handlers.WebhookExceptionTranslationHandler">
+        <property name="localizationService" ref="integrationBackofficeLocalizationService"/>
+    </bean>
+
+    <alias name="webhookConfigurationAuditReportBuilder" alias="webhookConfigAuditReportBuilder"/>
+    <bean id="webhookConfigurationAuditReportBuilder"
+          class="de.hybris.platform.webhookbackoffice.widgets.modals.builders.WebhookConfigurationAuditReportBuilder">
+        <property name="auditViewService" ref="auditViewService"/>
+        <property name="rendererService" ref="rendererService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="userService" ref="userService"/>
+        <property name="reportViewConverterStrategies" ref="reportViewConverterStrategies"/>
+        <property name="configName" value="WebhookConfigurationReport"/>
+        <property name="isDownload" value="true"/>
+    </bean>
+
+    <bean id="webhookProcessDestinationTargetWizardHandler"
+          class="de.hybris.platform.webhookbackoffice.handlers.WebhookProcessDestinationTargetWizardHandler">
+        <constructor-arg name="modelService" ref="modelService"/>
+        <constructor-arg name="cockpitEventQueue" ref="cockpitEventQueue"/>
+        <constructor-arg name="notificationService" ref="notificationService"/>
+    </bean>
+
+    <bean id="webhookProcessConsumedDestinationWizardHandler"
+          class="de.hybris.platform.webhookbackoffice.handlers.WebhookProcessConsumedDestinationWizardHandler">
+        <constructor-arg name="modelService" ref="modelService"/>
+        <constructor-arg name="cockpitEventQueue" ref="cockpitEventQueue"/>
+        <constructor-arg name="notificationService" ref="notificationService"/>
+    </bean>
+
+</beans>

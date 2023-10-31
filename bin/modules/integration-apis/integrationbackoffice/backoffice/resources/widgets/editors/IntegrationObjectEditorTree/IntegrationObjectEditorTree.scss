@@ -1,0 +1,28 @@
+/* Tree */
+.integrationbackoffice-editor-tree {
+  .z-treecol {
+    border-top: 0px;
+    height: 54px;
+    background: var(--bo-list-table-header-background);
+    padding-left: 15px;
+  }
+
+  .z-treecol-content {
+    color: var(--bo-page-header-text-color);
+    font-size: $font-size__base;
+  }
+
+  .z-treecell {
+    height: 45px;
+    padding-left: 15px;
+    border-bottom: 1px solid var(--bo-list-border-color);
+  }
+
+  .z-treecols-bar {
+    background: var(--bo-list-table-header-background);
+    border-top: 0;
+    border-left: 0;
+  }
+}
+
+

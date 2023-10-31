@@ -1,0 +1,7 @@
+# ---------------------------------------------------------------------------
+# Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+# ---------------------------------------------------------------------------
+
+INSERT_UPDATE Quote; code[unique = true]      ; version[unique = true]; currency(isocode); user(uid)                 ; date[dateformat = dd.MM.yyyy HH:mm:ss]; state(code) ; net   ; calculated; site(uid); store(uid); expirationTime[dateformat = dd.MM.yyyy HH:mm:ss];
+                   ; testExpiredQuote         ; 4                     ; EUR              ; mark.rivers@rustic-hw.com ; 05.04.2021 00:00:00                   ; BUYER_OFFER ; false ; false     ;          ; wsTest    ; 10.04.2021 00:00:00                             ;
+                   ; testNullExpiredTimeQuote ; 4                     ; EUR              ; mark.rivers@rustic-hw.com ; 05.04.2021 00:00:00                   ; BUYER_OFFER ; false ; false     ;          ; wsTest    ;                                                 ;

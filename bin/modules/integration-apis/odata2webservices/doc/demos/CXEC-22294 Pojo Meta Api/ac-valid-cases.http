@@ -1,0 +1,89 @@
+###
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "Valid-Pojo-Reference-1",
+    "classes": [
+      {
+        "root": true,
+        "code": "Product",
+        "type": "de.hybris.platform.core.model.product.ProductModel",
+        "integrationObject": {
+          "code": "Valid-Pojo-Reference-1"
+        }
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in CREATED", function() {
+  client.assert(response.status === 201, "Response status is not 201 CREATED");
+});
+%}
+
+###
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "POJO-4",
+    "classes": [
+      {
+        "root": true,
+        "code": "Unit",
+        "type": "de.hybris.platform.core.model.product.UnitModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          }
+        ]
+      },
+      {
+        "root": false,
+        "code": "Product",
+        "type": "de.hybris.platform.core.model.product.ProductModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true,
+            "readMethod": "getCode"
+          },
+          {
+            "attributeName": "unit",
+            "unique": true,
+            "readMethod": "getUnit",
+            "integrationObjectClass": {
+              "code": "Product"
+            },
+            "returnIntegrationObjectClass": {
+              "code": "Unit",
+              "type": "de.hybris.platform.core.model.product.UnitModel"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Request resulted in CREATED", function() {
+  client.assert(response.status === 201, "Response status is not 201 CREATED");
+});
+%}

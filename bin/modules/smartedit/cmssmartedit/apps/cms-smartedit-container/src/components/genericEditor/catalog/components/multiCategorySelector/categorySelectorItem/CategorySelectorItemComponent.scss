@@ -1,0 +1,7 @@
+.se-category-row-container--item {
+    display: grid;
+    grid-template-columns: 6fr 6fr 8fr;
+    grid-column-gap: 12px;
+    width: 100%;
+    padding: 0 8px;
+}

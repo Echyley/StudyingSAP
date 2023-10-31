@@ -1,0 +1,7 @@
+<se-select class="perso-filter"
+          (click)="$event.stopPropagation()"
+          [(model)]="selectedId"
+          [onChange]="onChange"
+          [fetchStrategy]="fetchStrategy"
+          [searchEnabled]="false">
+</se-select>

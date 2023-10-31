@@ -1,0 +1,4 @@
+{
+    "extends": "./node_modules/smartedit-build/config/tsconfig.base.json",
+    "include": ["src/**/*.ts"]
+}

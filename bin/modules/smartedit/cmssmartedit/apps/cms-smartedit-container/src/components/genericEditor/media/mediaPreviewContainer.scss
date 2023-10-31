@@ -1,0 +1,14 @@
+.se-media-preview-container {
+    position: relative;
+    .se-media-preview {
+        &__image-wrapper {
+            @include se-flex-row(center);
+            height: 75px;
+            background-color: var(--sapShell_Background);
+        }
+        &__image-thumbnail {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}

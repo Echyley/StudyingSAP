@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+
+.yw-integrationbackoffice-filter-btn {
+  background: no-repeat;
+  height: 28px;
+  width: 28px;
+  display: inline-block;
+  padding: 0;
+  border: none;
+
+  &:before {
+    font-family: var(--bo-content-icon-font-family);
+    content: _getIconGlyphContentValue("filter")
+  }
+
+  &:hover {
+    font-family: var(--bo-content-icon-font-family);
+    content: _getIconGlyphContentValue("filter")
+  }
+
+  &:disabled {
+    font-family: var(--bo-content-icon-font-family);
+    content: _getIconGlyphContentValue("filter")
+  }
+}
+
+.yw-integrationbackoffice-filter-btn:focus {
+  outline: var(--bo-content-focus-outline-width) var(--bo-content-focus-outline-style) var(--bo-content-focus-outline-color);
+  outline-offset: -0.1875rem;
+}
+
+.yw-integrationbackoffice-filterMenu {
+  .z-menuitem-image {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .z-menuitem-icon {
+    color: white !important;
+  }
+}
+
+.yw-integrationbackoffice-filterButtonDiv {
+  margin-top: 3px;
+}

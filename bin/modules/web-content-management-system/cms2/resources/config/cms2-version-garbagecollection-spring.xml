@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<alias name="defaultCMSVersionCollectRetainableStrategy" alias="cmsVersionCollectRetainableStrategy" />
+	<bean id="defaultCMSVersionCollectRetainableStrategy" class="de.hybris.platform.cms2.version.strategies.impl.DefaultCMSVersionCollectRetainableStrategy">
+		<constructor-arg ref="configurationService"/>
+		<constructor-arg ref="cmsVersionGCService"/>
+		<constructor-arg ref="modelService"/>
+	</bean>
+
+	<alias name="defaultCMSVersionDeleteStrategy" alias="cmsVersionDeleteStrategy" />
+	<bean id="defaultCMSVersionDeleteStrategy" class="de.hybris.platform.cms2.version.strategies.impl.DefaultCMSVersionDeleteStrategy" >
+		<constructor-arg ref="modelService" />
+	</bean>
+
+	<alias name="defaultCMSVersionGCPerformable" alias="cmsVersionGCPerformable" />
+	<bean id="defaultCMSVersionGCPerformable" class="de.hybris.platform.cms2.version.CMSVersionGCPerformable" parent="abstractJobPerformable">
+		<constructor-arg ref="cmsVersionCollectRetainableStrategy" />
+		<constructor-arg ref="cmsVersionDeleteStrategy" />
+	</bean>
+</beans>

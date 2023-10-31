@@ -1,0 +1,29 @@
+	$salesOrderSimulationUrl=https://s4url/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/
+	
+	#**********************************#
+	#************  Endpoints  *********#
+	#**********************************#
+	
+	INSERT_UPDATE Endpoint ; id[unique = true]        ; name                     ; version[unique = true] ; specUrl                   
+	                       ; sapOrderSimulateEndpoint ; sapOrderSimulateEndpoint ; unknown                ; "$salesOrderSimulationUrl"
+	
+	INSERT_UPDATE DestinationTarget ; id[unique=true]                    
+	                         		; sapOrderSimulateOutboundDestination
+	
+	#**********************************************#
+	#*************  Basic Credentials  ************#
+	#**********************************************#
+	INSERT_UPDATE BasicCredential ; id[unique=true]            ; username ; password   
+	                              ; sapOrderSimulateBasicCreds ; "user"   ; "password!"
+	                                  
+	
+	
+	#**********************************************#
+	#************  Consumed Destinations  *********#
+	#**********************************************#
+	
+	INSERT_UPDATE ConsumedDestination ; id[unique = true]           ; url                        ; endpoint(id,version)             ; credential(id)             ;destinationTarget(id)[default = sapOrderSimulateOutboundDestination]
+	                           		  ; sapOrderSimulateDestination ; "$salesOrderSimulationUrl" ; sapOrderSimulateEndpoint:unknown ; sapOrderSimulateBasicCreds ;    
+	
+	
+	

@@ -1,0 +1,13 @@
+<div class="se-tree-node__name col-xs-6" [title]="node.name | seL10n | async">
+    <span>{{ node.name | seL10n | async }}</span>
+</div>
+<div
+    class="col-sm-4 pull-right tree-node se-navigation-picker-renderer"
+    (click)="pick(node)"
+    *ngIf="isEditable()"
+>
+    <a
+        translate="se.cms.navigationcomponent.management.node.selection.select.action"
+        class="btn btn-link se-navigation-picker-renderer__btn"
+    ></a>
+</div>

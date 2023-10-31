@@ -1,0 +1,24 @@
+#*******************************************
+#*** Create SAP Integration User Groups ****
+#*******************************************
+INSERT_UPDATE UserGroup; UID[unique = true]                         ; locname[lang = en]                                     ; description
+                        ; sapCpqQuoteApiGroup           ; SAP Inbound Subscription Price Group                  ; SAP Inbound Subscription PriceP Group
+
+#**************************************************************************
+#*** Assign SAP Integration User Groups to The Parent Integration Group ***
+#**************************************************************************
+INSERT_UPDATE UserGroup; UID[unique = true]        				    ; groups(uid)[mode = append]
+                       ; sapCpqQuoteApiGroup           ; integrationadmingroup ;
+
+#**********************************************************
+#*** Create SAP Integration Flexible Search Restriction ***
+#**********************************************************
+INSERT_UPDATE SearchRestriction; code[unique = true]                   				 ; name[lang = en]                             			; query                                                                                                                                                                                                                                               ; principal(UID)       ; restrictedType(code); active; generate                          
+
+                               ; sapCPQInboundBlockUsageChargeRestriction          ; SAP Inbound Subscription Price Plan Restriction      ; ({code}='CPQInboundBlockUsageCharge' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='CPQInboundBlockUsageCharge')            ; integrationadmingroup ; IntegrationObject   ; true  ; true
+                               ; sapCPQInboundPercentageUsageChargeRestriction          ; SAP Inbound Subscription Price Plan Restriction      ; ({code}='CPQInboundPercentageUsageCharge' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='CPQInboundPercentageUsageCharge')            ; integrationadmingroup ; IntegrationObject   ; true  ; true
+                               ; sapCPQInboundTierUsageChargeRestriction          ; SAP Inbound Subscription Price Plan Restriction      ; ({code}='CPQInboundTierUsageCharge' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='CPQInboundTierUsageCharge')            ; integrationadmingroup ; IntegrationObject   ; true  ; true
+                               ; sapCPQInboundVolumeUsageChargeRestriction          ; SAP Inbound Subscription Price Plan Restriction      ; ({code}='CPQInboundVolumeUsageCharge' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='CPQInboundVolumeUsageCharge')            ; integrationadmingroup ; IntegrationObject   ; true  ; true
+                               ; sapCPQInboundOverageUsageChargeRestriction          ; SAP Inbound Subscription Price Plan Restriction      ; ({code}='CPQInboundOverageUsageCharge' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='CPQInboundOverageUsageCharge')            ; integrationadmingroup ; IntegrationObject   ; true  ; true
+                               ; sapInboundSubscriptionPricePlanRestriction          ; SAP Inbound Subscription Price Plan Restriction      ; ({code}='InboundSubscriptionPricePlan' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapCpqQuoteApiGroup' }} )) OR ({code}!='InboundSubscriptionPricePlan')            ; integrationadmingroup ; IntegrationObject   ; true  ; true
+

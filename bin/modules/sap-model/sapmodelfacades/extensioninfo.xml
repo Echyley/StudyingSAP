@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+               
+    
+    
+    <extension abstractclassprefix="Generated" classprefix="Sapmodelfacades" jaloLogicFree="true" managername="SapmodelfacadesManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="sapmodelfacades" usemaven="false">
+                
+        <requires-extension name="sapmodel"/>
+                
+        <requires-extension name="commercefacades"/>
+                
+        
+        <coremodule generated="true" manager="de.hybris.platform.sap.sapmodelfacades.jalo.SapmodelfacadesManager" packageroot="de.hybris.platform.sap.sapmodelfacades"/>
+            
+    
+    </extension>
+    
+</extensioninfo>

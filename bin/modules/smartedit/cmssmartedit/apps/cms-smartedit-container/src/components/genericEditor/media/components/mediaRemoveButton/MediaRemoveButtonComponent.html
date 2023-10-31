@@ -1,0 +1,13 @@
+<button
+    type="button"
+    class="se-media-action-btn se-media-remove-btn"
+    [disabled]="isDisabled"
+    (click)="onClick($event)"
+>
+    <span class="se-media__action-icon se-media__action-icon--delete sap-icon--delete"></span>
+    <span
+        class="se-media-remove-btn-txt"
+        [ngClass]="{ 'se-media-remove-btn-txt--disabled': isDisabled }"
+        translate="se.media.format.remove"
+    ></span>
+</button>

@@ -1,0 +1,15 @@
+<div class="cms-nested-component-template">
+    <div class="cms-nested-component-select">
+        <ng-container *ngIf="forceRecompile">
+            <se-generic-editor-dropdown
+                [field]="field"
+                [qualifier]="qualifier"
+                [model]="model"
+                [id]="id"
+                [itemComponent]="itemComponent"
+                [actionableSearchItem]="actionableSearchItem"
+                [showRemoveButton]="true"
+            ></se-generic-editor-dropdown>
+        </ng-container>
+    </div>
+</div>

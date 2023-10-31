@@ -1,0 +1,15 @@
+/* @cc_on!@*/
+
+/*! Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved. */
+
+/**
+     * @license
+     * Copyright 2017 Google LLC
+     * SPDX-License-Identifier: BSD-3-Clause
+     */
+
+/**
+     * @license
+     * Copyright 2019 Google LLC
+     * SPDX-License-Identifier: BSD-3-Clause
+     */

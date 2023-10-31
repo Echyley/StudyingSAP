@@ -1,0 +1,212 @@
+@import "../support/_workflows-mixins.scss";
+
+.yw-workflows-list {
+	&.z-listbox {
+		overflow-y: auto;
+		height: auto !important;
+		max-height: calc(100% - 90px);
+		border: 0;
+		> .z-listbox-body {
+			max-height: 100%;
+			height: auto !important;
+		}
+	}
+
+	&-bottom {
+	  	padding-top: $workflows__list-bottom--padding-top;
+	  	display: table;
+	  	width: 100%;
+
+		& &-start {
+			&.ye-text-button {
+				@include _add-button-styles("-transparent");
+				text-decoration: none;
+			}
+
+			&-disabled {
+				opacity: var(--bo-content-disabled-opacity);
+			  	cursor: not-allowed !important;
+			  	text-decoration: none !important;
+		  	}	  	
+		}
+	}
+
+	.z-listitem {
+		&:hover {
+			cursor: default;
+		}
+	}
+
+	&-item {
+		text-align: left;
+
+		&:last-child > .z-listcell {
+			border-bottom-width: $workflows__list-item--border-width;
+			border-bottom-style: solid;
+			margin-bottom: $workflows__list-item-last--margin-bottom;
+		}
+		.z-listcell {
+			border-color: $workflows__list-item--border-color;
+			
+			> .z-listcell-content {
+				padding: $workflows__list-item-content--padding;
+			}
+		}
+		.yw-workflows-list &.z-listitem-selected {
+			background-color: transparent;
+		}
+		.yw-workflows-list &, 
+		.yw-workflows-list &.z-listitem-selected {
+			&:hover, &:hover {
+				background-color: $workflows__list-item-hover--bg-color;
+			}
+		}
+	}
+	&-content {
+		padding: $workflows__list-content--padding;
+
+		&-top {
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		&-bottom {
+			padding-top: $_container-spacing-default__tiny;
+		}
+		.z-label {
+			max-width: 100%;
+			white-space: normal;
+		}
+	}
+
+	&-content-bottom & {
+		&-bottom-start,
+		&-info.z-label {
+			padding-right: $workflows__list-info-label--padding-x;
+			display: table-cell;
+			color: $workflows__list-info-label--color;
+			line-height: $workflows__list-info-label--line-height;
+
+			&:last-child {
+				padding-left: $workflows__list-info-label--padding-x;
+				text-align: right;
+				padding-right: 0;
+			}
+		}
+	}
+	&-info {
+
+		&-bottom,
+		&-container {
+			padding-top: $workflows__list-info-container--padding-top;
+			display: table;
+			width: 100%;
+		}
+	}
+
+	.yw-workflows-list-subtitle,
+	.yw-workflows-list-title {
+		font-size: $workflows__list-title--font-size;
+		color: $workflows__list-title--color;
+		max-width: $workflows__list-title--max-width;
+		display: inline-block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.yw-workflows-list-title {
+		@include _default_hyperlink_styles();
+		height: calc(#{var(--bo-font-size-large)} + 2 * #{$boxes--border__thin});
+		line-height: calc(#{var(--bo-font-size-large)} + 2 * #{$boxes--border__thin});
+		font-size: var(--bo-font-size-large);
+	}
+
+	.yw-workflows-list-subtitle {
+		@include _default_subTitleLink_styles();
+		height: var(--bo-font-size-large);
+	}
+
+	&-button {
+		clear: left;
+		float: right;
+		text-align: center;
+
+		&:empty {
+			width: $workflows__list-button-empty-width;
+			height: $workflows__list-button-empty-width;
+			display: block;
+			padding: 0;
+			min-height: 0;
+			@include _addButtonBackgroundDots();	
+
+			&:hover,
+			&:focus,
+			&:active {
+				@include _addButtonBackgroundDots($workflows__list-button-empty-width * -1);
+			}
+		}
+	}
+
+	tbody.z-listbox-emptybody td {
+		background: transparent;
+	}
+
+	.yw-custom-menu-popup {
+		margin-top: $workflows__menu-popup-top--margin-top;
+	}
+}
+
+.yw-workflows-menu-popup {
+	&.yw-pointer-menupopup {
+		&-right {
+		margin-top: $workflows__menu-popup-right--margin-top;
+		margin-left: $workflows__menu-popup-right--margin-left;
+		}
+		&-top {
+			margin-top: $workflows__menu-popup-top--margin-top;
+
+			&-right {
+
+				margin-top: $workflows__menu-popup-top-right--margin-top;
+
+				&:before,
+				&:after {
+					right: $workflows__menu-popup-top-right-pointer--indent;
+				}
+			}
+		}
+
+		.z-menupopup-content {
+			padding: $_container-spacing-default__core;
+			.z-menu {
+				&:hover {
+					background: inherit;
+				}
+				&-content {
+					@include _add-button-styles("-transparent");
+					margin: $_container-spacing-default__core;
+					.z-menu-icon {
+						color: inherit;
+						background: inherit;
+						right: 2px;
+					}
+				}
+			}
+
+			.z-menuitem {
+				&:hover {
+					background: inherit;
+				}
+				&-content {
+					@include _add-button-styles("-transparent");
+					margin: $_container-spacing-default__core;
+				}
+			}
+		}
+	}
+}

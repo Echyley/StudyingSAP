@@ -1,0 +1,61 @@
+package de.hybris.platform.promotionengineservices.test
+
+
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import de.hybris.platform.ruleengineservices.rule.evaluation.impl.RuleAndRuleGroupExecutionTracker;
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import de.hybris.platform.ruleengineservices.rao.CartRAO;
+import de.hybris.platform.ruleengineservices.rao.WebsiteGroupRAO;
+import java.util.Map;
+import de.hybris.platform.ruleengineservices.rao.OrderEntryRAO;
+import java.math.BigDecimal;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleOrderEntryPercentageDiscountAction;
+
+query rule_9888e3abed8b44d28c715e6f761695c7_query(CartRAO $v1, RuleEngineResultRAO $v2, WebsiteGroupRAO $v3, OrderEntryRAO $v4)
+   (
+      (
+         $v4 := OrderEntryRAO(basePrice >= new BigDecimal("95"), availableQuantity >= Integer.valueOf(1))
+         and
+         $v1 := CartRAO(currencyIsoCode == "USD", entries contains $v4)
+      )
+   )
+end
+
+rule "basePriceWithDiscountRow"
+@ruleCode("basePriceWithDiscountRow")
+@moduleName("promotions-module-junit")
+@maxRuleExecutions("1")
+dialect "mvel"
+salience 10
+when
+   (
+
+         $rao_v4 := OrderEntryRAO(basePrice >= new BigDecimal("95"), availableQuantity >= Integer.valueOf(1))
+         and
+         exists (CartRAO(currencyIsoCode == "USD", entries contains $rao_v4))
+
+   )
+   $v1 := CartRAO()
+   $v2 := RuleEngineResultRAO()
+   accumulate (
+      rule_9888e3abed8b44d28c715e6f761695c7_query($v1, $v2, $v3, $v4;)
+   ;
+      $v1_set : collectSet($v1),
+      $v2_set : collectSet($v2),
+      $v3_set : collectSet($v3),
+      $v4_set : collectSet($v4),
+      $result_count : count(1)
+   )
+   $executionTracker := RuleAndRuleGroupExecutionTracker()
+   eval($result_count > 0)
+then
+   Map variables = [
+      "de.hybris.platform.ruleengineservices.rao.CartRAO" : $v1_set,
+      "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO" : $v2_set,
+      "de.hybris.platform.ruleengineservices.rao.WebsiteGroupRAO" : $v3_set,
+      "de.hybris.platform.ruleengineservices.rao.OrderEntryRAO" : $v4_set
+   ];
+   ruleOrderEntryPercentageDiscountAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), ["value_uuid":"73731400-98b9-45d0-ab18-5acf55b3b49e", "value":new BigDecimal("10")]);
+   $executionTracker.trackRuleExecution(kcontext);
+end

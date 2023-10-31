@@ -1,0 +1,21 @@
+.angular-ui-tree-handle__name,
+.angular-ui-tree-handle__title,
+.angular-ui-tree-handle__entry,
+.se-tree-node__name,
+.se-tree-node__title,
+.se-tree-node__entry {
+    min-height: 50px !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.angular-ui-tree-handle__expander,
+.se-tree-node__expander {
+    display: flex !important;
+}
+
+.hidden {
+    display: none !important;
+}

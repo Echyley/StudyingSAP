@@ -1,0 +1,44 @@
+### Scenario 1
+GET {{fullURL}}/Pojo_IO_S1/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 2
+GET {{fullURL}}/Pojo_IO_S2/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 3
+GET {{fullURL}}/Pojo_IO_S3/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 4
+GET {{fullURL}}/Pojo_IO_S4/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 5
+GET {{fullURL}}/Pojo_IO_S5/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 6
+GET {{fullURL}}/Pojo_IO_S6/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 7
+GET {{fullURL}}/Pojo_IO_S7/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 8
+GET {{fullURL}}/Pojo_IO_S8/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml
+
+### Scenario 10
+GET {{fullURL}}/Pojo_IO_S10/$metadata
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Accept: application/xml

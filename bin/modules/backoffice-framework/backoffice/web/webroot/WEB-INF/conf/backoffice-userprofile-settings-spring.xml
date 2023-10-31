@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias name="defaultChangePasswordRendererUtil" alias="changePasswordRendererUtil"/>
+	<bean id="defaultChangePasswordRendererUtil"
+		  class="com.hybris.backoffice.widgets.userprofile.passwordsetting.changepassword.ChangePasswordRendererUtil">
+		<property name="modelService" ref="modelService"/>
+		<property name="passwordPolicyService" ref="passwordPolicyService"/>
+	</bean>
+
+	<alias name="defaultUserProfileSettingService" alias="userProfileSettingService"/>
+	<bean id="defaultUserProfileSettingService"
+		  class="com.hybris.backoffice.masterdetail.impl.DefaultMasterDetailSettingService" scope="session">
+	</bean>
+
+</beans>

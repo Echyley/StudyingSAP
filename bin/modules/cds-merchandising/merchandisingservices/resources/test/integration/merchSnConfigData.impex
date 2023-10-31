@@ -1,0 +1,62 @@
+#
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+#
+
+$snIndexConf1 = snIndexConf1
+$snIndexConf2 = snIndexConf2
+$snIndexConf3 = snIndexConf3
+$snIndexType1 = snIndexType1
+$snIndexType2 = snIndexType2
+$snIndexType3 = snIndexType3
+$snIndexField1 = snIndexField1
+$snIndexField2 = snIndexField2
+$snIndexField3 = snIndexField3
+$snIndexField4 = snIndexField4
+$merchField1 = merchField1
+$merchField2 = merchField2
+$merchField3 = merchField3
+
+INSERT_UPDATE BaseSite; uid[unique = true];
+                      ; apparel-uk        ;
+                      ; electronics       ;
+                      ; apparel-de        ;
+
+
+# Languages
+INSERT_UPDATE Language; isocode[unique = true]; fallbackLanguages(isocode); active[default = true]
+                      ; en                    ;                           ; ;
+                      ; de                    ; en                        ; ;
+
+# Currencies
+INSERT_UPDATE Currency; isocode[unique = true]; conversion; digits; symbol
+                      ; GBP                   ; 1         ; 2     ; £
+                      ; EUR                   ; 1         ; 2     ; €
+
+INSERT_UPDATE SnIndexConfiguration; id[unique = true]; name        ; user(uid) ; languages(isocode); currencies(isocode)
+                                  ; $snIndexConf1    ; Electronics ; anonymous ; en                ; EUR
+                                  ; $snIndexConf2    ; Apparel DE  ; anonymous ; de                ; EUR
+                                  ; $snIndexConf3    ; Apparel UK  ; anonymous ; en                ; GBP
+
+INSERT_UPDATE SnIndexType; indexConfiguration(id); id[unique = true]; name                ; itemComposedType(code);
+                         ; $snIndexConf1         ; $snIndexType1    ; Electronics Product ; Product               ;
+                         ; $snIndexConf2         ; $snIndexType2    ; Apparel DE Product  ; Product               ;
+                         ; $snIndexConf3         ; $snIndexType3    ; Apparel UK Product  ; Product               ;
+
+INSERT_UPDATE SnField; indexType(id)[unique = true]; id[unique = true]; name           ; fieldType(code);
+                     ; $snIndexType1               ; $snIndexField1   ; $snIndexField1 ; STRING         ;
+                     ; $snIndexType1               ; $snIndexField2   ; $snIndexField2 ; STRING         ;
+                     ; $snIndexType1               ; $snIndexField3   ; $snIndexField3 ; STRING         ;
+                     ; $snIndexType2               ; $snIndexField1   ; $snIndexField1 ; STRING         ;
+                     ; $snIndexType2               ; $snIndexField4   ; $snIndexField4 ; STRING         ;
+
+
+INSERT_UPDATE MerchSnConfig; snIndexType(id)[unique = true]; rollUpStrategy(code)   ; rollUpStrategyField; baseSite(uid); displayName ; enabled[default = false]; defaultLanguage(isocode); currency(isocode)
+                           ; $snIndexType1                 ; No Rollup              ; code               ; electronics  ; Electronics ; false                   ; en                      ; GBP
+                           ; $snIndexType2                 ; Rollup to Base Product ; baseProductCode    ; apparel-de   ; Apparel DE  ; false                   ; de                      ; EUR
+
+INSERT_UPDATE MerchSnField; merchSnConfig(snIndexType(id))[unique = true]; indexedField(indexType(id), id)[unique = true]; merchMappedName
+                          ; $snIndexType1                                ; $snIndexType1:$snIndexField1                  ; $merchField1
+                          ; $snIndexType1                                ; $snIndexType1:$snIndexField2                  ; $merchField2
+                          ; $snIndexType1                                ; $snIndexType1:$snIndexField3                  ; $merchField3
+                          ; $snIndexType2                                ; $snIndexType2:$snIndexField1                  ; $merchField1
+                          ; $snIndexType2                                ; $snIndexType2:$snIndexField4                  ; ;

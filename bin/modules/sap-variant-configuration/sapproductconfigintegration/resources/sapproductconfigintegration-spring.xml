@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">	
+	
+	<alias name="sapProductConfigDefaultVariantUtil" alias="sapProductConfigVariantUtil" />
+	<bean id="sapProductConfigDefaultVariantUtil"
+		class="de.hybris.platform.sap.productconfig.services.impl.ConfigurationVariantUtilImpl">
+			<property name="changeableVariantBaseProducts" ref="sapProductConfigChangeableVariantBaseProducts" />		
+	</bean>
+
+	<alias name="sapProductConfigDefaultPricingParameters" alias="sapProductConfigPricingParameters" />
+	<bean id="sapProductConfigDefaultPricingParameters" class="de.hybris.platform.sap.productconfig.runtime.interf.impl.DefaultPricingConfigurationParameter">
+		<property name="commonSalesAreaService" ref="sapDefaultSalesAreaService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>      
+
+	<alias name="sapProductConfigDefaultClassificationAttributeDescriptionAccess" alias="sapProductConfigClassificationAttributeDescriptionAccess" />
+	<bean id="sapProductConfigDefaultClassificationAttributeDescriptionAccess" class="de.hybris.platform.sap.productconfig.integration.service.impl.ClassificationAttributeDescriptionAccessImpl">
+	</bean>    
+	
+	<alias name="sapProductConfigDefaultExternalConfigurationAccess" alias="sapProductConfigExternalConfigurationAccess" />
+	<bean id="sapProductConfigDefaultExternalConfigurationAccess"
+		class="de.hybris.platform.sap.productconfig.integration.service.impl.DefaultExternalConfigurationAccess">
+	</bean>	    
+		   
+	<alias name="sapProductConfigDefaultIntegrationCloneAbstractOrderHook" alias="sapProductConfigIntegrationCloneAbstractOrderHook" />
+	<bean id="sapProductConfigDefaultIntegrationCloneAbstractOrderHook"
+		class="de.hybris.platform.sap.productconfig.integration.service.impl.DefaultProductConfigIntegrationCloneAbstractOrderHook">
+		<constructor-arg name="itemsStart" value="${sapproductconfigintegration.items.start}"/>
+		<constructor-arg name="itemsIncrement" value="${sapproductconfigintegration.items.increment}"/>
+	</bean>		
+	
+	<bean id="sapProductConfigIntegrationCloneAbstractOrderHookMergeDirective" depends-on="cloneAbstractOrderHookList" parent="listMergeDirective">
+		<property name="add" ref="sapProductConfigIntegrationCloneAbstractOrderHook" />
+	</bean>  
+	
+</beans>

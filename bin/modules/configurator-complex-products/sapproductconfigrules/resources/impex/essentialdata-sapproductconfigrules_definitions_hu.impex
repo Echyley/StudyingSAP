@@ -1,0 +1,55 @@
+$lang=hu
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Konfigurálható anyag
+;productconfig_customer_category;Vevő
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;Termék megadott konfigurációval a kosárban;A kosár tartalmazza a(z) {product} terméket. A(z) {cstic} jellemző {value_operator} {cstic_value} érték.
+;y_configurable_product;Jelenleg konfigurált termék;A jelenleg konfigurált termék a(z) {product}. A(z) {cstic} jellemző {value_operator} {cstic_value} érték.
+;y_configurable_product_customer;Vevők;A vevő {customers_operator} a következő listán\: {customers}
+;y_configurable_product_customer_group;Vevőcsoportok;A vevő {customer_groups_operator} a következő csoportokban\: {customer_groups}
+;y_configurable_product_customer_support_mode;Ügyfélszolgálat;Az értékesítés eladói támogatással aktív\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;Termék;Termék a kosárban;Item Type (Product)
+;y_configurable_product_in_cart;cstic;Jellemző;Jellemző neve
+;y_configurable_product_in_cart;value_operator;Operátor;Jellemző és érték közötti operátor
+;y_configurable_product_in_cart;cstic_value;Érték;Jellemzőérték neve;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;Termék;Jelenleg konfigurált termék
+;y_configurable_product;cstic;Jellemző;Jellemző neve
+;y_configurable_product;value_operator;Operátor;Jellemző és érték közötti operátor
+;y_configurable_product;cstic_value;Érték;Jellemzőérték neve
+;y_configurable_product_customer;customers_operator;Vevőkiválasztó operátor;Megadja, hogy a vevő szerepel-e a listán
+;y_configurable_product_customer;customers;Vevők;Vevők listája
+;y_configurable_product_customer_group;customer_groups_operator;Vevőcsoport-kiválasztási operátor;Megadja, hogy a vevő szerepel-e BÁRMELYIK vagy MINDEN vevőcsoportban
+;y_configurable_product_customer_group;customer_groups;Vevőcsoportok;Vevőcsoportok listája
+;y_configurable_product_customer_support_mode;value;Értékesítés eladói támogatással aktív;A vevő nevében be van jelentkezve egy ügyfélszolgálati munkatárs
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;Konfigurálható termék
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;Konfigurálható termék jellemzőértékének beállítása;A(z) {cstic_value} érték beállítása a(z) {cstic} jellemzőnél
+;y_configurable_product_remove_assignable_value;Konfigurálható termék hozzárendelhető értékének elrejtése;A(z) {cstic_value} érték elrejtése a(z) {cstic} jellemzőnél
+;y_configurable_product_hide_cstic;Konfigurálható termék jellemzőjének elrejtése;A(z) {cstic} jellemző elrejtése
+;y_configurable_product_display_cstic_readonly;Konfigurálható termék jellemzőjének megjelenítése írásvédettként;A(z) {cstic} jellemző megjelenítése írásvédettként
+;y_configurable_product_display_message;Üzenet megjelenítése;Üzenet megjelenítése
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;Jellemző;Jellemző, amihez az érték be lesz állítva
+;y_configurable_product_set_cstic_value;cstic_value;Érték;Beállítandó jellemzőérték
+;y_configurable_product_remove_assignable_value;cstic;Jellemző;A jellemző, amelynél a hozzárendelhető értéket el kell távolítani
+;y_configurable_product_remove_assignable_value;cstic_value;Érték;A hozzárendelhető értékek listájáról eltávolítandó érték
+;y_configurable_product_hide_cstic;cstic;Jellemző;Elrejtendő jellemző
+;y_configurable_product_display_cstic_readonly;cstic;Jellemző;Írásvédettként megjelenítendő jellemző
+;y_configurable_product_display_message;message;Üzenet;Üzenet szövege
+;y_configurable_product_display_message;message_severity;Súlyosság;Üzenet súlyossága
+;y_configurable_product_display_message;cstic;Jellemző;Jellemző, amelyre ez az üzenet megjelenik
+;y_configurable_product_display_message;cstic_value;Jellemzőérték;Jellemzőérték, amelyre ez az üzenet megjelenik
+
+#% endif:

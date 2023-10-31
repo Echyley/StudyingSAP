@@ -1,0 +1,92 @@
+@use 'sass:list';
+@use 'sass:map';
+$se-type--base: 16 !default;
+$se-type: () !default;
+$se-type: map-merge(
+    (
+        //"key": font-size line-height margin-bottom
+        '-1': #{calc(12 / $se-type--base)}rem calc(16 / 12) 8px,
+        //12/16 8 btm
+        '0': #{calc(14 / $se-type--base)}rem calc(20 / 14) 12px,
+        //14/20 12
+        '1': #{calc(16 / $se-type--base)}rem calc(20 / 16) 12px,
+        //16/20 12
+        '2': #{calc(18 / $se-type--base)}rem calc(24 / 18) 12px,
+        //18/24 12
+        '3': #{calc(20 / $se-type--base)}rem calc(28 / 20) 12px,
+        //20/28 12
+        '4': #{calc(24 / $se-type--base)}rem calc(32 / 24) 16px,
+        //23/32 16
+        '5': #{calc(36 / $se-type--base)}rem calc(40 / 36) 20px,
+        //36/40 20
+        '6': #{calc(48 / $se-type--base)}rem calc(52 / 48) 24px,
+        //48/52 24
+    ),
+    $se-type
+);
+$se-font-size: #{$se-type--base}px !default;
+$se-line-height: calc(20 / #{$se-type--base}) !default;
+
+//weights
+$se-weights: () !default;
+$se-weights: map-merge(
+    (
+        'light': 300,
+        'normal': 400,
+        'bold': 700
+    ),
+    $se-weights
+);
+
+// get line-height from main map
+@function se-line-height($size: '0') {
+    $_map: $se-type;
+    $_size: '0';
+    $list: map-get($_map, '0');
+    @if map-has-key($_map, $size) {
+        $list: map-get($_map, $size);
+    } @else {
+        @warn "Invalid $size of `#{$size}` in the map $se-type. Valid $size values are #{map-keys($_map)}. Returning `#{$_size}`.";
+    }
+    @return nth($list, 2);
+}
+
+// get font-size from main map
+@function se-font-size($size: '0') {
+    $_map: $se-type;
+    $_size: '0';
+    $list: map-get($_map, '0');
+    @if map-has-key($_map, $size) {
+        $list: map-get($_map, $size);
+    } @else {
+        @warn "Invalid $size of `#{$size}` in the map $se-type. Valid $size values are #{map-keys($_map)}. Returning `#{$_size}`.";
+    }
+    @return nth($list, 1);
+}
+
+@function se-font-weight($weight: 'normal') {
+    $_map: $se-weights;
+    $_weight: map-get($_map, 'normal');
+    @if $weight == 'reg' {
+        $weight: 'normal';
+    }
+    @if map-has-key($_map, $weight) {
+        $_weight: map-get($_map, $weight);
+    } @else {
+        @warn "Invalid $weight of `#{$weight}` in the map $se-weights. Valid $weight values are #{map-keys($_map)}. Returning `#{$_weight}`.";
+    }
+    @return $_weight;
+}
+
+//$weight: "light", "normal", "bold"
+@mixin se-weight($weight: 'normal') {
+    font-weight: se-font-weight($weight);
+}
+
+@mixin se-type($size: '0', $weight: 'normal') {
+    $list: map-get($se-type, $size);
+    font-size: se-font-size($size);
+    line-height: se-line-height($size);
+    //set weight
+    font-weight: se-font-weight($weight);
+}

@@ -1,0 +1,8 @@
+# Creates users referenced in the http-client.env.json profiles.
+$password=@password[translator = de.hybris.platform.impex.jalo.translators.UserPasswordTranslator]
+INSERT_UPDATE Employee; UID[unique = true] ; $password; loginDisabled; groups(uid)[mode = append]
+                      ; ioadmin            ; *:nimda  ; false        ; integrationadmingroup,integrationservicegroup,integrationmonitoringgroup
+                      ; ioview             ; *:nimda  ; false        ; integrationviewgroup
+                      ; iocreate           ; *:nimda  ; false        ; integrationcreategroup
+                      ; iodelete           ; *:nimda  ; false        ; integrationdeletegroup
+                      ; iomonitoring       ; *:nimda  ; false        ; integrationmonitoringgroup

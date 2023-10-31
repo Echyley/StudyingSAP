@@ -1,0 +1,25 @@
+<div class="target-catalog-version-selector-wrapper form-group">
+    <label
+        for="se-catalog-version-selector-dropdown"
+        class="se-control-label"
+        translate="se.cms.clonepagewizard.options.targetcatalogversion.label"
+    ></label>
+
+    <se-select
+        *ngIf="!!catalogVersions.length"
+        id="se-catalog-version-selector-dropdown"
+        [(model)]="selectedCatalogVersion"
+        [fetchStrategy]="catalogVersionSelectorFetchStrategy"
+        [onChange]="onSelectionChange"
+        [searchEnabled]="false"
+        (getApi)="setSelectApi($event)"
+    >
+    </se-select>
+
+    <div *ngIf="catalogVersionContainsPageWithSameLabel">
+        <span
+            class="se-exists-label-warning"
+            translate="se.cms.clonepagewizard.options.targetcatalogversion.label.exists.message"
+        ></span>
+    </div>
+</div>

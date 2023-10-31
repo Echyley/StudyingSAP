@@ -1,0 +1,30 @@
+<div
+    [ngClass]="{
+        'cms-external-component-decorator': !isExternalSlot,
+        'cms-external-component-decorator--versioning': isVersioningPerspective,
+        'disabled-shared-slot-hovered': isActive && !isExternalSlot
+    }"
+>
+    <div class="se-ctx-menu__overlay" *ngIf="!isExternalSlot && isReady">
+        <se-tooltip
+            *ngIf="!isActive || isVersioningPerspective"
+            [placement]="'bottom'"
+            [isChevronVisible]="true"
+            [triggers]="['mouseenter', 'mouseleave']"
+        >
+            <span se-tooltip-trigger class="se-ctx-menu-element__btn sap-icon--globe"></span>
+
+            <div
+                se-tooltip-body
+                translate="se.cms.from.external.catalog.version"
+                [translateParams]="{ catalogVersion: catalogVersionText }"
+            ></div>
+        </se-tooltip>
+    </div>
+    <div
+        class="se-wrapper-data"
+        [ngClass]="{ 'disabled-shared-slot-versioning-mode': isVersioningPerspective && !isExternalSlot }"
+    >
+        <ng-content></ng-content>
+    </div>
+</div>

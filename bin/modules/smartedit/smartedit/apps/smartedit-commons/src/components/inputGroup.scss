@@ -1,0 +1,30 @@
+.se-input-group {
+    @include se-flex-row();
+    position: relative;
+}
+input.se-input-group__input-area {
+    border: none !important;
+    box-shadow: 0 0 0 1px var(--sapGroup_ContentBorderColor) !important;
+    &:focus {
+        box-shadow: 0 0 0 2px var(--sapAccentColor6) !important;
+    }
+}
+.se-input-group__addon {
+    &[class*='sap-icon'] {
+        position: absolute;
+        z-index: 100;
+        color: var(--sapNeutralColor);
+        right: 0;
+        height: calc(100% - 0.5rem);
+        width: 36px;
+        background-color: var(--sapField_Background);
+        border-radius: se-space('base');
+        @include se-flex-row(center);
+        @include se-type('1');
+    }
+    &.se-input-group__clear-btn {
+        color: var(--sapLinkColor);
+        line-height: 36px;
+        z-index: 101;
+    }
+}

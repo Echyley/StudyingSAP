@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns3:EntityDescriptor xmlns:ns3="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:ns2="http://www.w3.org/2001/04/xmlenc#"
+    xmlns:ns4="urn:oasis:names:tc:SAML:2.0:assertion" ID="c000bd2a-1f36-4a1a-a342-059e25c54d99" entityID="test.identityProvider.com">
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+            <ds:Reference URI="c000bd2a-1f36-4a1a-a342-059e25c54d99">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                <ds:DigestValue>f4acf072-bdcc-4c20-b273-e090ded1b2c6</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>40014e92-8edb-4bc5-b67a-aa9a649f94a340014e92-8edb-4bc5-b67a-aa9a649f94a340014e92-8edb-4bc5-b67a-aa9a649f94a340014e92-8edb-4bc5-b67a-aa9a649f94a340014e92-8edb-4bc5-b67a-aa9a649f94a340014e92-8edb-4bc5-b67a-aa9a649f94a3</ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:X509Data>
+                <ds:X509Certificate>MIICOjCCAaOgAwIBAgIBADANBgkqhkiG9w0BAQ0FADA6MQswCQYDVQQGEwJ1czENMAsGA1UECAwEdGVzdDENMAsGA1UECgwEdGVzdDENMAsGA1UEAwwEdGVzdDAeFw0yMTEwMTMxNjUzMjZaFw0zMTEwMTExNjUzMjZaMDoxCzAJBgNVBAYTAnVzMQ0wCwYDVQQIDAR0ZXN0MQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQDDAR0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrZ+ZujxeCcfyakceFNrYXzqFSjSUG6I6V39vMwuKOgZ8uY2/PWasKGaL2L3V63tx7QRyY4kMOqh2GEttCzFR/Wmx5zEUhB7BNvWvcDWjpy3Zy5mwXigIfo+HTRR+Onxu71ic3OHGO59xUECecbtPVr8wdId2Q2sLVkB5PyyZK7QIDAQABo1AwTjAdBgNVHQ4EFgQUOajOOTCjNcReI8tdBsFHaWaBo1MwHwYDVR0jBBgwFoAUOajOOTCjNcReI8tdBsFHaWaBo1MwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQ0FAAOBgQAggBNTxpE3xVYNAz3aH/0ePNEHPweu/EU/PCGB6183NsF9XhaiHlr1ZwIKsVgrDkBN3nTA9r9pAVd57Do/6+o5m98ONCSRfAE9xFl9mUBhG6Zv5gmKU407THNZ0c5goNYGU01eM6TUbKLSn7+H6AbrtpGDPI3v99uzESt9GbHrGg==</ds:X509Certificate>
+            </ds:X509Data>
+            <ds:KeyValue>
+                <ds:RSAKeyValue>
+                    <ds:Modulus>90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc90c2f53b-4d6e-4f28-a589-0a8483a293bc</ds:Modulus>
+                    <ds:Exponent>AQAB</ds:Exponent>
+                </ds:RSAKeyValue>
+            </ds:KeyValue>
+        </ds:KeyInfo>
+    </ds:Signature>
+    <ns3:IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <ns3:KeyDescriptor use="signing">
+            <KeyInfo>
+                <KeyName>test.identityProvider.com</KeyName>
+                <X509Data>
+                    <X509Certificate>MIICOjCCAaOgAwIBAgIBADANBgkqhkiG9w0BAQ0FADA6MQswCQYDVQQGEwJ1czENMAsGA1UECAwEdGVzdDENMAsGA1UECgwEdGVzdDENMAsGA1UEAwwEdGVzdDAeFw0yMTEwMTMxNjUzMjZaFw0zMTEwMTExNjUzMjZaMDoxCzAJBgNVBAYTAnVzMQ0wCwYDVQQIDAR0ZXN0MQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQDDAR0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrZ+ZujxeCcfyakceFNrYXzqFSjSUG6I6V39vMwuKOgZ8uY2/PWasKGaL2L3V63tx7QRyY4kMOqh2GEttCzFR/Wmx5zEUhB7BNvWvcDWjpy3Zy5mwXigIfo+HTRR+Onxu71ic3OHGO59xUECecbtPVr8wdId2Q2sLVkB5PyyZK7QIDAQABo1AwTjAdBgNVHQ4EFgQUOajOOTCjNcReI8tdBsFHaWaBo1MwHwYDVR0jBBgwFoAUOajOOTCjNcReI8tdBsFHaWaBo1MwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQ0FAAOBgQAggBNTxpE3xVYNAz3aH/0ePNEHPweu/EU/PCGB6183NsF9XhaiHlr1ZwIKsVgrDkBN3nTA9r9pAVd57Do/6+o5m98ONCSRfAE9xFl9mUBhG6Zv5gmKU407THNZ0c5goNYGU01eM6TUbKLSn7+H6AbrtpGDPI3v99uzESt9GbHrGg==</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </ns3:KeyDescriptor>
+        <ns3:KeyDescriptor use="encryption">
+            <KeyInfo>
+                <KeyName>test.identityProvider.com</KeyName>
+                <X509Data>
+                    <X509Certificate>MIICOjCCAaOgAwIBAgIBADANBgkqhkiG9w0BAQ0FADA6MQswCQYDVQQGEwJ1czENMAsGA1UECAwEdGVzdDENMAsGA1UECgwEdGVzdDENMAsGA1UEAwwEdGVzdDAeFw0yMTEwMTMxNjUzMjZaFw0zMTEwMTExNjUzMjZaMDoxCzAJBgNVBAYTAnVzMQ0wCwYDVQQIDAR0ZXN0MQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQDDAR0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrZ+ZujxeCcfyakceFNrYXzqFSjSUG6I6V39vMwuKOgZ8uY2/PWasKGaL2L3V63tx7QRyY4kMOqh2GEttCzFR/Wmx5zEUhB7BNvWvcDWjpy3Zy5mwXigIfo+HTRR+Onxu71ic3OHGO59xUECecbtPVr8wdId2Q2sLVkB5PyyZK7QIDAQABo1AwTjAdBgNVHQ4EFgQUOajOOTCjNcReI8tdBsFHaWaBo1MwHwYDVR0jBBgwFoAUOajOOTCjNcReI8tdBsFHaWaBo1MwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQ0FAAOBgQAggBNTxpE3xVYNAz3aH/0ePNEHPweu/EU/PCGB6183NsF9XhaiHlr1ZwIKsVgrDkBN3nTA9r9pAVd57Do/6+o5m98ONCSRfAE9xFl9mUBhG6Zv5gmKU407THNZ0c5goNYGU01eM6TUbKLSn7+H6AbrtpGDPI3v99uzESt9GbHrGg==</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </ns3:KeyDescriptor>
+        <ns3:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test.identityProvider.com/saml2/idp/slo/test.identityProvider.com"/>
+        <ns3:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test.identityProvider.com/saml2/idp/slo/test.identityProvider.com"/>
+        <ns3:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test.identityProvider.com/saml2/idp/sso/test.identityProvider.com"/>
+        <ns3:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test.identityProvider.com/saml2/idp/sso/test.identityProvider.com"/>
+    </ns3:IDPSSODescriptor>
+    <ns3:SPSSODescriptor AuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <ns3:KeyDescriptor use="signing">
+            <KeyInfo>
+                <KeyName>test.identityProvider.com</KeyName>
+                <X509Data>
+                    <X509Certificate>MIICOjCCAaOgAwIBAgIBADANBgkqhkiG9w0BAQ0FADA6MQswCQYDVQQGEwJ1czENMAsGA1UECAwEdGVzdDENMAsGA1UECgwEdGVzdDENMAsGA1UEAwwEdGVzdDAeFw0yMTEwMTMxNjUzMjZaFw0zMTEwMTExNjUzMjZaMDoxCzAJBgNVBAYTAnVzMQ0wCwYDVQQIDAR0ZXN0MQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQDDAR0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrZ+ZujxeCcfyakceFNrYXzqFSjSUG6I6V39vMwuKOgZ8uY2/PWasKGaL2L3V63tx7QRyY4kMOqh2GEttCzFR/Wmx5zEUhB7BNvWvcDWjpy3Zy5mwXigIfo+HTRR+Onxu71ic3OHGO59xUECecbtPVr8wdId2Q2sLVkB5PyyZK7QIDAQABo1AwTjAdBgNVHQ4EFgQUOajOOTCjNcReI8tdBsFHaWaBo1MwHwYDVR0jBBgwFoAUOajOOTCjNcReI8tdBsFHaWaBo1MwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQ0FAAOBgQAggBNTxpE3xVYNAz3aH/0ePNEHPweu/EU/PCGB6183NsF9XhaiHlr1ZwIKsVgrDkBN3nTA9r9pAVd57Do/6+o5m98ONCSRfAE9xFl9mUBhG6Zv5gmKU407THNZ0c5goNYGU01eM6TUbKLSn7+H6AbrtpGDPI3v99uzESt9GbHrGg==</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </ns3:KeyDescriptor>
+        <ns3:KeyDescriptor use="encryption">
+            <KeyInfo>
+                <KeyName>test.identityProvider.com</KeyName>
+                <X509Data>
+                    <X509Certificate>MIICOjCCAaOgAwIBAgIBADANBgkqhkiG9w0BAQ0FADA6MQswCQYDVQQGEwJ1czENMAsGA1UECAwEdGVzdDENMAsGA1UECgwEdGVzdDENMAsGA1UEAwwEdGVzdDAeFw0yMTEwMTMxNjUzMjZaFw0zMTEwMTExNjUzMjZaMDoxCzAJBgNVBAYTAnVzMQ0wCwYDVQQIDAR0ZXN0MQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQDDAR0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrZ+ZujxeCcfyakceFNrYXzqFSjSUG6I6V39vMwuKOgZ8uY2/PWasKGaL2L3V63tx7QRyY4kMOqh2GEttCzFR/Wmx5zEUhB7BNvWvcDWjpy3Zy5mwXigIfo+HTRR+Onxu71ic3OHGO59xUECecbtPVr8wdId2Q2sLVkB5PyyZK7QIDAQABo1AwTjAdBgNVHQ4EFgQUOajOOTCjNcReI8tdBsFHaWaBo1MwHwYDVR0jBBgwFoAUOajOOTCjNcReI8tdBsFHaWaBo1MwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQ0FAAOBgQAggBNTxpE3xVYNAz3aH/0ePNEHPweu/EU/PCGB6183NsF9XhaiHlr1ZwIKsVgrDkBN3nTA9r9pAVd57Do/6+o5m98ONCSRfAE9xFl9mUBhG6Zv5gmKU407THNZ0c5goNYGU01eM6TUbKLSn7+H6AbrtpGDPI3v99uzESt9GbHrGg==</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </ns3:KeyDescriptor>
+        <ns3:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test.identityProvider.com/saml2/idp/slo/test.identityProvider.com"/>
+        <ns3:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test.identityProvider.com/saml2/idp/slo/test.identityProvider.com"/>
+        <ns3:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test.identityProvider.com/saml2/idp/acs/test.identityProvider.com" index="0" isDefault="true"/>
+    </ns3:SPSSODescriptor>
+</ns3:EntityDescriptor>

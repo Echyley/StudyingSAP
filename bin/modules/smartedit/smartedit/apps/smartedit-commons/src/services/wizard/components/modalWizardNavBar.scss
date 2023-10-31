@@ -1,0 +1,66 @@
+.se-modal-wizard-template {
+    min-height: 480px;
+    max-width: 80vw;
+}
+.se-modal-wizard__steps-container,
+.se-modal-wizard__step {
+    @include se-flex-row();
+}
+.se-modal-wizard__steps-container {
+    border-bottom: se-border();
+}
+.se-modal-wizard__content {
+    display: none;
+
+    &--visible {
+        padding-bottom: 16px;
+        display: block;
+    }
+}
+
+.se-modal-wizard-step__action {
+    @include se-text-btn();
+    @include se-type('1');
+    margin-bottom: 10px;
+    position: relative;
+
+    &--disabled[disabled] {
+        color: se-color-state('disabled', 'action');
+        cursor: not-allowed;
+    }
+    &--enabled {
+        cursor: pointer;
+        color: var(--sapLinkColor);
+    }
+    &--current {
+        cursor: default;
+        color: var(--sapLinkColor);
+        &::before {
+            @include se-active-link;
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            height: 0;
+            left: 0;
+            width: 100%;
+        }
+    }
+}
+.se-modal-wizard__step-icon-next {
+    color: var(--sapNeutralColor);
+    &,
+    & [class*='sap-icon'] {
+        margin-bottom: 10px !important;
+        padding: 0 se-space('s') !important;
+    }
+    &--enabled {
+        color: var(--sapLinkColor);
+    }
+    &--disabled {
+        color: se-color-state('disabled', 'action');
+    }
+}
+.se-wizard-dialog {
+    padding: 0;
+    width: 650px;
+}

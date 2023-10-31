@@ -1,0 +1,12 @@
+@import '~smarteditcommons/styling/sass/styles';
+@import './components/PerspectiveSelectorComponent.scss';
+
+html {
+    font-size: $se-font-size;
+}
+
+body {
+    height: initial;
+    font-family: $font-sap;
+    background-color: var(--sapShell_Background);
+}

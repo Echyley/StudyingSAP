@@ -1,0 +1,15 @@
+{
+  "extends": "./node_modules/smartedit-build/config/tsconfig.base.json",
+  "compilerOptions": {
+      "typeRoots": ["node_modules/@types"],
+      "baseUrl": ".",
+      "paths": {
+          "personalizationsearchsmartedit/*": ["src/*"],
+          "personalizationsearchsmartedit": ["src"]
+      }
+  },
+  "include": ["src/**/*.ts", "src/**/*.js"],
+  "exclude": [
+    "src/**/*Test.ts"
+  ]
+}

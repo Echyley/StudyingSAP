@@ -1,0 +1,26 @@
+se-component-types-tab .se-component-menu {
+    &__type-search {
+        width: 100%;
+    }
+
+    &__result {
+        @include se-grid-columns(2);
+    }
+
+    &__infinite-scroll .se-infinite-scrolling__container {
+        max-height: 300px;
+    }
+
+    &__types-header {
+        padding: 0 20px se-space('s');
+        border-bottom: se-border();
+        .fd-form__set {
+            margin: 0 !important;
+        }
+    }
+    &__input-group {
+        .se-input-group__addon[class*='sap-icon'] {
+            height: 100%;
+        }
+    }
+}

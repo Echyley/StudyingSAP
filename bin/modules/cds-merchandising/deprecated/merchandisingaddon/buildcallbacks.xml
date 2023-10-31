@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+
+    Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<project name="merchandisingaddon_buildcallbacks">
+
+    <patternset id="extension.merchandisingaddon.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="common/"/>
+        <exclude name="**/jsTarget/"/>
+    </patternset>
+
+    <patternset id="extension.merchandisingaddon.source.filter">
+        <patternset refid="extension.source.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="common/"/>
+        <exclude name="**/jsTarget/"/>
+    </patternset>
+
+    <patternset id="extension.merchandisingaddon.production.filter">
+        <patternset refid="extension.production.filter"/>
+        <exclude name="**/node_modules/"/>
+        <exclude name="common/"/>
+        <exclude name="**/jsTarget/"/>
+    </patternset>
+	
+</project>

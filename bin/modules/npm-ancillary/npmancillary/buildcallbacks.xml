@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<project name="npmancillary_buildcallbacks">
+
+    <patternset id="extension.npmancillary.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="resources/npm/verdaccio/.cache/**"/>
+        <exclude name="resources/npm/verdaccio/verdaccio-lib/**"/>
+    </patternset>
+
+    <patternset id="extension.npmancillary.source.filter">
+        <patternset refid="extension.filter" />
+        <exclude name="bin/**" />
+        <exclude name=".settings/org.sonarlint.eclipse.core.prefs" />
+
+        <!-- only exclude npmancillary/classes folder -->
+        <exclude name="classes/**" />
+
+        <exclude name="resources/npm/verdaccio/.cache/**"/>
+        <exclude name="resources/npm/verdaccio/verdaccio-lib/**"/>
+    </patternset>
+
+    <patternset id="extension.npmancillary.production.filter">
+        <patternset refid="extension.production.filter" />
+        <exclude name="resources/npm/verdaccio/.cache/**"/>
+        <exclude name="resources/npm/verdaccio/verdaccio-lib/**"/>
+    </patternset>
+
+    <macrodef name="detectOS">
+        <sequential>
+            <if>
+                <os family="windows"/>
+                <then>
+                    <property name="os.family" value="windows"/>
+                </then>
+
+                <elseif>
+                    <os family="mac"/>
+                    <then>
+                        <property name="os.family" value="darwin"/>
+                    </then>
+                </elseif>
+
+                <else>
+                    <property name="os.family" value="linux"/>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="invokeNpm">
+        <attribute name="arguments" default=""/>
+        <attribute name="path" default="${loc.NPM_HOME}"/>
+        <attribute name="failonerror" default="true"/>
+
+        <sequential>
+            <echo message="Running [npm @{arguments}]"/>
+            <property environment="env"/>
+            <detectOS/>
+            <property file="${ext.npmancillary.path}${file.separator}resources${file.separator}ant${file.separator}${os.family}.properties" />
+            <var name="se.npm.result" unset="true"/>
+            <if>
+                <os family="windows" />
+                <then>
+                    <exec executable="cmd" dir="@{path}" failonerror="@{failonerror}" outputproperty="se.npm.result">
+                        <arg value="/c"/>
+                        <arg value="${loc.NODE_HOME}${file.separator}npm"/>
+                        <arg line="@{arguments}"/>
+                    </exec>
+                </then>
+                <else>
+                    <exec dir="@{path}" executable="${loc.NODE_HOME}${file.separator}bin${file.separator}npm" failonerror="@{failonerror}" outputproperty="se.npm.result">
+                        <env key="PATH" value="${loc.EXTRA_PATH}${path.separator}${env.PATH}"/>
+                        <arg line="@{arguments}"/>
+                    </exec>
+                </else>
+            </if>
+            <echo message="${se.npm.result}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="invokeNode">
+        <attribute name="arguments" default=""/>
+
+        <sequential>
+            <echo message="Running [node @{arguments}]"/>
+            <property environment="env"/>
+            <detectOS/>
+            <property file="${ext.npmancillary.path}${file.separator}resources${file.separator}ant${file.separator}${os.family}.properties" />
+
+            <if>
+                <os family="windows" />
+                <then>
+                    <exec executable="cmd" dir="${loc.NPM_HOME}" failonerror="true">
+                        <arg value="/c"/>
+                        <arg value="${loc.NODE_HOME}${file.separator}node"/>
+                        <arg line="@{arguments}"/>
+                    </exec>
+                </then>
+                <else>
+                    <exec dir="${loc.NPM_HOME}" executable="${loc.NODE_HOME}${file.separator}bin${file.separator}node" failonerror="true">
+                        <env key="PATH" value="${loc.EXTRA_PATH}${path.separator}${env.PATH}"/>
+                        <arg line="@{arguments}"/>
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="invokeRush">
+        <attribute name="arguments" default=""/>
+        <attribute name="path" default="NOT SET"/>
+        <attribute name="failonerror" default="true"/>
+        <sequential>
+            <echo message="Running [rush @{arguments}] on path @{path}"/>
+            <if>
+                <equals arg1="${path}" arg2="NOT SET" />
+                <then>
+                    <echo message="Error: The path argument must be set."/>
+                </then>
+                <else>
+                    <property environment="env"/>
+                    <detectOS/>
+                    <property file="${ext.npmancillary.path}${file.separator}resources${file.separator}ant${file.separator}${os.family}.properties" />
+
+                    <if>
+                        <os family="windows" />
+                        <then>
+                            <exec executable="cmd" dir="@{path}" failonerror="@{failonerror}">
+                                <arg value="/c"/>
+                                <arg value="${loc.NODE_HOME}${file.separator}node"/>
+                                <arg value="${ext.smartedittools.path}${file.separator}common${file.separator}scripts${file.separator}install-run-rush.js"/>
+                                <env key="PATH" value="${loc.EXTRA_PATH}${path.separator}${env.Path}"/><!-- env.Path in WinOS is case-sensitive -->
+                                <env key="RUSH_ALLOW_WARNINGS_IN_SUCCESSFUL_BUILD" value="1"/>
+                                <env key="RUSH_PARALLELISM" value="${npmancillary.rush.parallelism}"/>
+                                <arg line="@{arguments}"/>
+                            </exec>
+                        </then>
+                        <else>
+                            <exec dir="@{path}" executable="${loc.NODE_HOME}${file.separator}bin${file.separator}node" failonerror="@{failonerror}">
+                                <env key="PATH" value="${loc.EXTRA_PATH}${path.separator}${env.PATH}"/>
+                                <env key="RUSH_ALLOW_WARNINGS_IN_SUCCESSFUL_BUILD" value="1"/>
+                                <env key="RUSH_PARALLELISM" value="${npmancillary.rush.parallelism}"/>
+                                <arg line="${ext.smartedittools.path}${file.separator}common${file.separator}scripts${file.separator}install-run-rush.js @{arguments}"/>
+                            </exec>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!-- TODO: remove this macro from all smartedit extensions -->
+    <macrodef name="removeNodeModulesSymlink">
+        <attribute name="path" default="NOT SET"/>
+        <sequential>
+            <echo message="removeNodeModulesSymlink: Deprecated since 21.05"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="gruntBuild">
+        <attribute name="path" default="NOT SET"/>
+        <attribute name="phase" default="NOT SET"/>
+        <attribute name="failonerror" default="NOT SET"/>
+        <sequential>
+            <echo message="Deprecated since 21.05"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="repairnpm">
+        <attribute name="failonerror" default="true"/>
+        <sequential>
+            <echo message="fixing node/npm symlinks and permissions"/>
+            <detectOS/>
+            <property file="${ext.npmancillary.path}${file.separator}resources${file.separator}ant${file.separator}${os.family}.properties" />
+            <if>
+                <not>
+                    <os family="windows"/>
+                </not>
+                <then>
+                    <!-- sometimes the npm link is converted to file -->
+                    <exec executable="${ext.npmancillary.path}/resources/npm/repairnpm.sh" failonerror="@{failonerror}">
+                        <arg value="${os.family}"/>
+                    </exec>
+                </then>
+            </if>
+            <!-- Should change this config for all OS -->
+            <invokeNpm arguments="config set update-notifier false"/>
+            <invokeNpm arguments="config get registry"/>
+            <if>
+                <equals arg1="${se.npm.result}" arg2="http://localhost:4873/" />
+                <then>
+                    <invokeNpm arguments="config delete registry"/>
+                    <echo message="Detect the wrong npm registry [http://localhost:4873/] and set to default"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="repairnpm">
+        <repairnpm />
+    </target>
+
+    <target name="fixnpminstall">
+        <echo message="Fixing wrong binaries paths in previous npm install"/>
+        <invokeNpm arguments="run update-webdriver"/>
+    </target>
+
+    <target name="npmversion">
+        <echo message="Display npm version - for testing"/>
+        <invokeNpm arguments="version"/>
+    </target>
+
+    <target name="nodeversion">
+        <echo message="Display Node version - for testing"/>
+        <invokeNode arguments="-v"/>
+    </target>
+
+    <target name="npmpackagelock" depends="npminstall">
+        <echo message="npmpackagelock: Deprecated since 21.05"/>
+    </target>
+
+    <macrodef name="npminstall">
+        <sequential>
+            <echo message="npminstall: Deprecated since 21.05 - Use rushupdate instead"/>
+        </sequential>
+    </macrodef>
+
+    <target name="npminstall">
+        <echo message="npminstall: Deprecated since 21.05 - Use rushupdate instead"/>
+    </target>
+
+    <target name="npminstallf">
+        <echo message="npminstallf: Deprecated since 21.05 - Use rushupdate instead"/>
+    </target>
+
+    <target name="npmci">
+        <echo message="npmci: Deprecated since 21.05 - Use rushupdate instead"/>
+    </target>
+
+    <macrodef name="safeLink">
+        <attribute name="sourcePath" default="NOT_SET"/>
+        <attribute name="targetPath" default="NOT_SET"/>
+        <sequential>
+            <validatePathAttribute path="@{sourcePath}" message="link sourcePath not defined" />
+            <validatePathAttribute path="@{targetPath}" message="link targetPath not defined" />
+
+            <safeUnLink targetPath="@{targetPath}"/>
+            <if>
+                <not>
+                    <available file="@{targetPath}"/>
+                </not>
+                <then>
+                    <echo message="safeLink - linking @{sourcePath} to @{targetPath}" level="info"/>
+                    <!-- (mkdir + delete) workaround to create nested folder structure and then delete leaf folder/file -->
+                    <dirname file="@{targetPath}" property="targetPath.parent" />
+                    <mkdir dir="${targetPath.parent}"/>
+                    <if>
+                        <os family="windows"/>
+                        <then>
+                            <echo message="safeLink - creating windows symlink"/>
+                            <if>
+                                <available file="@{sourcePath}" type="dir"/>
+                                <then>
+                                    <echo message="safeLink - creating diretory symlink"/>
+                                    <exec executable="cmd" failonerror="false">
+                                        <arg value="/c"/>
+                                        <arg value="mklink"/>
+                                        <arg value="/D"/>
+                                        <arg value="@{targetPath}"/>
+                                        <arg value="@{sourcePath}"/>
+                                    </exec>
+                                </then>
+                                <else>
+                                    <echo message="safeLink - creating file symlink"/>
+                                    <exec executable="cmd" failonerror="false">
+                                        <arg value="/c"/>
+                                        <arg value="mklink"/>
+                                        <arg value="@{targetPath}"/>
+                                        <arg value="@{sourcePath}"/>
+                                    </exec>
+                                </else>
+                            </if>
+                        </then>
+                        <else>
+                            <echo message="safeLink - creating symlink on *nix"/>
+                            <exec executable="ln">
+                                <arg line="-sf @{sourcePath} @{targetPath}"/>
+                            </exec>
+                        </else>
+                    </if>
+                </then>
+                <else>
+                    <echo message="safeLink - skipping symlink creation"/>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="safeUnLinkWindows">
+        <attribute name="targetPath" default="NOT_SET"/>
+        <sequential>
+            <if>
+                <available file="@{targetPath}" type="dir"/>
+                <then>
+                    <exec executable="cmd" failonerror="true">
+                        <arg value="/c"/>
+                        <arg value="rmdir"/>
+                        <arg value="@{targetPath}"/>
+                    </exec>
+                </then>
+                <elseif>
+                    <available file="@{targetPath}" type="file"/>
+                    <then>
+                        <exec executable="cmd" failonerror="true">
+                            <arg value="/c"/>
+                            <arg value="del"/>
+                            <arg value="@{targetPath}"/>
+                        </exec>
+                    </then>
+                </elseif>
+                <else>
+                    <!-- This is a fix for broken symlinks -->
+                    <echo message="Cleaning broken link @{targetPath}"/>
+                    <exec executable="cmd" failonerror="false">
+                        <arg value="/c"/>
+                        <arg value="del"/>
+                        <arg value="@{targetPath}"/>
+                        <arg value="2>nul"/>
+                    </exec>
+                    <exec executable="cmd" failonerror="false">
+                        <arg value="/c"/>
+                        <arg value="rmdir"/>
+                        <arg value="@{targetPath}"/>
+                        <arg value="2>nul"/>
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="safeUnLink">
+        <attribute name="targetPath" default="NOT_SET"/>
+        <sequential>
+            <validatePathAttribute path="@{targetPath}" message="link targetPath not defined" />
+            <echo message="safeUnlink - removing link @{targetPath}" level="info"/>
+            <if>
+                <os family="windows"/>
+                <then>
+                    <safeUnLinkWindows targetPath="@{targetPath}"/>
+                </then>
+                <else>
+                    <exec executable="rm">
+                        <arg line="-rf @{targetPath}"/>
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="validatePathAttribute">
+        <attribute name="path"/>
+        <attribute name="message" default="Error in macro validatePathAttribute: path not provided."/>
+        <sequential>
+            <condition property="pathIsNotSet">
+                <equals arg1="@{path}" arg2="NOT_SET" />
+            </condition>
+            <fail if="pathIsNotSet" message="@{message}"/>
+        </sequential>
+    </macrodef>
+
+    <!-- Start verdaccio in background process (spawn="true") -->
+    <!-- Verdaccio is meant to run in "online" mode only to create the .cache folder that will be copied into the offline-ancillary module.
+    Then, before running a 'rush update' command, verdaccio will execute first (in offline mode) only if the .cache folder is present -->
+    <macrodef name="startverdaccio">
+        <attribute name="offline" default="false"/>
+        <sequential>
+            <echo message="Verdaccio - offline mode is set to: @{offline}" level="info"/>
+            <if>
+                <equals arg1="@{offline}" arg2="true" />
+                <then>
+                    <property name="verdaccio.config" value="config_offline.yaml"/>
+                </then>
+                <else>
+                    <property name="verdaccio.config" value="config.yaml"/>
+                </else>
+            </if>
+
+            <detectOS/>
+            <property file="${ext.npmancillary.path}${file.separator}resources${file.separator}ant${file.separator}${os.family}.properties" />
+
+            <!-- Need to change the registry of .npmrc under rush config in offline mode, otherwise it will use the default one -->
+            <invokeNpm arguments="config set registry=http://localhost:4873/ --location=project --prefix=${ext.smartedittools.path}${file.separator}common${file.separator}config${file.separator}rush" />
+
+            <if>
+                <!-- Not meant to run on windows - CI only -->
+                <os family="windows" />
+                <then></then>
+                <else>
+                    <echo message="Executing verdaccio with config: ${verdaccio.config}" level="info"/>
+                    <exec spawn="true" dir="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio"
+                          executable="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}start-verdaccio.sh">
+                        <env key="PATH" value="${loc.EXTRA_PATH}${path.separator}${env.PATH}"/>
+                        <arg line="${verdaccio.config}"/> <!-- verdaccio config file -->
+                        <arg line="true"/> <!-- debug mode -->
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="stopverdaccio">
+        <sequential>
+            <detectOS/>
+            <property file="${ext.npmancillary.path}${file.separator}resources${file.separator}ant${file.separator}${os.family}.properties" />
+
+            <!-- Revert to default one when offline mode is over -->
+            <invokeNpm arguments="config delete registry --location=project --prefix=${ext.smartedittools.path}${file.separator}common${file.separator}config${file.separator}rush" />
+
+            <if>
+                <!-- Not meant to run on windows - CI only -->
+                <os family="windows" />
+                <then></then>
+                <else>
+                    <echo message="Stopping verdaccio..." level="info"/>
+                    <exec spawn="true" dir="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio"
+                          executable="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}stop-verdaccio.sh"/>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="checkVerdaccioCache">
+        <attribute name="verdaccio.cache" default="false"/>
+        <sequential>
+            <echo message="check verdaccio.cache: ${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}.cache " />
+            <if>
+                <available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}.cache" type="dir"/>
+                <then>
+                    <property name="verdaccio.cache" value="true"/>
+                </then>
+                <else>
+                    <property name="verdaccio.cache" value="false"/>
+                </else>
+            </if>
+        </sequential>   
+    </macrodef>
+
+    <!--
+        Execute the rush update command (full by default).
+        The 'tryOffline' flag can be used to execute rush in an offline mode, by using verdaccio as npm proxy.
+        The offline mode is possible only if the verdaccio .cache folder is available
+    -->
+    <macrodef name="rushupdate">
+        <attribute name="path"/>
+        <attribute name="full" default="true"/>
+        <attribute name="tryOffline" default="false"/>
+        <sequential>
+            <invokeNpm arguments="config set loglevel ${npmancillary.package.manager.loglevel}"/>
+            <if>
+                <equals arg1="@{tryOffline}" arg2="true" />
+                <then>
+                    <checkVerdaccioCache/>
+                    <echo message="verdaccio.cache is set to: ${verdaccio.cache}" />
+                    <if>
+                        <equals arg1="${verdaccio.cache}" arg2="true" />
+                        <then>
+                            <startverdaccio offline="true"/>
+                        </then>
+                    </if>
+                </then>
+            </if>
+            <if>
+                <equals arg1="@{full}" arg2="true" />
+                <then>
+                    <invokeRush arguments="update --full --bypass-policy" path="@{path}"/>
+                </then>
+                <else>
+                    <invokeRush arguments="update --bypass-policy" path="@{path}"/>
+                </else>
+            </if>
+            <if>
+                <and>
+                    <equals arg1="@{tryOffline}" arg2="true" />
+                    <equals arg1="${verdaccio.cache}" arg2="true" />
+                </and>
+                <then>
+                    <stopverdaccio/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="rushupdate">
+        <property name="path" value="NOT SET" />
+        <property name="full" value="false" />
+        <rushupdate path="${path}" full="${full}"/>
+    </target>
+
+    <target name="rushupdatefull">
+        <property name="path" value="${ext.smartedittools.path}" />
+        <property name="full" value="true" />
+        <rushupdate path="${path}" full="${full}"/>
+    </target>
+
+    <target name="rushupdate_offline_cache">
+        <echo message="Use this target to update verdaccio .cache only when introduce/bump package in ECP/PATCH Ticket"/>
+        <property environment="env"/>
+
+        <echo message="Clean pnpm and rush related cache..."/>
+        <delete dir="${env.HOME}/.pnpm-store" />
+        <delete dir="${env.HOME}/.rush" />
+        <delete dir="${ext.smartedittools.path}${file.separator}common${file.separator}temp" />
+        <delete dir="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}.cache" />
+        <invokeNpm arguments="cache clean --force"/>
+
+        <!-- Direct start verdaccio server since spawn mode have some issue -->
+        <echo message="Executing verdaccio with config: config.yaml" level="info"/>
+        <exec dir="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio"
+              executable="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}start-verdaccio.sh">
+            <env key="PATH" value="${loc.EXTRA_PATH}${path.separator}${env.PATH}"/>
+            <arg line="config.yaml true"/>
+        </exec>
+
+        <linkSmarteditProjects />
+        <invokeRush arguments="update --bypass-policy" path="${ext.smartedittools.path}"/>
+        <stopverdaccio />
+        <echo message="Remember to commit all changes under .cache and pnpm-lock.yaml"/>
+    </target>
+    
+    <macrodef name="rushbuild">
+        <attribute name="path"/>
+        <sequential>
+            <invokeRush arguments="build" path="@{path}"/>
+        </sequential>
+    </macrodef>
+
+    <target name="rushbuild">
+        <property name="path" value="NOT SET"/>
+        <invokeRush arguments="build" path="${path}"/>
+    </target>
+
+    <target name="rushbuilddev">
+        <property name="path" value="NOT SET"/>
+        <invokeRush arguments="build --to-except smarteditmaster" path="${path}"/>
+        <invokeNpm path="${ext.smartedit.path}${file.separator}apps${file.separator}smartedit-master" arguments="run-script build:dev"/>
+    </target>
+
+    <target name="rushrebuild">
+        <property name="path" value="NOT SET"/>
+        <invokeRush arguments="rebuild" path="${path}"/>
+    </target>
+
+    <target name="rushcheck">
+        <property name="path" value="NOT SET"/>
+        <invokeRush arguments="check" path="${path}"/>
+    </target>
+
+    <!--
+        Delete the logic here because 'ant clean' will be executed in ECPP generic test phase which make the offline mode rushupdate failed
+        And customer may also have the case that CI can't access internet, so would keep .cache folder after manually added
+    -->
+<!--    <macrodef name="npmancillary_before_clean">-->
+<!--        <sequential>-->
+<!--            <safeUnLink targetPath="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}verdaccio${file.separator}.cache" />-->
+<!--        </sequential>-->
+<!--    </macrodef>-->
+</project>

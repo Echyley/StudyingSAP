@@ -1,0 +1,28 @@
+<!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.044/cXML.dtd">
+<cXML payloadID="9949494" xml:lang="en-US" timestamp="2000-03-12T18:39:09-08:00">
+<Header>
+        <!-- Originator (buying organization) -->
+        <From>
+            <Credential domain="DUNS">
+                <Identity>123456789</Identity>
+            </Credential>
+        </From>
+        <!-- Destination (supplier) -->
+        <To>
+            <Credential domain="DUNS">
+                <Identity>83528721</Identity>
+            </Credential>
+        </To>
+        <!-- Previous relaying entity (network hub in this case) -->
+        <Sender>
+            <Credential domain="NetworkID">
+               <Identity>AN01000002779-T</Identity>
+                <SharedSecret>VerySecret1234</SharedSecret>
+            </Credential>
+            <UserAgent>Procurement System 2.0</UserAgent>
+        </Sender>
+    </Header>
+ <Request>
+ <ProfileRequest />
+ </Request>
+</cXML>

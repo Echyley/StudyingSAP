@@ -1,0 +1,11 @@
+<li
+    fd-list-item
+    *ngIf="dropdownItem.condition(selectedItem)"
+    class="fd-list__byline-left"
+    [ngClass]="dropdownItem.customCss"
+    (click)="onClick()"
+>
+    <ng-container
+        *ngComponentOutlet="dropdownItem.component; injector: dropdownItemInjector;"
+    ></ng-container>
+</li>

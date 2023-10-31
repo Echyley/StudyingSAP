@@ -1,0 +1,119 @@
+# Set up the IOs for using QA/Demo scenarios
+
+###  Create a POJO IO
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "OrderSubmission",
+    "classes": [
+      {
+        "code": "User",
+        "type": "de.hybris.platform.core.model.user.UserModel",
+        "attributes": [
+          {
+            "attributeName": "id",
+            "readMethod": "getUid",
+            "unique": true
+          }
+        ]
+      },
+      {
+        "code": "Order",
+        "type": "de.hybris.platform.core.model.order.OrderModel",
+        "attributes": [
+          {
+            "attributeName": "code",
+            "unique": true
+          },
+          {
+            "attributeName": "date",
+            "unique": true
+          },
+          {
+            "attributeName": "user",
+            "returnIntegrationObjectClass": {
+              "code": "User"
+            }
+          }
+        ]
+      },
+      {
+        "root": true,
+        "code": "SubmitOrderEvent",
+        "type": "de.hybris.platform.order.events.SubmitOrderEvent",
+        "attributes": [
+          {
+            "attributeName": "order",
+            "unique": true,
+            "returnIntegrationObjectClass": {
+              "code": "Order"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Pojo IO created", function() {
+  client.assert(response.status === 201, "Response status is not 201 Created");
+});
+%}
+
+### Create an Item IO
+POST {{fullURL}}/IntegrationService/InboundChannelConfigurations
+Authorization: Basic {{admin_user}} {{admin_pass}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "integrationObject": {
+    "code": "InboundCustomer",
+    "items": [
+      {
+        "code": "Customer",
+        "root": true,
+        "type": {
+          "code": "Customer"
+        },
+        "attributes": [
+          {
+            "attributeName": "id",
+            "attributeDescriptor": {
+              "qualifier": "uid",
+              "enclosingType": {
+                "code": "Customer"
+              }
+            }
+          },
+          {
+            "attributeName": "name",
+            "attributeDescriptor": {
+              "qualifier": "name",
+              "enclosingType": {
+                "code": "Customer"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "authenticationType": {
+    "code": "BASIC"
+  }
+}
+
+> {%
+client.test("Item IO created", function() {
+  client.assert(response.status === 201, "Response status is not 201 Created");
+});
+%}

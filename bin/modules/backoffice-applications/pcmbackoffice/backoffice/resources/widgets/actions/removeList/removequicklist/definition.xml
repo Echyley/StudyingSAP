@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   id="com.hybris.pcmbackoffice.action.removelist.removequicklist"
+				   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+	<name>Remove Quick List</name>
+	<description>
+		Action providing default implementation of remove from quick list operation.
+	</description>
+	<author>hybris</author>
+	<version>1.0</version>
+
+	<iconUri>removeList</iconUri>
+
+	<inputType>java.util.Collection</inputType>
+	<outputType>java.util.Collection</outputType>
+
+	<actionClassName>com.hybris.pcmbackoffice.actions.removelist.RemoveQuickListAction</actionClassName>
+
+</action-definition>

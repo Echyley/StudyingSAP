@@ -1,0 +1,21 @@
+se-component-menu .se-component-menu {
+    width: 640px;
+    height: 485px;
+
+    &__tabs .se-tabset {
+        margin: 0 20px 20px;
+    }
+
+    &__tip {
+        @include se-type('0');
+        margin-bottom: se-space('s');
+        color: var(--sapNeutralColor);
+        padding: 0 20px;
+    }
+
+    &__title {
+        color: var(--sapTextColor);
+        @include se-type('1');
+        padding: 14px 20px se-space('base');
+    }
+}

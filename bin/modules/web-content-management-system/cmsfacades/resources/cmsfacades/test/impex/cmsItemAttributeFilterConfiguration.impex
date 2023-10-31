@@ -1,0 +1,15 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;AbstractPage;BASIC;approvalStatus
+
+# Content page
+INSERT_UPDATE CMSItemTypeAttributeFilterConfig;typeCode[unique=true];mode[unique=true];attributes[mode=append]
+;ContentPage;BASIC;catalogVersion,defaultPage,description,displayStatus,title,type,uuid,pageStatus,uid,label,typeCode,itemtype,labelOrId,name,homepage
+;ContentPage;DEFAULT;BASIC,navigationNodeList,masterTemplateId,linkComponents,view,modifiedtime,contentSlots,onlyOneRestrictionMustApply,restrictions,navigationNodes,localizedPages,missingContentSlots,bannerComponets,availableContentSlots,creationtime
+;ContentPage;CUSTOM;AbstractPage:BASIC,label
+
+
+

@@ -1,0 +1,41 @@
+/*================================
+    Generic Charts
+================================*/
+// Defined Variables for Generic Charts
+
+
+@import "cockpitng-globals.scss";
+
+$_genericchart__widget-default--height: 500px; //defined fallback-config on dashboard
+$genericchart__highcharts-graph--height: 400px;
+$genericchart__highcharts-container--bg-color: var(--bo-container-background) !important;
+$genericchart__highcharts--box-shadow: var(--bo-content-shadow-small);
+$genericchart__highcharts--border-radius: $_layout-panels__panel--border-radius;
+$genericchart__highcharts--font-family: $font-family__text;
+$genericchart__highcharts-title--font-size: $font-size__h4 !important; //to override generated inline-styling
+$genericchart__highcharts-title--color: var(--bo-group-title-text-color) !important;
+$_genericchart__highcharts-title-delimiter--top: $editor-defaults__popup-box-header--height;
+$genericchart__highcharts-graph--bg-color: $_layout-panels__panel--bg-color;
+
+$genericchart__highcharts--axis-title-color: var(--bo-tile-title-color) !important;
+$genericchart__highcharts--axis-label-text-color: $genericchart__highcharts--axis-title-color;
+
+$genericchart__highcharts--axis-line-color: var(--bo-list-border-color) !important;
+
+$genericchart__info-value--color: $_default-list__item--color;
+$genericchart__info-value--font-size: $font-size__kpi_medium; // ~36px;
+$_genericchart__info-value--line-height: floor($genericchart__info-value--font-size * 1.28);
+$genericchart__info-value--font-weight: $font-weight-normal;
+$genericchart__info-label--color: $_default-list__item--color;
+$genericchart__info-label--font-size: $font-size__base;
+$_genericchart__info-label--line-height: floor($genericchart__info-label--font-size * 1.4);
+$_genericchart__content-delimiter--border-color: $_navigation__tabs--border-color;
+$_genericchart__content-delimiter--border-width: $boxes--border__thin;
+
+$genericchart__highcharts-graph--spacing: $container-spacing-default__half;
+$_genericchart__highcharts-info-container--min-height: $_genericchart__widget-default--height - $genericchart__highcharts-graph--height - $genericchart__highcharts-graph--spacing;
+$_genericchart__highcharts-info-container--padding: $container-spacing-default__half ($_container-spacing-default__small + $_container-spacing-default__core);
+$_genericchart__highcharts-info-container--width: 100%;
+$_genericchart__highcharts-info-content-delimiter--top: $_container-spacing-default__core;
+
+$genericchart__highcharts-button--size: $font-size__kpi_medium;

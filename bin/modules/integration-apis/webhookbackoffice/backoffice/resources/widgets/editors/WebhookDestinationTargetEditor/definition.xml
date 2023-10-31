@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+  -->
+<editor-definition id="webhookbackoffice.editors.webhookDestinationTargetEditor"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/editor-definition.xsd"
+                   extends="com.hybris.cockpitng.editor.defaultreferenceeditor">
+
+    <name>DestinationTarget editor for webhooks</name>
+    <description>This editor is used during the creation of WebhookConfiguration's ConsumedDestination's DestinationTarget</description>
+    <author>SAP</author>
+    <version>1.0</version>
+
+    <type>de.hybris.platform.apiregistryservices.model.DestinationTargetModel</type>
+    <editorClassName>de.hybris.platform.webhookbackoffice.widgets.editors.WebhookDestinationTargetEditor</editorClassName>
+    <sockets>
+        <input id="referenceEditorInput" type="java.lang.Object"/>
+        <output id="referenceEditorOutput" type="java.util.Map"/>
+        <output id="referenceSelected" type="com.hybris.cockpitng.data.TypeAwareSelectionContext"/>
+        <output id="referenceSearchCtx" type="com.hybris.cockpitng.data.TypeAwareSelectionContext"/>
+    </sockets>
+
+    <settings>
+        <setting key="pageSize" default-value="5" type="java.lang.Integer"/>
+        <setting key="referenceAdvancedSearchEnabled" default-value="true" type="Boolean"/>
+    </settings>
+
+</editor-definition>

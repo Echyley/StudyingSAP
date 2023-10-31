@@ -1,0 +1,59 @@
+@import "scss/_logosetting-variables.scss";
+@import "../scss/_branding-common.scss";
+
+.logo-setting-info {
+  color: $logo-setting-label-color;
+  display: block;
+  padding-top: $_container-spacing-default__tiny;
+}
+.logo-setting-content {
+  padding-top: $_container-spacing-default__small;
+  .logo-upload-container {
+    padding: $logo-upload-container-padding;
+    .logo-upload-label {
+      display: block;
+      padding-top: $logo-upload-label-padding-y;
+      padding-bottom: $logo-upload-label-padding-y;
+      color: $logo-setting-label-color;
+    }
+    .logo-btns-container {
+      display: flex;
+      width: $logo-preview-container-width;
+      padding-right: $_container-spacing-default__tiny;
+      padding-bottom: $_container-spacing-default__core;
+    }
+    .logo-preview-container {
+      width: $logo-preview-container-width;
+      height: $logo-preview-container-height;
+      box-shadow: $logo-preview-container-shadow;
+      border-radius: 4px;
+      border: 0;
+      padding: $logo-preview-container-padding;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > img {
+        max-width: $logo-preview-img-max-width;
+        max-height: $logo-preview-img-max-height;
+      }
+    }
+    .logo-reset-btn,
+    .logo-upload-btn {
+      font-size: $font-size__large;
+      font-family: $font-family__icon;
+    }
+    .logo-upload-btn {
+      margin-left: auto; 
+      margin-right: 0;
+      &:after {
+       content: $logo-setting-upload-btn-content;
+      }
+    }
+    .logo-reset-btn {
+      margin-left: $_container-spacing-default__tiny; 
+      &:after {
+        content: $logo-setting-reset-btn-content;
+      }
+    }
+  }
+}

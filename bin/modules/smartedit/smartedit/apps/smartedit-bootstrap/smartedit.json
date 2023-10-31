@@ -1,0 +1,10 @@
+{
+    "name": "smarteditbootstrap",
+    "extension": {
+        "type": "inner"
+    },
+    "typescript": {
+        "entry": "./src/index.ts",
+        "dist": "./dist/index.js"
+    }
+}

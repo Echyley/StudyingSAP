@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<urlrewrite>
+    <rule>
+        <condition type="header" name="${orbeonweb.orbeon.hybris-proxy-header}" operator="equal">${orbeonweb.orbeon.hybris-proxy-value}</condition>
+        <from>^/xforms.*$</from>
+        <to last="true">-</to>
+    </rule>
+    <rule>
+        <condition type="header" name="${orbeonweb.orbeon.hybris-proxy-header}" operator="equal">${orbeonweb.orbeon.hybris-proxy-value}</condition>
+        <from>^/.*\.(css|js|png|gif|jpeg|jpg|woff|woff2)$</from>
+        <to last="true">-</to>
+    </rule>
+    <rule>
+        <condition type="header" name="${orbeonweb.orbeon.hybris-proxy-header}" operator="equal">${orbeonweb.orbeon.hybris-proxy-value}</condition>
+        <from>^/fr/[^/]+/[^/]+/(edit|new|view|pdf|tiff)/?.*$</from>
+        <to last="true">-</to>
+    </rule>
+    <rule>
+        <condition type="header" name="${orbeonweb.orbeon.hybris-proxy-header}" operator="equal">${orbeonweb.orbeon.hybris-proxy-value}</condition>
+        <from>^/fr/[^/]+/[^/]+/(summary)/?.*$</from>
+        <set type="status">404</set>
+        <to last="true">null</to>
+    </rule>
+    <rule>
+        <from>^/fr/service/persistence/.*$</from>
+        <set type="status">${orbeonweb.orbeon.persistence-api-status}</set>
+        <to last="true">${orbeonweb.orbeon.persistence-api-to}</to>
+    </rule>
+    <rule>
+        <from>^/fr/service/.*$</from>
+        <to last="true">-</to>
+    </rule>
+    <rule>
+        <from>^/fr/[^/]+/[^/]+/test$</from>
+        <to last="true">-</to>
+    </rule>
+    <rule>
+        <from>^/logout.jsp</from>
+        <to last="true">-</to>
+    </rule>
+    <rule>
+        <from>^.*$</from>
+        <set type="status">403</set>
+        <to last="true">null</to>
+    </rule>
+</urlrewrite>

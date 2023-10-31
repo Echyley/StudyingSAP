@@ -1,0 +1,20 @@
+#************* Added Subscription Order related attributes to Order Integration Object***********	##************* Added Subscription Order related attributes to Order Integration Object***********
+INSERT_UPDATE IntegrationObject; code[unique = true]; integrationType(code)
+                               ; OutboundOMMOrderOMSOrder; INBOUND
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]; type(code); root[default = false]; itemTypeMatch(code)
+                                   ; OutboundOMMOrderOMSOrder	; SAPCpiOutboundOrder         	; SAPCpiOutboundOrder         	; true	; 	;
+                                   ; OutboundOMMOrderOMSOrder	; SAPCpiOutboundOrderItem     	; SAPCpiOutboundOrderItem     	; 	; 	;
+                                   ; OutboundOMMOrderOMSOrder	; SAPCpiOutboundPartnerRole   	; SAPCpiOutboundPartnerRole   	; 	; 	;
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute ; integrationObjectItem(integrationObject(code), code)[unique = true] ; attributeName[unique = true] ; attributeDescriptor(enclosingType(code), qualifier) ; returnIntegrationObjectItem(integrationObject(code), code) ; unique[default = false]
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem                    ; pricePlanId                  ; SAPCpiOutboundOrderItem:pricePlanId                 ;                                                            ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem                    ; subscriptionValidFrom        ; SAPCpiOutboundOrderItem:subscriptionValidFrom       ;                                                            ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundPartnerRole                  ; email                        ; SAPCpiOutboundPartnerRole:email                     ;                                                            ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundPartnerRole                  ; revenueCloudCustomerId       ; SAPCpiOutboundPartnerRole:revenueCloudCustomerId    ;                                                            ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder                        ; revenueCloudOrderId          ; SAPCpiOutboundOrder:revenueCloudOrderId             ;                                                            ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem     	           ; subscriptionValidTill        ; SAPCpiOutboundOrderItem:subscriptionValidTill    	;                                                      	     ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem                    ; overwriteContractTerm        ; SAPCpiOutboundOrderItem:overwriteContractTerm       ;                                                            ;
+                                             ; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrderItem                    ; subscriptionValidTerm        ; SAPCpiOutboundOrderItem:subscriptionValidTerm       ;                                                            ;                      
+
+

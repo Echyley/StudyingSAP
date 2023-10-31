@@ -1,0 +1,51 @@
+$defaultCurrency=EUR
+$passwordEncoding=md5
+$defaultPassword=welcome
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+# Create Customer Group
+INSERT_UPDATE Usergroup;uid[unique=true];
+;customergroup;;
+;orgadmingroup;;
+;orgmanagergroup;;
+;orgapprovergroup;;
+;salesapprovergroup;;
+;salesemployeegroup;;
+;orgemployeegroup;;
+
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid);locname[lang=en];
+;b2bgroup;customergroup;B2B Group;
+;b2bcustomergroup;b2bgroup;B2B Customer Group;
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;B2B_DEFAULT_PRICE_GROUP;A DEFAULT B2B USERPRICEGROUP;
+
+INSERT_UPDATE B2BUnit;name[unique=true];uid
+;TESTUNIT;TESTUNIT
+
+###############################
+# B2B Customer
+###############################
+INSERT_UPDATE B2BCustomer;description;uid[unique=true];customerid;originalUid;email;name;groups(uid);defaultB2BUnit(uid);sessionCurrency(isocode)[default=$defaultCurrency];$setPassword;
+;CPQ Customer B2B;cpq03;cpq03;cpq03;cpq03@sap.com;cpq03;b2bcustomergroup;TESTUNIT;;;
+
+#INSERT_UPDATE Address;&addId;owner(B2BCustomer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);
+#;cpq03addr;cpq03;Testreet;1a;123456;false;Testtown;US;
+INSERT_UPDATE Address;&addId;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;url;company;fax;department
+;cpq03addr;cpq03;Hasso-Plattner-Ring;15;69190;false;Walldorf;US;true;true;true;true;Fritz;Hermann;hermann@cpq.de;MALE;;;;
+
+#credit card details for cpq03 
+INSERT_UPDATE CreditCardPaymentInfo;code[unique=true];&payId[unique=true];user(uid)[unique=true];ccOwner;number;type(code);validFromMonth;validFromYear;validToMonth;validToYear;subscriptionId;duplicate[default=false];saved[default=true]
+;cpq03payer;cpq03payer;cpq03;cpq03;4012888888881881;visa;1;2014;12;2030;1231;
+
+#Set default address and payment info
+UPDATE B2BCustomer;uid[unique=true];defaultPaymentAddress(&addId);defaultShipmentAddress(&addId);
+;cpq03;cpq03addr;cpq03addr;
+
+###################################################################################
+# CPQ Test Users
+###################################################################################
+
+INSERT_UPDATE Customer;description;uid[unique=true];originalUid;email;name;sessionCurrency(isocode)[default=$defaultCurrency];$setPassword;groups(uid);
+;CPQ Customer 01;cpq01;cpq01;cpq01@sap.com;cpq01;;;customergroup;
+;CPQ Customer 02;cpq02;cpq02;cpq02@sap.com;cpq02;;;customergroup;

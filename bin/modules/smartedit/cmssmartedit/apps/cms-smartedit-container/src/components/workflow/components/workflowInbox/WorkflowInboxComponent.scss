@@ -1,0 +1,31 @@
+.se-workflow-inbox-toggle {
+    outline: none;
+}
+
+.se-workflow-inbox-header {
+    @include se-container-section('header', 'dropdown');
+    @include se-type('1');
+    color: var(--sapTextColor);
+    border-bottom: se-border();
+    padding: 10px 0 15px 20px;
+    height: 46px;
+}
+
+.se-workflow-inbox-tasks {
+    padding: se-space('s') 0 se-space('tiny');
+    width: 280px;
+
+    &__no-tasks {
+        @include se-flex-column(center);
+    }
+}
+
+.se-workflow-inbox__empty-inbox-message {
+    color: var(--sapNeutralColor);
+    padding: se-space('xxs') 0 se-space('base');
+}
+.se-workflow-inbox__empty-inbox-message-alt {
+    font-size: 13px;
+    color: var(--sapNeutralColor);
+    padding-bottom: 30px;
+}

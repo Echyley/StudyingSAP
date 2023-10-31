@@ -1,0 +1,10 @@
+.se-button {
+    cursor: pointer;
+    &--text {
+        @include se-text-btn();
+    }
+
+    &--disabled {
+        @include se-disabled();
+    }
+}

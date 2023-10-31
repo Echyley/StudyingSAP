@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!DOCTYPE cXML
+        SYSTEM 'http://xml.cxml.org/schemas/cXML/1.2.051/cXML.dtd'>
+<cXML payloadID="933695160894" timestamp="2002-08-15T08:47:00- 07:00" xml:lang="en-US">
+    <Header>
+        <From>
+            <Credential domain="DUNS">
+                <Identity>punchout.customer1@punchoutorg.com</Identity>
+            </Credential>
+        </From>
+        <To>
+            <Credential domain="NetworkID">
+                <Identity>AN01000002779-T</Identity>
+            </Credential>
+        </To>
+        <Sender>
+            <Credential domain="AribaNetworkUserId">
+                <Identity>punchout.customer2@punchoutorg.com</Identity>
+                <SharedSecret>VerySecret1234#</SharedSecret>
+            </Credential>
+            <UserAgent>Buyer 14s2</UserAgent>
+        </Sender>
+    </Header>
+    <Request deploymentMode="test">
+        <OrderRequest>
+            <OrderRequestHeader orderID="DO1234" orderDate="2000-10-12T18:41:29-08:00" type="new">
+                <Total>
+                    <Money currency="USD">96.0</Money>
+                </Total>
+                <ShipTo>
+                    <Address>
+                        <Name xml:lang="en">Acme</Name>
+                        <PostalAddress name="default">
+                            <DeliverTo>Joe Smith</DeliverTo>
+                            <DeliverTo>Mailstop M-543</DeliverTo>
+                            <Street>123 Anystreet</Street>
+                            <City>Sunnyvale</City>
+                            <State>CA</State>
+                            <PostalCode>90489</PostalCode>
+                            <Country isoCountryCode="US">United States</Country>
+                        </PostalAddress>
+                    </Address>
+                </ShipTo>
+                <BillTo>
+                    <Address>
+                        <Name xml:lang="en">Acme</Name>
+                        <PostalAddress name="default">
+                            <Street>123 Anystreet</Street>
+                            <City>Sunnyvale</City>
+                            <State>CA</State>
+                            <PostalCode>90489</PostalCode>
+                            <Country isoCountryCode="US">United States</Country>
+                        </PostalAddress>
+                    </Address>
+                </BillTo>
+                <Payment>
+                    <PCard number="4111111111111111" expiration="2020-03-12"/>
+                </Payment>
+                <Comments xml:lang="en-US">Anything well formed in XML.</Comments>
+            </OrderRequestHeader>
+        </OrderRequest>
+    </Request>
+</cXML>

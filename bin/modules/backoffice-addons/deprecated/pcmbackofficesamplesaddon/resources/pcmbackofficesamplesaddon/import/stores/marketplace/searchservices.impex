@@ -1,0 +1,33 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+#% if: de.hybris.platform.core.Registry.getCurrentTenant().getTenantSpecificExtensionNames().contains("searchservices")
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+$languages=en,de
+$currencies=EUR,USD
+$snIndexConfiguration=backoffice
+$snIndexType=backoffice-product
+$ItemType = Product
+$backofficeSearchProfileCode = backoffice-product-default
+$backofficeSearchProfileName = Backoffice Product Default
+$indexedType = indexType(id)[unique = true, default = 'backoffice-product']
+$backofficeSearchCfgId = 42d46b84-3b85-42ad-a057-382fcbae294b
+
+INSERT_UPDATE SnIndexConfiguration ; id[unique=true]       ; name             ; user(uid) ; languages(isocode) ; currencies(isocode);
+                                   ; $snIndexConfiguration ; Backoffice       ; admin     ; $languages         ; $currencies;
+
+INSERT_UPDATE SnIndexType ; indexConfiguration(id) ; id[unique=true] ; name                      ; itemComposedType(code) ; identityProvider
+                          ; $snIndexConfiguration  ; $snIndexType    ; Backoffice Product        ; Product                ; snIdentityProvider
+
+
+INSERT_UPDATE SnField; id[unique = true]  ; $indexedType    ; fieldType(code); valueProvider                                              ; retrievable[default=true]  ; searchable[default=false]  ; localized[default = false]; multiValued[default = false]; useForSuggesting[default=false] ; useForSpellChecking[default = false]; valueProviderParameters[map-delimiter=|]                                                                      ;
+                     ; colour             ;                 ; STRING         ; productClassificationAttributeFormatSnIndexerValueProvider ;                            ;                            ; false                     ;                             ;                                 ;                                     ; classificationAttribute->MarketplaceClassification/1.0/2762.Colour of product, 1766|format->lowerCaseFormat   ;
+                     ; audiorecorder      ;                 ; BOOLEAN        ; productClassificationAttributeFormatSnIndexerValueProvider ;                            ;                            ; false                     ;                             ;                                 ;                                     ; classificationAttribute->MarketplaceClassification/1.0/2760.Audio recorder, 85                                ;
+                     ; height             ;                 ; DOUBLE         ; productClassificationAttributeFormatSnIndexerValueProvider ;                            ;                            ; false                     ;                             ;                                 ;                                     ; classificationAttribute->MarketplaceClassification/1.0/2623.Height, 1464                                      ;
+                     ; weight             ;                 ; DOUBLE         ; productClassificationAttributeFormatSnIndexerValueProvider ;                            ;                            ; false                     ;                             ;                                 ;                                     ; classificationAttribute->MarketplaceClassification/1.0/2623.Weight, 94                                        ;
+                     ; width              ;                 ; DOUBLE         ; productClassificationAttributeFormatSnIndexerValueProvider ;                            ;                            ; false                     ;                             ;                                 ;                                     ; classificationAttribute->MarketplaceClassification/1.0/2623.Width, 1649                                       ;
+
+#% endif:

@@ -1,0 +1,14 @@
+<div class="se-product-row">
+    <div class="se-category-row-container--item">
+        <div class="se-product-row__product" [title]="item.name | seL10n | async">
+            {{ item.name | seL10n | async }}
+        </div>
+        <div class="se-product-row__product" [title]="item.code">{{ item.code }}</div>
+        <div
+            class="se-product-row__catalog"
+            title="{{ item.catalogId }} - {{ item.catalogVersion }}"
+        >
+            {{ item.catalogId }} - {{ item.catalogVersion }}
+        </div>
+    </div>
+</div>

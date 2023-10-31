@@ -1,0 +1,18 @@
+#### 10% Discount on Canon EOS 450D ####
+ProductPercentageDiscountPromotion.10DiscountCanonEOS450D.messageFired=10% ディスカウント受領。<br>このアイテムで {2} の節約
+
+#### Multiby on films ####
+ProductMultiBuyPromotion.MultiBuyElectronics.messageCouldHaveFired={0,number,integer} フィルムを {2} で買って - 資格を得るのに {3,number,integer} を追加
+ProductMultiBuyPromotion.MultiBuyElectronics.messageFired={0,number,integer} を{2} で買えば、{4} の節約
+
+#### Buy One Get One Free on Memory Cards ####
+ProductBOGOFPromotion.BOGOFElectronics.messageCouldHaveFired={0,choice,1#one more item|1<another {0,number,integer} items} を購入し、当ショップの{1,number,integer} を買って {2,number,integer} をゲットの無料提供が得られる資格を手に入れよう
+ProductBOGOFPromotion.BOGOFElectronics.messageFired=このカードは当ショップの {0,number,integer} を買って {1,number,integer} をゲットの無料提供が得られる資格になります - {3} の節約
+
+#### Perfect partner on Digital SLR Camera DSLR-A100H and InfoLITHIUM-Akku battery ####
+ProductPerfectPartnerPromotion.PerfectPartnerElectronics.messageCouldHaveFired=DSLR-A100H を買って、ソニーのバッテリーを{1} でゲット
+ProductPerfectPartnerPromotion.PerfectPartnerElectronics.messageFired=DSLR-A100H を買って、ソニーのバッテリーを {1} でゲット - {3} の節約です
+
+#### Product bundle on HDR-CX105E Red ####
+ProductBundlePromotion.ProductBundleElectronics.messageCouldHaveFired=当ショップで {0,choice,1#one more item|1<another {0,number,integer} items} を買おう<a href='$storefrontContextRoot/Cameras/Hand-held-Camcorders/HDR-CX105E-Red/p/1934406' class='promotion_link'><b>SONY HDR Red</b></a> のパッケージ特売で<a href='$storefrontContextRoot/Components/Power-Supplies/Battery-Chargers/AC-VQP10-CHARGER/p/278688' class='promotion_link'><b>充電器</b></a>と<a href='$storefrontContextRoot/Cameras/Camera-Accessories-Supplies/Tripods/Remote-Control-Tripod-VCT-80AV/p/1687508' class='promotion_link'><b>三脚</b></a> もあわせてたった {2}！
+ProductBundlePromotion.ProductBundleElectronics.messageFired=ビデオカメラの特売セットを {1} で手に入れ、 {3} の節約！

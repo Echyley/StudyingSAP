@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "ES2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "lib": ["dom", "ES2016", "scripthost"],
+        "baseUrl": ".",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "allowJs": true,
+        "noUnusedParameters": false,
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmitOnError": true,
+        "traceResolution": true,
+        "listEmittedFiles": true,
+        "skipLibCheck": true,
+        "pretty": true,
+        "declaration": false,
+        "experimentalDecorators": true
+    },
+    "include": ["src/**/*.ts"]
+}

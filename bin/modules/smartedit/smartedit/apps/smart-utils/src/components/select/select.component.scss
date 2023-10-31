@@ -1,0 +1,59 @@
+.su-select {
+    &,
+    &__popover-control,
+    &__popover-control .fd-dropdown {
+        width: 100%;
+    }
+
+    &__popover-control .fd-dropdown__control {
+        overflow: hidden;
+        color: var(--sapNeutralColor);
+        text-align: left;
+        padding: 0 0.625rem;
+        justify-content: space-between;
+        &:focus {
+            outline: none !important;
+            &:after {
+                border-style: none;
+            }
+        }
+    }
+    &__popover-control .fd-dropdown__control::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        height: 36px;
+        width: 36px;
+        margin-top: 0;
+        font-size: 14px;
+    }
+
+    &__menu .fd-list {
+        max-height: 200px;
+        overflow: auto;
+        .fd-list__title {
+            padding: 0.5rem;
+        }
+    }
+
+    &__menu .fd-list__item[select-highlighted] {
+        background: se-color-state('selected');
+
+        &:focus {
+            outline: none;
+        }
+    }
+    &__popover-control .se-select-arrow {
+        position: absolute;
+        right: 0;
+        border-left-color: inherit;
+        border-left-style: solid;
+        border-left-width: 1px;
+        border-top-left-radius: unset;
+        border-bottom-left-radius: unset;
+    }
+}

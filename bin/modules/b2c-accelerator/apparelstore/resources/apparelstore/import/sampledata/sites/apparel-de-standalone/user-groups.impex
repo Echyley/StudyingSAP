@@ -1,0 +1,154 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$defaultPassword = 12341234
+$defaultLanguage = en
+$defaultCurrency = EUR
+$defaultGroups = customergroup
+$standaloneSiteUid = apparel-de-standalone
+$siteEmployeeGroupUid = apparel-de-standalone-group
+
+INSERT_UPDATE Customer; uid[unique = true]                            ; password[default = $defaultPassword]; name               ; site(uid)          ; customerId                           ; sessionLanguage(isocode)[default = $defaultLanguage]; sessionCurrency(isocode)[default = $defaultCurrency]; groups(uid)[default = $defaultGroups]; loginDisabled[default = true]
+                      ; keenreviewer1@hybris.com|$standaloneSiteUid   ;                                     ; Kenneth Reviewer   ; $standaloneSiteUid ; 344f1889-8621-4c22-a3e8-e05e53210912 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer600@hybris.com|$standaloneSiteUid ;                                     ; Peter Reviewer     ; $standaloneSiteUid ; d0856ec3-07e6-4177-873f-3700f5f85e24 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer800@hybris.com|$standaloneSiteUid ;                                     ; Elizabeth Reviewer ; $standaloneSiteUid ; 29dc307c-bfa5-400f-b7d4-24ff28f6c36f ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer801@hybris.com|$standaloneSiteUid ;                                     ; Dorothy Reviewer   ; $standaloneSiteUid ; 7a8e99f3-9b51-462b-8d46-c78b294e77aa ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer802@hybris.com|$standaloneSiteUid ;                                     ; George Reviewer    ; $standaloneSiteUid ; 2a4906a4-3e8b-49cf-85de-f8f63deccbce ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer803@hybris.com|$standaloneSiteUid ;                                     ; Henry Reviewer     ; $standaloneSiteUid ; 32253cdf-9ad8-40fe-933b-c085e55c0c3f ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer804@hybris.com|$standaloneSiteUid ;                                     ; Nicko Reviewer     ; $standaloneSiteUid ; 49848a3c-6b69-432f-a99f-ffaa92895b21 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer805@hybris.com|$standaloneSiteUid ;                                     ; Kate Reviewer      ; $standaloneSiteUid ; 0285c520-c36e-49c5-bb44-9d91118bf694 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer806@hybris.com|$standaloneSiteUid ;                                     ; Honda Reviewer     ; $standaloneSiteUid ; 546959b3-e486-47d0-80f7-1ac9fe1d2114 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer807@hybris.com|$standaloneSiteUid ;                                     ; Doris Reviewer     ; $standaloneSiteUid ; fecd2071-b293-4f20-827b-750486e81d7f ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer808@hybris.com|$standaloneSiteUid ;                                     ; Brendan Reviewer   ; $standaloneSiteUid ; 6d519bc6-59cd-4d7c-b33b-6d4b7915bcd0 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer809@hybris.com|$standaloneSiteUid ;                                     ; Ken Reviewer       ; $standaloneSiteUid ; 34720729-6216-48af-bdfb-92ef751031b6 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer810@hybris.com|$standaloneSiteUid ;                                     ; Deepak Reviewer    ; $standaloneSiteUid ; 404c8694-8ba0-4afd-93b3-56f1bf0262ea ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer811@hybris.com|$standaloneSiteUid ;                                     ; John Reviewer      ; $standaloneSiteUid ; 1f11f62d-0f4d-4b14-876a-71a1cf519e04 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer812@hybris.com|$standaloneSiteUid ;                                     ; Rick Reviewer      ; $standaloneSiteUid ; 96ec5cac-5500-4e1d-abfb-678ed79c911f ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer813@hybris.com|$standaloneSiteUid ;                                     ; Axel Reviewer      ; $standaloneSiteUid ; 40f58bef-7b9f-417c-9e0a-007121a2f146 ;                                                     ;                                                     ;                                      ;
+                      ; keenreviewer814@hybris.com|$standaloneSiteUid ;                                     ; Flavia Reviewer    ; $standaloneSiteUid ; b526e097-f523-4f5e-bd3c-98a5df12b08d ;                                                     ;                                                     ;                                      ;
+
+
+INSERT_UPDATE SiteEmployeeGroup; uid[unique = true]    ; visibleSite(uid)   ; groups(uid)
+                               ; $siteEmployeeGroupUid ; $standaloneSiteUid ; multisitegroup ;
+
+INSERT_UPDATE Employee; uid[unique = true]                                 ; groups(uid)                                              ; password[default = $defaultPassword]; loginDisabled[default = true]
+"#%beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.hybris.platform.util.Config;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+extensionNames = Registry.getCurrentTenant().getTenantSpecificExtensionNames();
+extensionName = ""customersupportbackoffice"";
+if(!extensionNames.contains(extensionName))
+{
+    LOG.info(""Employee [{}] was skipped because the extension customersupportbackoffice is not included in the setup"", line.get(1));
+    line.clear();
+    break;
+
+}"
+                      ; CustomerSupportAdministrator-apparel-de-standalone ; customersupportadministratorgroup, $siteEmployeeGroupUid ;                                     ;                               
+                      ; CustomerSupportManager-apparel-de-standalone       ; customersupportmanagergroup, $siteEmployeeGroupUid       ;                                     ;                               
+                      ; CustomerSupportAgent-apparel-de-standalone         ; customersupportagentgroup, $siteEmployeeGroupUid         ;                                     ;                               
+
+INSERT_UPDATE Employee; UID[unique = true]                       ; groups(uid)[mode = append]                               ; password[default = $defaultPassword]; loginDisabled[default = true]
+"#%beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.hybris.platform.util.Config;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+extensionNames = Registry.getCurrentTenant().getTenantSpecificExtensionNames();
+extensionName = ""customersupportbackoffice"";
+if(!extensionNames.contains(extensionName))
+{
+    LOG.info(""Employee [{}] was skipped because the extension customersupportbackoffice is not included in the setup"", line.get(1));
+    line.clear();
+    break;
+
+}"
+                      ; CustomerSupportAdministrator-apparel-all ; customersupportadministratorgroup, $siteEmployeeGroupUid ;                                     ;                               
+                      ; CustomerSupportManager-apparel-all       ; customersupportmanagergroup, $siteEmployeeGroupUid       ;                                     ;                               
+                      ; CustomerSupportAgent-apparel-all         ; customersupportagentgroup, $siteEmployeeGroupUid         ;                                     ;                               
+
+                      ; CustomerSupportAdministrator-all         ; customersupportadministratorgroup, $siteEmployeeGroupUid ;                                     ;                               
+                      ; CustomerSupportManager-all               ; customersupportmanagergroup, $siteEmployeeGroupUid       ;                                     ;                               
+                      ; CustomerSupportAgent-all                 ; customersupportagentgroup, $siteEmployeeGroupUid         ;                                     ;                               
+ 
+INSERT_UPDATE PrincipalGroupRelation; source(uid)[unique = true]                    ; target(uid)[unique = true]
+"#%beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.hybris.platform.util.Config;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+extensionNames = Registry.getCurrentTenant().getTenantSpecificExtensionNames();
+    if(!extensionNames.contains(""customersupportbackoffice"") ||  !extensionNames.contains(""assistedserviceservices""))
+    {
+        LOG.info(""Sample data for assistedserviceservices was skipped because the extensions are not included in the setup"");
+        line.clear();
+    }
+"
+                                    ; asagent-apparel-de-standalone                 ; nakanostoreemployees
+                                    ; asagent-apparel-de-standalone                 ; ichikawastoreemployees
+                                    ; keenreviewer800@hybris.com|$standaloneSiteUid ; POS_NAKANO
+                                    ; keenreviewer801@hybris.com|$standaloneSiteUid ; POS_ICHIKAWA
+
+INSERT_UPDATE Employee; uid[unique = true]                    ; groups(uid)                                                           ; loginDisabled[default = true]
+"#%beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.hybris.platform.util.Config;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+extensionNames = Registry.getCurrentTenant().getTenantSpecificExtensionNames();
+    if(!extensionNames.contains(""customersupportbackoffice"") ||  !extensionNames.contains(""assistedserviceservices""))
+    {
+        LOG.info(""Sample data for assistedserviceservices was skipped because the extensions are not included in the setup"");
+        line.clear();
+    }
+"
+                      ; asagent-apparel-de-standalone        ; asagentsalesmanagergroup, customermanagergroup, $siteEmployeeGroupUid ;
+                      ; asagentsales-apparel-de-standalone   ; asagentsalesgroup, $siteEmployeeGroupUid                              ;
+                      ; asagentmanager-apparel-de-standalone ; asagentsalesmanagergroup, $siteEmployeeGroupUid                       ;
+
+INSERT_UPDATE Employee; UID[unique = true] ; groups(uid)[mode = append]                                            ; loginDisabled[default = true]
+"#%beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.hybris.platform.util.Config;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+extensionNames = Registry.getCurrentTenant().getTenantSpecificExtensionNames();
+    if(!extensionNames.contains(""customersupportbackoffice"") ||  !extensionNames.contains(""assistedserviceservices""))
+    {
+        LOG.info(""Sample data for assistedserviceservices was skipped because the extensions are not included in the setup"");
+        line.clear();
+    }
+"
+                      ; asagent-all        ; asagentsalesmanagergroup, customermanagergroup, $siteEmployeeGroupUid ;
+                      ; asagentsales-all   ; asagentsalesgroup, $siteEmployeeGroupUid                              ;
+                      ; asagentmanager-all ; asagentsalesmanagergroup, $siteEmployeeGroupUid                       ;
+
+INSERT_UPDATE CustomerList; uid[unique = true]; implementationType; priority; members(uid)[mode = append]
+"#%beforeEach:
+import de.hybris.platform.core.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import de.hybris.platform.util.Config;
+
+Logger LOG = LoggerFactory.getLogger(""ImpExImportReader"");
+extensionNames = Registry.getCurrentTenant().getTenantSpecificExtensionNames();
+    if(!extensionNames.contains(""customersupportbackoffice"") ||  !extensionNames.contains(""assistedserviceservices""))
+    {
+        LOG.info(""Sample data for assistedserviceservices was skipped because the extensions are not included in the setup"");
+        line.clear();
+    }
+"                                                              ;
+                          ; instoreCustomers  ; "IN_STORE"        ; 3       ; asagent-all, asagent-apparel-de-standalone;
+                          ; bopisCustomers    ; "BOPIS"           ; 2       ; asagent-all, asagent-apparel-de-standalone ;

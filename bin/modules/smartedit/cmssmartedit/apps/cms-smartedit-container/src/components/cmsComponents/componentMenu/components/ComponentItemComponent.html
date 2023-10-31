@@ -1,0 +1,48 @@
+<div
+    class="se-component-item"
+    [ngClass]="{ 'se-component-item--disabled': isComponentDisabled, 'smartEditComponent': !isComponentDisabled }"
+    [attr.data-smartedit-component-id]="componentInfo.uid"
+    [attr.data-smartedit-component-uuid]="componentInfo.uuid"
+    [attr.data-smartedit-component-type]="componentInfo.typeCode"
+>
+    <se-tooltip
+        *ngIf="isComponentDisabled"
+        class="se-component-item__tooltip"
+        [placement]="'bottom'"
+        [triggers]="['mouseenter', 'mouseleave']"
+        [additionalClasses]="['se-component-item__tooltip--for-disabled']"
+    >
+        <div se-tooltip-trigger class="se-component-item--disabled-overlay"></div>
+        <div
+            se-tooltip-body
+            class="se-popover--inner-content"
+            translate="se.cms.component.non.cloneable.tooltip"
+            [translateParams]="{ componentName: componentInfo.name }"
+        ></div>
+    </se-tooltip>
+
+    <div class="se-component-item--image">
+        <span class="sap-icon--card"></span>
+        <div *ngIf="isSharedComponent">
+            <span class="se-component-item--image-shared--background"></span>
+            <span class="sap-icon--chain-link se-component-item--image-shared"></span>
+        </div>
+    </div>
+    <div class="se-component-item--details-container">
+        <div
+            class="se-component-item--details"
+            title="{{ componentInfo.name }} - {{ componentInfo.typeCode }}"
+        >
+            <div class="se-component-item--details-name">{{ componentInfo.name }}</div>
+            <div class="se-component-item--details-type">{{ componentInfo.typeCode }}</div>
+        </div>
+        <se-tooltip
+            *ngIf="!componentInfo.visible"
+            [triggers]="['mouseenter', 'mouseleave']"
+            [additionalClasses]="['se-component-item--visibility']"
+        >
+            <span se-tooltip-trigger class="hyicon hyicon-unpowered"></span>
+            <div se-tooltip-body translate="se.cms.component.display.off.tooltip"></div>
+        </se-tooltip>
+    </div>
+</div>

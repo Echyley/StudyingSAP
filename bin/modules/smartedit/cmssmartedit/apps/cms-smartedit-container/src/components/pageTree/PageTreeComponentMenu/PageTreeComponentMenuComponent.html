@@ -1,0 +1,31 @@
+<div class="se-page-tree-component-menu">
+    <span
+        *ngIf="component.isHidden"
+        class="sap-icon--hide se-page-tree-component-menu--hide"
+        title="{{ 'se.cms.pagetree.component.menu.icon.hide.title' | translate }}"
+    ></span>
+
+    <se-popup-overlay
+        *ngIf="!!leftButton"
+        [popupOverlay]="itemTemplateOverlayWrapper"
+        [popupOverlayTrigger]="canShowTemplate(leftButton) && templateOverlayIsOpen"
+        [popupOverlayData]="{ item: leftButton }"
+        (popupOverlayOnHide)="onHideItemPopup(false)"
+    >
+        <span
+            class="se-page-tree-component-menu--icon"
+            [ngClass]="leftButton.displayIconClass"
+            (click)="triggerMenuItemAction(leftButton, $event)"
+            title="{{ leftButton.i18nKey | translate }}"
+        ></span>
+    </se-popup-overlay>
+
+    <se-popup-overlay [popupOverlay]="moreMenuPopupConfig" [popupOverlayTrigger]="moreMenuIsOpen">
+        <span
+            *ngIf="items && items.length > 0"
+            (click)="toggleMoreMenu()"
+            class="se-page-tree-component-menu--icon sap-icon--overflow"
+            title="{{ 'se.cms.contextmenu.title.more' | translate }}"
+        ></span>
+    </se-popup-overlay>
+</div>

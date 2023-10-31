@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">	
+
+    <!-- SAP common service for order simulation, order creation, order details and Billing Invoice-->
+	<alias name="defaultSapS4OMOutboundService" alias="sapS4OMOutboundService" />
+	<bean id="defaultSapS4OMOutboundService"
+		class=" de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OMOutboundService">
+		<property name="destinationService" ref="destinationService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="s4omRestTemplate" ref="sapS4OMRestTemplate" />
+		<property name="outboundRequestDecorator"	ref="sapS4OMOutboundRequestDecorator" />
+	  	<property name="commonI18NService" ref="commonI18NService" />
+	  	<property name="configurationService" ref="configurationService" />
+	  	<property name="sapMappedDestinationService" ref="sapMappedDestinationService" />
+	  	<property name="baseStoreService" ref="baseStoreService" />
+	 </bean>
+	
+	<alias name="defaultB2BCommercePlaceOrderStrategy" alias="b2bCommercePlaceOrderStrategy"/>
+	<bean name="defaultB2BCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy">
+		<property name="orderService" ref="b2bOrderService"/>
+	</bean>
+	
+	<alias name="s4PlaceOrderStrategy" alias="b2bCommercePlaceOrderStrategy"/>
+    <bean id="s4PlaceOrderStrategy" class="de.hybris.platform.sap.saps4omservices.strategies.S4PlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy">
+        <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+        <property name="sapS4omOutboundService" ref="sapS4OMOutboundService" />
+        <property name="sapS4OMRequestPayloadCreator" ref="sapS4OMRequestPayloadCreator" />
+        <property name="sapS4OMResponseProcessor" ref="sapS4OMResponseProcessor" />
+        <property name="cartService" ref="cartService" />
+        <property name="orderService" ref="b2bOrderService"/>
+        <property name="sapS4OMAvailabilityService" ref="sapS4OMAvailabilityService"/>
+        <property name="sapS4PlaceOrderMethodHooks" ref="sapS4PlaceOrderMethodHooks"/>   
+    </bean>
+    
+    
+    <alias name="defaultSapS4OrderManagementConfigService" alias="sapS4OrderManagementConfigService" />
+	<bean id="defaultSapS4OrderManagementConfigService"
+		class=" de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OrderManagementConfigService">
+		<property name="moduleConfigurationAccess" ref="sapS4OMConfigurationAccess" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<alias name="defaultSapS4omBillingInvoiceServiceImpl" alias="sapBillingInvoiceService" />
+	<bean id="defaultSapS4omBillingInvoiceServiceImpl"
+		class=" de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4omBillingInvoiceServiceImpl" parent="defaultSapBillingInvoiceServiceImpl" >
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="defaultSapS4OMOrderService" ref="defaultSapS4OMOrderService" />
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	</bean>
+	
+	<bean id="sapS4OMConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="saps4omservices" />		
+	</bean>
+   
+    <alias name="sapS4OrderUtil" alias="s4OrderUtil"/>
+    <bean id="sapS4OrderUtil" class="de.hybris.platform.sap.saps4omservices.utils.SapS4OrderUtil">
+        <property name="userService" ref="userService" />
+        <property name="b2bUnitService" ref="b2bUnitService" />
+        <property name="baseStoreService" ref="baseStoreService" />
+    </bean>
+    
+    <alias alias="orderCancelCallbackService" name="s4OrderCancelService"/>
+	<alias alias="orderCancelService" name="s4OrderCancelService"/>
+	<bean id="s4OrderCancelService"
+	      class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OrderCancelService" parent="defaultOrderCancelService">
+	      <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	 </bean>
+    
+    <alias alias="sapS4OMResponseProcessor" name="defaultSapS4OMResponseProcessor"/>
+    <bean id="defaultSapS4OMResponseProcessor"
+          class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OMResponseProcessor" >
+          	<property name="baseStoreService" ref="baseStoreService" />
+          	<property name="sapUnitService" ref="sapUnitService"/>	
+          	<property name="responsePayloadModifierHooks" ref="responsePayloadModifierHooks"/>
+          	<property name="sessionService" ref="sessionService"/>
+          	<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService"/>
+    </bean>
+    
+    <alias alias="sapS4OMRequestPayloadCreator" name="defaultSapS4OMRequestPayloadCreator"/>
+    <bean id="defaultSapS4OMRequestPayloadCreator"
+          class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OMRequestPayloadCreator" >
+          <property name="sapS4OrderUtil" ref="s4OrderUtil" />
+		  <property name="deliveryService" ref="deliveryService" />
+		  <property name="userService" ref="userService" />
+		  <property name="baseStoreService" ref="baseStoreService" />
+		  <property name="commonI18NService" ref="commonI18NService" />
+		  <property name="requestPayloadModifierHooks" ref="requestPayloadModifierHooks"/>
+          <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+    </bean>
+    
+    <alias name="defaultSapS4OMOrderService" alias="customerAccountService"/>
+	<bean id="defaultSapS4OMOrderService" class="de.hybris.platform.sap.saps4omservices.order.services.impl.DefaultSapS4OMOrderService"
+		parent="defaultCustomerAccountService">
+		<property name="sapS4OMOutboundService" ref="sapS4OMOutboundService" />
+		<property name="sapS4OMOrderFilterBuilder" ref="sapS4OMOrderFilterBuilder" />
+		<property name="sapS4OrderConverter" ref="sapS4OrderConverter" /> 
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+		<property name="orderListSortMap" ref="s4OMOrderListSortMap" />
+		<property name="sapS4OrderUtil" ref="s4OrderUtil" />
+	</bean>
+    
+    <!-- Converter and Populator -->
+	<alias name="sapS4DefaultOrderConverter" alias="sapS4OrderConverter" />
+	<bean id="sapS4DefaultOrderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.core.model.order.OrderModel" />
+		<property name="populators">
+			<list>
+				<ref bean="sapS4OMOrderPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultSapS4OMOrderPopulator" alias="sapS4OMOrderPopulator" />
+	<bean id="defaultSapS4OMOrderPopulator"
+          class="de.hybris.platform.sap.saps4omservices.order.populator.DefaultSapS4OMOrderPopulator">
+        <property name="userService" ref="userService"/>
+        <property name="customerService" ref="customerService" />
+        <property name="productService" ref="productService"/>
+        <property name="baseStoreService" ref="baseStoreService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+        <property name="b2bUnitService" ref="b2bUnitService"/>
+        <property name="b2bCostCenterService" ref="b2bCostCenterService" />
+        <property name="sapUnitService" ref="sapUnitService"/>	
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="guidKeyGenerator" ref="guidKeyGenerator"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="sapS4OMOrderStatusMap" ref="sapS4OMOrderStatusMap"/>
+        <property name="sapS4OMConsignmentEntryStatusMap" ref="sapS4OMConsignmentEntryStatusMap"/>
+        <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService"/>
+    </bean>
+
+    <alias alias="sapS4SalesOrderSimulationService" name="defaultSapS4SalesOrderSimulationService" />
+	<bean id="defaultSapS4SalesOrderSimulationService"
+		class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4SalesOrderSimulationService">
+		<property name="sapS4OMOutboundService" ref="sapS4OMOutboundService" />
+		<property name="sapS4OMRequestPayloadCreator" ref="sapS4OMRequestPayloadCreator" />	
+		<property name="sapS4OMResponseProcessor" ref="sapS4OMResponseProcessor" />	
+		<property name="sapS4OMProductAvailabilityCache" ref="sapS4OMProductAvailabilityCache" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+		
+	</bean>
+		<alias alias="sapS4OMProductAvailabilityCache" name="sapS4OMProductAvailabilityCacheImpl" />
+		<bean id="sapS4OMProductAvailabilityCacheImpl"
+		class="de.hybris.platform.sap.core.saps4omservices.cache.service.impl.SapS4OMProductAvailabilityCache">
+		<property name="sapS4OMAtpCheckAvailabilityCacheRegion" ref="sapS4OMAtpCheckAvailabilityCacheRegion" />
+	</bean>
+	
+	<alias alias="sapS4OMAvailabilityService" name="defaultSAPS4OMAvailabilityService"/>
+	<bean id="defaultSAPS4OMAvailabilityService" 
+		class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSAPS4OMAvailabilityService">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="sapS4SalesOrderSimulationService" ref="sapS4SalesOrderSimulationService" />
+		<property name="sapS4OMProductAvailabilityCache" ref="sapS4OMProductAvailabilityCache" />
+	</bean>
+	
+ 	<alias alias="s4omPricingService" name="sapS4OMDefaultPricingService"/>
+	<bean id="sapS4OMDefaultPricingService" class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultPricingService">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="sapS4SalesOrderSimulationService" ref="sapS4SalesOrderSimulationService" />
+		<property name="sapS4OMSalesPricingCacheRegion" ref="sapS4OMSalesPricingCacheRegion" />
+		<property name="moduleConfigurationAccess" ref="sapPricingConfigurationAccess" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="sapS4OrderUtil" ref="s4OrderUtil" />		
+	</bean>   
+	
+	<alias alias="futureStockService" name="defaultS4OMSapFutureStockService"/>
+	<bean id="defaultS4OMSapFutureStockService" parent="defaultFutureStockService" class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapFutureStockService">
+	      <property name="sapS4OMAvailabilityService" ref="sapS4OMAvailabilityService" />  
+	      <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	</bean>
+
+	<alias alias="calculationService" name="sapS4OMCartCalculationService" />
+	<bean id="sapS4OMCartCalculationService"
+		class="de.hybris.platform.sap.saps4omservices.services.impl.SapCartCalculationService"
+		parent="defaultCalculationService">
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+		<property name="sapS4SalesOrderSimulationService" ref="sapS4SalesOrderSimulationService" />
+		<property name="sapS4OMPricingService" ref="s4omPricingService" />
+	</bean>
+
+	<alias alias="stockService" name="sapS4OMLiveStockService"/>
+	<bean id="sapS4OMLiveStockService" class="de.hybris.platform.sap.saps4omservices.services.impl.SapLiveStockService" parent="defaultStockService">
+		<property name="sapS4SalesOrderSimulationService" ref="sapS4SalesOrderSimulationService" />
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+			<property name="userService" ref="userService" />
+			<property name="b2bUnitService" ref="b2bUnitService" />
+			<property name="sapS4OMProductAvailabilityCache" ref="sapS4OMProductAvailabilityCache" />
+			<property name="sapS4OMAvailabilityService" ref="sapS4OMAvailabilityService" />	
+	</bean>
+	
+	
+	<alias name="sapS4OMExternalTaxesService" alias="externalTaxesService" />
+	<bean id="sapS4OMExternalTaxesService"
+		class="de.hybris.platform.sap.saps4omservices.services.impl.SapExternalTaxesService" parent="defaultExternalTaxesService">
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	</bean>
+	
+	<alias alias="priceService" name="liveSapS4OMPricingCatalogService" />
+	<bean id="liveSapS4OMPricingCatalogService"
+		class="de.hybris.platform.sap.saps4omservices.services.impl.LiveSapPricingCatalogService" parent="netPriceService">
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+		<property name="sapS4OMPricingService" ref="s4omPricingService" />
+
+	</bean>
+	
+	
+	<bean id="sapPricingConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="saps4omservices" />		
+	</bean>
+	
+
+    <!-- redefine commerceStockService -->	
+	<alias alias="commerceStockService" name="defaultSapS4OMProductAvailabilityService"/>
+	<bean id="defaultSapS4OMProductAvailabilityService" parent="defaultCommerceStockService" class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OMProductAvailabilityService">	
+	     <property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />	
+	     <property name="sapS4OMAvailabilityService" ref="sapS4OMAvailabilityService" />
+	</bean>
+    
+ 	    
+	<alias alias="sapS4OMRestTemplate" name="defaultSAPS4OMRestTemplate" />
+	<bean id="defaultSAPS4OMRestTemplate" class="org.springframework.web.client.RestTemplate" />
+	
+	<alias alias="s4OMOrderListSortMap" name="defaultS4OMOrderListSortMap" />
+    <util:map id="defaultS4OMOrderListSortMap"
+		map-class="java.util.HashMap" key-type="java.lang.String"
+		value-type="java.lang.String">
+		<entry key="byDate" value="SalesOrderDate" />
+		<entry key="byOrderNumber" value="SalesOrder" />
+	</util:map>
+	
+	<alias alias="sapS4OMOrderFilterBuilder" name="defaultSapS4OMOrderFilterBuilder" />
+	<bean id="defaultSapS4OMOrderFilterBuilder" class="de.hybris.platform.sap.saps4omservices.order.services.impl.DefaultSapS4OMOrderFilterBuilder">
+		<property name="sapS4OrderUtil" ref="s4OrderUtil" />
+		<property name="sapS4OMOrderFilterBuilderHooks" ref="sapS4OMOrderFilterBuilderHooks"/>
+		<property name="configurationService" ref="configurationService"/>
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+	
+	<util:list id="sapS4OMOrderFilterBuilderHooks"
+               value-type="de.hybris.platform.sap.saps4omservices.order.services.SapS4OMOrderFilterBuilderHook"/>
+          
+ 	<alias name="defaultSapS4OMPassportService" alias="sapS4OMPassportService" />
+	<bean id="defaultSapS4OMPassportService" class="de.hybris.platform.sap.saps4omservices.services.impl.DefaultSapS4OMPassportService">
+	    <property name="configuration" ref="integrationServicesConfiguration" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultSapS4OMPassportRequestDecorator" alias="sapS4OMPassportRequestDecorator" />
+	<bean id="defaultSapS4OMPassportRequestDecorator" class="de.hybris.platform.sap.saps4omservices.decorator.impl.DefaultSapS4OMPassportRequestDecorator">
+		<property name="sapS4OMPassportService" ref="sapS4OMPassportService" />
+	</bean>
+
+	<util:list id="sapS4OMOutboundRequestDecorator" value-type="de.hybris.platform.sap.saps4omservices.decorator.SAPS4OMOutboundRequestDecorator">
+		<ref bean="defaultSapS4OMPassportRequestDecorator" />
+	</util:list>
+	
+	<util:list id="requestPayloadModifierHooks" value-type="de.hybris.platform.sap.saps4omservices.services.RequestPayloadModifierHook">
+	</util:list>
+	
+	<util:list id="responsePayloadModifierHooks" value-type="de.hybris.platform.sap.saps4omservices.services.ResponsePayloadModifierHook">
+	</util:list>
+	
+	<bean id="commercePlaceCreditCheckMethodHookMergeDirective" depends-on="sapS4PlaceOrderMethodHooks" parent="listMergeDirective">
+        <property name="add" ref="sapS4OMPlaceOrderCreditCheckMethodHook"/>
+    </bean>
+    <util:list id="sapS4PlaceOrderMethodHooks" value-type="de.hybris.platform.sap.saps4omservices.order.hook.SapS4OMPlaceOrderCreditCheckMethodHook">
+	</util:list>
+	<bean id="sapS4OMPlaceOrderCreditCheckMethodHook" class="de.hybris.platform.sap.saps4omservices.order.hook.SapS4OMPlaceOrderCreditCheckMethodHook">
+	    <property name="userService" ref="userService" />
+    	<property name="sapS4SalesOrderSimulationService" ref="sapS4SalesOrderSimulationService" />
+    	<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />    	
+	</bean>
+	
+	<alias name="defaultSapS4OMB2BOrderService" alias="b2bOrderService"/>
+	<bean id="defaultSapS4OMB2BOrderService" class="de.hybris.platform.sap.saps4omservices.order.services.impl.DefaultSapS4OMB2BOrderService"
+		parent="defaultB2BOrderService">
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	 	<property name="customerAccountService" ref="customerAccountService" />
+  		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+	
+	<alias name="defaultSapS4OMOrderStatusMap" alias="sapS4OMOrderStatusMap" />
+	<util:map id="defaultSapS4OMOrderStatusMap" key-type="java.lang.String" value-type="de.hybris.platform.core.enums.OrderStatus">
+		<entry key="A" value="OPEN" />
+		<entry key="B" value="IN_PROCESS" />
+		<entry key="C" value="COMPLETED" />
+	</util:map>
+	
+	<alias name="defaultSapS4OMConsignmentEntryStatusMap" alias="sapS4OMConsignmentEntryStatusMap" />
+	<util:map id="defaultSapS4OMConsignmentEntryStatusMap" key-type="java.lang.String" value-type="de.hybris.platform.sap.sapmodel.enums.ConsignmentEntryStatus">
+		<entry key="A" value="READY" />
+		<entry key="B" value="READY" />
+		<entry key="C" value="SHIPPED" />
+	</util:map>
+	
+	<alias name="defaultSapS4OMCartEarliestRetrievalDateHook" alias="sapS4OMCartEarliestRetrievalDateHook"/>
+	<bean id="defaultSapS4OMCartEarliestRetrievalDateHook" class="de.hybris.platform.sap.saps4omservices.order.hook.DefaultSapS4OMCartEarliestRetrievalDateHook">
+		<property name="sapS4OrderManagementConfigService" ref="sapS4OrderManagementConfigService" />
+	 	<property name="sessionService" ref="sessionService" />
+  		<property name="sapS4OrderUtil" ref="s4OrderUtil" />
+	</bean>
+	
+	<bean id="sapS4OMCartEarliestRetrievalDateMergeDirective" depends-on="cartEarliestRetrievalDateHooks" parent="listMergeDirective">
+        <property name="add" ref="sapS4OMCartEarliestRetrievalDateHook"/>
+    </bean>
+</beans>

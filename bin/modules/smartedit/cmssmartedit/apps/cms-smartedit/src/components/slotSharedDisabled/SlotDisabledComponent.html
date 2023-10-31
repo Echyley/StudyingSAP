@@ -1,0 +1,24 @@
+<div
+    class="se-slot-popover"
+    [ngClass]="{ 
+        'disabled-shared-slot': !isVersioningPerspective,
+        'disabled-shared-slot-hovered': active, 
+        'disabled-shared-slot-versioning-mode': isVersioningPerspective, 
+        'external-shared-slot': isGlobalSlot
+    }"
+    [attr.data-popover-content]="popoverMessage?.translate | translate: popoverMessage?.translateParams"
+>
+    <div class="se-slot-popover__arrow">
+        <div class="se-slot-popover__arrow--fill"></div>
+    </div>
+    <div
+        class="disabled-shared-slot__icon--outer disabled-shared-slot__icon--outer-linked"
+        [ngClass]="outerSlotClass"
+    >
+        <span
+            class="shared_slot_disabled_icon disabled-shared-slot__icon--inner"
+            [ngClass]="iconClass"
+        >
+        </span>
+    </div>
+</div>

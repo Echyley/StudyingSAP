@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+<bean class="de.hybris.platform.sap.saps4omocc.scheduleline.dto.ScheduleLineWsDTO">
+		<description>List of ScheduleLine</description>
+		<hints>
+			<hint name="wsRelated"/>
+			<hint name="alias">ScheduleLine</hint>
+		</hints>
+		<property name="confirmedQuantity" type="Integer">
+		<description>Scheduled Quantity</description>
+            <hints>
+                <hint name="example">16</hint>
+                <hint name="default">0</hint>
+                <hint name="allowEmptyValue">false</hint>
+            </hints>  
+        </property>     
+		<property name="confirmedAt" type="java.util.Date">
+		<description>Scheduled Date</description>
+            <hints>
+                <hint name="example">2022-03-23T00:00:00+0000</hint>
+            </hints>  
+        </property>  
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO">
+		<property name="scheduleLines"
+		          type="java.util.List&lt;de.hybris.platform.sap.saps4omocc.scheduleline.dto.ScheduleLineWsDTO>">
+		<description>List of ScheduleLine</description>        
+		</property>
+          
+	</bean>
+</beans>

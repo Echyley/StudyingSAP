@@ -1,0 +1,66 @@
+<div *ngIf="isReady">
+    <div class="form-group">
+        <label
+            for="page-condition-selector-id"
+            class="se-control-label"
+            translate="se.cms.page.condition.selection.label"
+        ></label>
+        <se-select
+            id="page-condition-selector-id"
+            [model]="conditionSelected.label"
+            (modelChange)="onConditionChange($event)"
+            [fetchStrategy]="conditionSelectorFetchStrategy"
+            [onChange]="onDataChange"
+            [searchEnabled]="false"
+        >
+        </se-select>
+        <span class="se-form-help-message">
+            <span [translate]="conditionSelected.description"></span>
+        </span>
+    </div>
+
+    <div *ngIf="showPrimarySelector()" class="form-group">
+        <label
+            for="page-condition-primary-selector-id"
+            class="se-control-label"
+            translate="se.cms.page.condition.primary.association.label"
+        ></label>
+        <se-select
+            id="page-condition-primary-selector-id"
+            [model]="primarySelectedModel"
+            (modelChange)="primarySelectedModelOnChange($event)"
+            [fetchStrategy]="primaryPageChoicesFetchStrategy"
+            [onChange]="onDataChange"
+        >
+        </se-select>
+        <span *ngIf="primarySelected?.label" class="se-form-help-message">
+            <span>{{ 'se.cms.page.label.label' | translate }}: {{ primarySelected.label }}</span>
+        </span>
+    </div>
+
+    <div *ngIf="showHomePageWidget()">
+        <div class="fd-form__item">
+            <input
+                type="checkbox"
+                id="set-homepage-checkbox"
+                class="se-component-item--details se-component-homepage__checkbox-input fd-form__control"
+                name="clone-on-drop"
+                (ngModelChange)="onHomePageChange($event)"
+                [ngModel]="homepage"
+            />
+            <label
+                class="se-control-label se-component-homepage--label fd-form__label"
+                for="set-homepage-checkbox"
+                translate="se.cms.display.conditions.homepage.set"
+            ></label>
+        </div>
+        <label
+            class="se-control-label se-component-homepage--label"
+            for="set-homepage-checkbox"
+            *ngIf="showReplaceLabel"
+        >
+            {{ "se.cms.display.conditions.homepage.replace" | translate: { currentHomepage:
+            currentHomePageName } }}
+        </label>
+    </div>
+</div>

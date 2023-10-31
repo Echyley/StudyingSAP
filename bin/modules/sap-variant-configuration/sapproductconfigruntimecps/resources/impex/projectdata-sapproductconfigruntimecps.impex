@@ -1,0 +1,38 @@
+######################################################### 
+# Import example data below, only no data exists so far # 
+#########################################################
+
+#% if: de.hybris.platform.core.Registry.getApplicationContext().getBean(de.hybris.platform.servicelayer.search.FlexibleSearchService.class).search("SELECT * FROM {DestinationTarget} where {id}='sapproductconfiguration'").getCount() == 0;
+
+                                
+#************  OAuth CredentialS ******************************************************************************************#
+
+INSERT ConsumedOAuthCredential; id[unique = true]          ; clientId                ; clientSecret         ; oAuthUrl
+                                     ; credential.configuration   ; clientIdConfiguration   ; secretConfiguration  ; oauthUrlConfiguration
+                                     ; credential.masterData      ; clientIdMasterData      ; secretMasterData     ; oauthUrlMasterData
+                                     ; credential.pricing         ; clientIdPricing         ; secretPricing        ; oauthUrlPricing
+                                     ; credential.kbDetermination ; clientIdKbDetermination ; secretKbDetermination; oauthUrlKbDetermination
+                                    
+
+#************  Endpoints **************************************************************************************************#
+
+INSERT Endpoint; id[unique = true]    ; version[unique = true]; name           ; specUrl
+                      ; ConfigurationEndpoint   ; n.a            ; Configuration  ; "n.a"
+                      ; MasterDataEndpoint      ; n.a            ; MasterData     ; "n.a"
+                      ; PricingEndpoint         ; n.a            ; Pricing        ; "n.a"
+                      ; KbDeterminationEndpoint ; n.a            ; KbDetermination; "n.a"
+
+
+#************  Destinations************************************************************************************************#
+
+INSERT DestinationTarget; id[unique=true]
+; sapproductconfiguration
+ 
+
+INSERT ConsumedDestination; id[unique = true]          ; url                                ; endpoint(id, version)       ; credential(id)             ;additionalProperties(key,value)[map-delimiter=|]                                                                  ;destinationTarget(id)[default=sapproductconfiguration]
+                                 ; configurationDestination   ; "https://serverConfiguration/v=1"  ; ConfigurationEndpoint:n.a   ; credential.configuration   ;clientClassName->ConfigurationClient|oauth.scope->uaa.resource|sapproductconfigruntimecps.charon.timeout->15000   ;
+                                 ; masterDataDestination      ; "https://serverMasterData/v=1"     ; MasterDataEndpoint:n.a      ; credential.masterData      ;clientClassName->MasterDataClient|oauth.scope->uaa.resource|sapproductconfigruntimecps.charon.timeout->15000      ;
+                                 ; pricingDestination         ; "https://serverPricing/v=1"        ; PricingEndpoint:n.a         ; credential.pricing         ;clientClassName->PricingClient|oauth.scope->uaa.resource|sapproductconfigruntimecps.charon.timeout->15000         ;
+                                 ; kbDeterminationDestination ; "https://serverKbDetermination/v=1"; KbDeterminationEndpoint:n.a ; credential.kbDetermination ;clientClassName->KbDeterminationClient|oauth.scope->uaa.resource|sapproductconfigruntimecps.charon.timeout->15000 ; 
+                                 
+#% endif:       

@@ -1,0 +1,55 @@
+$lang=hi
+
+#% if: de.hybris.platform.servicelayer.i18n.util.LanguageUtils.isLanguagePresent("$lang")
+
+### Conditions
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;कॉन्फ़िगर करने योग्य उत्पाद
+;productconfig_customer_category;ग्राहक
+
+UPDATE RuleConditionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_in_cart;कार्ट में निर्दिष्ट कॉन्फ़िगरेशन के साथ उत्पाद;कार्ट में उत्पाद {उत्पाद} शामिल है. विशिष्टता {विशिष्टता} {value_operator} मान {cstic_value}.
+;y_configurable_product;उत्पाद आप वर्तमान रूप से कॉन्फ़िगर कर रहे हैं;वर्तमान में आप इस उत्पाद {उत्पाद} को कॉन्फ़िगर कर रहें है. विशिष्टता {विशिष्टता} {value_operator} मान {cstic_value}.
+;y_configurable_product_customer;ग्राहक;ग्राहक {customers_operator} निम्नलिखित सूची\: {ग्राहक}
+;y_configurable_product_customer_group;ग्राहक समूह;ग्राहक {customer_groups_operator} निम्नलिखित समूहों से है\: {customer_groups}
+;y_configurable_product_customer_support_mode;ग्राहक समर्थन;सहायक सेवा सत्र सक्रिय है\: {value}
+
+UPDATE RuleConditionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_in_cart;product;उत्पाद;कार्ट में उत्पाद;Item Type (Product)
+;y_configurable_product_in_cart;cstic;विशिष्टता;विशिष्टता नाम
+;y_configurable_product_in_cart;value_operator;ऑपरेटर;विशिष्टता और मान के बीच स्थित ऑपरेटर
+;y_configurable_product_in_cart;cstic_value;मान;विशिष्टता मान नाम;for numeric values, use the US American number format (xxx,xxx.xx) with mandatory group separators
+;y_configurable_product;product;उत्पाद;उत्पाद आप वर्तमान रूप से कॉन्फ़िगर कर रहे हैं
+;y_configurable_product;cstic;विशिष्टता;विशिष्टता नाम
+;y_configurable_product;value_operator;ऑपरेटर;विशिष्टता और मान के बीच स्थित ऑपरेटर
+;y_configurable_product;cstic_value;मान;विशिष्टता मान नाम
+;y_configurable_product_customer;customers_operator;ग्राहक चयन ऑपरेटर;सूची में ग्राहक है या नहीं इस बात को निर्धारित करता है
+;y_configurable_product_customer;customers;ग्राहक;ग्राहकों की सूची
+;y_configurable_product_customer_group;customer_groups_operator;ग्राहक समूह चयन ऑपरेटर;सभी या किसी एक ग्राहक समूह में ग्राहक शामिल है या नहीं इस बात को निर्धारित करता है
+;y_configurable_product_customer_group;customer_groups;ग्राहक समूह;ग्राहक समूहों की सूची
+;y_configurable_product_customer_support_mode;value;सहायता सेवा सत्र सक्रीय है;ग्राहक के द्वारा एक ग्राहक समर्थन एजेंट लॉग इन है
+
+### Actions
+UPDATE RuleActionDefinitionCategory;id[unique=true];name[lang=$lang]
+;productconfig;कॉन्फ़िगर करने योग्य उत्पाद
+
+UPDATE RuleActionDefinition;id[unique=true];name[lang=$lang];breadcrumb[lang=$lang]
+;y_configurable_product_set_cstic_value;कॉन्फ़िगर करने योग्य उत्पाद के लिए विशिष्टता मान सेट करें;विशिष्टता {विशिष्टता} के लिए मान {cstic_value} सेट करें
+;y_configurable_product_remove_assignable_value;कॉन्फ़िगर योग्य उत्पाद के लिए असाइन करने योग्य मान छिपाएं;विशिष्टता {cstic} के लिए मान {cstic_value} छिपाएं
+;y_configurable_product_hide_cstic;कॉन्फ़िगर करने योग्य उत्पाद के लिए विशिष्टता छिपाएं;विशिष्टता छिपाएं {विशिष्टता}
+;y_configurable_product_display_cstic_readonly;केवल पठन-योग्य रूप में कॉन्फ़िगर करने योग्य उत्पाद के लिए विशिष्टता प्रदर्शित करें;केवल पठन-योग्य रूप में विशिष्टता {विशिष्टता} प्रदर्शित करें
+;y_configurable_product_display_message;संदेश प्रदर्शित करें;संदेश प्रदर्शित करें
+
+UPDATE RuleActionDefinitionParameter;definition(id)[unique=true];id[unique=true];name[lang=$lang];description[lang=$lang]
+;y_configurable_product_set_cstic_value;cstic;विशिष्टता;विशिष्टता जिसके लिए मान सेट है
+;y_configurable_product_set_cstic_value;cstic_value;मान;विशिष्टता मान सेट किया जाएगा
+;y_configurable_product_remove_assignable_value;cstic;विशिष्टता;विशिष्टता जिसके लिए असाइनयोग्य मान निकाली जाएगी
+;y_configurable_product_remove_assignable_value;cstic_value;मान;मान असाइनयोग्य मानों की सूची से निकाला जाएगा
+;y_configurable_product_hide_cstic;cstic;विशिष्टता;छिपाएं जाने वाली विशिष्टता
+;y_configurable_product_display_cstic_readonly;cstic;विशिष्टता;केवल पठन-योग्य रूप में प्रदर्शित की जाने वाली विशिष्टता
+;y_configurable_product_display_message;message;संदेश;संदेश टेक्स्ट
+;y_configurable_product_display_message;message_severity;गंभीरता;संदेश की गंभीरता
+;y_configurable_product_display_message;cstic;विशिष्टता;जिसके लिए यह संदेश दिखाई देने वाला है उसके लिए विशिष्टता
+;y_configurable_product_display_message;cstic_value;विशिष्टता मान;जिसके लिए यह संदेश दिखाई देने वाला है उसके लिए विशिष्टता मान
+
+#% endif:

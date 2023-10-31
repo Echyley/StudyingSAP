@@ -1,0 +1,10 @@
+.yw-labelstyle
+{
+	color: var(--bo-text-color);
+}
+
+.ybackoffice-container {
+	background: var(--bo-base-background);
+	font-family: var(--bo-font-family);
+	font-size:  var(--bo-font-size);
+}

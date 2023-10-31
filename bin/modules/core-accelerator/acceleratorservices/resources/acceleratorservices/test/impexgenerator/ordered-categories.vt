@@ -1,0 +1,4 @@
+#set ( $ordered = $query.load('ordered-categories') )
+#foreach( $row in $ordered )
+ ;$row.key;$row.values.name; 
+#end

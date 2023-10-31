@@ -1,0 +1,54 @@
+@import "cockpitng-globals.scss";
+
+/*Icons for explorer tree */
+div.yw-explorerTree {
+    .y-tree-icon-hmc_type_tree_solrfacetsearchconfig .y-tree-icon {
+       font-family: 'SAP-icons';
+       content: "\e6c3";
+    }
+
+    .y-tree-icon-hmc_type_tree_solrindexedtype .y-tree-icon {
+       font-family: 'SAP-icons';
+       content: "\xe260";
+    }
+
+    .y-tree-icon-hmc_type_tree_solrvaluerangeset .y-tree-icon {
+       font-family: 'SAP-icons';
+       content: "\e6c6";
+    }
+
+    .y-tree-icon-SolrIndexerOperationWizard .y-tree-icon {
+       font-family: 'SAP-icons';
+       content: "\e6c5";
+    }
+
+    .y-tree-icon-SolrIndexerHotUpdateWizard .y-tree-icon {
+       font-family: 'SAP-icons';
+       content: "\e6c4";
+    }
+
+    .y-tree-icon-SolrIndexedCoresRecord .y-tree-icon {
+       font-family: 'SAP-icons';
+       content: "\xe09d";
+    }
+}
+
+/* Icons for buttons */
+button {
+    &.export-solr-configuration-btn {
+        height: 30px;
+        width: 160px;
+        background-repeat: no-repeat;
+        background-position: 5px 50%;
+        margin-bottom: 15px
+    }
+
+    &.indexerhotupdate-btn,
+    &.indexeroperations-btn {
+        height: 30px;
+        width: 250px;
+        background-repeat: no-repeat;
+        background-position: 5px 50%;
+        margin-bottom: 15px
+    }
+}

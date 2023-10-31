@@ -1,0 +1,32 @@
+<div *seHasOperationPermission="deletePagePermission">
+    <div class="se-dropdown-item__delete-wrapper">
+        <div
+            class="se-dropdown-item__delete-link-wrapper"
+            [ngClass]="{'se-dropdown-item__delete-link-wrapper--disabled': !isDeletePageEnabled}"
+        >
+            <a
+                fd-list-link
+                class="se-dropdown-item se-dropdown-item__delete"
+                [ngClass]="{'se-dropdown-item--disabled': !isDeletePageEnabled}"
+                (click)="isDeletePageEnabled && onClickOnDeletePage()"
+            >
+                <span
+                    class="se-dropdown-item--label"
+                    translate="se.cms.actionitem.page.trash"
+                ></span>
+            </a>
+        </div>
+        <se-tooltip
+            *ngIf="!isDeletePageEnabled"
+            class="se-dropdown-item__delete-page-popover"
+            [placement]="'left'"
+            [triggers]="['mouseenter', 'mouseleave']"
+            [isChevronVisible]="true"
+        >
+            <span se-tooltip-trigger class="sap-icon--message-error"></span>
+            <div se-tooltip-body class="popover-tooltip">
+                <span [translate]="tooltipMessage"></span>
+            </div>
+        </se-tooltip>
+    </div>
+</div>

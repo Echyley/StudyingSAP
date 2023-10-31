@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+# -----------------------------------------------------------------------
+
+"#% impex.setValidationMode(""import_relaxed"");"
+
+
+$lang=id
+$typeCode=type(code)[default='Product'];
+$active=active[allownull=true,default=true];
+
+INSERT_UPDATE NotNullConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductNameNotNullForAllLocalesConstraint;;;Atribut "Pengidentifikasi" harus berisi nilai untuk semua bahasa.;
+
+INSERT_UPDATE SizeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductEurope1PricesSizeConstraint;;;Atribut "Harga" harus berisi minimal 1 elemen.;
+;ProductSupercategoriesSizeConstraint;;;Atribut “Superkategori” harus berisi minimal 1 elemen.;
+;ProductGalleryImagesSizeConstraint;;;Atribut "Gambar Galeri" harus berisi minimal 1 elemen.;
+;ProductReferencesSizeConstraint;;;Atribut "Referensi Produk" harus berisi minimal 1 elemen.;
+
+INSERT_UPDATE NotEmptyConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductCodeNotEmptyConstraint;;;Atribut "Nomor Artikel" tidak boleh kosong.;
+;ProductDescriptionNotEmptyConstraint;;;Atribut "Deskripsi" tidak boleh kosong.;
+;ProductEanNotEmptyConstraint;;;Atribut "EAN" tidak boleh kosong.;
+
+INSERT_UPDATE HybrisEnumValueCodeConstraint;id[unique=true];$typeCode;$active;message[lang=$lang];
+;ProductApprovedHybrisEnumValueCodeConstraint;;;Nilai atribut untuk "Persetujuan" harus "disetujui".;

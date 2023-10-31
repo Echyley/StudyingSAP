@@ -1,0 +1,37 @@
+import { ElementRef } from '@angular/core';
+import { CrossFrameEventService, PolyfillService, SystemEventService } from 'smarteditcommons';
+import { SakExecutorService } from './SakExecutorService';
+export declare class SmarteditElementComponent {
+    private elementRef;
+    private sakExecutorService;
+    private systemEventService;
+    private crossFrameEventService;
+    private polyfillService;
+    smarteditComponentId: string;
+    smarteditComponentUuid: string;
+    smarteditComponentType: string;
+    smarteditContainerId: string;
+    smarteditContainerType: string;
+    active: boolean;
+    private componentDecoratorEnabled;
+    private projectedContent;
+    private bundle;
+    private unregisterPerspectiveChangeEvent;
+    private unregisterPerspectiveRefreshedEvent;
+    private unregisterComponentUpdatedEvent;
+    private unregisterDnDEnd;
+    private unregisterDnDStart;
+    private mousenterListener;
+    private mouseleaveListener;
+    constructor(elementRef: ElementRef, sakExecutorService: SakExecutorService, systemEventService: SystemEventService, crossFrameEventService: CrossFrameEventService, polyfillService: PolyfillService);
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    private removeDecorators;
+    private appendDecorators;
+    private onComponentUpdated;
+    private propagateActiveStateToChildren;
+    private getUuid;
+    private get uuid();
+    private get element();
+}

@@ -1,0 +1,11 @@
+$integrationClass = integrationObjectClass(integrationObject(code), code)
+INSERT_UPDATE IntegrationObject; code[unique = true]
+                               ; Pojo_IO_S10
+INSERT_UPDATE IntegrationObjectClass; integrationObject(code)[unique = true]; code[unique = true]   ; type(code)                                             ; root
+                                    ; Pojo_IO_S10                           ; Product               ; de.hybris.platform.core.model.product.ProductModel     ; true
+
+INSERT_UPDATE IntegrationObjectClassAttribute; $integrationClass[unique = true]; attributeName[unique = true]; unique[default = false]; readMethod
+                                             ; Pojo_IO_S10:Product             ; code                        ;                        ; getCode
+
+INSERT_UPDATE InboundChannelConfiguration; integrationObject(code)[unique = true]; authenticationType(code)
+                                         ; Pojo_IO_S10                           ; BASIC

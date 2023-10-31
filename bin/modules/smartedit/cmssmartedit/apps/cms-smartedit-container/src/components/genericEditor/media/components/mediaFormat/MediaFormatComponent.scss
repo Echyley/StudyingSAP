@@ -1,0 +1,33 @@
+.se-media-format {
+    height: 100%;
+
+    &__screen-type {
+        @include se-weight('bold');
+        padding-top: se-space('base');
+        padding-bottom: 10px;
+        color: var(--sapTextColor);
+    }
+
+    &__error {
+        color: var(--sapErrorColor);
+    }
+}
+
+.se-media--absent {
+    @include se-flex-row(center);
+    height: 75px;
+    border: 1px dashed var(--sapGroup_ContentBorderColor);
+}
+
+.se-media--edit-wrapper {
+    height: 100%;
+}
+
+.se-media--edit {
+    @include se-flex-row(center);
+}
+.se-media-preview--edit {
+    @include se-text-ellipsis;
+    display: block;
+    font-style: italic;
+}
