@@ -92,9 +92,9 @@ CREATE CACHED TABLE aclentries
     PRIMARY KEY (PermissionPK, PrincipalPK, ItemPK)
 );
 
-CREATE INDEX aclupdateindex_aclentries ON aclentries (ItemPK);
-
 CREATE INDEX aclcheckindex_aclentries ON aclentries (ItemPK, PrincipalPK);
+
+CREATE INDEX aclupdateindex_aclentries ON aclentries (ItemPK);
 
 
 CREATE CACHED TABLE addresses
@@ -180,9 +180,9 @@ CREATE CACHED TABLE addressprops
     PRIMARY KEY (ITEMPK, NAME, LANGPK)
 );
 
-CREATE INDEX itempk_addressprops ON addressprops (ITEMPK);
-
 CREATE INDEX nameidx_addressprops ON addressprops (NAME);
+
+CREATE INDEX itempk_addressprops ON addressprops (ITEMPK);
 
 CREATE INDEX realnameidx_addressprops ON addressprops (REALNAME);
 
@@ -255,11 +255,11 @@ CREATE CACHED TABLE atomictypes
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX typecode_81 ON atomictypes (InternalCode);
-
 CREATE INDEX inheritpsi_81 ON atomictypes (InheritancePathString);
 
 CREATE INDEX typecodelowercase_81 ON atomictypes (InternalCodeLowerCase);
+
+CREATE INDEX typecode_81 ON atomictypes (InternalCode);
 
 
 CREATE CACHED TABLE atomictypes81sn
@@ -405,13 +405,13 @@ CREATE CACHED TABLE attributedescriptors
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX inheritps_87 ON attributedescriptors (InheritancePathString);
-
 CREATE INDEX lcqualifier_87 ON attributedescriptors (QualifierLowerCaseInternal);
+
+CREATE INDEX enclosing_87 ON attributedescriptors (EnclosingTypePK);
 
 CREATE UNIQUE INDEX qualifier_87 ON attributedescriptors (QualifierInternal, EnclosingTypePK);
 
-CREATE INDEX enclosing_87 ON attributedescriptors (EnclosingTypePK);
+CREATE INDEX inheritps_87 ON attributedescriptors (InheritancePathString);
 
 
 CREATE CACHED TABLE attributedescriptorslp
@@ -679,15 +679,15 @@ CREATE CACHED TABLE cat2catrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_144 ON cat2catrel (Qualifier);
-
 CREATE INDEX linktarget_144 ON cat2catrel (TargetPK);
 
-CREATE INDEX rseqnr_144 ON cat2catrel (RSequenceNumber);
+CREATE INDEX qualifier_144 ON cat2catrel (Qualifier);
 
 CREATE INDEX linksource_144 ON cat2catrel (SourcePK);
 
 CREATE INDEX seqnr_144 ON cat2catrel (SequenceNumber);
+
+CREATE INDEX rseqnr_144 ON cat2catrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE cat2catrel144sn
@@ -737,15 +737,15 @@ CREATE CACHED TABLE cat2keywordrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_605 ON cat2keywordrel (Qualifier);
-
 CREATE INDEX linktarget_605 ON cat2keywordrel (TargetPK);
 
-CREATE INDEX rseqnr_605 ON cat2keywordrel (RSequenceNumber);
+CREATE INDEX qualifier_605 ON cat2keywordrel (Qualifier);
 
 CREATE INDEX linksource_605 ON cat2keywordrel (SourcePK);
 
 CREATE INDEX seqnr_605 ON cat2keywordrel (SequenceNumber);
+
+CREATE INDEX rseqnr_605 ON cat2keywordrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE cat2keywordrel605sn
@@ -795,15 +795,15 @@ CREATE CACHED TABLE cat2medrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_145 ON cat2medrel (Qualifier);
-
 CREATE INDEX linktarget_145 ON cat2medrel (TargetPK);
 
-CREATE INDEX rseqnr_145 ON cat2medrel (RSequenceNumber);
+CREATE INDEX qualifier_145 ON cat2medrel (Qualifier);
 
 CREATE INDEX linksource_145 ON cat2medrel (SourcePK);
 
 CREATE INDEX seqnr_145 ON cat2medrel (SequenceNumber);
+
+CREATE INDEX rseqnr_145 ON cat2medrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE cat2medrel145sn
@@ -853,15 +853,15 @@ CREATE CACHED TABLE cat2princrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_613 ON cat2princrel (Qualifier);
-
 CREATE INDEX linktarget_613 ON cat2princrel (TargetPK);
 
-CREATE INDEX rseqnr_613 ON cat2princrel (RSequenceNumber);
+CREATE INDEX qualifier_613 ON cat2princrel (Qualifier);
 
 CREATE INDEX linksource_613 ON cat2princrel (SourcePK);
 
 CREATE INDEX seqnr_613 ON cat2princrel (SequenceNumber);
+
+CREATE INDEX rseqnr_613 ON cat2princrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE cat2princrel613sn
@@ -911,15 +911,15 @@ CREATE CACHED TABLE cat2prodrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_143 ON cat2prodrel (Qualifier);
-
 CREATE INDEX linktarget_143 ON cat2prodrel (TargetPK);
 
-CREATE INDEX rseqnr_143 ON cat2prodrel (RSequenceNumber);
+CREATE INDEX qualifier_143 ON cat2prodrel (Qualifier);
 
 CREATE INDEX linksource_143 ON cat2prodrel (SourcePK);
 
 CREATE INDEX seqnr_143 ON cat2prodrel (SequenceNumber);
+
+CREATE INDEX rseqnr_143 ON cat2prodrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE cat2prodrel143sn
@@ -1117,15 +1117,15 @@ CREATE CACHED TABLE catalogversionsyncjob
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_624 ON catalogversionsyncjob (Qualifier);
-
 CREATE INDEX linktarget_624 ON catalogversionsyncjob (TargetPK);
 
-CREATE INDEX rseqnr_624 ON catalogversionsyncjob (RSequenceNumber);
+CREATE INDEX qualifier_624 ON catalogversionsyncjob (Qualifier);
 
 CREATE INDEX linksource_624 ON catalogversionsyncjob (SourcePK);
 
 CREATE INDEX seqnr_624 ON catalogversionsyncjob (SequenceNumber);
+
+CREATE INDEX rseqnr_624 ON catalogversionsyncjob (RSequenceNumber);
 
 
 CREATE CACHED TABLE categories
@@ -1498,15 +1498,15 @@ CREATE CACHED TABLE cmptype2covgrprels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_978 ON cmptype2covgrprels (Qualifier);
-
 CREATE INDEX linktarget_978 ON cmptype2covgrprels (TargetPK);
 
-CREATE INDEX rseqnr_978 ON cmptype2covgrprels (RSequenceNumber);
+CREATE INDEX qualifier_978 ON cmptype2covgrprels (Qualifier);
 
 CREATE INDEX linksource_978 ON cmptype2covgrprels (SourcePK);
 
 CREATE INDEX seqnr_978 ON cmptype2covgrprels (SequenceNumber);
+
+CREATE INDEX rseqnr_978 ON cmptype2covgrprels (RSequenceNumber);
 
 
 CREATE CACHED TABLE collectiontypes
@@ -1531,9 +1531,9 @@ CREATE CACHED TABLE collectiontypes
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX typecode_83 ON collectiontypes (InternalCode);
-
 CREATE INDEX typecodelowercase_83 ON collectiontypes (InternalCodeLowerCase);
+
+CREATE INDEX typecode_83 ON collectiontypes (InternalCode);
 
 
 CREATE CACHED TABLE collectiontypes83sn
@@ -1612,15 +1612,15 @@ CREATE CACHED TABLE commentassignrelations
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1148 ON commentassignrelations (Qualifier);
-
 CREATE INDEX linktarget_1148 ON commentassignrelations (TargetPK);
 
-CREATE INDEX rseqnr_1148 ON commentassignrelations (RSequenceNumber);
+CREATE INDEX qualifier_1148 ON commentassignrelations (Qualifier);
 
 CREATE INDEX linksource_1148 ON commentassignrelations (SourcePK);
 
 CREATE INDEX seqnr_1148 ON commentassignrelations (SequenceNumber);
+
+CREATE INDEX rseqnr_1148 ON commentassignrelations (RSequenceNumber);
 
 
 CREATE CACHED TABLE commentattachme1146sn
@@ -1707,15 +1707,15 @@ CREATE CACHED TABLE commentcompcreaterels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1152 ON commentcompcreaterels (Qualifier);
-
 CREATE INDEX linktarget_1152 ON commentcompcreaterels (TargetPK);
 
-CREATE INDEX rseqnr_1152 ON commentcompcreaterels (RSequenceNumber);
+CREATE INDEX qualifier_1152 ON commentcompcreaterels (Qualifier);
 
 CREATE INDEX linksource_1152 ON commentcompcreaterels (SourcePK);
 
 CREATE INDEX seqnr_1152 ON commentcompcreaterels (SequenceNumber);
+
+CREATE INDEX rseqnr_1152 ON commentcompcreaterels (RSequenceNumber);
 
 
 CREATE CACHED TABLE commentcomponen1142sn
@@ -1805,15 +1805,15 @@ CREATE CACHED TABLE commentcompreadrels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1150 ON commentcompreadrels (Qualifier);
-
 CREATE INDEX linktarget_1150 ON commentcompreadrels (TargetPK);
 
-CREATE INDEX rseqnr_1150 ON commentcompreadrels (RSequenceNumber);
+CREATE INDEX qualifier_1150 ON commentcompreadrels (Qualifier);
 
 CREATE INDEX linksource_1150 ON commentcompreadrels (SourcePK);
 
 CREATE INDEX seqnr_1150 ON commentcompreadrels (SequenceNumber);
+
+CREATE INDEX rseqnr_1150 ON commentcompreadrels (RSequenceNumber);
 
 
 CREATE CACHED TABLE commentcompremo1153sn
@@ -1863,15 +1863,15 @@ CREATE CACHED TABLE commentcompremoverels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1153 ON commentcompremoverels (Qualifier);
-
 CREATE INDEX linktarget_1153 ON commentcompremoverels (TargetPK);
 
-CREATE INDEX rseqnr_1153 ON commentcompremoverels (RSequenceNumber);
+CREATE INDEX qualifier_1153 ON commentcompremoverels (Qualifier);
 
 CREATE INDEX linksource_1153 ON commentcompremoverels (SourcePK);
 
 CREATE INDEX seqnr_1153 ON commentcompremoverels (SequenceNumber);
+
+CREATE INDEX rseqnr_1153 ON commentcompremoverels (RSequenceNumber);
 
 
 CREATE CACHED TABLE commentcompwrit1151sn
@@ -1921,15 +1921,15 @@ CREATE CACHED TABLE commentcompwriterels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1151 ON commentcompwriterels (Qualifier);
-
 CREATE INDEX linktarget_1151 ON commentcompwriterels (TargetPK);
 
-CREATE INDEX rseqnr_1151 ON commentcompwriterels (RSequenceNumber);
+CREATE INDEX qualifier_1151 ON commentcompwriterels (Qualifier);
 
 CREATE INDEX linksource_1151 ON commentcompwriterels (SourcePK);
 
 CREATE INDEX seqnr_1151 ON commentcompwriterels (SequenceNumber);
+
+CREATE INDEX rseqnr_1151 ON commentcompwriterels (RSequenceNumber);
 
 
 CREATE CACHED TABLE commentdomains
@@ -2016,15 +2016,15 @@ CREATE CACHED TABLE commentitemrelations
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1147 ON commentitemrelations (Qualifier);
-
 CREATE INDEX linktarget_1147 ON commentitemrelations (TargetPK);
 
-CREATE INDEX rseqnr_1147 ON commentitemrelations (RSequenceNumber);
+CREATE INDEX qualifier_1147 ON commentitemrelations (Qualifier);
 
 CREATE INDEX linksource_1147 ON commentitemrelations (SourcePK);
 
 CREATE INDEX seqnr_1147 ON commentitemrelations (SequenceNumber);
+
+CREATE INDEX rseqnr_1147 ON commentitemrelations (RSequenceNumber);
 
 
 CREATE CACHED TABLE comments
@@ -2218,15 +2218,15 @@ CREATE CACHED TABLE commentwatchrelations
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1149 ON commentwatchrelations (Qualifier);
-
 CREATE INDEX linktarget_1149 ON commentwatchrelations (TargetPK);
 
-CREATE INDEX rseqnr_1149 ON commentwatchrelations (RSequenceNumber);
+CREATE INDEX qualifier_1149 ON commentwatchrelations (Qualifier);
 
 CREATE INDEX linksource_1149 ON commentwatchrelations (SourcePK);
 
 CREATE INDEX seqnr_1149 ON commentwatchrelations (SequenceNumber);
+
+CREATE INDEX rseqnr_1149 ON commentwatchrelations (RSequenceNumber);
 
 
 CREATE CACHED TABLE composedtypes
@@ -2276,11 +2276,11 @@ CREATE CACHED TABLE composedtypes
 
 CREATE INDEX ComposedTypeSuperTypePKIDX_82 ON composedtypes (SuperTypePK);
 
-CREATE INDEX typecode_82 ON composedtypes (InternalCode);
-
 CREATE INDEX inheritpsi_82 ON composedtypes (InheritancePathString);
 
 CREATE INDEX typecodelowercase_82 ON composedtypes (InternalCodeLowerCase);
+
+CREATE INDEX typecode_82 ON composedtypes (InternalCode);
 
 
 CREATE CACHED TABLE composedtypes82sn
@@ -2804,15 +2804,15 @@ CREATE CACHED TABLE cstrgr2abscstrrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_979 ON cstrgr2abscstrrel (Qualifier);
-
 CREATE INDEX linktarget_979 ON cstrgr2abscstrrel (TargetPK);
 
-CREATE INDEX rseqnr_979 ON cstrgr2abscstrrel (RSequenceNumber);
+CREATE INDEX qualifier_979 ON cstrgr2abscstrrel (Qualifier);
 
 CREATE INDEX linksource_979 ON cstrgr2abscstrrel (SourcePK);
 
 CREATE INDEX seqnr_979 ON cstrgr2abscstrrel (SequenceNumber);
+
+CREATE INDEX rseqnr_979 ON cstrgr2abscstrrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE currencies
@@ -3484,15 +3484,15 @@ CREATE CACHED TABLE format2comtyprel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_13102 ON format2comtyprel (Qualifier);
-
 CREATE INDEX linktarget_13102 ON format2comtyprel (TargetPK);
 
-CREATE INDEX rseqnr_13102 ON format2comtyprel (RSequenceNumber);
+CREATE INDEX qualifier_13102 ON format2comtyprel (Qualifier);
 
 CREATE INDEX linksource_13102 ON format2comtyprel (SourcePK);
 
 CREATE INDEX seqnr_13102 ON format2comtyprel (SequenceNumber);
+
+CREATE INDEX rseqnr_13102 ON format2comtyprel (RSequenceNumber);
 
 
 CREATE CACHED TABLE format2medforre13101sn
@@ -3542,15 +3542,15 @@ CREATE CACHED TABLE format2medforrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_13101 ON format2medforrel (Qualifier);
-
 CREATE INDEX linktarget_13101 ON format2medforrel (TargetPK);
 
-CREATE INDEX rseqnr_13101 ON format2medforrel (RSequenceNumber);
+CREATE INDEX qualifier_13101 ON format2medforrel (Qualifier);
 
 CREATE INDEX linksource_13101 ON format2medforrel (SourcePK);
 
 CREATE INDEX seqnr_13101 ON format2medforrel (SequenceNumber);
+
+CREATE INDEX rseqnr_13101 ON format2medforrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE formatlp
@@ -4256,15 +4256,15 @@ CREATE CACHED TABLE links
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_7 ON links (Qualifier);
-
 CREATE INDEX linktarget_7 ON links (TargetPK);
 
-CREATE INDEX rseqnr_7 ON links (RSequenceNumber);
+CREATE INDEX qualifier_7 ON links (Qualifier);
 
 CREATE INDEX linksource_7 ON links (SourcePK);
 
 CREATE INDEX seqnr_7 ON links (SequenceNumber);
+
+CREATE INDEX rseqnr_7 ON links (RSequenceNumber);
 
 
 CREATE CACHED TABLE links7sn
@@ -4316,9 +4316,9 @@ CREATE CACHED TABLE maptypes
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX typecode_84 ON maptypes (InternalCode);
-
 CREATE INDEX typecodelowercase_84 ON maptypes (InternalCodeLowerCase);
+
+CREATE INDEX typecode_84 ON maptypes (InternalCode);
 
 
 CREATE CACHED TABLE maptypes84sn
@@ -4581,11 +4581,11 @@ CREATE CACHED TABLE mediaprops
     PRIMARY KEY (ITEMPK, NAME, LANGPK)
 );
 
+CREATE INDEX realnameidx_mediaprops ON mediaprops (REALNAME);
+
 CREATE INDEX itempk_mediaprops ON mediaprops (ITEMPK);
 
 CREATE INDEX nameidx_mediaprops ON mediaprops (NAME);
-
-CREATE INDEX realnameidx_mediaprops ON mediaprops (REALNAME);
 
 
 CREATE CACHED TABLE medias
@@ -4934,15 +4934,15 @@ CREATE CACHED TABLE orderdiscrels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_202 ON orderdiscrels (Qualifier);
-
 CREATE INDEX linktarget_202 ON orderdiscrels (TargetPK);
 
-CREATE INDEX rseqnr_202 ON orderdiscrels (RSequenceNumber);
+CREATE INDEX qualifier_202 ON orderdiscrels (Qualifier);
 
 CREATE INDEX linksource_202 ON orderdiscrels (SourcePK);
 
 CREATE INDEX seqnr_202 ON orderdiscrels (SequenceNumber);
+
+CREATE INDEX rseqnr_202 ON orderdiscrels (RSequenceNumber);
 
 
 CREATE CACHED TABLE orderdiscrels202sn
@@ -5298,15 +5298,15 @@ CREATE CACHED TABLE pcp2wrtblecvrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_617 ON pcp2wrtblecvrel (Qualifier);
-
 CREATE INDEX linktarget_617 ON pcp2wrtblecvrel (TargetPK);
 
-CREATE INDEX rseqnr_617 ON pcp2wrtblecvrel (RSequenceNumber);
+CREATE INDEX qualifier_617 ON pcp2wrtblecvrel (Qualifier);
 
 CREATE INDEX linksource_617 ON pcp2wrtblecvrel (SourcePK);
 
 CREATE INDEX seqnr_617 ON pcp2wrtblecvrel (SequenceNumber);
+
+CREATE INDEX rseqnr_617 ON pcp2wrtblecvrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE pcp2wrtblecvrel617sn
@@ -5356,15 +5356,15 @@ CREATE CACHED TABLE pcpl2rdblecvrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_618 ON pcpl2rdblecvrel (Qualifier);
-
 CREATE INDEX linktarget_618 ON pcpl2rdblecvrel (TargetPK);
 
-CREATE INDEX rseqnr_618 ON pcpl2rdblecvrel (RSequenceNumber);
+CREATE INDEX qualifier_618 ON pcpl2rdblecvrel (Qualifier);
 
 CREATE INDEX linksource_618 ON pcpl2rdblecvrel (SourcePK);
 
 CREATE INDEX seqnr_618 ON pcpl2rdblecvrel (SequenceNumber);
+
+CREATE INDEX rseqnr_618 ON pcpl2rdblecvrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE pcpl2rdblecvrel618sn
@@ -5441,15 +5441,15 @@ CREATE CACHED TABLE pendingstepsrelation
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_507 ON pendingstepsrelation (Qualifier);
-
 CREATE INDEX linktarget_507 ON pendingstepsrelation (TargetPK);
 
-CREATE INDEX rseqnr_507 ON pendingstepsrelation (RSequenceNumber);
+CREATE INDEX qualifier_507 ON pendingstepsrelation (Qualifier);
 
 CREATE INDEX linksource_507 ON pendingstepsrelation (SourcePK);
 
 CREATE INDEX seqnr_507 ON pendingstepsrelation (SequenceNumber);
+
+CREATE INDEX rseqnr_507 ON pendingstepsrelation (RSequenceNumber);
 
 
 CREATE CACHED TABLE pgrels
@@ -5472,15 +5472,15 @@ CREATE CACHED TABLE pgrels
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_201 ON pgrels (Qualifier);
-
 CREATE INDEX linktarget_201 ON pgrels (TargetPK);
 
-CREATE INDEX rseqnr_201 ON pgrels (RSequenceNumber);
+CREATE INDEX qualifier_201 ON pgrels (Qualifier);
 
 CREATE INDEX linksource_201 ON pgrels (SourcePK);
 
 CREATE INDEX seqnr_201 ON pgrels (SequenceNumber);
+
+CREATE INDEX rseqnr_201 ON pgrels (RSequenceNumber);
 
 
 CREATE CACHED TABLE pgrels201sn
@@ -5661,15 +5661,15 @@ CREATE CACHED TABLE processedstepsrelation
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_506 ON processedstepsrelation (Qualifier);
-
 CREATE INDEX linktarget_506 ON processedstepsrelation (TargetPK);
 
-CREATE INDEX rseqnr_506 ON processedstepsrelation (RSequenceNumber);
+CREATE INDEX qualifier_506 ON processedstepsrelation (Qualifier);
 
 CREATE INDEX linksource_506 ON processedstepsrelation (SourcePK);
 
 CREATE INDEX seqnr_506 ON processedstepsrelation (SequenceNumber);
+
+CREATE INDEX rseqnr_506 ON processedstepsrelation (RSequenceNumber);
 
 
 CREATE CACHED TABLE processes
@@ -5773,15 +5773,15 @@ CREATE CACHED TABLE prod2keywordrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_604 ON prod2keywordrel (Qualifier);
-
 CREATE INDEX linktarget_604 ON prod2keywordrel (TargetPK);
 
-CREATE INDEX rseqnr_604 ON prod2keywordrel (RSequenceNumber);
+CREATE INDEX qualifier_604 ON prod2keywordrel (Qualifier);
 
 CREATE INDEX linksource_604 ON prod2keywordrel (SourcePK);
 
 CREATE INDEX seqnr_604 ON prod2keywordrel (SequenceNumber);
+
+CREATE INDEX rseqnr_604 ON prod2keywordrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE prod2keywordrel604sn
@@ -5883,9 +5883,9 @@ CREATE CACHED TABLE productprops
 
 CREATE INDEX itempk_productprops ON productprops (ITEMPK);
 
-CREATE INDEX nameidx_productprops ON productprops (NAME);
-
 CREATE INDEX realnameidx_productprops ON productprops (REALNAME);
+
+CREATE INDEX nameidx_productprops ON productprops (NAME);
 
 
 CREATE CACHED TABLE productreferenc606sn
@@ -6061,9 +6061,9 @@ CREATE CACHED TABLE props
 
 CREATE INDEX nameidx_props ON props (NAME);
 
-CREATE INDEX itempk_props ON props (ITEMPK);
-
 CREATE INDEX realnameidx_props ON props (REALNAME);
+
+CREATE INDEX itempk_props ON props (ITEMPK);
 
 
 CREATE CACHED TABLE quoteentries
@@ -6134,9 +6134,9 @@ CREATE CACHED TABLE quoteentryprops
     PRIMARY KEY (ITEMPK, NAME, LANGPK)
 );
 
-CREATE INDEX itempk_quoteentryprops ON quoteentryprops (ITEMPK);
-
 CREATE INDEX nameidx_quoteentryprops ON quoteentryprops (NAME);
+
+CREATE INDEX itempk_quoteentryprops ON quoteentryprops (ITEMPK);
 
 CREATE INDEX realnameidx_quoteentryprops ON quoteentryprops (REALNAME);
 
@@ -6155,11 +6155,11 @@ CREATE CACHED TABLE quoteprops
     PRIMARY KEY (ITEMPK, NAME, LANGPK)
 );
 
+CREATE INDEX nameidx_quoteprops ON quoteprops (NAME);
+
 CREATE INDEX itempk_quoteprops ON quoteprops (ITEMPK);
 
 CREATE INDEX realnameidx_quoteprops ON quoteprops (REALNAME);
-
-CREATE INDEX nameidx_quoteprops ON quoteprops (NAME);
 
 
 CREATE CACHED TABLE quotes
@@ -6640,9 +6640,9 @@ CREATE CACHED TABLE searchrestrictions
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX principal_90 ON searchrestrictions (principal);
-
 CREATE INDEX restrtype_90 ON searchrestrictions (RestrictedType);
+
+CREATE INDEX principal_90 ON searchrestrictions (principal);
 
 
 CREATE CACHED TABLE searchrestrictionslp
@@ -6876,15 +6876,15 @@ CREATE CACHED TABLE syncjob2langrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_622 ON syncjob2langrel (Qualifier);
-
 CREATE INDEX linktarget_622 ON syncjob2langrel (TargetPK);
 
-CREATE INDEX rseqnr_622 ON syncjob2langrel (RSequenceNumber);
+CREATE INDEX qualifier_622 ON syncjob2langrel (Qualifier);
 
 CREATE INDEX linksource_622 ON syncjob2langrel (SourcePK);
 
 CREATE INDEX seqnr_622 ON syncjob2langrel (SequenceNumber);
+
+CREATE INDEX rseqnr_622 ON syncjob2langrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE syncjob2langrel622sn
@@ -6934,15 +6934,15 @@ CREATE CACHED TABLE syncjob2pcplrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_623 ON syncjob2pcplrel (Qualifier);
-
 CREATE INDEX linktarget_623 ON syncjob2pcplrel (TargetPK);
 
-CREATE INDEX rseqnr_623 ON syncjob2pcplrel (RSequenceNumber);
+CREATE INDEX qualifier_623 ON syncjob2pcplrel (Qualifier);
 
 CREATE INDEX linksource_623 ON syncjob2pcplrel (SourcePK);
 
 CREATE INDEX seqnr_623 ON syncjob2pcplrel (SequenceNumber);
+
+CREATE INDEX rseqnr_623 ON syncjob2pcplrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE syncjob2pcplrel623sn
@@ -6992,15 +6992,15 @@ CREATE CACHED TABLE syncjob2typerel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_621 ON syncjob2typerel (Qualifier);
-
 CREATE INDEX linktarget_621 ON syncjob2typerel (TargetPK);
 
-CREATE INDEX rseqnr_621 ON syncjob2typerel (RSequenceNumber);
+CREATE INDEX qualifier_621 ON syncjob2typerel (Qualifier);
 
 CREATE INDEX linksource_621 ON syncjob2typerel (SourcePK);
 
 CREATE INDEX seqnr_621 ON syncjob2typerel (SequenceNumber);
+
+CREATE INDEX rseqnr_621 ON syncjob2typerel (RSequenceNumber);
 
 
 CREATE CACHED TABLE syncjob2typerel621sn
@@ -7515,11 +7515,11 @@ CREATE CACHED TABLE typesystemprops
     PRIMARY KEY (ITEMPK, NAME, LANGPK)
 );
 
-CREATE INDEX nameidx_typesystemprops ON typesystemprops (NAME);
-
 CREATE INDEX itempk_typesystemprops ON typesystemprops (ITEMPK);
 
 CREATE INDEX realnameidx_typesystemprops ON typesystemprops (REALNAME);
+
+CREATE INDEX nameidx_typesystemprops ON typesystemprops (NAME);
 
 
 CREATE CACHED TABLE units
@@ -7630,9 +7630,9 @@ CREATE CACHED TABLE usergroupprops
 
 CREATE INDEX nameidx_usergroupprops ON usergroupprops (NAME);
 
-CREATE INDEX realnameidx_usergroupprops ON usergroupprops (REALNAME);
-
 CREATE INDEX itempk_usergroupprops ON usergroupprops (ITEMPK);
+
+CREATE INDEX realnameidx_usergroupprops ON usergroupprops (REALNAME);
 
 
 CREATE CACHED TABLE usergroups
@@ -7759,11 +7759,11 @@ CREATE CACHED TABLE userprops
     PRIMARY KEY (ITEMPK, NAME, LANGPK)
 );
 
+CREATE INDEX realnameidx_userprops ON userprops (REALNAME);
+
 CREATE INDEX nameidx_userprops ON userprops (NAME);
 
 CREATE INDEX itempk_userprops ON userprops (ITEMPK);
-
-CREATE INDEX realnameidx_userprops ON userprops (REALNAME);
 
 
 CREATE CACHED TABLE userrights
@@ -8063,15 +8063,15 @@ CREATE CACHED TABLE workflowactionitemsrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1116 ON workflowactionitemsrel (Qualifier);
-
 CREATE INDEX linktarget_1116 ON workflowactionitemsrel (TargetPK);
 
-CREATE INDEX rseqnr_1116 ON workflowactionitemsrel (RSequenceNumber);
+CREATE INDEX qualifier_1116 ON workflowactionitemsrel (Qualifier);
 
 CREATE INDEX linksource_1116 ON workflowactionitemsrel (SourcePK);
 
 CREATE INDEX seqnr_1116 ON workflowactionitemsrel (SequenceNumber);
+
+CREATE INDEX rseqnr_1116 ON workflowactionitemsrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE workflowactionl1124sn
@@ -8124,15 +8124,15 @@ CREATE CACHED TABLE workflowactionlinkrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1124 ON workflowactionlinkrel (Qualifier);
-
 CREATE INDEX linktarget_1124 ON workflowactionlinkrel (TargetPK);
 
-CREATE INDEX rseqnr_1124 ON workflowactionlinkrel (RSequenceNumber);
+CREATE INDEX qualifier_1124 ON workflowactionlinkrel (Qualifier);
 
 CREATE INDEX linksource_1124 ON workflowactionlinkrel (SourcePK);
 
 CREATE INDEX seqnr_1124 ON workflowactionlinkrel (SequenceNumber);
+
+CREATE INDEX rseqnr_1124 ON workflowactionlinkrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE workflowactions
@@ -8248,15 +8248,15 @@ CREATE CACHED TABLE workflowactionsrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1115 ON workflowactionsrel (Qualifier);
-
 CREATE INDEX linktarget_1115 ON workflowactionsrel (TargetPK);
 
-CREATE INDEX rseqnr_1115 ON workflowactionsrel (RSequenceNumber);
+CREATE INDEX qualifier_1115 ON workflowactionsrel (Qualifier);
 
 CREATE INDEX linksource_1115 ON workflowactionsrel (SourcePK);
 
 CREATE INDEX seqnr_1115 ON workflowactionsrel (SequenceNumber);
+
+CREATE INDEX rseqnr_1115 ON workflowactionsrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE workflowitematt1114sn
@@ -8362,15 +8362,15 @@ CREATE CACHED TABLE workflowtemplatelinkrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1125 ON workflowtemplatelinkrel (Qualifier);
-
 CREATE INDEX linktarget_1125 ON workflowtemplatelinkrel (TargetPK);
 
-CREATE INDEX rseqnr_1125 ON workflowtemplatelinkrel (RSequenceNumber);
+CREATE INDEX qualifier_1125 ON workflowtemplatelinkrel (Qualifier);
 
 CREATE INDEX linksource_1125 ON workflowtemplatelinkrel (SourcePK);
 
 CREATE INDEX seqnr_1125 ON workflowtemplatelinkrel (SequenceNumber);
+
+CREATE INDEX rseqnr_1125 ON workflowtemplatelinkrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE workflowtemplpr1117sn
@@ -8420,15 +8420,15 @@ CREATE CACHED TABLE workflowtemplprincrel
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1117 ON workflowtemplprincrel (Qualifier);
-
 CREATE INDEX linktarget_1117 ON workflowtemplprincrel (TargetPK);
 
-CREATE INDEX rseqnr_1117 ON workflowtemplprincrel (RSequenceNumber);
+CREATE INDEX qualifier_1117 ON workflowtemplprincrel (Qualifier);
 
 CREATE INDEX linksource_1117 ON workflowtemplprincrel (SourcePK);
 
 CREATE INDEX seqnr_1117 ON workflowtemplprincrel (SequenceNumber);
+
+CREATE INDEX rseqnr_1117 ON workflowtemplprincrel (RSequenceNumber);
 
 
 CREATE CACHED TABLE ydeployments
@@ -8474,15 +8474,15 @@ CREATE CACHED TABLE zone2country
     PRIMARY KEY (PK)
 );
 
-CREATE INDEX qualifier_1204 ON zone2country (Qualifier);
-
 CREATE INDEX linktarget_1204 ON zone2country (TargetPK);
 
-CREATE INDEX rseqnr_1204 ON zone2country (RSequenceNumber);
+CREATE INDEX qualifier_1204 ON zone2country (Qualifier);
 
 CREATE INDEX linksource_1204 ON zone2country (SourcePK);
 
 CREATE INDEX seqnr_1204 ON zone2country (SequenceNumber);
+
+CREATE INDEX rseqnr_1204 ON zone2country (RSequenceNumber);
 
 
 CREATE CACHED TABLE zone2country1204sn

@@ -1117,3 +1117,55 @@ DROP TABLE abstractcontactinfo IF EXISTS;
 
 DROP TABLE abstractcontact26sn IF EXISTS;
 
+DROP TABLE enumerationvalues IF EXISTS;
+
+DROP TABLE collectiontypes083sn IF EXISTS;
+
+DROP TABLE maptypes IF EXISTS;
+
+DROP TABLE attributedescriptorslp IF EXISTS;
+
+DROP TABLE atomictypeslp IF EXISTS;
+
+DROP TABLE collectiontypeslp IF EXISTS;
+
+DROP TABLE maptypes084sn IF EXISTS;
+
+DROP TABLE typesystempropslp IF EXISTS;
+
+DROP TABLE attributedescri087sn IF EXISTS;
+
+DROP TABLE atomictypes IF EXISTS;
+
+DROP TABLE attributedescri87sn IF EXISTS;
+
+DROP TABLE composedtypeslp IF EXISTS;
+
+DROP TABLE composedtypes82sn IF EXISTS;
+
+DROP TABLE collectiontypes83sn IF EXISTS;
+
+DROP TABLE enumerationvalu91sn IF EXISTS;
+
+DROP TABLE attributedescriptors IF EXISTS;
+
+DROP TABLE maptypes84sn IF EXISTS;
+
+DROP TABLE composedtypes082sn IF EXISTS;
+
+DROP TABLE typesystemprops IF EXISTS;
+
+DROP TABLE enumerationvalueslp IF EXISTS;
+
+DROP TABLE enumerationvalu091sn IF EXISTS;
+
+DROP TABLE collectiontypes IF EXISTS;
+
+DROP TABLE composedtypes IF EXISTS;
+
+DROP TABLE atomictypes81sn IF EXISTS;
+
+DROP TABLE atomictypes081sn IF EXISTS;
+
+DROP TABLE maptypeslp IF EXISTS;
+
